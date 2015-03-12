@@ -1,8 +1,11 @@
 package ui;
 
-import java.awt.event.ActionEvent;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.AffineTransform;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,6 +22,7 @@ public class MainPanel extends FatherPanel{
 	private LeftPanel leftPanel;
 	private JFrame frame;
 	private UIController controller;
+	private Random random = new Random();
 	
 	public MainPanel(JFrame frame,String url,UIController controller){
 		super(frame,url,controller);
@@ -26,22 +30,22 @@ public class MainPanel extends FatherPanel{
 		this.frame = frame;
 		this.controller = controller;
 		this.add(button);
-		this.setLeftPanel();
+		this.addLeftPanel();
 		
 	}
 	
-	public void setLeftPanel(){
+	public void addLeftPanel(){
 		leftPanel = new LeftPanel(frame,"Image/2.png",controller);
+		this.add(leftPanel);
 	}
 	
 	public void toLeftPanel(){
-		leftPanel.setVisible(true);
-		this.add(leftPanel);
+		leftPanel.moveIn();
 		this.repaint();
 	}
 	
 	public void outLeftPanel(){
-		leftPanel.setVisible(false);
+		leftPanel.moveOut();
 		this.repaint();
 	}
 	
@@ -49,7 +53,7 @@ public class MainPanel extends FatherPanel{
 		
 		button = new JButton();
 		button.setContentAreaFilled(false);
-		button.setBounds(204,0, 43, 550);
+		button.setBounds(0,0, 43, 550);
 		button.setBorder(null);
 		button.addMouseListener(new ButtonListener());
 	}
@@ -57,7 +61,6 @@ public class MainPanel extends FatherPanel{
 	class ButtonListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
-			System.out.println("mouseClicked");
 		}
 
 		public void mousePressed(MouseEvent e) {
@@ -77,4 +80,5 @@ public class MainPanel extends FatherPanel{
 		}
 		
 	}
+	
 }

@@ -11,7 +11,7 @@ public class UIController {
 	}
 
 	private void mainPanel() {
-		mainPanel = new MainPanel(frame,"Image/0.png",this);
+		mainPanel = new MainPanel(frame,"Image/1.png",this);
 		frame.setPanel(mainPanel);
 	}
 	
