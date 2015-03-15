@@ -60,7 +60,7 @@ public class SeasonData {
 				ArrayList<PlayerSeasonRecord> homePlayers = new ArrayList<PlayerSeasonRecord>();
 				ArrayList<PlayerSeasonRecord> roadPlayers = new ArrayList<PlayerSeasonRecord>();
 				
-				//该数组存储本场比赛主场队的总数据，0位置不用，1位置为所有球员的分钟数，2为秒数，3之后是s的对应位置转化为整数的和
+				//该数组存储本场比赛主场队的总数据，0,1位置不用，2为所有球员上场秒数，3之后是s的对应位置转化为整数的和
 				int [] homeTeamData = new int [18];
 				//客场队总数据
 				int [] roadTeamData = new int [18];
