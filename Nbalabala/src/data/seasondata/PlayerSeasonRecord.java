@@ -10,12 +10,19 @@ public class PlayerSeasonRecord {
 	//在遍历比赛信息的过程中不记录球员的球队和位置
 	//因为在查看球员赛季数据的时候不显示球队，而且位置以player文件夹中的为准
 
+	/**
+	 * attempt是出手 
+	 * goal命中
+	 * avg场均
+	 */
 	
 	/** 球员名字 */
 	String name;
 	
+	/** 上场数 */
 	int matchCount;
 	
+	/** 首发数 */
 	int firstCount;
 
 	/** 时间，单位是秒 */

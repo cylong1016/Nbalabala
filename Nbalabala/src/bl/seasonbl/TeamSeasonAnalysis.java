@@ -20,27 +20,358 @@ import enums.TeamSortBasis;
 /**
  * 
  * @author Issac Ding
- * @version 2015年3月15日  下午3:08:56
+ * @version 2015年3月15日 下午3:08:56
  */
 public class TeamSeasonAnalysis {
-	
+
 	private SeasonData seasonData = new SeasonData();
-	
+
 	private int factor = 1;
-	
-	public ArrayList<TeamSeasonRecord> getTeamSeasonData(TeamSortBasis basis, SortOrder order){
-		
+
+	public ArrayList<TeamSeasonRecord> getTeamSeasonData(TeamSortBasis basis, SortOrder order) {
+
 		ArrayList<TeamSeasonRecord> teams = seasonData.getTeamSeasonData();
-		
+
 		Comparator<TeamSeasonRecord> comparator = null;
-		
-		if (order == SortOrder.DE) factor = -1;
-		else factor = 1;
-		
+
+		if (order == SortOrder.DE)
+			factor = -1;
+		else
+			factor = 1;
+
 		switch (basis) {
+		
 		case MATCH_COUNT:
 			comparator = new Comparator<TeamSeasonRecord>() {
-				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2){
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+			
+		case FIELD_GOAL:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getFieldGoal() - t2.getFieldGoal());
+				}
+			};
+			break;
+
+		case FIELD_GOAL_AVG:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getFi- t2.getFieldPercent())< 0 ? -1 : 1;
+				}
+			};
+			break;
+
+		case FIELD_ATTEMPT:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getFieldAttempt() - t2.getFieldAttempt());
+				}
+			};
+			break;
+
+		case FIELD_ATTEMPT_AVG:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getFi - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case FIELD_PERCENT:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getFieldPercent() - t2.getFieldPercent())< 0 ? -1 : 1;
+				}
+			};
+			break;
+
+		case THREE_POINT_ATTEMPT:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getThreePointAttempt() - t2.getThreePointAttempt());
+				}
+			};
+			break;
+
+		case THREE_POINT_ATTEMPT_AVG:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getThreePointAttemptAvg() - t2.getThreePointAttemptAvg())< 0 ? -1 : 1;
+				}
+			};
+			break;
+
+		case THREE_POINT_GOAL:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getThreePointGoal() - t2.getThreePointGoal());
+				}
+			};
+			break;
+
+		case THREE_POINT_GOAL_AVG:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getThreePointGoalAvg() - t2.getThreePointGoalAvg())< 0 ? -1 : 1;
+				}
+			};
+			break;
+
+		case THREE_POINT_PERCENT:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getThreePointPercent()- t2.getThreePointPercent())< 0 ? -1 : 1;
+				}
+			};
+			break;
+
+		case FREETHROW_GOAL:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getFreethrowGoal() - t2.getFreethrowGoal());
+				}
+			};
+			break;
+
+		case FREETHROW_GOAL_AVG:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getFreethrowGoalAvg()) - t2.getFreethrowGoalAvg())< 0 ? -1 : 1;
+				}
+			};
+			break;
+
+		case FREETHROW_ATTEMPT:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getFreethrowAttempt() - t2.getFreethrowAttempt());
+				}
+			};
+			break;
+
+		case FREETHROW_ATTEMPT_AVG:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getFreethrowAttempAvg() - t2.getFreethrowAttempAvg())< 0 ? -1 : 1;
+				}
+			};
+			break;
+
+		case FREETHROW_PERCENT:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getFreeThrowPercent()- t2.getFreeThrowPercent())< 0 ? -1 : 1;
+				}
+			};
+			break;
+
+		case OFFENSIVE_REBOUND:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getOffensiveRebound()- t2.getOffensiveRebound());
+				}
+			};
+			break;
+
+		case OFFENSIVE_REBOUND_AVG:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getOffensiveReboundAvg() - t2.getOffensiveReboundAvg())< 0 ? -1 : 1;
+				}
+			};
+			break;
+
+		case DEFENSIVE_REBOUND:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getDefensiveRebound()- t2.getDefensiveRebound());
+				}
+			};
+			break;
+
+		case DEFENSIVE_REBOUND_AVG:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getDefensiveReboundAvg() - t2.getDefensiveReboundAvg())< 0 ? -1 : 1;
+				}
+			};
+			break;
+
+		case TOTAL_REBOUND:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getTotalRebound() - t2.getTotalRebound());
+				}
+			};
+			break;
+
+		case TOTAL_REBOUND_AVG:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getTotalReboundAvg() - t2.getTotalReboundAvg())< 0 ? -1 : 1;
+				}
+			};
+			break;
+
+		case ASSIST:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case ASSIST_AVG:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case STEAL:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case STEAL_AVG:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case BLOCK:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case BLOCK_AVG:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case TURNOVER:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case TURNOVER_AVG:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case FOUL:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case FOUL_AVG:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case SCORE:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case SCORE_AVG:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case WINNING:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case ROUND:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case ROUND_AVG:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case OFFENSIVE_EFF:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case DEFENSIVE_EFF:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case REBOUND_EFF:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case STEAL_EFF:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getMatchCount() - t2.getMatchCount());
+				}
+			};
+			break;
+
+		case ASSIST_EFF:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
 					return factor * (t1.getMatchCount() - t2.getMatchCount());
 				}
 			};
@@ -49,9 +380,9 @@ public class TeamSeasonAnalysis {
 		default:
 			break;
 		}
-		
-		//上面还有40个case！
-		
+
+		// 上面还有40个case！
+
 		Collections.sort(teams, comparator);
 		return teams;
 	}
