@@ -60,7 +60,7 @@ public class TeamSeasonAnalysis {
 		case FIELD_GOAL_AVG:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getFi- t2.getFieldPercent())< 0 ? -1 : 1;
+					return factor * (t1.getFieldGoalAvg()- t2.getFieldGoalAvg())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -76,7 +76,7 @@ public class TeamSeasonAnalysis {
 		case FIELD_ATTEMPT_AVG:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getFi - t2.getMatchCount());
+					return factor * (t1.getFieldAttemptAvg() - t2.getFieldAttemptAvg())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -140,7 +140,7 @@ public class TeamSeasonAnalysis {
 		case FREETHROW_GOAL_AVG:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getFreethrowGoalAvg()) - t2.getFreethrowGoalAvg())< 0 ? -1 : 1;
+					return factor * (t1.getFreethrowGoalAvg() - t2.getFreethrowGoalAvg())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -220,7 +220,7 @@ public class TeamSeasonAnalysis {
 		case ASSIST:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getAssist()- t2.getAssist());
 				}
 			};
 			break;
@@ -228,7 +228,7 @@ public class TeamSeasonAnalysis {
 		case ASSIST_AVG:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getAssistAvg()- t2.getAssistAvg())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -236,7 +236,7 @@ public class TeamSeasonAnalysis {
 		case STEAL:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getSteal()- t2.getSteal());
 				}
 			};
 			break;
@@ -244,7 +244,7 @@ public class TeamSeasonAnalysis {
 		case STEAL_AVG:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getStealAvg() - t2.getStealAvg())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -252,7 +252,7 @@ public class TeamSeasonAnalysis {
 		case BLOCK:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getBlock()- t2.getBlock());
 				}
 			};
 			break;
@@ -260,7 +260,7 @@ public class TeamSeasonAnalysis {
 		case BLOCK_AVG:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getBlockAvg() - t2.getBlockAvg())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -268,7 +268,7 @@ public class TeamSeasonAnalysis {
 		case TURNOVER:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getTurnover() - t2.getTurnover());
 				}
 			};
 			break;
@@ -276,7 +276,7 @@ public class TeamSeasonAnalysis {
 		case TURNOVER_AVG:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getTurnoverAvg()- t2.getTurnoverAvg())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -284,7 +284,7 @@ public class TeamSeasonAnalysis {
 		case FOUL:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getFoul() - t2.getFoul());
 				}
 			};
 			break;
@@ -292,7 +292,7 @@ public class TeamSeasonAnalysis {
 		case FOUL_AVG:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getFoulAvg() - t2.getFoulAvg())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -300,7 +300,7 @@ public class TeamSeasonAnalysis {
 		case SCORE:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getTeamGoal()- t2.getTeamGoal());
 				}
 			};
 			break;
@@ -308,7 +308,7 @@ public class TeamSeasonAnalysis {
 		case SCORE_AVG:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getTeamGoalAvg()- t2.getTeamGoalAvg())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -316,7 +316,7 @@ public class TeamSeasonAnalysis {
 		case WINNING:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getWinning() - t2.getWinning())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -324,7 +324,7 @@ public class TeamSeasonAnalysis {
 		case ROUND:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getRound()- t2.getRound())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -332,7 +332,7 @@ public class TeamSeasonAnalysis {
 		case ROUND_AVG:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getRoundAvg() - t2.getRoundAvg())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -340,7 +340,7 @@ public class TeamSeasonAnalysis {
 		case OFFENSIVE_EFF:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getOffensiveEff() - t2.getOffensiveEff())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -348,15 +348,23 @@ public class TeamSeasonAnalysis {
 		case DEFENSIVE_EFF:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getDefensiveEff()- t2.getDefensiveEff())< 0 ? -1 : 1;
 				}
 			};
 			break;
 
-		case REBOUND_EFF:
+		case OFFENSIVE_REBOUND_EFF:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getOffensiveReboundEff()- t2.getOffensiveReboundEff())< 0 ? -1 : 1;
+				}
+			};
+			break;
+			
+		case DEFENSIVE_REBOUND_EFF:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getDefensiveReboundEff() - t2.getDefensiveReboundEff())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -364,7 +372,7 @@ public class TeamSeasonAnalysis {
 		case STEAL_EFF:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getStealEff() - t2.getStealEff())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -372,7 +380,7 @@ public class TeamSeasonAnalysis {
 		case ASSIST_EFF:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
+					return factor * (t1.getAssistEff() - t2.getAssistEff())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -381,7 +389,6 @@ public class TeamSeasonAnalysis {
 			break;
 		}
 
-		// 上面还有40个case！
 
 		Collections.sort(teams, comparator);
 		return teams;

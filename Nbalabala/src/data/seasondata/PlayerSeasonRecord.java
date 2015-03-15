@@ -146,6 +146,10 @@ public class PlayerSeasonRecord {
 		return fieldAttempt;
 	}
 	
+	public double getFieldAttemptAvg(){
+		return fieldAttempt/matchCount;
+	}
+	
 	public double getFieldPercent() {
 		return fieldGoal / fieldAttempt;
 	}
@@ -154,8 +158,16 @@ public class PlayerSeasonRecord {
 		return threePointGoal;
 	}
 
+	public double getThreePointGoalAvg() {
+		return threePointGoal/matchCount;
+	}
+	
 	public int getThreePointAttempt() {
 		return threePointAttempt;
+	}
+	
+	public double getThreePointAttemptAvg(){
+		return threePointAttempt/matchCount;
 	}
 	
 	public double getThreePointPercent() {
@@ -168,6 +180,10 @@ public class PlayerSeasonRecord {
 
 	public int getFreethrowAttempt() {
 		return freethrowAttempt;
+	}
+	
+	public double getFreethrowAttemptAvg() {
+		return freethrowAttempt/matchCount;
 	}
 	
 	public double getFreethrowPercent() {
@@ -202,12 +218,24 @@ public class PlayerSeasonRecord {
 		return turnover;
 	}
 
+	public double getTurnOverAvg(){
+		return turnover/matchCount;
+	}
+	
 	public int getFoul() {
 		return foul;
 	}
 
+	public double getFoulAvg() {
+		return foul/matchCount;
+	}
+	
 	public int getPersonalGoal() {
 		return personalGoal;
+	}
+	
+	public double getPersonalGoalAvg() {
+		return personalGoal/matchCount;
 	}
 	
 	public int getEfficiency(){
@@ -254,6 +282,10 @@ public class PlayerSeasonRecord {
 	
 	public double getBlockPercent() {
 		return block * (teamTime / 5)/time / (oppoFieldAttempt - oppoThreePointAttempt);
+	}
+	
+	public double getTurnOverPercent(){
+		return turnover/(fieldAttempt-threePointAttempt+0.44*freethrowAttempt+turnover);
 	}
 	
 	public double getFouldPercent() {

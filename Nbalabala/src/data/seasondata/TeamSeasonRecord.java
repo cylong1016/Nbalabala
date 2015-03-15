@@ -104,12 +104,20 @@ public class TeamSeasonRecord {
 		return fieldGoal;
 	}
 	
+	public double getFieldGoalAvg() {
+		return fieldGoal/matchCount;
+	}
+	
 	public double getAvgFieldGoal() {
 		return fieldGoal / matchCount;
 	}
 
 	public int getFieldAttempt() {
 		return fieldAttempt;
+	}
+	
+	public double getFieldAttemptAvg() {
+		return fieldAttempt/matchCount;
 	}
 	
 	public double getAvgFieldAttempt(){
@@ -238,6 +246,10 @@ public class TeamSeasonRecord {
 
 	public double getRound() {
 		return fieldAttempt + 0.4 * (freethrowAttempt) - 1.07 * (offensiveRebound / (offensiveRebound  + oppoDefensiveRebound) * (fieldAttempt - fieldGoal))+ 1.07*turnover;
+	}
+	
+	public double getRoundAvg(){
+		return getRound()/matchCount;
 	}
 	
 	public double getOffensiveEff() {

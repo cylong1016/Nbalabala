@@ -90,7 +90,7 @@ public class PlayerSeasonAnalysis {
 		case FIELD_ATTEMPT_AVG:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getF - p2.getTime());
+					return factor * (p1.getFieldAttemptAvg() - p2.getFieldAttemptAvg()) < 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -114,7 +114,7 @@ public class PlayerSeasonAnalysis {
 		case THREE_POINT_ATTEMPT_AVG:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getTh - p2.getTime());
+					return factor * (p1.getThreePointAttemptAvg()- p2.getThreePointAttemptAvg()) < 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -130,7 +130,7 @@ public class PlayerSeasonAnalysis {
 		case THREE_POINT_GOAL_AVG:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getThree - p2.getThreePointPercent()) < 0 ? -1 : 1;
+					return factor * (p1.getThreePointGoalAvg() - p2.getThreePointGoalAvg()) < 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -170,7 +170,7 @@ public class PlayerSeasonAnalysis {
 		case FREETHROW_ATTEMPT_AVG:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getFree - p2.getTime());
+					return factor * (p1.getFreethrowAttemptAvg() - p2.getFreethrowAttemptAvg())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -292,7 +292,7 @@ public class PlayerSeasonAnalysis {
 		case TURNOVER_AVG:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getTu - p2.getTime());
+					return factor * (p1.getTurnOverAvg() - p2.getTurnOverAvg())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -308,7 +308,7 @@ public class PlayerSeasonAnalysis {
 		case FOUL_AVG:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getFouldPercent() - p2.getFouldPercent()) < 0 ? -1 : 1;
+					return factor * (p1.getFoulAvg() - p2.getFoulAvg()) < 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -316,7 +316,7 @@ public class PlayerSeasonAnalysis {
 		case SCORE:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getS - p2.getTime());
+					return factor * (p1.getPersonalGoal() - p2.getPersonalGoal());
 				}
 			};
 			break;
@@ -324,7 +324,7 @@ public class PlayerSeasonAnalysis {
 		case SCORE_AVG:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getS - p2.getTime());
+					return factor * (p1.getPersonalGoalAvg() - p2.getPersonalGoalAvg()) < 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -414,7 +414,7 @@ public class PlayerSeasonAnalysis {
 		case TURNOVER_PERCENT:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getTu - p2.getTime());
+					return factor * (p1.getTurnOverPercent() - p2.getTurnOverPercent())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -431,7 +431,6 @@ public class PlayerSeasonAnalysis {
 			break;
 		}
 
-		// 上面还有47个switch！
 
 		Collections.sort(players, comparator);
 		return players;
