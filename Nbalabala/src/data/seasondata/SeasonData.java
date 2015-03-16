@@ -1,8 +1,4 @@
-/**
- * 
- * @author Issac Ding
- * @version 下午4:04:31
- */
+
 package data.seasondata;
 
 import java.io.BufferedReader;
@@ -11,12 +7,21 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
+/**
+ * 读取并累加赛季数据
+ * @author Issac Ding
+ * @version 2015年3月14日  下午4:04:31
+ */
 /**
  * 
  * @author Issac Ding
- * @version 2015年3月14日  下午4:04:31
+ * @version 2015年3月16日  下午6:39:27
  */
 public class SeasonData {
 	
@@ -40,9 +45,40 @@ public class SeasonData {
 		return new ArrayList<TeamSeasonRecord>(teamRecords.values());
 	}
 	
+	/** 将文件按照比赛时间排序 */
+	public void sortFiles(File [] files) {
+		Arrays.sort(files, new Comparator<File>() {
+			public int compare(File f1, File f2) {
+				String name1 = f1.getName();
+				String name2 = f2.getName();
+				String[]s1 = name1.split("_|-");
+				String[]s2 = name2.split("_|-"); 
+				int month1 = Integer.parseInt(s1[2]);
+				int month2 = Integer.parseInt(s2[2]);
+				if (month1 < 8) month1 += 12;
+				if (month2 < 8) month2 += 12;
+				int deltaMonth = month1 - month2;
+				if (deltaMonth != 0) return deltaMonth;
+				else {
+					int day1 = Integer.parseInt(s1[3]);
+					int day2 = Integer.parseInt(s2[3]);
+					return day1 - day2;
+				}
+			}
+		});
+	}
+	
+	public static void main(String[]args){
+		new SeasonData();
+	}
+	
 	public void loadMatches() {
 		File dir = new File(path);
 		File[] files = dir.listFiles();
+		
+		//将文件按比赛时间排序
+		sortFiles(files);
+		
 		BufferedReader br = null;
 
 		try {

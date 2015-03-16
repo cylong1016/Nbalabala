@@ -1,15 +1,12 @@
 package data.seasondata;
 
 /**
- * 
+ * 用来记录计算球员赛季数据所需的各种指标
  * @author Issac Ding
  * @version 2015年3月14日  下午4:17:44
  */
 public class PlayerSeasonRecord {
 	
-	//在遍历比赛信息的过程中不记录球员的球队和位置
-	//因为在查看球员赛季数据的时候不显示球队，而且位置以player文件夹中的为准
-
 	/**
 	 * attempt是出手 
 	 * goal命中
@@ -18,6 +15,12 @@ public class PlayerSeasonRecord {
 	
 	/** 球员名字 */
 	String name;
+	
+	/** 记录最后一次位置 */
+	char position = '\0';
+	
+	/** 记录最后一次比赛时的队伍 */
+	String teamName;
 	
 	/** 上场数 */
 	int matchCount;
@@ -87,8 +90,6 @@ public class PlayerSeasonRecord {
 	/** 球队总篮板 */
 	int teamTotalRebound;
 	
-	
-	
 	int teamFieldGoal;
 	
 	int teamFieldAttempt;
@@ -147,7 +148,7 @@ public class PlayerSeasonRecord {
 	}
 	
 	public double getFieldAttemptAvg(){
-		return fieldAttempt/matchCount;
+		return fieldAttempt / matchCount;
 	}
 	
 	public double getFieldPercent() {
@@ -159,7 +160,7 @@ public class PlayerSeasonRecord {
 	}
 
 	public double getThreePointGoalAvg() {
-		return threePointGoal/matchCount;
+		return threePointGoal / matchCount;
 	}
 	
 	public int getThreePointAttempt() {
@@ -167,7 +168,7 @@ public class PlayerSeasonRecord {
 	}
 	
 	public double getThreePointAttemptAvg(){
-		return threePointAttempt/matchCount;
+		return threePointAttempt / matchCount;
 	}
 	
 	public double getThreePointPercent() {
@@ -183,7 +184,7 @@ public class PlayerSeasonRecord {
 	}
 	
 	public double getFreethrowAttemptAvg() {
-		return freethrowAttempt/matchCount;
+		return freethrowAttempt / matchCount;
 	}
 	
 	public double getFreethrowPercent() {
@@ -219,7 +220,7 @@ public class PlayerSeasonRecord {
 	}
 
 	public double getTurnOverAvg(){
-		return turnover/matchCount;
+		return turnover / matchCount;
 	}
 	
 	public int getFoul() {
@@ -227,7 +228,7 @@ public class PlayerSeasonRecord {
 	}
 
 	public double getFoulAvg() {
-		return foul/matchCount;
+		return foul / matchCount;
 	}
 	
 	public int getPersonalGoal() {
@@ -296,6 +297,4 @@ public class PlayerSeasonRecord {
 		return (fieldAttempt + 0.44 * freethrowAttempt + foul) * (teamTime / 5) / time /
 				(teamFieldAttempt + 0.44 * teamFreethrowAttempt + teamFoul); 
 	}
-	
-	
 }
