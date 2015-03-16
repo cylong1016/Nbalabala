@@ -1,8 +1,4 @@
-/**
- * 
- * @author Issac Ding
- * @version 下午2:06:28
- */
+
 package enums;
 
 /**
