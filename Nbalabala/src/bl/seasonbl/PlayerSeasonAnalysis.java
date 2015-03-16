@@ -7,6 +7,9 @@ import java.util.Comparator;
 import data.seasondata.PlayerSeasonRecord;
 import data.seasondata.SeasonData;
 import enums.PlayerSortBasis;
+import enums.Position;
+import enums.ScreenArea;
+import enums.ScreenBasis;
 import enums.SortOrder;
 
 /**
@@ -17,9 +20,21 @@ import enums.SortOrder;
 public class PlayerSeasonAnalysis {
 
 	private SeasonData seasonData = new SeasonData();
+	
+	
+	/** 记录上一次返回给UI层，即UI层正在显示的球员列表 */
+	private ArrayList<PlayerSeasonRecord> currentList;
 
 	private int factor = 1;
+	
+	/** 根据位置、地区、筛选依据，返回含有前50个 */
+	public ArrayList<PlayerSeasonRecord> screen(Position position, ScreenArea area, ScreenBasis basis){
+		ArrayList<PlayerSeasonRecord> players = seasonData.getPlayerSeasonData();
+		
+		
+	}
 
+	/** 对输入的球员记录列表按排序依据进行排序 */
 	public ArrayList<PlayerSeasonRecord> sortPlayers(ArrayList<PlayerSeasonRecord> players,
 						PlayerSortBasis basis, SortOrder order) {
 		

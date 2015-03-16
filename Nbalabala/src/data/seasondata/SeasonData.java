@@ -71,7 +71,7 @@ public class SeasonData {
 	public static void main(String[]args){
 		SeasonData data = new SeasonData();
 		PlayerSeasonRecord record = data.playerRecords.get("LeBron James");
-		System.out.println(record.getSteal()/ (record.getMatchCount() + 0.0));
+		System.out.println(record.getSteal() / (record.getMatchCount() + 0.0));
 	}
 	
 	public void loadMatches() {
@@ -116,6 +116,10 @@ public class SeasonData {
 							new PlayerSeasonRecord());
 					PlayerSeasonRecord playerRecord = playerRecords.get(s[0]);
 					
+					// 如果是首发，更新其位置信息
+					if (s[1].length() != 0) playerRecord.position = s[1].charAt(0);
+					playerRecord.teamName = homeTeam;
+					
 					homePlayers.add(playerRecord);
 					
 					dataAccumulate(homeTeamData, playerRecord, s, file, HOME);
@@ -128,6 +132,10 @@ public class SeasonData {
 					if ( !playerRecords.containsKey(s[0])) playerRecords.put(s[0], 
 							new PlayerSeasonRecord());
 					PlayerSeasonRecord playerRecord = playerRecords.get(s[0]);
+					
+					// 如果是首发，更新其位置信息
+					if (s[1].length() != 0) playerRecord.position = s[1].charAt(0);
+					playerRecord.teamName = roadTeam;
 					
 					roadPlayers.add(playerRecord);
 					

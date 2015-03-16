@@ -10,6 +10,7 @@ import java.util.HashMap;
 
 import po.PlayerPO;
 import dataservice.playerdataservice.PlayerDataService;
+import enums.ScreenArea;
 
 /**
  * @see dataservice.playerdataservice.PlayerDataService
@@ -26,6 +27,16 @@ public class PlayerData implements PlayerDataService {
 
 	public PlayerData() {
 		loadPlayers();
+		System.out.println(players.size());
+	}
+	
+	// 龙哥写出这个方法，输入球队缩写，返回所属地区（六个大区中的一个，而不是笼统的东部或者西部）
+	public ScreenArea getAreaByAbr(String abr) {
+		
+	}
+	
+	public static void main(String[]args){
+		new PlayerData();
 	}
 
 	/**

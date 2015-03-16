@@ -17,9 +17,6 @@ import dataservice.teamdataservice.TeamDataService;
  */
 public class TeamData implements TeamDataService {
 
-	public static void main(String[] args) {
-		new TeamData();
-	}
 
 	/** 全部球队信息 */
 	private HashMap<String, TeamPO> teams = new HashMap<String, TeamPO>();
@@ -29,6 +26,11 @@ public class TeamData implements TeamDataService {
 
 	public TeamData() {
 		loadTeams();
+		System.out.println(teams.size());
+	}
+	
+	public static void main(String[]args){
+		new TeamData();
 	}
 
 	/**
