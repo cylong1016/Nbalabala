@@ -17,7 +17,6 @@ import dataservice.teamdataservice.TeamDataService;
  */
 public class TeamData implements TeamDataService {
 
-
 	/** 全部球队信息 */
 	private HashMap<String, TeamPO> teams = new HashMap<String, TeamPO>();
 
@@ -26,17 +25,12 @@ public class TeamData implements TeamDataService {
 
 	public TeamData() {
 		loadTeams();
-		System.out.println(teams.size());
-	}
-	
-	public static void main(String[]args){
-		new TeamData();
 	}
 
 	/**
 	 * 加载全部球队信息
 	 * @author cylong
-	 * @version 2015年3月13日  下午9:05:33
+	 * @version 2015年3月13日 下午9:05:33
 	 */
 	private void loadTeams() {
 		File file = new File(path);
@@ -46,7 +40,7 @@ public class TeamData implements TeamDataService {
 			String line = null;
 			while((line = br.readLine()) != null) {
 				line = line.replace("║", "");
-				if (!Character.isLetter(line.charAt(0))) {
+				if (!Character.isLetterOrDigit(line.charAt(0))) {
 					continue;
 				}
 				String[] info = line.split("│");
