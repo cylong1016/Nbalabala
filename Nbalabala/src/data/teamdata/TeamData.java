@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import po.TeamPO;
-import dataservice.playerdataservice.TeamDataService;
+import dataservice.teamdataservice.TeamDataService;
 
 /**
- * @see dataservice.playerdataservice.TeamDataService
+ * @see dataservice.teamdataservice.TeamDataService
  * @author cylong
  * @version 2015年3月13日 下午8:36:13
  */
@@ -25,7 +25,7 @@ public class TeamData implements TeamDataService {
 	private HashMap<String, TeamPO> teams = new HashMap<String, TeamPO>();
 
 	/** 存储球队信息的文件 */
-	private String path = "data/teams/teams";
+	private String path = "NBAdata/teams/teams";
 
 	public TeamData() {
 		loadTeams();
@@ -59,7 +59,7 @@ public class TeamData implements TeamDataService {
 	}
 
 	/**
-	 * @see dataservice.playerdataservice.TeamDataService#findTeam(java.lang.String)
+	 * @see dataservice.teamdataservice.TeamDataService#findTeam(java.lang.String)
 	 */
 	@Override
 	public TeamPO findTeam(String name) {

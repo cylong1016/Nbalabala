@@ -20,7 +20,7 @@ import java.util.HashMap;
  */
 public class SeasonData {
 	
-	private final String path = "data/matches";
+	private final String path = "NBAdata/matches";
 	
 	public SeasonData(){
 		loadMatches();
