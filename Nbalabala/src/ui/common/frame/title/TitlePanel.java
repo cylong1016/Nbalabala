@@ -17,7 +17,7 @@ import ui.common.frame.Frame;
 /**
  * frame上的标题栏
  * @author cylong
- * @version 2015年3月16日  上午12:49:52
+ * @version 2015年3月16日 上午12:49:52
  */
 public class TitlePanel extends JPanel {
 

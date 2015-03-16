@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 /**
  * 最小化按钮；关闭按钮
  * @author cylong
- * @version 2015年3月16日  上午12:49:34
+ * @version 2015年3月16日 上午12:49:34
  */
 public class TitleButton extends JLabel {
 

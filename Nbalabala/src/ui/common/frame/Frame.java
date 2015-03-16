@@ -1,7 +1,6 @@
 package ui.common.frame;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -11,27 +10,18 @@ import java.util.Properties;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
+import ui.UIConfig;
 import ui.common.frame.title.TitlePanel;
 
 /**
  * 自定义Frame
  * @author cylong
- * @version 2015年3月16日  上午12:50:04
+ * @version 2015年3月16日 上午12:50:04
  */
 public class Frame extends JFrame {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 5359481363535358093L;
-
-	/*----------------------------Frame配置--------------------------------*/
-	/** 界面的宽 */
-	public static int WIDTH = 1000;
-	/** 界面的高 */
-	public static int HEIGHT = 600;
-	/** 主界面的背景色 */
-	public static Color MAIN_COLOR = Color.WHITE;
-
-	/*----------------------------Frame配置--------------------------------*/
 
 	/** 标题栏 */
 	protected TitlePanel title;
@@ -46,7 +36,7 @@ public class Frame extends JFrame {
 		// 标题栏
 		title = new TitlePanel(this);
 		this.add(title, BorderLayout.NORTH); // 添加标题
-		this.setSize(WIDTH, HEIGHT);
+		this.setSize(UIConfig.WIDTH, UIConfig.HEIGHT);
 		this.setLocationRelativeTo(null); // 居中，要在设置大小之后 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setUndecorated(true);
