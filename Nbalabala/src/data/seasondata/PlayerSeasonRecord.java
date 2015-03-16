@@ -142,6 +142,10 @@ public class PlayerSeasonRecord {
 	public int getFieldGoal() {
 		return fieldGoal;
 	}
+	
+	public double getFieldGoalAvg() {
+		return fieldGoal / matchCount;
+	}
 
 	public int getFieldAttempt() {
 		return fieldAttempt;
@@ -178,6 +182,10 @@ public class PlayerSeasonRecord {
 	public int getFreethrowGoal() {
 		return freethrowGoal;
 	}
+	
+	public double getFreethrowGoalAvg() {
+		return freethrowGoal / matchCount;
+	}
 
 	public int getFreethrowAttempt() {
 		return freethrowAttempt;
@@ -194,32 +202,56 @@ public class PlayerSeasonRecord {
 	public int getOffensiveRebound() {
 		return offensiveRebound;
 	}
+	
+	public double getOffensiveReboundAvg() {
+		return offensiveRebound / matchCount;
+	}
 
 	public int getDefensiveRebound() {
 		return defensiveRebound;
 	}
 
+	public double getDefensiveReboundAvg() {
+		return defensiveRebound / matchCount;
+	}
+	
 	public int getTotalRebound() {
 		return totalRebound;
+	}
+	
+	public double getTotalReboundAvg() {
+		return totalRebound / matchCount;
 	}
 
 	public int getAssist() {
 		return assist;
 	}
+	
+	public double getAssistAvg() {
+		return assist / matchCount;
+	}
 
 	public int getSteal() {
 		return steal;
+	}
+	
+	public double getStealAvg() {
+		return steal / matchCount;
 	}
 
 	public int getBlock() {
 		return block;
 	}
+	
+	public double getBlockAvg() {
+		return block / matchCount;
+	}
 
 	public int getTurnover() {
 		return turnover;
 	}
-
-	public double getTurnOverAvg(){
+	
+	public double getTurnoverAvg() {
 		return turnover / matchCount;
 	}
 	

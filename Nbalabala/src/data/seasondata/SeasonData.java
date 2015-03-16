@@ -11,8 +11,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
-
 /**
  * 读取并累加赛季数据
  * @author Issac Ding
@@ -26,6 +24,8 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 public class SeasonData {
 	
 	private final String path = "NBAdata/matches";
+	private static int HOME = 0;
+	private static int ROAD = 0;
 	
 	public SeasonData(){
 		loadMatches();
@@ -69,7 +69,9 @@ public class SeasonData {
 	}
 	
 	public static void main(String[]args){
-		new SeasonData();
+		SeasonData data = new SeasonData();
+		PlayerSeasonRecord record = data.playerRecords.get("LeBron James");
+		System.out.println(record.getSteal()/ (record.getMatchCount() + 0.0));
 	}
 	
 	public void loadMatches() {
@@ -116,7 +118,7 @@ public class SeasonData {
 					
 					homePlayers.add(playerRecord);
 					
-					dataAccumulate(homeTeamData, playerRecord, s);
+					dataAccumulate(homeTeamData, playerRecord, s, file, HOME);
 				}
 				
 				//下面读取客场队
@@ -129,7 +131,7 @@ public class SeasonData {
 					
 					roadPlayers.add(playerRecord);
 					
-					dataAccumulate(roadTeamData, playerRecord, s);
+					dataAccumulate(roadTeamData, playerRecord, s, file, ROAD);
 				}
 				
 				for (PlayerSeasonRecord record : homePlayers) {
@@ -159,7 +161,6 @@ public class SeasonData {
 					homeTeamRecord.loses ++;
 					roadTeamRecord.wins ++;
 				}
-				
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -169,16 +170,29 @@ public class SeasonData {
 	}
 	
 	/** 数据累加，包括一队的各种数据累加和球员的数据累加 */
-	public void dataAccumulate(int[] teamData, PlayerSeasonRecord playerRecord, String[] s) {
+	public void dataAccumulate(int[] teamData, PlayerSeasonRecord playerRecord, String[] s,
+			File file, int teamState) {
 		//该数组0，1位置不用， 2位置为该球员的上场秒数，3之后是s的对应转化为整数
 		int[] lineInt = new int[18];
 		
-		String[] timeString = s[2].split(":");
+		//识别上场时间为null的情况：
+		try{
+			String[] timeString = s[2].split(":");
+			lineInt[2] = 60 * Integer.parseInt(timeString[0]) + 
+					Integer.parseInt(timeString[1]);
+		}catch(Exception e){
+			modifyTime(lineInt, file, teamState);
+		}
 		
-		lineInt[2] = 60 * Integer.parseInt(timeString[0]) + 
-				Integer.parseInt(timeString[1]);
-		for (int i = 3;i < 18;i++){
+		for (int i = 3;i < 17;i++){
 			lineInt[i] = Integer.parseInt(s[i]);
+		}
+		
+		//识别总分为null的情况：
+		try{
+			lineInt[17] = Integer.parseInt(s[17]);
+		}catch(Exception e){
+			modifyScore(lineInt);
 		}
 		
 		for (int i=2;i<18;i++){
@@ -254,5 +268,57 @@ public class SeasonData {
 		teamRecord.oppoOffensiveRebound += oppoData[9];
 		teamRecord.oppoGoal += oppoData[17];
 		teamRecord.oppoTurnover += oppoData[15];
+	}
+	
+	/** 修正时间为null的脏数据，方法是总时间减去其他球员上场时间，总时间为48分钟+5分钟*加时赛场数*/
+	private void modifyTime(int [] lineInt, File file, int teamState) {
+		BufferedReader br = null;
+		try{
+			br = new BufferedReader(new FileReader(file));
+			br.readLine();
+			int totalSeconds = ((br.readLine().split(";").length - 4) * 5 + 48) * 60;
+			br.readLine();
+			//有记录的总分钟数和秒数之和
+			int minutes = 0;
+			int seconds = 0;
+			String [] line;
+			
+			//如果是主场队，读取文件的上半部分
+			if (teamState == HOME) {
+				while (true){
+					line = br.readLine().split(";|:");
+					if (line.length < 2) break;		//读到客场队缩写说明读完了主场队
+					try{
+						minutes += Integer.parseInt(line[2]);
+						seconds += Integer.parseInt(line[3]);
+					}catch (Exception e){
+						continue;
+					}
+				}
+				
+			}else {	//如果要纠正的是客场队
+				while (br.readLine().length() > 5) {
+					//跳过主场队部分
+				}
+				String s = null;
+				while ((s = br.readLine()) != null){
+					line = s.split(";|:");
+					try{
+						minutes += Integer.parseInt(line[2]);
+						seconds += Integer.parseInt(line[3]);
+					}catch (Exception e){
+						continue;
+					}
+				}
+			}
+			lineInt[2] = totalSeconds - seconds - minutes * 60;
+		}catch (Exception e){
+			
+		}
+	}
+	
+	/** 修正得分，得分=（投篮数3-三分球数5）*2 + 三分球数 *3 + 罚球7 * 1 ，整理后即为下式 */
+	private void modifyScore(int [] lineInt) {
+		lineInt[17] = 2 * lineInt[3] + lineInt[5] + lineInt[7];
 	}
 }
