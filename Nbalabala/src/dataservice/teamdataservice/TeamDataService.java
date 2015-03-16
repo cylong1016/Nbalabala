@@ -1,4 +1,4 @@
-package dataservice.playerdataservice;
+package dataservice.teamdataservice;
 
 import po.TeamPO;
 

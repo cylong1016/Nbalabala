@@ -22,7 +22,7 @@ public class PlayerData implements PlayerDataService {
 	private HashMap<String, PlayerPO> players = new HashMap<String, PlayerPO>();
 
 	/** 存储球员信息的文件夹 */
-	private String path = "data/players/info/";
+	private String path = "NBAdata/players/info/";
 
 	public PlayerData() {
 		loadPlayers();

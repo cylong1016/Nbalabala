@@ -59,7 +59,6 @@ public class Frame extends JFrame {
 	/**
 	 * 透明度渐变启动界面，需要外部或者子类自己调用
 	 * @author cylong
-	 * @version 2015年3月16日  上午12:50:13
 	 */
 	public void start() {
 		hy.start();
@@ -68,7 +67,6 @@ public class Frame extends JFrame {
 	/**
 	 * 透明度渐变启动界面
 	 * @author cylong
-	 * @version 2015年3月16日  上午12:50:20
 	 */
 	protected class HyalineValue extends Thread {
 
@@ -99,7 +97,6 @@ public class Frame extends JFrame {
 	/**
 	 * 设置Frame可以拖动
 	 * @author cylong
-	 * @version 2015年3月16日  上午12:50:26
 	 */
 	public void setDragable() {
 		this.addMouseListener(new MouseAdapter() {
@@ -129,7 +126,6 @@ public class Frame extends JFrame {
 	/**
 	 * 设置为相应操作系统风格
 	 * @author cylong
-	 * @version 2015年3月16日  上午12:50:38
 	 */
 	private void setOSStyle() {
 		Properties props = System.getProperties(); //系统属性

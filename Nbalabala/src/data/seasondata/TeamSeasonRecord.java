@@ -87,10 +87,10 @@ public class TeamSeasonRecord {
 	int oppoGoal;
 	
 	private double oppoRound() {
-		return oppoFieldAttempt + 0.4 * (oppoFreethrowAttempt) - 1.07 * (oppoOffensiveRebound / (oppoOffensiveRebound  + defensiveRebound) * (oppoFieldAttempt - oppoFieldGoal))+ 1.07*oppoTurnover;
+		return oppoFieldAttempt + 0.4 * (oppoFreethrowAttempt) - 
+				1.07 * (oppoOffensiveRebound / (oppoOffensiveRebound  + defensiveRebound) * 
+						(oppoFieldAttempt - oppoFieldGoal))+ 1.07*oppoTurnover;
 	}
-	
-	
 
 	public String getTeamName() {
 		return teamName;
@@ -105,10 +105,6 @@ public class TeamSeasonRecord {
 	}
 	
 	public double getFieldGoalAvg() {
-		return fieldGoal/matchCount;
-	}
-	
-	public double getAvgFieldGoal() {
 		return fieldGoal / matchCount;
 	}
 
@@ -120,10 +116,6 @@ public class TeamSeasonRecord {
 		return fieldAttempt/matchCount;
 	}
 	
-	public double getAvgFieldAttempt(){
-		return fieldAttempt / matchCount;
-	}
-
 	public int getThreePointGoal() {
 		return threePointGoal;
 	}
@@ -229,7 +221,7 @@ public class TeamSeasonRecord {
 	}
 	
 	public double getFieldPercent(){
-		return fieldGoal/fieldAttempt;
+		return fieldGoal / fieldAttempt;
 	}
 	
 	public double getThreePointPercent(){
@@ -241,15 +233,17 @@ public class TeamSeasonRecord {
 	}
 	
 	public double getWinning(){
-		return wins/loses;
+		return wins / loses;
 	}
 
 	public double getRound() {
-		return fieldAttempt + 0.4 * (freethrowAttempt) - 1.07 * (offensiveRebound / (offensiveRebound  + oppoDefensiveRebound) * (fieldAttempt - fieldGoal))+ 1.07*turnover;
+		return fieldAttempt + 0.4 * (freethrowAttempt) - 1.07 *
+				(offensiveRebound / (offensiveRebound  + oppoDefensiveRebound) * 
+						(fieldAttempt - fieldGoal))+ 1.07*turnover;
 	}
 	
 	public double getRoundAvg(){
-		return getRound()/matchCount;
+		return getRound() / matchCount;
 	}
 	
 	public double getOffensiveEff() {
@@ -257,7 +251,7 @@ public class TeamSeasonRecord {
 	}
 
 	public double getDefensiveEff() {
-		return oppoGoal / oppoRound();
+		return oppoGoal / oppoRound() * 100;
 	}
 
 	public double getOffensiveReboundEff() {

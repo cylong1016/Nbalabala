@@ -20,9 +20,9 @@ public class PlayerSeasonAnalysis {
 
 	private int factor = 1;
 
-	public ArrayList<PlayerSeasonRecord> sortPlayers(PlayerSortBasis basis, SortOrder order) {
-		ArrayList<PlayerSeasonRecord> players = seasonData.getPlayerSeasonData();
-
+	public ArrayList<PlayerSeasonRecord> sortPlayers(ArrayList<PlayerSeasonRecord> players,
+						PlayerSortBasis basis, SortOrder order) {
+		
 		Comparator<PlayerSeasonRecord> comparator = null;
 
 		if (order == SortOrder.DE)
@@ -74,7 +74,7 @@ public class PlayerSeasonAnalysis {
 		case FIELD_GOAL_AVG:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getFieldPercent() - p2.getFieldPercent()) < 0 ? -1 : 1;
+					return factor * (p1.getFieldGoalAvg() - p2.getFieldGoalAvg()) < 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -154,7 +154,7 @@ public class PlayerSeasonAnalysis {
 		case FREETHROW_GOAL_AVG:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getFreethrowPercent() - p2.getThreePointPercent()) < 0 ? -1 : 1;
+					return factor * (p1.getFreethrowGoalAvg() - p2.getFreethrowGoalAvg()) < 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -194,6 +194,15 @@ public class PlayerSeasonAnalysis {
 		case OFFENSIVE_REBOUND_AVG:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
+					return factor * (p1.getOffensiveReboundAvg() - p2.getOffensiveReboundAvg()) < 0 ? -1
+							: 1;
+				}
+			};
+			break;
+			
+		case OFFENSIVE_REBOUND_PERCENT:
+			comparator = new Comparator<PlayerSeasonRecord>() {
+				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
 					return factor * (p1.getOffensiveReboundPercent() - p2.getOffensiveReboundPercent()) < 0 ? -1
 							: 1;
 				}
@@ -208,10 +217,18 @@ public class PlayerSeasonAnalysis {
 			};
 			break;
 
-		case DEFENSIVE_REBOUND_AVG:
+		case DEFENSIVE_REBOUND_PERCENT:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
 					return factor * (p1.getDefensiveReboundPercent() - p2.getDefensiveReboundPercent()) < 0 ? -1
+							: 1;
+				}
+			};
+			break;
+		case DEFENSIVE_REBOUND_AVG:
+			comparator = new Comparator<PlayerSeasonRecord>() {
+				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
+					return factor * (p1.getDefensiveReboundAvg() - p2.getDefensiveReboundAvg()) < 0 ? -1
 							: 1;
 				}
 			};
@@ -225,10 +242,17 @@ public class PlayerSeasonAnalysis {
 			};
 			break;
 
-		case TOTAL_REBOUND_AVG:
+		case TOTAL_REBOUND_PERCENT:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
 					return factor * (p1.getTotalReboundPercent() - p2.getTotalReboundPercent()) < 0 ? -1 : 1;
+				}
+			};
+			break;
+		case TOTAL_REBOUND_AVG:
+			comparator = new Comparator<PlayerSeasonRecord>() {
+				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
+					return factor * (p1.getTotalReboundAvg() - p2.getTotalReboundAvg()) < 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -242,6 +266,14 @@ public class PlayerSeasonAnalysis {
 			break;
 
 		case ASSIST_AVG:
+			comparator = new Comparator<PlayerSeasonRecord>() {
+				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
+					return factor * (p1.getAssistAvg() - p2.getAssistAvg()) < 0 ? -1 : 1;
+				}
+			};
+			break;
+			
+		case ASSIST_PERCENT:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
 					return factor * (p1.getAssistPercent() - p2.getAssistPercent()) < 0 ? -1 : 1;
@@ -260,6 +292,14 @@ public class PlayerSeasonAnalysis {
 		case STEAL_AVG:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
+					return factor * (p1.getStealAvg() - p2.getStealAvg()) < 0 ? -1 : 1;
+				}
+			};
+			break;
+			
+		case STEAL_PERCENT:
+			comparator = new Comparator<PlayerSeasonRecord>() {
+				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
 					return factor * (p1.getStealPercent() - p2.getStealPercent()) < 0 ? -1 : 1;
 				}
 			};
@@ -274,6 +314,14 @@ public class PlayerSeasonAnalysis {
 			break;
 
 		case BLOCK_AVG:
+			comparator = new Comparator<PlayerSeasonRecord>() {
+				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
+					return factor * (p1.getBlockAvg() - p2.getBlockAvg()) < 0 ? -1 : 1;
+				}
+			};
+			break;
+			
+		case BLOCK_PERCENT:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
 					return factor * (p1.getBlockPercent() - p2.getBlockPercent()) < 0 ? -1 : 1;
@@ -292,7 +340,15 @@ public class PlayerSeasonAnalysis {
 		case TURNOVER_AVG:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getTurnOverAvg() - p2.getTurnOverAvg())< 0 ? -1 : 1;
+					return factor * (p1.getTurnoverAvg() - p2.getTurnoverAvg())< 0 ? -1 : 1;
+				}
+			};
+			break;
+			
+		case TURNOVER_PERCENT:
+			comparator = new Comparator<PlayerSeasonRecord>() {
+				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
+					return factor * (p1.getTurnOverPercent() - p2.getTurnOverPercent())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -312,7 +368,7 @@ public class PlayerSeasonAnalysis {
 				}
 			};
 			break;
-
+			
 		case SCORE:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
@@ -361,64 +417,6 @@ public class PlayerSeasonAnalysis {
 			};
 			break;
 
-		case TOTAL_REBOUND_PERCENT:
-			comparator = new Comparator<PlayerSeasonRecord>() {
-				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getTotalReboundPercent() - p2.getTotalReboundPercent()) < 0 ? -1 : 1;
-				}
-			};
-			break;
-
-		case OFFENSIVE_REBOUND_PERCENT:
-			comparator = new Comparator<PlayerSeasonRecord>() {
-				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getOffensiveReboundPercent() - p2.getOffensiveReboundPercent()) < 0 ? -1
-							: 1;
-				}
-			};
-			break;
-
-		case DEFENSIVE_REBOUND_PERCENT:
-			comparator = new Comparator<PlayerSeasonRecord>() {
-				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getDefensiveReboundPercent() - p2.getDefensiveReboundPercent()) < 0 ? -1
-							: 1;
-				}
-			};
-			break;
-
-		case ASSIST_PERCENT:
-			comparator = new Comparator<PlayerSeasonRecord>() {
-				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getAssistPercent() - p2.getAssistPercent()) < 0 ? -1 : 1;
-				}
-			};
-			break;
-
-		case STEAL_PERCENT:
-			comparator = new Comparator<PlayerSeasonRecord>() {
-				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getStealPercent() - p2.getStealPercent()) < 0 ? -1 : 1;
-				}
-			};
-			break;
-
-		case BLOCK_PERCENT:
-			comparator = new Comparator<PlayerSeasonRecord>() {
-				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getBlockPercent() - p2.getBlockPercent()) < 0 ? -1 : 1;
-				}
-			};
-			break;
-
-		case TURNOVER_PERCENT:
-			comparator = new Comparator<PlayerSeasonRecord>() {
-				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getTurnOverPercent() - p2.getTurnOverPercent())< 0 ? -1 : 1;
-				}
-			};
-			break;
-
 		case USE_PERCENT:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
@@ -430,7 +428,6 @@ public class PlayerSeasonAnalysis {
 		default:
 			break;
 		}
-
 
 		Collections.sort(players, comparator);
 		return players;
