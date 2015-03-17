@@ -333,4 +333,37 @@ public class PlayerSeasonRecord {
 	public char getPosition() {
 		return position;
 	}
+	
+	/** 两双以场均数据计算，如果只有一项超过10，返回0.如果有两项以上超过10，返回其和 */
+	public int getDoubleDouble() {
+		int count = 0;
+		int sum = 0;
+		if (getPersonalGoalAvg() >= 10) {
+			count ++;
+			sum += getPersonalGoal();
+		}
+		if (getTotalReboundAvg() >= 10) {
+			count ++;
+			sum += getTotalReboundAvg();
+		}
+		if (getAssistAvg() >= 10) {
+			count ++;
+			sum += getAssistAvg();
+		}
+		if (getStealAvg() >= 10) {
+			count ++;
+			sum += getStealAvg();
+		}
+		if (getBlockAvg() >= 10) {
+			count ++;
+			sum += getBlockAvg();
+		}
+		if (count < 2) return 0;
+		return sum;
+	}
+	
+	/** 三项相加 */
+	public int getScoreReboundAssist() {
+		return personalGoal + totalRebound + assist;
+	}
 }
