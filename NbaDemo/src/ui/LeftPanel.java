@@ -30,6 +30,9 @@ public class LeftPanel extends FatherPanel {
 		
 		public void run(){
 			while(true){
+				if(secPanelX >= 0){
+					break;
+				}
 				try {
 					secPanelX = secPanelX + speed;
 					LeftPanel.this.setLocation(secPanelX, 0);
@@ -37,9 +40,6 @@ public class LeftPanel extends FatherPanel {
 					LeftPanel.this.repaint();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
-				}
-				if(secPanelX >= 0){
-					break;
 				}
 			}
 		}
@@ -49,6 +49,9 @@ public class LeftPanel extends FatherPanel {
 
 		public void run(){
 			while(true){
+				if(secPanelX <= -205){
+					break;
+				}
 				try {
 					secPanelX = secPanelX - speed;
 					LeftPanel.this.setLocation(secPanelX, 0);
@@ -56,9 +59,6 @@ public class LeftPanel extends FatherPanel {
 					Thread.sleep(5);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
-				}
-				if(secPanelX <= -205){
-					break;
 				}
 			}
 		}

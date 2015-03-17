@@ -1,72 +1,58 @@
 package ui.FatherPanel;
 
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-import javax.swing.JButton;
+import ui.UIConfig;
 
 /**
  * 带有左边边框和底层的panel，其他具体功能panel的父类
+ * 
  * @author lsy
- * @version 2015年3月17日  下午6:21:08
+ * @version 2015年3月17日 下午6:21:08
  */
-public class FatherPanel extends BottomPanel{
+public class FatherPanel extends BottomPanel {
 	private static final long serialVersionUID = 7108387309547483359L;
-	private JButton button;
 	private LeftPanel leftPanel;
-	
-	public FatherPanel(String url){
+
+	public FatherPanel(String url) {
 		super(url);
-		setButton();
-		this.add(button);
 		this.addLeftPanel();
-		
+		this.addMouseMotionListener(new MouListener());
+
 	}
-	
-	public void addLeftPanel(){
+
+	class MouListener implements MouseMotionListener {
+
+		public void mouseDragged(MouseEvent e) {
+
+		}
+
+		public void mouseMoved(MouseEvent e) {
+			if (e.getX() > 0 && e.getX() < UIConfig.PROMPT_WIDTH) {
+				toLeftPanel();
+			} else if (e.getX() > UIConfig.LEFT_WIDTH && e.getX() < UIConfig.WIDTH) {
+				outLeftPanel();
+			}
+
+		}
+
+	}
+
+	public void addLeftPanel() {
+		//TODO 图片待换
 		leftPanel = new LeftPanel("Image/2.png");
 		this.add(leftPanel);
 	}
-	
-	public void toLeftPanel(){
+
+	public void toLeftPanel() {
 		leftPanel.moveIn();
 		this.repaint();
 	}
-	
-	public void outLeftPanel(){
+
+	public void outLeftPanel() {
 		leftPanel.moveOut();
 		this.repaint();
 	}
-	
-	public void setButton(){
-		
-		button = new JButton();
-		button.setContentAreaFilled(false);
-		button.setBounds(0,0, 189, 600);
-		button.setBorder(null);
-		button.addMouseListener(new ButtonListener());
-	}
-	
-	class ButtonListener implements MouseListener{
 
-		public void mouseClicked(MouseEvent e) {
-		}
-
-		public void mousePressed(MouseEvent e) {
-			
-		}
-
-		public void mouseReleased(MouseEvent e) {
-			
-		}
-
-		public void mouseEntered(MouseEvent e) {
-			toLeftPanel();
-		}
-
-		public void mouseExited(MouseEvent e) {
-			outLeftPanel();
-		}
-		
-	}
 }

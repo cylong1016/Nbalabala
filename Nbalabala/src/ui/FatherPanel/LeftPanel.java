@@ -1,5 +1,7 @@
 package ui.FatherPanel;
 
+import ui.UIConfig;
+
 
 /**
  * 左边边框
@@ -10,7 +12,7 @@ public class LeftPanel extends BottomPanel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 1L;
-	private int secPanelX = -189, secPanelY = 0, secPanelWidth = 189, secPanelHeight = 600;
+	private int secPanelX = UIConfig.LEFT_WIDTH*(-1);
 	private ThreadIn threadIn;
 	private ThreadOut threadOut;
 	private int speed = 5;
@@ -19,7 +21,7 @@ public class LeftPanel extends BottomPanel {
 		super(url);
 		this.setLayout(null);
 		this.setOpaque(false);
-		this.setBounds(secPanelX, secPanelY, secPanelWidth, secPanelHeight);
+		this.setBounds(secPanelX, 0, UIConfig.LEFT_WIDTH, UIConfig.WIDTH);
 	}
 
 	public void moveIn(){
@@ -36,6 +38,9 @@ public class LeftPanel extends BottomPanel {
 		
 		public void run(){
 			while(true){
+				if(secPanelX >= 0){
+					break;
+				}
 				try {
 					secPanelX = secPanelX + speed;
 					LeftPanel.this.setLocation(secPanelX, 0);
@@ -43,9 +48,6 @@ public class LeftPanel extends BottomPanel {
 					LeftPanel.this.repaint();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
-				}
-				if(secPanelX >= 0){
-					break;
 				}
 			}
 		}
@@ -55,6 +57,9 @@ public class LeftPanel extends BottomPanel {
 
 		public void run(){
 			while(true){
+				if(secPanelX <= secPanelX){
+					break;
+				}
 				try {
 					secPanelX = secPanelX - speed;
 					LeftPanel.this.setLocation(secPanelX, 0);
@@ -62,9 +67,6 @@ public class LeftPanel extends BottomPanel {
 					Thread.sleep(5);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
-				}
-				if(secPanelX <= -205){
-					break;
 				}
 			}
 		}

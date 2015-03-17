@@ -16,6 +16,10 @@ public class UIConfig {
 	public static int HEIGHT = 632;
 	/** 主界面的背景色 */
 	public static Color MAIN_COLOR = Color.WHITE;
+	/** 左边边框的宽度 */
+	public static int LEFT_WIDTH = 189;
+	/** 会弹出左边栏的宽度*/
+	public static int PROMPT_WIDTH = 50;
 
 	/*----------------------------Frame配置--------------------------------*/
 }
