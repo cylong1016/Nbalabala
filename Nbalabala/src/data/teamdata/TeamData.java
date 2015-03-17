@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 import po.TeamPO;
 import dataservice.teamdataservice.TeamDataService;
+import enums.ScreenDivision;
 
 /**
  * @see dataservice.teamdataservice.TeamDataService
@@ -18,12 +19,12 @@ import dataservice.teamdataservice.TeamDataService;
 public class TeamData implements TeamDataService {
 
 	/** 全部球队信息 */
-	private HashMap<String, TeamPO> teams = new HashMap<String, TeamPO>();
+	private static HashMap<String, TeamPO> teams = new HashMap<String, TeamPO>();
 
 	/** 存储球队信息的文件 */
-	private String path = "NBAdata/teams/teams";
+	private static final String path = "NBAdata/teams/teams";
 
-	public TeamData() {
+	static{
 		loadTeams();
 	}
 
@@ -32,7 +33,7 @@ public class TeamData implements TeamDataService {
 	 * @author cylong
 	 * @version 2015年3月13日 下午9:05:33
 	 */
-	private void loadTeams() {
+	private static void loadTeams() {
 		File file = new File(path);
 		BufferedReader br = null;
 		try {
@@ -60,6 +61,16 @@ public class TeamData implements TeamDataService {
 	@Override
 	public TeamPO findTeam(String name) {
 		return teams.get(name);
+	}
+	
+	// 以下两个方法主要用来根据球队缩写返回东/西或者具体赛区，主要用于球员的条件筛选
+	
+	public static ScreenDivision getAreaByAbbr(String abbr) {
+		return teams.get(abbr).getArea();
+	}
+	
+	public static ScreenDivision getDivisionByAbbr(String abbr) {
+		return teams.get(abbr).getDivision();
 	}
 
 }

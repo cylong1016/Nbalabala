@@ -28,7 +28,7 @@ public class PlayerSeasonAnalysis {
 	private int factor = 1;
 	
 	/** 根据位置、地区、筛选依据，返回含有前50个 */
-	public ArrayList<PlayerSeasonRecord> screen(Position position, ScreenArea area, ScreenBasis basis){
+	public ArrayList<PlayerSeasonRecord> screen(Position position, ScreenDivision area, ScreenBasis basis){
 		ArrayList<PlayerSeasonRecord> players = seasonData.getPlayerSeasonData();
 		
 		

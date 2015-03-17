@@ -10,6 +10,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import data.teamdata.TeamData;
+import enums.Position;
+import enums.ScreenDivision;
 
 /**
  * 读取并累加赛季数据
@@ -37,7 +43,79 @@ public class SeasonData {
 	/** 存储所有球队的赛季数据记录 */
 	private HashMap<String, TeamSeasonRecord> teamRecords = new HashMap<String, TeamSeasonRecord>();
 	
-	public ArrayList<PlayerSeasonRecord> getPlayerSeasonData() {
+	/** 根据位置、赛区来返回符合条件的球员 */
+	public ArrayList<PlayerSeasonRecord> getScreenedPlayerSeasonData(Position position,
+			ScreenDivision division) {
+		
+		if (playerRecords.size() == 0) {
+			loadMatches();
+		}
+		
+		char posChar = '\0';
+		switch (position) {
+		case F:
+			posChar = 'F';
+			break;
+		case C:
+			posChar = 'C';
+			break;
+		case G:
+			posChar = 'G';
+		default:
+			break;
+		}
+		
+		ArrayList<PlayerSeasonRecord> result = new ArrayList<PlayerSeasonRecord>();
+		
+		Iterator<Map.Entry<String, PlayerSeasonRecord>> itr = playerRecords.entrySet().iterator();
+		
+		if (position == Position.ALL && division == ScreenDivision.ALL) {
+			return getAllPlayerSeasonData();
+		}else if (position == Position.ALL && 
+				(division == ScreenDivision.WEST || division == ScreenDivision.EAST)){
+			while (itr.hasNext()) {
+				PlayerSeasonRecord record = itr.next().getValue();
+				if (TeamData.getAreaByAbbr(record.teamName) == division) {
+					result.add(record);
+				}
+			}
+		}else if (position == Position.ALL && 
+				(division != ScreenDivision.WEST && division != ScreenDivision.EAST)){
+			while (itr.hasNext()) {
+				PlayerSeasonRecord record = itr.next().getValue();
+				if (TeamData.getDivisionByAbbr(record.teamName) == division) {
+					result.add(record);
+				}
+			}
+		}else if (position != Position.ALL && division == ScreenDivision.ALL) {
+			while (itr.hasNext()) {
+				PlayerSeasonRecord record = itr.next().getValue();
+				if (record.getPosition() == posChar) {
+					result.add(record);
+				}
+			}
+		}else if (position != Position.ALL && 
+				(division == ScreenDivision.WEST || division == ScreenDivision.EAST)){
+			while (itr.hasNext()) {
+				PlayerSeasonRecord record = itr.next().getValue();
+				if (record.getPosition() == posChar && 
+						TeamData.getAreaByAbbr(record.teamName) == division) {
+					result.add(record);
+				}
+			}
+		}else{
+			while (itr.hasNext()) {
+				PlayerSeasonRecord record = itr.next().getValue();
+				if (record.getPosition() == posChar &&
+						TeamData.getDivisionByAbbr(record.teamName) == division) {
+					result.add(record);
+				}
+			}
+		}
+		return result;
+	}
+	
+	public ArrayList<PlayerSeasonRecord> getAllPlayerSeasonData() {
 		return new ArrayList<PlayerSeasonRecord>(playerRecords.values());
 	}
 	

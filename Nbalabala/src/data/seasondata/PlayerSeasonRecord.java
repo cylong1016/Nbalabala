@@ -329,4 +329,8 @@ public class PlayerSeasonRecord {
 		return (fieldAttempt + 0.44 * freethrowAttempt + foul) * (teamTime / 5) / time /
 				(teamFieldAttempt + 0.44 * teamFreethrowAttempt + teamFoul); 
 	}
+	
+	public char getPosition() {
+		return position;
+	}
 }

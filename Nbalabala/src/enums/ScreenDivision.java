@@ -1,12 +1,11 @@
 package enums;
 
 /**
- * 筛选地区
+ * 筛选赛区
  * @author Issac Ding
- * @version 2015年3月16日  下午6:10:23
+ * @version 2015年3月17日  下午9:14:27
  */
-public enum ScreenArea {
-	
+public enum ScreenDivision {
 	ALL,
 	
 	EAST,
@@ -20,5 +19,4 @@ public enum ScreenArea {
 	PACIFIC,
 	NORTH_WEST,
 	SOUTH_WEST
-	
 }
