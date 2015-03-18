@@ -11,6 +11,7 @@ import java.util.Comparator;
 
 import data.seasondata.SeasonData;
 import data.seasondata.TeamSeasonRecord;
+import enums.ScreenDivision;
 import enums.SortOrder;
 import enums.TeamSortBasis;
 
@@ -29,12 +30,18 @@ public class TeamSeasonAnalysis {
 	private int factor = 1;
 	
 	public TeamSeasonAnalysis() {
-		currentList = seasonData.getTeamSeasonData();
+		currentList = seasonData.getScreenedTeamSeasonData(ScreenDivision.ALL);
 	}
 	
 	/** 刚进入界面时调用此方法，得到按名字排序的球队数据 */
 	public ArrayList<TeamSeasonRecord> getTeamDataSortedByName() {
 		sortTeamDataByName(currentList);
+		return currentList;
+	}
+	
+	/** 返回按地区筛选的 */
+	public ArrayList<TeamSeasonRecord> getScreenedTeamData(ScreenDivision division) {
+		currentList = seasonData.getScreenedTeamSeasonData(division);
 		return currentList;
 	}
 	

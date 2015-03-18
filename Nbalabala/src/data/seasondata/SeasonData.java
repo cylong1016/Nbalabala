@@ -118,12 +118,38 @@ public class SeasonData {
 		return result;
 	}
 	
+	/** 返回全部球员赛季数据 */
 	public ArrayList<PlayerSeasonRecord> getAllPlayerSeasonData() {
 		return new ArrayList<PlayerSeasonRecord>(playerRecords.values());
 	}
 	
-	public ArrayList<TeamSeasonRecord> getTeamSeasonData() {
-		return new ArrayList<TeamSeasonRecord>(teamRecords.values());
+	/** 根据赛区返回符合条件的记录 */
+	public ArrayList<TeamSeasonRecord> getScreenedTeamSeasonData(ScreenDivision division) {
+		if (division == ScreenDivision.ALL){
+			return new ArrayList<TeamSeasonRecord>(teamRecords.values());
+		}
+		
+		Iterator<Map.Entry<String, TeamSeasonRecord>> itr = teamRecords.entrySet().iterator();
+		TeamData teamData = new TeamData();
+		ArrayList<TeamSeasonRecord> result = new ArrayList<TeamSeasonRecord>();
+		
+		if (division == ScreenDivision.EAST || division == ScreenDivision.WEST) {
+			while (itr.hasNext()) {
+				TeamSeasonRecord record = itr.next().getValue();
+				if (teamData.getAreaByAbbr(record.getTeamName()) == division){
+					result.add(record);
+				}
+			}
+		}else {
+			while (itr.hasNext()) {
+				TeamSeasonRecord record = itr.next().getValue();
+				if (teamData.getDivisionByAbbr(record.getTeamName()) == division){
+					result.add(record);
+				}
+			}
+		}
+		
+		return result;
 	}
 	
 	/** 将文件按照比赛时间排序 */
