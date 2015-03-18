@@ -4,6 +4,7 @@ import ui.UIConfig;
 import ui.common.frame.Frame;
 import ui.common.panel.Panel;
 import ui.panel.main.MainPanel;
+import ui.panel.playerPanel.PlayerDataPanel;
 import ui.panel.teamdata.TeamDataPanel;
 
 /**
@@ -19,6 +20,8 @@ public class MainController {
 	private MainPanel mainPanel;
 	/** 球队数据界面 */
 	private TeamDataPanel teamDataPanel;
+	/** 球员数据界面 */
+	private PlayerDataPanel playerDataPanel;
 
 	/**
 	 * 初始化主界面
@@ -51,7 +54,9 @@ public class MainController {
 	 * @version 2015年3月18日 上午11:11:46
 	 */
 	public void toPlayerPanel(Panel panel) {
-		System.out.println("进入球员数据界面");
+		frame.remove(panel);
+		playerDataPanel = new PlayerDataPanel(UIConfig.imgPath + "playerData/playerDataBG.png");
+		frame.setPanel(playerDataPanel);
 	}
 
 	/**
@@ -65,23 +70,23 @@ public class MainController {
 	}
 
 	/**
-	 * 进入全部球员数据界面
+	 * 进入所有球员界面
 	 * @param panel 从哪一界面跳转
 	 * @author cylong
 	 * @version 2015年3月18日 上午11:11:55
 	 */
 	public void toAllPlayersPanel(Panel panel) {
-		System.out.println("进入全部球员数据界面");
+		System.out.println("进入所有球员界面");
 	}
 
 	/**
-	 * 进入全部球队数据界面
+	 * 进入所有球队界面
 	 * @param panel 从哪一界面跳转
 	 * @author cylong
 	 * @version 2015年3月18日 上午11:11:58
 	 */
 	public void toAllTeamsPanel(MainPanel panel) {
-		System.out.println("进入全部球队数据界面");
+		System.out.println("进入所有球队界面");
 	}
 
 }
