@@ -20,14 +20,43 @@ import enums.TeamSortBasis;
  * @version 2015年3月15日 下午3:08:56
  */
 public class TeamSeasonAnalysis {
+	
+	//记录上一次返回的，也就是界面正在展示的表
+	private ArrayList<TeamSeasonRecord> currentList;
 
 	private SeasonData seasonData = new SeasonData();
 
 	private int factor = 1;
+	
+	public TeamSeasonAnalysis() {
+		currentList = seasonData.getTeamSeasonData();
+	}
+	
+	/** 刚进入界面时调用此方法，得到按名字排序的球队数据 */
+	public ArrayList<TeamSeasonRecord> getTeamDataSortedByName() {
+		sortTeamDataByName(currentList);
+		return currentList;
+	}
+	
+	/** 排序时调用此方法，order的AS为升序，DE为降序 */
+	public ArrayList<TeamSeasonRecord> getResortedTeamData(TeamSortBasis basis, SortOrder order) {
+		sortTeamSeasonData(currentList, basis, order);
+		return currentList;
+	}
+	
+	/** 按球队名排序 */
+	private void sortTeamDataByName(ArrayList<TeamSeasonRecord> teams) {
+		Comparator<TeamSeasonRecord> comparator = new Comparator<TeamSeasonRecord>() {
+			public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+				return t1.getTeamName().compareTo(t2.getTeamName());
+			}
+		};
+		Collections.sort(teams, comparator);
+	}
 
-	public ArrayList<TeamSeasonRecord> getTeamSeasonData(TeamSortBasis basis, SortOrder order) {
-
-		ArrayList<TeamSeasonRecord> teams = seasonData.getTeamSeasonData();
+	/** 按排序指标排序 */
+	private void sortTeamSeasonData(ArrayList<TeamSeasonRecord> teams,
+			TeamSortBasis basis, SortOrder order) {
 
 		Comparator<TeamSeasonRecord> comparator = null;
 
@@ -386,8 +415,6 @@ public class TeamSeasonAnalysis {
 			break;
 		}
 
-
 		Collections.sort(teams, comparator);
-		return teams;
 	}
 }

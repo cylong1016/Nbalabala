@@ -69,13 +69,16 @@ public class SeasonData {
 		
 		Iterator<Map.Entry<String, PlayerSeasonRecord>> itr = playerRecords.entrySet().iterator();
 		
+		//需要队伍信息来查询球员属于哪个分区
+		TeamData teamData = new TeamData();
+		
 		if (position == Position.ALL && division == ScreenDivision.ALL) {
 			return getAllPlayerSeasonData();
 		}else if (position == Position.ALL && 
 				(division == ScreenDivision.WEST || division == ScreenDivision.EAST)){
 			while (itr.hasNext()) {
 				PlayerSeasonRecord record = itr.next().getValue();
-				if (TeamData.getAreaByAbbr(record.teamName) == division) {
+				if (teamData.getAreaByAbbr(record.teamName) == division) {
 					result.add(record);
 				}
 			}
@@ -83,7 +86,7 @@ public class SeasonData {
 				(division != ScreenDivision.WEST && division != ScreenDivision.EAST)){
 			while (itr.hasNext()) {
 				PlayerSeasonRecord record = itr.next().getValue();
-				if (TeamData.getDivisionByAbbr(record.teamName) == division) {
+				if (teamData.getDivisionByAbbr(record.teamName) == division) {
 					result.add(record);
 				}
 			}
@@ -99,7 +102,7 @@ public class SeasonData {
 			while (itr.hasNext()) {
 				PlayerSeasonRecord record = itr.next().getValue();
 				if (record.getPosition() == posChar && 
-						TeamData.getAreaByAbbr(record.teamName) == division) {
+						teamData.getAreaByAbbr(record.teamName) == division) {
 					result.add(record);
 				}
 			}
@@ -107,7 +110,7 @@ public class SeasonData {
 			while (itr.hasNext()) {
 				PlayerSeasonRecord record = itr.next().getValue();
 				if (record.getPosition() == posChar &&
-						TeamData.getDivisionByAbbr(record.teamName) == division) {
+						teamData.getDivisionByAbbr(record.teamName) == division) {
 					result.add(record);
 				}
 			}

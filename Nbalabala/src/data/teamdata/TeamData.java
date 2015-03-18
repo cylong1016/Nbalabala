@@ -19,13 +19,14 @@ import enums.ScreenDivision;
 public class TeamData implements TeamDataService {
 
 	/** 全部球队信息 */
-	private static HashMap<String, TeamPO> teams = new HashMap<String, TeamPO>();
+	private static HashMap<String, TeamPO> teams;
 
 	/** 存储球队信息的文件 */
 	private static final String path = "NBAdata/teams/teams";
 
-	static{
-		loadTeams();
+	public TeamData() {
+		if (teams == null)
+			loadTeams();
 	}
 
 	/**
@@ -33,7 +34,7 @@ public class TeamData implements TeamDataService {
 	 * @author cylong
 	 * @version 2015年3月13日 下午9:05:33
 	 */
-	private static void loadTeams() {
+	private void loadTeams() {
 		File file = new File(path);
 		BufferedReader br = null;
 		try {
@@ -65,11 +66,11 @@ public class TeamData implements TeamDataService {
 	
 	// 以下两个方法主要用来根据球队缩写返回东/西或者具体赛区，主要用于球员的条件筛选
 	
-	public static ScreenDivision getAreaByAbbr(String abbr) {
+	public ScreenDivision getAreaByAbbr(String abbr) {
 		return teams.get(abbr).getArea();
 	}
 	
-	public static ScreenDivision getDivisionByAbbr(String abbr) {
+	public ScreenDivision getDivisionByAbbr(String abbr) {
 		return teams.get(abbr).getDivision();
 	}
 
