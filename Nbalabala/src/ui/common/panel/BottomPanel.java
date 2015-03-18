@@ -11,8 +11,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 
 import ui.UIConfig;
-
-import common.Sleep;
+import utility.Sleep;
 
 /**
  * 带有左边边框和底层的panel，其他具体功能panel的父类
@@ -29,7 +28,7 @@ public class BottomPanel extends Panel {
 	private LeftPanel leftPanel;
 
 	/** 画笔透明度 */
-	protected float hyaline = 0.4f;
+	protected float hyaline = 0.0f;
 
 	public BottomPanel(String url) {
 		bgImage = new ImageIcon(url).getImage();
@@ -72,7 +71,7 @@ public class BottomPanel extends Panel {
 		@Override
 		public void run() {
 			while(true) {
-				Sleep.sleep(20);
+				Sleep.sleep(10);
 				BottomPanel.this.addHyaline();
 				BottomPanel.this.repaint();
 				if (BottomPanel.this.hyaline == 1) {
@@ -96,7 +95,6 @@ public class BottomPanel extends Panel {
 	}
 
 	public void addLeftPanel() {
-		//TODO 图片待换
 		leftPanel = new LeftPanel();
 		this.add(leftPanel);
 	}
