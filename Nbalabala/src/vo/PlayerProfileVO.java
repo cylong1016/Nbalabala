@@ -1,5 +1,7 @@
 package vo;
 
+import java.awt.Image;
+
 /**
  * 球员简况
  * @author lsy
@@ -7,40 +9,49 @@ package vo;
  */
 
 public class PlayerProfileVO {
+
+	/** 头像 */
+	public Image photo;
 	
 	/**球员姓名*/
 	public String name;
 	
+	/**所属球队*/
+	public String team;
+	
 	/** 球员号码 */
-	public int number;
+	public String number;
 	
 	/** 球员位置 */
-	public String location;
+	public String position;
 	
 	/** 身高 */
 	public String height;
 	
 	/** 体重 */
-	public int weight;
+	public String weight;
 	
 	/** 生日 */
 	public String birth;
 	
 	/** 年龄 */
-	public int age;
+	public String age;
 	
 	/** 球龄 */
-	public int exp;
+	public String exp;
 	
 	/** 毕业学校 */
 	public String school;
-
-	public PlayerProfileVO(String name, int number, String location, String height, int weight, String birth,
-			int age, int exp, String school) {
+	
+	public PlayerProfileVO(Image photo, String name, String team,
+			String number, String position, String height, String weight,
+			String birth, String age, String exp, String school) {
 		super();
+		this.photo = photo;
 		this.name = name;
+		this.team = team;
 		this.number = number;
-		this.location = location;
+		this.position = position;
 		this.height = height;
 		this.weight = weight;
 		this.birth = birth;
@@ -48,4 +59,6 @@ public class PlayerProfileVO {
 		this.exp = exp;
 		this.school = school;
 	}
+
+	
 }
