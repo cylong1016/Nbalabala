@@ -24,7 +24,7 @@ public class MainPanel extends Panel {
 	private static final long serialVersionUID = 1L;
 
 	/** 主界面的图片url */
-	private static String imgUrl = UIConfig.imgPath + "main/";
+	private static String imgUrl = UIConfig.IMG_PATH + "main/";
 
 	/** 背景图片 */
 	private static Image bgImg = new ImageIcon(imgUrl + "main.png").getImage();

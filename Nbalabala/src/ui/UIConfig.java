@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.Color;
+import java.awt.Font;
 
 /**
  * UI配置
@@ -18,11 +19,14 @@ public class UIConfig {
 	public static Color MAIN_COLOR = Color.WHITE;
 	/** 左边边框的宽度 */
 	public static int LEFT_WIDTH = 189;
-	/** 会弹出左边栏的宽度*/
+	/** 会弹出左边栏的宽度 */
 	public static int PROMPT_WIDTH = 50;
 
 	/*----------------------------Frame配置--------------------------------*/
-	
+
 	/** 图片路径 */
-	public static String imgPath = "images/";
+	public static String IMG_PATH = "images/";
+
+	/** 界面显示的字体 */
+	public static Font FONT = new Font("微软雅黑", 0, 14);
 }

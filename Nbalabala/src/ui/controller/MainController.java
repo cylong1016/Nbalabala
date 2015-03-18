@@ -4,7 +4,7 @@ import ui.UIConfig;
 import ui.common.frame.Frame;
 import ui.common.panel.Panel;
 import ui.panel.main.MainPanel;
-import ui.panel.playerPanel.PlayerDataPanel;
+import ui.panel.playerData.PlayerDataPanel;
 import ui.panel.teamdata.TeamDataPanel;
 
 /**
@@ -43,7 +43,7 @@ public class MainController {
 	 */
 	public void toTeamPanel(Panel panel) {
 		frame.remove(panel);
-		teamDataPanel = new TeamDataPanel(UIConfig.imgPath + "teamData/teamDataBG.png");
+		teamDataPanel = new TeamDataPanel(UIConfig.IMG_PATH + "teamData/teamDataBG.png");
 		frame.setPanel(teamDataPanel);
 	}
 
@@ -55,7 +55,7 @@ public class MainController {
 	 */
 	public void toPlayerPanel(Panel panel) {
 		frame.remove(panel);
-		playerDataPanel = new PlayerDataPanel(UIConfig.imgPath + "playerData/playerDataBG.png");
+		playerDataPanel = new PlayerDataPanel(UIConfig.IMG_PATH + "playerData/playerDataBG.png");
 		frame.setPanel(playerDataPanel);
 	}
 
