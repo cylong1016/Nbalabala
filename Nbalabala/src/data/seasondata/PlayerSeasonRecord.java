@@ -334,6 +334,10 @@ public class PlayerSeasonRecord {
 		return position;
 	}
 	
+	public String getTeam() {
+		return teamName;
+	}
+	
 	/** 两双以场均数据计算，如果只有一项超过10，返回0.如果有两项以上超过10，返回其和 */
 	public int getDoubleDouble() {
 		int count = 0;

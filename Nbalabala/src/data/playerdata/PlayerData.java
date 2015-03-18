@@ -1,14 +1,22 @@
 package data.playerdata;
 
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
-import po.PlayerPO;
+import javax.imageio.ImageIO;
+
+import vo.PlayerProfileVO;
+import data.seasondata.SeasonData;
 import dataservice.playerdataservice.PlayerDataService;
 
 /**
@@ -18,22 +26,22 @@ import dataservice.playerdataservice.PlayerDataService;
  */
 public class PlayerData implements PlayerDataService {
 
-	/** 全部球员基本信息（name， PlayerPO） */
-	private HashMap<String, PlayerPO> players = new HashMap<String, PlayerPO>();
+	/** 全部球员基本信息 */
+	private static HashMap<String, PlayerProfileVO> players = new HashMap<String, PlayerProfileVO>();
 
 	/** 存储球员信息的文件夹 */
-	private String path = "NBAdata/players/info/";
-
+	private String infoPath = "NBAdata/players/info/";
+	
+	/** 存储球员头像的文件夹 */
+	private String portraitPath = "NBAdata/players/portrait/";
+	
+	/** 存储全身像的文件夹 */
+	private String actionPath = "NBAdata/players/action/";
+	
 	public PlayerData() {
-		loadPlayers();
-		System.out.println(players.size());
+		if (players.size() == 0) loadPlayers();
 	}
 	
-	
-	public static void main(String[]args){
-		new PlayerData();
-	}
-
 	/**
 	 * 加载全部球员信息
 	 * 这个全部加载肯能效率不太好，暂时先不要用这个方法
@@ -41,16 +49,21 @@ public class PlayerData implements PlayerDataService {
 	 * @version 2015年3月13日 下午7:33:17
 	 */
 	public void loadPlayers() {
-		File dir = new File(path);
+		File dir = new File(infoPath);
 		File[] files = dir.listFiles();
 		BufferedReader br = null;
-
+		
+		SeasonData seasonData = new SeasonData();
+		
 		try {
 			for(File file : files) {
+				
+				String name = file.getName();
 				br = new BufferedReader(new FileReader(file));
 				ArrayList<String> playerInfo = new ArrayList<String>(9);
 				String line = null;
 				int lineNum = 0;
+				
 				while((line = br.readLine()) != null) { // 一次读取每行的球员信息
 					lineNum++;
 					if (lineNum % 2 != 0) {
@@ -59,8 +72,13 @@ public class PlayerData implements PlayerDataService {
 					line = line.replace("║", "");
 					playerInfo.add(line.split("│")[1].trim());
 				}
-				PlayerPO player = new PlayerPO(playerInfo);
-				players.put(player.getName(), player);
+				
+				Image portrait = ImageIO.read(new File(portraitPath + name + ".png"));
+				PlayerProfileVO player = new PlayerProfileVO(portrait, playerInfo.get(0), 
+						seasonData.getTeamAbbrByPlayer(name), playerInfo.get(1), playerInfo.get(2), 
+						playerInfo.get(3), playerInfo.get(4), playerInfo.get(5), playerInfo.get(6), 
+						playerInfo.get(7), playerInfo.get(8));
+				players.put(name, player);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -70,40 +88,43 @@ public class PlayerData implements PlayerDataService {
 	}
 
 	/**
-	 * @see dataservice.playerdataservice.PlayerDataService#findPlayer(java.lang.String)
+	 * @see dataservice.playerdataservice.PlayerDataService#getActionImageByName(java.lang.String)
 	 */
-	@SuppressWarnings("resource")
 	@Override
-	public PlayerPO findPlayer(String name) {
-		PlayerPO po = players.get(name);
-		if(po != null) { // 如果以前已经加载进内存就直接读取
-			return po;
-		}
-		
-		File file = new File(path + name);
-		BufferedReader br = null;
+	public Image getActionImageByName(String name) {
 		try {
-			br = new BufferedReader(new FileReader(file));
-			ArrayList<String> playerInfo = new ArrayList<String>(9);
-			String line = null;
-			int lineNum = 0;
-			while((line = br.readLine()) != null) { // 一次读取每行的球员信息
-				lineNum++;
-				if (lineNum % 2 != 0) {
-					continue; // 文件中只有双数行有数据
-				}
-				line = line.replace("║", "");
-				playerInfo.add(line.split("│")[1].trim());
-			}
-			PlayerPO player = new PlayerPO(playerInfo);
-			players.put(player.getName(), player);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			return null; // 球员不存在
+			return  ImageIO.read(new File(actionPath + name + ".png"));
 		} catch (IOException e) {
-			e.printStackTrace();
+			return null;
 		}
-		return players.get(name);
 	}
 
+	/**
+	 * @see dataservice.playerdataservice.PlayerDataService#getPlayerProfileByInitial(char)
+	 */
+	@Override
+	public ArrayList<PlayerProfileVO> getPlayerProfileByInitial(char initial) {
+		ArrayList<PlayerProfileVO> result = new ArrayList<PlayerProfileVO>();
+		Iterator<Entry<String, PlayerProfileVO>> itr = players.entrySet().iterator();
+		while (itr.hasNext()) {
+			PlayerProfileVO po = itr.next().getValue();
+			if (po.name.charAt(0) == initial) result.add(po);
+		}
+		Comparator<PlayerProfileVO> comparator = new Comparator<PlayerProfileVO>() {
+			public int compare(PlayerProfileVO p1, PlayerProfileVO p2) {
+				return p1.name.compareTo(p2.name);
+			}
+		};
+		Collections.sort(result, comparator);
+		return result;
+	}
+
+	/**
+	 * @see dataservice.playerdataservice.PlayerDataService#getPlayerProfileByName(java.lang.String)
+	 */
+	@Override
+	public PlayerProfileVO getPlayerProfileByName(String name) {
+		return players.get(name);
+	}
+	
 }

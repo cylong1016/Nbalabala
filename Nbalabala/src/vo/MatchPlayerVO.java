@@ -1,5 +1,10 @@
 package vo;
 
+import java.io.File;
+
+import enums.TeamState;
+import utility.Utility;
+
 /**
  * 记录一场比赛中一个球员的发挥
  * @author Issac Ding
@@ -61,11 +66,20 @@ public class MatchPlayerVO {
 	/** 个人得分 */
 	private int personalGoal;
 	
-	public MatchPlayerVO(String record){
+	//将该比赛的文件也传进来，如果有脏数据，可以处理修正之
+	public MatchPlayerVO(String record, File file, TeamState teamState){
 		String[]s = record.split(";");
 		name = s[0];
 		position = s[1];
-		time = s[2];
+		//上场时间为null的情况
+		if (s[2].split(":").length < 2) {
+			int totalSeconds = Utility.getModifiedTime(file, teamState);
+			int minutes = totalSeconds / 60;
+			int seconds = totalSeconds - minutes * 60;
+			time = minutes + "-" + seconds;
+		}else {
+			time = s[2];
+		}
 		fieldGoal = Integer.parseInt(s[3]);
 		fieldAttempt = Integer.parseInt(s[4]);
 		threePointGoal = Integer.parseInt(s[5]);
@@ -80,7 +94,12 @@ public class MatchPlayerVO {
 		block = Integer.parseInt(s[14]);
 		turnover = Integer.parseInt(s[15]);
 		foul = Integer.parseInt(s[16]);
-		personalGoal = Integer.parseInt(s[17]);
+		try{
+			personalGoal = Integer.parseInt(s[17]);
+		}catch(NumberFormatException e){
+			personalGoal = 2 * fieldGoal + threePointGoal + freethrowGoal;
+		}
+		
 	}
 
 	public String getName() {

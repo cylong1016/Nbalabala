@@ -121,6 +121,11 @@ public class PlayerSeasonAnalysis {
 		return result;
 	}
 	
+	/** 根据球员名字返回所属球队缩写 */
+	public String getTeamAbbrByPlayer(String playerName) {
+		return seasonData.getTeamAbbrByPlayer(playerName);
+	}
+	
 	/** 根据名字字典顺序为球员排序 */
 	private void sortPlayersByName(ArrayList<PlayerSeasonRecord> players){
 		Comparator<PlayerSeasonRecord> comparator = new Comparator<PlayerSeasonRecord>() {

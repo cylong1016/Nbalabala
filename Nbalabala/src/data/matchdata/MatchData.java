@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import vo.MatchDetailVO;
 import vo.MatchPlayerVO;
 import vo.MatchProfileVO;
@@ -64,13 +65,13 @@ public class MatchData {
 			while (true) {
 				s = br.readLine();
 				if (s.length() < 5) break;
-				MatchPlayerVO homeVo = new MatchPlayerVO(s);
+				MatchPlayerVO homeVo = new MatchPlayerVO(s, file);
 				homePlayers.add(homeVo);
 			}
 			
 			ArrayList<MatchPlayerVO> roadPlayers = new ArrayList<MatchPlayerVO>();
 			while ((s = br.readLine()) != null) {
-				MatchPlayerVO roadVo = new MatchPlayerVO(s);
+				MatchPlayerVO roadVo = new MatchPlayerVO(s, file);
 				roadPlayers.add(roadVo);
 			}
 			
@@ -84,5 +85,9 @@ public class MatchData {
 		}
 		
 		return null;
+	}
+	
+	public ArrayList<MatchPlayerVO> getMatchRecordByPlayerName(String playerName) {
+		
 	}
 }
