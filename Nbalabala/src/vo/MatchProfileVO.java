@@ -27,5 +27,10 @@ public class MatchProfileVO {
 		this.eachSectionScore = eachSectionScore;
 	}
 	
+	public boolean equals(Object o) {
+		MatchProfileVO vo = (MatchProfileVO)o;
+		return time.equals(vo.time) && team.equals(vo.team);
+	}
+	
 	
 }
