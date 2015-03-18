@@ -2,7 +2,6 @@ package ui.common.frame.title;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -25,10 +24,6 @@ public class TitlePanel extends JPanel {
 	private static final long serialVersionUID = -5595756092214353675L;
 
 	/*----------------------------标题配置--------------------------------*/
-	/** 标题字体 */
-	public static Font TITLE_FONT = new Font("黑体", Font.PLAIN, 25);
-	/** 标题字体颜色 */
-	public static Color TITLE_FORE_COLOR = Color.BLACK;
 	/** 标题背景颜色 */
 	public static Color TITLE_BACK_COLOR = new Color(0x2D2D30);
 	/** 按钮与按钮之间、按钮与边框的间距 */
@@ -59,8 +54,6 @@ public class TitlePanel extends JPanel {
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		super.paintComponent(g2d);
-		g2d.setFont(TITLE_FONT);
-		g2d.setColor(TITLE_FORE_COLOR);
 	}
 
 	private void addTitleButton() {

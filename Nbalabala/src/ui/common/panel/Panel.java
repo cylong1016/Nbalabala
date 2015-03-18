@@ -1,23 +1,19 @@
 package ui.common.panel;
 
-import java.awt.Color;
-
 import javax.swing.JPanel;
 
 /**
- * 所有panel的父类
- * @author cylong
- * @version 2015年3月16日 下午6:59:25
+ * 不带左边边框的底层panel
+ * @author lsy
+ * @version 2015年3月17日 下午6:11:09
  */
 public class Panel extends JPanel {
 
-	/** serialVersionUID */
-	private static final long serialVersionUID = 7959972677335276198L;
+	private static final long serialVersionUID = -4321340946565227856L;
 
 	public Panel() {
+		this.setOpaque(false);
 		this.setLayout(null);
-		// this.setOpaque(false);
-		this.setBackground(Color.LIGHT_GRAY);
 	}
 
 }

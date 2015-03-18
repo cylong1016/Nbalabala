@@ -12,6 +12,7 @@ import javax.swing.UIManager;
 
 import ui.UIConfig;
 import ui.common.frame.title.TitlePanel;
+import ui.common.panel.Panel;
 
 /**
  * 自定义Frame
@@ -52,6 +53,11 @@ public class Frame extends JFrame {
 	 */
 	public void start() {
 		hy.start();
+	}
+	
+	public void setPanel(Panel panel) {
+		this.add(panel);
+		this.setVisible(true);
 	}
 
 	/**

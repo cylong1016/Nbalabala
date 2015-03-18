@@ -22,4 +22,7 @@ public class UIConfig {
 	public static int PROMPT_WIDTH = 50;
 
 	/*----------------------------Frame配置--------------------------------*/
+	
+	/** 图片路径 */
+	public static String imgPath = "images/";
 }

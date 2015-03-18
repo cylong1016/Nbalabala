@@ -1,7 +1,10 @@
 package ui.controller;
 
+import ui.UIConfig;
 import ui.common.frame.Frame;
+import ui.common.panel.Panel;
 import ui.panel.main.MainPanel;
+import ui.panel.teamdata.TeamDataPanel;
 
 /**
  * 界面跳转控制
@@ -14,6 +17,8 @@ public class MainController {
 	private Frame frame;
 	/** 主界面 */
 	private MainPanel mainPanel;
+	/** 球队数据界面 */
+	private TeamDataPanel teamDataPanel;
 
 	/**
 	 * 初始化主界面
@@ -22,11 +27,61 @@ public class MainController {
 	 */
 	public MainController() {
 		frame = new Frame();
-		mainPanel = new MainPanel();
-		frame.add(mainPanel);
-
-		frame.setVisible(true);
+		mainPanel = new MainPanel(this);
+		frame.setPanel(mainPanel);
 		frame.start();
+	}
+
+	/**
+	 * 进入球队数据界面
+	 * @param panel 从哪一界面跳转
+	 * @author cylong
+	 * @version 2015年3月18日 上午11:11:38
+	 */
+	public void toTeamPanel(Panel panel) {
+		frame.remove(panel);
+		teamDataPanel = new TeamDataPanel(UIConfig.imgPath + "teamData/teamDataBG.png");
+		frame.setPanel(teamDataPanel);
+	}
+
+	/**
+	 * 进入球员数据界面
+	 * @param panel 从哪一界面跳转
+	 * @author cylong
+	 * @version 2015年3月18日 上午11:11:46
+	 */
+	public void toPlayerPanel(Panel panel) {
+		System.out.println("进入球员数据界面");
+	}
+
+	/**
+	 * 进入比赛数据界面
+	 * @param panel 从哪一界面跳转
+	 * @author cylong
+	 * @version 2015年3月18日 上午11:11:51
+	 */
+	public void toGamePanel(Panel panel) {
+		System.out.println("进入比赛数据界面");
+	}
+
+	/**
+	 * 进入全部球员数据界面
+	 * @param panel 从哪一界面跳转
+	 * @author cylong
+	 * @version 2015年3月18日 上午11:11:55
+	 */
+	public void toAllPlayersPanel(Panel panel) {
+		System.out.println("进入全部球员数据界面");
+	}
+
+	/**
+	 * 进入全部球队数据界面
+	 * @param panel 从哪一界面跳转
+	 * @author cylong
+	 * @version 2015年3月18日 上午11:11:58
+	 */
+	public void toAllTeamsPanel(MainPanel panel) {
+		System.out.println("进入全部球队数据界面");
 	}
 
 }

@@ -1,11 +1,9 @@
 package data.matchdata;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import vo.MatchDetailVO;
 import vo.MatchProfileVO;
-import blservice.MatchQueryBLService;
 
 /**
  * 读取比赛信息，检索并返回符合条件的比赛信息的类
