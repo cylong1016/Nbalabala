@@ -29,4 +29,7 @@ public class UIConfig {
 
 	/** 界面显示的字体 */
 	public static Font FONT = new Font("微软雅黑", 0, 14);
+	
+	/** button选中之后的颜色 */
+	public static Color buttonColor = new Color(15,24,44);
 }
