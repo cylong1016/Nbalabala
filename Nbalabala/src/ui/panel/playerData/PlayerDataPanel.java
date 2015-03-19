@@ -1,9 +1,13 @@
 package ui.panel.playerData;
 
 import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import ui.UIConfig;
 import ui.common.button.TextButton;
 import ui.common.panel.BottomPanel;
 
@@ -61,13 +65,13 @@ public class PlayerDataPanel extends BottomPanel {
 	private boolean[] isClicked4 = new boolean[2];
 
 	/** “所有”按钮组成一个数组 */
-	private int[] all = new int[] { 0, 4, 13 };
+	private int[] all = new int[] { 0, 4, 13, 28 };
 	public PlayerDataPanel(String url) {
 		super(url);
 		setButton();
-		// setEffect(all);
-		addButton();
 		setArray();
+		addButton();
+		firstSet(all);
 		addListener(0,4,line1,isClicked1);
 		addListener(4,13,line2,isClicked2);
 		addListener(13,28,line3,isClicked3);
@@ -145,9 +149,9 @@ public class PlayerDataPanel extends BottomPanel {
 	public void addListener(final int firstIndex,final int lth,TextButton[] buttonArray,final boolean[] isClicked) {
 		for (index = firstIndex; index < lth; index++) {
 			button[index].addMouseListener(new MouseListener() {
-
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					backSet();
 					for (int j = firstIndex; j < lth; j++) {
 						isClicked[j - firstIndex] = false;
 					}
@@ -191,5 +195,17 @@ public class PlayerDataPanel extends BottomPanel {
 			}
 		}
 	}
-
+	
+	public void firstSet(int []ini){
+		for(int i = 0;i<ini.length;i++){
+			button[ini[i]].isIni = true;
+		}
+	}
+	
+	public void backSet(){
+		for(int initial=0;initial<all.length;initial++){
+			button[all[initial]].isIni = false;
+			}
+	}
+		
 }

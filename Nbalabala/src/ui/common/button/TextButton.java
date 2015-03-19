@@ -4,13 +4,10 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 
 import ui.UIConfig;
-import ui.common.panel.LeftPanel;
 
 /**
  * 显示文字的button
@@ -22,7 +19,8 @@ public class TextButton extends JButton {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -5390884444460444968L;
-	boolean isSelected = false;
+	private boolean isSelected = false;
+	public boolean isIni = false;
 
 	/**
 	 * @param x
@@ -41,34 +39,24 @@ public class TextButton extends JButton {
 	public TextButton(int x, int y, int width, int height, String text) {
 		this.setBorderPainted(false);
 		this.setContentAreaFilled(false);
-		// this.setFocusPainted(false);
+		this.setFocusPainted(false);
 		this.setBounds(x, y, width, height);
 		this.setText(text);
 		this.setFont(UIConfig.FONT);
-		this.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				// onClick(g2,Color.red);
-			}
-
-			public void mouseReleased(MouseEvent e) {
-
-			}
-		});
-
 	}
 
 	public void paintComponent(Graphics g) {
-		if (getModel().isArmed()) {
+		if (getModel().isArmed()||isIni) {
 			isSelected = true;
-			onClick(g,UIConfig.buttonColor);
-		} 
-		if(isSelected){
-			onClick(g,UIConfig.buttonColor);
+			onClick(g, UIConfig.buttonColor);
+		}
+		if (isSelected) {
+			onClick(g, UIConfig.buttonColor);
 		}
 		super.paintComponent(g);
 	}
 
-	public Graphics onClick(Graphics g,Color color) {
+	public Graphics onClick(Graphics g, Color color) {
 		Graphics2D g2D = (Graphics2D) g.create();
 		int h = getHeight();
 		int w = getWidth();
@@ -80,7 +68,7 @@ public class TextButton extends JButton {
 		return g;
 	}
 
-	public void back(){
+	public void back() {
 		isSelected = false;
 		this.setForeground(Color.black);
 	}
