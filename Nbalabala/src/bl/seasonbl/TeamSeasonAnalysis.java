@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import blservice.TeamSeasonBLService;
 import data.seasondata.SeasonData;
 import data.seasondata.TeamSeasonRecord;
 import dataservice.SeasonDataService;
@@ -21,7 +22,7 @@ import enums.TeamSortBasis;
  * @author Issac Ding
  * @version 2015年3月15日 下午3:08:56
  */
-public class TeamSeasonAnalysis {
+public class TeamSeasonAnalysis implements TeamSeasonBLService{
 	
 	//记录上一次返回的，也就是界面正在展示的表
 	private ArrayList<TeamSeasonRecord> currentList;

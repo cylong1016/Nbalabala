@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import blservice.PlayerSeasonBLService;
 import data.seasondata.PlayerSeasonRecord;
 import data.seasondata.SeasonData;
 import dataservice.SeasonDataService;
@@ -18,7 +19,7 @@ import enums.SortOrder;
  * @author Issac Ding
  * @version 2015年3月15日 下午2:46:44
  */
-public class PlayerSeasonAnalysis {
+public class PlayerSeasonAnalysis implements PlayerSeasonBLService{
 
 	private SeasonDataService seasonData = new SeasonData();
 	
