@@ -51,6 +51,10 @@ public class TeamSeasonAnalysis {
 		return currentList;
 	}
 	
+	public TeamSeasonRecord getTeamDataByAbbr(String abbr) {
+		return seasonData.getTeamDataByAbbr(abbr);
+	}
+	
 	/** 按球队名排序 */
 	private void sortTeamDataByName(ArrayList<TeamSeasonRecord> teams) {
 		Comparator<TeamSeasonRecord> comparator = new Comparator<TeamSeasonRecord>() {

@@ -3,13 +3,14 @@ package bl.playerbl;
 import java.awt.Image;
 import java.util.ArrayList;
 
-import data.playerdata.PlayerData;
-import dataservice.playerdataservice.PlayerDataService;
+import vo.MatchPlayerVO;
 import vo.PlayerDetailVO;
 import vo.PlayerProfileVO;
 import bl.matchbl.MatchQuery;
 import bl.seasonbl.PlayerSeasonAnalysis;
 import blservice.PlayerQueryBLService;
+import data.playerdata.PlayerData;
+import data.seasondata.PlayerSeasonRecord;
 
 /**
  * 负责查询球员信息的类
@@ -18,7 +19,7 @@ import blservice.PlayerQueryBLService;
  */
 public class PlayerQuery implements PlayerQueryBLService{
 	
-	private PlayerDataService playerData = new PlayerData();
+	private PlayerData playerData = new PlayerData();
 
 	/**
 	 * @see blservice.PlayerQueryBLService#getPlayerProfileByInitial(char)
@@ -38,13 +39,16 @@ public class PlayerQuery implements PlayerQueryBLService{
 		
 		//从seasonbl获取球员的赛季数据
 		PlayerSeasonAnalysis playerSeasonAnalysis = new PlayerSeasonAnalysis();
+		PlayerSeasonRecord seasonRecord = playerSeasonAnalysis.getPlayerSeasonDataByName(playerName);
 		
 		//从matchbl获取球员所有比赛的数据
 		MatchQuery matchQuery = new MatchQuery();
-		
+		ArrayList<MatchPlayerVO> matchRecords = matchQuery.getMatchRecordByPlayerName(playerName);
 
-		return ;
+		return new PlayerDetailVO(profile, seasonRecord, matchRecords, actionImage);
 	}
 	
-
+	public ArrayList<PlayerProfileVO> getPlayerProfilesByNames(ArrayList<String> names) {
+		return playerData.getPlayerProfileByNames(names);
+	}
 }

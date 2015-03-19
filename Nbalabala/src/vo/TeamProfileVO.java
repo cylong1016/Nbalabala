@@ -1,13 +1,15 @@
-package po;
+package vo;
 
+import utility.Constants;
 import enums.ScreenDivision;
 
 /**
- * 球队基本信息
- * @author cylong
- * @version 2015年3月13日 下午9:02:54
+ * 球队简况
+ * @author Issac Ding
+ * @version 2015年3月19日  下午4:56:50
  */
-public class TeamPO {
+public class TeamProfileVO {
+	
 
 	/** 球队全名 */
 	private String name;
@@ -24,7 +26,7 @@ public class TeamPO {
 	/** 建立时间 */
 	private String since;
 
-	public TeamPO(String name, String abbr, String location, String area, String division, String home, String since) {
+	public TeamProfileVO(String name, String abbr, String location, String area, String division, String home, String since) {
 		this.name = name;
 		this.abbr = abbr;
 		this.location = location;
@@ -85,6 +87,12 @@ public class TeamPO {
 
 	public String getSince() {
 		return this.since;
+	}
+	
+	public String getDivisionString() {
+		String areaString = Constants.translateDivision(area);
+		String divisionString = Constants.translateDivision(division);
+		return areaString + "-" + divisionString;
 	}
 
 }

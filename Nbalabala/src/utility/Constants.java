@@ -2,6 +2,8 @@ package utility;
 
 import java.util.HashMap;
 
+import enums.ScreenDivision;
+
 /**
  * 
  * @author Issac Ding
@@ -10,6 +12,29 @@ import java.util.HashMap;
 public class Constants {
 	
 	private static HashMap<String, String> abbrToEngMandarin;
+	
+	public static String translateDivision(ScreenDivision division) {
+		switch (division) {
+		case EAST:
+			return "东部";
+		case WEST:
+			return "西部";
+		case PACIFIC:
+			return "太平洋";
+		case ATLANTIC:
+			return "大西洋";
+		case SOUTH_EAST:
+			return "东南";
+		case SOUTH_WEST:
+			return "西南";
+		case CENTRAL:
+			return "中央";
+		case NORTH_WEST:
+			return "西北";
+		default:
+			return "";
+		}
+	}
 	
 	static {
 		abbrToEngMandarin = new HashMap<String, String>();

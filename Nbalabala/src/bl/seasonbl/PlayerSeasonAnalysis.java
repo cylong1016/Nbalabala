@@ -3,6 +3,7 @@ package bl.seasonbl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 
 import data.seasondata.PlayerSeasonRecord;
 import data.seasondata.SeasonData;
@@ -124,6 +125,16 @@ public class PlayerSeasonAnalysis {
 	/** 根据球员名字返回所属球队缩写 */
 	public String getTeamAbbrByPlayer(String playerName) {
 		return seasonData.getTeamAbbrByPlayer(playerName);
+	}
+	
+	/** 根据球员名字返回其赛季数据*/
+	public PlayerSeasonRecord getPlayerSeasonDataByName(String playerName) {
+		return seasonData.getPlayerSeasonDataByName(playerName);
+	}
+	
+	/** 根据球队缩写返回其当前阵容包含的球员名单  */
+	public ArrayList<String> getPlayerNamesByTeamAbbr(String abbr) {
+		return seasonData.getPlayerNamesByTeamAbbr(abbr);
 	}
 	
 	/** 根据名字字典顺序为球员排序 */

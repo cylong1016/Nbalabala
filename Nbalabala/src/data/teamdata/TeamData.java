@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-import po.TeamPO;
+import vo.TeamProfileVO;
 import dataservice.teamdataservice.TeamDataService;
 import enums.ScreenDivision;
 
@@ -19,7 +19,7 @@ import enums.ScreenDivision;
 public class TeamData implements TeamDataService {
 
 	/** 全部球队信息 */
-	private static HashMap<String, TeamPO> teams;
+	private static HashMap<String, TeamProfileVO> teams;
 
 	/** 存储球队信息的文件 */
 	private static final String path = "NBAdata/teams/teams";
@@ -46,7 +46,7 @@ public class TeamData implements TeamDataService {
 					continue;
 				}
 				String[] info = line.split("│");
-				TeamPO team = new TeamPO(info[0], info[1], info[2], info[3], info[4], info[5], info[6]);
+				TeamProfileVO team = new TeamProfileVO(info[0], info[1], info[2], info[3], info[4], info[5], info[6]);
 				teams.put(team.getAbbr(), team);
 			}
 		} catch (FileNotFoundException e) {
@@ -60,8 +60,8 @@ public class TeamData implements TeamDataService {
 	 * @see dataservice.teamdataservice.TeamDataService#findTeam(java.lang.String)
 	 */
 	@Override
-	public TeamPO findTeam(String name) {
-		return teams.get(name);
+	public TeamProfileVO getTeamProfileByAbbr(String abbr) {
+		return teams.get(abbr);
 	}
 	
 	// 以下两个方法主要用来根据球队缩写返回东/西或者具体赛区，主要用于球员的条件筛选

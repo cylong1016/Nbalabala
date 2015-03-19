@@ -73,7 +73,7 @@ public class PlayerData implements PlayerDataService {
 					playerInfo.add(line.split("│")[1].trim());
 				}
 				
-				Image portrait = ImageIO.read(new File(portraitPath + name + ".png"));
+				Image portrait = getPotraitImageByName(name);
 				PlayerProfileVO player = new PlayerProfileVO(portrait, playerInfo.get(0), 
 						seasonData.getTeamAbbrByPlayer(name), playerInfo.get(1), playerInfo.get(2), 
 						playerInfo.get(3), playerInfo.get(4), playerInfo.get(5), playerInfo.get(6), 
@@ -95,7 +95,11 @@ public class PlayerData implements PlayerDataService {
 		try {
 			return  ImageIO.read(new File(actionPath + name + ".png"));
 		} catch (IOException e) {
-			return null;
+			try {
+				return ImageIO.read(new File("images/nullAction.png"));
+			} catch (IOException e1) {
+				return null;
+			}
 		}
 	}
 
@@ -125,6 +129,26 @@ public class PlayerData implements PlayerDataService {
 	@Override
 	public PlayerProfileVO getPlayerProfileByName(String name) {
 		return players.get(name);
+	}
+	
+	public ArrayList<PlayerProfileVO> getPlayerProfileByNames(ArrayList<String> names) {
+		ArrayList<PlayerProfileVO> result = new ArrayList<PlayerProfileVO>();
+		for (String name : names) {
+			result.add(players.get(name));
+		}
+		return result;
+	}
+	
+	private Image getPotraitImageByName(String name) {
+		try {
+			return  ImageIO.read(new File(portraitPath + name + ".png"));
+		} catch (IOException e) {
+			try {
+				return ImageIO.read(new File("images/nullPortrait.png"));
+			} catch (IOException e1) {
+				return null;
+			}
+		}
 	}
 	
 }

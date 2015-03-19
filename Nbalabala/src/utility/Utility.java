@@ -16,10 +16,10 @@ import enums.TeamState;
 public class Utility {
 	
 	/** 存储比赛信息的文件夹 */
-	private static String path = "NBAdata/matches/"; 
+	public static String matchPath = "NBAdata/matches/"; 
 	
 	public static File[] getSortedMatchFiles(){
-		File dir = new File(path);
+		File dir = new File(matchPath);
 		File[] files = dir.listFiles();
 		Arrays.sort(files, new Comparator<File>() {
 			public int compare(File f1, File f2) {

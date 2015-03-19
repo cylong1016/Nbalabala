@@ -44,6 +44,9 @@ public class PlayerProfileVO {
 	/** 毕业学校 */
 	public String school;
 	
+	/** 无资料的时候显示的提示 */
+	private static final String UNKNOWN = "无资料";
+	
 	public PlayerProfileVO(Image portrait, String name, String team,
 			String number, String position, String height, String weight,
 			String birth, String age, String exp, String school) {
@@ -72,5 +75,19 @@ public class PlayerProfileVO {
 		this.age = age;
 		this.exp = exp;
 		this.school = school;
+	}
+	
+	public PlayerProfileVO(Image portrait, String name) {
+		this.portrait = portrait;
+		this.name = name;
+		this.team = UNKNOWN;
+		this.number = UNKNOWN;
+		this.position = UNKNOWN;
+		this.height = UNKNOWN;
+		this.weight = UNKNOWN;
+		this.birth = UNKNOWN;
+		this.age = UNKNOWN;
+		this.exp = UNKNOWN;
+		this.school = UNKNOWN;
 	}
 }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import utility.Utility;
 import data.teamdata.TeamData;
@@ -149,6 +150,14 @@ public class SeasonData {
 		return playerRecords.get(playerName).getTeam();
 	}
 	
+	public PlayerSeasonRecord getPlayerSeasonDataByName(String playerName) {
+		return playerRecords.get(playerName);
+	}
+	
+	public TeamSeasonRecord getTeamDataByAbbr(String abbr) {
+		return teamRecords.get(abbr);
+	}
+	
 	public void loadMatches() {
 		File[] files = Utility.getSortedMatchFiles();
 		
@@ -246,6 +255,19 @@ public class SeasonData {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/** 根据球队缩写返回其阵容名单 */
+	public ArrayList<String> getPlayerNamesByTeamAbbr(String abbr) {
+		ArrayList<String> result = new ArrayList<String>();
+		Iterator<Entry<String, PlayerSeasonRecord>> itr = playerRecords.entrySet().iterator();
+		while (itr.hasNext()) {
+			PlayerSeasonRecord record = itr.next().getValue();
+			if (record.getTeam().equals(abbr)) {
+				result.add(record.getName());
+			}
+		}
+		return result;
 	}
 	
 	/** 数据累加，包括一队的各种数据累加和球员的数据累加 */
