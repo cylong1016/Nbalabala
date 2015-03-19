@@ -13,24 +13,16 @@ import ui.common.button.TextButton;
  */
 public class Line_1_Button extends TextButton {
 
+	/** serialVersionUID */
+	private static final long serialVersionUID = -4055004512100806741L;
 	static TextButton current;
 
-	/**
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
-	 * @param text
-	 * @author lsy
-	 * @version 2015年3月19日 下午2:48:19
-	 */
 	public Line_1_Button(int x, int y, int width, int height, String text) {
 		super(x, y, width, height, text);
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				current = Line_1_Button.this;
 			}
-
 		});
 	}
 
