@@ -19,6 +19,7 @@ public class ImgButton extends JButton {
 		ImageIcon imageIconPressOn = new ImageIcon(pressOnImgPath);
 
 		this.setBorderPainted(false);
+		this.setFocusPainted(false);
 		this.setContentAreaFilled(false);
 		this.setIcon(imageIcon);
 		this.setBounds(x, y, imageIcon.getImage().getWidth(null), imageIcon.getImage().getHeight(null));

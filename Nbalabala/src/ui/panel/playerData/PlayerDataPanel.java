@@ -3,9 +3,17 @@ package ui.panel.playerData;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
+import data.seasondata.PlayerSeasonRecord;
+import ui.common.button.ImgButton;
 import ui.common.button.TextButton;
 import ui.common.panel.BottomPanel;
+import bl.seasonbl.PlayerSeasonAnalysis;
+import blservice.PlayerSeasonBLService;
+import enums.Position;
+import enums.ScreenBasis;
+import enums.ScreenDivision;
 
 /**
  * @author lsy
@@ -59,9 +67,18 @@ public class PlayerDataPanel extends BottomPanel {
 	private String[] textLine3 = new String[] { "所有", "得分", "篮板", "助攻", "得分/篮板/助攻", "盖帽", "抢断", "犯规", "失误", "分钟",
 			"效率", "投篮", "三分", "罚球", "两双", "总计" };
 	private String[] textLine4 = new String[] { "总计", "平均" };
-
-	TextButton oldButton1, oldButton2, oldButton3, oldButton4;
-
+	
+	/** 查询按钮 */
+	private ImgButton findButton;
+	
+	/** 将枚举类型赋值为数组 */
+	Position[] pArray = Position.values();
+	ScreenDivision[] dArray = ScreenDivision.values();
+	ScreenBasis[] bArray = ScreenBasis.values();
+	
+	/** 通过接口调用方法 */
+	PlayerSeasonBLService playerSeason = new PlayerSeasonAnalysis();
+	
 	public PlayerDataPanel(String url) {
 		super(url);
 		setButton();
@@ -69,6 +86,19 @@ public class PlayerDataPanel extends BottomPanel {
 		setEffect(button);
 		iniSet();
 		addListener();
+		addFindButton();
+		ArrayList<PlayerSeasonRecord> iniArray = playerSeason.getAllPlayersSortedByName();
+	}
+	
+	public void addFindButton(){
+		findButton = new ImgButton("images/playerData/search.png",856,124,"images/playerData/searchOn.png","images/playerData/searchClick.png");
+		this.add(findButton);
+		findButton.addMouseListener(new MouseAdapter(){
+			public void mousePressed(MouseEvent e) {
+				ArrayList<PlayerSeasonRecord> seasonArray = playerSeason.getScreenedPlayers(Line_1_Button.current.p,Line_2_Button.current.division,
+						Line_3_Button.current.basis);
+			}
+		});
 	}
 
 	/**
@@ -83,6 +113,11 @@ public class PlayerDataPanel extends BottomPanel {
 		Line_4_Button.current = (Line_4_Button) button[3];
 	}
 
+	/**
+	 * 设置条件按钮
+	 * @author lsy
+	 * @version 2015年3月19日  下午9:00:34
+	 */
 	public void setButton() {
 		buttonLine1 = new Line_1_Button[sum1];
 		buttonLine2 = new Line_2_Button[sum2];
@@ -90,17 +125,18 @@ public class PlayerDataPanel extends BottomPanel {
 		buttonLine4 = new Line_4_Button[sum4];
 		for (int i = 0; i < sum1; i++) {
 			buttonLine1[i] = new Line_1_Button(buttonXLine1[i], y1, width, height, textLine1[i]);
+			buttonLine1[i].p = pArray[i];
 		}
-		oldButton1 = buttonLine1[0];
 		for (int i = 0; i < sum2; i++) {
+			buttonLine2[i].division = dArray[i];
 			if (i == 3 || i == 6) {
 				buttonLine2[i] = new Line_2_Button(buttonXLine2[i], y2, widthThree, height, textLine2[i]);
 			} else {
 				buttonLine2[i] = new Line_2_Button(buttonXLine2[i], y2, width, height, textLine2[i]);
 			}
 		}
-		oldButton2 = buttonLine2[0];
 		for (int i = 0; i < 10; i++) {
+			buttonLine3[i].basis = bArray[i];
 			if (i == 4) {
 				buttonLine3[i] = new Line_3_Button(buttonXLine3[i], y3, widthLong, height, textLine3[i]);
 			} else {
@@ -108,16 +144,20 @@ public class PlayerDataPanel extends BottomPanel {
 			}
 		}
 		for (int i = 10; i < sum3; i++) {
+			buttonLine3[i].basis = bArray[i];
 			buttonLine3[i] = new Line_3_Button(buttonXLine3[i], y4, width, height, textLine3[i]);
 		}
-		oldButton3 = buttonLine3[0];
 		for (int i = 0; i < sum4; i++) {
 			buttonLine4[i] = new Line_4_Button(buttonXLine4[i], y5, width, height, textLine4[i]);
 		}
-		oldButton4 = buttonLine4[0];
 		button = new TextButton[] { buttonLine1[0], buttonLine2[0], buttonLine3[0], buttonLine4[0] };
 	}
 
+	/**
+	 * 添加条件按钮
+	 * @author lsy
+	 * @version 2015年3月19日  下午9:00:47
+	 */
 	public void addButton() {
 		for (int i = 0; i < sum1; i++) {
 			this.add(buttonLine1[i]);
@@ -147,6 +187,11 @@ public class PlayerDataPanel extends BottomPanel {
 		}
 	}
 
+	/**
+	 * 按钮添加监听
+	 * @author lsy
+	 * @version 2015年3月19日  下午9:00:59
+	 */
 	public void addListener() {
 		MouListener1 mou1 = new MouListener1();
 		MouListener2 mou2 = new MouListener2();

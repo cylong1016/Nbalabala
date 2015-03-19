@@ -1,9 +1,7 @@
 package ui.panel.playerData;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 import ui.common.button.TextButton;
+import enums.ScreenBasis;
 
 /**
  * 
@@ -14,6 +12,7 @@ public class Line_3_Button extends TextButton{
 	/** serialVersionUID */
 	private static final long serialVersionUID = -4055004512100806741L;
 	static Line_3_Button current;
+	ScreenBasis basis;
 
 	public Line_3_Button(int x, int y, int width, int height, String text) {
 		super(x, y, width, height, text);
