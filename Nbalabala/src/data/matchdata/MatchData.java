@@ -13,6 +13,7 @@ import utility.Utility;
 import vo.MatchDetailVO;
 import vo.MatchPlayerVO;
 import vo.MatchProfileVO;
+import vo.PlayerMatchPerformanceVO;
 
 /**
  * 读取比赛信息，检索并返回符合条件的比赛信息的类
@@ -36,9 +37,10 @@ public class MatchData implements MatchDataService {
 			for(File file : files) {
 				
 				if ( ! file.getName().contains(keyword)) continue;
-				
 				BufferedReader br = new BufferedReader(new FileReader(file));
 				String [] profile = br.readLine().split(";");
+				
+				//比赛简况包括赛季、日期、两队缩写、总比分、各节比分，不涉及脏数据
 				MatchProfileVO matchProfileVO = new MatchProfileVO(season, profile[0], profile[1], 
 						profile[2], br.readLine());
 				result.add(matchProfileVO);
@@ -90,6 +92,7 @@ public class MatchData implements MatchDataService {
 	@Override
 	public MatchDetailVO getMatchDetailByFileName(String fileName) {
 		
+		//文件名的开头部分就是赛季
 		String season = fileName.split("_")[0];
 		File file = new File(Utility.matchPath + fileName);
 		
@@ -132,11 +135,12 @@ public class MatchData implements MatchDataService {
 	 * @see dataservice.MatchDataService#getMatchRecordByPlayerName(java.lang.String)
 	 */
 	@Override
-	public ArrayList<MatchPlayerVO> getMatchRecordByPlayerName(String playerName) {
+	public ArrayList<PlayerMatchPerformanceVO> getMatchRecordByPlayerName(String playerName) {
 		File [] files = Utility.getSortedMatchFiles();
 		
-		ArrayList<MatchPlayerVO> result = new ArrayList<MatchPlayerVO>();
+		ArrayList<PlayerMatchPerformanceVO> result = new ArrayList<PlayerMatchPerformanceVO>();
 		
+		打个标记
 		FILELOOP: for (File file : files) {
 			try {
 				BufferedReader br = new BufferedReader(new FileReader(file));

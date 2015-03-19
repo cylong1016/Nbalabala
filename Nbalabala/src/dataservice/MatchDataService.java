@@ -3,8 +3,8 @@ package dataservice;
 import java.util.ArrayList;
 
 import vo.MatchDetailVO;
-import vo.MatchPlayerVO;
 import vo.MatchProfileVO;
+import vo.PlayerMatchPerformanceVO;
 
 /**
  * 
@@ -24,7 +24,7 @@ public interface MatchDataService {
 	public abstract MatchDetailVO getMatchDetailByFileName(String fileName);
 
 	/** 通过运动员名字返回其全部比赛记录 */
-	public abstract ArrayList<MatchPlayerVO> getMatchRecordByPlayerName(
+	public abstract ArrayList<PlayerMatchPerformanceVO> getMatchRecordByPlayerName(
 			String playerName);
 
 }

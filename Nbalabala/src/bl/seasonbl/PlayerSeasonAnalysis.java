@@ -24,7 +24,7 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService{
 	private SeasonDataService seasonData = new SeasonData();
 	
 	/** 记录上一次返回给UI层，即UI层正在显示的球员列表 */
-	private ArrayList<PlayerSeasonRecord> currentList;
+	private ArrayList<PlayerSeasonRecord> currentList = new ArrayList<PlayerSeasonRecord>();
 
 	private int factor = 1;
 
@@ -550,6 +550,14 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService{
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
 					return factor * (p1.getUsePercent() - p2.getUsePercent()) < 0 ? -1 : 1;
+				}
+			};
+			break;
+		
+		case TIME_AVG:
+			comparator = new Comparator<PlayerSeasonRecord>() {
+				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
+					return factor * (p1.getTimeAvg() - p2.getTimeAvg()) < 0 ? -1 : 1;
 				}
 			};
 			break;

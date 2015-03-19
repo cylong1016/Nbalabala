@@ -18,25 +18,22 @@ import enums.SortOrder;
 import enums.TeamSortBasis;
 
 /**
- * 
+ * 分析球队数据的类
  * @author Issac Ding
  * @version 2015年3月15日 下午3:08:56
  */
 public class TeamSeasonAnalysis implements TeamSeasonBLService{
 	
 	//记录上一次返回的，也就是界面正在展示的表
-	private ArrayList<TeamSeasonRecord> currentList;
+	private ArrayList<TeamSeasonRecord> currentList = new ArrayList<TeamSeasonRecord>();
 
 	private SeasonDataService seasonData = new SeasonData();
 
 	private int factor = 1;
 	
-	public TeamSeasonAnalysis() {
-		currentList = seasonData.getScreenedTeamSeasonData(ScreenDivision.ALL);
-	}
-	
 	/** 刚进入界面时调用此方法，得到按名字排序的球队数据 */
 	public ArrayList<TeamSeasonRecord> getTeamDataSortedByName() {
+		currentList = seasonData.getScreenedTeamSeasonData(ScreenDivision.ALL);
 		sortTeamDataByName(currentList);
 		return currentList;
 	}
@@ -53,6 +50,7 @@ public class TeamSeasonAnalysis implements TeamSeasonBLService{
 		return currentList;
 	}
 	
+	/** 根据球队缩写返回其赛季数据 */
 	public TeamSeasonRecord getTeamDataByAbbr(String abbr) {
 		return seasonData.getTeamDataByAbbr(abbr);
 	}
@@ -423,7 +421,7 @@ public class TeamSeasonAnalysis implements TeamSeasonBLService{
 				}
 			};
 			break;
-
+			
 		default:
 			break;
 		}
