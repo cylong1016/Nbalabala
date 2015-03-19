@@ -1,9 +1,19 @@
 package ui.common.panel;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.ImageIcon;
+
 import ui.UIConfig;
+import ui.common.button.ImgButton;
+import ui.controller.MainController;
 
 /**
  * 左边边框
+ * 
  * @author lsy
  * @version 2015年3月17日 下午6:19:16
  */
@@ -11,15 +21,87 @@ public class LeftPanel extends Panel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 1L;
-	
+
 	private int secPanelX = UIConfig.LEFT_WIDTH * (-1);
 	private ThreadIn threadIn;
 	private ThreadOut threadOut;
 	/** 边框移动速度 */
 	private int speed = 5;
+	/** 背景图片 */
+	private Image bgImage;
 
-	public LeftPanel() {
+	/** 横纵坐标 间距 宽高 */
+	private int x = 58, y = 202, inter = 54, width = 117, height = 27;
+	/** 图片地址 */
+	String url = UIConfig.IMG_PATH + "sidebar/";
+	/** button */
+	ImgButton allPlayers, allTeams, game, playerData, returnButton, teamData;
+	/** button数组 */
+	ImgButton[] buttonArr;
+	MouListener mou = new MouListener();
+	/** 获得底层panel */
+	BottomPanel panel;
+	MainController controller;
+	
+	public LeftPanel(BottomPanel panel,MainController controller) {
+		this.panel = panel;
+		this.controller = controller;
 		this.setBounds(secPanelX, 0, UIConfig.LEFT_WIDTH, UIConfig.WIDTH);
+		bgImage = new ImageIcon(url + "BG.png").getImage();
+		setButton();
+		addButton();
+	}
+
+	/**
+	 * 设置按钮
+	 * 
+	 * @author lsy
+	 * @version 2015年3月20日 上午12:02:28
+	 */
+	public void setButton() {
+		allPlayers = new ImgButton(url + "allPlayers.png", x, y, url + "allPlayersClick.png", url
+				+ "allPlayersOn.png");
+		allTeams = new ImgButton(url + "allTeams.png", x, y + inter, url + "allTeamsClick.png", url
+				+ "allTeamssOn.png");
+		game = new ImgButton(url + "game.png", x, y + 2 * inter, url + "gameClick.png", url
+				+ "gameOn.png");
+		playerData = new ImgButton(url + "playerData.png", x, y + 3 * inter, url + "playerDataClick.png", url
+				+ "playerDataOn.png");
+		teamData = new ImgButton(url + "teamData.png", x, y + 4 * inter, url + "teamDataClick.png", url
+				+ "teamDataOn.png");
+		returnButton = new ImgButton(url + "return.png", 13, 529, url + "returnClick.png", url
+				+ "returnOn.png");
+	}
+	
+	public void addButton(){
+		buttonArr = new ImgButton[]{allPlayers,allTeams,game,playerData,teamData,returnButton};
+		for(int i =0;i<buttonArr.length;i++){
+			this.add(buttonArr[i]);
+			buttonArr[i].addMouseListener(mou);
+		}
+	}
+	
+	class MouListener extends MouseAdapter{
+		 public void mousePressed(MouseEvent e) {
+			 if(e.getSource() == allPlayers){
+				 controller.toAllPlayersPanel(panel);
+			 }else if(e.getSource() == allTeams){
+				 controller.toAllTeamsPanel(panel);
+			 }else if(e.getSource() == game){
+				 controller.toGamePanel(panel);
+			 }else if(e.getSource() == playerData){
+				 controller.toPlayerPanel(panel);
+			 }else if(e.getSource() == teamData){
+				 controller.toTeamPanel(panel);
+			 }else if(e.getSource() == returnButton){
+				 controller.toMainPanel(panel);
+			 }
+		 }
+	}
+
+	public void paint(Graphics g) {
+		g.drawImage(bgImage, 0, 0, this);
+		super.paint(g);
 	}
 
 	public void moveIn() {
@@ -35,7 +117,7 @@ public class LeftPanel extends Panel {
 	class ThreadIn extends Thread {
 
 		public void run() {
-			while(true) {
+			while (true) {
 				if (secPanelX >= 0) {
 					break;
 				}
@@ -54,8 +136,8 @@ public class LeftPanel extends Panel {
 	class ThreadOut extends Thread {
 
 		public void run() {
-			while(true) {
-				if (secPanelX <= secPanelX) {
+			while (true) {
+				if (secPanelX <= UIConfig.LEFT_WIDTH * (-1)) {
 					break;
 				}
 				try {

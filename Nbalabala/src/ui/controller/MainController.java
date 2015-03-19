@@ -43,6 +43,12 @@ public class MainController {
 		frame.setPanel(mainPanel);
 		frame.start();
 	}
+	
+	public void toMainPanel(Panel panel){
+		frame.remove(panel);
+		mainPanel = new MainPanel(this);
+		frame.setPanel(mainPanel);
+	}
 
 	/**
 	 * 进入球队数据界面
@@ -52,7 +58,7 @@ public class MainController {
 	 */
 	public void toTeamPanel(Panel panel) {
 		frame.remove(panel);
-		teamDataPanel = new TeamDataPanel(UIConfig.IMG_PATH + "teamData/teamDataBG.png");
+		teamDataPanel = new TeamDataPanel(this,UIConfig.IMG_PATH + "teamData/teamDataBG.png");
 		frame.setPanel(teamDataPanel);
 	}
 
@@ -64,7 +70,7 @@ public class MainController {
 	 */
 	public void toPlayerPanel(Panel panel) {
 		frame.remove(panel);
-		playerDataPanel = new PlayerDataPanel(UIConfig.IMG_PATH + "playerData/playerDataBG.png");
+		playerDataPanel = new PlayerDataPanel(this,UIConfig.IMG_PATH + "playerData/playerDataBG.png");
 		frame.setPanel(playerDataPanel);
 	}
 
@@ -76,7 +82,7 @@ public class MainController {
 	 */
 	public void toGamePanel(Panel panel) {
 		frame.remove(panel);
-		gameDataPanel = new GameDataPanel(UIConfig.IMG_PATH + "gameData/gameDataBG.png");
+		gameDataPanel = new GameDataPanel(this,UIConfig.IMG_PATH + "gameData/gameDataBG.png");
 		frame.setPanel(gameDataPanel);
 	}
 
@@ -88,7 +94,7 @@ public class MainController {
 	 */
 	public void toAllPlayersPanel(Panel panel) {
 		frame.remove(panel);
-		allPlayersPanel = new AllPlayersPanel(UIConfig.IMG_PATH + "players/allPlayers.png");
+		allPlayersPanel = new AllPlayersPanel(this,UIConfig.IMG_PATH + "players/allPlayersBG.png");
 		frame.setPanel(allPlayersPanel);
 	}
 
@@ -98,9 +104,9 @@ public class MainController {
 	 * @author cylong
 	 * @version 2015年3月18日 上午11:11:58
 	 */
-	public void toAllTeamsPanel(MainPanel panel) {
+	public void toAllTeamsPanel(Panel panel) {
 		frame.remove(panel);
-		allTeamsPanel = new AllTeamsPanel(UIConfig.IMG_PATH + "teams/allTeam.png");
+		allTeamsPanel = new AllTeamsPanel(this,UIConfig.IMG_PATH + "teams/allTeam.png");
 		frame.setPanel(allTeamsPanel);
 	}
 

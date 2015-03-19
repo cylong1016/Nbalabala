@@ -5,12 +5,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import data.seasondata.PlayerSeasonRecord;
 import ui.common.button.ImgButton;
 import ui.common.button.TextButton;
 import ui.common.panel.BottomPanel;
+import ui.controller.MainController;
 import bl.seasonbl.PlayerSeasonAnalysis;
 import blservice.PlayerSeasonBLService;
+import data.seasondata.PlayerSeasonRecord;
 import enums.Position;
 import enums.ScreenBasis;
 import enums.ScreenDivision;
@@ -79,15 +80,16 @@ public class PlayerDataPanel extends BottomPanel {
 	/** 通过接口调用方法 */
 	PlayerSeasonBLService playerSeason = new PlayerSeasonAnalysis();
 	
-	public PlayerDataPanel(String url) {
-		super(url);
+	public PlayerDataPanel(MainController controller,String url) {
+		super(controller, url);
 		setButton();
 		addButton();
 		setEffect(button);
+		
 		iniSet();
 		addListener();
 		addFindButton();
-		ArrayList<PlayerSeasonRecord> iniArray = playerSeason.getAllPlayersSortedByName();
+//		ArrayList<PlayerSeasonRecord> iniArray = playerSeason.getAllPlayersSortedByName();
 		//TODO setTable
 	}
 	

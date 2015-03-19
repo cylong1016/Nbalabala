@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 
 import ui.UIConfig;
+import ui.controller.MainController;
 import utility.Sleep;
 
 /**
@@ -30,9 +31,11 @@ public class BottomPanel extends Panel {
 	/** 画笔透明度 */
 	protected float hyaline = 0.0f;
 
-	public BottomPanel(String url) {
+	MainController controller;
+	public BottomPanel(MainController controller,String url) {
 		bgImage = new ImageIcon(url).getImage();
-		this.addLeftPanel();
+		this.controller = controller;
+		this.addLeftPanel(this,controller);
 		this.addMouseMotionListener(new MouListener());
 		new Opacity().start();
 	}
@@ -94,8 +97,8 @@ public class BottomPanel extends Panel {
 
 	}
 
-	public void addLeftPanel() {
-		leftPanel = new LeftPanel();
+	public void addLeftPanel(BottomPanel panel,MainController controller) {
+		leftPanel = new LeftPanel(panel,controller);
 		this.add(leftPanel);
 	}
 

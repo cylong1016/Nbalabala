@@ -4,16 +4,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.button.TextButton;
 import ui.common.panel.BottomPanel;
+import ui.controller.MainController;
 import ui.panel.playerData.Line_4_Button;
 import bl.seasonbl.TeamSeasonAnalysis;
 import blservice.TeamSeasonBLService;
-import data.seasondata.TeamSeasonRecord;
 import enums.ScreenDivision;
 
 /**
@@ -62,8 +61,8 @@ public class TeamDataPanel extends BottomPanel {
 	TeamSeasonBLService teamSeason = new TeamSeasonAnalysis();
 	private String imgURL = UIConfig.IMG_PATH+"teamData/";
 	
-	public TeamDataPanel(String url) {
-		super(url);
+	public TeamDataPanel(MainController controller,String url) {
+		super(controller, url);
 		setButton();
 		addButton();
 		addFindButton();
