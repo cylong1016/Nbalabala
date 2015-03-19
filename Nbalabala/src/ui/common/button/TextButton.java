@@ -17,19 +17,14 @@ public class TextButton extends JButton {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -5390884444460444968L;
-	boolean isSelected = false;
+	public boolean isIni = false;
 
 	/**
-	 * @param x
-	 *            横坐标
-	 * @param y
-	 *            纵坐标
-	 * @param width
-	 *            宽度
-	 * @param height
-	 *            高度
-	 * @param text
-	 *            button显示的文字
+	 * @param x 横坐标
+	 * @param y 纵坐标
+	 * @param width 宽度
+	 * @param height 高度
+	 * @param text button显示的文字
 	 * @author cylong
 	 * @version 2015年3月19日 上午2:48:41
 	 */
