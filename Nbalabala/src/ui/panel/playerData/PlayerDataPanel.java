@@ -128,24 +128,24 @@ public class PlayerDataPanel extends BottomPanel {
 			buttonLine1[i].p = pArray[i];
 		}
 		for (int i = 0; i < sum2; i++) {
-			buttonLine2[i].division = dArray[i];
 			if (i == 3 || i == 6) {
 				buttonLine2[i] = new Line_2_Button(buttonXLine2[i], y2, widthThree, height, textLine2[i]);
 			} else {
 				buttonLine2[i] = new Line_2_Button(buttonXLine2[i], y2, width, height, textLine2[i]);
 			}
+			buttonLine2[i].division = dArray[i];
 		}
 		for (int i = 0; i < 10; i++) {
-			buttonLine3[i].basis = bArray[i];
 			if (i == 4) {
 				buttonLine3[i] = new Line_3_Button(buttonXLine3[i], y3, widthLong, height, textLine3[i]);
 			} else {
 				buttonLine3[i] = new Line_3_Button(buttonXLine3[i], y3, width, height, textLine3[i]);
 			}
+			buttonLine3[i].basis = bArray[i];
 		}
 		for (int i = 10; i < sum3; i++) {
-			buttonLine3[i].basis = bArray[i];
 			buttonLine3[i] = new Line_3_Button(buttonXLine3[i], y4, width, height, textLine3[i]);
+			buttonLine3[i].basis = bArray[i];
 		}
 		for (int i = 0; i < sum4; i++) {
 			buttonLine4[i] = new Line_4_Button(buttonXLine4[i], y5, width, height, textLine4[i]);
