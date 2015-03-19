@@ -42,41 +42,14 @@ public class TextButton extends JButton {
 		this.addMouseListener(new MouseAdapter() {
 
 			public void mousePressed(MouseEvent e) {
+				TextButton.this.setOpaque(true);
 				TextButton.this.setBackground(UIConfig.BUTTON_COLOR);
 			}
-
-			public void mouseReleased(MouseEvent e) {
-
-			}
 		});
-
 	}
 
-	//	public void paintComponent(Graphics g) {
-	//		if (getModel().isArmed()) {
-	//			isSelected = true;
-	//			onClick(g,UIConfig.buttonColor);
-	//		} 
-	//		if(isSelected){
-	//			onClick(g,UIConfig.buttonColor);
-	//		}
-	//		super.paintComponent(g);
-	//	}
-	//
-	//	public Graphics onClick(Graphics g,Color color) {
-	//		Graphics2D g2D = (Graphics2D) g.create();
-	//		int h = getHeight();
-	//		int w = getWidth();
-	//		GradientPaint gp = new GradientPaint(0.0F, 0.0F, color, 0.0F, h, color, true);
-	//		g2D.setPaint(gp);
-	//		g2D.fillRect(0, 0, w, h);
-	//		g2D.dispose();
-	//		this.setForeground(Color.white);
-	//		return g;
-	//	}
-
 	public void back() {
-		isSelected = false;
+		this.setOpaque(false);
 		this.setForeground(Color.black);
 	}
 }
