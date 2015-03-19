@@ -88,6 +88,7 @@ public class PlayerDataPanel extends BottomPanel {
 		addListener();
 		addFindButton();
 		ArrayList<PlayerSeasonRecord> iniArray = playerSeason.getAllPlayersSortedByName();
+		//TODO setTable
 	}
 	
 	public void addFindButton(){
@@ -97,6 +98,7 @@ public class PlayerDataPanel extends BottomPanel {
 			public void mousePressed(MouseEvent e) {
 				ArrayList<PlayerSeasonRecord> seasonArray = playerSeason.getScreenedPlayers(Line_1_Button.current.p,Line_2_Button.current.division,
 						Line_3_Button.current.basis);
+				//TODO changeTable
 			}
 		});
 	}
