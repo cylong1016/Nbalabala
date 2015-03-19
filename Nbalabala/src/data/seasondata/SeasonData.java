@@ -14,6 +14,8 @@ import java.util.Map.Entry;
 
 import utility.Utility;
 import data.teamdata.TeamData;
+import dataservice.SeasonDataService;
+import dataservice.TeamDataService;
 import enums.Position;
 import enums.ScreenDivision;
 import enums.TeamState;
@@ -24,7 +26,7 @@ import enums.TeamState;
  * @version 2015年3月14日  下午4:04:31
  */
 
-public class SeasonData {
+public class SeasonData implements SeasonDataService {
 	
 	public SeasonData(){
 		if (playerRecords.size() == 0 || teamRecords.size() == 0) loadMatches();
@@ -36,7 +38,10 @@ public class SeasonData {
 	/** 存储所有球队的赛季数据记录 */
 	private static HashMap<String, TeamSeasonRecord> teamRecords = new HashMap<String, TeamSeasonRecord>();
 	
-	/** 根据位置、赛区来返回符合条件的球员 */
+	/**
+	 * @see dataservice.SeasonDataService#getScreenedPlayerSeasonData(enums.Position, enums.ScreenDivision)
+	 */
+	@Override
 	public ArrayList<PlayerSeasonRecord> getScreenedPlayerSeasonData(Position position,
 			ScreenDivision division) {
 		
@@ -63,7 +68,7 @@ public class SeasonData {
 		Iterator<Map.Entry<String, PlayerSeasonRecord>> itr = playerRecords.entrySet().iterator();
 		
 		//需要队伍信息来查询球员属于哪个分区
-		TeamData teamData = new TeamData();
+		TeamDataService teamData = new TeamData();
 		
 		if (position == Position.ALL && division == ScreenDivision.ALL) {
 			return getAllPlayerSeasonData();
@@ -111,19 +116,25 @@ public class SeasonData {
 		return result;
 	}
 	
-	/** 返回全部球员赛季数据 */
+	/**
+	 * @see dataservice.SeasonDataService#getAllPlayerSeasonData()
+	 */
+	@Override
 	public ArrayList<PlayerSeasonRecord> getAllPlayerSeasonData() {
 		return new ArrayList<PlayerSeasonRecord>(playerRecords.values());
 	}
 	
-	/** 根据赛区返回符合条件的记录 */
+	/**
+	 * @see dataservice.SeasonDataService#getScreenedTeamSeasonData(enums.ScreenDivision)
+	 */
+	@Override
 	public ArrayList<TeamSeasonRecord> getScreenedTeamSeasonData(ScreenDivision division) {
 		if (division == ScreenDivision.ALL){
 			return new ArrayList<TeamSeasonRecord>(teamRecords.values());
 		}
 		
 		Iterator<Map.Entry<String, TeamSeasonRecord>> itr = teamRecords.entrySet().iterator();
-		TeamData teamData = new TeamData();
+		TeamDataService teamData = new TeamData();
 		ArrayList<TeamSeasonRecord> result = new ArrayList<TeamSeasonRecord>();
 		
 		if (division == ScreenDivision.EAST || division == ScreenDivision.WEST) {
@@ -145,20 +156,31 @@ public class SeasonData {
 		return result;
 	}
 	
-	/** 根据球员名字返回其最后一次比赛的球队 */
+	/**
+	 * @see dataservice.SeasonDataService#getTeamAbbrByPlayer(java.lang.String)
+	 */
+	@Override
 	public String getTeamAbbrByPlayer(String playerName) {
 		return playerRecords.get(playerName).getTeam();
 	}
 	
+	/**
+	 * @see dataservice.SeasonDataService#getPlayerSeasonDataByName(java.lang.String)
+	 */
+	@Override
 	public PlayerSeasonRecord getPlayerSeasonDataByName(String playerName) {
 		return playerRecords.get(playerName);
 	}
 	
+	/**
+	 * @see dataservice.SeasonDataService#getTeamDataByAbbr(java.lang.String)
+	 */
+	@Override
 	public TeamSeasonRecord getTeamDataByAbbr(String abbr) {
 		return teamRecords.get(abbr);
 	}
 	
-	public void loadMatches() {
+	private void loadMatches() {
 		File[] files = Utility.getSortedMatchFiles();
 		
 		BufferedReader br = null;
@@ -257,7 +279,10 @@ public class SeasonData {
 		}
 	}
 	
-	/** 根据球队缩写返回其阵容名单 */
+	/**
+	 * @see dataservice.SeasonDataService#getPlayerNamesByTeamAbbr(java.lang.String)
+	 */
+	@Override
 	public ArrayList<String> getPlayerNamesByTeamAbbr(String abbr) {
 		ArrayList<String> result = new ArrayList<String>();
 		Iterator<Entry<String, PlayerSeasonRecord>> itr = playerRecords.entrySet().iterator();
@@ -271,7 +296,7 @@ public class SeasonData {
 	}
 	
 	/** 数据累加，包括一队的各种数据累加和球员的数据累加 */
-	public void dataAccumulate(int[] teamData, PlayerSeasonRecord playerRecord, String[] s,
+	private void dataAccumulate(int[] teamData, PlayerSeasonRecord playerRecord, String[] s,
 			File file, TeamState teamState) {
 		//该数组0，1位置不用， 2位置为该球员的上场秒数，3之后是s的对应转化为整数
 		int[] lineInt = new int[18];
@@ -323,7 +348,7 @@ public class SeasonData {
 	}
 	
 	/** 把球队本场比赛的数据累加到球员赛季数据中 */
-	public void playerAccumulate(PlayerSeasonRecord playerRecord, int [] teamData, int[] oppoData){
+	private void playerAccumulate(PlayerSeasonRecord playerRecord, int [] teamData, int[] oppoData){
 		playerRecord.oppoDefensiveRebound += oppoData[10];
 		playerRecord.oppoFieldAttempt += oppoData[4];
 		playerRecord.oppoFieldGoal += oppoData[3];
@@ -343,7 +368,7 @@ public class SeasonData {
 		playerRecord.teamTotalRebound += teamData[11];
 	}
 	
-	public void teamAccumulate(TeamSeasonRecord teamRecord, int [] teamData, int [] oppoData){
+	private void teamAccumulate(TeamSeasonRecord teamRecord, int [] teamData, int [] oppoData){
 		teamRecord.matchCount ++;
 		teamRecord.teamGoal += teamData[17];
 		teamRecord.fieldGoal += teamData[3];

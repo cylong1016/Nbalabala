@@ -10,7 +10,6 @@ import enums.ScreenDivision;
  */
 public class TeamProfileVO {
 	
-
 	/** 球队全名 */
 	private String name;
 	/** 球队缩写 */

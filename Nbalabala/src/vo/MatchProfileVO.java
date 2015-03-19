@@ -8,19 +8,19 @@ package vo;
 public class MatchProfileVO {
 	
 	/** 赛季，形式为13-14 */
-	public String season;
+	private String season;
 	
 	/**比赛时间 格式为"01-01"*/
-	public String time;
+	private String time;
 	
 	/** 对阵球队 格式为"CHA-LAC" */
-	public String team;
+	private String team;
 	
 	/** 比分,格式为“85-112” */
-	public String score;
+	private String score;
 	
 	/** 每节比分 ，格式为“27-25;29-31;13-25;16-31;”*/
-	public String eachSectionScore;
+	private String eachSectionScore;
 
 	public MatchProfileVO(String season, String time, String team, String score, String eachSectionScore) {
 		super();
@@ -33,6 +33,26 @@ public class MatchProfileVO {
 	public boolean equals(Object o) {
 		MatchProfileVO vo = (MatchProfileVO)o;
 		return time.equals(vo.time) && team.equals(vo.team);
+	}
+
+	public String getSeason() {
+		return season;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public String getTeam() {
+		return team;
+	}
+
+	public String getScore() {
+		return score;
+	}
+
+	public String getEachSectionScore() {
+		return eachSectionScore;
 	}
 	
 	

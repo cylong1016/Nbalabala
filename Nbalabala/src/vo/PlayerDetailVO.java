@@ -12,14 +12,14 @@ import data.seasondata.PlayerSeasonRecord;
  */
 public class PlayerDetailVO {
 	
-	public PlayerProfileVO profile;
+	private PlayerProfileVO profile;
 	
-	public PlayerSeasonRecord seasonRecord;
+	private PlayerSeasonRecord seasonRecord;
 	
-	public ArrayList<MatchPlayerVO> matchRecords;
+	private ArrayList<MatchPlayerVO> matchRecords;
 	
 	/** 全身像 */
-	public Image action;
+	private Image action;
 	
 	public PlayerDetailVO(PlayerProfileVO profile,
 			PlayerSeasonRecord seasonRecord,
@@ -29,6 +29,22 @@ public class PlayerDetailVO {
 		this.seasonRecord = seasonRecord;
 		this.matchRecords = matchRecords;
 		this.action = action;
+	}
+
+	public PlayerProfileVO getProfile() {
+		return profile;
+	}
+
+	public PlayerSeasonRecord getSeasonRecord() {
+		return seasonRecord;
+	}
+
+	public ArrayList<MatchPlayerVO> getMatchRecords() {
+		return matchRecords;
+	}
+
+	public Image getAction() {
+		return action;
 	}
 	
 }

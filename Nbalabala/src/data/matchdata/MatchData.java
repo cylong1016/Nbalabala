@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dataservice.MatchDataService;
 import enums.TeamState;
 import utility.Utility;
 import vo.MatchDetailVO;
@@ -18,9 +19,12 @@ import vo.MatchProfileVO;
  * @author Issac Ding
  * @version 2015年3月18日  上午10:34:35
  */
-public class MatchData {
+public class MatchData implements MatchDataService {
 	
-	/** 根据赛季以及日期返回符合的比赛简报，season形如13-14,date形如01-01和12-12 */
+	/**
+	 * @see dataservice.MatchDataService#getMatchProfileBySeasonAndDate(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public ArrayList<MatchProfileVO> getMatchProfileBySeasonAndDate(String season, String date) {
 		
 		File[] files = Utility.getSortedMatchFiles();
@@ -48,7 +52,10 @@ public class MatchData {
 		return result;
 	}
 
-	/** 根据参赛队伍返回比赛简报，team形如ABC-DEF */
+	/**
+	 * @see dataservice.MatchDataService#getMatchProfileByTeam(java.lang.String)
+	 */
+	@Override
 	public ArrayList<MatchProfileVO> getMatchProfileByTeam(String team) {
 		
 		File[] files = Utility.getSortedMatchFiles();
@@ -77,7 +84,10 @@ public class MatchData {
 		return result;
 	}
 
-	/** 通过比赛文件名返回详情 */
+	/**
+	 * @see dataservice.MatchDataService#getMatchDetailByFileName(java.lang.String)
+	 */
+	@Override
 	public MatchDetailVO getMatchDetailByFileName(String fileName) {
 		
 		String season = fileName.split("_")[0];
@@ -118,7 +128,10 @@ public class MatchData {
 		return null;
 	}
 	
-	/** 通过运动员名字返回其全部比赛记录 */
+	/**
+	 * @see dataservice.MatchDataService#getMatchRecordByPlayerName(java.lang.String)
+	 */
+	@Override
 	public ArrayList<MatchPlayerVO> getMatchRecordByPlayerName(String playerName) {
 		File [] files = Utility.getSortedMatchFiles();
 		

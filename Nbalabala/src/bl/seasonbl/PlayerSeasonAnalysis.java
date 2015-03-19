@@ -3,10 +3,10 @@ package bl.seasonbl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 
 import data.seasondata.PlayerSeasonRecord;
 import data.seasondata.SeasonData;
+import dataservice.SeasonDataService;
 import enums.PlayerSortBasis;
 import enums.Position;
 import enums.ScreenBasis;
@@ -20,7 +20,7 @@ import enums.SortOrder;
  */
 public class PlayerSeasonAnalysis {
 
-	private SeasonData seasonData = new SeasonData();
+	private SeasonDataService seasonData = new SeasonData();
 	
 	/** 记录上一次返回给UI层，即UI层正在显示的球员列表 */
 	private ArrayList<PlayerSeasonRecord> currentList;

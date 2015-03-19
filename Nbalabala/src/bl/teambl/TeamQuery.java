@@ -5,6 +5,7 @@ import java.util.Collections;
 
 import data.seasondata.TeamSeasonRecord;
 import data.teamdata.TeamData;
+import dataservice.TeamDataService;
 import vo.PlayerProfileVO;
 import vo.TeamDetailVO;
 import vo.TeamProfileVO;
@@ -25,7 +26,7 @@ public class TeamQuery implements TeamQueryBLService{
 	 */
 	@Override
 	public TeamDetailVO getTeamDetailByAbbr(String abbr) {
-		TeamData teamData = new TeamData();
+		TeamDataService teamData = new TeamData();
 		TeamProfileVO profile = teamData.getTeamProfileByAbbr(abbr);
 		
 		PlayerSeasonAnalysis playerSeasonAnalysis = new PlayerSeasonAnalysis();

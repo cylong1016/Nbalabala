@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import data.matchdata.MatchData;
+import dataservice.MatchDataService;
 import vo.MatchDetailVO;
 import vo.MatchPlayerVO;
 import vo.MatchProfileVO;
@@ -17,7 +18,7 @@ import blservice.MatchQueryBLService;
  */
 public class MatchQuery implements MatchQueryBLService{
 	
-	private MatchData matchData = new MatchData();
+	private MatchDataService matchData = new MatchData();
 	
 	/**
 	 * @see blservice.MatchQueryBLService#screenMatchByDate(java.util.Date)

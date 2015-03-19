@@ -17,14 +17,15 @@ import javax.imageio.ImageIO;
 
 import vo.PlayerProfileVO;
 import data.seasondata.SeasonData;
-import dataservice.playerdataservice.PlayerDataService;
+import dataservice.PlayerDataService;
+import dataservice.SeasonDataService;
 
 /**
  * @see dataservice.playerdataservice.PlayerDataService
  * @author cylong
  * @version 2015年3月13日 下午7:01:57
  */
-public class PlayerData implements PlayerDataService {
+public class PlayerData implements PlayerDataService{
 
 	/** 全部球员基本信息 */
 	private static HashMap<String, PlayerProfileVO> players = new HashMap<String, PlayerProfileVO>();
@@ -48,12 +49,12 @@ public class PlayerData implements PlayerDataService {
 	 * @author cylong
 	 * @version 2015年3月13日 下午7:33:17
 	 */
-	public void loadPlayers() {
+	private void loadPlayers() {
 		File dir = new File(infoPath);
 		File[] files = dir.listFiles();
 		BufferedReader br = null;
 		
-		SeasonData seasonData = new SeasonData();
+		SeasonDataService seasonData = new SeasonData();
 		
 		try {
 			for(File file : files) {
@@ -88,7 +89,7 @@ public class PlayerData implements PlayerDataService {
 	}
 
 	/**
-	 * @see dataservice.playerdataservice.PlayerDataService#getActionImageByName(java.lang.String)
+	 * @see dataservice.PlayerDataService#getActionImageByName(java.lang.String)
 	 */
 	@Override
 	public Image getActionImageByName(String name) {
@@ -104,7 +105,7 @@ public class PlayerData implements PlayerDataService {
 	}
 
 	/**
-	 * @see dataservice.playerdataservice.PlayerDataService#getPlayerProfileByInitial(char)
+	 * @see dataservice.PlayerDataService#getPlayerProfileByInitial(char)
 	 */
 	@Override
 	public ArrayList<PlayerProfileVO> getPlayerProfileByInitial(char initial) {
@@ -112,11 +113,11 @@ public class PlayerData implements PlayerDataService {
 		Iterator<Entry<String, PlayerProfileVO>> itr = players.entrySet().iterator();
 		while (itr.hasNext()) {
 			PlayerProfileVO po = itr.next().getValue();
-			if (po.name.charAt(0) == initial) result.add(po);
+			if (po.getName().charAt(0) == initial) result.add(po);
 		}
 		Comparator<PlayerProfileVO> comparator = new Comparator<PlayerProfileVO>() {
 			public int compare(PlayerProfileVO p1, PlayerProfileVO p2) {
-				return p1.name.compareTo(p2.name);
+				return p1.getName().compareTo(p2.getName());
 			}
 		};
 		Collections.sort(result, comparator);
@@ -124,13 +125,16 @@ public class PlayerData implements PlayerDataService {
 	}
 
 	/**
-	 * @see dataservice.playerdataservice.PlayerDataService#getPlayerProfileByName(java.lang.String)
+	 * @see dataservice.PlayerDataService#getPlayerProfileByName(java.lang.String)
 	 */
 	@Override
 	public PlayerProfileVO getPlayerProfileByName(String name) {
 		return players.get(name);
 	}
 	
+	/**
+	 * @see dataservice.PlayerDataService#getPlayerProfileByNames(java.util.ArrayList)
+	 */
 	public ArrayList<PlayerProfileVO> getPlayerProfileByNames(ArrayList<String> names) {
 		ArrayList<PlayerProfileVO> result = new ArrayList<PlayerProfileVO>();
 		for (String name : names) {

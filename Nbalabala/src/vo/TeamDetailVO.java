@@ -11,11 +11,11 @@ import data.seasondata.TeamSeasonRecord;
  */
 public class TeamDetailVO {
 	
-	public TeamProfileVO profile;
+	private TeamProfileVO profile;
 	
-	public ArrayList<PlayerProfileVO> players;
+	private ArrayList<PlayerProfileVO> players;
 	
-	public TeamSeasonRecord seasonRecord;
+	private TeamSeasonRecord seasonRecord;
 
 	public TeamDetailVO(TeamProfileVO profile,
 			ArrayList<PlayerProfileVO> players, TeamSeasonRecord seasonRecord) {
@@ -23,6 +23,18 @@ public class TeamDetailVO {
 		this.profile = profile;
 		this.players = players;
 		this.seasonRecord = seasonRecord;
+	}
+
+	public TeamProfileVO getProfile() {
+		return profile;
+	}
+
+	public ArrayList<PlayerProfileVO> getPlayers() {
+		return players;
+	}
+
+	public TeamSeasonRecord getSeasonRecord() {
+		return seasonRecord;
 	}
 
 }

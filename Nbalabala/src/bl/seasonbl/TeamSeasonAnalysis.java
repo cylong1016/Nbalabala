@@ -11,6 +11,7 @@ import java.util.Comparator;
 
 import data.seasondata.SeasonData;
 import data.seasondata.TeamSeasonRecord;
+import dataservice.SeasonDataService;
 import enums.ScreenDivision;
 import enums.SortOrder;
 import enums.TeamSortBasis;
@@ -25,7 +26,7 @@ public class TeamSeasonAnalysis {
 	//记录上一次返回的，也就是界面正在展示的表
 	private ArrayList<TeamSeasonRecord> currentList;
 
-	private SeasonData seasonData = new SeasonData();
+	private SeasonDataService seasonData = new SeasonData();
 
 	private int factor = 1;
 	

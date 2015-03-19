@@ -7,16 +7,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
+import dataservice.TeamDataService;
 import vo.TeamProfileVO;
-import dataservice.teamdataservice.TeamDataService;
 import enums.ScreenDivision;
 
 /**
- * @see dataservice.teamdataservice.TeamDataService
+ *	
  * @author cylong
  * @version 2015年3月13日 下午8:36:13
  */
-public class TeamData implements TeamDataService {
+public class TeamData implements TeamDataService{
 
 	/** 全部球队信息 */
 	private static HashMap<String, TeamProfileVO> teams;
@@ -56,8 +56,9 @@ public class TeamData implements TeamDataService {
 		}
 	}
 
+
 	/**
-	 * @see dataservice.teamdataservice.TeamDataService#findTeam(java.lang.String)
+	 * @see dataservice.TeamDataService#getTeamProfileByAbbr(java.lang.String)
 	 */
 	@Override
 	public TeamProfileVO getTeamProfileByAbbr(String abbr) {
@@ -66,10 +67,18 @@ public class TeamData implements TeamDataService {
 	
 	// 以下两个方法主要用来根据球队缩写返回东/西或者具体赛区，主要用于球员的条件筛选
 	
+	/**
+	 * @see dataservice.TeamDataService#getAreaByAbbr(java.lang.String)
+	 */
+	@Override
 	public ScreenDivision getAreaByAbbr(String abbr) {
 		return teams.get(abbr).getArea();
 	}
 	
+	/**
+	 * @see dataservice.TeamDataService#getDivisionByAbbr(java.lang.String)
+	 */
+	@Override
 	public ScreenDivision getDivisionByAbbr(String abbr) {
 		return teams.get(abbr).getDivision();
 	}

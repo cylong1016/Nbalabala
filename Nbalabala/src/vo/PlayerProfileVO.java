@@ -12,37 +12,37 @@ import java.text.DecimalFormat;
 public class PlayerProfileVO {
 
 	/** 头像 */
-	public Image portrait;
+	private Image portrait;
 	
 	/**球员姓名*/
-	public String name;
+	private String name;
 	
 	/**所属球队*/
-	public String team;
+	private String team;
 	
 	/** 球员号码 */
-	public String number;
+	private String number;
 	
 	/** 球员位置 */
-	public String position;
+	private String position;
 	
 	/** 生日 */
-	public String birth;
+	private String birth;
 	
 	/** 身高 */
-	public String height;
+	private String height;
 	
 	/** 体重 */
-	public String weight;
+	private String weight;
 	
 	/** 年龄 */
-	public String age;
+	private String age;
 	
 	/** 球龄 */
-	public String exp;
+	private String exp;
 	
 	/** 毕业学校 */
-	public String school;
+	private String school;
 	
 	/** 无资料的时候显示的提示 */
 	private static final String UNKNOWN = "无资料";
@@ -89,5 +89,53 @@ public class PlayerProfileVO {
 		this.age = UNKNOWN;
 		this.exp = UNKNOWN;
 		this.school = UNKNOWN;
+	}
+
+	public Image getPortrait() {
+		return portrait;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getTeam() {
+		return team;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public String getBirth() {
+		return birth;
+	}
+
+	public String getHeight() {
+		return height;
+	}
+
+	public String getWeight() {
+		return weight;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public String getExp() {
+		return exp;
+	}
+
+	public String getSchool() {
+		return school;
+	}
+
+	public static String getUnknown() {
+		return UNKNOWN;
 	}
 }

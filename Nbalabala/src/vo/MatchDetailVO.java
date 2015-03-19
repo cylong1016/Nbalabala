@@ -9,11 +9,11 @@ import java.util.ArrayList;
  */
 public class MatchDetailVO {
 	
-	MatchProfileVO profile;
+	private MatchProfileVO profile;
 	
-	ArrayList<MatchPlayerVO> homePlayers;
+	private ArrayList<MatchPlayerVO> homePlayers;
 	
-	ArrayList<MatchPlayerVO> roadPlayers;
+	private ArrayList<MatchPlayerVO> roadPlayers;
 	
 	public MatchDetailVO(MatchProfileVO profile,
 			ArrayList<MatchPlayerVO> homePlayers,
@@ -22,5 +22,17 @@ public class MatchDetailVO {
 		this.profile = profile;
 		this.homePlayers = homePlayers;
 		this.roadPlayers = roadPlayers;
+	}
+
+	public MatchProfileVO getProfile() {
+		return profile;
+	}
+
+	public ArrayList<MatchPlayerVO> getHomePlayers() {
+		return homePlayers;
+	}
+
+	public ArrayList<MatchPlayerVO> getRoadPlayers() {
+		return roadPlayers;
 	}
 }
