@@ -32,4 +32,20 @@ public class UIConfig {
 	
 	/** button选中之后的颜色 */
 	public static Color BUTTON_COLOR = new Color(15,24,44);
+	
+	/*----------------------------表格配置--------------------------------*/
+	/** 表格字体 */
+	public static Font TABLE_FONT = new Font("黑体", Font.PLAIN, 13);
+	/** 表格字体颜色 */
+	public static Color TABLE_FORE_COLOR = Color.WHITE;
+	/** 表格边框颜色 */
+	public static Color TABLE_BORDER_COLOR = Color.LIGHT_GRAY;
+	/** 表头前景颜色 */
+	public static Color TABLE_HEADER_FORE_COLOR = Color.WHITE;
+	/** 表头背景颜色 */
+	public static Color TABLE_HEADER_BACK_COLOR = new Color(0x22355F);
+	/** 选择后的前景色 */
+	public static Color TABLE_SELECTIONFORE = Color.BLACK;
+	/*----------------------------表格配置--------------------------------*/
+
 }

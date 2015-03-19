@@ -39,6 +39,7 @@ public class TextButton extends JButton {
 			public void mousePressed(MouseEvent e) {
 				TextButton.this.setOpaque(true);
 				TextButton.this.setBackground(UIConfig.BUTTON_COLOR);
+				TextButton.this.setForeground(Color.WHITE);
 			}
 		});
 	}
