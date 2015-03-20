@@ -205,31 +205,36 @@ public class SeasonData implements SeasonDataService {
 				ArrayList<PlayerSeasonRecord> homePlayers = new ArrayList<PlayerSeasonRecord>();
 				ArrayList<PlayerSeasonRecord> roadPlayers = new ArrayList<PlayerSeasonRecord>();
 				
-				//该数组存储本场比赛主场队的总数据，0,1位置不用，2为所有球员上场秒数，3之后是s的对应位置转化为整数的和
+				//该数组存储本场比赛主场队的总数据，0,1位置不用，2为所有球员上场秒数，3之后是s的对应位置转化为整数的和，
 				int [] homeTeamData = new int [18];
 				//客场队总数据
 				int [] roadTeamData = new int [18];
 				
-				for (int i=0; i< 18;i++){
+				for (int i=0; i< 17;i++){
 					homeTeamData[i] = 0;
 					roadTeamData[i] = 0;
 				}
 				
+				homeTeamData[17] = homePoints;
+				roadTeamData[17] = roadPoints;
+				
 				while(true){
 					line = br.readLine();
+					
+					if (line.length() < 5) break; 	//读到客场队队名时说明主场队读完了
 					String[] s = line.split(";");
-					if (s.length == 1) break; 	//读到客场队队名时说明主场队读完了
 					if ( !playerRecords.containsKey(s[0])) playerRecords.put(s[0], 
 							new PlayerSeasonRecord());
 					PlayerSeasonRecord playerRecord = playerRecords.get(s[0]);
 					
+					playerRecord.name = s[0];
 					// 如果是首发，更新其位置信息
 					if (s[1].length() != 0) playerRecord.position = s[1].charAt(0);
 					playerRecord.teamName = homeTeam;
 					
 					homePlayers.add(playerRecord);
 					
-					dataAccumulate(homeTeamData, playerRecord, s, file, TeamState.HOME);
+					lineAccumulate(homeTeamData, playerRecord, s, file, TeamState.HOME);
 				}
 				
 				//下面读取客场队
@@ -240,13 +245,14 @@ public class SeasonData implements SeasonDataService {
 							new PlayerSeasonRecord());
 					PlayerSeasonRecord playerRecord = playerRecords.get(s[0]);
 					
+					playerRecord.name = s[0];
 					// 如果是首发，更新其位置信息
 					if (s[1].length() != 0) playerRecord.position = s[1].charAt(0);
 					playerRecord.teamName = roadTeam;
 					
 					roadPlayers.add(playerRecord);
 					
-					dataAccumulate(roadTeamData, playerRecord, s, file, TeamState.ROAD);
+					lineAccumulate(roadTeamData, playerRecord, s, file, TeamState.ROAD);
 				}
 				
 				for (PlayerSeasonRecord record : homePlayers) {
@@ -257,10 +263,10 @@ public class SeasonData implements SeasonDataService {
 				}
 				
 				if (!teamRecords.containsKey(homeTeam)) {
-					teamRecords.put(homeTeam, new TeamSeasonRecord());
+					teamRecords.put(homeTeam, new TeamSeasonRecord(homeTeam));
 				}
 				if (!teamRecords.containsKey(roadTeam)) {
-					teamRecords.put(roadTeam, new TeamSeasonRecord());
+					teamRecords.put(roadTeam, new TeamSeasonRecord(homeTeam));
 				}
 				
 				TeamSeasonRecord homeTeamRecord = teamRecords.get(homeTeam);
@@ -301,7 +307,7 @@ public class SeasonData implements SeasonDataService {
 	}
 	
 	/** 数据累加，包括一队的各种数据累加和球员的数据累加 */
-	private void dataAccumulate(int[] teamData, PlayerSeasonRecord playerRecord, String[] s,
+	private void lineAccumulate(int[] teamData, PlayerSeasonRecord playerRecord, String[] s,
 			File file, TeamState teamState) {
 		//该数组0，1位置不用， 2位置为该球员的上场秒数，3之后是s的对应转化为整数
 		int[] lineInt = new int[18];
@@ -326,7 +332,8 @@ public class SeasonData implements SeasonDataService {
 			lineInt[17] = Utility.getModifiedScore(lineInt);
 		}
 		
-		for (int i=2;i<18;i++){
+		// 球队的总得分在之前已经写好，故不参与累加
+		for (int i=2;i<17;i++){
 			teamData[i] += lineInt[i];
 		}
 		
@@ -374,6 +381,7 @@ public class SeasonData implements SeasonDataService {
 	}
 	
 	private void teamAccumulate(TeamSeasonRecord teamRecord, int [] teamData, int [] oppoData){
+		
 		teamRecord.matchCount ++;
 		teamRecord.teamGoal += teamData[17];
 		teamRecord.fieldGoal += teamData[3];
@@ -390,7 +398,6 @@ public class SeasonData implements SeasonDataService {
 		teamRecord.block += teamData[14];
 		teamRecord.turnover += teamData[15];
 		teamRecord.foul += teamData[16];
-		teamRecord.matchCount ++;
 		
 		teamRecord.oppoDefensiveRebound += oppoData[10];
 		teamRecord.oppoFieldAttempt += oppoData[4];

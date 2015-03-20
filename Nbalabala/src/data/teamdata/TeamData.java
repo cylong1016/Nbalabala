@@ -25,8 +25,10 @@ public class TeamData implements TeamDataService{
 	private static final String path = "NBAdata/teams/teams";
 
 	public TeamData() {
-		if (teams == null)
+		if (teams == null) {
+			teams = new HashMap<String, TeamProfileVO>();
 			loadTeams();
+		}
 	}
 
 	/**

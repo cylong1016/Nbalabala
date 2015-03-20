@@ -91,6 +91,10 @@ public class TeamSeasonRecord {
 				1.07 * (oppoOffensiveRebound / (oppoOffensiveRebound  + defensiveRebound) * 
 						(oppoFieldAttempt - oppoFieldGoal))+ 1.07*oppoTurnover;
 	}
+	
+	public TeamSeasonRecord(String name){
+		this.teamName = name;
+	}
 
 	public String getTeamName() {
 		return teamName;
