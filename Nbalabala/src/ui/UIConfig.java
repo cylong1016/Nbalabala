@@ -21,7 +21,7 @@ public class UIConfig {
 	/** 左边边框的宽度 */
 	public static int LEFT_WIDTH = 189;
 	/** 会弹出左边栏的宽度 */
-	public static int PROMPT_WIDTH = 50;
+	public static int PROMPT_WIDTH = 20;
 
 	/*----------------------------Frame配置--------------------------------*/
 

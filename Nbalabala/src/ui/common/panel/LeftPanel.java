@@ -43,7 +43,7 @@ public class LeftPanel extends Panel {
 	BottomPanel panel;
 	MainController controller;
 	
-	public LeftPanel(BottomPanel panel,MainController controller) {
+	public LeftPanel(BottomPanel panel, MainController controller) {
 		this.panel = panel;
 		this.controller = controller;
 		this.setBounds(secPanelX, 0, UIConfig.LEFT_WIDTH, UIConfig.WIDTH);
@@ -119,6 +119,9 @@ public class LeftPanel extends Panel {
 		public void run() {
 			while (true) {
 				if (secPanelX >= 0) {
+					secPanelX = 0;
+					LeftPanel.this.setLocation(secPanelX, 0);
+					LeftPanel.this.repaint();
 					break;
 				}
 				try {
@@ -138,6 +141,9 @@ public class LeftPanel extends Panel {
 		public void run() {
 			while (true) {
 				if (secPanelX <= UIConfig.LEFT_WIDTH * (-1)) {
+					secPanelX = UIConfig.LEFT_WIDTH * (-1);
+					LeftPanel.this.setLocation(secPanelX, 0);
+					LeftPanel.this.repaint();
 					break;
 				}
 				try {
