@@ -23,7 +23,7 @@ public class ImgButton extends JButton {
 		this.setContentAreaFilled(false);
 		this.setIcon(imageIcon);
 		this.setBounds(x, y, imageIcon.getImage().getWidth(null), imageIcon.getImage().getHeight(null));
-
+		
 		this.setRolloverIcon(imageIconStop);
 		this.setPressedIcon(imageIconPressOn);
 	}

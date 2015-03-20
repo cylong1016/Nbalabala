@@ -28,8 +28,8 @@ public class AllPlayersPanel extends BottomPanel {
 	private int x = 60,y=60,inter=33,width=33,height=32;
 	/** 所有字母的button */
 	LetterButton [] buttonArr = new LetterButton[26];
-	String [] letterArr = new String[]{"A","B","C","D","E","F","G","H","I","J","K",
-			"L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+	char[] letter = new char[]{'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P',
+			'Q','R','S','T','U','V','W','X','Y','Z'};
 	
 	Color letterbg = new Color(51,66,84,130);
 	Color letterColor= new Color(38,41,46);
@@ -119,7 +119,7 @@ public class AllPlayersPanel extends BottomPanel {
 	
 	public void setButton(){
 		for(int i = 0;i<buttonArr.length;i++){
-			buttonArr[i] = new LetterButton(x+i*inter,y,width,height,letterArr[i]);
+			buttonArr[i] = new LetterButton(x+i*inter,y,width,height,letter[i]+"");
 			buttonArr[i].setForeground(letterColor);
 		}
 	}
@@ -127,6 +127,7 @@ public class AllPlayersPanel extends BottomPanel {
 	public void addButton(){
 		for(int i = 0;i<buttonArr.length;i++){
 			this.add(buttonArr[i]);
+			buttonArr[i].letter = letter[i];
 		}
 	}
 
