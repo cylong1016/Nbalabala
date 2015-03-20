@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import utility.Constants;
 import utility.Utility;
 import data.teamdata.TeamData;
 import dataservice.SeasonDataService;
@@ -161,7 +162,9 @@ public class SeasonData implements SeasonDataService {
 	 */
 	@Override
 	public String getTeamAbbrByPlayer(String playerName) {
-		return playerRecords.get(playerName).getTeam();
+		PlayerSeasonRecord record = playerRecords.get(playerName);
+		if (record != null) return record.getTeam(); 
+		else return Constants.UNKNOWN_TEAM;
 	}
 	
 	/**
@@ -169,7 +172,9 @@ public class SeasonData implements SeasonDataService {
 	 */
 	@Override
 	public PlayerSeasonRecord getPlayerSeasonDataByName(String playerName) {
-		return playerRecords.get(playerName);
+		PlayerSeasonRecord record = playerRecords.get(playerName);
+		if (record == null) return new PlayerSeasonRecord(playerName); 
+		else return record;
 	}
 	
 	/**

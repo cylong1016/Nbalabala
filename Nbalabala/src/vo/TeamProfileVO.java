@@ -93,5 +93,6 @@ public class TeamProfileVO {
 		String divisionString = Constants.translateDivision(division);
 		return areaString + "-" + divisionString;
 	}
+	
 
 }

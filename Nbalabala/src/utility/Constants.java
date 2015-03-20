@@ -11,6 +11,8 @@ import enums.ScreenDivision;
  */
 public class Constants {
 	
+	public static String UNKNOWN_TEAM = "未知";
+	
 	private static HashMap<String, String> abbrToEngMandarin;
 	
 	public static String translateDivision(ScreenDivision division) {

@@ -129,7 +129,10 @@ public class PlayerData implements PlayerDataService{
 	 */
 	@Override
 	public PlayerProfileVO getPlayerProfileByName(String name) {
-		return players.get(name);
+		if (players.get(name) != null)
+			return players.get(name);
+		else 
+			return new PlayerProfileVO(getPotraitImageByName("NULL_PLAYER_FOUND"), name);
 	}
 	
 	/**
