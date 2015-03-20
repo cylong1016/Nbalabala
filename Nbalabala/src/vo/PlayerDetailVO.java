@@ -16,14 +16,14 @@ public class PlayerDetailVO {
 	
 	private PlayerSeasonRecord seasonRecord;
 	
-	private ArrayList<MatchPlayerVO> matchRecords;
+	private ArrayList<PlayerMatchPerformanceVO> matchRecords;
 	
 	/** 全身像 */
 	private Image action;
 	
 	public PlayerDetailVO(PlayerProfileVO profile,
 			PlayerSeasonRecord seasonRecord,
-			ArrayList<MatchPlayerVO> matchRecords, Image action) {
+			ArrayList<PlayerMatchPerformanceVO> matchRecords, Image action) {
 		super();
 		this.profile = profile;
 		this.seasonRecord = seasonRecord;
@@ -39,7 +39,7 @@ public class PlayerDetailVO {
 		return seasonRecord;
 	}
 
-	public ArrayList<MatchPlayerVO> getMatchRecords() {
+	public ArrayList<PlayerMatchPerformanceVO> getMatchRecords() {
 		return matchRecords;
 	}
 

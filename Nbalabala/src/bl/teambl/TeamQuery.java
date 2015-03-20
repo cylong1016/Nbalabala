@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import data.seasondata.TeamSeasonRecord;
+import data.teamdata.SVGHandler;
 import data.teamdata.TeamData;
 import dataservice.TeamDataService;
 import vo.PlayerProfileVO;
@@ -39,6 +40,6 @@ public class TeamQuery implements TeamQueryBLService{
 		TeamSeasonAnalysis teamSeasonAnalysis = new TeamSeasonAnalysis();
 		TeamSeasonRecord record = teamSeasonAnalysis.getTeamDataByAbbr(abbr);
 		
-		return new TeamDetailVO(profile, playerProfiles, record);
+		return new TeamDetailVO(profile, playerProfiles, record, SVGHandler.getTeamLogo(abbr));
 	}
 }
