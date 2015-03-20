@@ -1,6 +1,10 @@
 package ui.panel.allplayers;
 
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import ui.UIConfig;
 import ui.common.button.TextButton;
@@ -12,11 +16,14 @@ import ui.common.button.TextButton;
  */
 public class LetterButton extends TextButton{
 
+	/** serialVersionUID */
+	private static final long serialVersionUID = -372944070418167926L;
 	/** 当前按钮 */
 	static LetterButton current;
 	/** 当前按钮代表哪个字母 */
 	char letter;
-	
+	Color letterColor= new Color(38,41,46);
+	final Color letterbg = new Color(51,66,84,130);
 	/**
 	 * @param x
 	 * @param y
@@ -28,7 +35,23 @@ public class LetterButton extends TextButton{
 	 */
 	public LetterButton(int x, int y, int width, int height, String text) {
 		super(x, y, width, height, text);
-		this.setFont(new Font("微软雅黑", 1, 17));
+		this.setFont(new Font("微软雅黑", 1, 15));
+		this.setMargin(new Insets(0,0,0,0));
 	}
 
+	
+	public void addListener(){
+		this.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				LetterButton.this.setOpaque(true);
+				LetterButton.this.setForeground(Color.white);
+				LetterButton.this.setBackground(letterbg);
+			}
+		});
+		
+	}
+	public void back() {
+		this.setOpaque(false);
+		this.setForeground(letterColor);
+	}
 }

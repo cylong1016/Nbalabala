@@ -17,7 +17,6 @@ public class TextButton extends JButton {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -5390884444460444968L;
-	public boolean isIni = false;
 
 	/**
 	 * @param x 横坐标
@@ -35,14 +34,18 @@ public class TextButton extends JButton {
 		this.setBounds(x, y, width, height);
 		this.setText(text);
 		this.setFont(UIConfig.FONT);
+		addListener();
+	}
+	
+	public void addListener(){
 		this.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				TextButton.this.setOpaque(true);
 				TextButton.this.setForeground(Color.white);
 				TextButton.this.setBackground(UIConfig.BUTTON_COLOR);
-				TextButton.this.setForeground(Color.WHITE);
 			}
 		});
+		
 	}
 
 	public void back() {
