@@ -89,7 +89,7 @@ public class PlayerDataPanel extends BottomPanel {
 		iniSet();
 		addListener();
 		addFindButton();
-//		ArrayList<PlayerSeasonRecord> iniArray = playerSeason.getAllPlayersSortedByName();
+		ArrayList<PlayerSeasonRecord> iniArray = playerSeason.getAllPlayersSortedByName();
 		//TODO setTable
 	}
 	
