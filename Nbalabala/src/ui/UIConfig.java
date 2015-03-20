@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 
 /**
@@ -46,6 +47,8 @@ public class UIConfig {
 	public static Color TABLE_HEADER_BACK_COLOR = new Color(0x22355F);
 	/** 选择后的前景色 */
 	public static Color TABLE_SELECTIONFORE = Color.BLACK;
+	/** 表格预设大小 */
+	public static Dimension TABLE_DIMEN = new Dimension(888, 290);
 	/*----------------------------表格配置--------------------------------*/
 
 }
