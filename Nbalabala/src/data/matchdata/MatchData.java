@@ -1,5 +1,6 @@
 package data.matchdata;
 
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import data.teamdata.SVGHandler;
 import dataservice.MatchDataService;
 import enums.TeamState;
 import utility.Utility;
@@ -120,7 +122,12 @@ public class MatchData implements MatchDataService {
 			}
 			
 			br.close();
-			return new MatchDetailVO(matchProfileVO, homePlayers, roadPlayers);
+			
+			String[] teams = profile[1].split("-");
+			Image homeLogo = SVGHandler.getTeamLogo(teams[0]);
+			Image roadLogo = SVGHandler.getTeamLogo(teams[1]);
+			
+			return new MatchDetailVO(matchProfileVO, homePlayers, roadPlayers, homeLogo, roadLogo);
 				
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -140,11 +147,15 @@ public class MatchData implements MatchDataService {
 		
 		ArrayList<PlayerMatchPerformanceVO> result = new ArrayList<PlayerMatchPerformanceVO>();
 		
-		打个标记
 		FILELOOP: for (File file : files) {
 			try {
 				BufferedReader br = new BufferedReader(new FileReader(file));
-				br.readLine();
+				
+				String season = file.getName().split("_")[0];
+				String[] profile = br.readLine().split(";");
+				String date = profile[0];
+				String twoTeams = profile[1];
+				
 				br.readLine();
 				br.readLine();
 				String line;
@@ -152,14 +163,16 @@ public class MatchData implements MatchDataService {
 					line = br.readLine();
 					if (line.length() < 5) break;
 					if (line.contains(playerName)) {
-						result.add(new MatchPlayerVO(line, file, TeamState.HOME));
+						MatchPlayerVO matchPlayerVO = new MatchPlayerVO(line, file, TeamState.HOME); 
+						result.add(new PlayerMatchPerformanceVO(matchPlayerVO, season, date, twoTeams));
 						br.close();
 						continue FILELOOP;
 					}
 				}
 				while ((line = br.readLine()) != null) {
 					if (line.contains(playerName)) {
-						result.add(new MatchPlayerVO(line, file, TeamState.ROAD));
+						MatchPlayerVO matchPlayerVO = new MatchPlayerVO(line, file, TeamState.ROAD); 
+						result.add(new PlayerMatchPerformanceVO(matchPlayerVO, season, date, twoTeams));
 						break;
 					}
 				}

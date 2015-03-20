@@ -1,5 +1,6 @@
 package data.seasondata;
 
+
 /**
  * 用来记录计算球员赛季数据所需的各种指标
  * @author Issac Ding
@@ -20,7 +21,7 @@ public class PlayerSeasonRecord {
 	char position = '\0';
 	
 	/** 记录最后一次比赛时的队伍 */
-	String teamName;
+	String teamName = "无记录";
 	
 	/** 上场数 */
 	int matchCount;
@@ -114,6 +115,15 @@ public class PlayerSeasonRecord {
 	int oppoFoul;
 	
 	int oppoThreePointAttempt;
+	
+	/** 如果没有关于此球员的比赛记录，但是在球员信息里有这个球员的话，用这个构造方法产生一个空的赛季纪录 */
+	public PlayerSeasonRecord(String name) {
+		this.name = name;
+	}
+	
+	public PlayerSeasonRecord() {
+		
+	}
 
 	public String getName() {
 		return name;

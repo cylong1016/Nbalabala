@@ -1,5 +1,6 @@
 package vo;
 
+import java.awt.Image;
 import java.util.ArrayList;
 
 import data.seasondata.TeamSeasonRecord;
@@ -16,13 +17,16 @@ public class TeamDetailVO {
 	private ArrayList<PlayerProfileVO> players;
 	
 	private TeamSeasonRecord seasonRecord;
+	
+	private Image logo;
 
 	public TeamDetailVO(TeamProfileVO profile,
-			ArrayList<PlayerProfileVO> players, TeamSeasonRecord seasonRecord) {
+			ArrayList<PlayerProfileVO> players, TeamSeasonRecord seasonRecord, Image logo) {
 		super();
 		this.profile = profile;
 		this.players = players;
 		this.seasonRecord = seasonRecord;
+		this.logo = logo;
 	}
 
 	public TeamProfileVO getProfile() {
@@ -35,6 +39,10 @@ public class TeamDetailVO {
 
 	public TeamSeasonRecord getSeasonRecord() {
 		return seasonRecord;
+	}
+	
+	public Image getLogo() {
+		return logo;
 	}
 
 }

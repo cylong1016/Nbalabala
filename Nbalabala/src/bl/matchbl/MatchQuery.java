@@ -3,12 +3,13 @@ package bl.matchbl;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import vo.MatchDetailVO;
+import vo.MatchProfileVO;
+import vo.PlayerMatchPerformanceVO;
+import blservice.MatchQueryBLService;
 import data.matchdata.MatchData;
 import dataservice.MatchDataService;
-import vo.MatchDetailVO;
-import vo.MatchPlayerVO;
-import vo.MatchProfileVO;
-import blservice.MatchQueryBLService;
 
 /**
  * 负责查询比赛信息的类
@@ -79,7 +80,7 @@ public class MatchQuery implements MatchQueryBLService{
 	}
 	
 	/** 根据球员名字返回其所有比赛记录 */
-	public ArrayList<MatchPlayerVO> getMatchRecordByPlayerName(String playerName) {
+	public ArrayList<PlayerMatchPerformanceVO> getMatchRecordByPlayerName(String playerName) {
 		return matchData.getMatchRecordByPlayerName(playerName);
 	}
 

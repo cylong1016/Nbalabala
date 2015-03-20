@@ -1,7 +1,7 @@
 package ui.panel.teamdata;
 
-import enums.ScreenDivision;
 import ui.common.button.TextButton;
+import enums.ScreenDivision;
 
 /**
  * 
@@ -14,6 +14,7 @@ public class SelectButton extends TextButton{
 	private static final long serialVersionUID = -7406509530315629567L;
 	ScreenDivision division;
 	static SelectButton current;
+	
 	/**
 	 * @param x
 	 * @param y
@@ -27,5 +28,5 @@ public class SelectButton extends TextButton{
 		super(x, y, width, height, text);
 		
 	}
-
+	
 }

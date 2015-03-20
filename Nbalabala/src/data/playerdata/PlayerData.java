@@ -31,13 +31,13 @@ public class PlayerData implements PlayerDataService{
 	private static HashMap<String, PlayerProfileVO> players = new HashMap<String, PlayerProfileVO>();
 
 	/** 存储球员信息的文件夹 */
-	private String infoPath = "NBAdata/players/info/";
+	private static final String INFO_Path = "NBAdata/players/info/";
 	
 	/** 存储球员头像的文件夹 */
-	private String portraitPath = "NBAdata/players/portrait/";
+	private static final String PORTRAIT_PATH = "NBAdata/players/portrait/";
 	
 	/** 存储全身像的文件夹 */
-	private String actionPath = "NBAdata/players/action/";
+	private static final String ACTION_Path = "NBAdata/players/action/";
 	
 	public PlayerData() {
 		if (players.size() == 0) loadPlayers();
@@ -50,7 +50,7 @@ public class PlayerData implements PlayerDataService{
 	 * @version 2015年3月13日 下午7:33:17
 	 */
 	private void loadPlayers() {
-		File dir = new File(infoPath);
+		File dir = new File(INFO_Path);
 		File[] files = dir.listFiles();
 		BufferedReader br = null;
 		
@@ -94,7 +94,7 @@ public class PlayerData implements PlayerDataService{
 	@Override
 	public Image getActionImageByName(String name) {
 		try {
-			return  ImageIO.read(new File(actionPath + name + ".png"));
+			return  ImageIO.read(new File(ACTION_Path + name + ".png"));
 		} catch (IOException e) {
 			try {
 				return ImageIO.read(new File("images/nullAction.png"));
@@ -129,7 +129,10 @@ public class PlayerData implements PlayerDataService{
 	 */
 	@Override
 	public PlayerProfileVO getPlayerProfileByName(String name) {
-		return players.get(name);
+		if (players.get(name) != null)
+			return players.get(name);
+		else 
+			return new PlayerProfileVO(getPotraitImageByName("NULL_PLAYER_FOUND"), name);
 	}
 	
 	/**
@@ -145,7 +148,7 @@ public class PlayerData implements PlayerDataService{
 	
 	private Image getPotraitImageByName(String name) {
 		try {
-			return  ImageIO.read(new File(portraitPath + name + ".png"));
+			return  ImageIO.read(new File(PORTRAIT_PATH + name + ".png"));
 		} catch (IOException e) {
 			try {
 				return ImageIO.read(new File("images/nullPortrait.png"));

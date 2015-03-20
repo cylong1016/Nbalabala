@@ -3,8 +3,8 @@ package bl.playerbl;
 import java.awt.Image;
 import java.util.ArrayList;
 
-import vo.MatchPlayerVO;
 import vo.PlayerDetailVO;
+import vo.PlayerMatchPerformanceVO;
 import vo.PlayerProfileVO;
 import bl.matchbl.MatchQuery;
 import bl.seasonbl.PlayerSeasonAnalysis;
@@ -44,7 +44,7 @@ public class PlayerQuery implements PlayerQueryBLService{
 		
 		//从matchbl获取球员所有比赛的数据
 		MatchQuery matchQuery = new MatchQuery();
-		ArrayList<MatchPlayerVO> matchRecords = matchQuery.getMatchRecordByPlayerName(playerName);
+		ArrayList<PlayerMatchPerformanceVO> matchRecords = matchQuery.getMatchRecordByPlayerName(playerName);
 
 		return new PlayerDetailVO(profile, seasonRecord, matchRecords, actionImage);
 	}
