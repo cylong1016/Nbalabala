@@ -6,7 +6,7 @@ import enums.TeamState;
 import utility.Utility;
 
 /**
- * 记录一场比赛中一个球员的发挥
+ * 记录一场比赛中一个球员的发挥，不记录赛季、日期、两队
  * @author Issac Ding
  * @version 2015年3月18日  上午10:32:04
  */
@@ -75,7 +75,7 @@ public class MatchPlayerVO {
 		if (s[2].split(":").length < 2) {
 			int totalSeconds = Utility.getModifiedTime(file, teamState);
 			int minutes = totalSeconds / 60;
-			int seconds = totalSeconds - minutes * 60;
+			int seconds = totalSeconds % 60;
 			time = minutes + "-" + seconds;
 		}else {
 			time = s[2];
@@ -174,5 +174,9 @@ public class MatchPlayerVO {
 		return personalGoal;
 	}
 
+	public int getSeconds() {
+		String[]s = time.split(":");
+		return 60 * Integer.parseInt(s[0]) + Integer.parseInt(s[1]);
+	}
 
 }

@@ -1,9 +1,7 @@
 package ui.panel.playerData;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 import ui.common.button.TextButton;
+import enums.Position;
 
 /**
  * 第一行按钮
@@ -15,15 +13,11 @@ public class Line_1_Button extends TextButton {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -4055004512100806741L;
-	static TextButton current;
+	/** 当前选中button */
+	static Line_1_Button current;
+	Position p;
 
 	public Line_1_Button(int x, int y, int width, int height, String text) {
 		super(x, y, width, height, text);
-		this.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				current = Line_1_Button.this;
-			}
-		});
 	}
-
 }

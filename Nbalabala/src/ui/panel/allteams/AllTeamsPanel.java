@@ -1,6 +1,7 @@
 package ui.panel.allteams;
 
 import ui.common.panel.BottomPanel;
+import ui.controller.MainController;
 
 /**
  * 全部球队信息的主界面
@@ -15,8 +16,8 @@ public class AllTeamsPanel extends BottomPanel {
 	/**
 	 * @param url 全部球队信息背景图的url
 	 */
-	public AllTeamsPanel(String url) {
-		super(url);
+	public AllTeamsPanel(MainController controller,String url) {
+		super(controller, url);
 	}
 
 }

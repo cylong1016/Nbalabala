@@ -31,13 +31,14 @@ public class TextButton extends JButton {
 	public TextButton(int x, int y, int width, int height, String text) {
 		this.setBorderPainted(false);
 		this.setContentAreaFilled(false);
+		this.setFocusPainted(false);
 		this.setBounds(x, y, width, height);
 		this.setText(text);
 		this.setFont(UIConfig.FONT);
 		this.addMouseListener(new MouseAdapter() {
-
 			public void mousePressed(MouseEvent e) {
 				TextButton.this.setOpaque(true);
+				TextButton.this.setForeground(Color.white);
 				TextButton.this.setBackground(UIConfig.BUTTON_COLOR);
 				TextButton.this.setForeground(Color.WHITE);
 			}

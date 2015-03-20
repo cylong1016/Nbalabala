@@ -1,6 +1,7 @@
 package ui.panel.allplayers;
 
 import ui.common.panel.BottomPanel;
+import ui.controller.MainController;
 
 /**
  * 全部球员信息主界面
@@ -15,8 +16,8 @@ public class AllPlayersPanel extends BottomPanel {
 	/**
 	 * @param url 背景图片的Url
 	 */
-	public AllPlayersPanel(String url) {
-		super(url);
+	public AllPlayersPanel(MainController controller,String url) {
+		super(controller, url);
 	}
 
 }

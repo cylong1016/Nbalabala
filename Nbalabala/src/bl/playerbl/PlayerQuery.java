@@ -11,6 +11,7 @@ import bl.seasonbl.PlayerSeasonAnalysis;
 import blservice.PlayerQueryBLService;
 import data.playerdata.PlayerData;
 import data.seasondata.PlayerSeasonRecord;
+import dataservice.PlayerDataService;
 
 /**
  * 负责查询球员信息的类
@@ -19,7 +20,7 @@ import data.seasondata.PlayerSeasonRecord;
  */
 public class PlayerQuery implements PlayerQueryBLService{
 	
-	private PlayerData playerData = new PlayerData();
+	private PlayerDataService playerData = new PlayerData();
 
 	/**
 	 * @see blservice.PlayerQueryBLService#getPlayerProfileByInitial(char)
@@ -48,6 +49,7 @@ public class PlayerQuery implements PlayerQueryBLService{
 		return new PlayerDetailVO(profile, seasonRecord, matchRecords, actionImage);
 	}
 	
+	/** 根据若干球员的名字返回其简况，提供给teambl用 */
 	public ArrayList<PlayerProfileVO> getPlayerProfilesByNames(ArrayList<String> names) {
 		return playerData.getPlayerProfileByNames(names);
 	}

@@ -3,6 +3,7 @@ package ui.panel.gamedata;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.panel.BottomPanel;
+import ui.controller.MainController;
 
 /**
  * 比赛数据的主界面
@@ -28,8 +29,8 @@ public class GameDataPanel extends BottomPanel {
 	/**
 	 * @param url 背景图片的url
 	 */
-	public GameDataPanel(String url) {
-		super(url);
+	public GameDataPanel(MainController controller,String url) {
+		super(controller, url);
 		confirmBtn = new ImgButton(confirmPath, 917, 123, confirmClickPath, confirmOnPath);
 		this.add(confirmBtn);
 	}

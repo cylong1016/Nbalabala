@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import blservice.PlayerSeasonBLService;
 import data.seasondata.PlayerSeasonRecord;
 import data.seasondata.SeasonData;
 import dataservice.SeasonDataService;
@@ -18,12 +19,12 @@ import enums.SortOrder;
  * @author Issac Ding
  * @version 2015年3月15日 下午2:46:44
  */
-public class PlayerSeasonAnalysis {
+public class PlayerSeasonAnalysis implements PlayerSeasonBLService{
 
 	private SeasonDataService seasonData = new SeasonData();
 	
 	/** 记录上一次返回给UI层，即UI层正在显示的球员列表 */
-	private ArrayList<PlayerSeasonRecord> currentList;
+	private ArrayList<PlayerSeasonRecord> currentList = new ArrayList<PlayerSeasonRecord>();
 
 	private int factor = 1;
 
@@ -549,6 +550,14 @@ public class PlayerSeasonAnalysis {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
 					return factor * (p1.getUsePercent() - p2.getUsePercent()) < 0 ? -1 : 1;
+				}
+			};
+			break;
+		
+		case TIME_AVG:
+			comparator = new Comparator<PlayerSeasonRecord>() {
+				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
+					return factor * (p1.getTimeAvg() - p2.getTimeAvg()) < 0 ? -1 : 1;
 				}
 			};
 			break;
