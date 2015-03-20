@@ -41,6 +41,8 @@ public class AllPlayersPanel extends BottomPanel {
 	
 	PlayerQueryBLService playerInfo = new PlayerQuery();
 	
+	
+	
 	/**
 	 * @param url 背景图片的Url
 	 */

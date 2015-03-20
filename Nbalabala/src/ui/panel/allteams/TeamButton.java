@@ -12,7 +12,7 @@ public class TeamButton extends ImgButton{
 	/** serialVersionUID */
 	private static final long serialVersionUID = 3789882441719172108L;
 	/** 标记自己是哪知球队 */
-	int which;
+	String team;
 	public TeamButton(String imgPath, int x, int y, String stopImgPath, String pressOnImgPath) {
 		super(imgPath, x, y, stopImgPath, pressOnImgPath);
 	}

@@ -4,7 +4,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import ui.UIConfig;
-import ui.common.button.ImgButton;
 import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
 
@@ -24,6 +23,9 @@ public class AllTeamsPanel extends BottomPanel {
 	private String url = UIConfig.IMG_PATH + "teams/mouseOn.png";
 	private String beforeURL = UIConfig.IMG_PATH + "teams/tran.png";
 	MouListener mou = new MouListener();
+	String[] teamArr = new String[]{"BOS","BKN","NYK","PHI","TOR","CHI","CLE","DET","IND","MIL","ATL","CHA","MIA","ORL","WAS",
+			"GSW","LAC","LAL","PHX","SAC","DEN","MIN","OKC","POR","UTA","DAL","HOU","MEM","NOP","SAS",};
+	MainController controller;
 
 	/**
 	 * @param url
@@ -31,6 +33,7 @@ public class AllTeamsPanel extends BottomPanel {
 	 */
 	public AllTeamsPanel(MainController controller, String url) {
 		super(controller, url);
+		this.controller = controller;
 		setButton();
 		addButton();
 	}
@@ -59,13 +62,15 @@ public class AllTeamsPanel extends BottomPanel {
 	public void addButton() {
 		for (int i = 0; i < 30; i++) {
 			this.add(buttonArr[i]);
-			buttonArr[i].which=i;
+			buttonArr[i].team=teamArr[i];
 			buttonArr[i].addMouseListener(mou);
 		}
 	}
 
 	class MouListener extends MouseAdapter {
 		public void mousePressed(MouseEvent e) {
+			TeamButton buttonSelect = (TeamButton) e.getSource();
+			controller.toTeamSeasonPanel(AllTeamsPanel.this, buttonSelect);
 			
 		}
 

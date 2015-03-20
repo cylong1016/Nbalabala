@@ -5,6 +5,10 @@ import ui.common.frame.Frame;
 import ui.common.panel.Panel;
 import ui.panel.allplayers.AllPlayersPanel;
 import ui.panel.allteams.AllTeamsPanel;
+import ui.panel.allteams.TeamButton;
+import ui.panel.allteams.TeamGamePanel;
+import ui.panel.allteams.TeamPlayerPanel;
+import ui.panel.allteams.TeamSeasonPanel;
 import ui.panel.gamedata.GameDataPanel;
 import ui.panel.main.MainPanel;
 import ui.panel.playerData.PlayerDataPanel;
@@ -31,6 +35,12 @@ public class MainController {
 	private AllTeamsPanel allTeamsPanel;
 	/** 比赛数据界面 */
 	private GameDataPanel gameDataPanel;
+	/** 球队赛季数据 */
+	private TeamSeasonPanel teamSeasonpanel;
+	/** 球队阵容数据 */
+	private TeamPlayerPanel teamPlayerPanel;
+	/** 球队比赛数据 */
+	private TeamGamePanel teamGamePanel;
 
 	/**
 	 * 初始化主界面
@@ -108,6 +118,43 @@ public class MainController {
 		frame.remove(panel);
 		allTeamsPanel = new AllTeamsPanel(this,UIConfig.IMG_PATH + "teams/allTeam.png");
 		frame.setPanel(allTeamsPanel);
+	}
+	
+	/**
+	 * 进入球队赛季情况界面
+	 * @param panel 从哪一界面跳转 
+	 * @param button 选择的球队按钮
+	 * @author lsy
+	 * @version 2015年3月20日  下午11:45:39
+	 */
+	public void toTeamSeasonPanel(Panel panel,TeamButton button){
+		frame.remove(panel);
+		teamSeasonpanel = new TeamSeasonPanel(this,"images/teams/teamSeasonBG.png",button);
+		frame.setPanel(teamSeasonpanel);
+	}
+	
+	/**
+	 * 球队赛季数据界面
+	 * @param panel
+	 * @author lsy
+	 * @version 2015年3月21日  上午12:31:15
+	 */
+	public void toTeamGamePanel(Panel panel,TeamButton button) {
+		frame.remove(panel);
+		teamGamePanel = new TeamGamePanel(this,UIConfig.IMG_PATH + "teams/teamGameBG.png",button);
+		frame.setPanel(teamGamePanel);
+	}
+	
+	/**
+	 * 球队阵容界面
+	 * @param panel
+	 * @author lsy
+	 * @version 2015年3月21日  上午12:31:21
+	 */
+	public void toTeamPlayerPanel(Panel panel,TeamButton button) {
+		frame.remove(panel);
+		teamPlayerPanel = new TeamPlayerPanel(this,UIConfig.IMG_PATH + "teams/teamPlayersBG.png",button);
+		frame.setPanel(teamPlayerPanel);
 	}
 
 }

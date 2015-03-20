@@ -1,6 +1,7 @@
 package ui.common.button;
 
 import java.awt.Color;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -33,6 +34,7 @@ public class TextButton extends JButton {
 		this.setFocusPainted(false);
 		this.setBounds(x, y, width, height);
 		this.setText(text);
+		this.setMargin(new Insets(0,0,0,0));
 		this.setFont(UIConfig.FONT);
 		addListener();
 	}
