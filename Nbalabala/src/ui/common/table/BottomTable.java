@@ -16,7 +16,7 @@ import ui.UIConfig;
 /**
  * 用JPanel为容器装饰表格
  * @author cylong
- * @version Jun 11, 2014 11:55:06 PM
+ * @version 2015年3月19日  下午7:32:53
  */
 public class BottomTable extends JTable {
 
@@ -55,7 +55,7 @@ public class BottomTable extends JTable {
 	/**
 	 * 装饰Table
 	 * @author cylong
-	 * @version Jun 12, 2014 2:47:48 AM
+	 * @version 2015年3月20日  下午6:32:45
 	 */
 	public void decorateTable() {
 		this.setFont(UIConfig.TABLE_FONT);	// 设置表格内容字体
