@@ -31,7 +31,7 @@ public class LeftPanel extends Panel {
 	private Image bgImage;
 
 	/** 横纵坐标 间距 宽高 */
-	private int x = 58, y = 202, inter = 54, width = 117, height = 27;
+	private int x = 58, y = 202, inter = 54;
 	/** 图片地址 */
 	String url = UIConfig.IMG_PATH + "sidebar/";
 	/** button */

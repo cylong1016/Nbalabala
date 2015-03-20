@@ -13,6 +13,9 @@ import ui.UIConfig;
  */
 public class MyTextField extends JTextField{
 
+	/** serialVersionUID */
+	private static final long serialVersionUID = -3458532595643157676L;
+
 	public MyTextField(int x, int y,int width,int height) {
 		this.setLocation(x, y);
 		this.setSize(width, height);
