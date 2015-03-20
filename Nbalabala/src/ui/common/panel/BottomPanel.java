@@ -24,6 +24,9 @@ public class BottomPanel extends Panel {
 	private static final long serialVersionUID = 7108387309547483359L;
 	/** 背景图片 */
 	protected Image bgImage;
+	
+	/** 鼠标移动到左边出现边框的提示 */
+	private Image slider = new ImageIcon(UIConfig.IMG_PATH + "sidebar/slider.png").getImage();
 
 	/** 左边导航栏 */
 	private LeftPanel leftPanel;
@@ -31,7 +34,9 @@ public class BottomPanel extends Panel {
 	/** 画笔透明度 */
 	protected float hyaline = 0.0f;
 
+	/** 主控制器 */
 	MainController controller;
+	
 	public BottomPanel(MainController controller,String url) {
 		bgImage = new ImageIcon(url).getImage();
 		this.controller = controller;
@@ -43,6 +48,7 @@ public class BottomPanel extends Panel {
 	public void paint(Graphics g) {
 		Graphics2D g2d = getPaintbrush(g);
 		g2d.drawImage(bgImage, 0, 0, this);
+		g2d.drawImage(slider, 0, 0, this);
 		super.paint(g2d);
 	}
 
