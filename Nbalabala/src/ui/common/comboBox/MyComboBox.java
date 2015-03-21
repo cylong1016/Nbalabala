@@ -41,9 +41,6 @@ public class MyComboBox extends JComboBox{
 	                
 	            }
 	             
-	            /**
-	             * 该方法返回右边的按钮
-	             */
 	        });
 		this.repaint();
 	}

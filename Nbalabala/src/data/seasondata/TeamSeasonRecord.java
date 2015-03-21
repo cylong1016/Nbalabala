@@ -86,6 +86,10 @@ public class TeamSeasonRecord {
 	public TeamSeasonRecord(String name){
 		this.teamName = name;
 	}
+	
+	public int getWins() {
+		return this.wins;
+	}
 
 	public String getTeamName() {
 		return teamName;

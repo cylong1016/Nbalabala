@@ -38,7 +38,7 @@ public class UIConfig {
 	/** 表格字体 */
 	public static Font TABLE_FONT = new Font("黑体", Font.PLAIN, 13);
 	/** 表格字体颜色 */
-	public static Color TABLE_FORE_COLOR = Color.WHITE;
+	public static Color TABLE_FORE_COLOR = Color.BLACK;
 	/** 表格边框颜色 */
 	public static Color TABLE_BORDER_COLOR = Color.LIGHT_GRAY;
 	/** 表头前景颜色 */

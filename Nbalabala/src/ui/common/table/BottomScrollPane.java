@@ -3,7 +3,6 @@ package ui.common.table;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
-import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -21,8 +20,8 @@ public class BottomScrollPane extends JScrollPane {
 	/** serialVersionUID */
 	private static final long serialVersionUID = -6211694438630784736L;
 
-	public BottomScrollPane(JPanel panel) {
-		this.initScrollPane(panel);
+	public BottomScrollPane(JTable table) {
+		this.initScrollPane(table);
 	}
 
 	/**
@@ -35,15 +34,15 @@ public class BottomScrollPane extends JScrollPane {
 	 * @author cylong
 	 * @version Jun 12, 2014 12:07:09 AM
 	 */
-	protected void initScrollPane(JPanel panel) {
+	protected void initScrollPane(JTable table) {
 		this.setSize(UIConfig.TABLE_DIMEN); // ScrollPane的大小，和表格大小无关
-		this.setViewportView(panel);	// 装载表格
-		// this.setBorder(new EmptyBorder(0, 0, 0, 0));
-		// this.getViewport().setOpaque(false);	// 将中间的viewport设置为透明
-		// this.setOpaque(false);	// 将JScrollPane设置为透明
-		// this.setColumnHeaderView(table.getTableHeader());	// 设置头部（HeaderView部分）
-		// this.getColumnHeader().setOpaque(false);	// 再取出头部，并设置为透明
-		// scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER); // 滚动条
+		this.setViewportView(table);	// 装载表格
+		this.setBorder(new EmptyBorder(0, 0, 0, 0));
+		this.getViewport().setOpaque(false);	// 将中间的viewport设置为透明
+		this.setOpaque(false);	// 将JScrollPane设置为透明
+		this.setColumnHeaderView(table.getTableHeader());	// 设置头部（HeaderView部分）
+		this.getColumnHeader().setOpaque(false);	// 再取出头部，并设置为透明
+		// this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER); // 滚动条
 		// 设置滚轮可以滑动滚动条
 		this.addMouseWheelListener(new MouseWheelListener() {
 

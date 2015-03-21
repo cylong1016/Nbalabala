@@ -1,24 +1,22 @@
 package ui.panel.teamdata;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import java.util.ArrayList;
 
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.button.TextButton;
 import ui.common.panel.BottomPanel;
+import ui.common.table.BottomScrollPane;
+import ui.common.table.BottomTable;
 import ui.controller.MainController;
 import ui.panel.playerData.Line_4_Button;
 import bl.teamseasonbl.TeamSeasonAnalysis;
 import blservice.TeamSeasonBLService;
+import data.seasondata.TeamSeasonRecord;
 import enums.ScreenDivision;
 
 /**
@@ -36,7 +34,7 @@ public class TeamDataPanel extends BottomPanel {
 	private static final long serialVersionUID = -4296014620804951285L;
 
 	/** 队伍数据表格 */
-	private JTable teamDataTable;
+	private BottomTable teamDataTable;
 
 	/** 条件按钮 */
 	SelectButton[] button;
@@ -79,8 +77,6 @@ public class TeamDataPanel extends BottomPanel {
 		setEffect(buttonArr);
 		addListener();
 		addTeamDataTable();
-		//		ArrayList<TeamSeasonRecord> teamArr = teamSeason.getTeamDataSortedByName();
-		//TODO setTable
 	}
 
 	/**
@@ -89,13 +85,14 @@ public class TeamDataPanel extends BottomPanel {
 	 * @version 2015年3月19日 下午11:22:32
 	 */
 	public void addFindButton() {
-		findButton = new ImgButton(imgURL + "search.png", 856, 124, imgURL + "searchOn.png", imgURL + "searchClick.png");
+		findButton = new ImgButton(imgURL + "search.png", 856, 124, imgURL + "searchOn.png", imgURL
+																								+ "searchClick.png");
 		this.add(findButton);
 		findButton.addMouseListener(new MouseAdapter() {
 
 			public void mousePressed(MouseEvent e) {
-				//				ArrayList<TeamSeasonRecord> seasonArray = teamSeason.getScreenedTeamData(SelectButton.current.division);
-				//TODO changeTable
+				// ArrayList<TeamSeasonRecord> seasonArray = teamSeason.getScreenedTeamData(SelectButton.current.division);
+				// TODO changeTable
 			}
 		});
 	}
@@ -195,72 +192,51 @@ public class TeamDataPanel extends BottomPanel {
 	/**
 	 * 添加当前登录的用户的信息table
 	 * @author cylong
-	 * @version 2015年3月20日  下午6:37:48
+	 * @version 2015年3月20日 下午6:37:48
 	 */
 	private void addTeamDataTable() {
-		String[] columnNames = {"名称", "胜", "负", "总", "命中", "球队名称6", "球队名称7", "球队名称8", "球队名称9",
-									"球队名称10", "球队名称11", "球队名称22", "球队名称33", "球队名称44", "球队名称55", "球队名称66", "球队名称", "球队名称"};
-		String[][] rowData = new String[20][columnNames.length];
-		rowData[0][0] = "2333";
+		String[] columnNames = {"球队名称", "胜场数", "负场数", "总场数", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手", "三分命中率", "罚球命中",
+									"罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "篮板效率", "进攻回合", "进攻效率", "助攻次数", "助攻效率",
+									"抢断", "盖帽", "失误", "犯规", "胜率", "防守", "得分"};
+		ArrayList<TeamSeasonRecord> teamArr = teamSeason.getTeamDataSortedByName();
+		String[][] rowData = new String[teamArr.size()][columnNames.length];
+		teamDataTable = new BottomTable(rowData, columnNames);
+		for(int i = 0; i < teamArr.size(); i++) {
+			TeamSeasonRecord teamSeason = teamArr.get(i);
+			rowData[i][0] = teamSeason.getTeamName();
+			rowData[i][1] = Integer.toString(teamSeason.getWins());
+			rowData[i][2] = teamSeason.getTeamName();
+			rowData[i][3] = teamSeason.getTeamName();
+			rowData[i][4] = teamSeason.getTeamName();
+			rowData[i][5] = teamSeason.getTeamName();
+			rowData[i][6] = teamSeason.getTeamName();
+			rowData[i][7] = teamSeason.getTeamName();
+			rowData[i][8] = teamSeason.getTeamName();
+			rowData[i][9] = teamSeason.getTeamName();
+			rowData[i][10] = teamSeason.getTeamName();
+			rowData[i][11] = teamSeason.getTeamName();
+			rowData[i][12] = teamSeason.getTeamName();
+			rowData[i][13] = teamSeason.getTeamName();
+			rowData[i][14] = teamSeason.getTeamName();
+			rowData[i][15] = teamSeason.getTeamName();
+			rowData[i][16] = teamSeason.getTeamName();
+			rowData[i][17] = teamSeason.getTeamName();
+			rowData[i][18] = teamSeason.getTeamName();
+			rowData[i][19] = teamSeason.getTeamName();
+			rowData[i][20] = teamSeason.getTeamName();
+			rowData[i][21] = teamSeason.getTeamName();
+			rowData[i][22] = teamSeason.getTeamName();
+			rowData[i][23] = teamSeason.getTeamName();
+			rowData[i][24] = teamSeason.getTeamName();
+			rowData[i][25] = teamSeason.getTeamName();
+			rowData[i][26] = teamSeason.getTeamName();
+			rowData[i][27] = teamSeason.getTeamName();
+		}
 		
-//		teamDataTable = new JTable(rowData, columnNames);
-//		// teamDataTable.setSize(new Dimension(1000, 1000));
-//		
-//		JPanel panel = new JPanel();
-//		panel.add(teamDataTable);
-//		panel.setSize(2000, 2000);
-//		BottomScrollPane scroll = new BottomScrollPane(panel);
-//		scroll.setLocation(57, 239);
-//		this.add(scroll);
-		
-		JTable table = new JTable(rowData, columnNames);
-		table.setSize(1500, 1500);
-		table.setLocation(57, 239);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-//		table.getTableHeader().setPreferredSize(new Dimension(30, 30));
-	
-		scroll = new JScrollPane(table);
-		scroll.setSize(888, 290);
+		BottomScrollPane scroll = new BottomScrollPane(teamDataTable);
 		scroll.setLocation(57, 239);
-		// scroll.setLayout(null);
-		// scroll.setOpaque(false);
 		this.add(scroll);
-		
-		JButton button = new JButton("换页");
-		button.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				String[] columnNames = {"名称1", "胜1", "负1", "总1", "命中1", "球队名称6", "球队名称7", "球队名称8", "球队名称9",
-										"球队名称10", "球队名称11", "球队名称22", "球队名称33", "球队名称44", "球队名称55", "球队名称66", "球队名称", "球队名称"};
-				String[][] rowData = new String[20][columnNames.length];
-				
-				JTable table = new JTable(rowData, columnNames);
-				table.setSize(1500, 1500);
-				table.setLocation(57, 239);
-				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-				table.getTableHeader().setPreferredSize(new Dimension(30, 30));
-			
-				JPanel panel = new JPanel();
-				panel.setPreferredSize(new Dimension(2000, 2000));
-				panel.setLocation(50, 50);
-				panel.setBackground(Color.BLUE);
-				panel.setLayout(null);
-				panel.add(table);
-				
-				int value = scroll.getVerticalScrollBar().getValue();
-				TeamDataPanel.this.remove(scroll);
-				scroll = new JScrollPane(table);
-				scroll.setSize(888, 290);
-				scroll.setLocation(57, 239);
-				scroll.getVerticalScrollBar().setValue(value);
-				System.out.println(value);
- 				TeamDataPanel.this.add(scroll);
-			}
-		});
-		button.setSize(100, 30);
-		button.setLocation(500, 20);
-		this.add(button);
+
 	}
-	
-	JScrollPane scroll;
 
 }
