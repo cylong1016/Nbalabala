@@ -59,18 +59,18 @@ public class LeftPanel extends Panel {
 	 * @version 2015年3月20日 上午12:02:28
 	 */
 	public void setButton() {
-		allPlayers = new ImgButton(url + "allPlayers.png", x, y, url + "allPlayersClick.png", url
-				+ "allPlayersOn.png");
-		allTeams = new ImgButton(url + "allTeams.png", x, y + inter, url + "allTeamsClick.png", url
-				+ "allTeamssOn.png");
-		game = new ImgButton(url + "game.png", x, y + 2 * inter, url + "gameClick.png", url
-				+ "gameOn.png");
-		playerData = new ImgButton(url + "playerData.png", x, y + 3 * inter, url + "playerDataClick.png", url
-				+ "playerDataOn.png");
-		teamData = new ImgButton(url + "teamData.png", x, y + 4 * inter, url + "teamDataClick.png", url
-				+ "teamDataOn.png");
-		returnButton = new ImgButton(url + "return.png", 13, 529, url + "returnClick.png", url
-				+ "returnOn.png");
+		allPlayers = new ImgButton(url + "allPlayers.png", x, y, url + "allPlayersOn.png", url
+				+ "allPlayersClick.png");
+		allTeams = new ImgButton(url + "allTeams.png", x, y + inter, url + "allTeamsOn.png", url
+				+ "allTeamssClick.png");
+		game = new ImgButton(url + "game.png", x, y + 2 * inter, url + "gameOn.png", url
+				+ "gameClick.png");
+		playerData = new ImgButton(url + "playerData.png", x, y + 3 * inter, url + "playerDataOn.png", url
+				+ "playerClick.png");
+		teamData = new ImgButton(url + "teamData.png", x, y + 4 * inter, url + "teamDataOn.png", url
+				+ "teamDataClick.png");
+		returnButton = new ImgButton(url + "return.png", 13, 529, url + "returnOn.png", url
+				+ "returnClick.png");
 	}
 	
 	public void addButton(){
