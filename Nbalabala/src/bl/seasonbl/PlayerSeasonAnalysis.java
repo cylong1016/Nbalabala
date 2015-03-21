@@ -57,14 +57,6 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService{
 		// 否则，就按指标选出前50个人
 		Comparator<PlayerSeasonRecord> comparator = null;
 		switch(basis){
-		case DOUBLE_DOUBLE:
-			 comparator = new Comparator<PlayerSeasonRecord>() {
-				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return p1.getDoubleDouble() - p2.getDoubleDouble();
-				}
-			};
-			Collections.sort(players, comparator);
-			break;
 		case SCORE_REBOUND_ASSIST:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
@@ -108,6 +100,9 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService{
 			break;
 		case SCORE:
 			sortPlayers(players, PlayerSortBasis.SCORE, SortOrder.DE);
+			break;
+		case DOUBLE_DOUBLE:
+			sortPlayers(players, PlayerSortBasis.DOUBLE_DOUBLE, SortOrder.DE);
 			break;
 		default:
 			break;
@@ -417,7 +412,6 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService{
 				}
 			};
 			break;
-
 		case STEAL_AVG:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
@@ -577,7 +571,6 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService{
 				}
 			};
 			break;
-
 		default:
 			break;
 		}
