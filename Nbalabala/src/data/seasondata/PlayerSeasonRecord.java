@@ -30,7 +30,7 @@ public class PlayerSeasonRecord {
 	int firstCount;
 
 	/** 时间，单位是秒 */
-	int time;
+	double time;
 	
 	/** 投篮命中 */
 	int fieldGoal;
@@ -77,11 +77,13 @@ public class PlayerSeasonRecord {
 	/** 个人得分 */
 	int personalGoal;
 	
+	/** 两双次数 */
+	int doubleDoubleCount;
 	
 	//以下记录球队和对手数据以计算各种率
 	
 	/** 球队总上场时间 ，单位为秒*/
-	int teamTime;
+	double teamTime;
 	
 	int teamOffensiveRebound;
 	
@@ -97,7 +99,7 @@ public class PlayerSeasonRecord {
 	
 	int teamFreethrowAttempt;
 	
-	int teamFoul;
+	int teamTurnover;
 	
 	/** 对手总篮板*/
 	int oppoTotalRebound;
@@ -112,7 +114,7 @@ public class PlayerSeasonRecord {
 	
 	int oppoFreethrowAttempt;
 	
-	int oppoFoul;
+	int oppoTurnover;
 	
 	int oppoThreePointAttempt;
 	
@@ -138,10 +140,10 @@ public class PlayerSeasonRecord {
 	}
 	
 	public double getFirstCountAvg() {
-		return firstCount / matchCount;
+		return (double)firstCount / matchCount;
 	}
 
-	public int getTime() {
+	public double getTime() {
 		return time;
 	}
 	
@@ -154,7 +156,7 @@ public class PlayerSeasonRecord {
 	}
 	
 	public double getFieldGoalAvg() {
-		return fieldGoal / matchCount;
+		return (double)fieldGoal / matchCount;
 	}
 
 	public int getFieldAttempt() {
@@ -162,11 +164,11 @@ public class PlayerSeasonRecord {
 	}
 	
 	public double getFieldAttemptAvg(){
-		return fieldAttempt / matchCount;
+		return (double)fieldAttempt / matchCount;
 	}
 	
 	public double getFieldPercent() {
-		return fieldGoal / fieldAttempt;
+		return (double)fieldGoal / fieldAttempt;
 	}
 
 	public int getThreePointGoal() {
@@ -174,7 +176,7 @@ public class PlayerSeasonRecord {
 	}
 
 	public double getThreePointGoalAvg() {
-		return threePointGoal / matchCount;
+		return (double)threePointGoal / matchCount;
 	}
 	
 	public int getThreePointAttempt() {
@@ -182,11 +184,11 @@ public class PlayerSeasonRecord {
 	}
 	
 	public double getThreePointAttemptAvg(){
-		return threePointAttempt / matchCount;
+		return (double)threePointAttempt / matchCount;
 	}
 	
 	public double getThreePointPercent() {
-		return threePointGoal / threePointAttempt;
+		return (double)threePointGoal / threePointAttempt;
 	}
 
 	public int getFreethrowGoal() {
@@ -194,7 +196,7 @@ public class PlayerSeasonRecord {
 	}
 	
 	public double getFreethrowGoalAvg() {
-		return freethrowGoal / matchCount;
+		return (double)freethrowGoal / matchCount;
 	}
 
 	public int getFreethrowAttempt() {
@@ -202,11 +204,11 @@ public class PlayerSeasonRecord {
 	}
 	
 	public double getFreethrowAttemptAvg() {
-		return freethrowAttempt / matchCount;
+		return (double)freethrowAttempt / matchCount;
 	}
 	
 	public double getFreethrowPercent() {
-		return freethrowGoal / freethrowAttempt;
+		return (double)freethrowGoal / freethrowAttempt;
 	}
 
 	public int getOffensiveRebound() {
@@ -214,7 +216,7 @@ public class PlayerSeasonRecord {
 	}
 	
 	public double getOffensiveReboundAvg() {
-		return offensiveRebound / matchCount;
+		return (double)offensiveRebound / matchCount;
 	}
 
 	public int getDefensiveRebound() {
@@ -222,7 +224,7 @@ public class PlayerSeasonRecord {
 	}
 
 	public double getDefensiveReboundAvg() {
-		return defensiveRebound / matchCount;
+		return (double)defensiveRebound / matchCount;
 	}
 	
 	public int getTotalRebound() {
@@ -230,7 +232,7 @@ public class PlayerSeasonRecord {
 	}
 	
 	public double getTotalReboundAvg() {
-		return totalRebound / matchCount;
+		return (double)totalRebound / matchCount;
 	}
 
 	public int getAssist() {
@@ -238,7 +240,7 @@ public class PlayerSeasonRecord {
 	}
 	
 	public double getAssistAvg() {
-		return assist / matchCount;
+		return (double)assist / matchCount;
 	}
 
 	public int getSteal() {
@@ -246,7 +248,7 @@ public class PlayerSeasonRecord {
 	}
 	
 	public double getStealAvg() {
-		return steal / matchCount;
+		return (double)steal / matchCount;
 	}
 
 	public int getBlock() {
@@ -254,7 +256,7 @@ public class PlayerSeasonRecord {
 	}
 	
 	public double getBlockAvg() {
-		return block / matchCount;
+		return (double)block / matchCount;
 	}
 
 	public int getTurnover() {
@@ -262,7 +264,7 @@ public class PlayerSeasonRecord {
 	}
 	
 	public double getTurnoverAvg() {
-		return turnover / matchCount;
+		return (double)turnover / matchCount;
 	}
 	
 	public int getFoul() {
@@ -270,7 +272,7 @@ public class PlayerSeasonRecord {
 	}
 
 	public double getFoulAvg() {
-		return foul / matchCount;
+		return (double)foul / matchCount;
 	}
 	
 	public int getPersonalGoal() {
@@ -278,7 +280,7 @@ public class PlayerSeasonRecord {
 	}
 	
 	public double getPersonalGoalAvg() {
-		return personalGoal/matchCount;
+		return (double)personalGoal/matchCount;
 	}
 	
 	public int getEfficiency(){
@@ -315,11 +317,11 @@ public class PlayerSeasonRecord {
 	public double getAssistPercent() {
 		return assist / (time / (teamTime / 5) * teamFieldGoal - fieldGoal); 
 	}
-	
+
 	public double getStealPercent() {
-		double oppoAttack = oppoFieldAttempt + 0.4 * oppoFreethrowAttempt - 1.07 *(oppoOffensiveRebound /
+		double oppoAttack = oppoFieldAttempt + 0.4 * oppoFreethrowAttempt - 1.07 *((double)oppoOffensiveRebound /
 				(oppoOffensiveRebound + teamDefensiveRebound) * (oppoFieldAttempt - oppoFieldGoal))
-				+ 1.07 * oppoFoul; 
+				+ 1.07 * oppoTurnover; 
 		return steal * (teamTime / 5) / time / oppoAttack; 
 	}
 	
@@ -336,8 +338,8 @@ public class PlayerSeasonRecord {
 	}
 	
 	public double getUsePercent() {
-		return (fieldAttempt + 0.44 * freethrowAttempt + foul) * (teamTime / 5) / time /
-				(teamFieldAttempt + 0.44 * teamFreethrowAttempt + teamFoul); 
+		return (fieldAttempt + 0.44 * freethrowAttempt + turnover) * (teamTime / 5) / time /
+				(teamFieldAttempt + 0.44 * teamFreethrowAttempt + teamTurnover); 
 	}
 	
 	public char getPosition() {
@@ -348,32 +350,12 @@ public class PlayerSeasonRecord {
 		return teamName;
 	}
 	
-	/** 两双以场均数据计算，如果只有一项超过10，返回0.如果有两项以上超过10，返回其和 */
 	public int getDoubleDouble() {
-		int count = 0;
-		int sum = 0;
-		if (getPersonalGoalAvg() >= 10) {
-			count ++;
-			sum += getPersonalGoal();
-		}
-		if (getTotalReboundAvg() >= 10) {
-			count ++;
-			sum += getTotalReboundAvg();
-		}
-		if (getAssistAvg() >= 10) {
-			count ++;
-			sum += getAssistAvg();
-		}
-		if (getStealAvg() >= 10) {
-			count ++;
-			sum += getStealAvg();
-		}
-		if (getBlockAvg() >= 10) {
-			count ++;
-			sum += getBlockAvg();
-		}
-		if (count < 2) return 0;
-		return sum;
+		return doubleDoubleCount;
+	}
+	
+	public double getDoubleDoubleAvg() {
+		return (double)doubleDoubleCount / matchCount;
 	}
 	
 	/** 三项相加 */

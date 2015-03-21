@@ -277,9 +277,7 @@ public class SeasonData implements SeasonDataService {
 				
 				if (homePoints > roadPoints) {
 					homeTeamRecord.wins ++;
-					roadTeamRecord.loses ++;
 				}else {
-					homeTeamRecord.loses ++;
 					roadTeamRecord.wins ++;
 				}
 			}
@@ -357,6 +355,18 @@ public class SeasonData implements SeasonDataService {
 		playerRecord.foul += lineInt[16];
 		playerRecord.personalGoal += lineInt[17];
 		playerRecord.matchCount ++;
+		
+		if (isDoubleDouble(lineInt)) playerRecord.doubleDoubleCount++;
+	}
+
+	private boolean isDoubleDouble(int[]lineInt) {
+		int doubleCount = 0;
+		if (lineInt[17] > 9) doubleCount ++;
+		if (lineInt[14] > 9) doubleCount ++;
+		if (lineInt[13] > 9) doubleCount ++;
+		if (lineInt[12] > 9) doubleCount ++;
+		if (lineInt[11] > 9) doubleCount ++;
+		return doubleCount > 1;
 	}
 	
 	/** 把球队本场比赛的数据累加到球员赛季数据中 */
@@ -364,7 +374,7 @@ public class SeasonData implements SeasonDataService {
 		playerRecord.oppoDefensiveRebound += oppoData[10];
 		playerRecord.oppoFieldAttempt += oppoData[4];
 		playerRecord.oppoFieldGoal += oppoData[3];
-		playerRecord.oppoFoul += oppoData[16];
+		playerRecord.oppoTurnover += oppoData[15];
 		playerRecord.oppoFreethrowAttempt += oppoData[8];
 		playerRecord.oppoOffensiveRebound += oppoData[9];
 		playerRecord.oppoThreePointAttempt += oppoData[6];
@@ -373,12 +383,89 @@ public class SeasonData implements SeasonDataService {
 		playerRecord.teamDefensiveRebound += teamData[10];
 		playerRecord.teamFieldAttempt += teamData[4];
 		playerRecord.teamFieldGoal += teamData[3];
-		playerRecord.teamFoul += teamData[16];
+		playerRecord.teamTurnover += teamData[15];
 		playerRecord.teamFreethrowAttempt += teamData[8];
 		playerRecord.teamOffensiveRebound += teamData[9];
 		playerRecord.teamTime += teamData[2];
 		playerRecord.teamTotalRebound += teamData[11];
+		
+		/**
+		 * PlayerVO [name=Al Horfor, appearance=29, starting=29, playTime=57464, hit=238, shot=420, 
+		 * thirdHit=4, thirdshot=11, freeHit=58, freeshot=85, offensiveRebound=66, defensiveRebound=178, 
+		 * totalRebound=244, assist=76, steal=27, block=44, miss=64, foul=56, score=538, 
+		 * hitRate=0.5666666666666667, thirdHitRate=0.36363636363636365, freeHitRate=0.6823529411764706,
+		 *  efficiency=656.0, gmScEfficiency=452.6, realHitRate=0.5881066899868824, 
+		 *  shotEfficiency=0.5714285714285714, reboundRate=0.14631181900575907, 
+		 *  offensiveReboundRate=0.17100804589319138, defensiveReboundRate=0.1388754086790601, 
+		 *  assistRate=0.14363234424966495, stealRate=0.014177970173000183, blockRate=0.035265161673555014,
+		 *   missRate=0.12539184952978058, useRate=0.24769325338861903, towPairs=9.0]
+		 * */
+		
+//		if (playerRecord.name.equals("Al-Farouq Aminu")) {
+//			System.out.println("___________________________");
+//			System.out.println(playerRecord.getTeam() + "  " +playerRecord.getPosition() + "  " + playerRecord.getFirstCount() +" "+
+//					playerRecord.getTime()+ "  " +playerRecord.getFieldGoal()+ "  " +playerRecord.getFieldAttempt());
+//			System.out.println(playerRecord.getThreePointGoal()+ "  " + playerRecord.getThreePointAttempt()+ "  " +
+//					playerRecord.getFreethrowGoal()+ "  " +playerRecord.getFreethrowAttempt()+ "  " );
+//			
+//			System.out.println(playerRecord.getOffensiveRebound()+ "  " + playerRecord.getDefensiveRebound()+ "  " +
+//					playerRecord.getTotalRebound()+ "  " + playerRecord.getAssist()+ "  " + playerRecord.getSteal());
+//			
+//			System.out.println(playerRecord.getBlock()+ "  " + playerRecord.getTurnover()+ "  " +playerRecord.getFoul()+ "  " +
+//					playerRecord.getPersonalGoal()+ "  " + playerRecord.getFieldPercent());
+//			
+//			System.out.println(playerRecord.getThreePointPercent()+ "  " + playerRecord.getFreethrowPercent()+ "  " +
+//					playerRecord.getEfficiency()+ "  " + playerRecord.getGmSc()+ "  " + playerRecord.getRealFieldPercent());
+//			
+//			System.out.println(playerRecord.getFieldEff()+ "  " + playerRecord.getTotalReboundPercent()+ "  " +
+//					playerRecord.getOffensiveReboundPercent()+ "  " + playerRecord.getDefensiveReboundPercent());
+//			
+//			System.out.println(playerRecord.getAssistPercent()+ "  " + playerRecord.getStealPercent()+ "  " +playerRecord.getBlockPercent()+ "  " +
+//					playerRecord.getTurnOverPercent()+ "  " + playerRecord.getUsePercent()+ "  " +playerRecord.getDoubleDouble());}
 	}
+	
+	public static void main(String[]args){
+		new SeasonData();
+//		TeamSeasonRecord record = SeasonData.teamRecords.get("CHI");
+//		System.out.println(record.getMatchCount() + "  " + record.getFieldGoal() + "  " + record.getFieldAttempt() + "  " + 
+//		record.getThreePointGoal() + "  " + record.getThreePointAttempt() + "  " + record.getFreethrowGoal() + "  " + record.getFreethrowAttempt());
+//		System.out.println(record.getOffensiveRebound() + "  " + record.getDefensiveRebound() + "  " + record.getTotalRebound() + "  " + 
+//		record.getAssist() + "  " + record.getSteal() + "  " + record.getBlock() + "  " + record.getTurnover() + "  " + record.getFoul() + "  " + record.getTeamGoal());
+//		System.out.println(record.getFieldPercent() + "  " + record.getThreePointPercent() + "  " + record.getFreeThrowPercent() + "  " );
+//		System.out.println(record.getWinning() + "  " + record.getOffensiveRound() + "  " + record.getOffensiveEff() + "  " + 
+//		record.getDefensiveRound() + "  " +record.getDefensiveEff());
+//		System.out.println(record.getOffensiveReboundEff()+ "  " +record.getDefensiveReboundEff()+ "  " +record.getStealEff()+ "  " +record.getAssistEff());
+	}
+	/**
+	 * TeamVO [fullName=Bulls, abbreviation=CHI, location=Chicago, division=E, 
+	 * zone=Central, home=United Center, setupTime=1966, appearance=82, hit=2829, 
+	 * shot=6544, thirdHit=506, thirdshot=1450, freeHit=1480, freeshot=1900, 
+	 * offensiveRebound=933, defensiveRebound=2671, totalRebound=3604, assist=1851, 
+	 * steal=592, block=421, miss=1144, foul=1556, score=7680, hitRate=0.4323044009779951, 
+	 * thirdHitRate=0.3489655172413793, freeHitRate=0.7789473684210526, 
+	 * 
+	 * winRate=0.5853658536585366, offensiveRound=7447.135187991839, 
+	 * offensiveEfficiency=103.1269045898837, defensiveRound=7496.849347826086, 
+	 * defensiveEfficiency=100.41551658208188, offensiveReboundEfficiency=0.2719323812299621, 
+	 * defensiveReboundEfficiency=0.7540937323546019, stealEfficiency=7.896650613256173, 
+	 * assistEfficiency=24.855195364046185]
+	 * 
+	 * */
+	/**
+	 * PlayerVO [teamFullName=Pelicans, teamAbbreviation=NOP, division=W, zone=Southwest,
+	 *  name=Al-Farouq Aminu, number=0, position=F, height=6英尺9英寸, weight=215, 
+	 *   age=23, exp=3, school=Wake Forest, appearance=80, starting=65, 
+	 *  playTime=122127, hit=231, shot=490, thirdHit=12, thirdshot=47, freeHit=91, freeshot=137,
+	 *   
+	 *  offensiveRebound=129, defensiveRebound=366, totalRebound=495, assist=114, steal=81, 
+	 *  block=38, miss=87, foul=147, score=565, hitRate=0.4714285714285714, 
+	 *  thirdHitRate=0.2553191489361702, freeHitRate=0.6642335766423357, efficiency=901.0, 
+	 *  gmScEfficiency=537.7, realHitRate=0.5133750090862834, shotEfficiency=0.48367346938775513, 
+	 *  reboundRate=0.1414083149604877, offensiveReboundRate=0.1389417693336824,
+	 *   defensiveReboundRate=0.14229867530857482, assistRate=0.08408738734094613, 
+	 *   stealRate=0.18031481670854213, blockRate=0.015645510018927236,
+	 *    missRate=0.1473876804228502, useRate=0.14351428056608692, towPairs=5.0]
+	 * */
 	
 	private void teamAccumulate(TeamSeasonRecord teamRecord, int [] teamData, int [] oppoData){
 		

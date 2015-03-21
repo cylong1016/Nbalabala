@@ -185,14 +185,24 @@ public enum TeamSortBasis {
 		WINNING,
 		
 		/**
+		 * 球队防守回合
+		 */
+		DEFENSIVE_ROUND,
+		
+		/**
+		 * 球队平均防守回合
+		 */
+		DEFENSIVE_ROUND_AVG,
+		
+		/**
 		 * 球队进攻回合
 		 */
-		ROUND,
+		OFFENSIVE_ROUND,
 		
 		/**
 		 * 球队平均进攻回合
 		 */
-		ROUND_AVG,
+		OFFENSIVE_ROUND_AVG,
 		
 		/**
 		 * 球队进攻效率

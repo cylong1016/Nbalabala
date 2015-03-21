@@ -60,7 +60,7 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService{
 		case DOUBLE_DOUBLE:
 			 comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return p1.getDoubleDouble() - p2.getDoubleDouble() < 0 ? -1 : 1;
+					return p1.getDoubleDouble() - p2.getDoubleDouble();
 				}
 			};
 			Collections.sort(players, comparator);
@@ -187,7 +187,7 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService{
 		case TIME:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getTime() - p2.getTime());
+					return factor * (p1.getTime() - p2.getTime()) < 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -558,6 +558,22 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService{
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
 					return factor * (p1.getTimeAvg() - p2.getTimeAvg()) < 0 ? -1 : 1;
+				}
+			};
+			break;
+			
+		case DOUBLE_DOUBLE:
+			comparator = new Comparator<PlayerSeasonRecord>() {
+				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
+					return factor * (p1.getDoubleDouble() - p2.getDoubleDouble());
+				}
+			};
+			break;
+			
+		case DOUBLE_DOUBLE_AVG:
+			comparator = new Comparator<PlayerSeasonRecord>() {
+				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
+					return factor * (p1.getDoubleDoubleAvg() - p2.getDoubleDoubleAvg()) < 0 ? -1 : 1;
 				}
 			};
 			break;

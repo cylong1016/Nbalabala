@@ -358,18 +358,18 @@ public class TeamSeasonAnalysis implements TeamSeasonBLService{
 			};
 			break;
 
-		case ROUND:
+		case OFFENSIVE_ROUND:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getRound()- t2.getRound())< 0 ? -1 : 1;
+					return factor * (t1.getOffensiveRound()- t2.getOffensiveRound())< 0 ? -1 : 1;
 				}
 			};
 			break;
 
-		case ROUND_AVG:
+		case OFFENSIVE_ROUND_AVG:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getRoundAvg() - t2.getRoundAvg())< 0 ? -1 : 1;
+					return factor * (t1.getOffensiveRoundAvg() - t2.getOffensiveRoundAvg())< 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -378,6 +378,22 @@ public class TeamSeasonAnalysis implements TeamSeasonBLService{
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
 					return factor * (t1.getOffensiveEff() - t2.getOffensiveEff())< 0 ? -1 : 1;
+				}
+			};
+			break;
+			
+		case DEFENSIVE_ROUND:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getDefensiveRound()- t2.getDefensiveRound())< 0 ? -1 : 1;
+				}
+			};
+			break;
+
+		case DEFENSIVE_ROUND_AVG:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getDefensiveRoundAvg() - t2.getDefensiveRoundAvg())< 0 ? -1 : 1;
 				}
 			};
 			break;

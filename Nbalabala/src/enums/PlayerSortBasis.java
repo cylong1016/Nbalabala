@@ -261,5 +261,10 @@ public enum PlayerSortBasis {
 	 * 使用率
 	 */
 	USE_PERCENT,
+	
+	/**两双和场均两双*/
+	DOUBLE_DOUBLE,
+	
+	DOUBLE_DOUBLE_AVG
 
 }
