@@ -265,6 +265,10 @@ public enum PlayerSortBasis {
 	/**两双和场均两双*/
 	DOUBLE_DOUBLE,
 	
-	DOUBLE_DOUBLE_AVG
+	DOUBLE_DOUBLE_AVG,
+	
+	SCORE_REBOUND_ASSIST,
+	
+	SCORE_REBOUND_ASSIST_AVG
 
 }

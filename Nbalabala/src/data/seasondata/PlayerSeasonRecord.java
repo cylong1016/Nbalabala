@@ -75,7 +75,7 @@ public class PlayerSeasonRecord {
 	int foul;
 	
 	/** 个人得分 */
-	int personalGoal;
+	int score;
 	
 	/** 两双次数 */
 	int doubleDoubleCount;
@@ -130,6 +130,10 @@ public class PlayerSeasonRecord {
 	public String getName() {
 		return name;
 	}
+	
+	public String getTeam() {
+		return teamName;
+	}
 
 	public int getMatchCount() {
 		return matchCount;
@@ -142,15 +146,21 @@ public class PlayerSeasonRecord {
 	public double getFirstCountAvg() {
 		return (double)firstCount / matchCount;
 	}
-
-	public double getTime() {
-		return time;
+	
+	public String getTime() {
+		int timeInt = (int)time;
+		int minutes = timeInt / 60;
+		int seconds = timeInt % 60;
+		return minutes + ":" + seconds;
 	}
 	
-	public double getTimeAvg() {
-		return time / matchCount;
+	public String getTimeAvg() {
+		int timeInt = (int)(time / matchCount);
+		int minutes = timeInt / 60;
+		int seconds = timeInt % 60;
+		return minutes + ":" + seconds;
 	}
-
+	
 	public int getFieldGoal() {
 		return fieldGoal;
 	}
@@ -275,36 +285,33 @@ public class PlayerSeasonRecord {
 		return (double)foul / matchCount;
 	}
 	
-	public int getPersonalGoal() {
-		return personalGoal;
+	public int getScore() {
+		return score;
 	}
 	
-	public double getPersonalGoalAvg() {
-		return (double)personalGoal/matchCount;
+	public double getScoreAvg() {
+		return (double)score/matchCount;
 	}
 	
 	public int getEfficiency(){
-		return personalGoal + totalRebound + assist + steal + block - fieldAttempt + fieldGoal 
+		return score + totalRebound + assist + steal + block - fieldAttempt + fieldGoal 
 				- freethrowAttempt + freethrowGoal - turnover;
 	}
 	
 	public double getGmSc(){
-		return personalGoal + 0.4 * fieldGoal - 0.7 * fieldAttempt - 0.4 * (freethrowAttempt - 
+		return score + 0.4 * fieldGoal - 0.7 * fieldAttempt - 0.4 * (freethrowAttempt - 
 				freethrowGoal) + 0.7 * offensiveRebound + 0.3 * defensiveRebound + 
 				steal + 0.7 * assist + 0.7 * block - 0.4 * foul - turnover; 
 	}
 	
 	public double getRealFieldPercent() {
-		return personalGoal / (2 * (fieldAttempt + 0.44 * freethrowAttempt)); 
+		return score / (2 * (fieldAttempt + 0.44 * freethrowAttempt)); 
 	}
 	
 	public double getFieldEff() {
 		return (fieldGoal + 0.5 * threePointGoal) / fieldAttempt;
 	}
 	
-	public double getTotalReboundPercent() {
-		return totalRebound * (teamTime / 5) / time / (teamTotalRebound + oppoTotalRebound);
-	}
 	
 	public double getOffensiveReboundPercent() {
 		return offensiveRebound * (teamTime / 5) / time / (teamOffensiveRebound + oppoOffensiveRebound);
@@ -312,6 +319,10 @@ public class PlayerSeasonRecord {
 	
 	public double getDefensiveReboundPercent() {
 		return defensiveRebound * (teamTime / 5) / time / (teamDefensiveRebound + oppoDefensiveRebound);
+	}
+	
+	public double getTotalReboundPercent() {
+		return totalRebound * (teamTime / 5) / time / (teamTotalRebound + oppoTotalRebound);
 	}
 	
 	public double getAssistPercent() {
@@ -346,9 +357,6 @@ public class PlayerSeasonRecord {
 		return position;
 	}
 	
-	public String getTeam() {
-		return teamName;
-	}
 	
 	public int getDoubleDouble() {
 		return doubleDoubleCount;
@@ -360,6 +368,18 @@ public class PlayerSeasonRecord {
 	
 	/** 三项相加 */
 	public int getScoreReboundAssist() {
-		return personalGoal + totalRebound + assist;
+		return score + totalRebound + assist;
+	}
+	
+	public double getScoreReboundAssistAvg() {
+		return (double)getScoreReboundAssist() / matchCount;
+	}
+	
+	public double getTimeDouble() {
+		return time;
+	}
+	
+	public double getTimeDoubleAvg() {
+		return time / matchCount;
 	}
 }

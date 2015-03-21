@@ -286,7 +286,7 @@ public class TeamSorter {
 		case SCORE:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getTeamGoal()- t2.getTeamGoal());
+					return factor * (t1.getScore()- t2.getScore());
 				}
 			};
 			break;
@@ -294,7 +294,7 @@ public class TeamSorter {
 		case SCORE_AVG:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getTeamGoalAvg()- t2.getTeamGoalAvg())< 0 ? -1 : 1;
+					return factor * (t1.getScoreAvg()- t2.getScoreAvg())< 0 ? -1 : 1;
 				}
 			};
 			break;
