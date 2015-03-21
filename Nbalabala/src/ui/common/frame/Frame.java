@@ -120,7 +120,7 @@ public class Frame extends JFrame {
 	}
 
 	/**
-	 * 设置为相应操作系统风格
+	 * 设置为windows操作系统风格
 	 * @author cylong
 	 */
 	private void setOSStyle() {
@@ -129,13 +129,6 @@ public class Frame extends JFrame {
 		if (osName.contains("Windows")) {
 			try {
 				String lookAndfeel = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
-				UIManager.setLookAndFeel(lookAndfeel);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (osName.contains("Mac")) {
-			try {
-				String lookAndfeel = "com.sun.java.swing.plaf.mac.MacLookAndFeel";
 				UIManager.setLookAndFeel(lookAndfeel);
 			} catch (Exception e) {
 				e.printStackTrace();
