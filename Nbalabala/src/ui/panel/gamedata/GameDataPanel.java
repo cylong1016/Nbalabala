@@ -5,6 +5,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JScrollPane;
+
 import ui.DateChooser;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
@@ -46,12 +48,24 @@ public class GameDataPanel extends BottomPanel {
 			"CHA", "MIA", "ORL", "WAS", "GSW", "LAC", "LAL", "PHX", "SAC", "DEN", "MIN", "OKC", "POR", "UTA",
 			"DAL", "HOU", "MEM", "NOP", "SAS" };
 
+	/** 下拉框的坐标 宽高 */
 	int box1X = 629, box2X = 818, box1Y = 44, box2Y = 80, boxWidth = 153, boxHeight = 30;
-
+	int teamY_1=280,teamY_2=308,inter=54;
+	int teamX_1=123,score_1=249,score_2=305,score_3=361,score_4=417,
+			addTime_1=478,addTime_2=562,addTime_3=646,score=730;
+	/** 技术统计 */
+	int analyX=825,analyY=293;
+	
 	MatchQueryBLService matchQuery = new MatchQuery();
 	DateChooser dateChooser;
 	MainController controller;
 	ArrayList<MatchProfileVO> matchProfile;
+	/** 画线 */
+	ImgButton[] lineImg;
+	/** 显示数据的panel */
+	DataPanel dataPanel;
+	int dataPanelX = 95,dataPanelY=276,dataPanelWidth=822,dataPanelHeight=253;
+	JScrollPane scroll;
 
 	/**
 	 * @param url
@@ -63,9 +77,19 @@ public class GameDataPanel extends BottomPanel {
 		this.controller = controller;
 		addDateChooser();
 		addConfirmBtn();
-		addDetail(0);
+		addDataPanel();
 	}
 
+	public void addDataPanel(){
+		dataPanel = new DataPanel(dataPanelX,dataPanelY,dataPanelWidth,dataPanelHeight);
+		scroll = new JScrollPane(dataPanel);
+		scroll.setBounds(dataPanelX, dataPanelY, dataPanelWidth, dataPanelHeight);
+		scroll.setBorder(null);
+		scroll.setOpaque(false);
+		scroll.add(dataPanel);
+		this.add(scroll);
+	}
+	
 	public void addDetail(final int i){
 		GameButton detail = new GameButton(400,250,75,25,"详细信息");
 		this.add(detail);
@@ -92,16 +116,27 @@ public class GameDataPanel extends BottomPanel {
 				int team1 = box1.getSelectedIndex();
 				int team2 = box2.getSelectedIndex();
 				matchProfile = matchQuery.screenMatchByTeam(teamArr[team1], teamArr[team2]);
+				addLine(matchProfile.size());
 			}
 		});
 		confirmBtn2.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				Date date = dateChooser.getDate();
 				matchProfile = matchQuery.screenMatchByDate(date);
+				addLine(matchProfile.size());
 			}
 		});
 	}
 
+	public void addLine(int size){
+		lineImg = new ImgButton[size];
+		for(int i = 0;i<size;i++){
+		 lineImg[i]=new ImgButton(gameImgPath+"line.png",0,54*(i+1),gameImgPath+"line.png",gameImgPath+"line.png");
+		 scroll.add(lineImg[i]);
+		}
+		this.repaint();
+	}
+	
 	/**
 	 * 分析打了几节
 	 * @author lsy
