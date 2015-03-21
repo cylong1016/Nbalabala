@@ -1,4 +1,4 @@
-package bl.matchbl;
+package bl.matchquerybl;
 
 import java.util.ArrayList;
 import java.util.Calendar;

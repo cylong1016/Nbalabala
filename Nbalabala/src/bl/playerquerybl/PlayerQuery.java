@@ -1,4 +1,4 @@
-package bl.playerbl;
+package bl.playerquerybl;
 
 import java.awt.Image;
 import java.util.ArrayList;
@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import vo.PlayerDetailVO;
 import vo.PlayerMatchPerformanceVO;
 import vo.PlayerProfileVO;
-import bl.matchbl.MatchQuery;
-import bl.seasonbl.PlayerSeasonAnalysis;
+import bl.matchquerybl.MatchQuery;
+import bl.playerseasonbl.PlayerSeasonAnalysis;
 import blservice.PlayerQueryBLService;
 import data.playerdata.PlayerData;
 import data.seasondata.PlayerSeasonRecord;

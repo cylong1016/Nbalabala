@@ -1,4 +1,4 @@
-package bl.teambl;
+package bl.teamquerybl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,9 +10,9 @@ import dataservice.TeamDataService;
 import vo.PlayerProfileVO;
 import vo.TeamDetailVO;
 import vo.TeamProfileVO;
-import bl.playerbl.PlayerQuery;
-import bl.seasonbl.PlayerSeasonAnalysis;
-import bl.seasonbl.TeamSeasonAnalysis;
+import bl.playerquerybl.PlayerQuery;
+import bl.playerseasonbl.PlayerSeasonAnalysis;
+import bl.teamseasonbl.TeamSeasonAnalysis;
 import blservice.TeamQueryBLService;
 
 /**
