@@ -15,7 +15,7 @@ public class DataPanel extends Panel {
 	private static final long serialVersionUID = -5211868747379960305L;
 	
 	public DataPanel(int x,int y,int width,int height) {
-		this.setLocation(x, y);
+		this.setBounds(x, y, width, height);
 		this.setPreferredSize(new Dimension(width, height));
 	}
 }

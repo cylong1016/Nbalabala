@@ -14,6 +14,8 @@ import ui.common.button.TextButton;
  */
 public class GameButton extends TextButton{
 
+	/** serialVersionUID */
+	private static final long serialVersionUID = 2368672076114330760L;
 	GameButton current;
 	public GameButton(int x, int y, int width, int height, String text) {
 		super(x, y, width, height, text);
