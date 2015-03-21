@@ -27,6 +27,9 @@ public class TeamPlayerPanel extends TeamSeasonPanel{
 	public TeamPlayerPanel(MainController controller, String url,TeamButton teamButton) {
 		super(controller, url,teamButton);
 		this.teamButton = teamButton;
+		TeamDetailVO teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
+		ArrayList<PlayerProfileVO> players = teamDetail.getPlayers();
+		//TODO 把球员信息分解下放到表格里~
 	}
 	
 	public void addListener(){
@@ -41,9 +44,7 @@ public class TeamPlayerPanel extends TeamSeasonPanel{
 			 if(e.getSource() == button[0]){
 				 controller.toTeamSeasonPanel(TeamPlayerPanel.this,teamButton);
 			 }else if(e.getSource() == button[1]){
-				 TeamDetailVO teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
-				 ArrayList<PlayerProfileVO> players = teamDetail.getPlayers();
-				 //TODO 把球员信息分解下放到表格里~
+				 return;
 			 }else if(e.getSource() == button[2]){
 				 controller.toTeamGamePanel(TeamPlayerPanel.this,teamButton);
 			 }

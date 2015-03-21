@@ -1,5 +1,7 @@
 package ui.controller;
 
+import javax.swing.JPanel;
+
 import ui.UIConfig;
 import ui.common.frame.Frame;
 import ui.common.panel.Panel;
@@ -155,6 +157,18 @@ public class MainController {
 		frame.remove(panel);
 		teamPlayerPanel = new TeamPlayerPanel(this,UIConfig.IMG_PATH + "teams/teamPlayersBG.png",button);
 		frame.setPanel(teamPlayerPanel);
+	}
+	
+	/**
+	 * 添加日期选择器
+	 * @param panel
+	 * @author lsy
+	 * @version 2015年3月21日  下午1:53:17
+	 */
+	public void addDateChooserPanel(JPanel panel){
+		panel.setVisible(true);
+		panel.setBounds(722, 280, 153,30);
+		frame.add(panel);
 	}
 
 }

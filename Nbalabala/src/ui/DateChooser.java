@@ -53,7 +53,7 @@ import javax.swing.event.AncestorListener;
 @SuppressWarnings("serial")
 public class DateChooser extends JPanel{
 	
-	private static final Font DATE_CHOOSER_FONT = UIConfig.FONT;
+	private static final Font DATE_CHOOSER_FONT = new Font("微软雅黑",1,17);
 	
 	
     private Date initDate;

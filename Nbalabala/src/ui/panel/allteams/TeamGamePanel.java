@@ -3,10 +3,16 @@ package ui.panel.allteams;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Date;
 
+import ui.DateChooser;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.controller.MainController;
+import vo.MatchProfileVO;
+import bl.matchbl.MatchQuery;
+import blservice.MatchQueryBLService;
 
 /**
  * 球队赛季数据界面
@@ -19,15 +25,32 @@ public class TeamGamePanel extends TeamSeasonPanel{
 	private static final long serialVersionUID = 5247981003029326464L;
 	ImgButton imgButton;
 	String url = UIConfig.IMG_PATH+"teams/";
+	MainController controller;
+	DateChooser dateChooser;
+	MatchQueryBLService matchQuery = new MatchQuery();
 	
 	public TeamGamePanel(MainController controller, String url,TeamButton teamButton) {
 		super(controller, url, teamButton);
 		addFindButton();
+		this.controller = controller;
+		addDateChooser();
+	}
+	
+	public void addDateChooser(){
+		dateChooser = new DateChooser();
+		controller.addDateChooserPanel(dateChooser);
 	}
 	
 	public void addFindButton(){
 		 imgButton = new ImgButton(url+"search.png",893,250,url+"searchOn.png",url+"searchClick.png");
 		 this.add(imgButton);
+		 imgButton.addMouseListener(new MouseAdapter(){
+			 public void mousePressed(MouseEvent e) {
+				 Date date = dateChooser.getDate();
+				 ArrayList<MatchProfileVO> matchProfile = matchQuery.screenMatchByDate(date);
+				 //TODO setTable
+			 }
+		 });
 	}
 	
 	public void setEffect() {
@@ -49,7 +72,7 @@ public class TeamGamePanel extends TeamSeasonPanel{
 			 }else if(e.getSource() == button[1]){
 				 controller.toTeamPlayerPanel(TeamGamePanel.this,teamButton);
 			 }else if(e.getSource() == button[2]){
-				 //TODO
+				 return;
 			 }
 		 }
 	}

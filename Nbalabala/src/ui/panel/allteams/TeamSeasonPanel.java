@@ -35,6 +35,8 @@ public class TeamSeasonPanel extends BottomPanel{
 		addListener();
 		this.controller = controller;
 		this.teamButton = teamButton;
+//		TeamDetailVO teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
+		//TODO 设置表格
 	}
 	
 	public void setButton(){
@@ -59,8 +61,7 @@ public class TeamSeasonPanel extends BottomPanel{
 	class MouListener extends MouseAdapter{
 		 public void mousePressed(MouseEvent e) {
 			 if(e.getSource() == button[0]){
-				 TeamDetailVO teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
-				 //TODO 设置表格
+				 return;
 			 }else if(e.getSource() == button[1]){
 				 controller.toTeamPlayerPanel(TeamSeasonPanel.this,teamButton);
 			 }else if(e.getSource() == button[2]){
