@@ -278,4 +278,12 @@ public class TeamSeasonRecord {
 	public double getAssistEff() {
 		return assist / getOffensiveRound() * 100;
 	}
+	
+	public int getWins(){
+		return wins;
+	}
+	
+	public int getLoses() {
+		return matchCount - wins;
+	}
 }

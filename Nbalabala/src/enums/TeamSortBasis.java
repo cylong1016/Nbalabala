@@ -233,4 +233,8 @@ public enum TeamSortBasis {
 		 * 球队助攻率
 		 */
 		ASSIST_EFF,
+		
+		WINS,
+		
+		LOSES
 }

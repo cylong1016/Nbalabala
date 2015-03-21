@@ -387,6 +387,22 @@ public class TeamSorter {
 			};
 			break;
 			
+		case WINS:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getWins() - t2.getWins());
+				}
+			};
+			break;
+			
+		case LOSES:
+			comparator = new Comparator<TeamSeasonRecord>() {
+				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
+					return factor * (t1.getLoses() - t2.getLoses());
+				}
+			};
+			break;
+			
 		default:
 			break;
 		}

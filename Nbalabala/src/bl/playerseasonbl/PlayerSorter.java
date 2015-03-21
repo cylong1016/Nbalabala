@@ -443,6 +443,7 @@ public class PlayerSorter {
 				}
 			};
 			break;
+			
 		default:
 			break;
 		}
