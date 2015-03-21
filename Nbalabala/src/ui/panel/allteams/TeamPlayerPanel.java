@@ -9,7 +9,7 @@ import ui.UIConfig;
 import ui.controller.MainController;
 import vo.PlayerProfileVO;
 import vo.TeamDetailVO;
-import bl.teambl.TeamQuery;
+import bl.teamquerybl.TeamQuery;
 import blservice.TeamQueryBLService;
 
 /**

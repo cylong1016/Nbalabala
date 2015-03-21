@@ -11,7 +11,7 @@ import ui.common.panel.BottomPanel;
 import ui.common.textField.MyTextField;
 import ui.controller.MainController;
 import vo.PlayerProfileVO;
-import bl.playerbl.PlayerQuery;
+import bl.playerquerybl.PlayerQuery;
 import blservice.PlayerQueryBLService;
 
 /**

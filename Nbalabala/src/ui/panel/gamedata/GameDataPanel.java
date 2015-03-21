@@ -12,7 +12,7 @@ import ui.common.comboBox.MyComboBox;
 import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
 import vo.MatchProfileVO;
-import bl.matchbl.MatchQuery;
+import bl.matchquerybl.MatchQuery;
 import blservice.MatchQueryBLService;
 
 /**

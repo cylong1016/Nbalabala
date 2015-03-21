@@ -1,7 +1,6 @@
 package vo;
-
-import utility.Constants;
 import enums.ScreenDivision;
+import utility.Constants;
 
 /**
  * 球队简况

@@ -13,7 +13,7 @@ import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
 import ui.panel.playerData.Line_4_Button;
-import bl.seasonbl.TeamSeasonAnalysis;
+import bl.teamseasonbl.TeamSeasonAnalysis;
 import blservice.TeamSeasonBLService;
 import enums.ScreenDivision;
 

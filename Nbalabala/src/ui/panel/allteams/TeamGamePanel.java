@@ -11,7 +11,7 @@ import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.controller.MainController;
 import vo.MatchProfileVO;
-import bl.matchbl.MatchQuery;
+import bl.matchquerybl.MatchQuery;
 import blservice.MatchQueryBLService;
 
 /**

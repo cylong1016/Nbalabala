@@ -9,7 +9,7 @@ import ui.common.button.ImgButton;
 import ui.common.button.TextButton;
 import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
-import bl.seasonbl.PlayerSeasonAnalysis;
+import bl.playerseasonbl.PlayerSeasonAnalysis;
 import blservice.PlayerSeasonBLService;
 import data.seasondata.PlayerSeasonRecord;
 import enums.Position;

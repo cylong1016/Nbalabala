@@ -7,8 +7,7 @@ import java.awt.event.MouseEvent;
 import ui.UIConfig;
 import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
-import vo.TeamDetailVO;
-import bl.teambl.TeamQuery;
+import bl.teamquerybl.TeamQuery;
 import blservice.TeamQueryBLService;
 
 /**
