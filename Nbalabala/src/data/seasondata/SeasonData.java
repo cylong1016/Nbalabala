@@ -353,7 +353,7 @@ public class SeasonData implements SeasonDataService {
 		playerRecord.block += lineInt[14];
 		playerRecord.turnover += lineInt[15];
 		playerRecord.foul += lineInt[16];
-		playerRecord.personalGoal += lineInt[17];
+		playerRecord.score += lineInt[17];
 		playerRecord.matchCount ++;
 		
 		if (isDoubleDouble(lineInt)) playerRecord.doubleDoubleCount++;
@@ -470,7 +470,7 @@ public class SeasonData implements SeasonDataService {
 	private void teamAccumulate(TeamSeasonRecord teamRecord, int [] teamData, int [] oppoData){
 		
 		teamRecord.matchCount ++;
-		teamRecord.teamGoal += teamData[17];
+		teamRecord.score += teamData[17];
 		teamRecord.fieldGoal += teamData[3];
 		teamRecord.fieldAttempt += teamData[4];
 		teamRecord.threePointGoal += teamData[5];

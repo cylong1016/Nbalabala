@@ -54,7 +54,7 @@ public class PlayerSorter {
 		case TIME:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getTime() - p2.getTime()) < 0 ? -1 : 1;
+					return factor * (p1.getTimeDouble() - p2.getTimeDouble()) < 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -367,7 +367,7 @@ public class PlayerSorter {
 		case SCORE:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getPersonalGoal() - p2.getPersonalGoal());
+					return factor * (p1.getScore() - p2.getScore());
 				}
 			};
 			break;
@@ -375,7 +375,7 @@ public class PlayerSorter {
 		case SCORE_AVG:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getPersonalGoalAvg() - p2.getPersonalGoalAvg()) < 0 ? -1 : 1;
+					return factor * (p1.getScoreAvg() - p2.getScoreAvg()) < 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -423,7 +423,7 @@ public class PlayerSorter {
 		case TIME_AVG:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getTimeAvg() - p2.getTimeAvg()) < 0 ? -1 : 1;
+					return factor * (p1.getTimeDoubleAvg() - p2.getTimeDoubleAvg()) < 0 ? -1 : 1;
 				}
 			};
 			break;
@@ -440,6 +440,22 @@ public class PlayerSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
 					return factor * (p1.getDoubleDoubleAvg() - p2.getDoubleDoubleAvg()) < 0 ? -1 : 1;
+				}
+			};
+			break;
+			
+		case SCORE_REBOUND_ASSIST:
+			comparator = new Comparator<PlayerSeasonRecord>() {
+				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
+					return factor * (p1.getScoreReboundAssist() - p2.getScoreReboundAssist());
+				}
+			};
+			break;
+			
+		case SCORE_REBOUND_ASSIST_AVG:
+			comparator = new Comparator<PlayerSeasonRecord>() {
+				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
+					return factor * (p1.getScoreReboundAssistAvg() - p2.getScoreReboundAssistAvg()) < 0 ? -1 : 1;
 				}
 			};
 			break;
