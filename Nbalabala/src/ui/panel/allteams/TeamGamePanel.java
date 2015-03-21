@@ -38,7 +38,7 @@ public class TeamGamePanel extends TeamSeasonPanel{
 	
 	public void addDateChooser(){
 		dateChooser = new DateChooser();
-		controller.addDateChooserPanel(dateChooser);
+		controller.addDateChooserPanel(this,dateChooser,722,248);
 	}
 	
 	public void addFindButton(){

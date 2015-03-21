@@ -165,10 +165,10 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月21日  下午1:53:17
 	 */
-	public void addDateChooserPanel(JPanel panel){
-		panel.setVisible(true);
-		panel.setBounds(722, 280, 153,30);
-		frame.add(panel);
+	public void addDateChooserPanel(JPanel panelBottom,JPanel panelAdd,int x,int y){
+		panelAdd.setVisible(true);
+		panelAdd.setBounds(x,y, 153,30);
+		panelBottom.add(panelAdd);
 	}
 
 }
