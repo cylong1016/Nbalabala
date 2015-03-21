@@ -1,5 +1,7 @@
 package ui.controller;
 
+import java.util.ArrayList;
+
 import javax.swing.JPanel;
 
 import ui.UIConfig;
@@ -12,9 +14,11 @@ import ui.panel.allteams.TeamGamePanel;
 import ui.panel.allteams.TeamPlayerPanel;
 import ui.panel.allteams.TeamSeasonPanel;
 import ui.panel.gamedata.GameDataPanel;
+import ui.panel.gamedata.GamePanel;
 import ui.panel.main.MainPanel;
 import ui.panel.playerData.PlayerDataPanel;
 import ui.panel.teamdata.TeamDataPanel;
+import vo.MatchProfileVO;
 
 /**
  * 界面跳转控制
@@ -43,6 +47,8 @@ public class MainController {
 	private TeamPlayerPanel teamPlayerPanel;
 	/** 球队比赛数据 */
 	private TeamGamePanel teamGamePanel;
+	/** 某场比赛数据 */
+	private GamePanel gamePanel;
 
 	/**
 	 * 初始化主界面
@@ -171,4 +177,14 @@ public class MainController {
 		panelBottom.add(panelAdd);
 	}
 
+	/**
+	 * 某场比赛数据图
+	 * @author lsy
+	 * @version 2015年3月21日  下午5:03:21
+	 */
+	public void toOneGamePanel(Panel panel,ArrayList<MatchProfileVO> matchProfile,int section){
+		frame.remove(panel);
+		gamePanel = new GamePanel(this,UIConfig.IMG_PATH+"game/gameBG.png",matchProfile,section);
+		frame.setPanel(gamePanel);
+	}
 }
