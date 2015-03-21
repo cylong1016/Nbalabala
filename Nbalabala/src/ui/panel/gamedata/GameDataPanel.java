@@ -11,7 +11,6 @@ import ui.common.button.ImgButton;
 import ui.common.comboBox.MyComboBox;
 import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
-import vo.MatchDetailVO;
 import vo.MatchProfileVO;
 import bl.matchbl.MatchQuery;
 import blservice.MatchQueryBLService;
@@ -29,7 +28,7 @@ public class GameDataPanel extends BottomPanel {
 	private String gameImgPath = UIConfig.IMG_PATH + "gameData/";
 	
 	/** 确认按钮 */
-	private ImgButton confirmBtn;
+	private ImgButton confirmBtn1,confirmBtn2;
 	/** 确认按钮图片路径 */
 	private String confirmPath = gameImgPath + "confirm.png";
 	/** 移动到确认按钮上的图片路径 */
@@ -62,15 +61,24 @@ public class GameDataPanel extends BottomPanel {
 	}
 	
 	public void addConfirmBtn(){
-		confirmBtn = new ImgButton(confirmPath, 917, 123, confirmClickPath, confirmOnPath);
-		this.add(confirmBtn);
-		confirmBtn.addMouseListener(new MouseAdapter(){
+		confirmBtn1 = new ImgButton(confirmPath, 917, 123, confirmClickPath, confirmOnPath);
+		confirmBtn2 =  new ImgButton(confirmPath, 450, box1Y, confirmClickPath, confirmOnPath);
+		this.add(confirmBtn1);
+		this.add(confirmBtn2);
+		confirmBtn1.addMouseListener(new MouseAdapter(){
 			 public void mousePressed(MouseEvent e) {
-				 Date date = dateChooser.getDate();
-				 String team1 = (String) box1.getSelectedItem();
-				 String team2 = (String) box2.getSelectedItem();
+				 int team1 =box1.getSelectedIndex();
+				 int team2 = box2.getSelectedIndex();
+				 ArrayList<MatchProfileVO> matchProfile = matchQuery.screenMatchByTeam(teamArr[team1],teamArr[team2]);
+				 //TODO 设置表格
 			 }
-
+		});
+		confirmBtn2.addMouseListener(new MouseAdapter(){
+			public void mousePressed(MouseEvent e) {
+				Date date = dateChooser.getDate();
+				ArrayList<MatchProfileVO> matchProfile =  matchQuery.screenMatchByDate(date);
+				//TODO 设置表格
+			}
 		});
 	}
 	
