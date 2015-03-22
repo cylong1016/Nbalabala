@@ -1,8 +1,6 @@
 package bl.playerseasonbl;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import data.seasondata.PlayerSeasonRecord;
 import enums.PlayerSortBasis;
@@ -18,16 +16,10 @@ public class PlayerScreener {
 	
 	public ArrayList<PlayerSeasonRecord> screen(ArrayList<PlayerSeasonRecord> players, 
 			ScreenBasis basis) {
-		Comparator<PlayerSeasonRecord> comparator = null;
 		PlayerSorter sorter = new PlayerSorter();
 		switch(basis){
 		case SCORE_REBOUND_ASSIST:
-			comparator = new Comparator<PlayerSeasonRecord>() {
-				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return p1.getScoreReboundAssist() - p2.getScoreReboundAssist();
-				}
-			};
-			Collections.sort(players, comparator);
+			sorter.sort(players, PlayerSortBasis.SCORE_REBOUND_ASSIST, SortOrder.DE);
 			break;
 		case REBOUND:
 			sorter.sort(players, PlayerSortBasis.TOTAL_REBOUND, SortOrder.DE);

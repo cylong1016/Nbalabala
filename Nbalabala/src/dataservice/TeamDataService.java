@@ -10,10 +10,10 @@ import enums.ScreenDivision;
  */
 public interface TeamDataService {
 
-	public abstract TeamProfileVO getTeamProfileByAbbr(String abbr);
+	public TeamProfileVO getTeamProfileByAbbr(String abbr);
 
-	public abstract ScreenDivision getAreaByAbbr(String abbr);
+	public ScreenDivision getAreaByAbbr(String abbr);
 
-	public abstract ScreenDivision getDivisionByAbbr(String abbr);
+	public ScreenDivision getDivisionByAbbr(String abbr);
 
 }

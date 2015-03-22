@@ -141,7 +141,7 @@ public class PlayerData implements PlayerDataService{
 	public ArrayList<PlayerProfileVO> getPlayerProfileByNames(ArrayList<String> names) {
 		ArrayList<PlayerProfileVO> result = new ArrayList<PlayerProfileVO>();
 		for (String name : names) {
-			result.add(players.get(name));
+			result.add(getPlayerProfileByName(name));
 		}
 		return result;
 	}

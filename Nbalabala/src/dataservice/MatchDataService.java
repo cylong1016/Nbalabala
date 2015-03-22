@@ -14,17 +14,17 @@ import vo.PlayerMatchPerformanceVO;
 public interface MatchDataService {
 
 	/** 根据赛季以及日期返回符合的比赛简报，season形如13-14,date形如01-01和12-12 */
-	public abstract ArrayList<MatchProfileVO> getMatchProfileBySeasonAndDate(
+	public ArrayList<MatchProfileVO> getMatchProfileBySeasonAndDate(
 			String season, String date);
 
 	/** 根据参赛队伍返回比赛简报，team形如ABC-DEF */
-	public abstract ArrayList<MatchProfileVO> getMatchProfileByTeam(String team);
+	public ArrayList<MatchProfileVO> getMatchProfileByTeam(String team);
 
 	/** 通过比赛文件名返回详情 */
-	public abstract MatchDetailVO getMatchDetailByFileName(String fileName);
+	public MatchDetailVO getMatchDetailByFileName(String fileName);
 
 	/** 通过运动员名字返回其全部比赛记录 */
-	public abstract ArrayList<PlayerMatchPerformanceVO> getMatchRecordByPlayerName(
+	public ArrayList<PlayerMatchPerformanceVO> getMatchRecordByPlayerName(
 			String playerName);
 
 }

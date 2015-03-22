@@ -101,6 +101,7 @@ public class GamePanel extends BottomPanel{
 	public void getScore(){
 			scoreAll = matchPro.getScore().split("-");//两支球队比赛总分
 			eachScore = matchPro.getEachSectionScore().split(";");
+
 			int eachlth=eachScore.length;
 			score1=new String[eachlth];
 			score2=new String[eachlth];
