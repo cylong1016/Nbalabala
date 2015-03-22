@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import ui.UIConfig;
 import ui.common.button.TextButton;
 
 /**

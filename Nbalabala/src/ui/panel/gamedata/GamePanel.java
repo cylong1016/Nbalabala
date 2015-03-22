@@ -1,6 +1,9 @@
 package ui.panel.gamedata;
 
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import ui.UIConfig;
 import ui.common.button.ImgButton;
@@ -8,7 +11,11 @@ import ui.common.label.ImgLabel;
 import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
+import ui.panel.allplayers.LetterButton;
 import vo.MatchProfileVO;
+import vo.TeamDetailVO;
+import bl.teamquerybl.TeamQuery;
+import blservice.TeamQueryBLService;
 
 /**
  * 某场比赛数据界面
@@ -50,17 +57,33 @@ public class GamePanel extends BottomPanel{
 	Font labelFont = new Font("微软雅黑",0,17);
 	String signurl = "NBAdata/teams/";
 	/** 球队队标 */
-	ImgLabel sign1,sing2;
+	ImgLabel sign1,sign2;
+	TeamQueryBLService teamQuery;
+	TeamDetailVO teamVO_1,teamVO_2;
+	MyLabel[] lb_1,lb_2;
 	
 	public GamePanel(MainController controller, String url,MatchProfileVO matchProfile,GameDataPanel gameData) {
 		super(controller, url);
 		this.gameData = gameData;
 		this.matchPro = matchProfile;
-		addTime();
+		teamQuery = new TeamQuery();
 		getScore();
 		getTeam();
+		getDetailVO();
 		addButton();
 		addLabel();
+		addTime();
+		addScore();
+	}
+	
+	/**
+	 * 获得详细的vo
+	 * @author lsy
+	 * @version 2015年3月22日  下午6:44:44
+	 */
+	public void getDetailVO(){
+		teamVO_1=teamQuery.getTeamDetailByAbbr(teamShort1);
+		teamVO_2=teamQuery.getTeamDetailByAbbr(teamShort2);
 	}
 	
 	public void addLabel(){
@@ -70,13 +93,14 @@ public class GamePanel extends BottomPanel{
 		teamLabel2.setFont(labelFont);
 		placeLabel1=new MyLabel(labelX,labelY_1,width,height,place1);
 		placeLabel2=new MyLabel(labelX,labelY_3,width,height,place2);
-		sign1=new ImgLabel(0,0,signurl+teamShort1+".svg");
-		System.out.println(signurl+teamShort1+".svg");
+		sign1=new ImgLabel(165,10,teamVO_1.getLogo());
+		sign2=new ImgLabel(165,95,teamVO_2.getLogo());
 		this.add(teamLabel1);
 		this.add(teamLabel2);
 		this.add(placeLabel1);
 		this.add(placeLabel2);
 		this.add(sign1);
+		this.add(sign2);
 	}
 	
 	public void addButton(){
@@ -84,6 +108,16 @@ public class GamePanel extends BottomPanel{
 		teamName2 = new GameDetailButton(teamX2,teamY,width,height,teamStr2);
 		this.add(teamName1);
 		this.add(teamName2);
+		teamName1.addMouseListener(new MouseAdapter(){
+			public void mousePressed(MouseEvent e) {
+				teamName2.back();
+			}
+		});
+		teamName2.addMouseListener(new MouseAdapter(){
+			public void mousePressed(MouseEvent e) {
+				teamName1.back();
+			}
+		});
 	}
 	
 	/**
@@ -112,8 +146,49 @@ public class GamePanel extends BottomPanel{
 		}
 	}
 	
+	/** 分数 */
+	int scoreX_1=355,scoreY=44,scoreY_2=120,inter=48;
+	int totalScoreX=579,totalScoreY_1=35,totalScoreY_2=116,totalInter=80;
+	int addX=565,addInterX=80;
+	int scoreWidth=40,scoreHeight=25;
 	public void addScore(){
-		
+		int lth=score1.length;
+		lb_1=new MyLabel[lth+1];
+		lb_2=new MyLabel[lth+1];
+		for(int i = 0;i<4;i++){
+			lb_1[i] = new MyLabel(scoreX_1+i*inter,scoreY,scoreWidth,scoreHeight,score1[i]);
+			lb_2[i] = new MyLabel(scoreX_1+i*inter,scoreY_2,scoreWidth,scoreHeight,score2[i]);
+			this.add(lb_1[i]);
+			this.add(lb_2[i]);
+			setRed(lb_1[i],lb_2[i]);
+		}
+		if(lth>4){
+		for(int i = 4;i<lth;i++){
+				lb_1[i]=new MyLabel(addX+(i-4)*80,scoreY,scoreWidth,scoreHeight,score1[i]);
+				lb_2[i]=new MyLabel(addX+(i-4)*80,scoreY_2,scoreWidth,scoreHeight,score2[i]);
+				this.add(lb_1[i]);
+				this.add(lb_2[i]);
+				setRed(lb_1[i],lb_2[i]);
+			}
+		}
+		lb_1[lth]=new MyLabel(totalScoreX+totalInter*(lth-4),scoreY,scoreWidth,scoreHeight,scoreAll[0]);
+		lb_2[lth]=new MyLabel(totalScoreX+totalInter*(lth-4),scoreY_2,scoreWidth,scoreHeight,scoreAll[1]);
+		Font all = new Font("微软雅黑",1,20);
+		lb_1[lth].setFont(all);
+		lb_2[lth].setFont(all);
+		setRed(lb_1[lth],lb_2[lth]);
+		this.add(lb_1[lth]);
+		this.add(lb_2[lth]);
+	}
+	
+	public void setRed(MyLabel l1,MyLabel l2){
+		if(Integer.parseInt(l1.text)>Integer.parseInt(l2.text)){
+			l1.setForeground(Color.red);
+		}else if(Integer.parseInt(l1.text)<Integer.parseInt(l2.text)){
+			l2.setForeground(Color.red);
+		}
+		else{
+		}
 	}
 	
 	/**

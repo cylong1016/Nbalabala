@@ -1,11 +1,16 @@
 package ui.panel.gamedata;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import ui.DateChooser;
 import ui.UIConfig;
@@ -85,11 +90,10 @@ public class GameDataPanel extends BottomPanel {
 
 	public void addDataPanel() {
 		dataPanel = new DataPanel(dataPanelX, dataPanelY, dataPanelWidth, dataPanelHeight);
-		scroll = new JScrollPane();
-		scroll.setBounds(dataPanelX, dataPanelY, dataPanelWidth, dataPanelHeight);
-		scroll.setBorder(null);
-		scroll.getViewport().add(dataPanel, null);
-		this.add(scroll);
+		dataPanel.setOpaque(true);
+		dataPanel.setBackground(Color.white);
+		dataPanel.setBorder(null);
+		this.add(dataPanel);
 		this.repaint();
 	}
 
@@ -132,7 +136,7 @@ public class GameDataPanel extends BottomPanel {
 		confirmBtn1.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				if(clickTime!=0){
-					dataPanel.remove(table);
+					dataPanel.removeAll();;
 				}
 				clickTime++;
 				int team1 = box1.getSelectedIndex();
@@ -147,7 +151,7 @@ public class GameDataPanel extends BottomPanel {
 		confirmBtn2.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				if(clickTime!=0){
-					dataPanel.remove(table);
+					dataPanel.removeAll();
 				}
 				clickTime++;
 				Date date = dateChooser.getDate();
@@ -160,6 +164,9 @@ public class GameDataPanel extends BottomPanel {
 		});
 	}
 
+	public void paint(Graphics g){
+		super.paint(g);
+	}	
 	/** 两个队伍每节的比分 */
 	String[] score1 = {"0","0","0","0","0","0","0"};
 	String[] score2 = {"0","0","0","0","0","0","0"};
@@ -206,6 +213,8 @@ public class GameDataPanel extends BottomPanel {
 		}
 		for(int j =1;j<gameSum*2+1;j=j+2){
 			MatchProfileVO pro = matchProfile.get(j/2);
+			score1 = new String[]{"0","0","0","0","0","0","0"};
+			score2 = new String[]{"0","0","0","0","0","0","0"};
 			analyzeVO(pro);
 			rowData[j][8] = scoreAll[0];
 			rowData[j+1][8]=scoreAll[1];
@@ -218,10 +227,51 @@ public class GameDataPanel extends BottomPanel {
 	public void addTable(){
 		table = new BottomTable(rowData,columns);
 		table.setRowHeight(32);
-		table.setBounds(0, 0, 730, 292);
-		table.setBorder(null);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); 
+		table.setBounds(0, 0, 730, 298);
+		makeFace(table);
 		dataPanel.add(table);
+		this.repaint();
 	}
+	
+	/**
+	 * 设置table不同行的不同颜色
+	 * @param table
+	 * @author lsy
+	 * @version 2015年3月22日  下午8:41:14
+	 */
+	private void makeFace(JTable table) {
+
+	    try {
+	      DefaultTableCellRenderer tcr = new DefaultTableCellRenderer() {
+	        /** serialVersionUID */
+			private static final long serialVersionUID = -4145147988893713337L;
+
+			public Component getTableCellRendererComponent(JTable table,
+	            Object value, boolean isSelected, boolean hasFocus,
+	            int row, int column) {
+	        		if (row== 0||(row%4==3||row%4==0)){
+	        			
+	        			setBackground(UIConfig.BUTTON_COLOR);
+	        			setForeground(Color.white);
+	        		}
+	        		else {
+	        			setBackground(Color.white);
+	        			setForeground(Color.black);
+	        		}
+	          return super.getTableCellRendererComponent(table, value,
+	              isSelected, hasFocus, row, column);
+	        }
+	      };
+	      for (int i = 0; i < table.getColumnCount(); i++) {
+	        table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
+	      }
+	    }
+	    catch (Exception ex) {
+	      ex.printStackTrace();
+	    }
+
+	  }
 	
 	public void addScore(int line){
 		for(int i = 0;i<7;i++){
