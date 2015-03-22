@@ -4,17 +4,23 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.label.ImgLabel;
 import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
+import ui.common.table.BottomScrollPane;
+import ui.common.table.BottomTable;
 import ui.controller.MainController;
-import ui.panel.allplayers.LetterButton;
+import vo.MatchDetailVO;
+import vo.MatchPlayerVO;
 import vo.MatchProfileVO;
 import vo.TeamDetailVO;
+import bl.matchquerybl.MatchQuery;
 import bl.teamquerybl.TeamQuery;
+import blservice.MatchQueryBLService;
 import blservice.TeamQueryBLService;
 
 /**
@@ -32,6 +38,7 @@ public class GamePanel extends BottomPanel{
 	ImgButton timeImg;
 	GameDataPanel gameData;
 	MatchProfileVO matchPro;
+	MatchQueryBLService matchQuery;
 	GameDetailButton teamName1,teamName2;
 	int teamX1=736,teamX2=828,teamY=190,width=74,height=24;
 	
@@ -60,6 +67,7 @@ public class GamePanel extends BottomPanel{
 	ImgLabel sign1,sign2;
 	TeamQueryBLService teamQuery;
 	TeamDetailVO teamVO_1,teamVO_2;
+	MatchDetailVO matchVO;
 	MyLabel[] lb_1,lb_2;
 	
 	public GamePanel(MainController controller, String url,MatchProfileVO matchProfile,GameDataPanel gameData) {
@@ -67,6 +75,7 @@ public class GamePanel extends BottomPanel{
 		this.gameData = gameData;
 		this.matchPro = matchProfile;
 		teamQuery = new TeamQuery();
+		matchQuery = new MatchQuery();
 		getScore();
 		getTeam();
 		getDetailVO();
@@ -74,6 +83,7 @@ public class GamePanel extends BottomPanel{
 		addLabel();
 		addTime();
 		addScore();
+		initSetTabel();
 	}
 	
 	/**
@@ -84,6 +94,12 @@ public class GamePanel extends BottomPanel{
 	public void getDetailVO(){
 		teamVO_1=teamQuery.getTeamDetailByAbbr(teamShort1);
 		teamVO_2=teamQuery.getTeamDetailByAbbr(teamShort2);
+	}
+	
+	public void initSetTabel(){
+		matchVO =  matchQuery.getMatchDetail(matchPro.getSeason(), matchPro.getTime(),teamShort1,teamShort2);
+		ArrayList<MatchPlayerVO> homePlayers=matchVO.getHomePlayers();
+		setTable(homePlayers);
 	}
 	
 	public void addLabel(){
@@ -105,19 +121,65 @@ public class GamePanel extends BottomPanel{
 	
 	public void addButton(){
 		teamName1 = new GameDetailButton(teamX1,teamY,width,height,teamStr1);
+		teamName1.setOpaque(true);
+		teamName1.setBackground(UIConfig.BUTTON_COLOR);
+		teamName1.setForeground(Color.white);
 		teamName2 = new GameDetailButton(teamX2,teamY,width,height,teamStr2);
 		this.add(teamName1);
 		this.add(teamName2);
 		teamName1.addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e) {
 				teamName2.back();
+			ArrayList<MatchPlayerVO> homePlayers=matchVO.getHomePlayers();
+			setTable(homePlayers);
 			}
 		});
 		teamName2.addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e) {
 				teamName1.back();
+				ArrayList<MatchPlayerVO> roadPlayers=matchVO.getRoadPlayers();
+				setTable(roadPlayers);
 			}
 		});
+	}
+	
+	String[] columns;
+	String[][] rowData;
+//	BottomTable table=new BottomTable(rowData,columns);
+	public void setTable(ArrayList<MatchPlayerVO> players){
+		columns = new String[]{"球员名","位置","在场时间","投篮命中数","投篮出手数","三分命中数","三分出手数",
+				"罚球命中数","罚球出手数","进攻篮板数","防守篮板数","总篮板数","助攻数","抢断数",
+				"盖帽数","失误数","犯规数","个人得分"};
+		int size=players.size();
+		int lth=columns.length;
+		rowData = new String[size][lth];
+		for(int i = 0;i<size;i++){
+			MatchPlayerVO mpVO = players.get(i);
+				rowData[i][0]=mpVO.getName();
+				rowData[i][1]=mpVO.getPosition();
+				rowData[i][2]=mpVO.getTime();
+				rowData[i][3]=mpVO.getFieldGoal()+"";
+				rowData[i][4]=mpVO.getFieldAttempt()+"";
+				rowData[i][5]=mpVO.getThreePointGoal()+"";
+				rowData[i][6]=mpVO.getThreePointAttempt()+"";
+				rowData[i][7]=mpVO.getFreethrowGoal()+"";
+				rowData[i][8]=mpVO.getFieldAttempt()+"";
+				rowData[i][9]=mpVO.getOffensiveRebound()+"";
+				rowData[i][10]=mpVO.getDefensiveRebound()+"";
+				rowData[i][11]=mpVO.getTotalRebound()+"";
+				rowData[i][12]=mpVO.getAssist()+"";
+				rowData[i][13]=mpVO.getSteal()+"";
+				rowData[i][14]=mpVO.getBlock()+"";
+				rowData[i][15]=mpVO.getTurnover()+"";
+				rowData[i][16]=mpVO.getFoul()+"";
+				rowData[i][17]=mpVO.getPersonalGoal()+"";
+		}
+		BottomTable table=new BottomTable(rowData,columns);
+		BottomScrollPane scroll = new BottomScrollPane(table);
+		scroll.setLocation(57, 239);
+		this.add(scroll);
+		
+		
 	}
 	
 	/**

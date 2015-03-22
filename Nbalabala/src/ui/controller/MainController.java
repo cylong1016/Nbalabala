@@ -1,7 +1,5 @@
 package ui.controller;
 
-import java.util.ArrayList;
-
 import javax.swing.JPanel;
 
 import ui.UIConfig;
