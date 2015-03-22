@@ -2,6 +2,7 @@ package ui.panel.gamedata;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -109,7 +110,7 @@ public class GameDataPanel extends BottomPanel {
 		int tableInter = 64;
 		detailImg = new GameDataButton[gameSum];
 		for (int i = 0; i < gameSum; i++) {
-			detailImg[i] = new GameDataButton(750, 55+i*tableInter, 75, 25, "技术统计");
+			detailImg[i] = new GameDataButton(700, 45+i*tableInter, 100, 40, "技术统计");
 			dataPanel.add(detailImg[i]);
 			final int temp=i;
 			detailImg[i].addMouseListener(new MouseAdapter(){
@@ -227,10 +228,10 @@ public class GameDataPanel extends BottomPanel {
 	public void addTable(){
 		table = new BottomTable(rowData,columns);
 		table.setRowHeight(32);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); 
-		table.setBounds(0, 0, 730, 298);
+		table.setBounds(0, 0, 670, 292);
 		makeFace(table);
 		dataPanel.add(table);
+		table.setBorder(null);
 		this.repaint();
 	}
 	

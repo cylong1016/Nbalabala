@@ -1,9 +1,11 @@
 package ui.panel.gamedata;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import ui.UIConfig;
 import ui.common.button.TextButton;
 
 /**
@@ -18,6 +20,10 @@ public class GameDataButton extends TextButton{
 	GameDataButton current;
 	public GameDataButton(int x, int y, int width, int height, String text) {
 		super(x, y, width, height, text);
+		this.setFont(new Font("微软雅黑",0,17));
+		this.setOpaque(true);
+		this.setBackground(UIConfig.BUTTON_COLOR);
+		this.setForeground(Color.white);
 	}
 
 	public void addListener(){
