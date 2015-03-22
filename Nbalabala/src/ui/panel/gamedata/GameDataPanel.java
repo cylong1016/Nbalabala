@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 
 import ui.DateChooser;
 import ui.UIConfig;
@@ -111,7 +110,7 @@ public class GameDataPanel extends BottomPanel {
 			final int temp=i;
 			detailImg[i].addMouseListener(new MouseAdapter(){
 				public void mousePressed(MouseEvent e) {
-					controller.toOneGamePanel(GameDataPanel.this,matchProfile,analyzeSection(matchProfile.get(temp)));
+					controller.toOneGamePanel(GameDataPanel.this,matchProfile.get(temp),GameDataPanel.this);
 				}
 			});
 			this.repaint();
@@ -124,6 +123,7 @@ public class GameDataPanel extends BottomPanel {
 	 * @author lsy
 	 * @version 2015年3月21日 下午4:29:48
 	 */
+	int clickTime=0;
 	public void addConfirmBtn() {
 		confirmBtn1 = new ImgButton(confirmPath, 917, 123, confirmClickPath, confirmOnPath);
 		confirmBtn2 = new ImgButton(confirmPath, 450, box1Y, confirmClickPath, confirmOnPath);
@@ -131,6 +131,10 @@ public class GameDataPanel extends BottomPanel {
 		this.add(confirmBtn2);
 		confirmBtn1.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
+				if(clickTime!=0){
+					dataPanel.remove(table);
+				}
+				clickTime++;
 				int team1 = box1.getSelectedIndex();
 				int team2 = box2.getSelectedIndex();
 				matchProfile = matchQuery.screenMatchByTeam(teamArr[team1], teamArr[team2]);
@@ -142,6 +146,10 @@ public class GameDataPanel extends BottomPanel {
 		});
 		confirmBtn2.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
+				if(clickTime!=0){
+					dataPanel.remove(table);
+				}
+				clickTime++;
 				Date date = dateChooser.getDate();
 				matchProfile = matchQuery.screenMatchByDate(date);
 				gameSum = matchProfile.size();
@@ -170,8 +178,6 @@ public class GameDataPanel extends BottomPanel {
 	 * @version 2015年3月22日  上午12:04:52
 	 */
 	public void analyzeVO(MatchProfileVO proVOArray){
-//		teamShort=proVOArray.getTime().split("-");//两支球队缩写
-//		teamLong = new String[]{match(teamShort[0]),match(teamShort[1])};//两支球队全称
 		scoreAll = proVOArray.getScore().split("-");//两支球队比赛总分
 		eachScore = proVOArray.getEachSectionScore().split(";");
 		int eachlth=eachScore.length;
@@ -182,9 +188,10 @@ public class GameDataPanel extends BottomPanel {
 		}
 		
 	}
+	
 	/** 表格内容 */
-	Object[][] rowData;
-	String []columns;
+	Object[][] rowData={};
+	String []columns={};
 	public void setTable(){
 		columns=new String[]{"","1","2","3","4","加时一","加时二","加时三","总分"};
 		rowData = new String[2*gameSum+1][columns.length];
@@ -207,7 +214,7 @@ public class GameDataPanel extends BottomPanel {
 		
 	}
 	
-	BottomTable table;
+	BottomTable table = new BottomTable(rowData,columns);
 	public void addTable(){
 		table = new BottomTable(rowData,columns);
 		table.setRowHeight(32);
