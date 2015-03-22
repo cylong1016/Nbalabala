@@ -62,7 +62,7 @@ public class GameDataPanel extends BottomPanel {
 	MainController controller;
 	ArrayList<MatchProfileVO> matchProfile;
 	/** 画线 */
-	GameButton[] detailImg;
+	GameDataButton[] detailImg;
 	/** 显示数据的panel */
 	DataPanel dataPanel;
 	int dataPanelX = 58, dataPanelY = 238, dataPanelWidth = 888, dataPanelHeight = 292;
@@ -103,9 +103,9 @@ public class GameDataPanel extends BottomPanel {
 	 */
 	public void addDetail(int gameSum) {
 		int tableInter = 64;
-		detailImg = new GameButton[gameSum];
+		detailImg = new GameDataButton[gameSum];
 		for (int i = 0; i < gameSum; i++) {
-			detailImg[i] = new GameButton(750, 55+i*tableInter, 75, 25, "技术统计");
+			detailImg[i] = new GameDataButton(750, 55+i*tableInter, 75, 25, "技术统计");
 			dataPanel.add(detailImg[i]);
 			final int temp=i;
 			detailImg[i].addMouseListener(new MouseAdapter(){

@@ -27,4 +27,6 @@ public class ImgButton extends JButton {
 		this.setRolloverIcon(imageIconStop);
 		this.setPressedIcon(imageIconPressOn);
 	}
+	
+	
 }
