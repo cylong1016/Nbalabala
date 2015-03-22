@@ -43,6 +43,7 @@ public class GamePanel extends BottomPanel{
 	String[] scoreAll,score1,score2,eachScore;
 	public void getScore(MatchProfileVO proVOArray){
 			scoreAll = proVOArray.getScore().split("-");//两支球队比赛总分
+			System.out.println(eachScore);
 			eachScore = proVOArray.getEachSectionScore().split(";");
 			int eachlth=eachScore.length;
 			for(int i = 0;i<eachlth;i++){
