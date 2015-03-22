@@ -15,20 +15,20 @@ public interface PlayerDataService {
 	/**
 	 * @see dataservice.playerdataservice.PlayerDataService#getActionImageByName(java.lang.String)
 	 */
-	public abstract Image getActionImageByName(String name);
+	public Image getActionImageByName(String name);
 
 	/**
 	 * @see dataservice.playerdataservice.PlayerDataService#getPlayerProfileByInitial(char)
 	 */
-	public abstract ArrayList<PlayerProfileVO> getPlayerProfileByInitial(
+	public ArrayList<PlayerProfileVO> getPlayerProfileByInitial(
 			char initial);
 
 	/**
 	 * @see dataservice.playerdataservice.PlayerDataService#getPlayerProfileByName(java.lang.String)
 	 */
-	public abstract PlayerProfileVO getPlayerProfileByName(String name);
+	public PlayerProfileVO getPlayerProfileByName(String name);
 
-	public abstract ArrayList<PlayerProfileVO> getPlayerProfileByNames(
+	public ArrayList<PlayerProfileVO> getPlayerProfileByNames(
 			ArrayList<String> names);
 
 }
