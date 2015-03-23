@@ -39,8 +39,8 @@ public class MatchQuery implements MatchQueryBLService{
 			seasonStart = year;
 			seasonEnd = year +1;
 		}
-		String seasonString = seasonStart + "-" + seasonEnd;
-		
+		String seasonString = String.valueOf(seasonStart).substring(2) + "-" + 
+				String.valueOf(seasonEnd).substring(2);
 		String monthString;
 		String dayString;
 		if (month < 10) {
@@ -55,7 +55,7 @@ public class MatchQuery implements MatchQueryBLService{
 		}
 		return matchData.getMatchProfileBySeasonAndDate(seasonString, monthString + "-" + dayString);
 	}
-
+	
 	/**
 	 * @see blservice.MatchQueryBLService#screenMatchByTeam(java.lang.String, java.lang.String)
 	 */
