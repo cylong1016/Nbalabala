@@ -24,6 +24,7 @@ public class MatchProfileVO {
 
 	public MatchProfileVO(String season, String time, String team, String score, String eachSectionScore) {
 		super();
+		this.season = season;
 		this.time = time;
 		this.team = team;
 		this.score = score;
