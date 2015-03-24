@@ -266,7 +266,7 @@ public class SeasonData implements SeasonDataService {
 					teamRecords.put(homeTeam, new TeamSeasonRecord(homeTeam));
 				}
 				if (!teamRecords.containsKey(roadTeam)) {
-					teamRecords.put(roadTeam, new TeamSeasonRecord(homeTeam));
+					teamRecords.put(roadTeam, new TeamSeasonRecord(roadTeam));
 				}
 				
 				TeamSeasonRecord homeTeamRecord = teamRecords.get(homeTeam);

@@ -30,5 +30,7 @@ public interface PlayerDataService {
 
 	public ArrayList<PlayerProfileVO> getPlayerProfileByNames(
 			ArrayList<String> names);
+	
+	public ArrayList<PlayerProfileVO> searchPlayers(String keyword);
 
 }

@@ -37,6 +37,12 @@ public class PlayerQuery implements PlayerQueryBLService{
 	public PlayerDetailVO getPlayerDetailByName(String playerName) {
 		PlayerProfileVO profile = playerData.getPlayerProfileByName(playerName);
 		Image actionImage = playerData.getActionImageByName(playerName);
+
+//		System.out.println(profile.getAge());
+//		System.out.println(profile.getNumber());
+//		System.out.println(profile.getSchool());
+//		System.out.println(profile.getTeam());
+//		System.out.println(profile.getWeight());
 		
 		//从seasonbl获取球员的赛季数据
 		PlayerSeasonAnalysis playerSeasonAnalysis = new PlayerSeasonAnalysis();
@@ -52,5 +58,13 @@ public class PlayerQuery implements PlayerQueryBLService{
 	/** 根据若干球员的名字返回其简况，提供给teambl用 */
 	public ArrayList<PlayerProfileVO> getPlayerProfilesByNames(ArrayList<String> names) {
 		return playerData.getPlayerProfileByNames(names);
+	}
+
+	/**
+	 * @see blservice.PlayerQueryBLService#searchPlayers(java.lang.String)
+	 */
+	@Override
+	public ArrayList<PlayerProfileVO> searchPlayers(String keyword) {
+		return playerData.searchPlayers(keyword);
 	}
 }

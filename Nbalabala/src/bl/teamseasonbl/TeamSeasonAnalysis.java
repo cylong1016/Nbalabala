@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import org.apache.batik.apps.svgbrowser.JSVGViewerFrame.NewWindowAction;
+
 import blservice.TeamSeasonBLService;
 import data.seasondata.SeasonData;
 import data.seasondata.TeamSeasonRecord;
@@ -34,6 +36,13 @@ public class TeamSeasonAnalysis implements TeamSeasonBLService{
 		currentList = seasonData.getScreenedTeamSeasonData(ScreenDivision.ALL);
 		sortTeamDataByName(currentList);
 		return currentList;
+	}
+	
+	public static void main(String[]args){
+		ArrayList<TeamSeasonRecord> records = new TeamSeasonAnalysis().getScreenedTeamData(ScreenDivision.ALL);
+		for (TeamSeasonRecord record : records) {
+			System.out.println(record.getTeamName());
+		}
 	}
 	
 	/** 返回按地区筛选的 */

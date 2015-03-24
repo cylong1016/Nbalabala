@@ -157,5 +157,26 @@ public class PlayerData implements PlayerDataService{
 			}
 		}
 	}
+
+	/**
+	 * @see dataservice.PlayerDataService#searchPlayers(java.lang.String)
+	 */
+	@Override
+	public ArrayList<PlayerProfileVO> searchPlayers(String keyword) {
+		ArrayList<PlayerProfileVO> result = new ArrayList<PlayerProfileVO>();
+		Iterator<Entry<String, PlayerProfileVO>> itr = players.entrySet().iterator();
+		keyword = keyword.toLowerCase();
+		while (itr.hasNext()) {
+			PlayerProfileVO po = itr.next().getValue();
+			if (po.getName().contains(keyword)) result.add(po);
+		}
+		Comparator<PlayerProfileVO> comparator = new Comparator<PlayerProfileVO>() {
+			public int compare(PlayerProfileVO p1, PlayerProfileVO p2) {
+				return p1.getName().compareTo(p2.getName());
+			}
+		};
+		Collections.sort(result, comparator);
+		return result;
+	}
 	
 }

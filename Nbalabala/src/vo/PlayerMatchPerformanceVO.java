@@ -44,7 +44,4 @@ public class PlayerMatchPerformanceVO {
 	public String getTwoTeams() {
 		return twoTeams;
 	}
-	
-	
-
 }
