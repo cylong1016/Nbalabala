@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import org.apache.batik.apps.svgbrowser.JSVGViewerFrame.NewWindowAction;
-
 import blservice.TeamSeasonBLService;
 import data.seasondata.SeasonData;
 import data.seasondata.TeamSeasonRecord;

@@ -73,5 +73,5 @@ public class TeamSeasonPanel extends BottomPanel{
 		button[0].setOpaque(true);
 		button[0].setBackground(UIConfig.BUTTON_COLOR);
 		button[0].setForeground(Color.white);
-}
+	}
 }

@@ -48,7 +48,8 @@ public class TeamData implements TeamDataService{
 					continue;
 				}
 				String[] info = line.split("│");
-				TeamProfileVO team = new TeamProfileVO(info[0], info[1], info[2], info[3], info[4], info[5], info[6]);
+				TeamProfileVO team = new TeamProfileVO(info[0].trim(), info[1], info[2].trim(), info[3], 
+						info[4].trim(), info[5].trim(), info[6]);
 				teams.put(team.getAbbr(), team);
 			}
 		} catch (FileNotFoundException e) {
@@ -56,6 +57,8 @@ public class TeamData implements TeamDataService{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
 
 

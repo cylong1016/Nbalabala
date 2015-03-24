@@ -11,7 +11,8 @@ import enums.ScreenDivision;
  */
 public class Constants {
 	
-	public static String UNKNOWN_TEAM = "未知";
+	/** 无资料的时候显示的提示 */
+	public static final String UNKNOWN = "无资料";
 	
 	private static HashMap<String, String> abbrToEngMandarin;
 	
@@ -80,6 +81,53 @@ public class Constants {
 	
 	public static String getTeamMandarinEngByAbbr(String abbr) {
 		return abbrToEngMandarin.get(abbr);
+	}
+	
+	public static String translateDate(String date) {
+		System.out.println(date);
+		String[] strings = date.split(" |,");
+		int month;
+		if (strings.length == 0) {
+			return UNKNOWN;
+		}
+		switch (strings[0]) {
+		case "JAN":
+			month = 1;
+			break;
+		case "FEB":
+			month = 2;
+			break;
+		case "MAR":
+			month = 3;
+			break;
+		case "APR":
+			month = 4;
+			break;
+		case "MAY":
+			month = 5;
+			break;
+		case "JUN":
+			month = 6;
+			break;
+		case "JUL":
+			month = 7;
+			break;
+		case "AUG":
+			month = 8;
+			break;
+		case "SEP":
+			month = 9;
+			break;
+		case "OCT":
+			month = 10;
+			break;
+		case "NOV":
+			month = 11;
+			break;
+		default:
+			month = 12;
+		}
+		return strings[3] + "年" + month + "月" + strings[1] + "日"; 
 	}
 
 }

@@ -154,6 +154,7 @@ public class SeasonData implements SeasonDataService {
 			}
 		}
 		
+		System.out.println(result.size());
 		return result;
 	}
 	
@@ -164,7 +165,7 @@ public class SeasonData implements SeasonDataService {
 	public String getTeamAbbrByPlayer(String playerName) {
 		PlayerSeasonRecord record = playerRecords.get(playerName);
 		if (record != null) return record.getTeam(); 
-		else return Constants.UNKNOWN_TEAM;
+		else return Constants.UNKNOWN;
 	}
 	
 	/**
