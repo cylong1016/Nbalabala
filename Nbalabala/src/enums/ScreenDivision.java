@@ -8,11 +8,11 @@ package enums;
 public enum ScreenDivision {
 	ALL,
 	
-	EAST,
-	
 	SOUTH_EAST,
 	CENTRAL,
 	ATLANTIC,
+
+	EAST,
 	
 	WEST,
 	
