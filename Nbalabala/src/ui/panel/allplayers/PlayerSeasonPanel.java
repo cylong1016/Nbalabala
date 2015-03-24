@@ -3,10 +3,15 @@ package ui.panel.allplayers;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import ui.UIConfig;
+import ui.common.table.BottomScrollPane;
+import ui.common.table.BottomTable;
 import ui.controller.MainController;
 import ui.panel.gamedata.GameDetailButton;
+import vo.MatchPlayerVO;
+import vo.PlayerMatchPerformanceVO;
 import vo.PlayerProfileVO;
 
 /**
@@ -42,4 +47,40 @@ public class PlayerSeasonPanel extends PlayerInfoPanel{
 		});
 	}
 
+	public void setTable() {
+		ArrayList<PlayerMatchPerformanceVO> playerMatch = detailVO.getMatchRecords();
+		int lth = playerMatch.size();
+		columns=new String[]{"赛季","日期","比赛球队","位置","上场时间","投篮命中"," 投篮出手","三分命中",
+				"三分出手","罚球命中","罚球出手","进攻篮板","防守篮板","总篮板","助攻","抢断","盖帽","失误",
+				"犯规","个人得分"};
+		rowData = new String[lth][columns.length];
+		for(int i = 0; i<lth; i++){
+			PlayerMatchPerformanceVO vo = playerMatch.get(i);
+			MatchPlayerVO player = vo.getMatchPlayerRecord();
+			rowData[i][0] = vo.getSeason();
+			rowData[i][1] = vo.getDate();
+			rowData[i][2] = vo.getTwoTeams();
+			rowData[i][3] = player.getPosition();
+			rowData[i][4] = player.getTime();
+			rowData[i][5] = player.getFieldGoal()+"";
+			rowData[i][6] = player.getFieldAttempt()+"";
+			rowData[i][7] = player.getThreePointGoal()+"";
+			rowData[i][8] = player.getThreePointAttempt()+"";
+			rowData[i][9] = player.getFreethrowGoal()+"";
+			rowData[i][10] = player.getFreethrowAttempt()+"";
+			rowData[i][11] = player.getOffensiveRebound()+"";
+			rowData[i][12] = player.getDefensiveRebound()+"";
+			rowData[i][13] = player.getTotalRebound()+"";
+			rowData[i][14] = player.getAssist()+"";
+			rowData[i][15] = player.getSteal()+"";
+			rowData[i][16] = player.getBlock()+"";
+			rowData[i][17] = player.getTurnover()+"";
+			rowData[i][18] = player.getFoul()+"";
+			rowData[i][19] = player.getPersonalGoal()+"";
+		}
+		table = new BottomTable(rowData, columns);
+		scroll = new BottomScrollPane(table);
+		scroll.setLocation(57, 285);
+		this.add(scroll);
+	}
 }
