@@ -1,0 +1,119 @@
+package ui.panel.allplayers;
+
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+
+import ui.UIConfig;
+import ui.common.button.TextButton;
+import ui.common.label.ImgLabel;
+import ui.common.panel.BottomPanel;
+import ui.common.table.BottomScrollPane;
+import ui.common.table.BottomTable;
+import ui.controller.MainController;
+import ui.panel.gamedata.GameDetailButton;
+import vo.PlayerDetailVO;
+import vo.PlayerProfileVO;
+import bl.playerquerybl.PlayerQuery;
+import blservice.PlayerQueryBLService;
+
+/**
+ * 具体球员信息界面
+ * @author lsy
+ * @version 2015年3月24日  上午10:26:48
+ */
+public class PlayerInfoPanel extends BottomPanel{
+
+	/** serialVersionUID */
+	private static final long serialVersionUID = 2506795997614982399L;
+	int totalX=676,gameX=765,y=190,totalWidth=63,gameWidth=83,height=25;
+	TextButton total,game;
+	PlayerProfileVO vo;
+	MainController controller;
+	Image headPicture,totalPicture;
+	PlayerQueryBLService playerQuery;
+	PlayerDetailVO detailVO;
+	
+	public PlayerInfoPanel(MainController controller, String url,PlayerProfileVO vo) {
+		super(controller, url);
+		this.vo = vo;
+		this.controller = controller;
+		playerQuery = new PlayerQuery();
+		detailVO = playerQuery.getPlayerDetailByName(vo.getName());
+		addButton();
+		setTableTotal();
+		addHead();
+		addPicture();
+	}
+	
+	public void addHead(){
+		headPicture = vo.getPortrait();
+		ImgLabel label = new ImgLabel(136,10,200,160,headPicture);
+		this.add(label);
+	}
+	
+	public void addPicture(){
+		totalPicture = detailVO.getAction();
+		ImgLabel label = new ImgLabel(885,6,151,240,totalPicture);
+		this.add(label);
+	}
+
+	public void addButton() {
+		total = new GameDetailButton(totalX, y, totalWidth, height, "总数据");
+		total.setOpaque(true);
+		total.setBackground(UIConfig.BUTTON_COLOR);
+		total.setForeground(Color.white);
+		game = new GameDetailButton(gameX, y, gameWidth, height, "比赛数据");
+		this.add(total);
+		this.add(game);
+		total.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				game.back();
+				scroll.removeAll();
+				setTableTotal();
+			}
+		});
+		game.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				total.back();
+				scroll.removeAll();
+				setTableGame();
+			}
+		});
+	}
+		
+
+		String[] columns;
+		Object[][] rowData;
+		BottomScrollPane scroll;
+		ImageIcon icon;
+		ArrayList<Image> imgArr = new ArrayList<Image>();
+		BottomTable table;
+		
+		
+		public void setTableTotal() {
+		//TODO  setTabel 内容为球员总数据
+//			table = new BottomTable(rowData, columns);
+//		
+//			table.setRowHeight(100);
+//			scroll = new BottomScrollPane(table);
+//			scroll.setLocation(57, 239);
+//			this.add(scroll);
+		}
+	
+		public void setTableGame() {
+			//TODO  setTabel 内容为球员每场比赛数据
+//				table = new BottomTable(rowData, columns);
+//			
+//				table.setRowHeight(100);
+//				scroll = new BottomScrollPane(table);
+//				scroll.setLocation(57, 239);
+//				this.add(scroll);
+			}
+		
+	
+}

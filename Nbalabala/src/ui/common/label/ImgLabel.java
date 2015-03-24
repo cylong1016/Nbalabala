@@ -16,10 +16,10 @@ public class ImgLabel extends JLabel{
 	/** serialVersionUID */
 	private static final long serialVersionUID = 4941915864868989205L;
 
-	public ImgLabel(int x, int y, Image img) {
+	public ImgLabel(int x, int y, int width,int height,Image img) {
 		this.setOpaque(false);
 		ImageIcon icon = new ImageIcon(img);
-		icon.setImage(icon.getImage().getScaledInstance(80,80,Image.SCALE_DEFAULT));		
+		icon.setImage(icon.getImage().getScaledInstance(width,height,Image.SCALE_DEFAULT));		
 		this.setBounds(x, y, icon.getImage().getWidth(null),icon.getImage().getWidth(null));
 		this.setIcon(icon);
 		this.repaint();

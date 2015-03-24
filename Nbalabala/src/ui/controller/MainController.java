@@ -6,6 +6,7 @@ import ui.UIConfig;
 import ui.common.frame.Frame;
 import ui.common.panel.Panel;
 import ui.panel.allplayers.AllPlayersPanel;
+import ui.panel.allplayers.PlayerInfoPanel;
 import ui.panel.allteams.AllTeamsPanel;
 import ui.panel.allteams.TeamButton;
 import ui.panel.allteams.TeamGamePanel;
@@ -17,6 +18,7 @@ import ui.panel.main.MainPanel;
 import ui.panel.playerData.PlayerDataPanel;
 import ui.panel.teamdata.TeamDataPanel;
 import vo.MatchProfileVO;
+import vo.PlayerProfileVO;
 
 /**
  * 界面跳转控制
@@ -47,6 +49,8 @@ public class MainController {
 	private TeamGamePanel teamGamePanel;
 	/** 某场比赛数据 */
 	private GamePanel gamePanel;
+	/** 球员详细信息 */
+	private PlayerInfoPanel playerInfoPanel;
 
 	/**
 	 * 初始化主界面
@@ -186,8 +190,21 @@ public class MainController {
 		frame.setPanel(gamePanel);
 	}
 	
+	/**
+	 * 返回到球员数据界面
+	 * @author lsy
+	 * @version 2015年3月24日  上午10:28:19
+	 */
 	public void backToGameDataPanel(Panel panelNow,Panel panelTo){
 		frame.remove(panelNow);
 		frame.setPanel(panelTo);
 	}
+	
+	public void toPlayerInfoPanel(Panel panel,PlayerProfileVO vo){
+		frame.remove(panel);
+		playerInfoPanel = new PlayerInfoPanel(this,UIConfig.IMG_PATH+"players/playerGameBG.png",vo);
+		frame.setPanel(playerInfoPanel);
+	}
+	
+	
 }

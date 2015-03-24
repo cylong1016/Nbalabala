@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import ui.UIConfig;
@@ -132,8 +131,8 @@ public class GamePanel extends BottomPanel {
 		teamLabel2.setFont(labelFont);
 		placeLabel1 = new MyLabel(labelX, labelY_1, width, height, place1);
 		placeLabel2 = new MyLabel(labelX, labelY_3, width, height, place2);
-		sign1 = new ImgLabel(165, 10, teamVO_1.getLogo());
-		sign2 = new ImgLabel(165, 95, teamVO_2.getLogo());
+		sign1 = new ImgLabel(165, 10,80,80, teamVO_1.getLogo());
+		sign2 = new ImgLabel(165, 95, 80,80,teamVO_2.getLogo());
 		this.add(teamLabel1);
 		this.add(teamLabel2);
 		this.add(placeLabel1);
