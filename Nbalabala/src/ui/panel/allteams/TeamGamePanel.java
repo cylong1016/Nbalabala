@@ -29,8 +29,8 @@ public class TeamGamePanel extends TeamSeasonPanel{
 	DateChooser dateChooser;
 	MatchQueryBLService matchQuery = new MatchQuery();
 	
-	public TeamGamePanel(MainController controller, String url,TeamButton teamButton) {
-		super(controller, url, teamButton);
+	public TeamGamePanel(MainController controller, String url,TeamButton teamButton,int x) {
+		super(controller, url, teamButton,x);
 		addFindButton();
 		this.controller = controller;
 		addDateChooser();
@@ -68,9 +68,9 @@ public class TeamGamePanel extends TeamSeasonPanel{
 	class MouListener extends MouseAdapter{
 		 public void mousePressed(MouseEvent e) {
 			 if(e.getSource() == button[0]){
-				 controller.toTeamSeasonPanel(TeamGamePanel.this,teamButton);
+				 controller.toTeamSeasonPanel(TeamGamePanel.this,teamButton,0);
 			 }else if(e.getSource() == button[1]){
-				 controller.toTeamPlayerPanel(TeamGamePanel.this,teamButton);
+				 controller.toTeamSeasonPanel(TeamGamePanel.this,teamButton,1);
 			 }else if(e.getSource() == button[2]){
 				 return;
 			 }
