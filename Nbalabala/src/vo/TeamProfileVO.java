@@ -24,13 +24,10 @@ public class TeamProfileVO {
 	/** 建立时间 */
 	private String since;
 
-	public TeamProfileVO(String name, String abbr, String location, String area, String division, String home, String since) {
+	public TeamProfileVO(String name, String abbr, String location, String division, String home, String since) {
 		this.name = name;
 		this.abbr = abbr;
 		this.location = location;
-		
-		if (area.equals("E")) this.area = ScreenDivision.EAST;
-		else this.area = ScreenDivision.WEST;
 		
 		switch (division) {
 		case "Southeast":
@@ -53,6 +50,16 @@ public class TeamProfileVO {
 			break;
 		default:
 			break;
+		}
+		
+		switch (this.division) {
+		case SOUTH_WEST:
+		case PACIFIC:
+		case NORTH_WEST:
+			this.area = ScreenDivision.WEST;
+			break;
+		default:
+			this.area = ScreenDivision.EAST;
 		}
 		
 		this.home = home;

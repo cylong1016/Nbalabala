@@ -55,6 +55,4 @@ public class MatchProfileVO {
 	public String getEachSectionScore() {
 		return eachSectionScore;
 	}
-	
-	
 }

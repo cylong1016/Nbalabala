@@ -114,6 +114,7 @@ public class SeasonData implements SeasonDataService {
 				}
 			}
 		}
+
 		return result;
 	}
 	
@@ -153,8 +154,6 @@ public class SeasonData implements SeasonDataService {
 				}
 			}
 		}
-		
-		System.out.println(result.size());
 		return result;
 	}
 	
