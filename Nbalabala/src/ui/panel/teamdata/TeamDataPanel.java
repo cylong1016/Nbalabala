@@ -36,6 +36,8 @@ public class TeamDataPanel extends BottomPanel {
 	private BottomTable teamDataTable;
 	/** 放表格的滚动条 */
 	private BottomScrollPane scroll;
+	/** 表格中数据显示的小数点位数 */
+	private DecimalFormat format = new DecimalFormat("0.000");
 
 	/** 条件按钮 */
 	private SelectButton[] button;
@@ -70,8 +72,6 @@ public class TeamDataPanel extends BottomPanel {
 	int sumSelectButton = 9, sumButton2 = 2;
 	private TeamSeasonBLService teamSeason = new TeamSeasonAnalysis();
 	private String imgURL = UIConfig.IMG_PATH + "teamData/";
-	/** 表格中数据显示的小数点位数 */
-	private DecimalFormat format = new DecimalFormat("0.000");
 
 	public TeamDataPanel(MainController controller, String url) {
 		super(controller, url);
@@ -191,7 +191,6 @@ public class TeamDataPanel extends BottomPanel {
 			Line_2_Button.current.back();
 			Line_2_Button.current = (Line_2_Button)e.getSource();
 			ArrayList<TeamSeasonRecord> seasonArray = teamSeason.getScreenedTeamData(SelectButton.current.division);
-			// changeTable
 			TeamDataPanel.this.remove(scroll); // 删除以前的Table
 			if(e.getSource() == buttonLine2[0]) {
 				TeamDataPanel.this.addTotalTeamDataTable(seasonArray); // 添加总数据

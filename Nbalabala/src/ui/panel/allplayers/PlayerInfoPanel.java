@@ -28,7 +28,6 @@ import data.seasondata.PlayerSeasonRecord;
 
 /**
  * 具体球员信息界面
- * 
  * @author lsy
  * @version 2015年3月24日 上午10:26:48
  */
@@ -58,9 +57,10 @@ public class PlayerInfoPanel extends BottomPanel {
 		this.allPlayers = allPlayers;
 		playerQuery = new PlayerQuery();
 		detailVO = playerQuery.getPlayerDetailByName(vo.getName());
-		lbstr = new String[] { "姓名: " + vo.getName(), "球队: " + vo.getTeam(), "号码: " + vo.getNumber(),
-				"位置: " + vo.getPosition(), "年龄: " + vo.getAge(), "球龄: " + vo.getExp(), "生日: " + vo.getBirth(),
-				"身高: " + vo.getHeight(), "体重: " + vo.getWeight(), "毕业学校: " + vo.getSchool() };
+		lbstr = new String[]{"姓名: " + vo.getName(), "球队: " + vo.getTeam(), "号码: " + vo.getNumber(),
+								"位置: " + vo.getPosition(), "年龄: " + vo.getAge(), "球龄: " + vo.getExp(),
+								"生日: " + vo.getBirth(), "身高: " + vo.getHeight(), "体重: " + vo.getWeight(),
+								"毕业学校: " + vo.getSchool()};
 		addButton();
 		setTable();
 		addHead();
@@ -70,19 +70,19 @@ public class PlayerInfoPanel extends BottomPanel {
 	}
 
 	public void addLabel() {
-		for (int i = 0; i < 3; i++) {
+		for(int i = 0; i < 3; i++) {
 			profileLabel[i] = new MyLabel(lbX + i * interX, lbY, width, lbHgt, lbstr[i]);
 		}
-		for (int i = 3; i < 6; i++) {
+		for(int i = 3; i < 6; i++) {
 			profileLabel[i] = new MyLabel(lbX + (i - 3) * interX, lbY + interY, width, lbHgt, lbstr[i]);
 		}
-		for (int i = 6; i < 8; i++) {
+		for(int i = 6; i < 8; i++) {
 			profileLabel[i] = new MyLabel(lbX + (i - 6) * interX, lbY + 2 * interY, width, lbHgt, lbstr[i]);
 		}
-		for (int i = 8; i < 10; i++) {
+		for(int i = 8; i < 10; i++) {
 			profileLabel[i] = new MyLabel(lbX + (i - 8) * interX, lbY + 3 * interY, width, lbHgt, lbstr[i]);
 		}
-		for (int i = 0; i < 10; i++) {
+		for(int i = 0; i < 10; i++) {
 			profileLabel[i].setHorizontalAlignment(SwingConstants.LEFT);
 			this.add(profileLabel[i]);
 		}
@@ -90,7 +90,6 @@ public class PlayerInfoPanel extends BottomPanel {
 
 	/**
 	 * 返回按钮
-	 * 
 	 * @author lsy
 	 * @version 2015年3月24日 下午4:20:16
 	 */
@@ -98,6 +97,7 @@ public class PlayerInfoPanel extends BottomPanel {
 		back = new ImgButton(url + "back.png", 50, 50, url + "back.png", url + "back.png");
 		this.add(back);
 		back.addMouseListener(new MouseAdapter() {
+
 			public void mousePressed(MouseEvent e) {
 				controller.backToGameDataPanel(PlayerInfoPanel.this, allPlayers);
 			}
@@ -107,7 +107,6 @@ public class PlayerInfoPanel extends BottomPanel {
 
 	/**
 	 * 添加头像
-	 * 
 	 * @author lsy
 	 * @version 2015年3月24日 上午11:17:35
 	 */
@@ -119,7 +118,6 @@ public class PlayerInfoPanel extends BottomPanel {
 
 	/**
 	 * 添加全身像
-	 * 
 	 * @author lsy
 	 * @version 2015年3月24日 上午11:17:42
 	 */
@@ -138,10 +136,12 @@ public class PlayerInfoPanel extends BottomPanel {
 		this.add(total);
 		this.add(game);
 		total.addMouseListener(new MouseAdapter() {
+
 			public void mousePressed(MouseEvent e) {
 			}
 		});
 		game.addMouseListener(new MouseAdapter() {
+
 			public void mousePressed(MouseEvent e) {
 				controller.toPlayerSeasonInfoPanel(PlayerInfoPanel.this, vo, allPlayers);
 			}
@@ -155,42 +155,43 @@ public class PlayerInfoPanel extends BottomPanel {
 	protected ArrayList<Image> imgArr = new ArrayList<Image>();
 	protected BottomTable table;
 	protected DecimalFormat df = new DecimalFormat("0.000");
+
 	public void setTable() {
-		columns = new String[] { "","参赛场数", "先发场数", "在场时间", "投篮命中数", "投篮出手数", "投篮命中率", "三分命中数",
-				"三分出手数", "三分命中率", "罚球命中数", "罚球出手数", "罚球命中率", "进攻篮板", "防守篮板", "总篮板", "助攻数", "抢断数", "盖帽数", "失误数",
-				"犯规数", "得分", "两双", "得分/篮板/助攻", "效率", "GmSc 效率值", "真实命中率", "投篮效率", "进攻篮板率", "防守篮板率", "篮板率", "助攻率",
-				"抢断率", "盖帽率", "失误率", "使用率" };
+		columns = new String[]{"", "参赛场数", "先发场数", "在场时间", "投篮命中数", "投篮出手数", "投篮命中率", "三分命中数", "三分出手数", "三分命中率",
+									"罚球命中数", "罚球出手数", "罚球命中率", "进攻篮板", "防守篮板", "总篮板", "助攻数", "抢断数", "盖帽数", "失误数",
+									"犯规数", "得分", "两双", "得分/篮板/助攻", "效率", "GmSc 效率值", "真实命中率", "投篮效率", "进攻篮板率", "防守篮板率",
+									"篮板率", "助攻率", "抢断率", "盖帽率", "失误率", "使用率"};
 		PlayerSeasonRecord playerSeason = detailVO.getSeasonRecord();
 		rowData = new String[3][columns.length];
 		rowData[0][0] = "总数据";
 		rowData[1][0] = "平均数据";
-		rowData[0][1] = playerSeason.getMatchCount() + "";
-		rowData[0][2] = playerSeason.getFirstCount() + "";
+		rowData[0][1] = String.valueOf(playerSeason.getMatchCount());
+		rowData[0][2] = String.valueOf(playerSeason.getFirstCount());
 		rowData[0][3] = playerSeason.getTime();
-		rowData[0][4] = playerSeason.getFieldGoal() + "";
-		rowData[0][5] = playerSeason.getFieldAttempt() + "";
+		rowData[0][4] = String.valueOf(playerSeason.getFieldGoal());
+		rowData[0][5] = String.valueOf(playerSeason.getFieldAttempt());
 		rowData[0][6] = df.format(playerSeason.getFieldPercent());
-		rowData[0][7] = playerSeason.getThreePointGoal() + "";
-		rowData[0][8] = playerSeason.getThreePointAttempt() + "";
+		rowData[0][7] = String.valueOf(playerSeason.getThreePointGoal());
+		rowData[0][8] = String.valueOf(playerSeason.getThreePointAttempt());
 		rowData[0][9] = df.format(playerSeason.getThreePointPercent());
-		rowData[0][10] = playerSeason.getFreethrowGoal() + "";
-		rowData[0][11] = playerSeason.getFreethrowAttempt() + "";
-		rowData[0][12] = df.format(playerSeason.getFreethrowPercent());
-		rowData[0][13] = playerSeason.getOffensiveRebound() + "";
-		rowData[0][14] = playerSeason.getDefensiveRebound() + "";
-		rowData[0][15] = playerSeason.getTotalRebound() + "";
-		rowData[0][16] = playerSeason.getAssist() + "";
-		rowData[0][17] = playerSeason.getSteal() + "";
-		rowData[0][18] = playerSeason.getBlock() + "";
-		rowData[0][19] = playerSeason.getTurnover() + "";
-		rowData[0][20] = playerSeason.getFoul() + "";
-		rowData[0][21] = playerSeason.getScore() + "";
-		rowData[0][22] = playerSeason.getDoubleDouble() + "";
-		rowData[0][23] = playerSeason.getScoreReboundAssist() + "";
-		rowData[0][24] = playerSeason.getEfficiency() + "";
-		rowData[0][25] = playerSeason.getGmSc() + "";
+		rowData[0][10] = String.valueOf(playerSeason.getFreeThrowGoal());
+		rowData[0][11] = String.valueOf(playerSeason.getFreeThrowAttempt());
+		rowData[0][12] = df.format(playerSeason.getFreeThrowPercent());
+		rowData[0][13] = String.valueOf(playerSeason.getOffensiveRebound());
+		rowData[0][14] = String.valueOf(playerSeason.getDefensiveRebound());
+		rowData[0][15] = String.valueOf(playerSeason.getTotalRebound());
+		rowData[0][16] = String.valueOf(playerSeason.getAssist());
+		rowData[0][17] = String.valueOf(playerSeason.getSteal());
+		rowData[0][18] = String.valueOf(playerSeason.getBlock());
+		rowData[0][19] = String.valueOf(playerSeason.getTurnover());
+		rowData[0][20] = String.valueOf(playerSeason.getFoul());
+		rowData[0][21] = String.valueOf(playerSeason.getScore());
+		rowData[0][22] = String.valueOf(playerSeason.getDoubleDouble());
+		rowData[0][23] = String.valueOf(playerSeason.getScoreReboundAssist());
+		rowData[0][24] = String.valueOf(playerSeason.getEfficiency());
+		rowData[0][25] = String.valueOf(playerSeason.getGmSc());
 		rowData[0][26] = df.format(playerSeason.getRealFieldPercent());
-		rowData[0][27] = playerSeason.getFieldEff() + "";
+		rowData[0][27] = String.valueOf(playerSeason.getFieldEff());
 		rowData[0][28] = df.format(playerSeason.getOffensiveReboundPercent());
 		rowData[0][29] = df.format(playerSeason.getDefensiveReboundPercent());
 		rowData[0][30] = df.format(playerSeason.getTotalReboundPercent());
@@ -199,7 +200,7 @@ public class PlayerInfoPanel extends BottomPanel {
 		rowData[0][33] = df.format(playerSeason.getBlockPercent());
 		rowData[0][34] = df.format(playerSeason.getTurnOverPercent());
 		rowData[0][35] = df.format(playerSeason.getUsePercent());
-		
+
 		rowData[1][3] = playerSeason.getTimeAvg();
 		rowData[1][4] = df.format(playerSeason.getFieldGoalAvg());
 		rowData[1][5] = df.format(playerSeason.getFieldAttemptAvg());
@@ -209,14 +210,14 @@ public class PlayerInfoPanel extends BottomPanel {
 		rowData[1][9] = df.format(playerSeason.getThreePointPercent());
 		rowData[1][10] = df.format(playerSeason.getFreethrowGoalAvg());
 		rowData[1][11] = df.format(playerSeason.getFreethrowAttemptAvg());
-		rowData[1][12] = df.format(playerSeason.getFreethrowPercent());
+		rowData[1][12] = df.format(playerSeason.getFreeThrowPercent());
 		rowData[1][13] = df.format(playerSeason.getOffensiveReboundAvg());
 		rowData[1][14] = df.format(playerSeason.getDefensiveReboundAvg());
 		rowData[1][15] = df.format(playerSeason.getTotalReboundAvg());
 		rowData[1][16] = df.format(playerSeason.getAssistAvg());
 		rowData[1][17] = df.format(playerSeason.getStealAvg());
 		rowData[1][18] = df.format(playerSeason.getBlockAvg());
-		rowData[1][19] =df.format(playerSeason.getTurnoverAvg());
+		rowData[1][19] = df.format(playerSeason.getTurnoverAvg());
 		rowData[1][20] = df.format(playerSeason.getFoulAvg());
 		rowData[1][21] = df.format(playerSeason.getScoreAvg());
 		rowData[1][22] = df.format(playerSeason.getDoubleDoubleAvg());
@@ -224,7 +225,7 @@ public class PlayerInfoPanel extends BottomPanel {
 		rowData[1][25] = df.format(playerSeason.getGmSc());
 		rowData[1][24] = df.format(playerSeason.getEfficiency());
 		rowData[1][26] = df.format(playerSeason.getRealFieldPercent());
-		rowData[1][27] =df.format(playerSeason.getFieldEff());
+		rowData[1][27] = df.format(playerSeason.getFieldEff());
 		rowData[1][28] = df.format(playerSeason.getOffensiveReboundPercent());
 		rowData[1][29] = df.format(playerSeason.getDefensiveReboundPercent());
 		rowData[1][30] = df.format(playerSeason.getTotalReboundPercent());

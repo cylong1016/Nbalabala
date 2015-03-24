@@ -198,10 +198,13 @@ public class PlayerSeasonRecord {
 	}
 	
 	public double getThreePointPercent() {
+		if(threePointAttempt == 0) {
+			return 0; // 防止除数为0
+		}
 		return (double)threePointGoal / threePointAttempt;
 	}
 
-	public int getFreethrowGoal() {
+	public int getFreeThrowGoal() {
 		return freethrowGoal;
 	}
 	
@@ -209,7 +212,7 @@ public class PlayerSeasonRecord {
 		return (double)freethrowGoal / matchCount;
 	}
 
-	public int getFreethrowAttempt() {
+	public int getFreeThrowAttempt() {
 		return freethrowAttempt;
 	}
 	
@@ -217,7 +220,7 @@ public class PlayerSeasonRecord {
 		return (double)freethrowAttempt / matchCount;
 	}
 	
-	public double getFreethrowPercent() {
+	public double getFreeThrowPercent() {
 		return (double)freethrowGoal / freethrowAttempt;
 	}
 

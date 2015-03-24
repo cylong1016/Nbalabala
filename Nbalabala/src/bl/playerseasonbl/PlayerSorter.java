@@ -142,7 +142,7 @@ public class PlayerSorter {
 		case FREETHROW_GOAL:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getFreethrowGoal() - p2.getFreethrowGoal());
+					return factor * (p1.getFreeThrowGoal() - p2.getFreeThrowGoal());
 				}
 			};
 			break;
@@ -158,7 +158,7 @@ public class PlayerSorter {
 		case FREETHROW_ATTEMPT:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getFreethrowAttempt() - p2.getFreethrowAttempt());
+					return factor * (p1.getFreeThrowAttempt() - p2.getFreeThrowAttempt());
 				}
 			};
 			break;
@@ -174,7 +174,7 @@ public class PlayerSorter {
 		case FREETHROW_PERCENT:
 			comparator = new Comparator<PlayerSeasonRecord>() {
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getFreethrowPercent() - p2.getFreethrowPercent()) < 0 ? -1 : 1;
+					return factor * (p1.getFreeThrowPercent() - p2.getFreeThrowPercent()) < 0 ? -1 : 1;
 				}
 			};
 			break;

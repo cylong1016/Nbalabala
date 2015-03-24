@@ -4,8 +4,7 @@ import ui.common.button.TextButton;
 import enums.Position;
 
 /**
- * 第一行按钮
- * 
+ * 第一行按钮（前锋，中锋，后卫）
  * @author lsy
  * @version 2015年3月19日 下午2:47:26
  */
