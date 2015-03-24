@@ -7,6 +7,7 @@ import ui.common.frame.Frame;
 import ui.common.panel.Panel;
 import ui.panel.allplayers.AllPlayersPanel;
 import ui.panel.allplayers.PlayerInfoPanel;
+import ui.panel.allplayers.PlayerSeasonPanel;
 import ui.panel.allteams.AllTeamsPanel;
 import ui.panel.allteams.TeamButton;
 import ui.panel.allteams.TeamGamePanel;
@@ -208,10 +209,14 @@ public class MainController {
 	 */
 	public void toPlayerInfoPanel(Panel panel,PlayerProfileVO vo,AllPlayersPanel allPanel){
 		frame.remove(panel);
-		playerInfoPanel = new PlayerInfoPanel(this,UIConfig.IMG_PATH+"players/playerGameBG.png",vo,allPanel);
+		playerInfoPanel = new PlayerInfoPanel(this,UIConfig.IMG_PATH+"players/playerInfoBG.png",vo,allPanel);
 		frame.setPanel(playerInfoPanel);
 	}
 	
-	
+	public void toPlayerSeasonInfoPanel(Panel panel,PlayerProfileVO vo,AllPlayersPanel allPanel){
+		frame.remove(panel);
+		playerInfoPanel = new PlayerSeasonPanel(this,UIConfig.IMG_PATH+"players/playerGameBG.png",vo,allPanel);
+		frame.setPanel(playerInfoPanel);
+	}
 	
 }
