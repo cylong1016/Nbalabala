@@ -76,7 +76,7 @@ public class TeamDataPanel extends BottomPanel {
 	public TeamDataPanel(MainController controller, String url) {
 		super(controller, url);
 		addButton();
-		addFindButton();
+		// addFindButton(); // 不需要查询按钮，以后需要的时候再添加上去
 		iniSet();
 		setEffect(buttonArr);
 		addListener();
@@ -175,6 +175,10 @@ public class TeamDataPanel extends BottomPanel {
 			}
 			SelectButton.current.back();
 			SelectButton.current = (SelectButton)e.getSource();
+			ArrayList<TeamSeasonRecord> seasonArray = teamSeason.getScreenedTeamData(SelectButton.current.division);
+			// changeTable
+			TeamDataPanel.this.remove(scroll); // 删除以前的Table
+			TeamDataPanel.this.addTotalTeamDataTable(seasonArray); // 添加总数据
 		}
 	}
 
