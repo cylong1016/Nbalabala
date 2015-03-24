@@ -160,7 +160,7 @@ public class TeamSeasonRecord {
 		return freethrowAttempt;
 	}
 	
-	public double getFreethrowAttempAvg() {
+	public double getFreethrowAttemptAvg() {
 		return (double)freethrowAttempt / matchCount;
 	}
 	

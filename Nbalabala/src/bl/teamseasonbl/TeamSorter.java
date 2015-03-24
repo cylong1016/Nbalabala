@@ -142,7 +142,7 @@ public class TeamSorter {
 		case FREETHROW_ATTEMPT_AVG:
 			comparator = new Comparator<TeamSeasonRecord>() {
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getFreethrowAttempAvg() - t2.getFreethrowAttempAvg())< 0 ? -1 : 1;
+					return factor * (t1.getFreethrowAttemptAvg() - t2.getFreethrowAttemptAvg())< 0 ? -1 : 1;
 				}
 			};
 			break;
