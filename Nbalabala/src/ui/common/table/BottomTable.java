@@ -61,10 +61,10 @@ public class BottomTable extends JTable {
 		this.setFont(UIConfig.TABLE_FONT);	// 设置表格内容字体
 		this.setForeground(UIConfig.TABLE_FORE_COLOR);	// 表格前景色
 		this.setSelectionForeground(UIConfig.TABLE_SELECTIONFORE);	// 选择文本的前景色
+		this.setSelectionBackground(UIConfig.TABLE_SELECTIONBACK);
 		this.setBorder(null);
 		this.setRowHeight(rowHeight);	// 每一行的高
 		this.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		// this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setIntercellSpacing(new Dimension(0, 0));
 		// 将表格设置为透明，表格同样包括表格本身和其中的内容项 仅仅将表格本身设置为透明也没有用，应该将其中的内容项也设置为透明
 		// 内容项的设置是通过设置渲染器的透明来实现

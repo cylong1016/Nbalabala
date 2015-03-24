@@ -42,11 +42,13 @@ public class UIConfig {
 	/** 表格边框颜色 */
 	public static Color TABLE_BORDER_COLOR = Color.LIGHT_GRAY;
 	/** 表头前景颜色 */
-	public static Color TABLE_HEADER_FORE_COLOR = Color.WHITE;
+	public static Color TABLE_HEADER_FORE_COLOR = new Color(0x12203A);
 	/** 表头背景颜色 */
 	public static Color TABLE_HEADER_BACK_COLOR = new Color(0x22355F);
 	/** 选择后的前景色 */
-	public static Color TABLE_SELECTIONFORE = Color.BLACK;
+	public static Color TABLE_SELECTIONFORE = Color.BLUE;
+	/** 选择后的背景色 */
+	public static Color TABLE_SELECTIONBACK = Color.BLACK;
 	/** 表格预设大小 */
 	public static Dimension TABLE_DIMEN = new Dimension(888, 290);
 	/*----------------------------表格配置--------------------------------*/

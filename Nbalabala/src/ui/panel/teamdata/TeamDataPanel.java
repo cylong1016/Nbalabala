@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import ui.UIConfig;
@@ -195,42 +196,46 @@ public class TeamDataPanel extends BottomPanel {
 	 * @version 2015年3月20日 下午6:37:48
 	 */
 	private void addTeamDataTable() {
-		String[] columnNames = {"球队名称", "胜场数", "负场数", "总场数", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手", "三分命中率", "罚球命中",
-									"罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "篮板效率", "进攻回合", "进攻效率", "助攻次数", "助攻效率",
-									"抢断", "盖帽", "失误", "犯规", "胜率", "防守", "得分"};
+		String[] columnNames = {"球队名称", "胜场数", "负场数", "总场数", "胜率", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手", "三分命中率", "罚球命中",
+									"罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "进攻篮板效率", "防守篮板效率", "进攻回合", "进攻效率", "防守回合", "防守效率",
+									"抢断", "抢断效率", "助攻", "助攻率", "盖帽", "失误", "犯规", "得分"};
 		ArrayList<TeamSeasonRecord> teamArr = teamSeason.getTeamDataSortedByName();
 		String[][] rowData = new String[teamArr.size()][columnNames.length];
 		teamDataTable = new BottomTable(rowData, columnNames);
+		DecimalFormat format = new DecimalFormat("0.000");
 		for(int i = 0; i < teamArr.size(); i++) {
 			TeamSeasonRecord teamSeason = teamArr.get(i);
 			rowData[i][0] = teamSeason.getTeamName();
 			rowData[i][1] = Integer.toString(teamSeason.getWins());
-			rowData[i][2] = teamSeason.getTeamName();
-			rowData[i][3] = teamSeason.getTeamName();
-			rowData[i][4] = teamSeason.getTeamName();
-			rowData[i][5] = teamSeason.getTeamName();
-			rowData[i][6] = teamSeason.getTeamName();
-			rowData[i][7] = teamSeason.getTeamName();
-			rowData[i][8] = teamSeason.getTeamName();
-			rowData[i][9] = teamSeason.getTeamName();
-			rowData[i][10] = teamSeason.getTeamName();
-			rowData[i][11] = teamSeason.getTeamName();
-			rowData[i][12] = teamSeason.getTeamName();
-			rowData[i][13] = teamSeason.getTeamName();
-			rowData[i][14] = teamSeason.getTeamName();
-			rowData[i][15] = teamSeason.getTeamName();
-			rowData[i][16] = teamSeason.getTeamName();
-			rowData[i][17] = teamSeason.getTeamName();
-			rowData[i][18] = teamSeason.getTeamName();
-			rowData[i][19] = teamSeason.getTeamName();
-			rowData[i][20] = teamSeason.getTeamName();
-			rowData[i][21] = teamSeason.getTeamName();
-			rowData[i][22] = teamSeason.getTeamName();
-			rowData[i][23] = teamSeason.getTeamName();
-			rowData[i][24] = teamSeason.getTeamName();
-			rowData[i][25] = teamSeason.getTeamName();
-			rowData[i][26] = teamSeason.getTeamName();
-			rowData[i][27] = teamSeason.getTeamName();
+			rowData[i][2] = Integer.toString(teamSeason.getLoses());
+			rowData[i][3] = Integer.toString(teamSeason.getMatchCount());
+			rowData[i][4] = format.format(teamSeason.getWinning());
+			rowData[i][5] = Integer.toString(teamSeason.getFieldGoal());
+			rowData[i][6] = Integer.toString(teamSeason.getFieldAttempt());
+			rowData[i][7] = format.format(teamSeason.getFieldPercent());
+			rowData[i][8] = Integer.toString(teamSeason.getThreePointGoal());
+			rowData[i][9] = Integer.toString(teamSeason.getThreePointAttempt());
+			rowData[i][10] = format.format(teamSeason.getThreePointPercent());
+			rowData[i][11] = Integer.toString(teamSeason.getFreethrowGoal());
+			rowData[i][12] = Integer.toString(teamSeason.getFreethrowAttempt());
+			rowData[i][13] = format.format(teamSeason.getFreeThrowPercent());
+			rowData[i][14] = Integer.toString(teamSeason.getOffensiveRebound());
+			rowData[i][15] = Integer.toString(teamSeason.getDefensiveRebound());
+			rowData[i][16] = Integer.toString(teamSeason.getTotalRebound());
+			rowData[i][17] = format.format(teamSeason.getOffensiveReboundEff());
+			rowData[i][18] = format.format(teamSeason.getDefensiveReboundEff());
+			rowData[i][19] = format.format(teamSeason.getOffensiveRound());
+			rowData[i][20] = format.format(teamSeason.getOffensiveEff());
+			rowData[i][21] = format.format(teamSeason.getDefensiveRound());
+			rowData[i][22] = format.format(teamSeason.getDefensiveEff());
+			rowData[i][23] = Integer.toString(teamSeason.getSteal());
+			rowData[i][24] = format.format(teamSeason.getStealEff());
+			rowData[i][25] = Integer.toString(teamSeason.getAssist());
+			rowData[i][26] = format.format(teamSeason.getAssistEff());
+			rowData[i][27] = Integer.toString(teamSeason.getBlock());
+			rowData[i][28] = Integer.toString(teamSeason.getTurnover());
+			rowData[i][29] = Integer.toString(teamSeason.getFoul());
+			rowData[i][30] = Integer.toString(teamSeason.getScore());
 		}
 		
 		BottomScrollPane scroll = new BottomScrollPane(teamDataTable);
