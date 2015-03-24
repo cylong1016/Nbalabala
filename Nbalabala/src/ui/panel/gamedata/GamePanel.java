@@ -92,7 +92,6 @@ public class GamePanel extends BottomPanel {
 
 	/**
 	 * 添加返回按钮
-	 * 
 	 * @author lsy
 	 * @version 2015年3月23日 下午6:20:43
 	 */

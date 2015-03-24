@@ -198,13 +198,20 @@ public class MainController {
 	public void backToGameDataPanel(Panel panelNow,Panel panelTo){
 		frame.remove(panelNow);
 		frame.setPanel(panelTo);
+		frame.repaint();
 	}
 	
-	public void toPlayerInfoPanel(Panel panel,PlayerProfileVO vo){
+	/**
+	 * 球员详细信息界面
+	 * @author lsy
+	 * @version 2015年3月24日  上午11:19:21
+	 */
+	public void toPlayerInfoPanel(Panel panel,PlayerProfileVO vo,AllPlayersPanel allPanel){
 		frame.remove(panel);
-		playerInfoPanel = new PlayerInfoPanel(this,UIConfig.IMG_PATH+"players/playerGameBG.png",vo);
+		playerInfoPanel = new PlayerInfoPanel(this,UIConfig.IMG_PATH+"players/playerGameBG.png",vo,allPanel);
 		frame.setPanel(playerInfoPanel);
 	}
+	
 	
 	
 }

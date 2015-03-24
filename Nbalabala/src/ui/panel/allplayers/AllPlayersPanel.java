@@ -20,6 +20,7 @@ import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.common.textField.MyTextField;
 import ui.controller.MainController;
+import vo.PlayerDetailVO;
 import vo.PlayerProfileVO;
 import bl.playerquerybl.PlayerQuery;
 import blservice.PlayerQueryBLService;
@@ -92,14 +93,14 @@ public class AllPlayersPanel extends BottomPanel {
 			rowData[i][5] = ppVO.getBirth();
 		}
 		table = new BottomTable(rowData, columns);
-		//TODO 将头像放入表格的第一列 监听已加好
+		//TODO 将头像放入表格的第一列 监听已加好 双击球员某一信息进入下一界面
 		try{
 			table.addMouseListener(new UserMouseAdapter(){
 				
 				public void mouseDoubleClicked(MouseEvent e){
 					int rowI  = table.rowAtPoint(e.getPoint());// 得到table的行号
 					if ( rowI > -1){
-						controller.toPlayerInfoPanel(AllPlayersPanel.this, players.get(rowI));
+						controller.toPlayerInfoPanel(AllPlayersPanel.this, players.get(rowI),AllPlayersPanel.this);
 					}
 					
 				}
@@ -125,8 +126,11 @@ public class AllPlayersPanel extends BottomPanel {
 		this.add(findButton);
 		findButton.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				ArrayList<PlayerProfileVO> playerInfoArr = playerInfo.getPlayerProfileByInitial('A');
-				// TODO 将查询到的球员信息显示出来
+				PlayerDetailVO playerInfoArr = playerInfo.getPlayerDetailByName(field.getText());
+				ArrayList<PlayerProfileVO> playerPro= new ArrayList<PlayerProfileVO>();
+				playerPro.add(playerInfoArr.getProfile());
+				scroll.removeAll();
+				setTable(playerPro);
 			}
 		});
 	}

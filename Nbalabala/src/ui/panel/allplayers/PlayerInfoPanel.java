@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 import ui.UIConfig;
+import ui.common.button.ImgButton;
 import ui.common.button.TextButton;
 import ui.common.label.ImgLabel;
 import ui.common.panel.BottomPanel;
@@ -16,6 +17,7 @@ import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
 import ui.panel.gamedata.GameDetailButton;
+import ui.panel.gamedata.GamePanel;
 import vo.PlayerDetailVO;
 import vo.PlayerProfileVO;
 import bl.playerquerybl.PlayerQuery;
@@ -37,25 +39,51 @@ public class PlayerInfoPanel extends BottomPanel{
 	Image headPicture,totalPicture;
 	PlayerQueryBLService playerQuery;
 	PlayerDetailVO detailVO;
+	ImgButton back;
+	String url = UIConfig.IMG_PATH+"players/";
+	AllPlayersPanel allPlayers;
 	
-	public PlayerInfoPanel(MainController controller, String url,PlayerProfileVO vo) {
+	public PlayerInfoPanel(MainController controller, String url,PlayerProfileVO vo,AllPlayersPanel allPlayers) {
 		super(controller, url);
 		this.vo = vo;
 		this.controller = controller;
+		this.allPlayers = allPlayers;
 		playerQuery = new PlayerQuery();
 		detailVO = playerQuery.getPlayerDetailByName(vo.getName());
 		addButton();
 		setTableTotal();
 		addHead();
 		addPicture();
+		addBack();
 	}
 	
+	public void addBack() {
+		back = new ImgButton(url + "back.png", 50, 50, url + "back.png", url + "back.png");
+		this.add(back);
+		back.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				controller.backToGameDataPanel(PlayerInfoPanel.this, allPlayers);
+			}
+
+		});
+	}
+	
+	/**
+	 * 添加头像
+	 * @author lsy
+	 * @version 2015年3月24日  上午11:17:35
+	 */
 	public void addHead(){
 		headPicture = vo.getPortrait();
 		ImgLabel label = new ImgLabel(136,10,200,160,headPicture);
 		this.add(label);
 	}
 	
+	/**
+	 * 添加全身像
+	 * @author lsy
+	 * @version 2015年3月24日  上午11:17:42
+	 */
 	public void addPicture(){
 		totalPicture = detailVO.getAction();
 		ImgLabel label = new ImgLabel(885,6,151,240,totalPicture);
@@ -95,8 +123,8 @@ public class PlayerInfoPanel extends BottomPanel{
 		BottomTable table;
 		
 		
-		public void setTableTotal() {
 		//TODO  setTabel 内容为球员总数据
+		public void setTableTotal() {
 //			table = new BottomTable(rowData, columns);
 //		
 //			table.setRowHeight(100);
@@ -105,8 +133,8 @@ public class PlayerInfoPanel extends BottomPanel{
 //			this.add(scroll);
 		}
 	
+		//TODO  setTabel 内容为球员每场比赛数据
 		public void setTableGame() {
-			//TODO  setTabel 内容为球员每场比赛数据
 //				table = new BottomTable(rowData, columns);
 //			
 //				table.setRowHeight(100);
