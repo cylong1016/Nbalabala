@@ -151,7 +151,7 @@ public class GamePanel extends BottomPanel {
 		teamName1.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				teamName2.back();
-				scroll.removeAll();
+				GamePanel.this.remove(scroll);
 				ArrayList<MatchPlayerVO> homePlayers = matchVO.getHomePlayers();
 				setTable(homePlayers);
 			}
@@ -159,7 +159,7 @@ public class GamePanel extends BottomPanel {
 		teamName2.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				teamName1.back();
-				scroll.removeAll();
+				GamePanel.this.remove(scroll);
 				ArrayList<MatchPlayerVO> roadPlayers = matchVO.getRoadPlayers();
 				setTable(roadPlayers);
 			}
