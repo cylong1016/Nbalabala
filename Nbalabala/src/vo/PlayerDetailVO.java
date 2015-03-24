@@ -35,10 +35,12 @@ public class PlayerDetailVO {
 		return profile;
 	}
 
+	//总数据
 	public PlayerSeasonRecord getSeasonRecord() {
 		return seasonRecord;
 	}
 
+	//比赛数据
 	public ArrayList<PlayerMatchPerformanceVO> getMatchRecords() {
 		return matchRecords;
 	}

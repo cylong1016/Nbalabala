@@ -129,7 +129,7 @@ public class AllPlayersPanel extends BottomPanel {
 				PlayerDetailVO playerInfoArr = playerInfo.getPlayerDetailByName(field.getText());
 				ArrayList<PlayerProfileVO> playerPro= new ArrayList<PlayerProfileVO>();
 				playerPro.add(playerInfoArr.getProfile());
-				scroll.removeAll();
+				AllPlayersPanel.this.remove(scroll);
 				setTable(playerPro);
 			}
 		});
@@ -175,7 +175,7 @@ public class AllPlayersPanel extends BottomPanel {
 			LetterButton.current = (LetterButton) e.getSource();
 			char goal = LetterButton.current.letter;
 			ArrayList<PlayerProfileVO> vo = playerInfo.getPlayerProfileByInitial(goal);
-			scroll.removeAll();
+			AllPlayersPanel.this.remove(scroll);
 			setTable(vo);
 		}
 	}
