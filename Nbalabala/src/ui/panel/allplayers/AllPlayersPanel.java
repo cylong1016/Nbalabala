@@ -173,6 +173,10 @@ public class AllPlayersPanel extends BottomPanel {
 			}
 			LetterButton.current.back();
 			LetterButton.current = (LetterButton) e.getSource();
+			char goal = LetterButton.current.letter;
+			ArrayList<PlayerProfileVO> vo = playerInfo.getPlayerProfileByInitial(goal);
+			scroll.removeAll();
+			setTable(vo);
 		}
 	}
 

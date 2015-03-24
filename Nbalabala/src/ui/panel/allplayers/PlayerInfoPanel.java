@@ -17,7 +17,6 @@ import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
 import ui.panel.gamedata.GameDetailButton;
-import ui.panel.gamedata.GamePanel;
 import vo.PlayerDetailVO;
 import vo.PlayerProfileVO;
 import bl.playerquerybl.PlayerQuery;
