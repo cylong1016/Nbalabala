@@ -83,5 +83,10 @@ public class MatchQuery implements MatchQueryBLService{
 	public ArrayList<PlayerMatchPerformanceVO> getMatchRecordByPlayerName(String playerName) {
 		return matchData.getMatchRecordByPlayerName(playerName);
 	}
+	
+	/** 根据球队缩写返回其参加的所有比赛简报 */
+	public ArrayList<MatchProfileVO> getMatchRecordByTeamAbbr(String abbr){
+		return matchData.getMatchProfileByTeam(abbr);
+	}
 
 }

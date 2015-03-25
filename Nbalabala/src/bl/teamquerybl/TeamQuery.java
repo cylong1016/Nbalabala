@@ -7,9 +7,11 @@ import data.seasondata.TeamSeasonRecord;
 import data.teamdata.SVGHandler;
 import data.teamdata.TeamData;
 import dataservice.TeamDataService;
+import vo.MatchProfileVO;
 import vo.PlayerProfileVO;
 import vo.TeamDetailVO;
 import vo.TeamProfileVO;
+import bl.matchquerybl.MatchQuery;
 import bl.playerquerybl.PlayerQuery;
 import bl.playerseasonbl.PlayerSeasonAnalysis;
 import bl.teamseasonbl.TeamSeasonAnalysis;
@@ -40,6 +42,11 @@ public class TeamQuery implements TeamQueryBLService{
 		TeamSeasonAnalysis teamSeasonAnalysis = new TeamSeasonAnalysis();
 		TeamSeasonRecord record = teamSeasonAnalysis.getTeamDataByAbbr(abbr);
 		
-		return new TeamDetailVO(profile, playerProfiles, record, SVGHandler.getTeamLogo(abbr));
+		MatchQuery matchQuery = new MatchQuery();
+		ArrayList<MatchProfileVO> matchRecords = matchQuery.getMatchRecordByTeamAbbr(abbr);
+		
+		return new TeamDetailVO(profile, playerProfiles, record, SVGHandler.getTeamLogo(abbr),
+				matchRecords);
 	}
+	
 }

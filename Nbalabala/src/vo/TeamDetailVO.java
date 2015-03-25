@@ -14,19 +14,26 @@ public class TeamDetailVO {
 	
 	private TeamProfileVO profile;
 	
+	/** 球员阵容 */
 	private ArrayList<PlayerProfileVO> players;
 	
+	/** 赛季数据 */
 	private TeamSeasonRecord seasonRecord;
 	
 	private Image logo;
+	
+	/** 比赛记录 */
+	private ArrayList<MatchProfileVO> matchRecords;
 
 	public TeamDetailVO(TeamProfileVO profile,
-			ArrayList<PlayerProfileVO> players, TeamSeasonRecord seasonRecord, Image logo) {
+			ArrayList<PlayerProfileVO> players, TeamSeasonRecord seasonRecord, Image logo,
+			ArrayList<MatchProfileVO> matchRecords) {
 		super();
 		this.profile = profile;
 		this.players = players;
 		this.seasonRecord = seasonRecord;
 		this.logo = logo;
+		this.matchRecords = matchRecords;
 	}
 
 	public TeamProfileVO getProfile() {
@@ -43,6 +50,10 @@ public class TeamDetailVO {
 	
 	public Image getLogo() {
 		return logo;
+	}
+	
+	public ArrayList<MatchProfileVO> getMatchRecords(){
+		return matchRecords;
 	}
 
 }
