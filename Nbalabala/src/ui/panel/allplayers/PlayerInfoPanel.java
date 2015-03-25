@@ -162,7 +162,7 @@ public class PlayerInfoPanel extends BottomPanel {
 									"犯规数", "得分", "两双", "得分/篮板/助攻", "效率", "GmSc 效率值", "真实命中率", "投篮效率", "进攻篮板率", "防守篮板率",
 									"篮板率", "助攻率", "抢断率", "盖帽率", "失误率", "使用率"};
 		PlayerSeasonRecord playerSeason = detailVO.getSeasonRecord();
-		rowData = new String[3][columns.length];
+		rowData = new String[2][columns.length];
 		rowData[0][0] = "总数据";
 		rowData[1][0] = "平均数据";
 		rowData[0][1] = String.valueOf(playerSeason.getMatchCount());

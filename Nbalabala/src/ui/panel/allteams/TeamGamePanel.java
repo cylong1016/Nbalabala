@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -17,7 +18,6 @@ import ui.common.button.ImgButton;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
-import ui.panel.gamedata.GameDataPanel;
 import vo.MatchProfileVO;
 import vo.TeamDetailVO;
 import bl.teamquerybl.TeamQuery;
@@ -41,20 +41,26 @@ public class TeamGamePanel extends TeamSeasonPanel {
 	TeamButton teamButton;
 	TeamDetailVO teamDetail;
 	ArrayList<MatchProfileVO> matchProfile;
-	/** 新建一个实例以调用其中的方法 */
-	GameDataPanel gameData;
 
 	public TeamGamePanel(AllTeamsPanel allteams, MainController controller, String url, TeamButton teamButton,
 			int x) {
 		super(allteams, controller, url, teamButton, x);
 		this.controller = controller;
 		this.teamButton = teamButton;
-		gameData = new GameDataPanel(controller, "", 0);
 		addFindButton();
 		addDateChooser();
 		teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
 		matchProfile = teamDetail.getMatchRecords();
-		setTable();
+		setTable(matchProfile);
+		iniTable(x);
+	}
+	
+	/**
+	 * 覆盖父类的方法
+	 * @see ui.panel.allteams.TeamSeasonPanel#iniTable(int)
+	 */
+	public void iniTable(int X){
+		
 	}
 
 	String[] columns;
@@ -125,7 +131,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		}
 	}
 	
-	public void setTable() {
+	public void setTable(final ArrayList<MatchProfileVO> matchProfile) {
 		int gameSum = matchProfile.size();
 		columns = new String[] { "球队", "1", "2", "3", "4", "加时一", "加时二", "加时三", "总分", "" };
 		rowData = new String[2 * gameSum][columns.length];
@@ -192,8 +198,18 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		imgButton.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				Date date = dateChooser.getDate();
+				SimpleDateFormat  sd = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
+				String str = sd.format(date);
+				String[] dateArr = str.split("  ");
+				String[] dateTemp = dateArr[0].split("-");
+				String dateStr = dateTemp[1]+"-"+dateTemp[2];
 				for (int i = 0; i < matchProfile.size(); i++) {
-					// TODO setTable
+					if(dateStr.equals(matchProfile.get(i).getTime())){
+						ArrayList<MatchProfileVO> pro = new ArrayList<MatchProfileVO>();
+						pro.add(matchProfile.get(i));
+						TeamGamePanel.this.remove(scroll);
+						setTable(pro);
+					}
 				}
 			}
 		});

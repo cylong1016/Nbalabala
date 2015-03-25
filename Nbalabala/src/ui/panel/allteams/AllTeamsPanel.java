@@ -43,19 +43,19 @@ public class AllTeamsPanel extends BottomPanel {
 			buttonArr[i] = new TeamButton(beforeURL, x1, y1 + i * inter, url, "");
 		}
 		for (int i = 5; i < 10; i++) {
-			buttonArr[i] = new TeamButton(beforeURL, x1, y2 + (i - 5) * inter, url, url);
+			buttonArr[i] = new TeamButton(beforeURL, x1, y2 + (i - 5) * inter, url, "");
 		}
 		for (int i = 10; i < 15; i++) {
-			buttonArr[i] = new TeamButton(beforeURL, x1, y3 + (i - 10) * inter, url, url);
+			buttonArr[i] = new TeamButton(beforeURL, x1, y3 + (i - 10) * inter, url, "");
 		}
 		for (int i = 15; i < 20; i++) {
-			buttonArr[i] = new TeamButton(beforeURL, x2, y1 + (i - 15) * inter, url, url);
+			buttonArr[i] = new TeamButton(beforeURL, x2, y1 + (i - 15) * inter, url, "");
 		}
 		for (int i = 20; i < 25; i++) {
-			buttonArr[i] = new TeamButton(beforeURL, x2, y2 + (i - 20) * inter, url, url);
+			buttonArr[i] = new TeamButton(beforeURL, x2, y2 + (i - 20) * inter, url, "");
 		}
 		for (int i = 25; i < 30; i++) {
-			buttonArr[i] = new TeamButton(beforeURL, x2, y3 + (i - 25) * inter, url, url);
+			buttonArr[i] = new TeamButton(beforeURL, x2, y3 + (i - 25) * inter, url, "");
 		}
 	}
 

@@ -79,10 +79,25 @@ public class TeamSeasonPanel extends BottomPanel {
 		addButton();
 		setEffect(x);
 		addListener();
-		teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
-		addSeasonTable(teamDetail.getSeasonRecord());
 		addBack();
+		teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
 		addLabel(teamDetail.getLogo());
+		iniTable(x);
+	}
+	
+	/**
+	 * 判断哪个表格应该被显示出来
+	 * @param i
+	 * @author lsy
+	 * @version 2015年3月25日  下午1:15:54
+	 */
+	public void iniTable(int i){
+		if(i==0){
+			addSeasonTable(teamDetail.getSeasonRecord());
+		}else{
+			ArrayList<PlayerProfileVO> players = teamDetail.getPlayers();
+			setPlayerTable(players);
+		}
 	}
 	
 	/**
@@ -91,7 +106,7 @@ public class TeamSeasonPanel extends BottomPanel {
 	 * @version 2015年3月25日  上午11:43:29
 	 */
 	public void addLabel(Image img){
-		logo = new ImgLabel(100,-25,270,270,img);
+		logo = new ImgLabel(100,-25,250,250,img);
 		teamName = new MyLabel(350,50,300,50,match());
 		teamName.setForeground(UIConfig.BUTTON_COLOR);
 		teamName.setFont(new Font("微软雅黑",0,30));
@@ -135,7 +150,7 @@ public class TeamSeasonPanel extends BottomPanel {
 		columns = new String[]{ "", "球队名称", "胜场数", "负场数", "总场数", "胜率", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手",
 				"三分命中率", "罚球命中", "罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "进攻篮板效率", "防守篮板效率", "进攻回合", "进攻效率",
 				"防守回合", "防守效率", "抢断", "抢断效率", "助攻", "助攻率", "盖帽", "失误", "犯规", "得分" };
-		rowData = new String[3][columns.length];
+		rowData = new String[2][columns.length];
 		table = new BottomTable(rowData, columns);
 		for(int i = 0; i < 1; i++) {
 			rowData[i][0] = "总数据";
@@ -238,6 +253,9 @@ public class TeamSeasonPanel extends BottomPanel {
 			TeamSeasonButton.current.back();
 			TeamSeasonButton.current = (TeamSeasonButton) e.getSource();
 			if (e.getSource() == button[0]) {
+				TeamSeasonPanel.this.remove(scroll);
+				teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
+				addSeasonTable(teamDetail.getSeasonRecord());
 				return;
 			} else if (e.getSource() == button[1]) {
 				TeamSeasonPanel.this.remove(scroll);
@@ -245,8 +263,10 @@ public class TeamSeasonPanel extends BottomPanel {
 				ArrayList<PlayerProfileVO> players = teamDetail.getPlayers();
 				setPlayerTable(players);
 			} else if (e.getSource() == button[2]) {
+				TeamSeasonPanel.this.remove(scroll);
 				controller.toTeamGamePanel(allteams,TeamSeasonPanel.this, teamButton);
 			}
+			TeamSeasonPanel.this.repaint();
 		}
 	}
 

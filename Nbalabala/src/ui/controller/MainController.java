@@ -150,7 +150,7 @@ public class MainController {
 	 */
 	public void toTeamGamePanel(AllTeamsPanel allteams,Panel panel,TeamButton button) {
 		frame.remove(panel);
-		teamGamePanel = new TeamGamePanel(allteams,this,UIConfig.IMG_PATH + "teams/teamGameBG.png",button,2);
+		teamGamePanel = new TeamGamePanel(allteams,this,UIConfig.IMG_PATH + "teams/teamSeasonBG.png",button,2);
 		frame.setPanel(teamGamePanel);
 	}
 	
