@@ -86,6 +86,15 @@ public class PlayerData implements PlayerDataService{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		//有些球员参加过比赛却没有球员资料，也应该将其加入
+		ArrayList<String> names = new SeasonData().getPlayerNames();
+		for (String name : names){
+			if (!players.containsKey(name)) {
+				players.put(name, new PlayerProfileVO(getPotraitImageByName("NULL_PLAYER_FOUND"), 
+						name));
+			}
+		}
 	}
 
 	/**
@@ -168,7 +177,7 @@ public class PlayerData implements PlayerDataService{
 		keyword = keyword.toLowerCase();
 		while (itr.hasNext()) {
 			PlayerProfileVO po = itr.next().getValue();
-			if (po.getName().contains(keyword)) result.add(po);
+			if (po.getName().toLowerCase().contains(keyword)) result.add(po);
 		}
 		Comparator<PlayerProfileVO> comparator = new Comparator<PlayerProfileVO>() {
 			public int compare(PlayerProfileVO p1, PlayerProfileVO p2) {
@@ -178,5 +187,4 @@ public class PlayerData implements PlayerDataService{
 		Collections.sort(result, comparator);
 		return result;
 	}
-	
 }
