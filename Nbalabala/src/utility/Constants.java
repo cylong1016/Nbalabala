@@ -84,12 +84,11 @@ public class Constants {
 	}
 	
 	public static String translateDate(String date) {
-		System.out.println(date);
 		String[] strings = date.split(" |,");
-		int month;
-		if (strings.length == 0) {
+		if (strings.length == 1) {
 			return UNKNOWN;
 		}
+		int month;
 		switch (strings[0]) {
 		case "JAN":
 			month = 1;

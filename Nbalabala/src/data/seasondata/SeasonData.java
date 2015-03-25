@@ -424,8 +424,6 @@ public class SeasonData implements SeasonDataService {
 //					playerRecord.getTurnOverPercent()+ "  " + playerRecord.getUsePercent()+ "  " +playerRecord.getDoubleDouble());}
 	}
 	
-	public static void main(String[]args){
-		new SeasonData();
 //		TeamSeasonRecord record = SeasonData.teamRecords.get("CHI");
 //		System.out.println(record.getMatchCount() + "  " + record.getFieldGoal() + "  " + record.getFieldAttempt() + "  " + 
 //		record.getThreePointGoal() + "  " + record.getThreePointAttempt() + "  " + record.getFreethrowGoal() + "  " + record.getFreethrowAttempt());
@@ -435,7 +433,6 @@ public class SeasonData implements SeasonDataService {
 //		System.out.println(record.getWinning() + "  " + record.getOffensiveRound() + "  " + record.getOffensiveEff() + "  " + 
 //		record.getDefensiveRound() + "  " +record.getDefensiveEff());
 //		System.out.println(record.getOffensiveReboundEff()+ "  " +record.getDefensiveReboundEff()+ "  " +record.getStealEff()+ "  " +record.getAssistEff());
-	}
 	/**
 	 * TeamVO [fullName=Bulls, abbreviation=CHI, location=Chicago, division=E, 
 	 * zone=Central, home=United Center, setupTime=1966, appearance=82, hit=2829, 
