@@ -32,7 +32,7 @@ public class LeftPanel extends Panel {
 	
 	/** 横纵坐标 间距 宽高 */
 //	private int x = 58, y = 202, inter = 54;
-	private int x = 6, y = 314, inter = 41;
+	private int x = 6, y = 312, inter = 39;
 	/** 图片地址 */
 	String url = UIConfig.IMG_PATH + "sidebar/";
 	private String trans = url + "trans.png";
@@ -51,6 +51,7 @@ public class LeftPanel extends Panel {
 		this.controller = controller;
 		this.setBounds(secPanelX, 0, UIConfig.LEFT_WIDTH, UIConfig.WIDTH);
 		bgImage = new ImageIcon(url + "BG.png").getImage();
+		buttonArr = new ImgButton[]{allPlayers,allTeams,game,playerData,teamData,returnButton};
 		setButton();
 		addButton();
 	}
@@ -62,17 +63,26 @@ public class LeftPanel extends Panel {
 	 * @version 2015年3月20日 上午12:02:28
 	 */
 	public void setButton() {
-		returnButton = new ImgButton(url + "return.png", 13, 529, url + "returnOn.png", url
-				+ "returnClick.png");
-		allPlayers = new ImgButton(trans, x, y, on, on);
-		allTeams = new ImgButton(trans, x, y + inter, on, on);
-		game = new ImgButton(trans, x, y + 2 * inter, on, on);
-		playerData = new ImgButton(trans, x, y + 3 * inter, on, on);
-		teamData = new ImgButton(trans, x, y + 4 * inter, on, on);
+//		allPlayers = new ImgButton(url + "allPlayers.png", x, y, url + "allPlayersOn.png", url
+//				+ "allPlayersClick.png");
+		for (int i = 0; i < buttonArr.length; i++) {
+			buttonArr[i] = new ImgButton(trans, x, y + i * inter, on, on);
+		}
+//		allTeams = new ImgButton(url + "allTeams.png", x, y + inter, url + "allTeamsOn.png", url
+//				+ "allTeamssClick.png");
+//		game = new ImgButton(url + "game.png", x, y + 2 * inter, url + "gameOn.png", url
+//				+ "gameClick.png");
+//		playerData = new ImgButton(url + "playerData.png", x, y + 3 * inter, url + "playerDataOn.png", url
+//				+ "playerClick.png");
+//		teamData = new ImgButton(url + "teamData.png", x, y + 4 * inter, url + "teamDataOn.png", url
+//				+ "teamDataClick.png");
+//		returnButton = new ImgButton(url + "return.png", 13, 529, url + "returnOn.png", url
+//				+ "returnClick.png");
+		
 	}
 	
 	public void addButton(){
-		buttonArr = new ImgButton[]{allPlayers,allTeams,game,playerData,teamData,returnButton};
+//		buttonArr = new ImgButton[]{allPlayers,allTeams,game,playerData,teamData,returnButton};
 		for(int i =0;i<buttonArr.length;i++){
 			this.add(buttonArr[i]);
 			buttonArr[i].addMouseListener(mou);
