@@ -1,45 +1,176 @@
 package ui.panel.allteams;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import data.seasondata.TeamSeasonRecord;
+import javax.swing.ImageIcon;
+
 import ui.DateChooser;
 import ui.UIConfig;
+import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
+import ui.common.table.BottomScrollPane;
+import ui.common.table.BottomTable;
 import ui.controller.MainController;
+import ui.panel.gamedata.GameDataPanel;
 import vo.MatchProfileVO;
-import bl.matchquerybl.MatchQuery;
-import blservice.MatchQueryBLService;
+import vo.TeamDetailVO;
+import bl.teamquerybl.TeamQuery;
+import blservice.TeamQueryBLService;
+import data.seasondata.TeamSeasonRecord;
 
 /**
- * 球队赛季数据界面
+ * 球队赛程数据界面
+ * 
  * @author lsy
- * @version 2015年3月21日  上午12:28:47
+ * @version 2015年3月21日 上午12:28:47
  */
-public class TeamGamePanel extends TeamSeasonPanel{
+public class TeamGamePanel extends TeamSeasonPanel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 5247981003029326464L;
 	ImgButton imgButton;
 	MainController controller;
 	DateChooser dateChooser;
-	MatchQueryBLService matchQuery = new MatchQuery();
-	
-	public TeamGamePanel(AllTeamsPanel allteams,MainController controller, String url,TeamButton teamButton,int x) {
-		super(allteams,controller, url, teamButton,x);
-		addFindButton();
+	TeamQueryBLService teamQuery = new TeamQuery();
+	TeamButton teamButton;
+	TeamDetailVO teamDetail;
+	ArrayList<MatchProfileVO> matchProfile;
+	/** 新建一个实例以调用其中的方法 */
+	GameDataPanel gameData;
+
+	public TeamGamePanel(AllTeamsPanel allteams, MainController controller, String url, TeamButton teamButton,
+			int x) {
+		super(allteams, controller, url, teamButton, x);
 		this.controller = controller;
+		this.teamButton = teamButton;
+		gameData = new GameDataPanel(controller, "", 0);
+		addFindButton();
 		addDateChooser();
+		teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
+		matchProfile = teamDetail.getMatchRecords();
+		setTable();
+	}
+
+	String[] columns;
+	String[][] rowData;
+	BottomScrollPane scroll;
+	ImageIcon icon;
+	ArrayList<Image> imgArr = new ArrayList<Image>();
+	BottomTable table;
+	DecimalFormat df = new DecimalFormat("0.000");
+	/** 两个队伍每节的比分 */
+	String[] score1 = { "0", "0", "0", "0", "0", "0", "0" };
+	String[] score2 = { "0", "0", "0", "0", "0", "0", "0" };
+	/** 两支球队缩写 */
+	String[] teamShort;
+	/** 两支球队比赛总分 */
+	String[] scoreAll;
+	/** 每节比分 */
+	String[] eachScore;
+	/** 球队全称 */
+	String[] teamLong;
+	String[] team = new String[] { "凯尔特人", "篮网", "尼克斯", "76人", "猛龙", "公牛", "骑士", "活塞", "步行者", "雄鹿", "老鹰", "黄蜂",
+			"热火", "魔术", "奇才", "勇士", "快船", "湖人", "太阳", "国王", "掘金", "森林狼", "雷霆", "开拓者", "爵士", "小牛", "火箭", "灰熊",
+			"鹈鹕", "马刺" };
+	String[] teamArr = new String[] { "BOS", "BKN", "NYK", "PHI", "TOR", "CHI", "CLE", "DET", "IND", "MIL", "ATL",
+			"CHA", "MIA", "ORL", "WAS", "GSW", "LAC", "LAL", "PHX", "SAC", "DEN", "MIN", "OKC", "POR", "UTA",
+			"DAL", "HOU", "MEM", "NOP", "SAS" };
+
+	/**
+	 * 拆解传回来的vo
+	 * 
+	 * @author lsy
+	 * @version 2015年3月22日 上午12:04:52
+	 */
+	public void analyzeVO(MatchProfileVO proVOArray) {
+		teamLong = new String[2];
+		teamShort = proVOArray.getTeam().split("-");
+		teamLong[0] = match(teamShort[0]);
+		teamLong[1] = match(teamShort[1]);
+		scoreAll = proVOArray.getScore().split("-");// 两支球队比赛总分
+		eachScore = proVOArray.getEachSectionScore().split(";");
+		int eachlth = eachScore.length;
+		for (int i = 0; i < eachlth; i++) {
+			String[] scoreTemp = eachScore[i].split("-");
+			score1[i] = scoreTemp[0];
+			score2[i] = scoreTemp[1];
+		}
+	}
+
+	/**
+	 * 根据缩写返回球队全称
+	 * 
+	 * @author lsy
+	 * @version 2015年3月22日 上午12:01:45
+	 */
+	public String match(String abbr) {
+		for (int i = 0; i < 30; i++) {
+			if (teamArr[i].equals(abbr)) {
+				return team[i];
+			}
+		}
+		return null;
+	}
+
+	public void addScore(int line) {
+		for(int i = 0; i < 7; i++) {
+			rowData[2 * line ][i + 1] = score1[i];
+			rowData[2 * line + 1][i + 1] = score2[i];
+		}
 	}
 	
-	public void addSeasonTable(TeamSeasonRecord record) {}
-	
+	public void setTable() {
+		int gameSum = matchProfile.size();
+		columns = new String[] { "球队", "1", "2", "3", "4", "加时一", "加时二", "加时三", "总分", "" };
+		rowData = new String[2 * gameSum][columns.length];
+		for (int j = 0; j < gameSum * 2; j = j + 2) {
+			MatchProfileVO pro = matchProfile.get(j / 2);
+			score1 = new String[] { "0", "0", "0", "0", "0", "0", "0" };
+			score2 = new String[] { "0", "0", "0", "0", "0", "0", "0" };
+			analyzeVO(pro);
+			rowData[j][0] = teamLong[0];
+			rowData[j + 1][0] = teamLong[1];
+			rowData[j][8] = scoreAll[0];
+			rowData[j + 1][8] = scoreAll[1];
+			rowData[j][9] = "数据统计";
+			addScore(j / 2);
+		}
+		table = new BottomTable(rowData, columns);
+		try {
+			table.addMouseListener(new UserMouseAdapter() {
+
+				public void mouseClicked(MouseEvent e) {
+					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
+					if (rowI > -1) {
+						 controller.toOneGamePanel(TeamGamePanel.this,
+						 matchProfile.get(rowI/2), TeamGamePanel.this);
+					}
+
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		scroll = new BottomScrollPane(table);
+		scroll.setLocation(57, 285);
+		this.add(scroll);
+	}
+
+	/**
+	 * 覆盖父类的方法，让父类的表格不显示
+	 */
+	public void addSeasonTable(TeamSeasonRecord record) {
+	}
+
 	public void addBack() {
-		ImgButton back = new ImgButton(UIConfig.IMG_PATH + "back.png", 50, 50,  UIConfig.IMG_PATH + "back.png",  UIConfig.IMG_PATH + "back.png");
+		ImgButton back = new ImgButton(UIConfig.IMG_PATH + "back.png", 50, 50, UIConfig.IMG_PATH + "back.png",
+				UIConfig.IMG_PATH + "back.png");
 		this.add(back);
 		back.addMouseListener(new MouseAdapter() {
 
@@ -49,47 +180,52 @@ public class TeamGamePanel extends TeamSeasonPanel{
 
 		});
 	}
-	
-	public void addDateChooser(){
+
+	public void addDateChooser() {
 		dateChooser = new DateChooser();
-		controller.addDateChooserPanel(this,dateChooser,722,248);
+		controller.addDateChooserPanel(this, dateChooser, 722, 248);
 	}
-	
-	public void addFindButton(){
-		 imgButton = new ImgButton(url+"search.png",893,250,url+"searchOn.png",url+"searchClick.png");
-		 this.add(imgButton);
-		 imgButton.addMouseListener(new MouseAdapter(){
-			 public void mousePressed(MouseEvent e) {
-				 Date date = dateChooser.getDate();
-				 ArrayList<MatchProfileVO> matchProfile = matchQuery.screenMatchByDate(date);
-				 //TODO setTable
-			 }
-		 });
+
+	public void addFindButton() {
+		imgButton = new ImgButton(url + "search.png", 893, 250, url + "searchOn.png", url + "searchClick.png");
+		this.add(imgButton);
+		imgButton.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				Date date = dateChooser.getDate();
+				for (int i = 0; i < matchProfile.size(); i++) {
+					// TODO setTable
+				}
+			}
+		});
 	}
-	
+
+	public void getGame() {
+
+	}
+
 	public void setEffect() {
 		button[2].setOpaque(true);
 		button[2].setBackground(UIConfig.BUTTON_COLOR);
 		button[2].setForeground(Color.white);
-}
-	public void addListener(){
+	}
+
+	public void addListener() {
 		MouListener mou1 = new MouListener();
-		for(int i = 0; i < 3; i++) {
+		for (int i = 0; i < 3; i++) {
 			button[i].addMouseListener(mou1);
 		}
 	}
-	
-	class MouListener extends MouseAdapter{
-		 public void mousePressed(MouseEvent e) {
-			 if(e.getSource() == button[0]){
-				 controller.toTeamSeasonPanel(allteams,TeamGamePanel.this,teamButton,0);
-			 }else if(e.getSource() == button[1]){
-				 controller.toTeamSeasonPanel(allteams,TeamGamePanel.this,teamButton,1);
-			 }else if(e.getSource() == button[2]){
-				 return;
-			 }
-		 }
+
+	class MouListener extends MouseAdapter {
+		public void mousePressed(MouseEvent e) {
+			if (e.getSource() == button[0]) {
+				controller.toTeamSeasonPanel(allteams, TeamGamePanel.this, teamButton, 0);
+			} else if (e.getSource() == button[1]) {
+				controller.toTeamSeasonPanel(allteams, TeamGamePanel.this, teamButton, 1);
+			} else if (e.getSource() == button[2]) {
+				return;
+			}
+		}
 	}
-	
 
 }

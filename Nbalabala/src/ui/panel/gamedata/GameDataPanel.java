@@ -1,7 +1,5 @@
 package ui.panel.gamedata;
 
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -11,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.ImageIcon;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 
 import ui.DateChooser;
 import ui.UIConfig;
@@ -23,7 +19,6 @@ import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
-import ui.panel.allplayers.AllPlayersPanel;
 import vo.MatchProfileVO;
 import bl.matchquerybl.MatchQuery;
 import blservice.MatchQueryBLService;
@@ -91,6 +86,12 @@ public class GameDataPanel extends BottomPanel {
 		addDateChooser();
 		addConfirmBtn();
 	}
+	
+
+	public GameDataPanel(MainController controller, String url,int i) {
+		super(controller, url);
+	}
+
 
 	/**
 	 * 添加确认按钮
@@ -211,41 +212,6 @@ public class GameDataPanel extends BottomPanel {
 		this.add(scroll);
 	}
 	
-	/**
-	 * 设置table不同行的不同颜色
-	 * @param table
-	 * @author lsy
-	 * @version 2015年3月22日 下午8:41:14
-	 */
-	private void makeFace(JTable table) {
-
-		try {
-			DefaultTableCellRenderer tcr = new DefaultTableCellRenderer() {
-
-				/** serialVersionUID */
-				private static final long serialVersionUID = -4145147988893713337L;
-
-				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-					if (row == 0 || (row % 4 == 3 || row % 4 == 0)) {
-
-						setBackground(UIConfig.BUTTON_COLOR);
-						setForeground(Color.white);
-					} else {
-						setBackground(Color.white);
-						setForeground(Color.black);
-					}
-					return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-				}
-			};
-			for(int i = 0; i < table.getColumnCount(); i++) {
-				table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-	}
-
 	public void addScore(int line) {
 		for(int i = 0; i < 7; i++) {
 			rowData[2 * line ][i + 1] = score1[i];

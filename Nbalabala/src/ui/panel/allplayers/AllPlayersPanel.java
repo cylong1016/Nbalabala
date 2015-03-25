@@ -20,7 +20,6 @@ import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.common.textField.MyTextField;
 import ui.controller.MainController;
-import vo.PlayerDetailVO;
 import vo.PlayerProfileVO;
 import bl.playerquerybl.PlayerQuery;
 import blservice.PlayerQueryBLService;
@@ -126,11 +125,10 @@ public class AllPlayersPanel extends BottomPanel {
 		this.add(findButton);
 		findButton.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				PlayerDetailVO playerInfoArr = playerInfo.getPlayerDetailByName(field.getText());
-				ArrayList<PlayerProfileVO> playerPro= new ArrayList<PlayerProfileVO>();
-				playerPro.add(playerInfoArr.getProfile());
+				ArrayList<PlayerProfileVO> playerInfoArr = playerInfo.searchPlayers(field.getText());
 				AllPlayersPanel.this.remove(scroll);
-				setTable(playerPro);
+				setTable(playerInfoArr);
+				AllPlayersPanel.this.repaint();
 			}
 		});
 	}

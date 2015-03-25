@@ -1,6 +1,7 @@
 package ui.panel.allteams;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -91,7 +92,9 @@ public class TeamSeasonPanel extends BottomPanel {
 	 */
 	public void addLabel(Image img){
 		logo = new ImgLabel(100,-25,270,270,img);
-		teamName = new MyLabel(400,50,100,50,match());
+		teamName = new MyLabel(350,50,300,50,match());
+		teamName.setForeground(UIConfig.BUTTON_COLOR);
+		teamName.setFont(new Font("微软雅黑",0,30));
 		this.add(logo);
 		this.add(teamName);
 	}

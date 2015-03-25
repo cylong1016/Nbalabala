@@ -37,7 +37,7 @@ public class GamePanel extends BottomPanel {
 	/** 时间地址 */
 	String timeURL;
 	ImgButton timeImg;
-	GameDataPanel gameData;
+	BottomPanel gameData;
 	MatchProfileVO matchPro;
 	MatchQueryBLService matchQuery;
 	GameDetailButton teamName1, teamName2;
@@ -72,7 +72,7 @@ public class GamePanel extends BottomPanel {
 	ImgButton back;
 	MainController mainController;
 
-	public GamePanel(MainController controller, String url, MatchProfileVO matchProfile, GameDataPanel gameData) {
+	public GamePanel(MainController controller, String url, MatchProfileVO matchProfile,BottomPanel gameData) {
 		super(controller, url);
 		this.gameData = gameData;
 		this.matchPro = matchProfile;
@@ -212,11 +212,17 @@ public class GamePanel extends BottomPanel {
 	 * @version 2015年3月22日 下午5:16:21
 	 */
 	public void addTime() {
-		timeURL = url + "time" + (gameData.analyzeSection(matchPro) - 4) + ".png";
+		timeURL = url + "time" + (analyzeSection(matchPro) - 4) + ".png";
 		timeImg = new ImgButton(timeURL, 260, 80, timeURL, timeURL);
 		this.add(timeImg);
 	}
 
+	public int analyzeSection(MatchProfileVO pro) {
+		String gameInfo = pro.getEachSectionScore();
+		String[] eachSection = gameInfo.split(";");
+		return eachSection.length;
+	}
+	
 	String[] scoreAll, eachScore, score1, score2;
 
 	public void getScore() {

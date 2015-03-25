@@ -171,7 +171,7 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月21日  下午5:03:21
 	 */
-	public void toOneGamePanel(Panel panel,MatchProfileVO matchProfile,GameDataPanel gameData){
+	public void toOneGamePanel(Panel panel,MatchProfileVO matchProfile,BottomPanel gameData){
 		frame.remove(panel);
 		gamePanel = new GamePanel(this,UIConfig.IMG_PATH+"game/gameBG.png",matchProfile,gameData);
 		frame.setPanel(gamePanel);
