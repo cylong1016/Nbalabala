@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import ui.UIConfig;
+import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
@@ -24,7 +25,7 @@ public class PlayerSeasonPanel extends PlayerInfoPanel{
 	/** serialVersionUID */
 	private static final long serialVersionUID = -1936824766623215286L;
 
-	public PlayerSeasonPanel(MainController controller, String url, PlayerProfileVO vo, AllPlayersPanel allPlayers) {
+	public PlayerSeasonPanel(MainController controller, String url, PlayerProfileVO vo, BottomPanel allPlayers) {
 		super(controller, url, vo, allPlayers);
 	}
 	

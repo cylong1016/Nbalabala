@@ -44,17 +44,17 @@ public class PlayerInfoPanel extends BottomPanel {
 	PlayerDetailVO detailVO;
 	ImgButton back;
 	String url = UIConfig.IMG_PATH + "players/";
-	AllPlayersPanel allPlayers;
+	BottomPanel allPlayers;
 	MyLabel lbName, lbTeam, lbNumber, lbPosition, lbBirth, lbHeight, lbWeight, lbAge, lbexp, lbschool;
 	MyLabel profileLabel[] = new MyLabel[10];
 	int lbX = 350, lbY = 40, interX = 180, interY = 30, width = 200, lbHgt = 35;
 	String[] lbstr;
 
-	public PlayerInfoPanel(MainController controller, String url, PlayerProfileVO vo, AllPlayersPanel allPlayers) {
+	public PlayerInfoPanel(MainController controller, String url, PlayerProfileVO vo, BottomPanel allPlayers) {
 		super(controller, url);
 		this.vo = vo;
 		this.controller = controller;
-		this.allPlayers = allPlayers;
+		this.allPlayers =  allPlayers;
 		playerQuery = new PlayerQuery();
 		detailVO = playerQuery.getPlayerDetailByName(vo.getName());
 		lbstr = new String[]{"姓名: " + vo.getName(), "球队: " + vo.getTeam(), "号码: " + vo.getNumber(),

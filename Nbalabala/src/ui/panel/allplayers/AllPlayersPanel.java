@@ -93,11 +93,11 @@ public class AllPlayersPanel extends BottomPanel {
 			rowData[i][5] = ppVO.getBirth();
 		}
 		table = new BottomTable(rowData, columns);
-		//TODO 将头像放入表格的第一列 监听已加好 双击球员某一信息进入下一界面
+		//TODO 将头像放入表格的第一列 监听已加好 单击球员某一信息进入下一界面
 		try{
 			table.addMouseListener(new UserMouseAdapter(){
 				
-				public void mouseDoubleClicked(MouseEvent e){
+				public void mouseClicked(MouseEvent e){
 					int rowI  = table.rowAtPoint(e.getPoint());// 得到table的行号
 					if ( rowI > -1){
 						controller.toPlayerInfoPanel(AllPlayersPanel.this, players.get(rowI),AllPlayersPanel.this);

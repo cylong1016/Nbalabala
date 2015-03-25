@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Date;
 
+import data.seasondata.TeamSeasonRecord;
 import ui.DateChooser;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
@@ -24,16 +25,29 @@ public class TeamGamePanel extends TeamSeasonPanel{
 	/** serialVersionUID */
 	private static final long serialVersionUID = 5247981003029326464L;
 	ImgButton imgButton;
-	String url = UIConfig.IMG_PATH+"teams/";
 	MainController controller;
 	DateChooser dateChooser;
 	MatchQueryBLService matchQuery = new MatchQuery();
 	
-	public TeamGamePanel(MainController controller, String url,TeamButton teamButton,int x) {
-		super(controller, url, teamButton,x);
+	public TeamGamePanel(AllTeamsPanel allteams,MainController controller, String url,TeamButton teamButton,int x) {
+		super(allteams,controller, url, teamButton,x);
 		addFindButton();
 		this.controller = controller;
 		addDateChooser();
+	}
+	
+	public void addSeasonTable(TeamSeasonRecord record) {}
+	
+	public void addBack() {
+		ImgButton back = new ImgButton(UIConfig.IMG_PATH + "back.png", 50, 50,  UIConfig.IMG_PATH + "back.png",  UIConfig.IMG_PATH + "back.png");
+		this.add(back);
+		back.addMouseListener(new MouseAdapter() {
+
+			public void mousePressed(MouseEvent e) {
+				controller.backToGameDataPanel(TeamGamePanel.this, allteams);
+			}
+
+		});
 	}
 	
 	public void addDateChooser(){
@@ -68,9 +82,9 @@ public class TeamGamePanel extends TeamSeasonPanel{
 	class MouListener extends MouseAdapter{
 		 public void mousePressed(MouseEvent e) {
 			 if(e.getSource() == button[0]){
-				 controller.toTeamSeasonPanel(TeamGamePanel.this,teamButton,0);
+				 controller.toTeamSeasonPanel(allteams,TeamGamePanel.this,teamButton,0);
 			 }else if(e.getSource() == button[1]){
-				 controller.toTeamSeasonPanel(TeamGamePanel.this,teamButton,1);
+				 controller.toTeamSeasonPanel(allteams,TeamGamePanel.this,teamButton,1);
 			 }else if(e.getSource() == button[2]){
 				 return;
 			 }

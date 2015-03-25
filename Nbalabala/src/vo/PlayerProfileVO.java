@@ -103,6 +103,7 @@ public class PlayerProfileVO {
 
 	public String getHeight() {
 		// 身高除了显示英尺、英寸以外还换算为厘米，保留一位小数
+		try{
 		String [] s = height.split("-");
 		int feet = Integer.parseInt(s[0]);
 		int inches = Integer.parseInt(s[1]);
@@ -110,14 +111,21 @@ public class PlayerProfileVO {
 		DecimalFormat decimalFormat = new DecimalFormat(".#");
 		String cmsString = decimalFormat.format(cms);	
 		return s[0] + "英尺" + s[1] + "英寸（" +cmsString + "厘米）";
+		}catch(Exception e){
+			return "无资料";
+		}
 	}
 
 	public String getWeight() {
 		//体重显示磅和千克，保留一位小数
+		try{
 		double kgs = 0.4536 * Integer.parseInt(weight);
 		DecimalFormat decimalFormat = new DecimalFormat(".#");
 		String kgsString = decimalFormat.format(kgs);
 		return weight + "磅（" + kgsString +"千克）";
+		}catch(Exception e){
+			return "无资料";
+		}
 	}
 
 	public String getAge() {

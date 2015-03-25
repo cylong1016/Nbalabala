@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 
 import ui.UIConfig;
 import ui.common.frame.Frame;
+import ui.common.panel.BottomPanel;
 import ui.common.panel.Panel;
 import ui.panel.allplayers.AllPlayersPanel;
 import ui.panel.allplayers.PlayerInfoPanel;
@@ -135,9 +136,9 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月20日  下午11:45:39
 	 */
-	public void toTeamSeasonPanel(Panel panel,TeamButton button,int x){
+	public void toTeamSeasonPanel(AllTeamsPanel allteams,Panel panel,TeamButton button,int x){
 		frame.remove(panel);
-		teamSeasonpanel = new TeamSeasonPanel(this,"images/teams/teamSeasonBG.png",button,x);
+		teamSeasonpanel = new TeamSeasonPanel(allteams,this,"images/teams/teamSeasonBG.png",button,x);
 		frame.setPanel(teamSeasonpanel);
 	}
 	
@@ -147,9 +148,9 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月21日  上午12:31:15
 	 */
-	public void toTeamGamePanel(Panel panel,TeamButton button) {
+	public void toTeamGamePanel(AllTeamsPanel allteams,Panel panel,TeamButton button) {
 		frame.remove(panel);
-		teamGamePanel = new TeamGamePanel(this,UIConfig.IMG_PATH + "teams/teamGameBG.png",button,2);
+		teamGamePanel = new TeamGamePanel(allteams,this,UIConfig.IMG_PATH + "teams/teamGameBG.png",button,2);
 		frame.setPanel(teamGamePanel);
 	}
 	
@@ -177,7 +178,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 返回到球员数据界面
+	 * 返回到某一界面
 	 * @author lsy
 	 * @version 2015年3月24日  上午10:28:19
 	 */
@@ -192,13 +193,13 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月24日  上午11:19:21
 	 */
-	public void toPlayerInfoPanel(Panel panel,PlayerProfileVO vo,AllPlayersPanel allPanel){
+	public void toPlayerInfoPanel(Panel panel,PlayerProfileVO vo,BottomPanel allPanel){
 		frame.remove(panel);
 		playerInfoPanel = new PlayerInfoPanel(this,UIConfig.IMG_PATH+"players/playerInfoBG.png",vo,allPanel);
 		frame.setPanel(playerInfoPanel);
 	}
 	
-	public void toPlayerSeasonInfoPanel(Panel panel,PlayerProfileVO vo,AllPlayersPanel allPanel){
+	public void toPlayerSeasonInfoPanel(Panel panel,PlayerProfileVO vo,BottomPanel allPanel){
 		frame.remove(panel);
 		playerInfoPanel = new PlayerSeasonPanel(this,UIConfig.IMG_PATH+"players/playerGameBG.png",vo,allPanel);
 		frame.setPanel(playerInfoPanel);
