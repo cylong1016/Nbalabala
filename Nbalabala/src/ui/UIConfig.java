@@ -3,6 +3,7 @@ package ui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.text.DecimalFormat;
 
 /**
  * UI配置
@@ -51,6 +52,8 @@ public class UIConfig {
 	public static Color TABLE_SELECTIONBACK = Color.BLACK;
 	/** 表格预设大小 */
 	public static Dimension TABLE_DIMEN = new Dimension(888, 290);
+	/** 表格中数据显示的小数点位数 */
+	public static DecimalFormat format = new DecimalFormat("0.000");
 	/*----------------------------表格配置--------------------------------*/
 
 }

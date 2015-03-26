@@ -3,9 +3,9 @@ package ui.panel.playerData;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.button.TextButton;
 import ui.common.panel.BottomPanel;
@@ -33,8 +33,6 @@ public class PlayerDataPanel extends BottomPanel {
 	private BottomTable playerDataTable;
 	/** 放表格的滚动条 */
 	private BottomScrollPane scroll;
-	/** 表格中数据显示的小数点位数 */
-	private DecimalFormat format = new DecimalFormat("0.000");
 
 	/** 代表所有button集合 */
 	private Line_1_Button[] buttonLine1;
@@ -102,7 +100,7 @@ public class PlayerDataPanel extends BottomPanel {
 		addFindButton();
 		// 初始化界面的表格
 		ArrayList<PlayerSeasonRecord> iniArray = playerSeason.getAllPlayersSortedByName();
-		addTotalPlayerDataTable(iniArray);
+		setTotalPlayerTableData(iniArray);
 	}
 	
 	public void addFindButton(){
@@ -113,7 +111,11 @@ public class PlayerDataPanel extends BottomPanel {
 				ArrayList<PlayerSeasonRecord> seasonArray = playerSeason.getScreenedPlayers(Line_1_Button.current.p,Line_2_Button.current.division,
 						Line_3_Button.current.basis);
 				PlayerDataPanel.this.remove(scroll); // 删除以前的表格
-				addTotalPlayerDataTable(seasonArray); // 添加查询的数据
+				if(Line_4_Button.current == buttonLine4[0]) {
+					setTotalPlayerTableData(seasonArray); // 添加球员总数居
+				} else if(Line_4_Button.current == buttonLine4[1]) {
+					setAvgPlayerTableData(seasonArray); // 添加球员平均数据
+				}
 			}
 		});
 	}
@@ -262,12 +264,13 @@ public class PlayerDataPanel extends BottomPanel {
 			}
 			Line_4_Button.current.back();
 			Line_4_Button.current = (Line_4_Button) e.getSource();
-			ArrayList<PlayerSeasonRecord> iniArray = playerSeason.getAllPlayersSortedByName();
+			ArrayList<PlayerSeasonRecord> seasonArray = playerSeason.getScreenedPlayers(Line_1_Button.current.p,Line_2_Button.current.division,
+					Line_3_Button.current.basis);
 			PlayerDataPanel.this.remove(scroll); // 删除以前的table
 			if(e.getSource() == buttonLine4[0]) {
-				addTotalPlayerDataTable(iniArray); // 添加球员总数居
+				setTotalPlayerTableData(seasonArray); // 添加球员总数居
 			} else if(e.getSource() == buttonLine4[1]) {
-				addAvgPlayerDataTable(iniArray); // 添加球员平均数据
+				setAvgPlayerTableData(seasonArray); // 添加球员平均数据
 			}
 		}
 	}
@@ -278,11 +281,8 @@ public class PlayerDataPanel extends BottomPanel {
 	 * @author cylong
 	 * @version 2015年3月24日  下午11:43:17
 	 */
-	private void addTotalPlayerDataTable(ArrayList<PlayerSeasonRecord> playerArr) {
-		String[] columnNames = {"序号", "球员名称", "所属球队", "参赛场数", "先发场数", "在场时间", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手",
-									"三分命中率", "罚球命中", "罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "助攻", "助攻率", "盖帽", "盖帽率",
-									"犯规", "犯规率", "得分", "两双", "得分/篮板/助攻", "效率", "GmSc", "真实命中率", "投篮效率", "进攻篮板率", "防守篮板率",
-									"总篮板率", "抢断", "抢断率", "失误", "失误率", "使用率"};
+	private void setTotalPlayerTableData(ArrayList<PlayerSeasonRecord> playerArr) {
+		String[] columnNames = getColumnNames();
 		String[][] rowData = new String[playerArr.size()][columnNames.length];
 		playerDataTable = new BottomTable(rowData, columnNames);
 		for(int i = 0; i < playerArr.size(); i++) {
@@ -295,42 +295,39 @@ public class PlayerDataPanel extends BottomPanel {
 			rowData[i][5] = playerSeason.getTime();
 			rowData[i][6] = Integer.toString(playerSeason.getFieldGoal());
 			rowData[i][7] = Integer.toString(playerSeason.getFieldAttempt());
-			rowData[i][8] = format.format(playerSeason.getFieldPercent());
+			rowData[i][8] = UIConfig.format.format(playerSeason.getFieldPercent());
 			rowData[i][9] = Integer.toString(playerSeason.getThreePointGoal());
 			rowData[i][10] = Integer.toString(playerSeason.getThreePointAttempt());
-			rowData[i][11] = format.format(playerSeason.getThreePointPercent());
+			rowData[i][11] = UIConfig.format.format(playerSeason.getThreePointPercent());
 			rowData[i][12] = Integer.toString(playerSeason.getFreeThrowGoal());
 			rowData[i][13] = Integer.toString(playerSeason.getFreeThrowAttempt());
-			rowData[i][14] = format.format(playerSeason.getFreeThrowPercent());
+			rowData[i][14] = UIConfig.format.format(playerSeason.getFreeThrowPercent());
 			rowData[i][15] = Integer.toString(playerSeason.getOffensiveRebound());
 			rowData[i][16] = Integer.toString(playerSeason.getDefensiveRebound());
 			rowData[i][17] = Integer.toString(playerSeason.getTotalRebound());
 			rowData[i][18] = Integer.toString(playerSeason.getAssist());
-			rowData[i][19] = format.format(playerSeason.getAssistPercent());
+			rowData[i][19] = UIConfig.format.format(playerSeason.getAssistPercent());
 			rowData[i][20] = Integer.toString(playerSeason.getBlock());
-			rowData[i][21] = format.format(playerSeason.getBlockPercent());
+			rowData[i][21] = UIConfig.format.format(playerSeason.getBlockPercent());
 			rowData[i][22] = Integer.toString(playerSeason.getFoul());
-			rowData[i][23] = format.format(playerSeason.getFouldPercent());
+			rowData[i][23] = UIConfig.format.format(playerSeason.getFouldPercent());
 			rowData[i][24] = Integer.toString(playerSeason.getScore());
 			rowData[i][25] = Integer.toString(playerSeason.getDoubleDouble());
 			rowData[i][26] = Integer.toString(playerSeason.getScoreReboundAssist());
 			rowData[i][27] = Integer.toString(playerSeason.getEfficiency());
-			rowData[i][28] = format.format(playerSeason.getGmSc());
-			rowData[i][29] = format.format(playerSeason.getRealFieldPercent());
-			rowData[i][30] = format.format(playerSeason.getFieldEff());
-			rowData[i][31] = format.format(playerSeason.getOffensiveReboundPercent());
-			rowData[i][32] = format.format(playerSeason.getDefensiveReboundPercent());
-			rowData[i][33] = format.format(playerSeason.getTotalReboundPercent());
+			rowData[i][28] = UIConfig.format.format(playerSeason.getGmSc());
+			rowData[i][29] = UIConfig.format.format(playerSeason.getRealFieldPercent());
+			rowData[i][30] = UIConfig.format.format(playerSeason.getFieldEff());
+			rowData[i][31] = UIConfig.format.format(playerSeason.getOffensiveReboundPercent());
+			rowData[i][32] = UIConfig.format.format(playerSeason.getDefensiveReboundPercent());
+			rowData[i][33] = UIConfig.format.format(playerSeason.getTotalReboundPercent());
 			rowData[i][34] = Integer.toString(playerSeason.getSteal());
-			rowData[i][35] = format.format(playerSeason.getStealPercent());
+			rowData[i][35] = UIConfig.format.format(playerSeason.getStealPercent());
 			rowData[i][36] = Integer.toString(playerSeason.getTurnover());
-			rowData[i][37] = format.format(playerSeason.getTurnOverPercent());
-			rowData[i][38] = format.format(playerSeason.getUsePercent());
+			rowData[i][37] = UIConfig.format.format(playerSeason.getTurnOverPercent());
+			rowData[i][38] = UIConfig.format.format(playerSeason.getUsePercent());
 		}
-		
-		scroll = new BottomScrollPane(playerDataTable);
-		scroll.setLocation(57, 239); // 表格的位置
-		this.add(scroll);
+		addScrollPane(playerDataTable);		
 	}
 	
 	/**
@@ -339,11 +336,8 @@ public class PlayerDataPanel extends BottomPanel {
 	 * @author cylong
 	 * @version 2015年3月25日  上午2:02:02
 	 */
-	private void addAvgPlayerDataTable(ArrayList<PlayerSeasonRecord> playerArr) {
-		String[] columnNames = {"序号", "球员名称", "所属球队", "参赛场数", "先发场数", "在场时间", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手",
-		                        "三分命中率", "罚球命中", "罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "助攻", "助攻率", "盖帽", "盖帽率",
-		                        "犯规", "犯规率", "得分", "两双", "得分/篮板/助攻", "效率", "GmSc", "真实命中率", "投篮效率", "进攻篮板率", "防守篮板率",
-		                        "总篮板率", "抢断", "抢断率", "失误", "失误率", "使用率"};
+	private void setAvgPlayerTableData(ArrayList<PlayerSeasonRecord> playerArr) {
+		String[] columnNames = getColumnNames();
 		String[][] rowData = new String[playerArr.size()][columnNames.length];
 		playerDataTable = new BottomTable(rowData, columnNames);
 		for(int i = 0; i < playerArr.size(); i++) {
@@ -352,44 +346,61 @@ public class PlayerDataPanel extends BottomPanel {
 			rowData[i][1] = playerSeason.getName();
 			rowData[i][2] = playerSeason.getTeam();
 			rowData[i][3] = Integer.toString(playerSeason.getMatchCount());
-			rowData[i][4] = format.format(playerSeason.getFirstCountAvg());
+			rowData[i][4] = UIConfig.format.format(playerSeason.getFirstCountAvg());
 			rowData[i][5] = playerSeason.getTimeAvg();
-			rowData[i][6] = format.format(playerSeason.getFieldGoalAvg());
-			rowData[i][7] = format.format(playerSeason.getFieldAttemptAvg());
-			rowData[i][8] = format.format(playerSeason.getFieldPercent());
-			rowData[i][9] = format.format(playerSeason.getThreePointGoalAvg());
-			rowData[i][10] = format.format(playerSeason.getThreePointAttemptAvg());
-			rowData[i][11] = format.format(playerSeason.getThreePointPercent());
-			rowData[i][12] = format.format(playerSeason.getFreethrowGoalAvg());
-			rowData[i][13] = format.format(playerSeason.getFreethrowAttemptAvg());
-			rowData[i][14] = format.format(playerSeason.getFreeThrowPercent());
-			rowData[i][15] = format.format(playerSeason.getOffensiveReboundAvg());
-			rowData[i][16] = format.format(playerSeason.getDefensiveReboundAvg());
-			rowData[i][17] = format.format(playerSeason.getTotalReboundAvg());
-			rowData[i][18] = format.format(playerSeason.getAssistAvg());
-			rowData[i][19] = format.format(playerSeason.getAssistPercent());
-			rowData[i][20] = format.format(playerSeason.getBlockAvg());
-			rowData[i][21] = format.format(playerSeason.getBlockPercent());
-			rowData[i][22] = format.format(playerSeason.getFoulAvg());
-			rowData[i][23] = format.format(playerSeason.getFouldPercent());
-			rowData[i][24] = format.format(playerSeason.getScoreAvg());
-			rowData[i][25] = format.format(playerSeason.getDoubleDoubleAvg());
-			rowData[i][26] = format.format(playerSeason.getScoreReboundAssistAvg());
+			rowData[i][6] = UIConfig.format.format(playerSeason.getFieldGoalAvg());
+			rowData[i][7] = UIConfig.format.format(playerSeason.getFieldAttemptAvg());
+			rowData[i][8] = UIConfig.format.format(playerSeason.getFieldPercent());
+			rowData[i][9] = UIConfig.format.format(playerSeason.getThreePointGoalAvg());
+			rowData[i][10] = UIConfig.format.format(playerSeason.getThreePointAttemptAvg());
+			rowData[i][11] = UIConfig.format.format(playerSeason.getThreePointPercent());
+			rowData[i][12] = UIConfig.format.format(playerSeason.getFreethrowGoalAvg());
+			rowData[i][13] = UIConfig.format.format(playerSeason.getFreethrowAttemptAvg());
+			rowData[i][14] = UIConfig.format.format(playerSeason.getFreeThrowPercent());
+			rowData[i][15] = UIConfig.format.format(playerSeason.getOffensiveReboundAvg());
+			rowData[i][16] = UIConfig.format.format(playerSeason.getDefensiveReboundAvg());
+			rowData[i][17] = UIConfig.format.format(playerSeason.getTotalReboundAvg());
+			rowData[i][18] = UIConfig.format.format(playerSeason.getAssistAvg());
+			rowData[i][19] = UIConfig.format.format(playerSeason.getAssistPercent());
+			rowData[i][20] = UIConfig.format.format(playerSeason.getBlockAvg());
+			rowData[i][21] = UIConfig.format.format(playerSeason.getBlockPercent());
+			rowData[i][22] = UIConfig.format.format(playerSeason.getFoulAvg());
+			rowData[i][23] = UIConfig.format.format(playerSeason.getFouldPercent());
+			rowData[i][24] = UIConfig.format.format(playerSeason.getScoreAvg());
+			rowData[i][25] = UIConfig.format.format(playerSeason.getDoubleDoubleAvg());
+			rowData[i][26] = UIConfig.format.format(playerSeason.getScoreReboundAssistAvg());
 			rowData[i][27] = Integer.toString(playerSeason.getEfficiency());
-			rowData[i][28] = format.format(playerSeason.getGmSc());
-			rowData[i][29] = format.format(playerSeason.getRealFieldPercent());
-			rowData[i][30] = format.format(playerSeason.getFieldEff());
-			rowData[i][31] = format.format(playerSeason.getOffensiveReboundPercent());
-			rowData[i][32] = format.format(playerSeason.getDefensiveReboundPercent());
-			rowData[i][33] = format.format(playerSeason.getTotalReboundPercent());
-			rowData[i][34] = format.format(playerSeason.getStealAvg());
-			rowData[i][35] = format.format(playerSeason.getStealPercent());
-			rowData[i][36] = format.format(playerSeason.getTurnoverAvg());
-			rowData[i][37] = format.format(playerSeason.getTurnOverPercent());
-			rowData[i][38] = format.format(playerSeason.getUsePercent());
+			rowData[i][28] = UIConfig.format.format(playerSeason.getGmSc());
+			rowData[i][29] = UIConfig.format.format(playerSeason.getRealFieldPercent());
+			rowData[i][30] = UIConfig.format.format(playerSeason.getFieldEff());
+			rowData[i][31] = UIConfig.format.format(playerSeason.getOffensiveReboundPercent());
+			rowData[i][32] = UIConfig.format.format(playerSeason.getDefensiveReboundPercent());
+			rowData[i][33] = UIConfig.format.format(playerSeason.getTotalReboundPercent());
+			rowData[i][34] = UIConfig.format.format(playerSeason.getStealAvg());
+			rowData[i][35] = UIConfig.format.format(playerSeason.getStealPercent());
+			rowData[i][36] = UIConfig.format.format(playerSeason.getTurnoverAvg());
+			rowData[i][37] = UIConfig.format.format(playerSeason.getTurnOverPercent());
+			rowData[i][38] = UIConfig.format.format(playerSeason.getUsePercent());
 		}
-		
-		scroll = new BottomScrollPane(playerDataTable);
+		addScrollPane(playerDataTable);
+	}
+
+	private String[] getColumnNames() {
+		String[] columnNames = {"序号", "球员名称", "所属球队", "参赛场数", "先发场数", "在场时间", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手",
+		                        "三分命中率", "罚球命中", "罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "助攻", "助攻率", "盖帽", "盖帽率",
+		                        "犯规", "犯规率", "得分", "两双", "得分/篮板/助攻", "效率", "GmSc", "真实命中率", "投篮效率", "进攻篮板率", "防守篮板率",
+		                        "总篮板率", "抢断", "抢断率", "失误", "失误率", "使用率"};
+		return columnNames;
+	}
+	
+	/**
+	 * 将表格添加到ScrollPane上面
+	 * @param table
+	 * @author cylong
+	 * @version 2015年3月26日  下午7:27:37
+	 */
+	private void addScrollPane(BottomTable table) {
+		scroll = new BottomScrollPane(table);
 		scroll.setLocation(57, 239); // 表格的位置
 		this.add(scroll);
 	}
