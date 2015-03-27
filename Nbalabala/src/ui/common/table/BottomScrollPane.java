@@ -1,11 +1,16 @@
 package ui.common.table;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JViewport;
 import javax.swing.border.EmptyBorder;
 
 import ui.UIConfig;
@@ -19,6 +24,9 @@ public class BottomScrollPane extends JScrollPane {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -6211694438630784736L;
+	
+	/** 背景图片 */
+	private static Image bgImage = new ImageIcon("images/tableBG.png").getImage();
 
 	public BottomScrollPane(JTable table) {
 		this.initScrollPane(table);
@@ -35,6 +43,16 @@ public class BottomScrollPane extends JScrollPane {
 	 * @version Jun 12, 2014 12:07:09 AM
 	 */
 	protected void initScrollPane(JTable table) {
+		
+		//设置背景图片
+		JViewport view = new JViewport(){
+			public void paintComponent(Graphics g){
+				super.paintComponent(g);
+				g.drawImage(bgImage, 0, 0, null);
+			}
+		};
+		this.setViewport(view);
+		
 		this.setSize(UIConfig.TABLE_DIMEN); // ScrollPane的大小，和表格大小无关
 		this.setViewportView(table);	// 装载表格
 		this.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -62,6 +80,8 @@ public class BottomScrollPane extends JScrollPane {
 				}
 			}
 		});
+		
+
 	}
 
 }

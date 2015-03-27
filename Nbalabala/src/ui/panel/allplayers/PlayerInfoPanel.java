@@ -47,7 +47,7 @@ public class PlayerInfoPanel extends BottomPanel {
 	BottomPanel allPlayers;
 	MyLabel lbName, lbTeam, lbNumber, lbPosition, lbBirth, lbHeight, lbWeight, lbAge, lbexp, lbschool;
 	MyLabel profileLabel[] = new MyLabel[10];
-	int lbX = 350, lbY = 40, interX = 180, interY = 30, width = 200, lbHgt = 35;
+	int lbX = 350, lbY = 40, interX = 220, interY = 30, width = 200, lbHgt = 35;
 	String[] lbstr;
 
 	public PlayerInfoPanel(MainController controller, String url, PlayerProfileVO vo, BottomPanel allPlayers) {
@@ -122,11 +122,12 @@ public class PlayerInfoPanel extends BottomPanel {
 	 * @version 2015年3月24日 上午11:17:42
 	 */
 	public void addPicture() {
-		totalPicture = detailVO.getAction();
-		ImgLabel label = new ImgLabel(885, 6, 151, 240, totalPicture);
-		this.add(label);
+		ActionPhotoPanel actionPhotoPanel = new ActionPhotoPanel(detailVO.getAction());
+		actionPhotoPanel.setOpaque(true);
+		actionPhotoPanel.setBounds(885,6, 1000, 1000);
+		this.add(actionPhotoPanel);
 	}
-
+	
 	public void addButton() {
 		total = new GameDetailButton(totalX, y, totalWidth, height, "总数据");
 		total.setOpaque(true);
