@@ -14,7 +14,7 @@ import javax.swing.table.TableCellRenderer;
 import ui.UIConfig;
 
 /**
- * 用JPanel为容器装饰表格
+ * 装饰表格
  * @author cylong
  * @version 2015年3月19日 下午7:32:53
  */
@@ -26,13 +26,16 @@ public class BottomTable extends JTable {
 	/** 表格每一行的高 */
 	private int rowHeight = 15;
 
+	/** 表头 */
 	protected String[] columnNames = null;
+	/** 表格数据 */
 	protected Object[][] rowData = null;
 
 	public BottomTable(Object[][] rowData, String[] columnNames) {
 		super(rowData, columnNames);
 		this.columnNames = columnNames;
 		this.rowData = rowData;
+		this.setAutoCreateRowSorter(true); // 点击表头进行排序
 		this.decorateTable();
 	}
 
@@ -87,10 +90,10 @@ public class BottomTable extends JTable {
 		// 头部实际上也是一个JTABLE，只有一行而已。
 		JTableHeader header = this.getTableHeader();// 获取头部
 		// header.setPreferredSize(new Dimension(30, rowHeight));
-//		header.setOpaque(false); // 设置头部为透明
+		// header.setOpaque(false); // 设置头部为透明
 		header.setBackground(UIConfig.TABLE_HEADER_BACK_COLOR);	// 设置头部背景色
-		header.setForeground(UIConfig.TABLE_HEADER_FORE_COLOR);	// 设置头部背景色
-//		header.getTable().setOpaque(false);// 设置头部里面的表格透明
+		header.setForeground(UIConfig.TABLE_HEADER_FORE_COLOR);	// 设置头部前景色
+		// header.getTable().setOpaque(false);// 设置头部里面的表格透明
 		// 头部的表格也像前面的表格设置一样，还需要将里面的单元项设置为透明 因此同样需要对头部单元项进行透明度设置，这里还是用渲染器。
 		// 但这里有个问题就是，若将头部渲染器直接像上文一样设置，则它的下面没有横线 因此，我们需要一个专用的头部渲染器来手动画横线
 		header.setDefaultRenderer(new HeaderCellRenderer());
