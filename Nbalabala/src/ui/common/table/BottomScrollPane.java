@@ -1,6 +1,5 @@
 package ui.common.table;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseWheelEvent;
@@ -46,6 +45,9 @@ public class BottomScrollPane extends JScrollPane {
 		
 		//设置背景图片
 		JViewport view = new JViewport(){
+			/** serialVersionUID */
+			private static final long serialVersionUID = 6019924568637393827L;
+
 			public void paintComponent(Graphics g){
 				super.paintComponent(g);
 				g.drawImage(bgImage, 0, 0, null);

@@ -8,23 +8,24 @@ import java.awt.Image;
 import javax.swing.JPanel;
 
 /**
- * 
  * @author Issac Ding
- * @version 2015年3月27日  下午8:18:46
+ * @version 2015年3月27日 下午8:18:46
  */
-public class ActionPhotoPanel extends JPanel{
-	
+public class ActionPhotoPanel extends JPanel {
+
+	/** serialVersionUID */
+	private static final long serialVersionUID = -5072767650175982844L;
 	private Image action;
-	
-	public ActionPhotoPanel(Image action){
+
+	public ActionPhotoPanel(Image action) {
 		this.action = action;
 	}
-	
+
 	public void paintComponent(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;  
-		AlphaComposite newComposite = AlphaComposite.getInstance( AlphaComposite.SRC_OVER, .85f);
+		Graphics2D g2d = (Graphics2D)g;
+		AlphaComposite newComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .85f);
 		g2d.setComposite(newComposite);
-		g2d.drawImage(action, 0, 0, 151,240,null);
+		g2d.drawImage(action, 0, 0, 151, 240, null);
 	}
 
 }
