@@ -2,6 +2,7 @@ package ui.panel.allplayers;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -11,6 +12,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
+
+import org.apache.batik.apps.svgbrowser.JSVGViewerFrame.NewWindowAction;
 
 import ui.UIConfig;
 import ui.common.UserMouseAdapter;
@@ -84,7 +87,8 @@ public class AllPlayersPanel extends BottomPanel {
 		rowData = new String[size][lth];
 		for (int i = 0; i < size; i++) {
 			PlayerProfileVO ppVO = players.get(i);
-			imgArr.add(ppVO.getPortrait());
+//			imgArr.add(ppVO.getPortrait());
+//			rowData[i][0] = ppVO.getPortrait();
 			rowData[i][1] = ppVO.getName();
 			rowData[i][2] = ppVO.getTeam();
 			rowData[i][3] = ppVO.getNumber();
@@ -107,9 +111,15 @@ public class AllPlayersPanel extends BottomPanel {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		table.setRowHeight(100);
+		table.setRowHeight(57);
+		table.setWidth(new int[]{123, 200, 150, 104, 89, 116});
+		table.setForeground(Color.WHITE);
+		table.cancelVerticalLines();
+		table.setRealOpaque();
+		
 		scroll = new BottomScrollPane(table);
-		scroll.setLocation(57, 239);
+		scroll.setBounds(101, 160, 802, 365);
+		scroll.cancelBgImage();
 		this.add(scroll);
 	}
 

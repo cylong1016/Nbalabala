@@ -17,6 +17,7 @@ import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
+import ui.common.table.MatchInfoTable;
 import ui.controller.MainController;
 import vo.MatchProfileVO;
 import vo.TeamDetailVO;
@@ -68,7 +69,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 	BottomScrollPane scroll;
 	ImageIcon icon;
 	ArrayList<Image> imgArr = new ArrayList<Image>();
-	BottomTable table;
+	MatchInfoTable table;
 	DecimalFormat df = new DecimalFormat("0.000");
 	/** 两个队伍每节的比分 */
 	String[] score1 = { "0", "0", "0", "0", "0", "0", "0" };
@@ -133,8 +134,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 	
 	public void setTable(final ArrayList<MatchProfileVO> matchProfile) {
 		int gameSum = matchProfile.size();
-		columns = new String[] { "球队", "1", "2", "3", "4", "加时一", "加时二", "加时三", "总分", "" };
-		rowData = new String[2 * gameSum][columns.length];
+		rowData = new String[2 * gameSum][MatchInfoTable.COLUMN_LENGTH];
 		for (int j = 0; j < gameSum * 2; j = j + 2) {
 			MatchProfileVO pro = matchProfile.get(j / 2);
 			score1 = new String[] { "0", "0", "0", "0", "0", "0", "0" };
@@ -147,7 +147,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 			rowData[j][9] = "数据统计";
 			addScore(j / 2);
 		}
-		table = new BottomTable(rowData, columns);
+		table = new MatchInfoTable(rowData);
 		try {
 			table.addMouseListener(new UserMouseAdapter() {
 
@@ -164,7 +164,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 			e.printStackTrace();
 		}
 		scroll = new BottomScrollPane(table);
-		scroll.setLocation(57, 285);
+		scroll.setBounds(57, 285,888,246);
 		this.add(scroll);
 	}
 

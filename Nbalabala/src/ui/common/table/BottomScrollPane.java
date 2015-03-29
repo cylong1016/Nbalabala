@@ -25,7 +25,7 @@ public class BottomScrollPane extends JScrollPane {
 	private static final long serialVersionUID = -6211694438630784736L;
 	
 	/** 背景图片 */
-	private static Image bgImage = new ImageIcon("images/tableBG.png").getImage();
+	private Image bgImage = new ImageIcon("images/tableBG.png").getImage();
 
 	public BottomScrollPane(JTable table) {
 		this.initScrollPane(table);
@@ -84,6 +84,10 @@ public class BottomScrollPane extends JScrollPane {
 		});
 		
 
+	}
+	
+	public void cancelBgImage() {
+		bgImage = null;
 	}
 
 }
