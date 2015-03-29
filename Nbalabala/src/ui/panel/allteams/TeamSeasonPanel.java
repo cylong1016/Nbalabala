@@ -8,6 +8,8 @@ import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
+
 import ui.UIConfig;
 import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
@@ -100,18 +102,34 @@ public class TeamSeasonPanel extends BottomPanel {
 		}
 	}
 	
+	
+	MyLabel[] teamInfo = new MyLabel[4];
+	int lbWidth = 100,lbHeight = 50, lbx = 450, lby = 50;
 	/**
 	 * 添加logo及队名
 	 * @author lsy
 	 * @version 2015年3月25日  上午11:43:29
 	 */
 	public void addLabel(Image img){
-		logo = new ImgLabel(100,-25,250,250,img);
-		teamName = new MyLabel(350,50,300,50,match());
+		logo = new ImgLabel(130,6,150,150,img);
+		teamName = new MyLabel(280,50,300,50,match());
 		teamName.setForeground(UIConfig.BUTTON_COLOR);
 		teamName.setFont(new Font("微软雅黑",0,30));
 		this.add(logo);
 		this.add(teamName);
+		teamInfo[0] = new MyLabel(350,100,lbWidth,lbHeight,teamDetail.getProfile().getAbbr());
+		teamInfo[1] = new MyLabel(600,40,lbWidth*4,lbHeight,"Location:  "+teamDetail.getProfile().getLocation()
+				+" "+teamDetail.getProfile().getDivisionString());
+		teamInfo[2] = new MyLabel(600,80,lbWidth*4,lbHeight,"Court:  "+teamDetail.getProfile().getHome());
+		teamInfo[3] = new MyLabel(600,120,lbWidth*4,lbHeight,"Since:  "+teamDetail.getProfile().getSince());
+		for(int i = 0;i<teamInfo.length;i++){
+			teamInfo[i].setFont(new Font("微软雅黑",0,20));
+			this.add(teamInfo[i]);
+			if(i!=0){
+			teamInfo[i].setHorizontalAlignment(JLabel.LEFT);
+			}
+		}
+		teamInfo[0].setFont(new Font("微软雅黑",0,25));
 	}
 	
 	public String match(){
@@ -222,7 +240,8 @@ public class TeamSeasonPanel extends BottomPanel {
 			}
 		
 		scroll = new BottomScrollPane(table);
-		scroll.setLocation(57, 299); // 表格的位置
+		scroll.setBounds(57, 270, 888, 80); // 表格的位置
+		
 		this.add(scroll);
 	}
 
@@ -256,17 +275,18 @@ public class TeamSeasonPanel extends BottomPanel {
 				TeamSeasonPanel.this.remove(scroll);
 				teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
 				addSeasonTable(teamDetail.getSeasonRecord());
+				TeamSeasonPanel.this.repaint();
 				return;
 			} else if (e.getSource() == button[1]) {
 				TeamSeasonPanel.this.remove(scroll);
 				TeamDetailVO teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
 				ArrayList<PlayerProfileVO> players = teamDetail.getPlayers();
 				setPlayerTable(players);
+				TeamSeasonPanel.this.repaint();
 			} else if (e.getSource() == button[2]) {
 				TeamSeasonPanel.this.remove(scroll);
 				controller.toTeamGamePanel(allteams,TeamSeasonPanel.this, teamButton);
 			}
-			TeamSeasonPanel.this.repaint();
 		}
 	}
 
@@ -308,9 +328,10 @@ public class TeamSeasonPanel extends BottomPanel {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		table.setRowHeight(100);
+		table.setRowHeight(40);
+		table.setWidth(new int[]{140, 45, 45, 45, 55, 148, 125, 98, 165});
 		scroll = new BottomScrollPane(table);
-		scroll.setLocation(57, 239);
+		scroll.setBounds(57, 250, 888, 280);
 		this.add(scroll);
 	}
 	

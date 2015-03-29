@@ -36,7 +36,7 @@ public class AllPlayersPanel extends BottomPanel {
 	private static final long serialVersionUID = 2951291212735567656L;
 
 	/** 按钮的横纵坐标 间隔 宽度 高度 */
-	private int x = 60, y = 60, inter = 33, width = 33, height = 32;
+	private int x = 60, y = 55, inter = 33, width = 33, height = 37;
 	/** 所有字母的button */
 	LetterButton[] buttonArr = new LetterButton[26];
 	char[] letter = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
@@ -84,7 +84,8 @@ public class AllPlayersPanel extends BottomPanel {
 		rowData = new String[size][lth];
 		for (int i = 0; i < size; i++) {
 			PlayerProfileVO ppVO = players.get(i);
-			imgArr.add(ppVO.getPortrait());
+//			imgArr.add(ppVO.getPortrait());
+//			rowData[i][0] = ppVO.getPortrait();
 			rowData[i][1] = ppVO.getName();
 			rowData[i][2] = ppVO.getTeam();
 			rowData[i][3] = ppVO.getNumber();
@@ -107,9 +108,15 @@ public class AllPlayersPanel extends BottomPanel {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		table.setRowHeight(100);
+		table.setRowHeight(57);
+		table.setWidth(new int[]{123, 200, 150, 104, 89, 116});
+		table.setForeground(Color.WHITE);
+		table.cancelVerticalLines();
+		table.setRealOpaque();
+		
 		scroll = new BottomScrollPane(table);
-		scroll.setLocation(57, 239);
+		scroll.setBounds(101, 160, 802, 365);
+		scroll.cancelBgImage();
 		this.add(scroll);
 	}
 
@@ -176,6 +183,7 @@ public class AllPlayersPanel extends BottomPanel {
 			AllPlayersPanel.this.remove(scroll);
 			setTable(vo);
 		}
+		
 	}
 
 	public void addTextField() {

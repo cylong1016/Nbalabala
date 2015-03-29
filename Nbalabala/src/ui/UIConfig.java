@@ -51,7 +51,7 @@ public class UIConfig {
 	/** 表头背景颜色 */
 	public static Color TABLE_HEADER_BACK_COLOR = new Color(51, 81, 168);
 	/** 选择后的前景色 */
-	public static Color TABLE_SELECTIONFORE = Color.BLUE;
+	public static Color TABLE_SELECTIONFORE = new Color(255, 150, 0);
 	/** 选择后的背景色 */
 	public static Color TABLE_SELECTIONBACK = Color.BLACK;
 	/** 表格预设大小 */

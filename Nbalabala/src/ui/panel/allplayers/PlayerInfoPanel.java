@@ -79,8 +79,11 @@ public class PlayerInfoPanel extends BottomPanel {
 		for(int i = 6; i < 8; i++) {
 			profileLabel[i] = new MyLabel(lbX + (i - 6) * interX, lbY + 2 * interY, width, lbHgt, lbstr[i]);
 		}
-		for(int i = 8; i < 10; i++) {
+		for(int i = 8; i < 9; i++) {
 			profileLabel[i] = new MyLabel(lbX + (i - 8) * interX, lbY + 3 * interY, width, lbHgt, lbstr[i]);
+		}
+		for (int i = 9; i < 10; i++) {
+			profileLabel[i] = new MyLabel(lbX + (i - 8) * interX, lbY + 3 * interY, width+150, lbHgt, lbstr[i]);
 		}
 		for(int i = 0; i < 10; i++) {
 			profileLabel[i].setHorizontalAlignment(SwingConstants.LEFT);
@@ -237,7 +240,7 @@ public class PlayerInfoPanel extends BottomPanel {
 		rowData[1][35] = df.format(playerSeason.getUsePercent());
 		table = new BottomTable(rowData, columns);
 		scroll = new BottomScrollPane(table);
-		scroll.setLocation(57, 285);
+		scroll.setBounds(57, 270, 888, 80); // 表格的位置
 		this.add(scroll);
 	}
 }
