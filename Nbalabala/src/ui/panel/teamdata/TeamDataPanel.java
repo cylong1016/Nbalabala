@@ -5,6 +5,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.table.JTableHeader;
+
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.button.TextButton;
@@ -16,6 +18,7 @@ import bl.teamseasonbl.TeamSeasonAnalysis;
 import blservice.TeamSeasonBLService;
 import data.seasondata.TeamSeasonRecord;
 import enums.ScreenDivision;
+import enums.TeamSortBasis;
 
 /**
  * 球队数据界面
@@ -209,9 +212,7 @@ public class TeamDataPanel extends BottomPanel {
 	 * @version 2015年3月24日  下午8:48:03
 	 */
 	private void addTotalTeamDataTable(ArrayList<TeamSeasonRecord> teamArr) {
-		String[] columnNames = getColumnNames();
-		String[][] rowData = new String[teamArr.size()][columnNames.length];
-		teamDataTable = new BottomTable(rowData, columnNames);
+		String[][] rowData = createTable(teamArr);
 		for(int i = 0; i < teamArr.size(); i++) {
 			TeamSeasonRecord teamSeason = teamArr.get(i);
 			rowData[i][0] = Integer.toString(i + 1);
@@ -257,9 +258,7 @@ public class TeamDataPanel extends BottomPanel {
 	 * @version 2015年3月24日  下午9:03:08
 	 */
 	private void addAvgTeamDataTable(ArrayList<TeamSeasonRecord> teamArr) {
-		String[] columnNames = getColumnNames();
-		String[][] rowData = new String[teamArr.size()][columnNames.length];
-		teamDataTable = new BottomTable(rowData, columnNames);
+		String[][] rowData = createTable(teamArr);
 		for(int i = 0; i < teamArr.size(); i++) {
 			TeamSeasonRecord teamSeason = teamArr.get(i);
 			rowData[i][0] = Integer.toString(i + 1);
@@ -298,11 +297,28 @@ public class TeamDataPanel extends BottomPanel {
 		addScrollPane(teamDataTable);
 	}
 	
-	private String[] getColumnNames() {
+	/**
+	 * 根据球队数据创建表格
+	 * @param teamArr
+	 * @return 表格数据的二维数组
+	 * @author cylong
+	 * @version 2015年3月29日  下午3:59:35
+	 */
+	private String[][] createTable(ArrayList<TeamSeasonRecord> teamArr) {
 		String[] columnNames = {"序号", "球队名称", "胜场数", "负场数", "总场数", "胜率", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手", "三分命中率", "罚球命中",
 								"罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "进攻篮板效率", "防守篮板效率", "进攻回合", "进攻效率", "防守回合", "防守效率",
 								"抢断", "抢断效率", "助攻", "助攻率", "盖帽", "失误", "犯规", "得分"};
-		return columnNames;
+		String[][] rowData = new String[teamArr.size()][columnNames.length];
+		teamDataTable = new BottomTable(rowData, columnNames);
+		// 给表头添加监听，用来排序
+		final JTableHeader header = teamDataTable.getTableHeader();
+		header.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				int index = header.columnAtPoint(e.getPoint());
+				
+			}
+		});
+		return rowData;
 	}
 	
 	/**
