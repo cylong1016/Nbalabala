@@ -8,6 +8,8 @@ import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
+
 import ui.UIConfig;
 import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
@@ -100,6 +102,9 @@ public class TeamSeasonPanel extends BottomPanel {
 		}
 	}
 	
+	
+	MyLabel[] teamInfo = new MyLabel[4];
+	int lbWidth = 100,lbHeight = 50, lbx = 450, lby = 50;
 	/**
 	 * 添加logo及队名
 	 * @author lsy
@@ -107,11 +112,24 @@ public class TeamSeasonPanel extends BottomPanel {
 	 */
 	public void addLabel(Image img){
 		logo = new ImgLabel(100,-25,250,250,img);
-		teamName = new MyLabel(350,50,300,50,match());
+		teamName = new MyLabel(300,50,300,50,match());
 		teamName.setForeground(UIConfig.BUTTON_COLOR);
 		teamName.setFont(new Font("微软雅黑",0,30));
 		this.add(logo);
 		this.add(teamName);
+		teamInfo[0] = new MyLabel(420,100,lbWidth,lbHeight,teamDetail.getProfile().getAbbr());
+		teamInfo[1] = new MyLabel(600,40,lbWidth*4,lbHeight,"Location:  "+teamDetail.getProfile().getLocation()
+				+" "+teamDetail.getProfile().getDivisionString());
+		teamInfo[2] = new MyLabel(600,80,lbWidth*4,lbHeight,"Court:  "+teamDetail.getProfile().getHome());
+		teamInfo[3] = new MyLabel(600,120,lbWidth*4,lbHeight,"Since:  "+teamDetail.getProfile().getSince());
+		for(int i = 0;i<teamInfo.length;i++){
+			teamInfo[i].setFont(new Font("微软雅黑",0,20));
+			this.add(teamInfo[i]);
+			if(i!=0){
+			teamInfo[i].setHorizontalAlignment(JLabel.LEFT);
+			}
+		}
+		teamInfo[0].setFont(new Font("微软雅黑",0,25));
 	}
 	
 	public String match(){

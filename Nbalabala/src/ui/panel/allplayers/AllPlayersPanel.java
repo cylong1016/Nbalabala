@@ -2,7 +2,6 @@ package ui.panel.allplayers;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -12,8 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
-
-import org.apache.batik.apps.svgbrowser.JSVGViewerFrame.NewWindowAction;
 
 import ui.UIConfig;
 import ui.common.UserMouseAdapter;

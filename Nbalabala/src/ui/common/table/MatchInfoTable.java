@@ -11,11 +11,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
-import org.apache.batik.bridge.SVGImageElementBridge.ProtectedStream;
-
 import ui.UIConfig;
-import ui.common.table.BottomTable.HeaderCellNoVerticalLinesRenderer;
-import ui.common.table.BottomTable.HeaderCellRenderer;
 
 /**
  * 
