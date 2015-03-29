@@ -79,8 +79,11 @@ public class PlayerInfoPanel extends BottomPanel {
 		for(int i = 6; i < 8; i++) {
 			profileLabel[i] = new MyLabel(lbX + (i - 6) * interX, lbY + 2 * interY, width, lbHgt, lbstr[i]);
 		}
-		for(int i = 8; i < 10; i++) {
+		for(int i = 8; i < 9; i++) {
 			profileLabel[i] = new MyLabel(lbX + (i - 8) * interX, lbY + 3 * interY, width, lbHgt, lbstr[i]);
+		}
+		for (int i = 9; i < 10; i++) {
+			profileLabel[i] = new MyLabel(lbX + (i - 8) * interX, lbY + 3 * interY, width+150, lbHgt, lbstr[i]);
 		}
 		for(int i = 0; i < 10; i++) {
 			profileLabel[i].setHorizontalAlignment(SwingConstants.LEFT);

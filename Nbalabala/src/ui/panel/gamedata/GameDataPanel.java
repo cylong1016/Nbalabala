@@ -196,8 +196,11 @@ public class GameDataPanel extends BottomPanel {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		int scores = 80;
+		int adds = 90;
+		table.setWidth(new int[]{123,scores, scores, scores, scores, adds, adds, adds, scores, 95});
 		scroll = new BottomScrollPane(table);
-		scroll.setLocation(57, 285);
+		scroll.setLocation(57, 240);
 		panel.add(scroll);
 		return scroll;
 	}

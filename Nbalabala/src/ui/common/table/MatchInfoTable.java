@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 import ui.UIConfig;
 
@@ -22,6 +23,8 @@ import ui.UIConfig;
  */
 public class MatchInfoTable extends JTable{
 	
+	private static final long serialVersionUID = 1L;
+
 	/** 表格每一行的高 */
 	private static final int ROW_Height = 30;
 	
@@ -37,6 +40,14 @@ public class MatchInfoTable extends JTable{
 		super(rowData, columnNames);
 		this.rowData = rowData;
 		this.decorateTable();
+	}
+	
+	/** 设置列宽 */
+	public void setWidth(int[]width) {
+		TableColumnModel model = this.getColumnModel();
+		for (int i=0;i<width.length;i++){
+			 model.getColumn(i).setPreferredWidth(width[i]);
+		}
 	}
 
 	/**
@@ -111,6 +122,8 @@ public class MatchInfoTable extends JTable{
 	}
 	
 	class HeaderRenderLabel extends JLabel{
+		private static final long serialVersionUID = 1L;
+
 		protected void paintComponent(Graphics g) {
 			// 重载jlabel的paintComponent方法，在这个jlabel里手动画线
 			Graphics2D g2d = (Graphics2D)g;
@@ -123,6 +136,7 @@ public class MatchInfoTable extends JTable{
 	}
 	
 	class CellRenderLabel extends JLabel{
+		private static final long serialVersionUID = 1L;
 		int row;
 		protected CellRenderLabel(int row){
 			this.row = row;

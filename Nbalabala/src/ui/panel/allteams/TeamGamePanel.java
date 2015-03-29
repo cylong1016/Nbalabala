@@ -53,6 +53,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		matchProfile = teamDetail.getMatchRecords();
 		gameData = new GameDataPanel(controller,"",1); 
 		pane = gameData.setTable(matchProfile,this,matchProfile.size(),controller);
+		pane.setBounds(55, 285, 905, 250);
 		iniTable(x);
 	}
 	

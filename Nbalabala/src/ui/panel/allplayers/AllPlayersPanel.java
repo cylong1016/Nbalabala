@@ -36,7 +36,7 @@ public class AllPlayersPanel extends BottomPanel {
 	private static final long serialVersionUID = 2951291212735567656L;
 
 	/** 按钮的横纵坐标 间隔 宽度 高度 */
-	private int x = 60, y = 60, inter = 33, width = 33, height = 32;
+	private int x = 60, y = 55, inter = 33, width = 33, height = 37;
 	/** 所有字母的button */
 	LetterButton[] buttonArr = new LetterButton[26];
 	char[] letter = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
@@ -183,6 +183,7 @@ public class AllPlayersPanel extends BottomPanel {
 			AllPlayersPanel.this.remove(scroll);
 			setTable(vo);
 		}
+		
 	}
 
 	public void addTextField() {

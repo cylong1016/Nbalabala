@@ -110,7 +110,7 @@ public class PlayerProfileVO {
 		double cms = feet * 30.48 + inches * 2.54;
 		DecimalFormat decimalFormat = new DecimalFormat(".#");
 		String cmsString = decimalFormat.format(cms);	
-		return s[0] + "英尺" + s[1] + "英寸（" +cmsString + "厘米）";
+		return s[0] + "英尺" + s[1] + "英寸（" +cmsString + "cm）";
 		}catch(Exception e){
 			return "无资料";
 		}
@@ -122,7 +122,7 @@ public class PlayerProfileVO {
 		double kgs = 0.4536 * Integer.parseInt(weight);
 		DecimalFormat decimalFormat = new DecimalFormat(".#");
 		String kgsString = decimalFormat.format(kgs);
-		return weight + "磅（" + kgsString +"千克）";
+		return weight + "磅（" + kgsString +"kg）";
 		}catch(Exception e){
 			return "无资料";
 		}

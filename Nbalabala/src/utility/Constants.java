@@ -126,7 +126,7 @@ public class Constants {
 		default:
 			month = 12;
 		}
-		return strings[3] + "年" + month + "月" + strings[1] + "日"; 
+		return strings[3] + "/" + month + "/" + strings[1]; 
 	}
 
 }

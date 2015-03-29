@@ -328,9 +328,10 @@ public class TeamSeasonPanel extends BottomPanel {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		table.setRowHeight(100);
+		table.setRowHeight(40);
+		table.setWidth(new int[]{140, 45, 45, 45, 55, 148, 125, 98, 165});
 		scroll = new BottomScrollPane(table);
-		scroll.setLocation(57, 239);
+		scroll.setBounds(57, 250, 888, 280);
 		this.add(scroll);
 	}
 	

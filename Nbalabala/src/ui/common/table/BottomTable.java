@@ -26,7 +26,7 @@ public class BottomTable extends JTable {
 	private static final long serialVersionUID = 3966419405700478023L;
 
 	/** 表格每一行的高 */
-	private int rowHeight = 15;
+	private int rowHeight = 23;
 
 	/** 表头 */
 	protected String[] columnNames = null;

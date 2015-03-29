@@ -101,7 +101,7 @@ public class MainController {
 	 */
 	public void toGamePanel(Panel panel) {
 		frame.remove(panel);
-		gameDataPanel = new GameDataPanel(this,UIConfig.IMG_PATH + "game/gameBG.png");
+		gameDataPanel = new GameDataPanel(this,UIConfig.IMG_PATH + "gameData/gameDataBG.png");
 		frame.setPanel(gameDataPanel);
 	}
 
