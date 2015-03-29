@@ -64,7 +64,6 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		
 	}
 
-
 	DecimalFormat df = new DecimalFormat("0.000");
 	String[] team = new String[] { "凯尔特人", "篮网", "尼克斯", "76人", "猛龙", "公牛", "骑士", "活塞", "步行者", "雄鹿", "老鹰", "黄蜂",
 			"热火", "魔术", "奇才", "勇士", "快船", "湖人", "太阳", "国王", "掘金", "森林狼", "雷霆", "开拓者", "爵士", "小牛", "火箭", "灰熊",
@@ -72,9 +71,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 	String[] teamArr = new String[] { "BOS", "BKN", "NYK", "PHI", "TOR", "CHI", "CLE", "DET", "IND", "MIL", "ATL",
 			"CHA", "MIA", "ORL", "WAS", "GSW", "LAC", "LAL", "PHX", "SAC", "DEN", "MIN", "OKC", "POR", "UTA",
 			"DAL", "HOU", "MEM", "NOP", "SAS" };
-
 	
-
 	/**
 	 * 覆盖父类的方法，让父类的表格不显示
 	 */

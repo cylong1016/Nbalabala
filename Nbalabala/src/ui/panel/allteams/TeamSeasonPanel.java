@@ -222,7 +222,8 @@ public class TeamSeasonPanel extends BottomPanel {
 			}
 		
 		scroll = new BottomScrollPane(table);
-		scroll.setLocation(57, 299); // 表格的位置
+		scroll.setBounds(57, 270, 888, 80); // 表格的位置
+		
 		this.add(scroll);
 	}
 

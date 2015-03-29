@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -172,7 +173,7 @@ public class GameDataPanel extends BottomPanel {
 	
 	protected BottomScrollPane scroll;
 	protected BottomTable table;
-	public void setTable(final ArrayList<MatchProfileVO> matchProfile,final BottomPanel panel,int gameSum,final MainController controller) {
+	public BottomScrollPane setTable(final ArrayList<MatchProfileVO> matchProfile,final BottomPanel panel,int gameSum,final MainController controller) {
 		String[] columns = new String[] {"球队", "1", "2", "3", "4", "加时一", "加时二", "加时三", "总分",""};
 		String[][] rowData = new String[2 * gameSum][columns.length];
 		for(int j = 0; j < gameSum * 2 ; j = j + 2) {
@@ -206,6 +207,7 @@ public class GameDataPanel extends BottomPanel {
 		scroll = new BottomScrollPane(table);
 		scroll.setLocation(57, 285);
 		panel.add(scroll);
+		return scroll;
 	}
 	
 	public void makeFace(JTable table) {
@@ -228,6 +230,7 @@ public class GameDataPanel extends BottomPanel {
 					return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 				}
 			};
+			tcr.setHorizontalAlignment(JLabel.CENTER);
 			for(int i = 0; i < table.getColumnCount(); i++) {
 				table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 			}
