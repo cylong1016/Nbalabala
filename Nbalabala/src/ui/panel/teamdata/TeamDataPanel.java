@@ -18,7 +18,9 @@ import bl.teamseasonbl.TeamSeasonAnalysis;
 import blservice.TeamSeasonBLService;
 import data.seasondata.TeamSeasonRecord;
 import enums.ScreenDivision;
-import enums.TeamSortBasis;
+import enums.SortOrder;
+import enums.TeamAllSortBasis;
+import enums.TeamAvgSortBasis;
 
 /**
  * 球队数据界面
@@ -43,7 +45,7 @@ public class TeamDataPanel extends BottomPanel {
 	private SelectButton[] button;
 	/** 总计和平均按钮 */
 	private Line_2_Button[] buttonLine2;
-	
+
 	private TextButton[] buttonArr;
 	/** 宽 高 */
 	private int width = 60, height = 24, widthThree = 75;
@@ -91,13 +93,13 @@ public class TeamDataPanel extends BottomPanel {
 	 * @version 2015年3月19日 下午11:22:32
 	 */
 	public void addFindButton() {
-		findButton = new ImgButton(imgURL + "search.png", 856, 124, imgURL + "searchOn.png", imgURL + "searchClick.png");
+		findButton = new ImgButton(imgURL + "search.png", 856, 124, imgURL + "searchOn.png", imgURL
+																								+ "searchClick.png");
 		this.add(findButton);
 		findButton.addMouseListener(new MouseAdapter() {
 
 			public void mousePressed(MouseEvent e) {
 				ArrayList<TeamSeasonRecord> seasonArray = teamSeason.getScreenedTeamData(SelectButton.current.division);
-				// changeTable
 				TeamDataPanel.this.remove(scroll); // 删除以前的Table
 				TeamDataPanel.this.addTotalTeamDataTable(seasonArray);
 			}
@@ -146,7 +148,7 @@ public class TeamDataPanel extends BottomPanel {
 	 * 设置按钮被点击后的效果
 	 * @param button
 	 * @author cylong
-	 * @version 2015年3月24日  下午8:14:49
+	 * @version 2015年3月24日 下午8:14:49
 	 */
 	public void setEffect(TextButton[] button) {
 		for(int i = 0; i < button.length; i++) {
@@ -178,9 +180,9 @@ public class TeamDataPanel extends BottomPanel {
 			ArrayList<TeamSeasonRecord> seasonArray = teamSeason.getScreenedTeamData(SelectButton.current.division);
 			// changeTable
 			TeamDataPanel.this.remove(scroll); // 删除以前的Table
-			if(Line_2_Button.current == buttonLine2[0]) {
+			if (Line_2_Button.current == buttonLine2[0]) {
 				TeamDataPanel.this.addTotalTeamDataTable(seasonArray); // 添加总数据
-			} else if(Line_2_Button.current == buttonLine2[1]) {
+			} else if (Line_2_Button.current == buttonLine2[1]) {
 				TeamDataPanel.this.addAvgTeamDataTable(seasonArray); // 添加平均数据
 			}
 		}
@@ -196,20 +198,20 @@ public class TeamDataPanel extends BottomPanel {
 			Line_2_Button.current = (Line_2_Button)e.getSource();
 			ArrayList<TeamSeasonRecord> seasonArray = teamSeason.getScreenedTeamData(SelectButton.current.division);
 			TeamDataPanel.this.remove(scroll); // 删除以前的Table
-			if(e.getSource() == buttonLine2[0]) {
+			if (e.getSource() == buttonLine2[0]) {
 				TeamDataPanel.this.addTotalTeamDataTable(seasonArray); // 添加总数据
-			} else if(e.getSource() == buttonLine2[1]) {
+			} else if (e.getSource() == buttonLine2[1]) {
 				TeamDataPanel.this.addAvgTeamDataTable(seasonArray); // 添加平均数据
 			}
 		}
 	}
-	
+
 	/**
 	 * 添加球队总数据
 	 * @param teamArr 逻辑层返回的球队数据
 	 * @param rowData 表格中显示的数据
 	 * @author cylong
-	 * @version 2015年3月24日  下午8:48:03
+	 * @version 2015年3月24日 下午8:48:03
 	 */
 	private void addTotalTeamDataTable(ArrayList<TeamSeasonRecord> teamArr) {
 		String[][] rowData = createTable(teamArr);
@@ -250,12 +252,12 @@ public class TeamDataPanel extends BottomPanel {
 		}
 		addScrollPane(teamDataTable);
 	}
-	
+
 	/**
 	 * 添加球队平均数据
 	 * @param teamArr 逻辑层返回的球队数据
 	 * @author cylong
-	 * @version 2015年3月24日  下午9:03:08
+	 * @version 2015年3月24日 下午9:03:08
 	 */
 	private void addAvgTeamDataTable(ArrayList<TeamSeasonRecord> teamArr) {
 		String[][] rowData = createTable(teamArr);
@@ -296,36 +298,60 @@ public class TeamDataPanel extends BottomPanel {
 		}
 		addScrollPane(teamDataTable);
 	}
+
 	
+	/** 鼠标被点击的次数，单数升序排列，偶数降序排列 */
+	private int clickedNum = 0;
 	/**
 	 * 根据球队数据创建表格
 	 * @param teamArr
 	 * @return 表格数据的二维数组
 	 * @author cylong
-	 * @version 2015年3月29日  下午3:59:35
+	 * @version 2015年3月29日 下午3:59:35
 	 */
 	private String[][] createTable(ArrayList<TeamSeasonRecord> teamArr) {
-		String[] columnNames = {"序号", "球队名称", "胜场数", "负场数", "总场数", "胜率", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手", "三分命中率", "罚球命中",
-								"罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "进攻篮板效率", "防守篮板效率", "进攻回合", "进攻效率", "防守回合", "防守效率",
-								"抢断", "抢断效率", "助攻", "助攻率", "盖帽", "失误", "犯规", "得分"};
+		String[] columnNames = {"序号", "球队名称", "胜场数", "负场数", "总场数", "胜率", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手",
+									"三分命中率", "罚球命中", "罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "进攻篮板效率", "防守篮板效率",
+									"进攻回合", "进攻效率", "防守回合", "防守效率", "抢断", "抢断效率", "助攻", "助攻率", "盖帽", "失误", "犯规", "得分"};
 		String[][] rowData = new String[teamArr.size()][columnNames.length];
 		teamDataTable = new BottomTable(rowData, columnNames);
 		// 给表头添加监听，用来排序
 		final JTableHeader header = teamDataTable.getTableHeader();
 		header.addMouseListener(new MouseAdapter() {
+
 			public void mouseClicked(MouseEvent e) {
+				clickedNum++;
+				SortOrder sort = null; // 升序降序
+				if(clickedNum % 2 == 0) {
+					sort = SortOrder.AS;
+				} else {
+					sort = SortOrder.DE;
+				}
 				int index = header.columnAtPoint(e.getPoint());
-				
+				if (index < 1) { // 确定所点击区域在第1列之后，第一列不需要排序
+					return;
+				}
+				TeamDataPanel.this.remove(scroll); // 删除以前的Table
+				if (Line_2_Button.current == buttonLine2[0]) {
+					TeamAllSortBasis[] basis = TeamAllSortBasis.values();
+					ArrayList<TeamSeasonRecord> seasonArray = teamSeason.getResortedTeamAllData(basis[index - 1], sort);
+					TeamDataPanel.this.addTotalTeamDataTable(seasonArray); // 添加总数据
+				} else if (Line_2_Button.current == buttonLine2[1]) {
+					TeamAvgSortBasis[] basis = TeamAvgSortBasis.values();
+					ArrayList<TeamSeasonRecord> seasonArray = teamSeason.getResortedTeamAvgData(basis[index - 1], sort);
+					TeamDataPanel.this.addAvgTeamDataTable(seasonArray); // 添加平均数据
+				}
+
 			}
 		});
 		return rowData;
 	}
-	
+
 	/**
 	 * 将表格添加到ScrollPane上面
 	 * @param table
 	 * @author cylong
-	 * @version 2015年3月26日  下午7:27:37
+	 * @version 2015年3月26日 下午7:27:37
 	 */
 	private void addScrollPane(BottomTable table) {
 		scroll = new BottomScrollPane(table);

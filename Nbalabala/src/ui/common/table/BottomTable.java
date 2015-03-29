@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
 
 import ui.UIConfig;
 
@@ -26,16 +27,17 @@ public class BottomTable extends JTable {
 	/** 表格每一行的高 */
 	private int rowHeight = 15;
 
-	/** 表头 */
-	protected String[] columnNames = null;
-	/** 表格数据 */
-	protected Object[][] rowData = null;
-
 	public BottomTable(Object[][] rowData, String[] columnNames) {
 		super(rowData, columnNames);
-		this.columnNames = columnNames;
-		this.rowData = rowData;
-		// this.setAutoCreateRowSorter(true); // 点击表头进行排序
+		this.decorateTable();
+	}
+
+	public BottomTable() {
+		super();
+	}
+
+	public BottomTable(TableModel dm) {
+		super(dm);
 		this.decorateTable();
 	}
 
