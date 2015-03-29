@@ -37,7 +37,7 @@ public class BottomTable extends JTable {
 		super(rowData, columnNames);
 		this.columnNames = columnNames;
 		this.rowData = rowData;
-		this.setAutoCreateRowSorter(true); // 点击表头进行排序
+		// this.setAutoCreateRowSorter(true); // 点击表头进行排序
 		this.decorateTable();
 	}
 

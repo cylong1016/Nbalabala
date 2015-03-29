@@ -13,12 +13,12 @@ import javax.swing.ImageIcon;
 
 import ui.DateChooser;
 import ui.UIConfig;
-import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.common.table.MatchInfoTable;
 import ui.controller.MainController;
+import ui.panel.gamedata.GameDataPanel;
 import vo.MatchProfileVO;
 import vo.TeamDetailVO;
 import bl.teamquerybl.TeamQuery;
@@ -41,6 +41,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 	TeamQueryBLService teamQuery = new TeamQuery();
 	TeamButton teamButton;
 	TeamDetailVO teamDetail;
+	GameDataPanel gameData;
 	ArrayList<MatchProfileVO> matchProfile;
 
 	public TeamGamePanel(AllTeamsPanel allteams, MainController controller, String url, TeamButton teamButton,
@@ -52,7 +53,8 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		addDateChooser();
 		teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
 		matchProfile = teamDetail.getMatchRecords();
-		setTable(matchProfile);
+		gameData = new GameDataPanel(controller,"",1); 
+		gameData.setTable(matchProfile,this,matchProfile.size(),controller);
 		iniTable(x);
 	}
 	
@@ -132,6 +134,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		}
 	}
 	
+<<<<<<< HEAD
 	public void setTable(final ArrayList<MatchProfileVO> matchProfile) {
 		int gameSum = matchProfile.size();
 		rowData = new String[2 * gameSum][MatchInfoTable.COLUMN_LENGTH];
@@ -167,6 +170,8 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		scroll.setBounds(57, 285,888,246);
 		this.add(scroll);
 	}
+=======
+>>>>>>> origin/master
 
 	/**
 	 * 覆盖父类的方法，让父类的表格不显示
@@ -208,7 +213,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 						ArrayList<MatchProfileVO> pro = new ArrayList<MatchProfileVO>();
 						pro.add(matchProfile.get(i));
 						TeamGamePanel.this.remove(scroll);
-						setTable(pro);
+						gameData.setTable(pro,TeamGamePanel.this,pro.size(),controller);
 					}
 				}
 			}

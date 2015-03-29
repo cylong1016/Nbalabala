@@ -257,17 +257,18 @@ public class TeamSeasonPanel extends BottomPanel {
 				TeamSeasonPanel.this.remove(scroll);
 				teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
 				addSeasonTable(teamDetail.getSeasonRecord());
+				TeamSeasonPanel.this.repaint();
 				return;
 			} else if (e.getSource() == button[1]) {
 				TeamSeasonPanel.this.remove(scroll);
 				TeamDetailVO teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
 				ArrayList<PlayerProfileVO> players = teamDetail.getPlayers();
 				setPlayerTable(players);
+				TeamSeasonPanel.this.repaint();
 			} else if (e.getSource() == button[2]) {
 				TeamSeasonPanel.this.remove(scroll);
 				controller.toTeamGamePanel(allteams,TeamSeasonPanel.this, teamButton);
 			}
-			TeamSeasonPanel.this.repaint();
 		}
 	}
 
