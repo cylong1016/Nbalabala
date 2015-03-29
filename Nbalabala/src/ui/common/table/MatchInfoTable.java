@@ -1,5 +1,6 @@
 package ui.common.table;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -126,11 +127,6 @@ public class MatchInfoTable extends JTable{
 		protected CellRenderLabel(int row){
 			this.row = row;
 			setHorizontalAlignment(JLabel.CENTER);
-			if ((row % 4 == 1 || row % 4 == 0)) {
-				setBackground(Color.yellow);
-			} else {
-				setBackground(Color.pink);
-			}
 		}
 		protected void paintComponent(Graphics g) {
 			// 重载jlabel的paintComponent方法，在这个jlabel里手动画线
@@ -140,6 +136,15 @@ public class MatchInfoTable extends JTable{
 				g2d.drawLine(0, this.getHeight() - 1, this.getWidth(), this.getHeight() - 1);
 			// 一定要记得调用父类的paintComponent方法，不然它只会划线，不会显示文字
 			super.paintComponent(g);
+			AlphaComposite newComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .05f);
+			g2d.setComposite(newComposite);
+			if ((row % 4 == 1 || row % 4 == 0)) {
+				g2d.setColor(Color.red);
+				g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
+			} else {
+				g2d.setColor(Color.blue);
+				g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
+			}
 		}
 	}
 	
@@ -148,7 +153,7 @@ public class MatchInfoTable extends JTable{
 		protected static final long serialVersionUID = 1L;
 		
 		public CellRenderer() {
-//			setOpaque(false); // 将渲染器设置为透明
+			setOpaque(false); // 将渲染器设置为透明
 			setHorizontalAlignment(JLabel.CENTER);	// 设置表格中内容居中显示
 		}
 
@@ -158,7 +163,7 @@ public class MatchInfoTable extends JTable{
 			label.setHorizontalAlignment(JLabel.CENTER);
 			label.setFont(UIConfig.TABLE_FONT);
 			label.setForeground(UIConfig.TABLE_FORE_COLOR);	// 表头前景色
-			
+			label.setBackground(Color.red);
 			return label;
 		}
 	}
