@@ -13,9 +13,9 @@ import javax.swing.ImageIcon;
 
 import ui.DateChooser;
 import ui.UIConfig;
+import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
 import ui.common.table.BottomScrollPane;
-import ui.common.table.BottomTable;
 import ui.common.table.MatchInfoTable;
 import ui.controller.MainController;
 import ui.panel.gamedata.GameDataPanel;
@@ -134,7 +134,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		}
 	}
 	
-<<<<<<< HEAD
+
 	public void setTable(final ArrayList<MatchProfileVO> matchProfile) {
 		int gameSum = matchProfile.size();
 		rowData = new String[2 * gameSum][MatchInfoTable.COLUMN_LENGTH];
@@ -151,6 +151,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 			addScore(j / 2);
 		}
 		table = new MatchInfoTable(rowData);
+
 		try {
 			table.addMouseListener(new UserMouseAdapter() {
 
@@ -170,8 +171,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		scroll.setBounds(57, 285,888,246);
 		this.add(scroll);
 	}
-=======
->>>>>>> origin/master
+
 
 	/**
 	 * 覆盖父类的方法，让父类的表格不显示

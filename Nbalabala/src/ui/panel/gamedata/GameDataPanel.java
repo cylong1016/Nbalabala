@@ -19,6 +19,7 @@ import ui.common.comboBox.MyComboBox;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
+import ui.common.table.MatchInfoTable;
 import ui.controller.MainController;
 import vo.MatchProfileVO;
 import bl.matchquerybl.MatchQuery;
@@ -171,10 +172,9 @@ public class GameDataPanel extends BottomPanel {
 	}
 	
 	protected BottomScrollPane scroll;
-	protected BottomTable table;
+	protected MatchInfoTable table;
 	public void setTable(final ArrayList<MatchProfileVO> matchProfile,final BottomPanel panel,int gameSum,final MainController controller) {
-		String[] columns = new String[] {"球队", "1", "2", "3", "4", "加时一", "加时二", "加时三", "总分",""};
-		String[][] rowData = new String[2 * gameSum][columns.length];
+		String[][] rowData = new String[2 * gameSum][MatchInfoTable.COLUMN_LENGTH];
 		for(int j = 0; j < gameSum * 2 ; j = j + 2) {
 			MatchProfileVO pro = matchProfile.get(j / 2);
 			score1 = new String[]{"0", "0", "0", "0", "0", "0", "0"};
@@ -187,7 +187,7 @@ public class GameDataPanel extends BottomPanel {
 			rowData[j][9]="数据统计";
 			addScore(rowData,j / 2);
 		}
-		table = new BottomTable(rowData, columns);
+		table = new MatchInfoTable(rowData);
 		try{
 			table.addMouseListener(new UserMouseAdapter(){
 				
@@ -202,42 +202,11 @@ public class GameDataPanel extends BottomPanel {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		makeFace(table);
 		scroll = new BottomScrollPane(table);
 		scroll.setLocation(57, 285);
 		panel.add(scroll);
 	}
-	
-	public void makeFace(JTable table) {
 
-		try {
-			DefaultTableCellRenderer tcr = new DefaultTableCellRenderer() {
-
-				/** serialVersionUID */
-				private static final long serialVersionUID = -4145147988893713337L;
-
-				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-					if ((row % 4 == 1 || row % 4 == 0)) {
-
-						setBackground(UIConfig.BUTTON_COLOR);
-						setForeground(Color.white);
-					} else {
-						setBackground(Color.white);
-						setForeground(Color.black);
-					}
-					return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-				}
-			};
-			for(int i = 0; i < table.getColumnCount(); i++) {
-				table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-	}
-
-	
 	public void addScore(String[][] rowData,int line) {
 		for(int i = 0; i < 7; i++) {
 			rowData[2 * line ][i + 1] = score1[i];
