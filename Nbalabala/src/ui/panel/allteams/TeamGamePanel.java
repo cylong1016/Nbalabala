@@ -1,21 +1,19 @@
 package ui.panel.allteams;
 
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-
-import javax.swing.ImageIcon;
 
 import ui.DateChooser;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
+import ui.common.label.MyLabel;
 import ui.common.table.BottomScrollPane;
-import ui.common.table.BottomTable;
 import ui.controller.MainController;
 import ui.panel.gamedata.GameDataPanel;
 import vo.MatchProfileVO;
@@ -42,6 +40,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 	TeamDetailVO teamDetail;
 	GameDataPanel gameData;
 	ArrayList<MatchProfileVO> matchProfile;
+	BottomScrollPane pane;
 
 	public TeamGamePanel(AllTeamsPanel allteams, MainController controller, String url, TeamButton teamButton,
 			int x) {
@@ -53,7 +52,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
 		matchProfile = teamDetail.getMatchRecords();
 		gameData = new GameDataPanel(controller,"",1); 
-		gameData.setTable(matchProfile,this,matchProfile.size(),controller);
+		pane = gameData.setTable(matchProfile,this,matchProfile.size(),controller);
 		iniTable(x);
 	}
 	
@@ -65,24 +64,8 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		
 	}
 
-	String[] columns;
-	String[][] rowData;
-	BottomScrollPane scroll;
-	ImageIcon icon;
-	ArrayList<Image> imgArr = new ArrayList<Image>();
-	BottomTable table;
+
 	DecimalFormat df = new DecimalFormat("0.000");
-	/** 两个队伍每节的比分 */
-	String[] score1 = { "0", "0", "0", "0", "0", "0", "0" };
-	String[] score2 = { "0", "0", "0", "0", "0", "0", "0" };
-	/** 两支球队缩写 */
-	String[] teamShort;
-	/** 两支球队比赛总分 */
-	String[] scoreAll;
-	/** 每节比分 */
-	String[] eachScore;
-	/** 球队全称 */
-	String[] teamLong;
 	String[] team = new String[] { "凯尔特人", "篮网", "尼克斯", "76人", "猛龙", "公牛", "骑士", "活塞", "步行者", "雄鹿", "老鹰", "黄蜂",
 			"热火", "魔术", "奇才", "勇士", "快船", "湖人", "太阳", "国王", "掘金", "森林狼", "雷霆", "开拓者", "爵士", "小牛", "火箭", "灰熊",
 			"鹈鹕", "马刺" };
@@ -90,48 +73,6 @@ public class TeamGamePanel extends TeamSeasonPanel {
 			"CHA", "MIA", "ORL", "WAS", "GSW", "LAC", "LAL", "PHX", "SAC", "DEN", "MIN", "OKC", "POR", "UTA",
 			"DAL", "HOU", "MEM", "NOP", "SAS" };
 
-	/**
-	 * 拆解传回来的vo
-	 * 
-	 * @author lsy
-	 * @version 2015年3月22日 上午12:04:52
-	 */
-	public void analyzeVO(MatchProfileVO proVOArray) {
-		teamLong = new String[2];
-		teamShort = proVOArray.getTeam().split("-");
-		teamLong[0] = match(teamShort[0]);
-		teamLong[1] = match(teamShort[1]);
-		scoreAll = proVOArray.getScore().split("-");// 两支球队比赛总分
-		eachScore = proVOArray.getEachSectionScore().split(";");
-		int eachlth = eachScore.length;
-		for (int i = 0; i < eachlth; i++) {
-			String[] scoreTemp = eachScore[i].split("-");
-			score1[i] = scoreTemp[0];
-			score2[i] = scoreTemp[1];
-		}
-	}
-
-	/**
-	 * 根据缩写返回球队全称
-	 * 
-	 * @author lsy
-	 * @version 2015年3月22日 上午12:01:45
-	 */
-	public String match(String abbr) {
-		for (int i = 0; i < 30; i++) {
-			if (teamArr[i].equals(abbr)) {
-				return team[i];
-			}
-		}
-		return null;
-	}
-
-	public void addScore(int line) {
-		for(int i = 0; i < 7; i++) {
-			rowData[2 * line ][i + 1] = score1[i];
-			rowData[2 * line + 1][i + 1] = score2[i];
-		}
-	}
 	
 
 	/**
@@ -158,25 +99,47 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		controller.addDateChooserPanel(this, dateChooser, 722, 248);
 	}
 
+	MyLabel label = new MyLabel(770,280,100,50,"当天没有比赛");
 	public void addFindButton() {
 		imgButton = new ImgButton(url + "search.png", 893, 250, url + "searchOn.png", url + "searchClick.png");
 		this.add(imgButton);
 		imgButton.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
+				TeamGamePanel.this.remove(pane);
+				label.setForeground(UIConfig.BUTTON_COLOR);
+				TeamGamePanel.this.add(label);
 				Date date = dateChooser.getDate();
+				
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTime(date);
+				int year = calendar.get(Calendar.YEAR);
+				int month = calendar.get(Calendar.MONTH) + 1;
+				int seasonStart;
+				int seasonEnd;
+				if (month < 8) {
+					seasonStart = year -1;
+					seasonEnd = year;
+				}else {
+					seasonStart = year;
+					seasonEnd = year +1;
+				}
+				String seasonString = String.valueOf(seasonStart).substring(2) + "-" + 
+						String.valueOf(seasonEnd).substring(2);
+				
 				SimpleDateFormat  sd = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
 				String str = sd.format(date);
 				String[] dateArr = str.split("  ");
 				String[] dateTemp = dateArr[0].split("-");
 				String dateStr = dateTemp[1]+"-"+dateTemp[2];
 				for (int i = 0; i < matchProfile.size(); i++) {
-					if(dateStr.equals(matchProfile.get(i).getTime())){
+					if(dateStr.equals(matchProfile.get(i).getTime())&&seasonString.equals(matchProfile.get(i).getSeason())){
+						TeamGamePanel.this.remove(label);
 						ArrayList<MatchProfileVO> pro = new ArrayList<MatchProfileVO>();
 						pro.add(matchProfile.get(i));
-						TeamGamePanel.this.remove(scroll);
-						gameData.setTable(pro,TeamGamePanel.this,pro.size(),controller);
+						pane = gameData.setTable(pro,TeamGamePanel.this,pro.size(),controller);
 					}
 				}
+				TeamGamePanel.this.repaint();
 			}
 		});
 	}
