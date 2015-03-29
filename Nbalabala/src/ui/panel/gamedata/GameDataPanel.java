@@ -1,5 +1,7 @@
 package ui.panel.gamedata;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -9,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.ImageIcon;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import ui.DateChooser;
 import ui.UIConfig;
@@ -87,7 +91,6 @@ public class GameDataPanel extends BottomPanel {
 		addConfirmBtn();
 	}
 	
-
 	public GameDataPanel(MainController controller, String url,int i) {
 		super(controller, url);
 	}
@@ -207,10 +210,41 @@ public class GameDataPanel extends BottomPanel {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		makeFace(table);
 		scroll = new BottomScrollPane(table);
 		scroll.setLocation(57, 285);
 		this.add(scroll);
 	}
+	
+	public void makeFace(JTable table) {
+
+		try {
+			DefaultTableCellRenderer tcr = new DefaultTableCellRenderer() {
+
+				/** serialVersionUID */
+				private static final long serialVersionUID = -4145147988893713337L;
+
+				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+					if ((row % 4 == 1 || row % 4 == 0)) {
+
+						setBackground(UIConfig.BUTTON_COLOR);
+						setForeground(Color.white);
+					} else {
+						setBackground(Color.white);
+						setForeground(Color.black);
+					}
+					return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+				}
+			};
+			for(int i = 0; i < table.getColumnCount(); i++) {
+				table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+	}
+
 	
 	public void addScore(int line) {
 		for(int i = 0; i < 7; i++) {

@@ -18,6 +18,7 @@ import ui.common.button.ImgButton;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
+import ui.panel.gamedata.GameDataPanel;
 import vo.MatchProfileVO;
 import vo.TeamDetailVO;
 import bl.teamquerybl.TeamQuery;
@@ -40,6 +41,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 	TeamQueryBLService teamQuery = new TeamQuery();
 	TeamButton teamButton;
 	TeamDetailVO teamDetail;
+	GameDataPanel gameData;
 	ArrayList<MatchProfileVO> matchProfile;
 
 	public TeamGamePanel(AllTeamsPanel allteams, MainController controller, String url, TeamButton teamButton,
@@ -51,6 +53,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		addDateChooser();
 		teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
 		matchProfile = teamDetail.getMatchRecords();
+		gameData = new GameDataPanel(controller,"",1); 
 		setTable(matchProfile);
 		iniTable(x);
 	}
@@ -163,6 +166,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		gameData.makeFace(table);
 		scroll = new BottomScrollPane(table);
 		scroll.setLocation(57, 285);
 		this.add(scroll);
