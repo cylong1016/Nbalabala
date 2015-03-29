@@ -13,7 +13,6 @@ import javax.swing.ImageIcon;
 
 import ui.DateChooser;
 import ui.UIConfig;
-import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
@@ -54,7 +53,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
 		matchProfile = teamDetail.getMatchRecords();
 		gameData = new GameDataPanel(controller,"",1); 
-		setTable(matchProfile);
+		gameData.setTable(matchProfile,this,matchProfile.size(),controller);
 		iniTable(x);
 	}
 	
@@ -134,43 +133,6 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		}
 	}
 	
-	public void setTable(final ArrayList<MatchProfileVO> matchProfile) {
-		int gameSum = matchProfile.size();
-		columns = new String[] { "球队", "1", "2", "3", "4", "加时一", "加时二", "加时三", "总分", "" };
-		rowData = new String[2 * gameSum][columns.length];
-		for (int j = 0; j < gameSum * 2; j = j + 2) {
-			MatchProfileVO pro = matchProfile.get(j / 2);
-			score1 = new String[] { "0", "0", "0", "0", "0", "0", "0" };
-			score2 = new String[] { "0", "0", "0", "0", "0", "0", "0" };
-			analyzeVO(pro);
-			rowData[j][0] = teamLong[0];
-			rowData[j + 1][0] = teamLong[1];
-			rowData[j][8] = scoreAll[0];
-			rowData[j + 1][8] = scoreAll[1];
-			rowData[j][9] = "数据统计";
-			addScore(j / 2);
-		}
-		table = new BottomTable(rowData, columns);
-		try {
-			table.addMouseListener(new UserMouseAdapter() {
-
-				public void mouseClicked(MouseEvent e) {
-					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
-					if (rowI > -1) {
-						 controller.toOneGamePanel(TeamGamePanel.this,
-						 matchProfile.get(rowI/2), TeamGamePanel.this);
-					}
-
-				}
-			});
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		gameData.makeFace(table);
-		scroll = new BottomScrollPane(table);
-		scroll.setLocation(57, 285);
-		this.add(scroll);
-	}
 
 	/**
 	 * 覆盖父类的方法，让父类的表格不显示
@@ -212,7 +174,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 						ArrayList<MatchProfileVO> pro = new ArrayList<MatchProfileVO>();
 						pro.add(matchProfile.get(i));
 						TeamGamePanel.this.remove(scroll);
-						setTable(pro);
+						gameData.setTable(pro,TeamGamePanel.this,pro.size(),controller);
 					}
 				}
 			}
