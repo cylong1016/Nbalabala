@@ -111,13 +111,13 @@ public class TeamSeasonPanel extends BottomPanel {
 	 * @version 2015年3月25日  上午11:43:29
 	 */
 	public void addLabel(Image img){
-		logo = new ImgLabel(100,-25,250,250,img);
-		teamName = new MyLabel(300,50,300,50,match());
+		logo = new ImgLabel(130,6,150,150,img);
+		teamName = new MyLabel(280,50,300,50,match());
 		teamName.setForeground(UIConfig.BUTTON_COLOR);
 		teamName.setFont(new Font("微软雅黑",0,30));
 		this.add(logo);
 		this.add(teamName);
-		teamInfo[0] = new MyLabel(420,100,lbWidth,lbHeight,teamDetail.getProfile().getAbbr());
+		teamInfo[0] = new MyLabel(350,100,lbWidth,lbHeight,teamDetail.getProfile().getAbbr());
 		teamInfo[1] = new MyLabel(600,40,lbWidth*4,lbHeight,"Location:  "+teamDetail.getProfile().getLocation()
 				+" "+teamDetail.getProfile().getDivisionString());
 		teamInfo[2] = new MyLabel(600,80,lbWidth*4,lbHeight,"Court:  "+teamDetail.getProfile().getHome());

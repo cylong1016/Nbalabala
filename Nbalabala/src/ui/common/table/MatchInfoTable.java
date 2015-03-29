@@ -1,5 +1,7 @@
 package ui.common.table;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -21,7 +23,7 @@ import ui.UIConfig;
 public class MatchInfoTable extends JTable{
 	
 	/** 表格每一行的高 */
-	private int rowHeight = 30;
+	private static final int ROW_Height = 30;
 	
 	public static final int COLUMN_LENGTH = 10;
 
@@ -49,24 +51,6 @@ public class MatchInfoTable extends JTable{
 		super.paint(g);
 		g.setColor(UIConfig.TABLE_BORDER_COLOR);
 		g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
-//		g.drawLine(getWidth() - 1, 0, getWidth() - 1, getHeight() - 1);
-//		g.drawLine(0, 0, 0, getHeight());
-	}
-	
-	public void cancelVerticalLines() {
-		this.setShowVerticalLines(false);
-		JTableHeader header = this.getTableHeader();// 获取头部
-		header.setOpaque(false); // 设置头部为透明
-		header.setForeground(UIConfig.TABLE_HEADER_FORE_COLOR);	// 设置头部前景色
-		header.getTable().setOpaque(false);// 设置头部里面的表格透明
-		// 头部的表格也像前面的表格设置一样，还需要将里面的单元项设置为透明 因此同样需要对头部单元项进行透明度设置，这里还是用渲染器。
-		// 但这里有个问题就是，若将头部渲染器直接像上文一样设置，则它的下面没有横线 因此，我们需要一个专用的头部渲染器来手动画横线
-		header.setDefaultRenderer(new HeaderCellNoVerticalLinesRenderer());
-		TableCellRenderer headerRenderer = header.getDefaultRenderer();
-		if (headerRenderer instanceof JLabel) {
-			((JLabel)headerRenderer).setHorizontalAlignment(JLabel.CENTER);
-			((JLabel)headerRenderer).setOpaque(false);
-		}
 	}
 	
 	public void decorateTable() {
@@ -76,7 +60,7 @@ public class MatchInfoTable extends JTable{
 		this.setSelectionBackground(UIConfig.TABLE_SELECTIONBACK);
 		this.setBorder(null);
 		this.setShowGrid(false);
-		this.setRowHeight(rowHeight);	// 每一行的高
+		this.setRowHeight(ROW_Height);	// 每一行的高
 		this.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		this.setIntercellSpacing(new Dimension(0, 0));
 		// 将表格设置为透明，表格同样包括表格本身和其中的内容项 仅仅将表格本身设置为透明也没有用，应该将其中的内容项也设置为透明
@@ -92,7 +76,6 @@ public class MatchInfoTable extends JTable{
 		// 设置头部透明
 		// 头部实际上也是一个JTABLE，只有一行而已。
 		JTableHeader header = this.getTableHeader();// 获取头部
-		// header.setPreferredSize(new Dimension(30, rowHeight));
 		// header.setOpaque(false); // 设置头部为透明
 		header.setBackground(UIConfig.TABLE_HEADER_BACK_COLOR);	// 设置头部背景色
 		header.setForeground(UIConfig.TABLE_HEADER_FORE_COLOR);	// 设置头部前景色
@@ -105,7 +88,6 @@ public class MatchInfoTable extends JTable{
 			((JLabel)headerRenderer).setHorizontalAlignment(JLabel.CENTER);
 			((JLabel)headerRenderer).setOpaque(false);
 		}
-
 	}
 	
 	/**
@@ -144,6 +126,7 @@ public class MatchInfoTable extends JTable{
 		int row;
 		protected CellRenderLabel(int row){
 			this.row = row;
+			setHorizontalAlignment(JLabel.CENTER);
 		}
 		protected void paintComponent(Graphics g) {
 			// 重载jlabel的paintComponent方法，在这个jlabel里手动画线
@@ -153,6 +136,15 @@ public class MatchInfoTable extends JTable{
 				g2d.drawLine(0, this.getHeight() - 1, this.getWidth(), this.getHeight() - 1);
 			// 一定要记得调用父类的paintComponent方法，不然它只会划线，不会显示文字
 			super.paintComponent(g);
+			AlphaComposite newComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .05f);
+			g2d.setComposite(newComposite);
+			if ((row % 4 == 1 || row % 4 == 0)) {
+				g2d.setColor(Color.red);
+				g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
+			} else {
+				g2d.setColor(Color.blue);
+				g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
+			}
 		}
 	}
 	
@@ -171,9 +163,8 @@ public class MatchInfoTable extends JTable{
 			label.setHorizontalAlignment(JLabel.CENTER);
 			label.setFont(UIConfig.TABLE_FONT);
 			label.setForeground(UIConfig.TABLE_FORE_COLOR);	// 表头前景色
+			label.setBackground(Color.red);
 			return label;
 		}
-
 	}
-	
 }
