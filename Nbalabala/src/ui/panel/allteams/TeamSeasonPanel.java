@@ -106,7 +106,7 @@ public class TeamSeasonPanel extends BottomPanel {
 	 * @version 2015年3月25日  上午11:43:29
 	 */
 	public void addLabel(Image img){
-		logo = new ImgLabel(100,-25,250,250,img);
+		logo = new ImgLabel(130,6,150,150,img);
 		teamName = new MyLabel(350,50,300,50,match());
 		teamName.setForeground(UIConfig.BUTTON_COLOR);
 		teamName.setFont(new Font("微软雅黑",0,30));

@@ -81,7 +81,7 @@ public class PlayerSeasonPanel extends PlayerInfoPanel{
 		}
 		table = new BottomTable(rowData, columns);
 		scroll = new BottomScrollPane(table);
-		scroll.setLocation(57, 285);
+		scroll.setBounds(57, 260, 888, 265); // 表格的位置
 		this.add(scroll);
 	}
 }
