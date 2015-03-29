@@ -148,7 +148,7 @@ public class MatchInfoTable extends JTable{
 		protected static final long serialVersionUID = 1L;
 		
 		public CellRenderer() {
-			setOpaque(false); // 将渲染器设置为透明
+//			setOpaque(false); // 将渲染器设置为透明
 			setHorizontalAlignment(JLabel.CENTER);	// 设置表格中内容居中显示
 		}
 
