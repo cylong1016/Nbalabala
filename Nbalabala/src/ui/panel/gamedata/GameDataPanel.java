@@ -159,7 +159,7 @@ public class GameDataPanel extends BottomPanel {
 	 */
 	public void addDateChooser() {
 		dateChooser = new DateChooser();
-		controller.addDateChooserPanel(this, dateChooser, 257, box1Y);
+		controller.addDateChooserPanel(this, dateChooser, 257, box1Y-3);
 	}
 
 	/**

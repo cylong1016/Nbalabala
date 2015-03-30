@@ -90,7 +90,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 
 	public void addDateChooser() {
 		dateChooser = new DateChooser();
-		controller.addDateChooserPanel(this, dateChooser, 722, 248);
+		controller.addDateChooserPanel(this, dateChooser, 722, 245);
 	}
 
 	MyLabel label = new MyLabel(770,280,100,50,"当天没有比赛");

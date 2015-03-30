@@ -49,7 +49,7 @@ public class UIConfig {
 	/** 表头前景颜色 */
 	public static Color TABLE_HEADER_FORE_COLOR = new Color(255, 221, 31);
 	/** 表头背景颜色 */
-	public static Color TABLE_HEADER_BACK_COLOR = new Color(51, 81, 168);
+	public static Color TABLE_HEADER_BACK_COLOR = new Color(25, 43, 102);
 	/** 选择后的前景色 */
 	public static Color TABLE_SELECTIONFORE = new Color(255, 150, 0);
 	/** 选择后的背景色 */

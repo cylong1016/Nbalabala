@@ -53,8 +53,10 @@ import javax.swing.event.AncestorListener;
 @SuppressWarnings("serial")
 public class DateChooser extends JPanel{
 	
-	private static final Font DATE_CHOOSER_FONT = new Font("微软雅黑",0,17);
+	private static final Font DATE_CHOOSER_FONT = new Font("微软雅黑",0,15);
 	
+	private static final Color CAL_MAIN = new Color(239, 168, 16);
+	private static final Color CAL_SUB = new Color(241, 220, 182);
 	
     private Date initDate;
     private Calendar now=Calendar.getInstance();
@@ -68,7 +70,7 @@ public class DateChooser extends JPanel{
 	private JP4 jp4;
     private final LabelManager lm=new LabelManager();
     private JLabel showDate;//,toSelect;
-    private SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日");
+    private SimpleDateFormat sdf=new SimpleDateFormat(" yyyy年MM月dd日 ");
     private boolean isShow=false;
     private Popup pop;
     /**
@@ -130,6 +132,7 @@ public class DateChooser extends JPanel{
         showDate.setOpaque(true);
         showDate.setForeground(Color.white);
         showDate.setBackground(UIConfig.BUTTON_COLOR);
+        showDate.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
         showDate.setRequestFocusEnabled(true);
         showDate.addMouseListener(new MouseAdapter(){
             public void mousePressed(MouseEvent me){
@@ -224,7 +227,7 @@ public class DateChooser extends JPanel{
         JLabel left,right,center;
         public JP1(){
             super(new BorderLayout());
-            this.setBackground(UIConfig.BUTTON_COLOR);
+            this.setBackground(CAL_MAIN);
             //new Color(160,185,215)
             initJP1();
         }
@@ -235,8 +238,8 @@ public class DateChooser extends JPanel{
             right=new JLabel(" >> ",JLabel.CENTER);
             right.setForeground(Color.white);
             right.setToolTipText("下一月");
-            left.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
-            right.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
+            left.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));
+            right.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));
             center=new JLabel("",JLabel.CENTER);
             updateDate();
             this.add(left,BorderLayout.WEST);
@@ -287,13 +290,16 @@ public class DateChooser extends JPanel{
     }
     private class JP2 extends JPanel{
         public JP2(){
-            this.setPreferredSize(new Dimension(295,20));
+        	this.setBackground(CAL_SUB);
+            this.setPreferredSize(new Dimension(295,25));
+            JLabel week = new JLabel("SUN    MON    TUE    WED    THU    FRI    SAT", JLabel.CENTER);
+            this.add(week, CENTER_ALIGNMENT);
         }
-        protected void paintComponent(Graphics g){
-            g.setFont(new Font("微软雅黑",0,16));
-            g.drawString("SUN  MON  TUE  WED  THU  FRI  SAT",5,15);
-            g.drawLine(0,15,getWidth(),15);
-        }
+//        protected void paintComponent(Graphics g){
+//            g.setFont(new Font("微软雅黑",0,15));
+//            g.drawString("SUN   MON   TUE   WED   THU   FRI   SAT",7,15);
+//            g.drawLine(0,15,getWidth(),15);
+//        }
     }
     private class JP3 extends JPanel{
         public JP3(){
@@ -368,7 +374,7 @@ public class DateChooser extends JPanel{
             if(day==select.get(Calendar.DAY_OF_MONTH)&&
                     month==select.get(Calendar.MONTH)){
                 //如果当前日期是选择日期,则高亮显示
-                g.setColor(new Color(160,185,215));
+                g.setColor(CAL_SUB);
                 g.fillRect(0,0,getWidth(),getHeight());
             }
             if(year==now.get(Calendar.YEAR)&&
@@ -376,7 +382,7 @@ public class DateChooser extends JPanel{
                     day==now.get(Calendar.DAY_OF_MONTH)){
                 //如果日期和当前日期一样,则用红框
                 Graphics2D gd=(Graphics2D)g;
-                gd.setColor(Color.WHITE);
+                gd.setColor(Color.yellow);
                 Polygon p=new Polygon();
                 p.addPoint(0,0);
                 p.addPoint(getWidth()-1,0);
@@ -506,9 +512,9 @@ public class DateChooser extends JPanel{
         public JP4(){
             super(new BorderLayout());
             this.setPreferredSize(new Dimension(295,20));
-            this.setBackground(UIConfig.BUTTON_COLOR);
+            this.setBackground(CAL_MAIN);
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日");
-            final JLabel jl=new JLabel("今天: "+sdf.format(new Date()));
+            final JLabel jl=new JLabel("   今天: "+sdf.format(new Date()));
             jl.setForeground(Color.white);
             jl.setToolTipText("点击回到今天日期");
             this.add(jl,BorderLayout.CENTER);
