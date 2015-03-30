@@ -176,8 +176,12 @@ public class TeamDataPanel extends BottomPanel {
 			}
 			SelectButton.current.back();
 			SelectButton.current = (SelectButton)e.getSource();
-			ArrayList<TeamSeasonRecord> seasonArray = teamSeason.getScreenedTeamData(SelectButton.current.division);
-			createTable(seasonArray);
+			ArrayList<TeamSeasonRecord> teamArr = teamSeason.getScreenedTeamData(SelectButton.current.division);
+			if (Line_2_Button.current == buttonLine2[0]) {
+				updateTotalTeamDataTable(teamArr); // 添加总数据
+			} else if (Line_2_Button.current == buttonLine2[1]) {
+				updateAvgTeamDataTable(teamArr); // 添加平均数据
+			}
 		}
 	}
 
@@ -189,8 +193,12 @@ public class TeamDataPanel extends BottomPanel {
 			}
 			Line_2_Button.current.back();
 			Line_2_Button.current = (Line_2_Button)e.getSource();
-			ArrayList<TeamSeasonRecord> seasonArray = teamSeason.getScreenedTeamData(SelectButton.current.division);
-			createTable(seasonArray);
+			ArrayList<TeamSeasonRecord> teamArr = teamSeason.getScreenedTeamData(SelectButton.current.division);
+			if (Line_2_Button.current == buttonLine2[0]) {
+				updateTotalTeamDataTable(teamArr); // 添加总数据
+			} else if (Line_2_Button.current == buttonLine2[1]) {
+				updateAvgTeamDataTable(teamArr); // 添加平均数据
+			}
 		}
 	}
 
@@ -302,7 +310,6 @@ public class TeamDataPanel extends BottomPanel {
 		teamDataTable.getColumnModel().getColumn(18).setPreferredWidth(80);
 		//表头太长，显示不出来
 		teamDataTable.getColumnModel().getColumn(19).setPreferredWidth(80);
-		// 给表头添加监听，用来排序
 		addScrollPane(teamDataTable);
 		
 		if (Line_2_Button.current == buttonLine2[0]) {
@@ -312,6 +319,7 @@ public class TeamDataPanel extends BottomPanel {
 		}
 		
 		final JTableHeader header = teamDataTable.getTableHeader();
+		// 给表头添加监听，用来排序
 		header.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {

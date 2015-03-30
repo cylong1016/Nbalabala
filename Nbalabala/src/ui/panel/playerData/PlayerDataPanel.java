@@ -116,12 +116,11 @@ public class PlayerDataPanel extends BottomPanel {
 		findButton.addMouseListener(new MouseAdapter() {
 
 			public void mousePressed(MouseEvent e) {
-				ArrayList<PlayerSeasonRecord> seasonArray = playerSeason.getScreenedPlayers(Line_1_Button.current.p, Line_2_Button.current.division, Line_3_Button.current.basis);
-				PlayerDataPanel.this.remove(scroll); // 删除以前的表格
+				ArrayList<PlayerSeasonRecord> playerRecords = playerSeason.getScreenedPlayers(Line_1_Button.current.p, Line_2_Button.current.division, Line_3_Button.current.basis);
 				if (Line_4_Button.current == buttonLine4[0]) {
-					createTable(seasonArray); // 添加球员总数居
+					updateTotalPlayerDataTable(playerRecords); // 添加球员总数居
 				} else if (Line_4_Button.current == buttonLine4[1]) {
-					createTable(seasonArray); // 添加球员平均数据
+					updateAvgPlayerDataTable(playerRecords); // 添加球员场均数居
 				}
 			}
 		});
@@ -277,10 +276,12 @@ public class PlayerDataPanel extends BottomPanel {
 			}
 			Line_4_Button.current.back();
 			Line_4_Button.current = (Line_4_Button)e.getSource();
-			ArrayList<PlayerSeasonRecord> seasonArray =
-														playerSeason.getScreenedPlayers(Line_1_Button.current.p, Line_2_Button.current.division, Line_3_Button.current.basis);
-			PlayerDataPanel.this.remove(scroll); // 删除以前的table
-			createTable(seasonArray);
+			ArrayList<PlayerSeasonRecord> playerRecords = playerSeason.getScreenedPlayers(Line_1_Button.current.p, Line_2_Button.current.division, Line_3_Button.current.basis);
+			if (Line_4_Button.current == buttonLine4[0]) {
+				updateTotalPlayerDataTable(playerRecords); // 添加球员总数居
+			} else if (Line_4_Button.current == buttonLine4[1]) {
+				updateAvgPlayerDataTable(playerRecords); // 添加球员场均数居
+			}
 		}
 	}
 

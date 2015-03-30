@@ -30,7 +30,8 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getFirstCountAvg() - p2.getFirstCountAvg()) < 0 ? -1 : 1;
+					// 排序时候的错误，参见以下的错误
+					return (int)(factor * (p1.getFirstCountAvg() - p2.getFirstCountAvg()) * 10000);
 				}
 			};
 			break;
