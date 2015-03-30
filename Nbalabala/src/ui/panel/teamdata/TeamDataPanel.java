@@ -205,37 +205,37 @@ public class TeamDataPanel extends BottomPanel {
 		for(int i = 0; i < teamArr.size(); i++) {
 			TeamSeasonRecord teamSeason = teamArr.get(i);
 			teamDataTable.setValueAt(Integer.toString(i + 1),i,0);
-			teamDataTable.setValueAt(teamSeason.getTeamName(),i,1);
+			teamDataTable.setValueAt(Constants.translateTeamAbbr(teamSeason.getTeamName()),i,1);
 			teamDataTable.setValueAt(Integer.toString(teamSeason.getWins()),i,2);
 			teamDataTable.setValueAt(Integer.toString(teamSeason.getLoses()),i,3);
 			teamDataTable.setValueAt(Integer.toString(teamSeason.getMatchCount()),i,4);
 			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getWinning()),i,5);
-			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getFieldGoal()),i,6);
-			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getFieldAttempt()),i,7);
+			teamDataTable.setValueAt(Integer.toString(teamSeason.getFieldGoal()),i,6);
+			teamDataTable.setValueAt(Integer.toString(teamSeason.getFieldAttempt()),i,7);
 			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getFieldPercent()),i,8);
-			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getThreePointGoal()),i,9);
-			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getThreePointAttempt()),i,10);
+			teamDataTable.setValueAt(Integer.toString(teamSeason.getThreePointGoal()),i,9);
+			teamDataTable.setValueAt(Integer.toString(teamSeason.getThreePointAttempt()),i,10);
 			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getThreePointPercent()),i,11);
-			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getFreethrowGoal()),i,12);
-			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getFreethrowAttempt()),i,13);
+			teamDataTable.setValueAt(Integer.toString(teamSeason.getFreethrowGoal()),i,12);
+			teamDataTable.setValueAt(Integer.toString(teamSeason.getFreethrowAttempt()),i,13);
 			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getFreeThrowPercent()),i,14);
-			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getOffensiveRebound()),i,15);
-			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getDefensiveRebound()),i,16);
-			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getTotalRebound()),i,17);
+			teamDataTable.setValueAt(Integer.toString(teamSeason.getOffensiveRebound()),i,15);
+			teamDataTable.setValueAt(Integer.toString(teamSeason.getDefensiveRebound()),i,16);
+			teamDataTable.setValueAt(Integer.toString(teamSeason.getTotalRebound()),i,17);
 			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getOffensiveReboundEff()),i,18);
 			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getDefensiveReboundEff()),i,19);
 			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getOffensiveRound()),i,20);
 			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getOffensiveEff()),i,21);
 			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getDefensiveRound()),i,22);
 			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getDefensiveEff()),i,23);
-			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getSteal()),i,24);
+			teamDataTable.setValueAt(Integer.toString(teamSeason.getSteal()),i,24);
 			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getStealEff()),i,25);
-			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getAssist()),i,26);
+			teamDataTable.setValueAt(Integer.toString(teamSeason.getAssist()),i,26);
 			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getAssistEff()),i,27);
-			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getBlock()),i,28);
-			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getTurnover()),i,29);
-			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getFoul()),i,30);
-			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getScore()),i,31);
+			teamDataTable.setValueAt(Integer.toString(teamSeason.getBlock()),i,28);
+			teamDataTable.setValueAt(Integer.toString(teamSeason.getTurnover()),i,29);
+			teamDataTable.setValueAt(Integer.toString(teamSeason.getFoul()),i,30);
+			teamDataTable.setValueAt(Integer.toString(teamSeason.getScore()),i,31);
 		}
 	}
 
@@ -249,7 +249,7 @@ public class TeamDataPanel extends BottomPanel {
 		for(int i = 0; i < teamArr.size(); i++) {
 			TeamSeasonRecord teamSeason = teamArr.get(i);
 			teamDataTable.setValueAt(Integer.toString(i + 1),i,0);
-			teamDataTable.setValueAt(teamSeason.getTeamName(),i,1);
+			teamDataTable.setValueAt(Constants.translateTeamAbbr(teamSeason.getTeamName()),i,1);
 			teamDataTable.setValueAt(Integer.toString(teamSeason.getWins()),i,2);
 			teamDataTable.setValueAt(Integer.toString(teamSeason.getLoses()),i,3);
 			teamDataTable.setValueAt(Integer.toString(teamSeason.getMatchCount()),i,4);
@@ -299,6 +299,9 @@ public class TeamDataPanel extends BottomPanel {
 	private void createTable(ArrayList<TeamSeasonRecord> teamArr) {
 		String[][] rowData = new String[teamArr.size()][Constants.TEAM_SEASON_HEADERS.length];
 		teamDataTable = new BottomTable(rowData, Constants.TEAM_SEASON_HEADERS);
+		teamDataTable.getColumnModel().getColumn(18).setPreferredWidth(80);
+		//表头太长，显示不出来
+		teamDataTable.getColumnModel().getColumn(19).setPreferredWidth(80);
 		// 给表头添加监听，用来排序
 		addScrollPane(teamDataTable);
 		

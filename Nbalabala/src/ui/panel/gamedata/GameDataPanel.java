@@ -77,6 +77,9 @@ public class GameDataPanel extends BottomPanel {
 		addComboBox();
 		addDateChooser();
 		addConfirmBtn();
+		scrollPane = new MatchInfoTableFactory(new ArrayList<MatchProfileVO>(), this, controller)
+			.getTableScrollPanel();
+		add(scrollPane);
 	}
 	
 	public GameDataPanel(MainController controller, String url,int i) {
@@ -107,10 +110,10 @@ public class GameDataPanel extends BottomPanel {
 				int team2 = box2.getSelectedIndex();
 				matchProfile = matchQuery.screenMatchByTeam(Constants.TEAM_ABBR[team1], Constants.TEAM_ABBR[team2]);
 				gameSum = matchProfile.size();
-				if (scrollPane != null){
-					remove(scrollPane);
-				}
-				GameDataPanel.this.add(new MatchInfoTableFactory(matchProfile,GameDataPanel.this,controller).getTableScrollPanel());
+				remove(scrollPane);
+				scrollPane = new MatchInfoTableFactory(matchProfile,GameDataPanel.this,controller)
+					.getTableScrollPanel();
+				GameDataPanel.this.add(scrollPane);
 			}
 		});
 		confirmBtn2.addMouseListener(new MouseAdapter() {
@@ -122,10 +125,10 @@ public class GameDataPanel extends BottomPanel {
 				clickTime++;
 				Date date = dateChooser.getDate();
 				matchProfile = matchQuery.screenMatchByDate(date);
-				if (scrollPane != null){
-					remove(scrollPane);
-				}
-				GameDataPanel.this.add(new MatchInfoTableFactory(matchProfile,GameDataPanel.this,controller).getTableScrollPanel());
+				remove(scrollPane);
+				scrollPane = new MatchInfoTableFactory(matchProfile,GameDataPanel.this,controller)
+					.getTableScrollPanel();
+				GameDataPanel.this.add(scrollPane);
 			}
 		});
 	}

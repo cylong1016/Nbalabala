@@ -20,6 +20,7 @@ import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.common.textField.MyTextField;
 import ui.controller.MainController;
+import utility.Constants;
 import vo.PlayerProfileVO;
 import bl.playerquerybl.PlayerQuery;
 import blservice.PlayerQueryBLService;
@@ -87,7 +88,7 @@ public class AllPlayersPanel extends BottomPanel {
 //			imgArr.add(ppVO.getPortrait());
 //			rowData[i][0] = ppVO.getPortrait();
 			rowData[i][1] = ppVO.getName();
-			rowData[i][2] = ppVO.getTeam();
+			rowData[i][2] = Constants.translateTeamAbbr(ppVO.getTeam());
 			rowData[i][3] = ppVO.getNumber();
 			rowData[i][4] = ppVO.getPosition();
 			rowData[i][5] = ppVO.getBirth();

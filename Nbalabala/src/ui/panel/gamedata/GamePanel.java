@@ -16,6 +16,7 @@ import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
+import utility.Constants;
 import vo.MatchDetailVO;
 import vo.MatchPlayerVO;
 import vo.MatchProfileVO;
@@ -48,12 +49,7 @@ public class GamePanel extends BottomPanel {
 	String[] teamPlace = { "波士顿", "布鲁克林", "纽约", "费城", "多伦多", "芝加哥", "克利夫兰", "底特律", "印第安纳", "密尔沃基", "亚特兰大", "夏洛特",
 			"迈阿密", "奥兰多", "华盛顿", "金洲", "洛杉矶", "洛杉矶", "菲尼克斯", "萨克拉门托", "丹佛", "明尼苏达", "俄克拉荷马", "波特兰", "犹他", "达拉斯",
 			"休斯敦", "孟菲斯", "新奥尔良", "圣安东尼奥" };
-	String[] teamShort = new String[] { "BOS", "BKN", "NYK", "PHI", "TOR", "CHI", "CLE", "DET", "IND", "MIL",
-			"ATL", "CHA", "MIA", "ORL", "WAS", "GSW", "LAC", "LAL", "PHX", "SAC", "DEN", "MIN", "OKC", "POR",
-			"UTA", "DAL", "HOU", "MEM", "NOP", "SAS" };
-	String[] team = new String[] { "凯尔特人", "篮网", "尼克斯", "76人", "猛龙", "公牛", "骑士", "活塞", "步行者", "雄鹿", "老鹰", "黄蜂",
-			"热火", "魔术", "奇才", "勇士", "快船", "湖人", "太阳", "国王", "掘金", "森林狼", "雷霆", "开拓者", "爵士", "小牛", "火箭", "灰熊",
-			"鹈鹕", "马刺" };
+
 	/** 球队中文全称 */
 	String teamStr1, teamStr2;
 	/** 球队所处位置 */
@@ -110,7 +106,7 @@ public class GamePanel extends BottomPanel {
 	}
 	
 	private void checkMatchValid() {
-		if (matchVO.isMatchValid()) {
+		if (!matchVO.isMatchValid()) {
 			ImgLabel imgLabel = new ImgLabel(5, 95, 232, 178, new ImageIcon("images/game/wrong.png").getImage());
 			this.add(imgLabel);
 		}
@@ -307,8 +303,8 @@ public class GamePanel extends BottomPanel {
 		teamShort2 = teamTemp[1];
 		int team_1_Order = match(teamShort1);
 		int team_2_Order = match(teamShort2);
-		teamStr1 = team[team_1_Order];
-		teamStr2 = team[team_2_Order];
+		teamStr1 = Constants.TEAM_NAMES[team_1_Order];
+		teamStr2 = Constants.TEAM_NAMES[team_2_Order];
 		place1 = teamPlace[team_1_Order];
 		place2 = teamPlace[team_2_Order];
 
@@ -318,7 +314,7 @@ public class GamePanel extends BottomPanel {
 
 	public int match(String str) {
 		for (order = 0; order < 30; order++) {
-			if (teamShort[order].equals(str)) {
+			if (Constants.TEAM_ABBR[order].equals(str)) {
 				return order;
 			}
 		}

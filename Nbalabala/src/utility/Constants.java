@@ -115,6 +115,73 @@ public class Constants {
 		case "UTA":
 			return "爵士";
 		default:
+			return "无资料";
+		}
+	}
+	
+	public static String getAbbrByName(String name) {
+		switch (name) {
+		case "凯尔特人":
+			return "BOS";
+		case "篮网":
+			return "BKN";
+		case "尼克斯":
+			return "NYK";
+		case "76人":
+			return "PHI";
+		case "猛龙":
+			return "TOR";
+		case "小牛":
+			return "DAL";
+		case "火箭":
+			return "HOU";
+		case "灰熊":
+			return "MEM";
+		case "鹈鹕":
+			return "NOP";
+		case "马刺":
+			return "SAS"; 
+		case "老鹰":
+			return "ATL";
+		case "黄蜂":
+			return "CHA";
+		case "热火":
+			return "MIA";
+		case "魔术":
+			return "ORL";
+		case "奇才":
+			return "WAS"; 
+		case "勇士":
+			return "GSW";
+		case "快船":
+			return "LAC";
+		case "湖人":
+			return "LAL";
+		case "太阳":
+			return "PHX";
+		case "国王":
+			return "SAC";
+		case "公牛":
+			return "CHI";
+		case "骑士":
+			return "CLE";
+		case "活塞":
+			return "DET";
+		case "步行者":
+			return "IND";
+		case "雄鹿":
+			return "MIL";
+		case "掘金":
+			return "DEN";
+		case "森林狼":
+			return "MIN";
+		case "雷霆":
+			return "OKC";
+		case "开拓者":
+			return "POR";
+		case "爵士":
+			return "UTA";
+		default:
 			return "未知";
 		}
 	}

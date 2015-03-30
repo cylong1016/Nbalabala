@@ -53,9 +53,6 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
 		matchProfile = teamDetail.getMatchRecords();
 		gameData = new GameDataPanel(controller,"",1); 
-		if (pane != null) {
-			remove(pane);
-		}
 		pane = new MatchInfoTableFactory(matchProfile,this,controller).getTableScrollPanel();
 		pane.setBounds(55, 285, 905, 250);
 		add(pane);

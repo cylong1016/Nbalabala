@@ -6,7 +6,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -16,8 +15,6 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
 import ui.UIConfig;
-import utility.Constants;
-import vo.MatchProfileVO;
 
 /**
  * 

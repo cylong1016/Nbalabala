@@ -69,6 +69,7 @@ public class MatchInfoTableFactory {
 		try{
 			table.addMouseListener(new UserMouseAdapter(){
 				public void mouseClicked(MouseEvent e){
+					if (e.getClickCount() < 2) return;
 					int rowI  = table.rowAtPoint(e.getPoint());// 得到table的行号
 					if ( rowI > -1){
 						controller.toOneGamePanel(panel, matchProfile.get(rowI/2), panel);
@@ -81,9 +82,9 @@ public class MatchInfoTableFactory {
 	}
 	
 	private void setLook() {
-		int scores = 80;
-		int adds = 90;
-		table.setWidth(new int[]{123,scores, scores, scores, scores, adds, adds, adds, scores, 95});
+		int scores = 70;
+		int adds = 80;
+		table.setWidth(new int[]{120,scores, scores, scores, scores, adds, adds, adds, scores, 89, 89});
 		scroll = new BottomScrollPane(table);
 		scroll.setLocation(57, 240);
 	}
