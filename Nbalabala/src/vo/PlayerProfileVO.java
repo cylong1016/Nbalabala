@@ -135,6 +135,8 @@ public class PlayerProfileVO {
 	public String getExp() {
 		if (exp.equals("R")){
 			return "新秀";
+		}else if (exp.equals("无资料")){
+			return exp;
 		}else {
 			return exp + "年";
 		}

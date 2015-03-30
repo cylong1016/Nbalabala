@@ -80,6 +80,7 @@ public class PlayerSeasonPanel extends PlayerInfoPanel{
 			rowData[i][19] = player.getPersonalGoal()+"";
 		}
 		table = new BottomTable(rowData, columns);
+		table.getColumnModel().getColumn(2).setPreferredWidth(110);
 		scroll = new BottomScrollPane(table);
 		scroll.setBounds(57, 260, 888, 265); // 表格的位置
 		this.add(scroll);

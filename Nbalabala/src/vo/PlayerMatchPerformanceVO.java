@@ -1,5 +1,7 @@
 package vo;
 
+import utility.Constants;
+
 /**
  * 记录球员在一场比赛中的发挥，包括赛季、日期、两队
  * @author Issac Ding
@@ -42,6 +44,10 @@ public class PlayerMatchPerformanceVO {
 	}
 
 	public String getTwoTeams() {
+		String[] strings = twoTeams.split("-");
+		if (strings.length > 1)
+			return Constants.translateTeamAbbr(strings[0]) + "-" + 
+				Constants.translateTeamAbbr(strings[1]);
 		return twoTeams;
 	}
 }

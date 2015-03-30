@@ -15,6 +15,7 @@ import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.MatchInfoTable;
 import ui.controller.MainController;
+import utility.Constants;
 import vo.MatchProfileVO;
 import bl.matchquerybl.MatchQuery;
 import blservice.MatchQueryBLService;
@@ -42,12 +43,6 @@ public class GameDataPanel extends BottomPanel {
 	/** 下拉框 */
 	private MyComboBox box1, box2;
 
-	String[] team = new String[]{"凯尔特人", "篮网", "尼克斯", "76人", "猛龙", "公牛", "骑士", "活塞", "步行者", "雄鹿", "老鹰", "黄蜂", "热火",
-									"魔术", "奇才", "勇士", "快船", "湖人", "太阳", "国王", "掘金", "森林狼", "雷霆", "开拓者", "爵士", "小牛",
-									"火箭", "灰熊", "鹈鹕", "马刺"};
-	String[] teamArr = new String[]{"BOS", "BKN", "NYK", "PHI", "TOR", "CHI", "CLE", "DET", "IND", "MIL", "ATL", "CHA",
-									"MIA", "ORL", "WAS", "GSW", "LAC", "LAL", "PHX", "SAC", "DEN", "MIN", "OKC", "POR",
-									"UTA", "DAL", "HOU", "MEM", "NOP", "SAS"};
 
 	/** 下拉框的坐标 宽高 */
 	int box1X = 629, box2X = 818, box1Y = 44, box2Y = 80, boxWidth = 153, boxHeight = 30;
@@ -109,7 +104,7 @@ public class GameDataPanel extends BottomPanel {
 				clickTime++;
 				int team1 = box1.getSelectedIndex();
 				int team2 = box2.getSelectedIndex();
-				matchProfile = matchQuery.screenMatchByTeam(teamArr[team1], teamArr[team2]);
+				matchProfile = matchQuery.screenMatchByTeam(Constants.TEAM_ABBR[team1], Constants.TEAM_ABBR[team2]);
 				gameSum = matchProfile.size();
 				setTable(matchProfile,GameDataPanel.this,gameSum,controller);
 			}
@@ -218,12 +213,7 @@ public class GameDataPanel extends BottomPanel {
 	 * @version 2015年3月22日 上午12:01:45
 	 */
 	public String match(String abbr) {
-		for(int i = 0; i < 30; i++) {
-			if (teamArr[i].equals(abbr)) {
-				return team[i];
-			}
-		}
-		return null;
+		return Constants.translateTeamAbbr(abbr);
 	}
 
 	/**
@@ -254,8 +244,8 @@ public class GameDataPanel extends BottomPanel {
 	 * @version 2015年3月21日 下午4:30:04
 	 */
 	public void addComboBox() {
-		box1 = new MyComboBox(team, box1X, box1Y, boxWidth, boxHeight);
-		box2 = new MyComboBox(team, box2X, box2Y, boxWidth, boxHeight);
+		box1 = new MyComboBox(Constants.TEAM_NAMES, box1X, box1Y, boxWidth, boxHeight);
+		box2 = new MyComboBox(Constants.TEAM_NAMES, box2X, box2Y, boxWidth, boxHeight);
 		this.add(box1);
 		this.add(box2);
 	}

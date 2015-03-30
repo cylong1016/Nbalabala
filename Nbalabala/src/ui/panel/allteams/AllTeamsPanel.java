@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import ui.UIConfig;
 import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
+import utility.Constants;
 
 /**
  * 全部球队信息的主界面
@@ -23,8 +24,7 @@ public class AllTeamsPanel extends BottomPanel {
 	private String url = UIConfig.IMG_PATH + "teams/mouseOn.png";
 	private String beforeURL = UIConfig.IMG_PATH + "teams/tran.png";
 	MouListener mou = new MouListener();
-	String[] teamArr = new String[]{"BOS","BKN","NYK","PHI","TOR","CHI","CLE","DET","IND","MIL","ATL","CHA","MIA","ORL","WAS",
-			"GSW","LAC","LAL","PHX","SAC","DEN","MIN","OKC","POR","UTA","DAL","HOU","MEM","NOP","SAS",};
+	
 	MainController controller;
 
 	/**
@@ -62,7 +62,7 @@ public class AllTeamsPanel extends BottomPanel {
 	public void addButton() {
 		for (int i = 0; i < 30; i++) {
 			this.add(buttonArr[i]);
-			buttonArr[i].team=teamArr[i];
+			buttonArr[i].team=Constants.TEAM_ABBR[i];
 			buttonArr[i].addMouseListener(mou);
 		}
 	}

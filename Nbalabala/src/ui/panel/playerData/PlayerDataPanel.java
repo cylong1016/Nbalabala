@@ -15,6 +15,7 @@ import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
+import utility.Constants;
 import bl.playerseasonbl.PlayerSeasonAnalysis;
 import blservice.PlayerSeasonBLService;
 import data.seasondata.PlayerSeasonRecord;
@@ -398,12 +399,8 @@ public class PlayerDataPanel extends BottomPanel {
 	 * @version 2015年3月29日 下午3:59:35
 	 */
 	private void createTable(ArrayList<PlayerSeasonRecord> playerRecords) {
-		String[] columnNames = {"序号", "球员名称", "所属球队", "参赛场数", "先发场数", "在场时间", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手",
-									"三分命中率", "罚球命中", "罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "助攻", "助攻率", "盖帽",
-									"盖帽率", "犯规", "犯规率", "得分", "两双", "得分/篮板/助攻", "效率", "GmSc", "真实命中率", "投篮效率", "进攻篮板率",
-									"防守篮板率", "总篮板率", "抢断", "抢断率", "失误", "失误率", "使用率"};
-		String[][] rowData = new String[playerRecords.size()][columnNames.length];
-		playerDataTable = new BottomTable(rowData, columnNames);
+		String[][] rowData = new String[playerRecords.size()][Constants.PLAYER_SEASON_HEADERS.length];
+		playerDataTable = new BottomTable(rowData, Constants.PLAYER_SEASON_HEADERS);
 		addScrollPane(playerDataTable);
 		TableColumn nameColom = playerDataTable.getColumnModel().getColumn(1); // 球员名称那列
 		nameColom.setPreferredWidth(150); // 防止球员名称显示不出来

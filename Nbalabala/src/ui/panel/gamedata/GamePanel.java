@@ -6,6 +6,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.label.ImgLabel;
@@ -88,6 +90,7 @@ public class GamePanel extends BottomPanel {
 		addScore();
 		initSetTabel();
 		addBack();
+		checkMatchValid();
 	}
 
 	/**
@@ -104,6 +107,13 @@ public class GamePanel extends BottomPanel {
 			}
 
 		});
+	}
+	
+	private void checkMatchValid() {
+		if (matchVO.isMatchValid()) {
+			ImgLabel imgLabel = new ImgLabel(5, 95, 232, 178, new ImageIcon("images/game/wrong.png").getImage());
+			this.add(imgLabel);
+		}
 	}
 
 	/**
@@ -200,7 +210,7 @@ public class GamePanel extends BottomPanel {
 		}
 		BottomTable table = new BottomTable(rowData, columns);
 		scroll = new BottomScrollPane(table);
-		scroll.setLocation(57, 239);
+		scroll.setBounds(58,318,888, 247);
 		this.add(scroll);
 
 	}

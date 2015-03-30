@@ -158,7 +158,7 @@ public class PlayerInfoPanel extends BottomPanel {
 	protected ImageIcon icon;
 	protected ArrayList<Image> imgArr = new ArrayList<Image>();
 	protected BottomTable table;
-	protected DecimalFormat df = new DecimalFormat("0.000");
+	protected DecimalFormat df = UIConfig.format;
 
 	public void setTable() {
 		columns = new String[]{"", "参赛场数", "先发场数", "在场时间", "投篮命中数", "投篮出手数", "投篮命中率", "三分命中数", "三分出手数", "三分命中率",
@@ -193,9 +193,9 @@ public class PlayerInfoPanel extends BottomPanel {
 		rowData[0][22] = String.valueOf(playerSeason.getDoubleDouble());
 		rowData[0][23] = String.valueOf(playerSeason.getScoreReboundAssist());
 		rowData[0][24] = String.valueOf(playerSeason.getEfficiency());
-		rowData[0][25] = String.valueOf(playerSeason.getGmSc());
+		rowData[0][25] = df.format(playerSeason.getGmSc());
 		rowData[0][26] = df.format(playerSeason.getRealFieldPercent());
-		rowData[0][27] = String.valueOf(playerSeason.getFieldEff());
+		rowData[0][27] = df.format(playerSeason.getFieldEff());
 		rowData[0][28] = df.format(playerSeason.getOffensiveReboundPercent());
 		rowData[0][29] = df.format(playerSeason.getDefensiveReboundPercent());
 		rowData[0][30] = df.format(playerSeason.getTotalReboundPercent());

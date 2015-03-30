@@ -374,18 +374,30 @@ public class PlayerSeasonRecord {
 	}
 
 	public double getOffensiveReboundPercent() {
+		if (matchCount == 0) {
+			return 0;
+		}
 		return offensiveRebound * (teamTime / 5) / time / (teamOffensiveRebound + oppoOffensiveRebound);
 	}
 
 	public double getDefensiveReboundPercent() {
+		if (matchCount == 0) {
+			return 0;
+		}
 		return defensiveRebound * (teamTime / 5) / time / (teamDefensiveRebound + oppoDefensiveRebound);
 	}
 
 	public double getTotalReboundPercent() {
+		if (matchCount == 0) {
+			return 0;
+		}
 		return totalRebound * (teamTime / 5) / time / (teamTotalRebound + oppoTotalRebound);
 	}
 
 	public double getAssistPercent() {
+		if (matchCount == 0) {
+			return 0;
+		}
 		return assist / (time / (teamTime / 5) * teamFieldGoal - fieldGoal);
 	}
 
@@ -393,13 +405,16 @@ public class PlayerSeasonRecord {
 		double oppoAttack = oppoFieldAttempt + 0.4 * oppoFreethrowAttempt - 1.07
 									* ((double)oppoOffensiveRebound / (oppoOffensiveRebound + teamDefensiveRebound)
 									* (oppoFieldAttempt - oppoFieldGoal)) + 1.07 * oppoTurnover;
-		if(time == 0 || oppoAttack == 0) {
+		if(matchCount == 0 || oppoAttack == 0) {
 			return 0;
 		}
 		return steal * (teamTime / 5) / time / oppoAttack;
 	}
 
 	public double getBlockPercent() {
+		if (matchCount == 0) {
+			return 0;
+		}
 		return block * (teamTime / 5) / time / (oppoFieldAttempt - oppoThreePointAttempt);
 	}
 
@@ -412,14 +427,17 @@ public class PlayerSeasonRecord {
 	}
 
 	public double getFoulPercent() {
-		double temp = (fieldAttempt - threePointAttempt + 0.44 * freethrowAttempt + foul);
-		if(temp == 0) {
+		if (matchCount == 0) {
 			return 0;
 		}
+		double temp = (fieldAttempt - threePointAttempt + 0.44 * freethrowAttempt + foul);
 		return foul / temp;
 	}
 
 	public double getUsePercent() {
+		if (matchCount == 0) {
+			return 0;
+		}
 		return (fieldAttempt + 0.44 * freethrowAttempt + turnover) * (teamTime / 5) / time
 				/ (teamFieldAttempt + 0.44 * teamFreethrowAttempt + teamTurnover);
 	}

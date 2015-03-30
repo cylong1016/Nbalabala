@@ -14,6 +14,7 @@ import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
+import utility.Constants;
 import bl.teamseasonbl.TeamSeasonAnalysis;
 import blservice.TeamSeasonBLService;
 import data.seasondata.TeamSeasonRecord;
@@ -296,11 +297,8 @@ public class TeamDataPanel extends BottomPanel {
 	 * @version 2015年3月29日 下午3:59:35
 	 */
 	private void createTable(ArrayList<TeamSeasonRecord> teamArr) {
-		String[] columnNames = {"序号", "球队名称", "胜场数", "负场数", "总场数", "胜率", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手",
-									"三分命中率", "罚球命中", "罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "进攻篮板效率", "防守篮板效率",
-									"进攻回合", "进攻效率", "防守回合", "防守效率", "抢断", "抢断效率", "助攻", "助攻率", "盖帽", "失误", "犯规", "得分"};
-		String[][] rowData = new String[teamArr.size()][columnNames.length];
-		teamDataTable = new BottomTable(rowData, columnNames);
+		String[][] rowData = new String[teamArr.size()][Constants.TEAM_SEASON_HEADERS.length];
+		teamDataTable = new BottomTable(rowData, Constants.TEAM_SEASON_HEADERS);
 		// 给表头添加监听，用来排序
 		addScrollPane(teamDataTable);
 		

@@ -98,6 +98,7 @@ public class AllPlayersPanel extends BottomPanel {
 			table.addMouseListener(new UserMouseAdapter(){
 				
 				public void mouseClicked(MouseEvent e){
+					if (e.getClickCount() < 2) return;
 					int rowI  = table.rowAtPoint(e.getPoint());// 得到table的行号
 					if ( rowI > -1){
 						controller.toPlayerInfoPanel(AllPlayersPanel.this, players.get(rowI),AllPlayersPanel.this);

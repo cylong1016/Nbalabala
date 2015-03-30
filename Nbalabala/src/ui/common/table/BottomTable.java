@@ -42,7 +42,7 @@ public class BottomTable extends JTable {
 		super(dm);
 		this.decorateTable();
 	}
-
+	
 	/**
 	 * @see javax.swing.JTable#isCellEditable(int, int)
 	 */
