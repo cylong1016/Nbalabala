@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -15,6 +16,8 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
 import ui.UIConfig;
+import utility.Constants;
+import vo.MatchProfileVO;
 
 /**
  * 
@@ -28,11 +31,9 @@ public class MatchInfoTable extends JTable{
 	/** 表格每一行的高 */
 	private static final int ROW_Height = 30;
 	
-	public static final int COLUMN_LENGTH = 10;
-
 	/** 表头 */
 	protected static final String[] columnNames 
-		= new String[] { "球队", "1", "2", "3", "4", "加时一", "加时二", "加时三", "总分", "" };
+		= new String[] { "时间", "球队", "1", "2", "3", "4", "加时一", "加时二", "加时三", "总分", "" };
 	/** 表格数据 */
 	protected Object[][] rowData = null;
 
@@ -41,6 +42,7 @@ public class MatchInfoTable extends JTable{
 		this.rowData = rowData;
 		this.decorateTable();
 	}
+	
 	
 	/** 设置列宽 */
 	public void setWidth(int[]width) {

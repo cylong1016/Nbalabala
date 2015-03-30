@@ -14,6 +14,7 @@ import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.label.MyLabel;
 import ui.common.table.BottomScrollPane;
+import ui.common.table.MatchInfoTableFactory;
 import ui.controller.MainController;
 import ui.panel.gamedata.GameDataPanel;
 import vo.MatchProfileVO;
@@ -52,8 +53,12 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
 		matchProfile = teamDetail.getMatchRecords();
 		gameData = new GameDataPanel(controller,"",1); 
-		pane = gameData.setTable(matchProfile,this,matchProfile.size(),controller);
+		if (pane != null) {
+			remove(pane);
+		}
+		pane = new MatchInfoTableFactory(matchProfile,this,controller).getTableScrollPanel();
 		pane.setBounds(55, 285, 905, 250);
+		add(pane);
 		iniTable(x);
 	}
 	
@@ -65,13 +70,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		
 	}
 
-	DecimalFormat df = new DecimalFormat("0.000");
-	String[] team = new String[] { "凯尔特人", "篮网", "尼克斯", "76人", "猛龙", "公牛", "骑士", "活塞", "步行者", "雄鹿", "老鹰", "黄蜂",
-			"热火", "魔术", "奇才", "勇士", "快船", "湖人", "太阳", "国王", "掘金", "森林狼", "雷霆", "开拓者", "爵士", "小牛", "火箭", "灰熊",
-			"鹈鹕", "马刺" };
-	String[] teamArr = new String[] { "BOS", "BKN", "NYK", "PHI", "TOR", "CHI", "CLE", "DET", "IND", "MIL", "ATL",
-			"CHA", "MIA", "ORL", "WAS", "GSW", "LAC", "LAL", "PHX", "SAC", "DEN", "MIN", "OKC", "POR", "UTA",
-			"DAL", "HOU", "MEM", "NOP", "SAS" };
+	DecimalFormat df = UIConfig.format;
 	
 	/**
 	 * 覆盖父类的方法，让父类的表格不显示
@@ -134,7 +133,11 @@ public class TeamGamePanel extends TeamSeasonPanel {
 						TeamGamePanel.this.remove(label);
 						ArrayList<MatchProfileVO> pro = new ArrayList<MatchProfileVO>();
 						pro.add(matchProfile.get(i));
-						pane = gameData.setTable(pro,TeamGamePanel.this,pro.size(),controller);
+						if (pane != null){
+							remove(pane);
+						}
+						pane = new MatchInfoTableFactory(pro,TeamGamePanel.this,controller).getTableScrollPanel();
+						add(pane);
 					}
 				}
 				TeamGamePanel.this.repaint();

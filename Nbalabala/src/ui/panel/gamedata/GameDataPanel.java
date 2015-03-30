@@ -8,12 +8,12 @@ import java.util.Date;
 
 import ui.DateChooser;
 import ui.UIConfig;
-import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
 import ui.common.comboBox.MyComboBox;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.MatchInfoTable;
+import ui.common.table.MatchInfoTableFactory;
 import ui.controller.MainController;
 import utility.Constants;
 import vo.MatchProfileVO;
@@ -42,6 +42,8 @@ public class GameDataPanel extends BottomPanel {
 	private String confirmClickPath = gameImgPath + "confirmClick.png";
 	/** 下拉框 */
 	private MyComboBox box1, box2;
+	
+	private BottomScrollPane scrollPane;
 
 
 	/** 下拉框的坐标 宽高 */
@@ -62,7 +64,6 @@ public class GameDataPanel extends BottomPanel {
 	DataPanel dataPanel;
 	int dataPanelX = 58, dataPanelY = 238, dataPanelWidth = 888, dataPanelHeight = 292;
 //	JScrollPane scroll;
-	/** 比赛场数 */
 	int gameSum;
 
 	/**
@@ -106,7 +107,10 @@ public class GameDataPanel extends BottomPanel {
 				int team2 = box2.getSelectedIndex();
 				matchProfile = matchQuery.screenMatchByTeam(Constants.TEAM_ABBR[team1], Constants.TEAM_ABBR[team2]);
 				gameSum = matchProfile.size();
-				setTable(matchProfile,GameDataPanel.this,gameSum,controller);
+				if (scrollPane != null){
+					remove(scrollPane);
+				}
+				GameDataPanel.this.add(new MatchInfoTableFactory(matchProfile,GameDataPanel.this,controller).getTableScrollPanel());
 			}
 		});
 		confirmBtn2.addMouseListener(new MouseAdapter() {
@@ -118,8 +122,10 @@ public class GameDataPanel extends BottomPanel {
 				clickTime++;
 				Date date = dateChooser.getDate();
 				matchProfile = matchQuery.screenMatchByDate(date);
-				gameSum = matchProfile.size();
-				setTable(matchProfile,GameDataPanel.this,gameSum,controller);
+				if (scrollPane != null){
+					remove(scrollPane);
+				}
+				GameDataPanel.this.add(new MatchInfoTableFactory(matchProfile,GameDataPanel.this,controller).getTableScrollPanel());
 			}
 		});
 	}
@@ -128,93 +134,9 @@ public class GameDataPanel extends BottomPanel {
 		super.paint(g);
 	}
 
-	/** 两个队伍每节的比分 */
-	String[] score1 = {"0", "0", "0", "0", "0", "0", "0"};
-	String[] score2 = {"0", "0", "0", "0", "0", "0", "0"};
-	/** 两支球队缩写 */
-	String[] teamShort;
-	/** 两支球队比赛总分 */
-	String[] scoreAll;
-	/** 每节比分 */
-	String[] eachScore;
-	/** 球队全称 */
-	String[] teamLong;
-
-	/**
-	 * 拆解传回来的vo
-	 * @author lsy
-	 * @version 2015年3月22日 上午12:04:52
-	 */
-	public void analyzeVO(MatchProfileVO proVOArray) {
-		teamLong = new String[2];
-		teamShort = proVOArray.getTeam().split("-");
-		teamLong[0] = match(teamShort[0]);
-		teamLong[1] = match(teamShort[1]);
-		scoreAll = proVOArray.getScore().split("-");// 两支球队比赛总分
-		eachScore = proVOArray.getEachSectionScore().split(";");
-		int eachlth = eachScore.length;
-		for(int i = 0; i < eachlth; i++) {
-			String[] scoreTemp = eachScore[i].split("-");
-			score1[i] = scoreTemp[0];
-			score2[i] = scoreTemp[1];
-		}
-	}
-	
 	protected BottomScrollPane scroll;
 	protected MatchInfoTable table;
-	public BottomScrollPane setTable(final ArrayList<MatchProfileVO> matchProfile,final BottomPanel panel,int gameSum,final MainController controller) {
-		String[][] rowData = new String[2 * gameSum][MatchInfoTable.COLUMN_LENGTH];
-		for(int j = 0; j < gameSum * 2 ; j = j + 2) {
-			MatchProfileVO pro = matchProfile.get(j / 2);
-			score1 = new String[]{"0", "0", "0", "0", "0", "0", "0"};
-			score2 = new String[]{"0", "0", "0", "0", "0", "0", "0"};
-			analyzeVO(pro);
-			rowData[j][0] = teamLong[0];
-			rowData[j+1][0] = teamLong[1];
-			rowData[j][8] = scoreAll[0];
-			rowData[j + 1][8] = scoreAll[1];
-			rowData[j][9]="数据统计";
-			addScore(rowData,j / 2);
-		}
-		table = new MatchInfoTable(rowData);
-		try{
-			table.addMouseListener(new UserMouseAdapter(){
-				
-				public void mouseClicked(MouseEvent e){
-					int rowI  = table.rowAtPoint(e.getPoint());// 得到table的行号
-					if ( rowI > -1){
-						controller.toOneGamePanel(panel, matchProfile.get(rowI/2), panel);
-					}
-					
-				}
-			});
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		int scores = 80;
-		int adds = 90;
-		table.setWidth(new int[]{123,scores, scores, scores, scores, adds, adds, adds, scores, 95});
-		scroll = new BottomScrollPane(table);
-		scroll.setLocation(57, 240);
-		panel.add(scroll);
-		return scroll;
-	}
 	
-	public void addScore(String[][] rowData,int line) {
-		for(int i = 0; i < 7; i++) {
-			rowData[2 * line ][i + 1] = score1[i];
-			rowData[2 * line + 1][i + 1] = score2[i];
-		}
-	}
-
-	/**
-	 * 根据缩写返回球队全称
-	 * @author lsy
-	 * @version 2015年3月22日 上午12:01:45
-	 */
-	public String match(String abbr) {
-		return Constants.translateTeamAbbr(abbr);
-	}
 
 	/**
 	 * 分析打了几节
