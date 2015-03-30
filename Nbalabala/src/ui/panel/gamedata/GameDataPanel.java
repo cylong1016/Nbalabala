@@ -103,7 +103,7 @@ public class GameDataPanel extends BottomPanel {
 
 			public void mousePressed(MouseEvent e) {
 				if (clickTime != 0) {
-					GameDataPanel.this.remove(scroll);
+					GameDataPanel.this.remove(scrollPane);
 				}
 				clickTime++;
 				int team1 = box1.getSelectedIndex();
@@ -120,7 +120,7 @@ public class GameDataPanel extends BottomPanel {
 
 			public void mousePressed(MouseEvent e) {
 				if (clickTime != 0) {
-					GameDataPanel.this.remove(scroll);
+					GameDataPanel.this.remove(scrollPane);
 				}
 				clickTime++;
 				Date date = dateChooser.getDate();
@@ -137,7 +137,6 @@ public class GameDataPanel extends BottomPanel {
 		super.paint(g);
 	}
 
-	protected BottomScrollPane scroll;
 	protected MatchInfoTable table;
 	
 
