@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.text.DecimalFormat;
 
+import ui.controller.MainController;
+
 /**
  * UI配置
  * @author cylong
@@ -59,5 +61,5 @@ public class UIConfig {
 	/** 表格中数据显示的小数点位数 */
 	public static DecimalFormat format = new DecimalFormat("0.000");
 	/*----------------------------表格配置--------------------------------*/
-
+	
 }
