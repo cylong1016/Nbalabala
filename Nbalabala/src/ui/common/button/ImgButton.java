@@ -28,5 +28,8 @@ public class ImgButton extends JButton {
 		this.setPressedIcon(imageIconPressOn);
 	}
 	
+	public ImgButton(){
+		
+	}
 	
 }

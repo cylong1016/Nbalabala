@@ -136,7 +136,7 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月20日  下午11:45:39
 	 */
-	public void toTeamSeasonPanel(AllTeamsPanel allteams,Panel panel,TeamButton button,int x){
+	public void toTeamSeasonPanel(BottomPanel allteams,Panel panel,TeamButton button,int x){
 		frame.remove(panel);
 		teamSeasonpanel = new TeamSeasonPanel(allteams,this,"images/teams/teamSeasonBG.png",button,x);
 		frame.setPanel(teamSeasonpanel);
@@ -148,7 +148,7 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月21日  上午12:31:15
 	 */
-	public void toTeamGamePanel(AllTeamsPanel allteams,Panel panel,TeamButton button) {
+	public void toTeamGamePanel(BottomPanel allteams,Panel panel,TeamButton button) {
 		frame.remove(panel);
 		teamGamePanel = new TeamGamePanel(allteams,this,UIConfig.IMG_PATH + "teams/teamSeasonBG.png",button,2);
 		frame.setPanel(teamGamePanel);

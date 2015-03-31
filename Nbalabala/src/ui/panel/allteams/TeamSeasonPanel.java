@@ -56,7 +56,7 @@ public class TeamSeasonPanel extends BottomPanel {
 	String[][] rowData;
 	protected ImgButton back;
 	protected String url = UIConfig.IMG_PATH + "players/";
-	protected AllTeamsPanel allteams;
+	protected BottomPanel allteams;
 	ImgLabel logo;
 	MyLabel teamName;
 	String[] teamPlace = { "波士顿", "布鲁克林", "纽约", "费城", "多伦多", "芝加哥", "克利夫兰", "底特律", "印第安纳", "密尔沃基", "亚特兰大", "夏洛特",
@@ -73,7 +73,7 @@ public class TeamSeasonPanel extends BottomPanel {
 	int order = 0;
 
 	// 用x来判断此时是赛季数据还是阵容 0代表赛季 1代表阵容
-	public TeamSeasonPanel(AllTeamsPanel allteams,MainController controller, String url, TeamButton teamButton, int x) {
+	public TeamSeasonPanel(BottomPanel allteams,MainController controller, String url, TeamButton teamButton, int x) {
 		super(controller, url);
 		this.allteams = allteams;
 		this.controller = controller;

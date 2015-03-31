@@ -16,5 +16,8 @@ public class TeamButton extends ImgButton{
 	public TeamButton(String imgPath, int x, int y, String stopImgPath, String pressOnImgPath) {
 		super(imgPath, x, y, stopImgPath, pressOnImgPath);
 	}
-
+	
+	public TeamButton(String team){
+		this.team = team;
+	}
 }

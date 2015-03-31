@@ -13,6 +13,7 @@ import ui.DateChooser;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.label.MyLabel;
+import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.MatchInfoTableFactory;
 import ui.controller.MainController;
@@ -43,7 +44,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 	ArrayList<MatchProfileVO> matchProfile;
 	BottomScrollPane pane;
 
-	public TeamGamePanel(AllTeamsPanel allteams, MainController controller, String url, TeamButton teamButton,
+	public TeamGamePanel(BottomPanel allteams, MainController controller, String url, TeamButton teamButton,
 			int x) {
 		super(allteams, controller, url, teamButton, x);
 		this.controller = controller;

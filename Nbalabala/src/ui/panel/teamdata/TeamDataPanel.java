@@ -8,15 +8,18 @@ import java.util.ArrayList;
 import javax.swing.table.JTableHeader;
 
 import ui.UIConfig;
+import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
 import ui.common.button.TextButton;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
+import ui.panel.allteams.TeamButton;
 import utility.Constants;
 import bl.teamseasonbl.TeamSeasonAnalysis;
 import blservice.TeamSeasonBLService;
+import data.seasondata.PlayerSeasonRecord;
 import data.seasondata.TeamSeasonRecord;
 import enums.ScreenDivision;
 import enums.SortOrder;
@@ -75,9 +78,11 @@ public class TeamDataPanel extends BottomPanel {
 	int sumSelectButton = 9, sumButton2 = 2;
 	private TeamSeasonBLService teamSeason = new TeamSeasonAnalysis();
 	private String imgURL = UIConfig.IMG_PATH + "teamData/";
+	MainController controller;
 
 	public TeamDataPanel(MainController controller, String url) {
 		super(controller, url);
+		this.controller = controller;
 		addButton();
 		// addFindButton(); // 不需要查询按钮，以后需要的时候再添加上去
 		iniSet();
@@ -245,8 +250,31 @@ public class TeamDataPanel extends BottomPanel {
 			teamDataTable.setValueAt(Integer.toString(teamSeason.getFoul()),i,30);
 			teamDataTable.setValueAt(Integer.toString(teamSeason.getScore()),i,31);
 		}
+		addListener(teamDataTable,teamArr);
+	}
+	
+	public void addListener(final BottomTable table,final ArrayList<TeamSeasonRecord> teamArr) {
+		try {
+			table.addMouseListener(new UserMouseAdapter() {
+
+				public void mouseClicked(MouseEvent e) {
+					if (e.getClickCount() < 2)
+						return;
+					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
+					if (rowI > -1) {
+						String abbr = teamArr.get(rowI).getTeamName();
+						controller.toTeamSeasonPanel(TeamDataPanel.this,TeamDataPanel.this,
+								new TeamButton(abbr),0);
+					}
+
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
+	
 	/**
 	 * 添加球队平均数据
 	 * @param teamArr 逻辑层返回的球队数据
@@ -289,6 +317,7 @@ public class TeamDataPanel extends BottomPanel {
 			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getFoulAvg()),i,30);
 			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getScoreAvg()),i,31);
 		}
+		addListener(teamDataTable,teamArr);
 	}
 
 	
