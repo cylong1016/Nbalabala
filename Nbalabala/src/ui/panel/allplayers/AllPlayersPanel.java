@@ -79,12 +79,13 @@ public class AllPlayersPanel extends BottomPanel {
 	ArrayList<Image> imgArr = new ArrayList<Image>();
 	BottomTable table;
 	MyTableCellRenderer myRenderer;
-	ArrayList<ImageIcon> iconArr = new ArrayList<ImageIcon>();
+	ArrayList<ImageIcon> iconArr;
 	public void setTable(final ArrayList<PlayerProfileVO> players) {
 		columns = new String[] {"球员头像","英文名", "所属球队", "球衣号码", "位置", "生日" };
 		int size = players.size();
 		int lth = columns.length;
 		rowData = new String[size][lth];
+		 iconArr = new ArrayList<ImageIcon>();
 		table = new BottomTable(rowData, columns);
 		for (int i = 0; i < size; i++) {
 			PlayerProfileVO ppVO = players.get(i);
@@ -102,6 +103,7 @@ public class AllPlayersPanel extends BottomPanel {
 		}
 		myRenderer = new MyTableCellRenderer();
 		myRenderer.icon = iconArr;
+//		iconArr.clear();
 		table.getColumnModel().getColumn(0).setCellRenderer(myRenderer);
 		//TODO 将头像放入表格的第一列 监听已加好 单击球员某一信息进入下一界面
 		try{
