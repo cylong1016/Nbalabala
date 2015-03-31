@@ -104,7 +104,7 @@ public class GamePanel extends BottomPanel {
 		this.add(back);
 		back.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				mainController.backToGameDataPanel(GamePanel.this, gameData);
+				mainController.backToOnePanel(GamePanel.this, gameData);
 			}
 
 		});

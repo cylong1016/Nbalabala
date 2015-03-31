@@ -78,6 +78,7 @@ public class TeamDataPanel extends BottomPanel {
 	private TeamSeasonBLService teamSeason = new TeamSeasonAnalysis();
 	private String imgURL = UIConfig.IMG_PATH + "teamData/";
 	MainController controller;
+	private ArrayList<TeamSeasonRecord> seasonArray;
 
 	public TeamDataPanel(MainController controller, String url) {
 		super(controller, url);
@@ -88,8 +89,8 @@ public class TeamDataPanel extends BottomPanel {
 		setEffect(buttonArr);
 		addListener();
 		// 初始化表格和球队总数据
-		ArrayList<TeamSeasonRecord> teamArr = teamSeason.getTeamDataSortedByName();
-		createTable(teamArr); // 设置表格数据
+		seasonArray = teamSeason.getTeamDataSortedByName();
+		createTable(seasonArray); // 设置表格数据
 	}
 
 	/**
@@ -104,7 +105,7 @@ public class TeamDataPanel extends BottomPanel {
 		findButton.addMouseListener(new MouseAdapter() {
 
 			public void mousePressed(MouseEvent e) {
-				ArrayList<TeamSeasonRecord> seasonArray = teamSeason.getScreenedTeamData(SelectButton.current.division);
+				seasonArray = teamSeason.getScreenedTeamData(SelectButton.current.division);
 				createTable(seasonArray);
 			}
 		});
@@ -180,11 +181,11 @@ public class TeamDataPanel extends BottomPanel {
 			}
 			SelectButton.current.back();
 			SelectButton.current = (SelectButton)e.getSource();
-			ArrayList<TeamSeasonRecord> teamArr = teamSeason.getScreenedTeamData(SelectButton.current.division);
+			seasonArray = teamSeason.getScreenedTeamData(SelectButton.current.division);
 			if (Line_2_Button.current == buttonLine2[0]) {
-				updateTotalTeamDataTable(teamArr); // 添加总数据
+				updateTotalTeamDataTable(seasonArray); // 添加总数据
 			} else if (Line_2_Button.current == buttonLine2[1]) {
-				updateAvgTeamDataTable(teamArr); // 添加平均数据
+				updateAvgTeamDataTable(seasonArray); // 添加平均数据
 			}
 		}
 	}
@@ -197,11 +198,11 @@ public class TeamDataPanel extends BottomPanel {
 			}
 			Line_2_Button.current.back();
 			Line_2_Button.current = (Line_2_Button)e.getSource();
-			ArrayList<TeamSeasonRecord> teamArr = teamSeason.getScreenedTeamData(SelectButton.current.division);
+			seasonArray = teamSeason.getScreenedTeamData(SelectButton.current.division);
 			if (Line_2_Button.current == buttonLine2[0]) {
-				updateTotalTeamDataTable(teamArr); // 添加总数据
+				updateTotalTeamDataTable(seasonArray); // 添加总数据
 			} else if (Line_2_Button.current == buttonLine2[1]) {
-				updateAvgTeamDataTable(teamArr); // 添加平均数据
+				updateAvgTeamDataTable(seasonArray); // 添加平均数据
 			}
 		}
 	}
@@ -249,10 +250,9 @@ public class TeamDataPanel extends BottomPanel {
 			teamDataTable.setValueAt(Integer.toString(teamSeason.getFoul()),i,30);
 			teamDataTable.setValueAt(Integer.toString(teamSeason.getScore()),i,31);
 		}
-		addListener(teamDataTable,teamArr);
 	}
 	
-	public void addListener(final BottomTable table,final ArrayList<TeamSeasonRecord> teamArr) {
+	public void addListener(final BottomTable table) {
 		try {
 			table.addMouseListener(new UserMouseAdapter() {
 
@@ -261,7 +261,7 @@ public class TeamDataPanel extends BottomPanel {
 						return;
 					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
 					if (rowI > -1) {
-						String abbr = teamArr.get(rowI).getTeamName();
+						String abbr = seasonArray.get(rowI).getTeamName();
 						controller.toTeamSeasonPanel(TeamDataPanel.this,TeamDataPanel.this,
 								new TeamButton(abbr),0);
 					}
@@ -316,7 +316,6 @@ public class TeamDataPanel extends BottomPanel {
 			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getFoulAvg()),i,30);
 			teamDataTable.setValueAt(UIConfig.format.format(teamSeason.getScoreAvg()),i,31);
 		}
-		addListener(teamDataTable,teamArr);
 	}
 
 	
@@ -370,17 +369,17 @@ public class TeamDataPanel extends BottomPanel {
 				
 				if (Line_2_Button.current == buttonLine2[0]) {
 					TeamAllSortBasis[] basis = TeamAllSortBasis.values();
-					ArrayList<TeamSeasonRecord> seasonArray = teamSeason.getResortedTeamAllData(basis[index - 1], sort);
+					seasonArray = teamSeason.getResortedTeamAllData(basis[index - 1], sort);
 					TeamDataPanel.this.updateTotalTeamDataTable(seasonArray); // 重排总数据
 				} else if (Line_2_Button.current == buttonLine2[1]) {
 					TeamAvgSortBasis[] basis = TeamAvgSortBasis.values();
-					ArrayList<TeamSeasonRecord> seasonArray = teamSeason.getResortedTeamAvgData(basis[index - 1], sort);
+					seasonArray = teamSeason.getResortedTeamAvgData(basis[index - 1], sort);
 					TeamDataPanel.this.updateAvgTeamDataTable(seasonArray); // 重排平均数据
 				}
 			}
 		});
+		addListener(teamDataTable);
 	}
-
 	/**
 	 * 将表格添加到ScrollPane上面
 	 * @param table

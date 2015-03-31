@@ -353,7 +353,7 @@ public class PlayerDataPanel extends BottomPanel {
 			playerDataTable.setValueAt(UIConfig.format.format(playerSeason.getTurnOverPercent()), i, 37);
 			playerDataTable.setValueAt(UIConfig.format.format(playerSeason.getUsePercent()), i, 38);
 		}
-		addListener(playerDataTable,playerArr);
+		
 	}
 
 	public void addListener(final BottomTable table,final ArrayList<PlayerSeasonRecord> playerArr) {
@@ -427,7 +427,6 @@ public class PlayerDataPanel extends BottomPanel {
 			playerDataTable.setValueAt(UIConfig.format.format(playerSeason.getTurnOverPercent()), i, 37);
 			playerDataTable.setValueAt(UIConfig.format.format(playerSeason.getUsePercent()), i, 38);
 		}
-		addListener(playerDataTable,playerArr);
 	}
 
 	/** 0表示下一次点击降序，1表示下一次点击升序排列 */
@@ -495,6 +494,7 @@ public class PlayerDataPanel extends BottomPanel {
 
 			}
 		});
+		addListener(playerDataTable, playerRecords);
 	}
 
 	/**

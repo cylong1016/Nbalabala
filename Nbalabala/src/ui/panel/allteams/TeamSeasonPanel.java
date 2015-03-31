@@ -154,7 +154,7 @@ public class TeamSeasonPanel extends BottomPanel {
 		back.addMouseListener(new MouseAdapter() {
 
 			public void mousePressed(MouseEvent e) {
-				controller.backToGameDataPanel(TeamSeasonPanel.this, allteams);
+				controller.backToOnePanel(TeamSeasonPanel.this, allteams);
 			}
 
 		});

@@ -182,7 +182,7 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月24日  上午10:28:19
 	 */
-	public void backToGameDataPanel(Panel panelNow,Panel panelTo){
+	public void backToOnePanel(Panel panelNow,Panel panelTo){
 		frame.remove(panelNow);
 		frame.setPanel(panelTo);
 		frame.repaint();
