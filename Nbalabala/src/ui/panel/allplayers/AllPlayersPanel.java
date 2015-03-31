@@ -70,30 +70,39 @@ public class AllPlayersPanel extends BottomPanel {
 		ArrayList<PlayerProfileVO> playerInfoArr = playerInfo.getPlayerProfileByInitial('A');
 		setTable(playerInfoArr);
 	}
-
+	
+	
 	String[] columns;
 	Object[][] rowData;
 	BottomScrollPane scroll;
 	ImageIcon icon;
 	ArrayList<Image> imgArr = new ArrayList<Image>();
 	BottomTable table;
-	
+	MyTableCellRenderer myRenderer;
+	ArrayList<ImageIcon> iconArr = new ArrayList<ImageIcon>();
 	public void setTable(final ArrayList<PlayerProfileVO> players) {
 		columns = new String[] {"球员头像","英文名", "所属球队", "球衣号码", "位置", "生日" };
 		int size = players.size();
 		int lth = columns.length;
 		rowData = new String[size][lth];
+		table = new BottomTable(rowData, columns);
 		for (int i = 0; i < size; i++) {
 			PlayerProfileVO ppVO = players.get(i);
-//			imgArr.add(ppVO.getPortrait());
-//			rowData[i][0] = ppVO.getPortrait();
+			Image protrait = ppVO.getPortrait();
+		     int  width  =  70;
+		     int  height =  protrait.getHeight(null)*70/protrait.getWidth(null);//按比例，将高度缩减
+		     Image smallImg =protrait.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+			ImageIcon ic = new ImageIcon(smallImg);
+			iconArr.add(ic);
 			rowData[i][1] = ppVO.getName();
 			rowData[i][2] = Constants.translateTeamAbbr(ppVO.getTeam());
 			rowData[i][3] = ppVO.getNumber();
 			rowData[i][4] = ppVO.getPosition();
 			rowData[i][5] = ppVO.getBirth();
 		}
-		table = new BottomTable(rowData, columns);
+		myRenderer = new MyTableCellRenderer();
+		myRenderer.icon = iconArr;
+		table.getColumnModel().getColumn(0).setCellRenderer(myRenderer);
 		//TODO 将头像放入表格的第一列 监听已加好 单击球员某一信息进入下一界面
 		try{
 			table.addMouseListener(new UserMouseAdapter(){
