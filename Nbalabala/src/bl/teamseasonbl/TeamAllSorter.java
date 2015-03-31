@@ -67,7 +67,7 @@ public class TeamAllSorter {
 			comparator = new Comparator<TeamSeasonRecord>() {
 
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getFieldPercent() - t2.getFieldPercent()) < 0 ? -1 : 1;
+					return (int)(factor * (t1.getFieldPercent() - t2.getFieldPercent()) * 10000);
 				}
 			};
 			break;
@@ -94,7 +94,7 @@ public class TeamAllSorter {
 			comparator = new Comparator<TeamSeasonRecord>() {
 
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getThreePointPercent() - t2.getThreePointPercent()) < 0 ? -1 : 1;
+					return (int)(factor * (t1.getThreePointPercent() - t2.getThreePointPercent()) * 10000);
 				}
 			};
 			break;
@@ -121,7 +121,7 @@ public class TeamAllSorter {
 			comparator = new Comparator<TeamSeasonRecord>() {
 
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getFreeThrowPercent() - t2.getFreeThrowPercent()) < 0 ? -1 : 1;
+					return (int)(factor * (t1.getFreeThrowPercent() - t2.getFreeThrowPercent()) * 10000);
 				}
 			};
 			break;
@@ -211,7 +211,7 @@ public class TeamAllSorter {
 			comparator = new Comparator<TeamSeasonRecord>() {
 
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getWinning() - t2.getWinning()) < 0 ? -1 : 1;
+					return (int)(factor * (t1.getWinning() - t2.getWinning()) * 10000);
 				}
 			};
 			break;
@@ -220,7 +220,7 @@ public class TeamAllSorter {
 			comparator = new Comparator<TeamSeasonRecord>() {
 
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getOffensiveRound() - t2.getOffensiveRound()) < 0 ? -1 : 1;
+					return (int)(factor * (t1.getOffensiveRound() - t2.getOffensiveRound()) * 10000);
 				}
 			};
 			break;
@@ -229,7 +229,7 @@ public class TeamAllSorter {
 			comparator = new Comparator<TeamSeasonRecord>() {
 
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getOffensiveEff() - t2.getOffensiveEff()) < 0 ? -1 : 1;
+					return (int)(factor * (t1.getOffensiveEff() - t2.getOffensiveEff()) * 10000);
 				}
 			};
 			break;
@@ -238,7 +238,7 @@ public class TeamAllSorter {
 			comparator = new Comparator<TeamSeasonRecord>() {
 
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getDefensiveRound() - t2.getDefensiveRound()) < 0 ? -1 : 1;
+					return (int)(factor * (t1.getDefensiveRound() - t2.getDefensiveRound()) * 10000);
 				}
 			};
 			break;
@@ -247,7 +247,7 @@ public class TeamAllSorter {
 			comparator = new Comparator<TeamSeasonRecord>() {
 
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getDefensiveEff() - t2.getDefensiveEff()) < 0 ? -1 : 1;
+					return (int)(factor * (t1.getDefensiveEff() - t2.getDefensiveEff()) * 10000);
 				}
 			};
 			break;
@@ -256,7 +256,7 @@ public class TeamAllSorter {
 			comparator = new Comparator<TeamSeasonRecord>() {
 
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getOffensiveReboundEff() - t2.getOffensiveReboundEff()) < 0 ? -1 : 1;
+					return (int)(factor * (t1.getOffensiveReboundEff() - t2.getOffensiveReboundEff()) * 10000);
 				}
 			};
 			break;
@@ -265,7 +265,7 @@ public class TeamAllSorter {
 			comparator = new Comparator<TeamSeasonRecord>() {
 
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getDefensiveReboundEff() - t2.getDefensiveReboundEff()) < 0 ? -1 : 1;
+					return (int)(factor * (t1.getDefensiveReboundEff() - t2.getDefensiveReboundEff()) * 10000);
 				}
 			};
 			break;
@@ -274,7 +274,7 @@ public class TeamAllSorter {
 			comparator = new Comparator<TeamSeasonRecord>() {
 
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getStealEff() - t2.getStealEff()) < 0 ? -1 : 1;
+					return (int)(factor * (t1.getStealEff() - t2.getStealEff()) * 10000);
 				}
 			};
 			break;
@@ -283,7 +283,7 @@ public class TeamAllSorter {
 			comparator = new Comparator<TeamSeasonRecord>() {
 
 				public int compare(TeamSeasonRecord t1, TeamSeasonRecord t2) {
-					return factor * (t1.getAssistEff() - t2.getAssistEff()) < 0 ? -1 : 1;
+					return (int)(factor * (t1.getAssistEff() - t2.getAssistEff()) * 10000);
 				}
 			};
 			break;

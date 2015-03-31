@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.text.DecimalFormat;
 
-import ui.controller.MainController;
-
 /**
  * UI配置
  * @author cylong

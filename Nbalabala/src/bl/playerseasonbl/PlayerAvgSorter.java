@@ -40,7 +40,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getFieldGoalAvg() - p2.getFieldGoalAvg()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getFieldGoalAvg() - p2.getFieldGoalAvg()) * 10000);
 				}
 			};
 			break;
@@ -49,7 +49,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getFieldAttemptAvg() - p2.getFieldAttemptAvg()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getFieldAttemptAvg() - p2.getFieldAttemptAvg()) * 10000);
 				}
 			};
 			break;
@@ -58,7 +58,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getFreethrowGoalAvg() - p2.getFreethrowGoalAvg()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getFreethrowGoalAvg() - p2.getFreethrowGoalAvg()) * 10000);
 				}
 			};
 			break;
@@ -67,7 +67,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getThreePointAttemptAvg() - p2.getThreePointAttemptAvg()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getThreePointAttemptAvg() - p2.getThreePointAttemptAvg()) * 10000);
 				}
 			};
 			break;
@@ -76,7 +76,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getThreePointGoalAvg() - p2.getThreePointGoalAvg()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getThreePointGoalAvg() - p2.getThreePointGoalAvg()) * 10000);
 				}
 			};
 			break;
@@ -85,7 +85,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getFreethrowAttemptAvg() - p2.getFreethrowAttemptAvg()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getFreethrowAttemptAvg() - p2.getFreethrowAttemptAvg()) * 10000);
 				}
 			};
 			break;
@@ -94,7 +94,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getOffensiveReboundAvg() - p2.getOffensiveReboundAvg()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getOffensiveReboundAvg() - p2.getOffensiveReboundAvg()) * 10000);
 				}
 			};
 			break;
@@ -103,7 +103,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getDefensiveReboundAvg() - p2.getDefensiveReboundAvg()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getDefensiveReboundAvg() - p2.getDefensiveReboundAvg()) * 10000);
 				}
 			};
 			break;
@@ -111,7 +111,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getTotalReboundAvg() - p2.getTotalReboundAvg()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getTotalReboundAvg() - p2.getTotalReboundAvg()) * 10000);
 				}
 			};
 			break;
@@ -120,7 +120,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getAssistAvg() - p2.getAssistAvg()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getAssistAvg() - p2.getAssistAvg()) * 10000);
 				}
 			};
 			break;
@@ -128,7 +128,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getStealAvg() - p2.getStealAvg()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getStealAvg() - p2.getStealAvg()) * 10000);
 				}
 			};
 			break;
@@ -137,7 +137,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getBlockAvg() - p2.getBlockAvg()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getBlockAvg() - p2.getBlockAvg()) * 10000);
 				}
 			};
 			break;
@@ -146,7 +146,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getTurnoverAvg() - p2.getTurnoverAvg()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getTurnoverAvg() - p2.getTurnoverAvg()) * 10000);
 				}
 			};
 			break;
@@ -155,7 +155,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getFoulAvg() - p2.getFoulAvg()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getFoulAvg() - p2.getFoulAvg()) * 10000);
 				}
 			};
 			break;
@@ -164,7 +164,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getScoreAvg() - p2.getScoreAvg()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getScoreAvg() - p2.getScoreAvg()) * 10000);
 				}
 			};
 			break;
@@ -173,7 +173,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getTimeDoubleAvg() - p2.getTimeDoubleAvg()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getTimeDoubleAvg() - p2.getTimeDoubleAvg()) * 10000);
 				}
 			};
 			break;
@@ -181,7 +181,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getDoubleDoubleAvg() - p2.getDoubleDoubleAvg()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getDoubleDoubleAvg() - p2.getDoubleDoubleAvg()) * 10000);
 				}
 			};
 			break;
@@ -189,7 +189,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getScoreReboundAssistAvg() - p2.getScoreReboundAssistAvg()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getScoreReboundAssistAvg() - p2.getScoreReboundAssistAvg()) * 10000);
 				}
 			};
 			break;
@@ -197,7 +197,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getAssistPercent() - p2.getAssistPercent()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getAssistPercent() - p2.getAssistPercent()) * 10000);
 				}
 			};
 			break;
@@ -205,7 +205,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getBlockPercent() - p2.getBlockPercent()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getBlockPercent() - p2.getBlockPercent()) * 10000);
 				}
 			};
 			break;
@@ -213,7 +213,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getDefensiveReboundPercent() - p2.getDefensiveReboundPercent()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getDefensiveReboundPercent() - p2.getDefensiveReboundPercent()) * 10000);
 				}
 			};
 			break;
@@ -229,7 +229,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getFieldEff() - p2.getFieldEff()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getFieldEff() - p2.getFieldEff()) * 10000);
 				}
 			};
 			break;
@@ -237,7 +237,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getFieldPercent() - p2.getFieldPercent()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getFieldPercent() - p2.getFieldPercent()) * 10000);
 				}
 			};
 			break;
@@ -245,7 +245,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getFoulPercent() - p2.getFoulPercent()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getFoulPercent() - p2.getFoulPercent()) * 10000);
 				}
 			};
 			break;
@@ -253,7 +253,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getFreeThrowPercent() - p2.getFreeThrowPercent()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getFreeThrowPercent() - p2.getFreeThrowPercent()) * 10000);
 				}
 			};
 			break;
@@ -261,7 +261,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getGmSc() - p2.getGmSc()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getGmSc() - p2.getGmSc()) * 10000);
 				}
 			};
 			break;
@@ -285,7 +285,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getOffensiveReboundPercent() - p2.getOffensiveReboundPercent()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getOffensiveReboundPercent() - p2.getOffensiveReboundPercent()) * 10000);
 				}
 			};
 			break;
@@ -293,7 +293,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getRealFieldPercent() - p2.getRealFieldPercent()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getRealFieldPercent() - p2.getRealFieldPercent()) * 10000);
 				}
 			};
 			break;
@@ -301,7 +301,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getStealPercent() - p2.getStealPercent()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getStealPercent() - p2.getStealPercent()) * 10000);
 				}
 			};
 			break;
@@ -317,7 +317,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getThreePointPercent() - p2.getThreePointPercent()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getThreePointPercent() - p2.getThreePointPercent()) * 10000);
 				}
 			};
 			break;
@@ -325,7 +325,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getTotalReboundPercent() - p2.getTotalReboundPercent()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getTotalReboundPercent() - p2.getTotalReboundPercent()) * 10000);
 				}
 			};
 			break;
@@ -333,7 +333,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getTurnOverPercent() - p2.getTurnOverPercent()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getTurnOverPercent() - p2.getTurnOverPercent()) * 10000);
 				}
 			};
 			break;
@@ -341,7 +341,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonRecord>() {
 
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
-					return factor * (p1.getUsePercent() - p2.getUsePercent()) < 0 ? -1 : 1;
+					return (int)(factor * (p1.getUsePercent() - p2.getUsePercent()) * 10000);
 				}
 			};
 			break;

@@ -32,7 +32,7 @@ public class BottomPanel extends Panel {
 	private LeftPanel leftPanel;
 
 	/** 画笔透明度 */
-	protected float hyaline = 0.0f;
+	protected float hyaline = 1.0f;
 
 	/** 主控制器 */
 	MainController controller;
@@ -42,7 +42,7 @@ public class BottomPanel extends Panel {
 		this.controller = controller;
 		this.addLeftPanel(this,controller);
 		this.addMouseMotionListener(new MouListener());
-		new Opacity().start();
+		// new Opacity().start();
 	}
 
 	public void paint(Graphics g) {
