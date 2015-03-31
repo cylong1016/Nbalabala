@@ -19,7 +19,6 @@ import ui.panel.allteams.TeamButton;
 import utility.Constants;
 import bl.teamseasonbl.TeamSeasonAnalysis;
 import blservice.TeamSeasonBLService;
-import data.seasondata.PlayerSeasonRecord;
 import data.seasondata.TeamSeasonRecord;
 import enums.ScreenDivision;
 import enums.SortOrder;

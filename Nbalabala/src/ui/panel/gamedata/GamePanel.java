@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 import ui.UIConfig;
+import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
 import ui.common.label.ImgLabel;
 import ui.common.label.MyLabel;
@@ -22,8 +23,10 @@ import vo.MatchPlayerVO;
 import vo.MatchProfileVO;
 import vo.TeamDetailVO;
 import bl.matchquerybl.MatchQuery;
+import bl.playerquerybl.PlayerQuery;
 import bl.teamquerybl.TeamQuery;
 import blservice.MatchQueryBLService;
+import blservice.PlayerQueryBLService;
 import blservice.TeamQueryBLService;
 
 /**
@@ -43,6 +46,7 @@ public class GamePanel extends BottomPanel {
 	BottomPanel gameData;
 	MatchProfileVO matchPro;
 	MatchQueryBLService matchQuery;
+	PlayerQueryBLService playerQuery;
 	GameDetailButton teamName1, teamName2;
 	int teamX1 = 736, teamX2 = 828, teamY = 190, width = 74, height = 24;
 
@@ -77,6 +81,7 @@ public class GamePanel extends BottomPanel {
 		this.mainController = controller;
 		teamQuery = new TeamQuery();
 		matchQuery = new MatchQuery();
+		playerQuery = new PlayerQuery();
 		getScore();
 		getTeam();
 		getDetailVO();
@@ -205,12 +210,33 @@ public class GamePanel extends BottomPanel {
 			rowData[i][17] = mpVO.getPersonalGoal() + "";
 		}
 		BottomTable table = new BottomTable(rowData, columns);
+		addListener(table,players);
 		scroll = new BottomScrollPane(table);
 		scroll.setBounds(58,318,888, 247);
 		this.add(scroll);
 
 	}
 
+	public void addListener(final BottomTable table,final ArrayList<MatchPlayerVO> players) {
+		try {
+			table.addMouseListener(new UserMouseAdapter() {
+
+				public void mouseClicked(MouseEvent e) {
+					if (e.getClickCount() < 2)
+						return;
+					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
+					if (rowI > -1) {
+						mainController.toPlayerInfoPanel(GamePanel.this,playerQuery.searchPlayers(players.get(rowI).getName()).get(rowI), 
+								GamePanel.this);
+					}
+
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * 两支球队的分割线
 	 * 
