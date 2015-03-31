@@ -431,6 +431,7 @@ public class PlayerSeasonRecord {
 			return 0;
 		}
 		double temp = (fieldAttempt - threePointAttempt + 0.44 * freethrowAttempt + foul);
+		if (temp == 0) return 0;
 		return foul / temp;
 	}
 

@@ -118,9 +118,9 @@ public class PlayerDataPanel extends BottomPanel {
 			public void mousePressed(MouseEvent e) {
 				ArrayList<PlayerSeasonRecord> playerRecords = playerSeason.getScreenedPlayers(Line_1_Button.current.p, Line_2_Button.current.division, Line_3_Button.current.basis);
 				if (Line_4_Button.current == buttonLine4[0]) {
-					updateTotalPlayerDataTable(playerRecords); // 添加球员总数居
+					createTable(playerRecords); // 添加球员总数居
 				} else if (Line_4_Button.current == buttonLine4[1]) {
-					updateAvgPlayerDataTable(playerRecords); // 添加球员场均数居
+					createTable(playerRecords); // 添加球员场均数居
 				}
 			}
 		});
