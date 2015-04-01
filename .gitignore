@@ -24,9 +24,5 @@ pom.xml.versionsBackup
 pom.xml.next
 release.properties
 /bin
-<<<<<<< Updated upstream
 .metadata
-=======
 
-.metadata/.plugins/org.eclipse.wst.sse.core/task-tags.properties
->>>>>>> Stashed changes

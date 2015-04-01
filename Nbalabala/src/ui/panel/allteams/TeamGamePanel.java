@@ -65,7 +65,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		
 	}
 
-	DecimalFormat df = UIConfig.format;
+	DecimalFormat df = UIConfig.FORMAT;
 	
 	/**
 	 * 覆盖父类的方法，让父类的表格不显示

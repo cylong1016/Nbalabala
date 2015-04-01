@@ -11,54 +11,51 @@ import java.text.DecimalFormat;
  * @version 2015年3月16日 下午7:29:26
  */
 public class UIConfig {
-	
 
 	/*----------------------------Frame配置--------------------------------*/
 	/** 界面的宽 */
-	public static int WIDTH = 1000;
+	public static final int WIDTH = 1000;
 	/** 界面的高 */
-	public static int HEIGHT = 632;
+	public static final int HEIGHT = 632;
 	/** 主界面的背景色 */
-	public static Color MAIN_COLOR = Color.WHITE;
+	public static final Color MAIN_COLOR = Color.WHITE;
 	/** 左边边框的宽度 */
-	public static int LEFT_WIDTH = 153;
+	public static final int LEFT_WIDTH = 153;
 	/** 会弹出左边栏的宽度 */
-	public static int PROMPT_WIDTH = 20;
+	public static final int PROMPT_WIDTH = 20;
 
 	/*----------------------------Frame配置--------------------------------*/
 
 	/** 图片路径 */
-	public static String IMG_PATH = "images/";
+	public static final String IMG_PATH = "images/";
 
 	/** 界面显示的字体 */
-	public static Font FONT = new Font("微软雅黑", 0, 14);
-	
+	public static final Font FONT = new Font("微软雅黑", 0, 14);
+
 	/** button选中之后的颜色 */
-	public static Color BUTTON_COLOR = new Color(15,24,44);
-	
-	
-	
+	public static final Color BUTTON_COLOR = new Color(15, 24, 44);
+
 	/*----------------------------表格配置--------------------------------*/
 	/** 表格字体 */
-	public static Font TABLE_FONT = new Font("黑体", Font.PLAIN, 13);
+	public static final Font TABLE_FONT = new Font("黑体", Font.PLAIN, 13);
 	/** 表格字体颜色 */
-	public static Color TABLE_FORE_COLOR = Color.BLACK;
+	public static final Color TABLE_FORE_COLOR = Color.BLACK;
 	/** 表格背景颜色 */
-	public static Color TABLE_BACK_COLOR = 	Color.WHITE;
+	public static final Color TABLE_BACK_COLOR = Color.WHITE;
 	/** 表格边框颜色 */
-	public static Color TABLE_BORDER_COLOR = Color.LIGHT_GRAY;
+	public static final Color TABLE_BORDER_COLOR = Color.LIGHT_GRAY;
 	/** 表头前景颜色 */
-	public static Color TABLE_HEADER_FORE_COLOR = new Color(255, 221, 31);
+	public static final Color TABLE_HEADER_FORE_COLOR = new Color(255, 221, 31);
 	/** 表头背景颜色 */
-	public static Color TABLE_HEADER_BACK_COLOR = new Color(25, 43, 102);
+	public static final Color TABLE_HEADER_BACK_COLOR = new Color(25, 43, 102);
 	/** 选择后的前景色 */
-	public static Color TABLE_SELECTIONFORE = new Color(255, 150, 0);
+	public static final Color TABLE_SELECTIONFORE = new Color(255, 150, 0);
 	/** 选择后的背景色 */
-	public static Color TABLE_SELECTIONBACK = Color.BLACK;
+	public static final Color TABLE_SELECTIONBACK = Color.BLACK;
 	/** 表格预设大小 */
-	public static Dimension TABLE_DIMEN = new Dimension(888, 290);
+	public static final Dimension TABLE_DIMEN = new Dimension(888, 290);
 	/** 表格中数据显示的小数点位数 */
-	public static DecimalFormat format = new DecimalFormat("0.000");
+	public static final DecimalFormat FORMAT = new DecimalFormat("0.000");
 	/*----------------------------表格配置--------------------------------*/
-	
+
 }
