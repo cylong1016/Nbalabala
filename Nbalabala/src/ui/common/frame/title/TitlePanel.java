@@ -1,6 +1,7 @@
 package ui.common.frame.title;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -11,6 +12,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import ui.common.button.ImgButton;
 import ui.common.frame.Frame;
 
 /**
@@ -31,9 +33,9 @@ public class TitlePanel extends JPanel {
 	/*----------------------------标题配置--------------------------------*/
 
 	/** 关闭按钮 */
-	private TitleButton exit;
+	private ImgButton exit;
 	/** 最小化按钮 */
-	private TitleButton min;
+	private ImgButton min;
 	/** 主frame，主要为了最小化使用其对象 */
 	private Frame frame;
 
@@ -60,12 +62,14 @@ public class TitlePanel extends JPanel {
 		// 按钮监听
 		TitleButtonListener listener = new TitleButtonListener();
 		// 最小化按钮
-		min = new TitleButton();
+		min = new ImgButton("images/mini.png");
 		min.addMouseListener(listener);
+		min.setPreferredSize(new Dimension(15,15));
 		this.add(min);
 		// 关闭按钮
-		exit = new TitleButton();
+		exit = new ImgButton("images/close.png");
 		exit.addMouseListener(listener);
+		exit.setPreferredSize(new Dimension(15,15));
 		this.add(exit);
 	}
 
