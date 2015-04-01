@@ -69,6 +69,12 @@ public class LeftPanel extends Panel {
 		game = new ImgButton(trans, x, y + 2 * inter, on, on);
 		playerData = new ImgButton(trans, x, y + 3 * inter, on, on);
 		teamData = new ImgButton(trans, x, y + 4 * inter, on, on);
+//		buttonArr = new ImgButton[]{allPlayers,allTeams,game,playerData,teamData,returnButton};
+//		for (int i = 0; i < buttonArr.length; i++) {
+//			buttonArr[i] = new ImgButton(trans, x, i * inter + y, on, on);
+//			this.add(buttonArr[i]);
+//			buttonArr[i].addMouseListener(mou);
+//		}
 	}
 	
 	public void addButton(){
