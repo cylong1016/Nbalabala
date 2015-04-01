@@ -35,8 +35,8 @@ public class LeftPanel extends Panel {
 	private int x = 6, y = 314, inter = 41;
 	/** 图片地址 */
 	private static final String URL = UIConfig.IMG_PATH + "sidebar/";
-	private static final String TRANS = URL + "trans.png";
-	private static final String ON = URL + "mouseOn.png";
+	private static final String trans = URL + "trans.png";
+	private static final String on = URL + "mouseOn.png";
 	/** button */
 	private ImgButton allPlayers, allTeams, game, playerData, returnButton, teamData;
 	/** button数组 */
@@ -62,11 +62,19 @@ public class LeftPanel extends Panel {
 	public void setButton() {
 		returnButton = new ImgButton(URL + "return.png", 13, 529, URL + "returnOn.png", URL
 				+ "returnClick.png");
-		allPlayers = new ImgButton(TRANS, x, y, ON, ON);
-		allTeams = new ImgButton(TRANS, x, y + inter, ON, ON);
-		game = new ImgButton(TRANS, x, y + 2 * inter, ON, ON);
-		playerData = new ImgButton(TRANS, x, y + 3 * inter, ON, ON);
-		teamData = new ImgButton(TRANS, x, y + 4 * inter, ON, ON);
+
+		allPlayers = new ImgButton(trans, x, y, on, on);
+		allTeams = new ImgButton(trans, x, y + inter, on, on);
+		game = new ImgButton(trans, x, y + 2 * inter, on, on);
+		playerData = new ImgButton(trans, x, y + 3 * inter, on, on);
+		teamData = new ImgButton(trans, x, y + 4 * inter, on, on);
+//		buttonArr = new ImgButton[]{allPlayers,allTeams,game,playerData,teamData,returnButton};
+//		for (int i = 0; i < buttonArr.length; i++) {
+//			buttonArr[i] = new ImgButton(trans, x, i * inter + y, on, on);
+//			this.add(buttonArr[i]);
+//			buttonArr[i].addMouseListener(mou);
+//		}
+
 	}
 	
 	public void addButton(){
