@@ -20,6 +20,7 @@ import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
 import ui.panel.gamedata.GameDetailButton;
+import utility.Constants;
 import vo.PlayerDetailVO;
 import vo.PlayerProfileVO;
 import bl.playerquerybl.PlayerQuery;
@@ -57,7 +58,7 @@ public class PlayerInfoPanel extends BottomPanel {
 		this.allPlayers =  allPlayers;
 		playerQuery = new PlayerQuery();
 		detailVO = playerQuery.getPlayerDetailByName(vo.getName());
-		lbstr = new String[]{"姓名: " + vo.getName(), "球队: " + vo.getTeam(), "号码: " + vo.getNumber(),
+		lbstr = new String[]{"姓名: " + vo.getName(), "球队: " + Constants.translateTeamAbbr(vo.getTeam()), "号码: " + vo.getNumber(),
 								"位置: " + vo.getPosition(), "年龄: " + vo.getAge(), "球龄: " + vo.getExp(),
 								"生日: " + vo.getBirth(), "身高: " + vo.getHeight(), "体重: " + vo.getWeight(),
 								"毕业学校: " + vo.getSchool()};

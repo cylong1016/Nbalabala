@@ -31,11 +31,11 @@ public enum TeamAvgSortBasis {
 	/** 投篮命中率 */
 	FIELD_PERCENT,
 
-	/** 三分球平均出手数 */
-	THREE_POINT_ATTEMPT_AVG,
-
 	/** 三分球平均命中数 */
 	THREE_POINT_GOAL_AVG,
+	
+	/** 三分球平均出手数 */
+	THREE_POINT_ATTEMPT_AVG,
 
 	/** 三分球命中率 */
 	THREE_POINT_PERCENT,

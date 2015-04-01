@@ -31,11 +31,11 @@ public enum PlayerAllSortBasis {
 	/** 投篮命中率 */
 	FIELD_PERCENT,
 
-	/** 三分球出手数 */
-	THREE_POINT_ATTEMPT,
-
 	/** 三分球命中数 */
 	THREE_POINT_GOAL,
+	
+	/** 三分球出手数 */
+	THREE_POINT_ATTEMPT,
 
 	/** 三分球命中率 */
 	THREE_POINT_PERCENT,

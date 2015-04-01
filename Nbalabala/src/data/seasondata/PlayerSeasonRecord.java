@@ -412,7 +412,7 @@ public class PlayerSeasonRecord {
 	}
 
 	public double getBlockPercent() {
-		if (matchCount == 0) {
+		if (matchCount == 0 || oppoFieldAttempt - oppoThreePointAttempt == 0) {
 			return 0;
 		}
 		return block * (teamTime / 5) / time / (oppoFieldAttempt - oppoThreePointAttempt);

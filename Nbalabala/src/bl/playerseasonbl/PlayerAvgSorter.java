@@ -19,7 +19,7 @@ public class PlayerAvgSorter {
 
 	public void sort(ArrayList<PlayerSeasonRecord> players, PlayerAvgSortBasis basis, SortOrder order) {
 		Comparator<PlayerSeasonRecord> comparator = null;
-
+		
 		if (order == SortOrder.DE)
 			factor = -1;
 		else
@@ -73,8 +73,8 @@ public class PlayerAvgSorter {
 			break;
 
 		case THREE_POINT_GOAL_AVG:
+			System.out.println("_________");
 			comparator = new Comparator<PlayerSeasonRecord>() {
-
 				public int compare(PlayerSeasonRecord p1, PlayerSeasonRecord p2) {
 					return (int)(factor * (p1.getThreePointGoalAvg() - p2.getThreePointGoalAvg()) * 10000);
 				}
