@@ -51,10 +51,7 @@ public class MainPanel extends Panel {
 	/** 鼠标坐标,开始为(0, 0) */
 	private Point mousePoint = new Point();
 
-	private MainController controller;
-
-	public MainPanel(MainController controller) {
-		this.controller = controller;
+	public MainPanel() {
 		MyMouseListener listener = new MyMouseListener();
 
 		// 球队数据按钮
@@ -113,15 +110,15 @@ public class MainPanel extends Panel {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if (tdPolygon.contains(mousePoint)) {
-				controller.toTeamPanel(MainPanel.this);
+				MainController.toTeamPanel(MainPanel.this);
 			} else if (pdPolygon.contains(mousePoint)) {
-				controller.toPlayerPanel(MainPanel.this);
+				MainController.toPlayerPanel(MainPanel.this);
 			} else if (gdPolygon.contains(mousePoint)) {
-				controller.toGamePanel(MainPanel.this);
+				MainController.toGamePanel(MainPanel.this);
 			} else if (apPolygon.contains(mousePoint)) {
-				controller.toAllPlayersPanel(MainPanel.this);
+				MainController.toAllPlayersPanel(MainPanel.this);
 			} else if (atPolygon.contains(mousePoint)) {
-				controller.toAllTeamsPanel(MainPanel.this);
+				MainController.toAllTeamsPanel(MainPanel.this);
 			}
 		}
 

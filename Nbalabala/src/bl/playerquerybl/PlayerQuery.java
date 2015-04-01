@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import vo.PlayerDetailVO;
 import vo.PlayerMatchPerformanceVO;
 import vo.PlayerProfileVO;
+import vo.PlayerSeasonVO;
 import bl.matchquerybl.MatchQuery;
 import bl.playerseasonbl.PlayerSeasonAnalysis;
 import blservice.PlayerQueryBLService;
 import data.playerdata.PlayerData;
-import data.seasondata.PlayerSeasonRecord;
 import dataservice.PlayerDataService;
 
 /**
@@ -46,7 +46,7 @@ public class PlayerQuery implements PlayerQueryBLService{
 		
 		//从seasonbl获取球员的赛季数据
 		PlayerSeasonAnalysis playerSeasonAnalysis = new PlayerSeasonAnalysis();
-		PlayerSeasonRecord seasonRecord = playerSeasonAnalysis.getPlayerSeasonDataByName(playerName);
+		PlayerSeasonVO seasonRecord = playerSeasonAnalysis.getPlayerSeasonDataByName(playerName);
 		
 		//从matchbl获取球员所有比赛的数据
 		MatchQuery matchQuery = new MatchQuery();

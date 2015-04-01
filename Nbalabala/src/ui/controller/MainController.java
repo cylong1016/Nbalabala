@@ -19,7 +19,6 @@ import ui.panel.main.MainPanel;
 import ui.panel.playerData.PlayerDataPanel;
 import ui.panel.teamdata.TeamDataPanel;
 import vo.MatchProfileVO;
-import vo.PlayerProfileVO;
 
 /**
  * 界面跳转控制
@@ -29,43 +28,47 @@ import vo.PlayerProfileVO;
 public class MainController {
 
 	/** 主Frame */
-	private Frame frame;
+	private static Frame frame;
 	/** 主界面 */
-	private MainPanel mainPanel;
+	private static MainPanel mainPanel;
 	/** 球队数据界面 */
-	private TeamDataPanel teamDataPanel;
+	private static TeamDataPanel teamDataPanel;
 	/** 球员数据界面 */
-	private PlayerDataPanel playerDataPanel;
+	private static PlayerDataPanel playerDataPanel;
 	/** 全部球员界面 */
-	private AllPlayersPanel allPlayersPanel;
+	private static AllPlayersPanel allPlayersPanel;
 	/** 全部球队界面 */
-	private AllTeamsPanel allTeamsPanel;
+	private static AllTeamsPanel allTeamsPanel;
 	/** 比赛数据界面 */
-	private GameDataPanel gameDataPanel;
+	private static GameDataPanel gameDataPanel;
 	/** 球队赛季数据 */
-	private TeamSeasonPanel teamSeasonpanel;
+	private static TeamSeasonPanel teamSeasonpanel;
 	/** 球队比赛数据 */
-	private TeamGamePanel teamGamePanel;
+	private static TeamGamePanel teamGamePanel;
 	/** 某场比赛数据 */
-	private GamePanel gamePanel;
+	private static GamePanel gamePanel;
 	/** 球员详细信息 */
-	private PlayerInfoPanel playerInfoPanel;
+	private static PlayerInfoPanel playerInfoPanel;
+	
+	private MainController() {
+		
+	}
 
 	/**
 	 * 初始化主界面
 	 * @author cylong
 	 * @version 2015年3月16日 下午8:13:55
 	 */
-	public MainController() {
+	public static void launch() {
 		frame = new Frame();
-		mainPanel = new MainPanel(this);
+		mainPanel = new MainPanel();
 		frame.setPanel(mainPanel);
 		frame.start();
 	}
 	
-	public void toMainPanel(Panel panel){
+	public static void toMainPanel(Panel panel){
 		frame.remove(panel);
-		mainPanel = new MainPanel(this);
+		mainPanel = new MainPanel();
 		frame.setPanel(mainPanel);
 	}
 
@@ -75,9 +78,9 @@ public class MainController {
 	 * @author cylong
 	 * @version 2015年3月18日 上午11:11:38
 	 */
-	public void toTeamPanel(Panel panel) {
+	public static void toTeamPanel(Panel panel) {
 		frame.remove(panel);
-		teamDataPanel = new TeamDataPanel(this,UIConfig.IMG_PATH + "teamData/teamDataBG.png");
+		teamDataPanel = new TeamDataPanel(UIConfig.IMG_PATH + "teamData/teamDataBG.png");
 		frame.setPanel(teamDataPanel);
 	}
 
@@ -87,9 +90,9 @@ public class MainController {
 	 * @author cylong
 	 * @version 2015年3月18日 上午11:11:46
 	 */
-	public void toPlayerPanel(Panel panel) {
+	public static void toPlayerPanel(Panel panel) {
 		frame.remove(panel);
-		playerDataPanel = new PlayerDataPanel(this,UIConfig.IMG_PATH + "playerData/playerDataBG.png");
+		playerDataPanel = new PlayerDataPanel(UIConfig.IMG_PATH + "playerData/playerDataBG.png");
 		frame.setPanel(playerDataPanel);
 	}
 
@@ -99,9 +102,9 @@ public class MainController {
 	 * @author cylong
 	 * @version 2015年3月18日 上午11:11:51
 	 */
-	public void toGamePanel(Panel panel) {
+	public static void toGamePanel(Panel panel) {
 		frame.remove(panel);
-		gameDataPanel = new GameDataPanel(this,UIConfig.IMG_PATH + "gameData/gameDataBG.png");
+		gameDataPanel = new GameDataPanel(UIConfig.IMG_PATH + "gameData/gameDataBG.png");
 		frame.setPanel(gameDataPanel);
 	}
 
@@ -111,9 +114,9 @@ public class MainController {
 	 * @author cylong
 	 * @version 2015年3月18日 上午11:11:55
 	 */
-	public void toAllPlayersPanel(Panel panel) {
+	public static void toAllPlayersPanel(Panel panel) {
 		frame.remove(panel);
-		allPlayersPanel = new AllPlayersPanel(this,UIConfig.IMG_PATH + "players/allPlayersBG.png");
+		allPlayersPanel = new AllPlayersPanel(UIConfig.IMG_PATH + "players/allPlayersBG.png");
 		frame.setPanel(allPlayersPanel);
 	}
 
@@ -123,9 +126,9 @@ public class MainController {
 	 * @author cylong
 	 * @version 2015年3月18日 上午11:11:58
 	 */
-	public void toAllTeamsPanel(Panel panel) {
+	public static void toAllTeamsPanel(Panel panel) {
 		frame.remove(panel);
-		allTeamsPanel = new AllTeamsPanel(this,UIConfig.IMG_PATH + "teams/allTeam.png");
+		allTeamsPanel = new AllTeamsPanel(UIConfig.IMG_PATH + "teams/allTeam.png");
 		frame.setPanel(allTeamsPanel);
 	}
 	
@@ -136,9 +139,9 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月20日  下午11:45:39
 	 */
-	public void toTeamSeasonPanel(BottomPanel allteams,Panel panel,TeamButton button,int x){
+	public static void toTeamSeasonPanel(BottomPanel allteams,Panel panel,TeamButton button,int x){
 		frame.remove(panel);
-		teamSeasonpanel = new TeamSeasonPanel(allteams,this,"images/teams/teamSeasonBG.png",button,x);
+		teamSeasonpanel = new TeamSeasonPanel(allteams,"images/teams/teamSeasonBG.png",button,x);
 		frame.setPanel(teamSeasonpanel);
 	}
 	
@@ -148,9 +151,9 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月21日  上午12:31:15
 	 */
-	public void toTeamGamePanel(BottomPanel allteams,Panel panel,TeamButton button) {
+	public static void toTeamGamePanel(BottomPanel allteams,Panel panel,TeamButton button) {
 		frame.remove(panel);
-		teamGamePanel = new TeamGamePanel(allteams,this,UIConfig.IMG_PATH + "teams/teamSeasonBG.png",button,2);
+		teamGamePanel = new TeamGamePanel(allteams,UIConfig.IMG_PATH + "teams/teamSeasonBG.png",button,2);
 		frame.setPanel(teamGamePanel);
 	}
 	
@@ -160,7 +163,7 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月21日  下午1:53:17
 	 */
-	public void addDateChooserPanel(JPanel panelBottom,JPanel panelAdd,int x,int y){
+	public static void addDateChooserPanel(JPanel panelBottom,JPanel panelAdd,int x,int y){
 		panelAdd.setVisible(true);
 		panelAdd.setBounds(x,y, 153,30);
 		panelBottom.add(panelAdd);
@@ -171,9 +174,9 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月21日  下午5:03:21
 	 */
-	public void toOneGamePanel(Panel panel,MatchProfileVO matchProfile,BottomPanel gameData){
+	public static void toOneGamePanel(Panel panel,MatchProfileVO matchProfile,BottomPanel gameData){
 		frame.remove(panel);
-		gamePanel = new GamePanel(this,UIConfig.IMG_PATH+"game/gameBG.png",matchProfile,gameData);
+		gamePanel = new GamePanel(UIConfig.IMG_PATH+"game/gameBG.png",matchProfile,gameData);
 		frame.setPanel(gamePanel);
 	}
 	
@@ -182,7 +185,7 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月24日  上午10:28:19
 	 */
-	public void backToOnePanel(Panel panelNow,Panel panelTo){
+	public static void backToOnePanel(Panel panelNow,Panel panelTo){
 		frame.remove(panelNow);
 		frame.setPanel(panelTo);
 		frame.repaint();
@@ -193,15 +196,15 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月24日  上午11:19:21
 	 */
-	public void toPlayerInfoPanel(Panel panel,PlayerProfileVO vo,BottomPanel allPanel){
+	public static void toPlayerInfoPanel(Panel panel,String name,BottomPanel allPanel){
 		frame.remove(panel);
-		playerInfoPanel = new PlayerInfoPanel(this,UIConfig.IMG_PATH+"players/playerInfoBG.png",vo,allPanel);
+		playerInfoPanel = new PlayerInfoPanel(UIConfig.IMG_PATH+"players/playerInfoBG.png",name,allPanel);
 		frame.setPanel(playerInfoPanel);
 	}
 	
-	public void toPlayerSeasonInfoPanel(Panel panel,PlayerProfileVO vo,BottomPanel allPanel){
+	public static void toPlayerSeasonInfoPanel(Panel panel,String name,BottomPanel allPanel){
 		frame.remove(panel);
-		playerInfoPanel = new PlayerSeasonPanel(this,UIConfig.IMG_PATH+"players/playerGameBG.png",vo,allPanel);
+		playerInfoPanel = new PlayerSeasonPanel(UIConfig.IMG_PATH+"players/playerGameBG.png",name,allPanel);
 		frame.setPanel(playerInfoPanel);
 	}
 	

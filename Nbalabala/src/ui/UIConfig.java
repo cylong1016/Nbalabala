@@ -11,6 +11,7 @@ import java.text.DecimalFormat;
  * @version 2015年3月16日 下午7:29:26
  */
 public class UIConfig {
+	
 
 	/*----------------------------Frame配置--------------------------------*/
 	/** 界面的宽 */

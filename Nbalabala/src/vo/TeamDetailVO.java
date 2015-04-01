@@ -3,8 +3,6 @@ package vo;
 import java.awt.Image;
 import java.util.ArrayList;
 
-import data.seasondata.TeamSeasonRecord;
-
 /**
  * 
  * @author Issac Ding
@@ -18,7 +16,7 @@ public class TeamDetailVO {
 	private ArrayList<PlayerProfileVO> players;
 	
 	/** 赛季数据 */
-	private TeamSeasonRecord seasonRecord;
+	private TeamSeasonVO seasonRecord;
 	
 	private Image logo;
 	
@@ -26,7 +24,7 @@ public class TeamDetailVO {
 	private ArrayList<MatchProfileVO> matchRecords;
 
 	public TeamDetailVO(TeamProfileVO profile,
-			ArrayList<PlayerProfileVO> players, TeamSeasonRecord seasonRecord, Image logo,
+			ArrayList<PlayerProfileVO> players, TeamSeasonVO seasonRecord, Image logo,
 			ArrayList<MatchProfileVO> matchRecords) {
 		super();
 		this.profile = profile;
@@ -44,7 +42,7 @@ public class TeamDetailVO {
 		return players;
 	}
 
-	public TeamSeasonRecord getSeasonRecord() {
+	public TeamSeasonVO getSeasonRecord() {
 		return seasonRecord;
 	}
 	

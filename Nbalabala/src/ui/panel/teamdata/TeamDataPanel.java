@@ -17,9 +17,9 @@ import ui.common.table.BottomTable;
 import ui.controller.MainController;
 import ui.panel.allteams.TeamButton;
 import utility.Constants;
+import vo.TeamSeasonVO;
 import bl.teamseasonbl.TeamSeasonAnalysis;
 import blservice.TeamSeasonBLService;
-import data.seasondata.TeamSeasonRecord;
 import enums.ScreenDivision;
 import enums.SortOrder;
 import enums.TeamAllSortBasis;
@@ -38,55 +38,63 @@ public class TeamDataPanel extends BottomPanel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -4296014620804951285L;
-
+	
+	private static final Color BUTTON_SELECTED_BG = new Color(15, 24, 44);
+	private static final Color BUTTON_SELECTED_FORE = Color.white;
+	/** 枚举数组 */
+	private static final ScreenDivision[] DIVISION_ARRAY = ScreenDivision.values();
+	/** 宽 高 */
+	private static final int WIDTH_X = 60, HEIGHT = 24, WIDTH_THREE = 75;
+	/** 纵坐标及间隔 */
+	private static final int Y = 66, INTER = 61, Y5 = 171;
+	/** “所有”的横坐标 */
+	private static final int ALL_X = 156;
+	/** 东南 中央 大西洋 东部 西部 太平洋 西北 西南  等按钮的X坐标*/
+	private static final int SOUTH_EAST_X = 227, CENTER_X = SOUTH_EAST_X + INTER, 
+			ATLANTIC_X = CENTER_X + INTER, EAST_X = 440, WEST_X = EAST_X + INTER,
+			PACIFIC_X = WEST_X + WIDTH_X + EAST_X - ATLANTIC_X - WIDTH_THREE, 
+			NORTH_WEST_X = PACIFIC_X + INTER + WIDTH_THREE - WIDTH_X,
+			SOUTH_WEST = NORTH_WEST_X + INTER;
+	/** 总计 平均  按钮的X坐标*/
+	private static final int TOTAL_X = 756, AVG_X = 823;
+	/** 所有button的横坐标 */
+	private static final int[] SELECT_BUTTON_X = new int[]{ALL_X, SOUTH_EAST_X, CENTER_X, 
+		ATLANTIC_X, EAST_X, WEST_X, PACIFIC_X, NORTH_WEST_X, SOUTH_WEST};
+	/** 总计 平均横坐标 */
+	private static final int[] TOTAL_AVG_BUTTONS_X = new int[]{TOTAL_X, AVG_X};
+	/** button上的文字 */
+	private static final String[] DIVISION_SELECT_TEXT = new String[]{"所有", "东南", "中央", 
+		"大西洋", "东部", "西部", "太平洋", "西北", "西南"};
+	private static final String[] TOTAL_AVG_SELECT_TEXT = new String[]{"总计", "平均"};
+	private static final int DIVISON_COUNT = 9, TOTAL_AVG_COUNT = 2;
+	private static final String IMG_PATH = UIConfig.IMG_PATH + "teamData/";
+	private static final String SEARCH_BUTTON_OFF = IMG_PATH + "search.png";
+	private static final String SEARCH_BUTTON_ON = IMG_PATH + "searchOn.png";
+	private static final String SEARCH_BUTTON_CLICK = IMG_PATH + "searchClick.png";
+	
 	/** 队伍数据表格 */
 	private BottomTable teamDataTable;
-	/** 放表格的滚动条 */
+	/** 放表格的scrollpane */
 	private BottomScrollPane scroll;
-
-	/** 条件按钮 */
-	private SelectButton[] button;
+	/** 赛区筛选条件按钮 */
+	private TeamDivisionSelectButton[] divisionSelectButtons;
 	/** 总计和平均按钮 */
-	private Line_2_Button[] buttonLine2;
-
-	private TextButton[] buttonArr;
-	/** 宽 高 */
-	private int width = 60, height = 24, widthThree = 75;
-	/** 横纵坐标及间隔 */
-	private int y = 66, x = 227, inter = 61, y5 = 171;
-	/** “所有”的横坐标 */
-	private int allX = 156;
-	/** 东南 中央 大西洋 东部 西部 太平洋 西北 西南 */
-	private int southEast = x, center = southEast + inter, atlantic = center + inter, east = 440, west = east + inter,
-			pacific = west + width + east - atlantic - widthThree, northWest = pacific + inter + widthThree - width,
-			southWest = northWest + inter;
-	/** 总计 平均 */
-	private int total = 756, average = 823;
-	/** 所有button的横坐标 */
-	private int[] selectButton = new int[]{allX, southEast, center, atlantic, east, west, pacific, northWest,
-												southWest};
-	/** 总计 平均横坐标 */
-	private int[] buttonXLine2 = new int[]{total, average};
-	/** button上的文字 */
-	private String[] textSelect = new String[]{"所有", "东南", "中央", "大西洋", "东部", "西部", "太平洋", "西北", "西南"};
-	private String[] textLine2 = new String[]{"总计", "平均"};
-	/** 枚举数组 */
-	ScreenDivision[] dArray = ScreenDivision.values();
+	private TeamTotalAvgSelectButton[] totalAvgSelectButtons;
 	/** 查询按钮 */
 	private ImgButton findButton;
-	int sumSelectButton = 9, sumButton2 = 2;
-	private TeamSeasonBLService teamSeason = new TeamSeasonAnalysis();
-	private String imgURL = UIConfig.IMG_PATH + "teamData/";
-	MainController controller;
-	private ArrayList<TeamSeasonRecord> seasonArray;
 
-	public TeamDataPanel(MainController controller, String url) {
-		super(controller, url);
-		this.controller = controller;
+	private TeamSeasonBLService teamSeason = new TeamSeasonAnalysis();
+	
+	private ArrayList<TeamSeasonVO> seasonArray;
+
+	public TeamDataPanel(String url) {
+		super(url);
 		addButton();
 		// addFindButton(); // 不需要查询按钮，以后需要的时候再添加上去
-		iniSet();
-		setEffect(buttonArr);
+		TeamDivisionSelectButton.current = divisionSelectButtons[0];
+		TeamTotalAvgSelectButton.current = totalAvgSelectButtons[0];
+		setEffect(divisionSelectButtons[0]);
+		setEffect(totalAvgSelectButtons[0]);
 		addListener();
 		// 初始化表格和球队总数据
 		seasonArray = teamSeason.getTeamDataSortedByName();
@@ -99,26 +107,16 @@ public class TeamDataPanel extends BottomPanel {
 	 * @version 2015年3月19日 下午11:22:32
 	 */
 	public void addFindButton() {
-		findButton = new ImgButton(imgURL + "search.png", 856, 124, imgURL + "searchOn.png", imgURL
-																								+ "searchClick.png");
+		findButton = new ImgButton(SEARCH_BUTTON_OFF, 856, 124, SEARCH_BUTTON_ON, 
+				SEARCH_BUTTON_CLICK);
 		this.add(findButton);
 		findButton.addMouseListener(new MouseAdapter() {
 
 			public void mousePressed(MouseEvent e) {
-				seasonArray = teamSeason.getScreenedTeamData(SelectButton.current.division);
+				seasonArray = teamSeason.getScreenedTeamData(TeamDivisionSelectButton.current.division);
 				createTable(seasonArray);
 			}
 		});
-	}
-
-	/**
-	 * 初始化按钮为选中状态
-	 * @author lsy
-	 * @version 2015年3月19日 下午11:44:50
-	 */
-	public void iniSet() {
-		SelectButton.current = (SelectButton)buttonArr[0];
-		Line_2_Button.current = (Line_2_Button)buttonArr[1];
 	}
 
 	/**
@@ -127,25 +125,24 @@ public class TeamDataPanel extends BottomPanel {
 	 * @version 2015年3月19日 下午11:19:15
 	 */
 	public void addButton() {
-		button = new SelectButton[sumSelectButton];
-		buttonLine2 = new Line_2_Button[sumButton2];
-		for(int i = 0; i < sumSelectButton; i++) {
+		divisionSelectButtons = new TeamDivisionSelectButton[DIVISON_COUNT];
+		totalAvgSelectButtons = new TeamTotalAvgSelectButton[TOTAL_AVG_COUNT];
+		for(int i = 0; i < DIVISON_COUNT; i++) {
 			if (i == 3 || i == 6) {
-				button[i] = new SelectButton(selectButton[i], y, widthThree, height, textSelect[i]);
+				divisionSelectButtons[i] = new TeamDivisionSelectButton(SELECT_BUTTON_X[i], Y, WIDTH_THREE, HEIGHT, DIVISION_SELECT_TEXT[i]);
 			} else {
-				button[i] = new SelectButton(selectButton[i], y, width, height, textSelect[i]);
+				divisionSelectButtons[i] = new TeamDivisionSelectButton(SELECT_BUTTON_X[i], Y, WIDTH_X, HEIGHT, DIVISION_SELECT_TEXT[i]);
 			}
-			button[i].division = dArray[i];
+			divisionSelectButtons[i].division = DIVISION_ARRAY[i];
 		}
-		for(int i = 0; i < sumButton2; i++) {
-			buttonLine2[i] = new Line_2_Button(buttonXLine2[i], y5, width, height, textLine2[i]);
+		for(int i = 0; i < TOTAL_AVG_COUNT; i++) {
+			totalAvgSelectButtons[i] = new TeamTotalAvgSelectButton(TOTAL_AVG_BUTTONS_X[i], Y5, WIDTH_X, HEIGHT, TOTAL_AVG_SELECT_TEXT[i]);
 		}
-		buttonArr = new TextButton[]{button[0], buttonLine2[0]};
-		for(int i = 0; i < sumSelectButton; i++) {
-			this.add(button[i]);
+		for(int i = 0; i < DIVISON_COUNT; i++) {
+			this.add(divisionSelectButtons[i]);
 		}
-		for(int i = 0; i < sumButton2; i++) {
-			this.add(buttonLine2[i]);
+		for(int i = 0; i < TOTAL_AVG_COUNT; i++) {
+			this.add(totalAvgSelectButtons[i]);
 		}
 	}
 
@@ -155,53 +152,48 @@ public class TeamDataPanel extends BottomPanel {
 	 * @author cylong
 	 * @version 2015年3月24日 下午8:14:49
 	 */
-	public void setEffect(TextButton[] button) {
-		for(int i = 0; i < button.length; i++) {
-			button[i].setOpaque(true);
-			button[i].setBackground(new Color(15, 24, 44));
-			button[i].setForeground(Color.white);
-		}
+	public void setEffect(TextButton button) {
+		button.setOpaque(true);
+		button.setBackground(BUTTON_SELECTED_BG);
+		button.setForeground(BUTTON_SELECTED_FORE);
 	}
 
 	public void addListener() {
-		MouListener1 mou1 = new MouListener1();
-		MouListener2 mou2 = new MouListener2();
-		for(int i = 0; i < sumSelectButton; i++) {
-			button[i].addMouseListener(mou1);
+		DivisionSelectListener divisionListener = new DivisionSelectListener();
+		TotalAvgListener totalAvgListener = new TotalAvgListener();
+		for(int i = 0; i < DIVISON_COUNT; i++) {
+			divisionSelectButtons[i].addMouseListener(divisionListener);
 		}
-		for(int i = 0; i < sumButton2; i++) {
-			buttonLine2[i].addMouseListener(mou2);
-		}
-	}
-
-	class MouListener1 extends MouseAdapter {
-		public void mousePressed(MouseEvent e) {
-			if (e.getSource() == SelectButton.current) {
-				return;
-			}
-			SelectButton.current.back();
-			SelectButton.current = (SelectButton)e.getSource();
-			seasonArray = teamSeason.getScreenedTeamData(SelectButton.current.division);
-			if (Line_2_Button.current == buttonLine2[0]) {
-				updateTotalTeamDataTable(seasonArray); // 添加总数据
-			} else if (Line_2_Button.current == buttonLine2[1]) {
-				updateAvgTeamDataTable(seasonArray); // 添加平均数据
-			}
+		for(int i = 0; i < TOTAL_AVG_COUNT; i++) {
+			totalAvgSelectButtons[i].addMouseListener(totalAvgListener);
 		}
 	}
 
-	class MouListener2 extends MouseAdapter {
-
+	class DivisionSelectListener extends MouseAdapter {
 		public void mousePressed(MouseEvent e) {
-			if (e.getSource() == Line_2_Button.current) {
+			if (e.getSource() == TeamDivisionSelectButton.current) {
 				return;
 			}
-			Line_2_Button.current.back();
-			Line_2_Button.current = (Line_2_Button)e.getSource();
-			seasonArray = teamSeason.getScreenedTeamData(SelectButton.current.division);
-			if (Line_2_Button.current == buttonLine2[0]) {
+			TeamDivisionSelectButton.current.back();
+			TeamDivisionSelectButton.current = (TeamDivisionSelectButton)e.getSource();
+			seasonArray = teamSeason.getScreenedTeamData(TeamDivisionSelectButton.current.division);
+
+			createTable(seasonArray); // 添加筛选出的数据
+		}
+	}
+
+	class TotalAvgListener extends MouseAdapter {
+
+		public void mousePressed(MouseEvent e) {
+			if (e.getSource() == TeamTotalAvgSelectButton.current) {
+				return;
+			}
+			TeamTotalAvgSelectButton.current.back();
+			TeamTotalAvgSelectButton.current = (TeamTotalAvgSelectButton)e.getSource();
+			seasonArray = teamSeason.getScreenedTeamData(TeamDivisionSelectButton.current.division);
+			if (TeamTotalAvgSelectButton.current == totalAvgSelectButtons[0]) {
 				updateTotalTeamDataTable(seasonArray); // 添加总数据
-			} else if (Line_2_Button.current == buttonLine2[1]) {
+			} else if (TeamTotalAvgSelectButton.current == totalAvgSelectButtons[1]) {
 				updateAvgTeamDataTable(seasonArray); // 添加平均数据
 			}
 		}
@@ -214,9 +206,9 @@ public class TeamDataPanel extends BottomPanel {
 	 * @author cylong
 	 * @version 2015年3月24日 下午8:48:03
 	 */
-	private void updateTotalTeamDataTable(ArrayList<TeamSeasonRecord> teamArr) {
+	private void updateTotalTeamDataTable(ArrayList<TeamSeasonVO> teamArr) {
 		for(int i = 0; i < teamArr.size(); i++) {
-			TeamSeasonRecord teamSeason = teamArr.get(i);
+			TeamSeasonVO teamSeason = teamArr.get(i);
 			teamDataTable.setValueAt(Integer.toString(i + 1),i,0);
 			teamDataTable.setValueAt(Constants.translateTeamAbbr(teamSeason.getTeamName()),i,1);
 			teamDataTable.setValueAt(Integer.toString(teamSeason.getWins()),i,2);
@@ -262,7 +254,7 @@ public class TeamDataPanel extends BottomPanel {
 					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
 					if (rowI > -1) {
 						String abbr = seasonArray.get(rowI).getTeamName();
-						controller.toTeamSeasonPanel(TeamDataPanel.this,TeamDataPanel.this,
+						MainController.toTeamSeasonPanel(TeamDataPanel.this,TeamDataPanel.this,
 								new TeamButton(abbr),0);
 					}
 
@@ -280,9 +272,9 @@ public class TeamDataPanel extends BottomPanel {
 	 * @author cylong
 	 * @version 2015年3月24日 下午9:03:08
 	 */
-	private void updateAvgTeamDataTable(ArrayList<TeamSeasonRecord> teamArr) {
+	private void updateAvgTeamDataTable(ArrayList<TeamSeasonVO> teamArr) {
 		for(int i = 0; i < teamArr.size(); i++) {
-			TeamSeasonRecord teamSeason = teamArr.get(i);
+			TeamSeasonVO teamSeason = teamArr.get(i);
 			teamDataTable.setValueAt(Integer.toString(i + 1),i,0);
 			teamDataTable.setValueAt(Constants.translateTeamAbbr(teamSeason.getTeamName()),i,1);
 			teamDataTable.setValueAt(Integer.toString(teamSeason.getWins()),i,2);
@@ -321,7 +313,6 @@ public class TeamDataPanel extends BottomPanel {
 	
 	/** 0表示下一次点击降序，1升序 */
 	private int clickedNum = 0;
-	
 	/** 上一次点击的列数 */
 	private int lastClickColumn = 0;
 	/**
@@ -331,7 +322,7 @@ public class TeamDataPanel extends BottomPanel {
 	 * @author cylong
 	 * @version 2015年3月29日 下午3:59:35
 	 */
-	private void createTable(ArrayList<TeamSeasonRecord> teamArr) {
+	private void createTable(ArrayList<TeamSeasonVO> teamArr) {
 		String[][] rowData = new String[teamArr.size()][Constants.TEAM_SEASON_HEADERS.length];
 		teamDataTable = new BottomTable(rowData, Constants.TEAM_SEASON_HEADERS);
 		teamDataTable.getColumnModel().getColumn(18).setPreferredWidth(80);
@@ -339,9 +330,9 @@ public class TeamDataPanel extends BottomPanel {
 		teamDataTable.getColumnModel().getColumn(19).setPreferredWidth(80);
 		addScrollPane(teamDataTable);
 		
-		if (Line_2_Button.current == buttonLine2[0]) {
+		if (TeamTotalAvgSelectButton.current == totalAvgSelectButtons[0]) {
 			updateTotalTeamDataTable(teamArr); // 添加总数据
-		} else if (Line_2_Button.current == buttonLine2[1]) {
+		} else if (TeamTotalAvgSelectButton.current == totalAvgSelectButtons[1]) {
 			updateAvgTeamDataTable(teamArr); // 添加平均数据
 		}
 		
@@ -367,11 +358,11 @@ public class TeamDataPanel extends BottomPanel {
 					sort = SortOrder.DE;
 				}
 				
-				if (Line_2_Button.current == buttonLine2[0]) {
+				if (TeamTotalAvgSelectButton.current == totalAvgSelectButtons[0]) {
 					TeamAllSortBasis[] basis = TeamAllSortBasis.values();
 					seasonArray = teamSeason.getResortedTeamAllData(basis[index - 1], sort);
 					TeamDataPanel.this.updateTotalTeamDataTable(seasonArray); // 重排总数据
-				} else if (Line_2_Button.current == buttonLine2[1]) {
+				} else if (TeamTotalAvgSelectButton.current == totalAvgSelectButtons[1]) {
 					TeamAvgSortBasis[] basis = TeamAvgSortBasis.values();
 					seasonArray = teamSeason.getResortedTeamAvgData(basis[index - 1], sort);
 					TeamDataPanel.this.updateAvgTeamDataTable(seasonArray); // 重排平均数据

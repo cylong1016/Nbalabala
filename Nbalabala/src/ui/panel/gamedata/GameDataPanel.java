@@ -56,7 +56,6 @@ public class GameDataPanel extends BottomPanel {
 
 	MatchQueryBLService matchQuery = new MatchQuery();
 	DateChooser dateChooser;
-	MainController controller;
 	ArrayList<MatchProfileVO> matchProfile;
 	/** 画线 */
 	GameDataButton[] detailImg;
@@ -70,20 +69,19 @@ public class GameDataPanel extends BottomPanel {
 	 * @param url
 	 *            背景图片的url
 	 */
-	public GameDataPanel(MainController controller, String url) {
-		super(controller, url);
-		this.controller = controller;
+	public GameDataPanel(String url) {
+		super(url);
 //		addDataPanel();
 		addComboBox();
 		addDateChooser();
 		addConfirmBtn();
-		scrollPane = new MatchInfoTableFactory(new ArrayList<MatchProfileVO>(), this, controller)
+		scrollPane = new MatchInfoTableFactory(new ArrayList<MatchProfileVO>(), this)
 			.getTableScrollPanel();
 		add(scrollPane);
 	}
 	
-	public GameDataPanel(MainController controller, String url,int i) {
-		super(controller, url);
+	public GameDataPanel(String url,int i) {
+		super(url);
 	}
 
 
@@ -111,7 +109,7 @@ public class GameDataPanel extends BottomPanel {
 				matchProfile = matchQuery.screenMatchByTeam(Constants.TEAM_ABBR[team1], Constants.TEAM_ABBR[team2]);
 				gameSum = matchProfile.size();
 				remove(scrollPane);
-				scrollPane = new MatchInfoTableFactory(matchProfile,GameDataPanel.this,controller)
+				scrollPane = new MatchInfoTableFactory(matchProfile,GameDataPanel.this)
 					.getTableScrollPanel();
 				GameDataPanel.this.add(scrollPane);
 			}
@@ -126,7 +124,7 @@ public class GameDataPanel extends BottomPanel {
 				Date date = dateChooser.getDate();
 				matchProfile = matchQuery.screenMatchByDate(date);
 				remove(scrollPane);
-				scrollPane = new MatchInfoTableFactory(matchProfile,GameDataPanel.this,controller)
+				scrollPane = new MatchInfoTableFactory(matchProfile,GameDataPanel.this)
 					.getTableScrollPanel();
 				GameDataPanel.this.add(scrollPane);
 			}
@@ -159,7 +157,7 @@ public class GameDataPanel extends BottomPanel {
 	 */
 	public void addDateChooser() {
 		dateChooser = new DateChooser();
-		controller.addDateChooserPanel(this, dateChooser, 257, box1Y-3);
+		MainController.addDateChooserPanel(this, dateChooser, 257, box1Y-3);
 	}
 
 	/**

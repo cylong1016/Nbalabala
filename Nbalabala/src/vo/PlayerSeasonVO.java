@@ -1,11 +1,11 @@
-package data.seasondata;
+package vo;
 
 /**
  * 用来记录计算球员赛季数据所需的各种指标
  * @author Issac Ding
  * @version 2015年3月14日 下午4:17:44
  */
-public class PlayerSeasonRecord {
+public class PlayerSeasonVO {
 
 	/**
 	 * attempt是出手
@@ -14,114 +14,114 @@ public class PlayerSeasonRecord {
 	 */
 
 	/** 球员名字 */
-	String name;
+	public String name;
 
 	/** 记录最后一次位置 */
-	char position = '\0';
+	public char position = '\0';
 
 	/** 记录最后一次比赛时的队伍 */
-	String teamName = "无记录";
+	public String teamName = "无记录";
 
 	/** 上场数 */
-	int matchCount;
+	public int matchCount;
 
 	/** 首发数 */
-	int firstCount;
+	public int firstCount;
 
 	/** 时间，单位是秒 */
-	double time;
+	public double time;
 
 	/** 投篮命中 */
-	int fieldGoal;
+	public int fieldGoal;
 
 	/** 投篮出手 */
-	int fieldAttempt;
+	public int fieldAttempt;
 
 	/** 三分命中 */
-	int threePointGoal;
+	public int threePointGoal;
 
 	/** 三分出手 */
-	int threePointAttempt;
+	public int threePointAttempt;
 
 	/** 罚球命中 */
-	int freethrowGoal;
+	public int freethrowGoal;
 
 	/** 罚球出手 */
-	int freethrowAttempt;
+	public int freethrowAttempt;
 
 	/** 进攻篮板 */
-	int offensiveRebound;
+	public int offensiveRebound;
 
 	/** 防守篮板 */
-	int defensiveRebound;
+	public int defensiveRebound;
 
 	/** 总篮板 */
-	int totalRebound;
+	public int totalRebound;
 
 	/** 助攻 */
-	int assist;
+	public int assist;
 
 	/** 抢断 */
-	int steal;
+	public int steal;
 
 	/** 盖帽 */
-	int block;
+	public int block;
 
 	/** 失误 */
-	int turnover;
+	public int turnover;
 
 	/** 犯规 */
-	int foul;
+	public int foul;
 
 	/** 个人得分 */
-	int score;
+	public int score;
 
 	/** 两双次数 */
-	int doubleDoubleCount;
+	public int doubleDoubleCount;
 
 	//以下记录球队和对手数据以计算各种率
 
 	/** 球队总上场时间 ，单位为秒 */
-	double teamTime;
+	public double teamTime;
 
-	int teamOffensiveRebound;
+	public int teamOffensiveRebound;
 
-	int teamDefensiveRebound;
+	public int teamDefensiveRebound;
 
 	/** 球队总篮板 */
-	int teamTotalRebound;
+	public int teamTotalRebound;
 
-	int teamFieldGoal;
+	public int teamFieldGoal;
 
-	int teamFieldAttempt;
+	public int teamFieldAttempt;
 
-	int teamFreethrowAttempt;
+	public int teamFreethrowAttempt;
 
-	int teamTurnover;
+	public int teamTurnover;
 
 	/** 对手总篮板 */
-	int oppoTotalRebound;
+	public int oppoTotalRebound;
 
-	int oppoOffensiveRebound;
+	public int oppoOffensiveRebound;
 
-	int oppoDefensiveRebound;
+	public int oppoDefensiveRebound;
 
-	int oppoFieldGoal;
+	public int oppoFieldGoal;
 
-	int oppoFieldAttempt;
+	public int oppoFieldAttempt;
 
-	int oppoFreethrowAttempt;
+	public int oppoFreethrowAttempt;
 
-	int oppoTurnover;
+	public int oppoTurnover;
 
-	int oppoThreePointAttempt;
+	public int oppoThreePointAttempt;
 
 	/** 如果没有关于此球员的比赛记录，但是在球员信息里有这个球员的话，用这个构造方法产生一个空的赛季纪录 */
-	public PlayerSeasonRecord(String name) {
+	public PlayerSeasonVO(String name) {
 		this.name = name;
 	}
 
-	public PlayerSeasonRecord() {
+	public PlayerSeasonVO() {
 
 	}
 

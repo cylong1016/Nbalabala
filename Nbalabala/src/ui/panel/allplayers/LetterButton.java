@@ -17,12 +17,14 @@ public class LetterButton extends TextButton{
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -372944070418167926L;
+	
+	private static final Font LETTER_FONT = new Font("微软雅黑", 1, 15);
 	/** 当前按钮 */
 	static LetterButton current;
 	/** 当前按钮代表哪个字母 */
 	char letter;
-	Color letterColor= new Color(38,41,46);
-	final Color letterbg = new Color(51,66,84,130);
+	static final Color LETTER_BG = new Color(51, 66, 84, 130);
+	static final Color LETTER_COLOR = new Color(38, 41, 46);
 	/**
 	 * @param x
 	 * @param y
@@ -34,7 +36,7 @@ public class LetterButton extends TextButton{
 	 */
 	public LetterButton(int x, int y, int width, int height, String text) {
 		super(x, y, width, height, text);
-		this.setFont(new Font("微软雅黑", 1, 15));
+		this.setFont(LETTER_FONT);
 		this.setMargin(new Insets(0,0,0,0));
 	}
 
@@ -44,13 +46,13 @@ public class LetterButton extends TextButton{
 			public void mousePressed(MouseEvent e) {
 				LetterButton.this.setOpaque(true);
 				LetterButton.this.setForeground(Color.white);
-				LetterButton.this.setBackground(letterbg);
+				LetterButton.this.setBackground(LETTER_BG);
 			}
 		});
 		
 	}
 	public void back() {
 		this.setOpaque(false);
-		this.setForeground(letterColor);
+		this.setForeground(LETTER_COLOR);
 	}
 }

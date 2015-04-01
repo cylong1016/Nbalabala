@@ -22,11 +22,11 @@ import ui.controller.MainController;
 import utility.Constants;
 import vo.PlayerProfileVO;
 import vo.TeamDetailVO;
+import vo.TeamSeasonVO;
 import bl.matchquerybl.MatchQuery;
 import bl.teamquerybl.TeamQuery;
 import blservice.MatchQueryBLService;
 import blservice.TeamQueryBLService;
-import data.seasondata.TeamSeasonRecord;
 
 /**
  * 球队赛季数据
@@ -73,10 +73,9 @@ public class TeamSeasonPanel extends BottomPanel {
 	int order = 0;
 
 	// 用x来判断此时是赛季数据还是阵容 0代表赛季 1代表阵容
-	public TeamSeasonPanel(BottomPanel allteams,MainController controller, String url, TeamButton teamButton, int x) {
-		super(controller, url);
+	public TeamSeasonPanel(BottomPanel allteams,String url, TeamButton teamButton, int x) {
+		super(url);
 		this.allteams = allteams;
-		this.controller = controller;
 		this.teamButton = teamButton;
 		setButton();
 		addButton();
@@ -154,7 +153,7 @@ public class TeamSeasonPanel extends BottomPanel {
 		back.addMouseListener(new MouseAdapter() {
 
 			public void mousePressed(MouseEvent e) {
-				controller.backToOnePanel(TeamSeasonPanel.this, allteams);
+				MainController.backToOnePanel(TeamSeasonPanel.this, allteams);
 			}
 
 		});
@@ -166,7 +165,7 @@ public class TeamSeasonPanel extends BottomPanel {
 	 * @author lsy
 	 * @version 2015年3月25日 上午10:34:45
 	 */
-	public void addSeasonTable(TeamSeasonRecord record) {
+	public void addSeasonTable(TeamSeasonVO record) {
 		columns = new String[]{ "", "球队名称", "胜场数", "负场数", "总场数", "胜率", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手",
 				"三分命中率", "罚球命中", "罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "进攻篮板效率", "防守篮板效率", "进攻回合", "进攻效率",
 				"防守回合", "防守效率", "抢断", "抢断效率", "助攻", "助攻率", "盖帽", "失误", "犯规", "得分" };
@@ -288,7 +287,7 @@ public class TeamSeasonPanel extends BottomPanel {
 				TeamSeasonPanel.this.repaint();
 			} else if (e.getSource() == button[2]) {
 				TeamSeasonPanel.this.remove(scroll);
-				controller.toTeamGamePanel(allteams,TeamSeasonPanel.this, teamButton);
+				MainController.toTeamGamePanel(allteams,TeamSeasonPanel.this, teamButton);
 			}
 		}
 	}
@@ -316,7 +315,7 @@ public class TeamSeasonPanel extends BottomPanel {
 			rowData[i][8] = ppVO.getSchool();
 		}
 		table = new BottomTable(rowData, columns);
-		//TODO 将头像放入表格的第一列 监听已加好 双击球员某一信息进入下一界面
+		//将头像放入表格的第一列 监听已加好 双击球员某一信息进入下一界面
 		try{
 			table.addMouseListener(new UserMouseAdapter(){
 				
@@ -324,7 +323,8 @@ public class TeamSeasonPanel extends BottomPanel {
 					if (e.getClickCount() < 2) return;
 					int rowI  = table.rowAtPoint(e.getPoint());// 得到table的行号
 					if ( rowI > -1){
-						controller.toPlayerInfoPanel(TeamSeasonPanel.this, players.get(rowI),TeamSeasonPanel.this);
+						MainController.toPlayerInfoPanel(TeamSeasonPanel.this, 
+								players.get(rowI).getName(),TeamSeasonPanel.this);
 					}
 					
 				}

@@ -13,6 +13,6 @@ import ui.controller.MainController;
 public class Nbalabala {
 
 	public static void main(String[] args) {
-		new MainController();
+		MainController.launch();
 	}
 }

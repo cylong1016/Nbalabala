@@ -3,7 +3,6 @@ package bl.teamquerybl;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import data.seasondata.TeamSeasonRecord;
 import data.teamdata.SVGHandler;
 import data.teamdata.TeamData;
 import dataservice.TeamDataService;
@@ -11,6 +10,7 @@ import vo.MatchProfileVO;
 import vo.PlayerProfileVO;
 import vo.TeamDetailVO;
 import vo.TeamProfileVO;
+import vo.TeamSeasonVO;
 import bl.matchquerybl.MatchQuery;
 import bl.playerquerybl.PlayerQuery;
 import bl.playerseasonbl.PlayerSeasonAnalysis;
@@ -40,7 +40,7 @@ public class TeamQuery implements TeamQueryBLService{
 		ArrayList<PlayerProfileVO> playerProfiles = playerQuery.getPlayerProfilesByNames(playerNames);
 		
 		TeamSeasonAnalysis teamSeasonAnalysis = new TeamSeasonAnalysis();
-		TeamSeasonRecord record = teamSeasonAnalysis.getTeamDataByAbbr(abbr);
+		TeamSeasonVO record = teamSeasonAnalysis.getTeamDataByAbbr(abbr);
 		
 		MatchQuery matchQuery = new MatchQuery();
 		ArrayList<MatchProfileVO> matchRecords = matchQuery.getMatchRecordByTeamAbbr(abbr);

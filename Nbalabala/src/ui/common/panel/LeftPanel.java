@@ -34,23 +34,21 @@ public class LeftPanel extends Panel {
 //	private int x = 58, y = 202, inter = 54;
 	private int x = 6, y = 314, inter = 41;
 	/** 图片地址 */
-	String url = UIConfig.IMG_PATH + "sidebar/";
-	private String trans = url + "trans.png";
-	private String on = url + "mouseOn.png";
+	private static final String URL = UIConfig.IMG_PATH + "sidebar/";
+	private static final String TRANS = URL + "trans.png";
+	private static final String ON = URL + "mouseOn.png";
 	/** button */
-	ImgButton allPlayers, allTeams, game, playerData, returnButton, teamData;
+	private ImgButton allPlayers, allTeams, game, playerData, returnButton, teamData;
 	/** button数组 */
-	ImgButton[] buttonArr;
-	MouListener mou = new MouListener();
+	private ImgButton[] buttonArr;
+	private MouListener mou = new MouListener();
 	/** 获得底层panel */
-	BottomPanel panel;
-	MainController controller;
+	private BottomPanel panel;
 	
-	public LeftPanel(BottomPanel panel, MainController controller) {
+	public LeftPanel(BottomPanel panel) {
 		this.panel = panel;
-		this.controller = controller;
 		this.setBounds(secPanelX, 0, UIConfig.LEFT_WIDTH, UIConfig.WIDTH);
-		bgImage = new ImageIcon(url + "BG.png").getImage();
+		bgImage = new ImageIcon(URL + "BG.png").getImage();
 		setButton();
 		addButton();
 	}
@@ -62,13 +60,13 @@ public class LeftPanel extends Panel {
 	 * @version 2015年3月20日 上午12:02:28
 	 */
 	public void setButton() {
-		returnButton = new ImgButton(url + "return.png", 13, 529, url + "returnOn.png", url
+		returnButton = new ImgButton(URL + "return.png", 13, 529, URL + "returnOn.png", URL
 				+ "returnClick.png");
-		allPlayers = new ImgButton(trans, x, y, on, on);
-		allTeams = new ImgButton(trans, x, y + inter, on, on);
-		game = new ImgButton(trans, x, y + 2 * inter, on, on);
-		playerData = new ImgButton(trans, x, y + 3 * inter, on, on);
-		teamData = new ImgButton(trans, x, y + 4 * inter, on, on);
+		allPlayers = new ImgButton(TRANS, x, y, ON, ON);
+		allTeams = new ImgButton(TRANS, x, y + inter, ON, ON);
+		game = new ImgButton(TRANS, x, y + 2 * inter, ON, ON);
+		playerData = new ImgButton(TRANS, x, y + 3 * inter, ON, ON);
+		teamData = new ImgButton(TRANS, x, y + 4 * inter, ON, ON);
 	}
 	
 	public void addButton(){
@@ -82,17 +80,17 @@ public class LeftPanel extends Panel {
 	class MouListener extends MouseAdapter{
 		 public void mousePressed(MouseEvent e) {
 			 if(e.getSource() == allPlayers){
-				 controller.toAllPlayersPanel(panel);
+				 MainController.toAllPlayersPanel(panel);
 			 }else if(e.getSource() == allTeams){
-				 controller.toAllTeamsPanel(panel);
+				 MainController.toAllTeamsPanel(panel);
 			 }else if(e.getSource() == game){
-				 controller.toGamePanel(panel);
+				 MainController.toGamePanel(panel);
 			 }else if(e.getSource() == playerData){
-				 controller.toPlayerPanel(panel);
+				 MainController.toPlayerPanel(panel);
 			 }else if(e.getSource() == teamData){
-				 controller.toTeamPanel(panel);
+				 MainController.toTeamPanel(panel);
 			 }else if(e.getSource() == returnButton){
-				 controller.toMainPanel(panel);
+				 MainController.toMainPanel(panel);
 			 }
 		 }
 	}

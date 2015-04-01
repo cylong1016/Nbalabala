@@ -12,7 +12,6 @@ import java.util.Date;
 import ui.DateChooser;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
-import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.MatchInfoTableFactory;
@@ -20,9 +19,9 @@ import ui.controller.MainController;
 import ui.panel.gamedata.GameDataPanel;
 import vo.MatchProfileVO;
 import vo.TeamDetailVO;
+import vo.TeamSeasonVO;
 import bl.teamquerybl.TeamQuery;
 import blservice.TeamQueryBLService;
-import data.seasondata.TeamSeasonRecord;
 
 /**
  * 球队赛程数据界面
@@ -35,7 +34,6 @@ public class TeamGamePanel extends TeamSeasonPanel {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 5247981003029326464L;
 	ImgButton imgButton;
-	MainController controller;
 	DateChooser dateChooser;
 	TeamQueryBLService teamQuery = new TeamQuery();
 	TeamButton teamButton;
@@ -44,17 +42,16 @@ public class TeamGamePanel extends TeamSeasonPanel {
 	ArrayList<MatchProfileVO> matchProfile;
 	BottomScrollPane pane;
 
-	public TeamGamePanel(BottomPanel allteams, MainController controller, String url, TeamButton teamButton,
+	public TeamGamePanel(BottomPanel allteams, String url, TeamButton teamButton,
 			int x) {
-		super(allteams, controller, url, teamButton, x);
-		this.controller = controller;
+		super(allteams, url, teamButton, x);
 		this.teamButton = teamButton;
 		addFindButton();
 		addDateChooser();
 		teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
 		matchProfile = teamDetail.getMatchRecords();
-		gameData = new GameDataPanel(controller,"",1); 
-		pane = new MatchInfoTableFactory(matchProfile,this,controller).getTableScrollPanel();
+		gameData = new GameDataPanel("",1); 
+		pane = new MatchInfoTableFactory(matchProfile,this).getTableScrollPanel();
 		pane.setBounds(55, 285, 905, 250);
 		add(pane);
 		iniTable(x);
@@ -73,7 +70,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 	/**
 	 * 覆盖父类的方法，让父类的表格不显示
 	 */
-	public void addSeasonTable(TeamSeasonRecord record) {
+	public void addSeasonTable(TeamSeasonVO record) {
 	}
 
 	public void addBack() {
@@ -83,7 +80,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		back.addMouseListener(new MouseAdapter() {
 
 			public void mousePressed(MouseEvent e) {
-				controller.backToOnePanel(TeamGamePanel.this, allteams);
+				MainController.backToOnePanel(TeamGamePanel.this, allteams);
 			}
 
 		});
@@ -91,18 +88,15 @@ public class TeamGamePanel extends TeamSeasonPanel {
 
 	public void addDateChooser() {
 		dateChooser = new DateChooser();
-		controller.addDateChooserPanel(this, dateChooser, 722, 245);
+		MainController.addDateChooserPanel(this, dateChooser, 722, 245);
 	}
 
-	MyLabel label = new MyLabel(770,280,100,50,"当天没有比赛");
 	public void addFindButton() {
 		imgButton = new ImgButton(url + "search.png", 893, 250, url + "searchOn.png", url + "searchClick.png");
 		this.add(imgButton);
 		imgButton.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				TeamGamePanel.this.remove(pane);
-				label.setForeground(UIConfig.BUTTON_COLOR);
-				TeamGamePanel.this.add(label);
 				Date date = dateChooser.getDate();
 				
 				Calendar calendar = Calendar.getInstance();
@@ -128,13 +122,13 @@ public class TeamGamePanel extends TeamSeasonPanel {
 				String dateStr = dateTemp[1]+"-"+dateTemp[2];
 				for (int i = 0; i < matchProfile.size(); i++) {
 					if(dateStr.equals(matchProfile.get(i).getTime())&&seasonString.equals(matchProfile.get(i).getSeason())){
-						TeamGamePanel.this.remove(label);
 						ArrayList<MatchProfileVO> pro = new ArrayList<MatchProfileVO>();
 						pro.add(matchProfile.get(i));
 						if (pane != null){
 							remove(pane);
 						}
-						pane = new MatchInfoTableFactory(pro,TeamGamePanel.this,controller).getTableScrollPanel();
+						pane = new MatchInfoTableFactory(pro,TeamGamePanel.this).getTableScrollPanel();
+						pane.setBounds(55, 285, 905, 250);
 						add(pane);
 					}
 				}
@@ -163,9 +157,9 @@ public class TeamGamePanel extends TeamSeasonPanel {
 	class MouListener extends MouseAdapter {
 		public void mousePressed(MouseEvent e) {
 			if (e.getSource() == button[0]) {
-				controller.toTeamSeasonPanel(allteams, TeamGamePanel.this, teamButton, 0);
+				MainController.toTeamSeasonPanel(allteams, TeamGamePanel.this, teamButton, 0);
 			} else if (e.getSource() == button[1]) {
-				controller.toTeamSeasonPanel(allteams, TeamGamePanel.this, teamButton, 1);
+				MainController.toTeamSeasonPanel(allteams, TeamGamePanel.this, teamButton, 1);
 			} else if (e.getSource() == button[2]) {
 				return;
 			}

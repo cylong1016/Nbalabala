@@ -72,13 +72,11 @@ public class GamePanel extends BottomPanel {
 	MatchDetailVO matchVO;
 	MyLabel[] lb_1, lb_2;
 	ImgButton back;
-	MainController mainController;
 
-	public GamePanel(MainController controller, String url, MatchProfileVO matchProfile,BottomPanel gameData) {
-		super(controller, url);
+	public GamePanel(String url, MatchProfileVO matchProfile,BottomPanel gameData) {
+		super(url);
 		this.gameData = gameData;
 		this.matchPro = matchProfile;
-		this.mainController = controller;
 		teamQuery = new TeamQuery();
 		matchQuery = new MatchQuery();
 		playerQuery = new PlayerQuery();
@@ -104,7 +102,7 @@ public class GamePanel extends BottomPanel {
 		this.add(back);
 		back.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				mainController.backToOnePanel(GamePanel.this, gameData);
+				MainController.backToOnePanel(GamePanel.this, gameData);
 			}
 
 		});
@@ -112,7 +110,7 @@ public class GamePanel extends BottomPanel {
 	
 	private void checkMatchValid() {
 		if (!matchVO.isMatchValid()) {
-			ImgLabel imgLabel = new ImgLabel(5, 95, 232, 178, new ImageIcon("images/game/wrong.png").getImage());
+			ImgLabel imgLabel = new ImgLabel(430, 60, 232, 178, new ImageIcon("images/game/wrong.png").getImage());
 			this.add(imgLabel);
 		}
 	}
@@ -210,9 +208,10 @@ public class GamePanel extends BottomPanel {
 			rowData[i][17] = mpVO.getPersonalGoal() + "";
 		}
 		BottomTable table = new BottomTable(rowData, columns);
+		table.getColumnModel().getColumn(0).setPreferredWidth(170);
 		addListener(table,players);
 		scroll = new BottomScrollPane(table);
-		scroll.setBounds(58,318,888, 247);
+		scroll.setBounds(58,257,888, 276);
 		this.add(scroll);
 
 	}
@@ -226,8 +225,8 @@ public class GamePanel extends BottomPanel {
 						return;
 					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
 					if (rowI > -1) {
-						mainController.toPlayerInfoPanel(GamePanel.this,playerQuery.searchPlayers(players.get(rowI).getName()).get(rowI), 
-								GamePanel.this);
+						MainController.toPlayerInfoPanel(GamePanel.this,
+								players.get(rowI).getName(), GamePanel.this);
 					}
 
 				}

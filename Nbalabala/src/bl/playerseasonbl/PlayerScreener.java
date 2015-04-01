@@ -2,7 +2,7 @@ package bl.playerseasonbl;
 
 import java.util.ArrayList;
 
-import data.seasondata.PlayerSeasonRecord;
+import vo.PlayerSeasonVO;
 import enums.PlayerAllSortBasis;
 import enums.ScreenBasis;
 import enums.SortOrder;
@@ -14,7 +14,7 @@ import enums.SortOrder;
  */
 public class PlayerScreener {
 	
-	public ArrayList<PlayerSeasonRecord> screen(ArrayList<PlayerSeasonRecord> players, 
+	public ArrayList<PlayerSeasonVO> screen(ArrayList<PlayerSeasonVO> players, 
 			ScreenBasis basis) {
 		PlayerAllSorter sorter = new PlayerAllSorter();
 		switch(basis){
@@ -64,7 +64,7 @@ public class PlayerScreener {
 			break;
 		}
 		
-		ArrayList<PlayerSeasonRecord> result = new ArrayList<PlayerSeasonRecord>();
+		ArrayList<PlayerSeasonVO> result = new ArrayList<PlayerSeasonVO>();
 		int maxIndex = players.size() > 50 ? 50 : players.size();
 		for (int i=0; i< maxIndex;i++) {
 			result.add(players.get(i));

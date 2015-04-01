@@ -27,7 +27,7 @@ public class BottomTable extends JTable {
 	private static final long serialVersionUID = 3966419405700478023L;
 
 	/** 表格每一行的高 */
-	private int rowHeight = 23;
+	private static final int ROW_HEIGHT = 23;
 
 	public BottomTable(Object[][] rowData, String[] columnNames) {
 		super(rowData, columnNames);
@@ -67,12 +67,12 @@ public class BottomTable extends JTable {
 		}
 	}
 	
-	/** 不显示竖线 */
+	/** 需要个别表格不显示竖线时调用 */
 	public void cancelVerticalLines() {
 		this.setShowVerticalLines(false);
 		JTableHeader header = this.getTableHeader();// 获取头部
 		header.setOpaque(false); // 设置头部为透明
-		header.setForeground(UIConfig.TABLE_HEADER_FORE_COLOR);	// 设置头部前景色
+		header.setForeground(UIConfig.TABLE_HEADER_FORE_COLOR);	
 		header.getTable().setOpaque(false);// 设置头部里面的表格透明
 		// 头部的表格也像前面的表格设置一样，还需要将里面的单元项设置为透明 因此同样需要对头部单元项进行透明度设置，这里还是用渲染器。
 		// 但这里有个问题就是，若将头部渲染器直接像上文一样设置，则它的下面没有横线 因此，我们需要一个专用的头部渲染器来手动画横线
@@ -130,7 +130,7 @@ public class BottomTable extends JTable {
 		this.setSelectionForeground(UIConfig.TABLE_SELECTIONFORE);	// 选择文本的前景色
 		this.setSelectionBackground(UIConfig.TABLE_SELECTIONBACK);
 		this.setBorder(null);
-		this.setRowHeight(rowHeight);	// 每一行的高
+		this.setRowHeight(ROW_HEIGHT);	// 每一行的高
 		this.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		this.setIntercellSpacing(new Dimension(0, 0));
 		// 将表格设置为透明，表格同样包括表格本身和其中的内容项 仅仅将表格本身设置为透明也没有用，应该将其中的内容项也设置为透明
@@ -154,7 +154,6 @@ public class BottomTable extends JTable {
 		// 头部实际上也是一个JTABLE，只有一行而已。
 		JTableHeader header = this.getTableHeader();// 获取头部
 		// header.setPreferredSize(new Dimension(30, rowHeight));
-		// header.setOpaque(false); // 设置头部为透明
 		header.setBackground(UIConfig.TABLE_HEADER_BACK_COLOR);	// 设置头部背景色
 		header.setForeground(UIConfig.TABLE_HEADER_FORE_COLOR);	// 设置头部前景色
 		// header.getTable().setOpaque(false);// 设置头部里面的表格透明

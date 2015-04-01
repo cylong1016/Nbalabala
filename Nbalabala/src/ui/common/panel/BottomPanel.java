@@ -11,8 +11,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 
 import ui.UIConfig;
-import ui.controller.MainController;
-import utility.Sleep;
 
 /**
  * 带有左边边框和底层的panel，其他具体功能panel的父类
@@ -33,14 +31,10 @@ public class BottomPanel extends Panel {
 
 	/** 画笔透明度 */
 	protected float hyaline = 1.0f;
-
-	/** 主控制器 */
-	MainController controller;
 	
-	public BottomPanel(MainController controller,String url) {
+	public BottomPanel(String url) {
 		bgImage = new ImageIcon(url).getImage();
-		this.controller = controller;
-		this.addLeftPanel(this,controller);
+		this.addLeftPanel(this);
 		this.addMouseMotionListener(new MouListener());
 		// new Opacity().start();
 	}
@@ -75,20 +69,19 @@ public class BottomPanel extends Panel {
 		}
 	}
 
-	private class Opacity extends Thread {
-
-		@Override
-		public void run() {
-			while(true) {
-				Sleep.sleep(10);
-				BottomPanel.this.addHyaline();
-				BottomPanel.this.repaint();
-				if (BottomPanel.this.hyaline == 1) {
-					break;
-				}
-			}
-		}
-	}
+//	private class Opacity extends Thread {
+//		@Override
+//		public void run() {
+//			while(true) {
+//				Sleep.sleep(10);
+//				BottomPanel.this.addHyaline();
+//				BottomPanel.this.repaint();
+//				if (BottomPanel.this.hyaline == 1) {
+//					break;
+//				}
+//			}
+//		}
+//	}
 
 	class MouListener extends MouseAdapter {
 
@@ -103,8 +96,8 @@ public class BottomPanel extends Panel {
 
 	}
 
-	public void addLeftPanel(BottomPanel panel,MainController controller) {
-		leftPanel = new LeftPanel(panel,controller);
+	public void addLeftPanel(BottomPanel panel) {
+		leftPanel = new LeftPanel(panel);
 		this.add(leftPanel);
 	}
 

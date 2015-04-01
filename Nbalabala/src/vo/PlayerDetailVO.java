@@ -3,8 +3,6 @@ package vo;
 import java.awt.Image;
 import java.util.ArrayList;
 
-import data.seasondata.PlayerSeasonRecord;
-
 /**
  * 球员信息详情，包括个人简况、赛季数据分析、所有比赛的数据、全身像
  * @author lsy
@@ -14,7 +12,7 @@ public class PlayerDetailVO {
 	
 	private PlayerProfileVO profile;
 	
-	private PlayerSeasonRecord seasonRecord;
+	private PlayerSeasonVO seasonRecord;
 	
 	private ArrayList<PlayerMatchPerformanceVO> matchRecords;
 	
@@ -22,7 +20,7 @@ public class PlayerDetailVO {
 	private Image action;
 	
 	public PlayerDetailVO(PlayerProfileVO profile,
-			PlayerSeasonRecord seasonRecord,
+			PlayerSeasonVO seasonRecord,
 			ArrayList<PlayerMatchPerformanceVO> matchRecords, Image action) {
 		super();
 		this.profile = profile;
@@ -36,7 +34,7 @@ public class PlayerDetailVO {
 	}
 
 	//总数据
-	public PlayerSeasonRecord getSeasonRecord() {
+	public PlayerSeasonVO getSeasonRecord() {
 		return seasonRecord;
 	}
 

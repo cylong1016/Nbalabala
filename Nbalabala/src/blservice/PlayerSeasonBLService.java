@@ -2,7 +2,7 @@ package blservice;
 
 import java.util.ArrayList;
 
-import data.seasondata.PlayerSeasonRecord;
+import vo.PlayerSeasonVO;
 import enums.PlayerAllSortBasis;
 import enums.PlayerAvgSortBasis;
 import enums.Position;
@@ -17,14 +17,14 @@ import enums.SortOrder;
 public interface PlayerSeasonBLService {
 
 	/** 刚进入界面时调用此方法获得按照字典顺序排序的全部球员数据 */
-	public ArrayList<PlayerSeasonRecord> getAllPlayersSortedByName();
+	public ArrayList<PlayerSeasonVO> getAllPlayersSortedByName();
 
 	/** 得到对当前总数据表重新排序后的表，参数是依据和顺序，AS为升序，DE为降序 */
-	public ArrayList<PlayerSeasonRecord> getResortedPlayersAllData(PlayerAllSortBasis basis, SortOrder order);
+	public ArrayList<PlayerSeasonVO> getResortedPlayersAllData(PlayerAllSortBasis basis, SortOrder order);
 
 	/** 得到对当前平均数据表重新排序后的表，参数是依据和顺序，AS为升序，DE为降序 */
-	public ArrayList<PlayerSeasonRecord> getResortedPlayersAvgData(PlayerAvgSortBasis basis, SortOrder order);
+	public ArrayList<PlayerSeasonVO> getResortedPlayersAvgData(PlayerAvgSortBasis basis, SortOrder order);
 
 	/** 根据球员位置、地区、筛选依据，返回含有前50个记录的表 */
-	public ArrayList<PlayerSeasonRecord> getScreenedPlayers(Position position, ScreenDivision division, ScreenBasis basis);
+	public ArrayList<PlayerSeasonVO> getScreenedPlayers(Position position, ScreenDivision division, ScreenBasis basis);
 }

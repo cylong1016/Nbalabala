@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 import ui.UIConfig;
 
 /**
- * 自己定义的滚动条，实现透明效果
+ * 自己定义的ScrollPane，实现透明效果
  * @author cylong
  * @version 2015年3月19日 下午7:46:47
  */
@@ -62,10 +62,9 @@ public class BottomScrollPane extends JScrollPane {
 		this.setOpaque(false);	// 将JScrollPane设置为透明
 		this.setColumnHeaderView(table.getTableHeader());	// 设置头部（HeaderView部分）
 		this.getColumnHeader().setOpaque(false);	// 再取出头部，并设置为透明
-		// this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER); // 滚动条
+		
 		// 设置滚轮可以滑动滚动条
 		this.addMouseWheelListener(new MouseWheelListener() {
-
 			@Override
 			public void mouseWheelMoved(MouseWheelEvent e) {
 				JScrollBar onlineFriendsBar = BottomScrollPane.this.getVerticalScrollBar();
@@ -82,12 +81,9 @@ public class BottomScrollPane extends JScrollPane {
 				}
 			}
 		});
-		
-
 	}
 	
 	public void cancelBgImage() {
 		bgImage = null;
 	}
-
 }

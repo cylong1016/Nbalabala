@@ -17,11 +17,9 @@ import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
 import utility.Constants;
-import bl.playerquerybl.PlayerQuery;
+import vo.PlayerSeasonVO;
 import bl.playerseasonbl.PlayerSeasonAnalysis;
-import blservice.PlayerQueryBLService;
 import blservice.PlayerSeasonBLService;
-import data.seasondata.PlayerSeasonRecord;
 import enums.PlayerAllSortBasis;
 import enums.PlayerAvgSortBasis;
 import enums.Position;
@@ -39,83 +37,80 @@ public class PlayerDataPanel extends BottomPanel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 1L;
+	
+	/** button的宽度 高度  */
+	private static final int WIDTH = 60, HEIGHT = 24, WIDTH_THREE = 75, WIDTH_LONG = 135;
+	/** 每行的button个数 */
+	private static final int POSITION_COUNT = 4, DIVISION_COUNT = 9, BASIS_COUNT = 15, 
+			TOTAL_AVG_COUNT = 2;
+	/** 分别代表第一行到第五行的纵坐标 */
+	private static final int Y1 = 27, Y2 = 66, Y3 = 107, Y4 = 138, Y5 = 171;
+	/** 代表所有列的前三个button的横坐标 */
+	private static final int X1 = 227, X2 = 288, X3 = 349;
+	/** “所有”的横坐标 */
+	private static final int ALL_X = 156;
+	/** 间隔 */
+	private static final int INTER = 61;
+	/** 东部 西部 太平洋 西北 西南 这些按钮的横坐标 */
+	private static final int EAST_X = 440, WEST_X = EAST_X + INTER, 
+			PACIFIC_X = WEST_X + WIDTH + EAST_X - X3 - WIDTH_THREE,
+			NORTH_WEST_X = PACIFIC_X + INTER + WIDTH_THREE - WIDTH, 
+			SOUTH_WEST_X = NORTH_WEST_X + INTER;
+	/** 得分/篮板/助攻 盖帽 抢断 犯规 失误 分钟  的横坐标*/
+	private static final int THREE_POINT_X = X3 + INTER, 
+			BLOCK_X = THREE_POINT_X + INTER + WIDTH_LONG - WIDTH, 
+			STEAL_X = BLOCK_X + INTER, FOUL_X = BLOCK_X + 2 * INTER, 
+			TURNOVER_X = BLOCK_X + 3 * INTER, MINUTE_X = BLOCK_X + 4 * INTER;
+	/** 罚球 两双 */
+	private static final int  FREETHROW_X = X3 + INTER, DOUBLE_DOUBLE_X = FREETHROW_X + INTER;
+	/** 总计 平均 */
+	private static final int TOTAL_X = 756, AVERAGE_X = 823;
+
+	/** 所有button横坐标集合 */
+	private static final int[] POSITION_SELECT_X = new int[] { ALL_X, X1, X2, X3 };
+	private static final int[] DIVISION_SELECT_X = new int[] { ALL_X, X1, X2, X3, EAST_X, 
+		WEST_X, PACIFIC_X, NORTH_WEST_X, SOUTH_WEST_X };
+	private static final int[] BASIS_SELECT_X = new int[] { ALL_X, X1, X2, X3, THREE_POINT_X, 
+		BLOCK_X, STEAL_X, FOUL_X, TURNOVER_X, MINUTE_X, X1,X2, X3, FREETHROW_X, DOUBLE_DOUBLE_X };
+	private static final int[] TOTAL_AVG_X = new int[] { TOTAL_X, AVERAGE_X };
+
+	/** 所有button上文字部分横坐标集合 */
+	private static final String[] POSITION_SELECT_TEXT = new String[] { "所有", "前锋", "中锋", "后卫" };
+	private static final String[] DIVISION_SELECT_TEXT = new String[] { "所有", "东南", "中央", 
+		"大西洋", "东部", "西部", "太平洋", "西北", "西南" };
+	private static final String[] BASIS_SELECT_TEXT = new String[] { "所有", "得分", "篮板", "助攻", 
+		"得分/篮板/助攻", "盖帽", "抢断", "犯规", "失误", "分钟","效率", "投篮", "三分", "罚球", "两双", "总计" };
+	private static final String[] TOTAL_AVG_TEXT = new String[] { "总计", "平均" };
+	/** 将枚举类型赋值为数组 */
+	private static final Position[] POSITION_ARRAY = Position.values();
+	private static final ScreenDivision[] DIVISION_ARRAY = ScreenDivision.values();
+	private static final ScreenBasis[] BASIS_ARRAY = ScreenBasis.values();
 
 	/** 球员数据表格 */
 	private BottomTable playerDataTable;
 	/** 放表格的滚动条 */
 	private BottomScrollPane scroll;
-
 	/** 代表所有button集合 */
-	private Line_1_Button[] buttonLine1;
-	private Line_2_Button[] buttonLine2;
-	private Line_3_Button[] buttonLine3;
-	private Line_4_Button[] buttonLine4;
-	private TextButton[] button;
-
-	/** button的宽度 高度 */
-	private int width = 60, height = 24, widthThree = 75, widthLong = 135;
-	/** 每行的button个数 */
-	private int sum1 = 4, sum2 = 9, sum3 = 15, sum4 = 2;
-	/** 分别代表第一行到第五行的纵坐标 */
-	private int y1 = 27, y2 = 66, y3 = 107, y4 = 138, y5 = 171;
-	/** 代表所有列的前三个button的横坐标 */
-	private int x1 = 227, x2 = 288, x3 = 349;
-	/** “所有”的横坐标 */
-	private int allX = 156;
-	/** 间隔 */
-	private int inter = 61;
-	/** 东部 西部 太平洋 西北 西南 */
-	private int east = 440, west = east + inter, pacific = west + width + east - x3 - widthThree,
-			northWest = pacific + inter + widthThree - width, southWest = northWest + inter;
-	/** 得分/篮板/助攻 盖帽 抢断 犯规 失误 分钟 */
-	private int three = x3 + inter, block = three + inter + widthLong - width, steal = block + inter, foul = block
-			+ 2 * inter, turnover = block + 3 * inter, minute = block + 4 * inter;
-	/** 罚球 两双 */
-	private int freeThrow = x3 + inter, double_double = freeThrow + inter;
-	/** 总计 平均 */
-	private int total = 756, average = 823;
-
-	/** 所有button横坐标集合 */
-	private int[] buttonXLine1 = new int[] { allX, x1, x2, x3 };
-	private int[] buttonXLine2 = new int[] { allX, x1, x2, x3, east, west, pacific, northWest, southWest };
-	private int[] buttonXLine3 = new int[] { allX, x1, x2, x3, three, block, steal, foul, turnover, minute, x1,
-			x2, x3, freeThrow, double_double };
-	private int[] buttonXLine4 = new int[] { total, average };
-
-	/** 所有button上文字部分横坐标集合 */
-	private String[] textLine1 = new String[] { "所有", "前锋", "中锋", "后卫" };
-	private String[] textLine2 = new String[] { "所有", "东南", "中央", "大西洋", "东部", "西部", "太平洋", "西北", "西南" };
-	private String[] textLine3 = new String[] { "所有", "得分", "篮板", "助攻", "得分/篮板/助攻", "盖帽", "抢断", "犯规", "失误", "分钟",
-			"效率", "投篮", "三分", "罚球", "两双", "总计" };
-	private String[] textLine4 = new String[] { "总计", "平均" };
-
+	private PlayerPositionSelectButton[] positionSelectButtons;
+	private PlayerDivisionSelectButton[] divisionSelectButtons;
+	private PlayerScreenSelectButton[] screenSelectButtons;
+	private PlayerTotalAvgButton[] totalAvgButtons;
 	/** 查询按钮 */
 	private ImgButton findButton;
 	
-	PlayerQueryBLService playerInfo = new PlayerQuery();
-
-	/** 将枚举类型赋值为数组 */
-	Position[] pArray = Position.values();
-	ScreenDivision[] dArray = ScreenDivision.values();
-	ScreenBasis[] bArray = ScreenBasis.values();
-
-	MainController controller;
-	
 	/** 通过接口调用方法 */
-	PlayerSeasonBLService playerSeason = new PlayerSeasonAnalysis();
+	private PlayerSeasonBLService playerSeason = new PlayerSeasonAnalysis();
 
-	public PlayerDataPanel(MainController controller, String url) {
-		super(controller, url);
-		this.controller = controller;
+	public PlayerDataPanel(String url) {
+		super(url);
 		setButton();
 		addButton();
-		setEffect(button);
 
 		iniSet();
 		addListener();
 		addFindButton();
 		// 初始化界面的表格
-		ArrayList<PlayerSeasonRecord> iniArray = playerSeason.getAllPlayersSortedByName();
+		ArrayList<PlayerSeasonVO> iniArray = playerSeason.getAllPlayersSortedByName();
 		createTable(iniArray);
 	}
 
@@ -126,11 +121,11 @@ public class PlayerDataPanel extends BottomPanel {
 		findButton.addMouseListener(new MouseAdapter() {
 
 			public void mousePressed(MouseEvent e) {
-				ArrayList<PlayerSeasonRecord> playerRecords = playerSeason.getScreenedPlayers(
-						Line_1_Button.current.p, Line_2_Button.current.division, Line_3_Button.current.basis);
-				if (Line_4_Button.current == buttonLine4[0]) {
+				ArrayList<PlayerSeasonVO> playerRecords = playerSeason.getScreenedPlayers(
+						PlayerPositionSelectButton.current.position, PlayerDivisionSelectButton.current.division, PlayerScreenSelectButton.current.basis);
+				if (PlayerTotalAvgButton.current == totalAvgButtons[0]) {
 					createTable(playerRecords); // 添加球员总数居
-				} else if (Line_4_Button.current == buttonLine4[1]) {
+				} else if (PlayerTotalAvgButton.current == totalAvgButtons[1]) {
 					createTable(playerRecords); // 添加球员场均数居
 				}
 			}
@@ -144,10 +139,14 @@ public class PlayerDataPanel extends BottomPanel {
 	 * @version 2015年3月19日 下午8:44:58
 	 */
 	public void iniSet() {
-		Line_1_Button.current = (Line_1_Button) button[0];
-		Line_2_Button.current = (Line_2_Button) button[1];
-		Line_3_Button.current = (Line_3_Button) button[2];
-		Line_4_Button.current = (Line_4_Button) button[3];
+		PlayerPositionSelectButton.current = positionSelectButtons[0];
+		PlayerDivisionSelectButton.current = divisionSelectButtons[0];
+		PlayerScreenSelectButton.current = screenSelectButtons[0];
+		PlayerTotalAvgButton.current = totalAvgButtons[0];
+		setEffect(PlayerPositionSelectButton.current);
+		setEffect(PlayerDivisionSelectButton.current);
+		setEffect(PlayerScreenSelectButton.current);
+		setEffect(PlayerTotalAvgButton.current);
 	}
 
 	/**
@@ -157,38 +156,44 @@ public class PlayerDataPanel extends BottomPanel {
 	 * @version 2015年3月19日 下午9:00:34
 	 */
 	public void setButton() {
-		buttonLine1 = new Line_1_Button[sum1];
-		buttonLine2 = new Line_2_Button[sum2];
-		buttonLine3 = new Line_3_Button[sum3];
-		buttonLine4 = new Line_4_Button[sum4];
-		for (int i = 0; i < sum1; i++) {
-			buttonLine1[i] = new Line_1_Button(buttonXLine1[i], y1, width, height, textLine1[i]);
-			buttonLine1[i].p = pArray[i];
+		positionSelectButtons = new PlayerPositionSelectButton[POSITION_COUNT];
+		divisionSelectButtons = new PlayerDivisionSelectButton[DIVISION_COUNT];
+		screenSelectButtons = new PlayerScreenSelectButton[BASIS_COUNT];
+		totalAvgButtons = new PlayerTotalAvgButton[TOTAL_AVG_COUNT];
+		for (int i = 0; i < POSITION_COUNT; i++) {
+			positionSelectButtons[i] = new PlayerPositionSelectButton(POSITION_SELECT_X[i], 
+					Y1, WIDTH, HEIGHT, POSITION_SELECT_TEXT[i]);
+			positionSelectButtons[i].position = POSITION_ARRAY[i];
 		}
-		for (int i = 0; i < sum2; i++) {
+		for (int i = 0; i < DIVISION_COUNT; i++) {
 			if (i == 3 || i == 6) {
-				buttonLine2[i] = new Line_2_Button(buttonXLine2[i], y2, widthThree, height, textLine2[i]);
+				divisionSelectButtons[i] = new PlayerDivisionSelectButton(DIVISION_SELECT_X[i],
+						Y2, WIDTH_THREE, HEIGHT, DIVISION_SELECT_TEXT[i]);
 			} else {
-				buttonLine2[i] = new Line_2_Button(buttonXLine2[i], y2, width, height, textLine2[i]);
+				divisionSelectButtons[i] = new PlayerDivisionSelectButton(DIVISION_SELECT_X[i],
+						Y2, WIDTH, HEIGHT, DIVISION_SELECT_TEXT[i]);
 			}
-			buttonLine2[i].division = dArray[i];
+			divisionSelectButtons[i].division = DIVISION_ARRAY[i];
 		}
 		for (int i = 0; i < 10; i++) {
 			if (i == 4) {
-				buttonLine3[i] = new Line_3_Button(buttonXLine3[i], y3, widthLong, height, textLine3[i]);
+				screenSelectButtons[i] = new PlayerScreenSelectButton(BASIS_SELECT_X[i], Y3, 
+						WIDTH_LONG, HEIGHT, BASIS_SELECT_TEXT[i]);
 			} else {
-				buttonLine3[i] = new Line_3_Button(buttonXLine3[i], y3, width, height, textLine3[i]);
+				screenSelectButtons[i] = new PlayerScreenSelectButton(BASIS_SELECT_X[i], Y3, 
+						WIDTH, HEIGHT, BASIS_SELECT_TEXT[i]);
 			}
-			buttonLine3[i].basis = bArray[i];
+			screenSelectButtons[i].basis = BASIS_ARRAY[i];
 		}
-		for (int i = 10; i < sum3; i++) {
-			buttonLine3[i] = new Line_3_Button(buttonXLine3[i], y4, width, height, textLine3[i]);
-			buttonLine3[i].basis = bArray[i];
+		for (int i = 10; i < BASIS_COUNT; i++) {
+			screenSelectButtons[i] = new PlayerScreenSelectButton(BASIS_SELECT_X[i], Y4, WIDTH,
+					HEIGHT, BASIS_SELECT_TEXT[i]);
+			screenSelectButtons[i].basis = BASIS_ARRAY[i];
 		}
-		for (int i = 0; i < sum4; i++) {
-			buttonLine4[i] = new Line_4_Button(buttonXLine4[i], y5, width, height, textLine4[i]);
+		for (int i = 0; i < TOTAL_AVG_COUNT; i++) {
+			totalAvgButtons[i] = new PlayerTotalAvgButton(TOTAL_AVG_X[i], Y5, WIDTH, HEIGHT, 
+					TOTAL_AVG_TEXT[i]);
 		}
-		button = new TextButton[] { buttonLine1[0], buttonLine2[0], buttonLine3[0], buttonLine4[0] };
 	}
 
 	/**
@@ -198,17 +203,17 @@ public class PlayerDataPanel extends BottomPanel {
 	 * @version 2015年3月19日 下午9:00:47
 	 */
 	public void addButton() {
-		for (int i = 0; i < sum1; i++) {
-			this.add(buttonLine1[i]);
+		for (int i = 0; i < POSITION_COUNT; i++) {
+			this.add(positionSelectButtons[i]);
 		}
-		for (int i = 0; i < sum2; i++) {
-			this.add(buttonLine2[i]);
+		for (int i = 0; i < DIVISION_COUNT; i++) {
+			this.add(divisionSelectButtons[i]);
 		}
-		for (int i = 0; i < sum3; i++) {
-			this.add(buttonLine3[i]);
+		for (int i = 0; i < BASIS_COUNT; i++) {
+			this.add(screenSelectButtons[i]);
 		}
-		for (int i = 0; i < sum4; i++) {
-			this.add(buttonLine4[i]);
+		for (int i = 0; i < TOTAL_AVG_COUNT; i++) {
+			this.add(totalAvgButtons[i]);
 		}
 	}
 
@@ -218,12 +223,10 @@ public class PlayerDataPanel extends BottomPanel {
 	 * @author lsy
 	 * @version 2015年3月18日 下午11:43:53
 	 */
-	public void setEffect(TextButton[] button) {
-		for (int i = 0; i < button.length; i++) {
-			button[i].setOpaque(true);
-			button[i].setBackground(new Color(15, 24, 44));
-			button[i].setForeground(Color.white);
-		}
+	public void setEffect(TextButton button) {
+		button.setOpaque(true);
+		button.setBackground(new Color(15, 24, 44));
+		button.setForeground(Color.white);
 	}
 
 	/**
@@ -233,70 +236,70 @@ public class PlayerDataPanel extends BottomPanel {
 	 * @version 2015年3月19日 下午9:00:59
 	 */
 	public void addListener() {
-		MouListener1 mou1 = new MouListener1();
-		MouListener2 mou2 = new MouListener2();
-		MouListener3 mou3 = new MouListener3();
-		MouListener4 mou4 = new MouListener4();
-		for (int i = 0; i < sum1; i++) {
-			buttonLine1[i].addMouseListener(mou1);
+		PositionListener positionListener = new PositionListener();
+		DivisionListener divisionListener = new DivisionListener();
+		BasisListener basisListener = new BasisListener();
+		TotalAvgListener totalAvgListener = new TotalAvgListener();
+		for (int i = 0; i < POSITION_COUNT; i++) {
+			positionSelectButtons[i].addMouseListener(positionListener);
 		}
-		for (int i = 0; i < sum2; i++) {
-			buttonLine2[i].addMouseListener(mou2);
+		for (int i = 0; i < DIVISION_COUNT; i++) {
+			divisionSelectButtons[i].addMouseListener(divisionListener);
 		}
-		for (int i = 0; i < sum3; i++) {
-			buttonLine3[i].addMouseListener(mou3);
+		for (int i = 0; i < BASIS_COUNT; i++) {
+			screenSelectButtons[i].addMouseListener(basisListener);
 		}
-		for (int i = 0; i < sum4; i++) {
-			buttonLine4[i].addMouseListener(mou4);
-		}
-	}
-
-	class MouListener1 extends MouseAdapter {
-
-		public void mousePressed(MouseEvent e) {
-			if (e.getSource() == Line_1_Button.current) {
-				return;
-			}
-			Line_1_Button.current.back();
-			Line_1_Button.current = (Line_1_Button) e.getSource();
+		for (int i = 0; i < TOTAL_AVG_COUNT; i++) {
+			totalAvgButtons[i].addMouseListener(totalAvgListener);
 		}
 	}
 
-	class MouListener2 extends MouseAdapter {
+	class PositionListener extends MouseAdapter {
 
 		public void mousePressed(MouseEvent e) {
-			if (e.getSource() == Line_2_Button.current) {
+			if (e.getSource() == PlayerPositionSelectButton.current) {
 				return;
 			}
-			Line_2_Button.current.back();
-			Line_2_Button.current = (Line_2_Button) e.getSource();
+			PlayerPositionSelectButton.current.back();
+			PlayerPositionSelectButton.current = (PlayerPositionSelectButton) e.getSource();
 		}
 	}
 
-	class MouListener3 extends MouseAdapter {
+	class DivisionListener extends MouseAdapter {
 
 		public void mousePressed(MouseEvent e) {
-			if (e.getSource() == Line_3_Button.current) {
+			if (e.getSource() == PlayerDivisionSelectButton.current) {
 				return;
 			}
-			Line_3_Button.current.back();
-			Line_3_Button.current = (Line_3_Button) e.getSource();
+			PlayerDivisionSelectButton.current.back();
+			PlayerDivisionSelectButton.current = (PlayerDivisionSelectButton) e.getSource();
 		}
 	}
 
-	class MouListener4 extends MouseAdapter {
+	class BasisListener extends MouseAdapter {
 
 		public void mousePressed(MouseEvent e) {
-			if (e.getSource() == Line_4_Button.current) {
+			if (e.getSource() == PlayerScreenSelectButton.current) {
 				return;
 			}
-			Line_4_Button.current.back();
-			Line_4_Button.current = (Line_4_Button) e.getSource();
-			ArrayList<PlayerSeasonRecord> playerRecords = playerSeason.getScreenedPlayers(Line_1_Button.current.p,
-					Line_2_Button.current.division, Line_3_Button.current.basis);
-			if (Line_4_Button.current == buttonLine4[0]) {
+			PlayerScreenSelectButton.current.back();
+			PlayerScreenSelectButton.current = (PlayerScreenSelectButton) e.getSource();
+		}
+	}
+
+	class TotalAvgListener extends MouseAdapter {
+
+		public void mousePressed(MouseEvent e) {
+			if (e.getSource() == PlayerTotalAvgButton.current) {
+				return;
+			}
+			PlayerTotalAvgButton.current.back();
+			PlayerTotalAvgButton.current = (PlayerTotalAvgButton) e.getSource();
+			ArrayList<PlayerSeasonVO> playerRecords = playerSeason.getScreenedPlayers(PlayerPositionSelectButton.current.position,
+					PlayerDivisionSelectButton.current.division, PlayerScreenSelectButton.current.basis);
+			if (PlayerTotalAvgButton.current == totalAvgButtons[0]) {
 				updateTotalPlayerDataTable(playerRecords); // 添加球员总数居
-			} else if (Line_4_Button.current == buttonLine4[1]) {
+			} else if (PlayerTotalAvgButton.current == totalAvgButtons[1]) {
 				updateAvgPlayerDataTable(playerRecords); // 添加球员场均数居
 			}
 		}
@@ -310,9 +313,9 @@ public class PlayerDataPanel extends BottomPanel {
 	 * @author cylong
 	 * @version 2015年3月24日 下午11:43:17
 	 */
-	private void updateTotalPlayerDataTable(ArrayList<PlayerSeasonRecord> playerArr) {
+	private void updateTotalPlayerDataTable(ArrayList<PlayerSeasonVO> playerArr) {
 		for (int i = 0; i < playerArr.size(); i++) {
-			PlayerSeasonRecord playerSeason = playerArr.get(i);
+			PlayerSeasonVO playerSeason = playerArr.get(i);
 			playerDataTable.setValueAt(Integer.toString(i + 1), i, 0);
 			playerDataTable.setValueAt(playerSeason.getName(), i, 1);
 			playerDataTable.setValueAt(Constants.translateTeamAbbr(playerSeason.getTeam()), i, 2);
@@ -356,7 +359,7 @@ public class PlayerDataPanel extends BottomPanel {
 		
 	}
 
-	public void addListener(final BottomTable table,final ArrayList<PlayerSeasonRecord> playerArr) {
+	public void addListener(final BottomTable table,final ArrayList<PlayerSeasonVO> playerArr) {
 		try {
 			table.addMouseListener(new UserMouseAdapter() {
 
@@ -365,8 +368,8 @@ public class PlayerDataPanel extends BottomPanel {
 						return;
 					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
 					if (rowI > -1) {
-						controller.toPlayerInfoPanel(PlayerDataPanel.this, playerInfo.getPlayerDetailByName(playerArr.get(rowI).getName()).getProfile(), 
-								PlayerDataPanel.this);
+						MainController.toPlayerInfoPanel(PlayerDataPanel.this, 
+								playerArr.get(rowI).getName(), PlayerDataPanel.this);
 					}
 
 				}
@@ -384,9 +387,9 @@ public class PlayerDataPanel extends BottomPanel {
 	 * @author cylong
 	 * @version 2015年3月25日 上午2:02:02
 	 */
-	private void updateAvgPlayerDataTable(ArrayList<PlayerSeasonRecord> playerArr) {
+	private void updateAvgPlayerDataTable(ArrayList<PlayerSeasonVO> playerArr) {
 		for (int i = 0; i < playerArr.size(); i++) {
-			PlayerSeasonRecord playerSeason = playerArr.get(i);
+			PlayerSeasonVO playerSeason = playerArr.get(i);
 			playerDataTable.setValueAt(Integer.toString(i + 1), i, 0);
 			playerDataTable.setValueAt(playerSeason.getName(), i, 1);
 			playerDataTable.setValueAt(Constants.translateTeamAbbr(playerSeason.getTeam()), i, 2);
@@ -442,7 +445,7 @@ public class PlayerDataPanel extends BottomPanel {
 	 * @author cylong
 	 * @version 2015年3月29日 下午3:59:35
 	 */
-	private void createTable(ArrayList<PlayerSeasonRecord> playerRecords) {
+	private void createTable(ArrayList<PlayerSeasonVO> playerRecords) {
 		String[][] rowData = new String[playerRecords.size()][Constants.PLAYER_SEASON_HEADERS.length];
 		playerDataTable = new BottomTable(rowData, Constants.PLAYER_SEASON_HEADERS);
 		playerDataTable.getColumnModel().getColumn(26).setPreferredWidth(95);
@@ -450,9 +453,9 @@ public class PlayerDataPanel extends BottomPanel {
 		TableColumn nameColom = playerDataTable.getColumnModel().getColumn(1); // 球员名称那列
 		nameColom.setPreferredWidth(150); // 防止球员名称显示不出来
 
-		if (Line_4_Button.current == buttonLine4[0]) {
+		if (PlayerTotalAvgButton.current == totalAvgButtons[0]) {
 			updateTotalPlayerDataTable(playerRecords); // 添加球员总数居
-		} else if (Line_4_Button.current == buttonLine4[1]) {
+		} else if (PlayerTotalAvgButton.current == totalAvgButtons[1]) {
 			updateAvgPlayerDataTable(playerRecords); // 添加球员场均数居
 		}
 
@@ -480,14 +483,14 @@ public class PlayerDataPanel extends BottomPanel {
 					sort = SortOrder.DE;
 				}
 
-				if (Line_4_Button.current == buttonLine4[0]) {
+				if (PlayerTotalAvgButton.current == totalAvgButtons[0]) {
 					PlayerAllSortBasis[] basis = PlayerAllSortBasis.values();
-					ArrayList<PlayerSeasonRecord> seasonArray = playerSeason.getResortedPlayersAllData(
+					ArrayList<PlayerSeasonVO> seasonArray = playerSeason.getResortedPlayersAllData(
 							basis[index - 1], sort);
 					updateTotalPlayerDataTable(seasonArray); // 重排球员总数居
-				} else if (Line_4_Button.current == buttonLine4[1]) {
+				} else if (PlayerTotalAvgButton.current == totalAvgButtons[1]) {
 					PlayerAvgSortBasis[] basis = PlayerAvgSortBasis.values();
-					ArrayList<PlayerSeasonRecord> seasonArray = playerSeason.getResortedPlayersAvgData(
+					ArrayList<PlayerSeasonVO> seasonArray = playerSeason.getResortedPlayersAvgData(
 							basis[index - 1], sort);
 					updateAvgPlayerDataTable(seasonArray); // 重排球员平均数据
 				}

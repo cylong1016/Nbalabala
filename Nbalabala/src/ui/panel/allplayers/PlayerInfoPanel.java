@@ -5,9 +5,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
 import ui.UIConfig;
@@ -23,9 +21,9 @@ import ui.panel.gamedata.GameDetailButton;
 import utility.Constants;
 import vo.PlayerDetailVO;
 import vo.PlayerProfileVO;
+import vo.PlayerSeasonVO;
 import bl.playerquerybl.PlayerQuery;
 import blservice.PlayerQueryBLService;
-import data.seasondata.PlayerSeasonRecord;
 
 /**
  * 具体球员信息界面
@@ -36,55 +34,70 @@ public class PlayerInfoPanel extends BottomPanel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 2506795997614982399L;
-	int totalX = 676, gameX = 765, y = 190, totalWidth = 63, gameWidth = 83, height = 25;
-	TextButton total, game;
-	PlayerProfileVO vo;
-	MainController controller;
-	Image headPicture, totalPicture;
-	PlayerQueryBLService playerQuery;
-	PlayerDetailVO detailVO;
-	ImgButton back;
-	String url = UIConfig.IMG_PATH + "players/";
-	BottomPanel allPlayers;
-	MyLabel lbName, lbTeam, lbNumber, lbPosition, lbBirth, lbHeight, lbWeight, lbAge, lbexp, lbschool;
-	MyLabel profileLabel[] = new MyLabel[10];
-	int lbX = 350, lbY = 40, interX = 220, interY = 30, width = 200, lbHgt = 35;
-	String[] lbstr;
+	protected static final int TOTAL_X = 676, GAME_X = 765, GAME_Y = 190, 
+			TOTAL_WIDTH = 63, GAME_WIDTH = 83, HEIGHT = 25;
+	private static final String IMG_URL = UIConfig.IMG_PATH + "players/";
+	private static final String BACK_BUTTON_OFF = IMG_URL + "back.png";
+	private static final String BACK_BUTTON_ON = IMG_URL + "back.png";
+	private static final String BACK_BUTTON_CLICK = IMG_URL + "back.png";
+	private static final int LABEL_X = 350, LABEL_Y = 40, INTER_X = 220, INTER_Y = 30, 
+			LABEL_WIDTH = 200, LABEL_HEIGHT = 35;
+	private static final String [] COLUMN_NAMES = new String[]{"", "参赛场数", "先发场数", "在场时间", "投篮命中数", "投篮出手数", "投篮命中率", "三分命中数", "三分出手数", "三分命中率",
+		"罚球命中数", "罚球出手数", "罚球命中率", "进攻篮板", "防守篮板", "总篮板", "助攻数", "抢断数", "盖帽数", "失误数",
+		"犯规数", "得分", "两双", "得分/篮板/助攻", "效率", "GmSc 效率值", "真实命中率", "投篮效率", "进攻篮板率", "防守篮板率",
+		"篮板率", "助攻率", "抢断率", "盖帽率", "失误率", "使用率"};
+	
+	protected TextButton totalButton, gameButton;
+	protected String name;
+	protected PlayerProfileVO profileVO;
+	private Image portraitImg;
+	private PlayerQueryBLService playerQuery;
+	protected PlayerDetailVO detailVO;
+	private ImgButton backButton;
+	
+	protected BottomPanel lastPanel;
+	private MyLabel profileLabel[] = new MyLabel[10];
+	private String[] labelStr;
+	
+	protected BottomScrollPane scroll;
+	protected BottomTable table;
 
-	public PlayerInfoPanel(MainController controller, String url, PlayerProfileVO vo, BottomPanel allPlayers) {
-		super(controller, url);
-		this.vo = vo;
-		this.controller = controller;
-		this.allPlayers =  allPlayers;
+	public PlayerInfoPanel(String url, String name, BottomPanel lastPanel) {
+		super(url);
 		playerQuery = new PlayerQuery();
-		detailVO = playerQuery.getPlayerDetailByName(vo.getName());
-		lbstr = new String[]{"姓名: " + vo.getName(), "球队: " + Constants.translateTeamAbbr(vo.getTeam()), "号码: " + vo.getNumber(),
-								"位置: " + vo.getPosition(), "年龄: " + vo.getAge(), "球龄: " + vo.getExp(),
-								"生日: " + vo.getBirth(), "身高: " + vo.getHeight(), "体重: " + vo.getWeight(),
-								"毕业学校: " + vo.getSchool()};
+		this.name = name;
+		this.detailVO = playerQuery.getPlayerDetailByName(name);
+		this.profileVO = detailVO.getProfile();
+		this.lastPanel =  lastPanel;
+		
+		detailVO = playerQuery.getPlayerDetailByName(profileVO.getName());
+		labelStr = new String[]{"姓名: " + profileVO.getName(), "球队: " + Constants.translateTeamAbbr(profileVO.getTeam()), "号码: " + profileVO.getNumber(),
+								"位置: " + profileVO.getPosition(), "年龄: " + profileVO.getAge(), "球龄: " + profileVO.getExp(),
+								"生日: " + profileVO.getBirth(), "身高: " + profileVO.getHeight(), "体重: " + profileVO.getWeight(),
+								"毕业学校: " + profileVO.getSchool()};
 		addButton();
 		setTable();
-		addHead();
-		addPicture();
-		addBack();
+		addPortrait();
+		addActionImg();
+		addBackButton();
 		addLabel();
 	}
 
-	public void addLabel() {
+	private void addLabel() {
 		for(int i = 0; i < 3; i++) {
-			profileLabel[i] = new MyLabel(lbX + i * interX, lbY, width, lbHgt, lbstr[i]);
+			profileLabel[i] = new MyLabel(LABEL_X + i * INTER_X, LABEL_Y, LABEL_WIDTH, LABEL_HEIGHT, labelStr[i]);
 		}
 		for(int i = 3; i < 6; i++) {
-			profileLabel[i] = new MyLabel(lbX + (i - 3) * interX, lbY + interY, width, lbHgt, lbstr[i]);
+			profileLabel[i] = new MyLabel(LABEL_X + (i - 3) * INTER_X, LABEL_Y + INTER_Y, LABEL_WIDTH, LABEL_HEIGHT, labelStr[i]);
 		}
 		for(int i = 6; i < 8; i++) {
-			profileLabel[i] = new MyLabel(lbX + (i - 6) * interX, lbY + 2 * interY, width, lbHgt, lbstr[i]);
+			profileLabel[i] = new MyLabel(LABEL_X + (i - 6) * INTER_X, LABEL_Y + 2 * INTER_Y, LABEL_WIDTH, LABEL_HEIGHT, labelStr[i]);
 		}
 		for(int i = 8; i < 9; i++) {
-			profileLabel[i] = new MyLabel(lbX + (i - 8) * interX, lbY + 3 * interY, width, lbHgt, lbstr[i]);
+			profileLabel[i] = new MyLabel(LABEL_X + (i - 8) * INTER_X, LABEL_Y + 3 * INTER_Y, LABEL_WIDTH, LABEL_HEIGHT, labelStr[i]);
 		}
 		for (int i = 9; i < 10; i++) {
-			profileLabel[i] = new MyLabel(lbX + (i - 8) * interX, lbY + 3 * interY, width+150, lbHgt, lbstr[i]);
+			profileLabel[i] = new MyLabel(LABEL_X + (i - 8) * INTER_X, LABEL_Y + 3 * INTER_Y, LABEL_WIDTH+150, LABEL_HEIGHT, labelStr[i]);
 		}
 		for(int i = 0; i < 10; i++) {
 			profileLabel[i].setHorizontalAlignment(SwingConstants.LEFT);
@@ -97,15 +110,14 @@ public class PlayerInfoPanel extends BottomPanel {
 	 * @author lsy
 	 * @version 2015年3月24日 下午4:20:16
 	 */
-	public void addBack() {
-		back = new ImgButton(url + "back.png", 50, 50, url + "back.png", url + "back.png");
-		this.add(back);
-		back.addMouseListener(new MouseAdapter() {
+	private void addBackButton() {
+		backButton = new ImgButton(BACK_BUTTON_OFF, 50, 50, BACK_BUTTON_ON, BACK_BUTTON_CLICK);
+		this.add(backButton);
+		backButton.addMouseListener(new MouseAdapter() {
 
 			public void mousePressed(MouseEvent e) {
-				controller.backToOnePanel(PlayerInfoPanel.this, allPlayers);
+				MainController.backToOnePanel(PlayerInfoPanel.this, lastPanel);
 			}
-
 		});
 	}
 
@@ -114,9 +126,9 @@ public class PlayerInfoPanel extends BottomPanel {
 	 * @author lsy
 	 * @version 2015年3月24日 上午11:17:35
 	 */
-	public void addHead() {
-		headPicture = vo.getPortrait();
-		ImgLabel label = new ImgLabel(136, -10, 200, 160, headPicture);
+	private void addPortrait() {
+		portraitImg = profileVO.getPortrait();
+		ImgLabel label = new ImgLabel(136, -10, 200, 160, portraitImg);
 		this.add(label);
 	}
 
@@ -125,7 +137,7 @@ public class PlayerInfoPanel extends BottomPanel {
 	 * @author lsy
 	 * @version 2015年3月24日 上午11:17:42
 	 */
-	public void addPicture() {
+	public void addActionImg() {
 		ActionPhotoPanel actionPhotoPanel = new ActionPhotoPanel(detailVO.getAction());
 		actionPhotoPanel.setOpaque(true);
 		actionPhotoPanel.setBounds(885,6, 1000, 1000);
@@ -133,41 +145,30 @@ public class PlayerInfoPanel extends BottomPanel {
 	}
 	
 	public void addButton() {
-		total = new GameDetailButton(totalX, y, totalWidth, height, "总数据");
-		total.setOpaque(true);
-		total.setBackground(UIConfig.BUTTON_COLOR);
-		total.setForeground(Color.white);
-		game = new GameDetailButton(gameX, y, gameWidth, height, "比赛数据");
-		this.add(total);
-		this.add(game);
-		total.addMouseListener(new MouseAdapter() {
+		totalButton = new GameDetailButton(TOTAL_X, GAME_Y, TOTAL_WIDTH, HEIGHT, "总数据");
+		totalButton.setOpaque(true);
+		totalButton.setBackground(UIConfig.BUTTON_COLOR);
+		totalButton.setForeground(Color.white);
+		gameButton = new GameDetailButton(GAME_X, GAME_Y, GAME_WIDTH, HEIGHT, "比赛数据");
+		this.add(totalButton);
+		this.add(gameButton);
+		totalButton.addMouseListener(new MouseAdapter() {
 
 			public void mousePressed(MouseEvent e) {
 			}
 		});
-		game.addMouseListener(new MouseAdapter() {
+		gameButton.addMouseListener(new MouseAdapter() {
 
 			public void mousePressed(MouseEvent e) {
-				controller.toPlayerSeasonInfoPanel(PlayerInfoPanel.this, vo, allPlayers);
+				MainController.toPlayerSeasonInfoPanel(PlayerInfoPanel.this, profileVO.getName(), lastPanel);
 			}
 		});
 	}
 
-	protected String[] columns;
-	protected String[][] rowData;
-	protected BottomScrollPane scroll;
-	protected ImageIcon icon;
-	protected ArrayList<Image> imgArr = new ArrayList<Image>();
-	protected BottomTable table;
-	protected DecimalFormat df = UIConfig.format;
-
 	public void setTable() {
-		columns = new String[]{"", "参赛场数", "先发场数", "在场时间", "投篮命中数", "投篮出手数", "投篮命中率", "三分命中数", "三分出手数", "三分命中率",
-									"罚球命中数", "罚球出手数", "罚球命中率", "进攻篮板", "防守篮板", "总篮板", "助攻数", "抢断数", "盖帽数", "失误数",
-									"犯规数", "得分", "两双", "得分/篮板/助攻", "效率", "GmSc 效率值", "真实命中率", "投篮效率", "进攻篮板率", "防守篮板率",
-									"篮板率", "助攻率", "抢断率", "盖帽率", "失误率", "使用率"};
-		PlayerSeasonRecord playerSeason = detailVO.getSeasonRecord();
-		rowData = new String[2][columns.length];
+		PlayerSeasonVO playerSeason = detailVO.getSeasonRecord();
+		String [][] rowData = new String[2][COLUMN_NAMES.length];
+		DecimalFormat df = UIConfig.format;
 		rowData[0][0] = "总数据";
 		rowData[1][0] = "平均数据";
 		rowData[0][1] = String.valueOf(playerSeason.getMatchCount());
@@ -239,7 +240,7 @@ public class PlayerInfoPanel extends BottomPanel {
 		rowData[1][33] = df.format(playerSeason.getBlockPercent());
 		rowData[1][34] = df.format(playerSeason.getTurnOverPercent());
 		rowData[1][35] = df.format(playerSeason.getUsePercent());
-		table = new BottomTable(rowData, columns);
+		table = new BottomTable(rowData, COLUMN_NAMES);
 		scroll = new BottomScrollPane(table);
 		scroll.setBounds(57, 270, 888, 80); // 表格的位置
 		this.add(scroll);

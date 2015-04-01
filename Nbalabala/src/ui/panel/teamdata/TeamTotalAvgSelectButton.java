@@ -7,14 +7,14 @@ import ui.common.button.TextButton;
  * @author cylong
  * @version 2015年3月24日 下午8:34:49
  */
-public class Line_2_Button extends TextButton {
+public class TeamTotalAvgSelectButton extends TextButton {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -4055004512100806741L;
 	/** 当前选中button */
-	static Line_2_Button current;
+	static TeamTotalAvgSelectButton current;
 
-	public Line_2_Button(int x, int y, int width, int height, String text) {
+	public TeamTotalAvgSelectButton(int x, int y, int width, int height, String text) {
 		super(x, y, width, height, text);
 	}
 }

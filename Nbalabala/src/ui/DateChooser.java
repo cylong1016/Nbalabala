@@ -193,14 +193,14 @@ public class DateChooser extends JPanel{
         showDate.setText(sdf.format(select.getTime()));
         hidePanel();
     }
-    private void hidePanel(){
+    protected void hidePanel(){
         if(pop!=null){
             isShow=false;
             pop.hide();
             pop=null;
         }
     }
-    private void showPanel(Component owner){
+    protected void showPanel(Component owner){
         if(pop!=null){
             pop.hide();
         }

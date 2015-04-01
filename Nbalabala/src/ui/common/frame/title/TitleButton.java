@@ -19,9 +19,9 @@ public class TitleButton extends JLabel {
 
 	/*----------------------------标题按钮配置--------------------------------*/
 	/** 标题按钮背景颜色 */
-	public static Color TITLE_BUTTON_BACK_COLOR = Color.LIGHT_GRAY;
+	public static final Color TITLE_BUTTON_BACK_COLOR = Color.LIGHT_GRAY;
 	/** 移动到button上的背景颜色 */
-	public static Color ENTERED_BTN_BACK_COLOR = Color.GRAY;
+	public static final Color ENTERED_BTN_BACK_COLOR = Color.GRAY;
 	/*----------------------------标题按钮配置--------------------------------*/
 
 	/** 按钮大小 */

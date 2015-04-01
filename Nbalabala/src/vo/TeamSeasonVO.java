@@ -1,82 +1,82 @@
-package data.seasondata;
+package vo;
 
 /**
  * @author Issac Ding
  * @version 2015年3月14日 下午4:17:09
  */
-public class TeamSeasonRecord {
+public class TeamSeasonVO {
 
 	/** 队名 */
-	String teamName;
+	public String teamName;
 
 	/** 比赛场数 */
-	int matchCount;
+	public int matchCount;
 
 	/** 投篮命中 */
-	int fieldGoal;
+	public int fieldGoal;
 
 	/** 投篮出手 */
-	int fieldAttempt;
+	public int fieldAttempt;
 
 	/** 三分命中 */
-	int threePointGoal;
+	public int threePointGoal;
 
 	/** 三分出手 */
-	int threePointAttempt;
+	public int threePointAttempt;
 
 	/** 罚球命中 */
-	int freethrowGoal;
+	public int freethrowGoal;
 
 	/** 罚球出手 */
-	int freethrowAttempt;
+	public int freethrowAttempt;
 
 	/** 进攻篮板 */
-	int offensiveRebound;
+	public int offensiveRebound;
 
 	/** 防守篮板 */
-	int defensiveRebound;
+	public int defensiveRebound;
 
 	/** 总篮板 */
-	int totalRebound;
+	public int totalRebound;
 
 	/** 助攻 */
-	int assist;
+	public int assist;
 
 	/** 抢断 */
-	int steal;
+	public int steal;
 
 	/** 盖帽 */
-	int block;
+	public int block;
 
 	/** 失误 */
-	int turnover;
+	public int turnover;
 
 	/** 犯规 */
-	int foul;
+	public int foul;
 
 	/** 总得分 */
-	int score;
+	public int score;
 
 	/** 胜场数 */
-	int wins;
+	public int wins;
 
 	//以下记录对手的总数据，以计算各种复杂的率
 
-	int oppoDefensiveRebound;
+	public int oppoDefensiveRebound;
 
-	int oppoOffensiveRebound;
+	public int oppoOffensiveRebound;
 
-	int oppoFieldAttempt;
+	public int oppoFieldAttempt;
 
-	int oppoFreethrowAttempt;
+	public int oppoFreethrowAttempt;
 
-	int oppoFieldGoal;
+	public int oppoFieldGoal;
 
-	int oppoTurnover;
+	public int oppoTurnover;
 
-	int oppoGoal;
+	public int oppoGoal;
 
-	public TeamSeasonRecord(String name) {
+	public TeamSeasonVO(String name) {
 		this.teamName = name;
 	}
 
