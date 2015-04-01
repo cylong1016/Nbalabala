@@ -19,28 +19,25 @@ public class ImgButton extends JButton {
 		ImageIcon imageIconPressOn = new ImageIcon(pressOnImgPath);
 
 		set();
-		
+
 		this.setIcon(imageIcon);
 		this.setBounds(x, y, imageIcon.getImage().getWidth(null), imageIcon.getImage().getHeight(null));
 		this.setRolloverIcon(imageIconStop);
 		this.setPressedIcon(imageIconPressOn);
 	}
-	
-	public ImgButton(String iconPath){
-		ImageIcon imageIcon = new ImageIcon(iconPath);
-		this.setIcon(imageIcon);
-		setOpaque(false);
-		set();
+
+	public ImgButton(String imgPath, String pressOnImgPath) {
+		this(imgPath, 0, 0, pressOnImgPath, pressOnImgPath);
 	}
-	
+
 	public ImgButton() {
-		
+
 	}
-	
+
 	private void set() {
 		this.setBorderPainted(false);
 		this.setFocusPainted(false);
 		this.setContentAreaFilled(false);
 	}
-	
+
 }

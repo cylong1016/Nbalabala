@@ -1,9 +1,0 @@
-cylong 1 2 3 4 5
-lsy 1 2 3 4 5
-zj 1 2 3 4 5
-cylong 1 2 3 4 5
-lsy 1 2 3 4 5
-zj 1 2 3 4 5
-cylong 1 2 3 4 5
-lsy 1 2 3 4 5
-zj 1 2 3 4 5
