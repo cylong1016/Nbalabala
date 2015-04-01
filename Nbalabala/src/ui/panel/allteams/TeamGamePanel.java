@@ -120,18 +120,18 @@ public class TeamGamePanel extends TeamSeasonPanel {
 				String[] dateArr = str.split("  ");
 				String[] dateTemp = dateArr[0].split("-");
 				String dateStr = dateTemp[1]+"-"+dateTemp[2];
+				ArrayList<MatchProfileVO> pro = new ArrayList<MatchProfileVO>();
 				for (int i = 0; i < matchProfile.size(); i++) {
 					if(dateStr.equals(matchProfile.get(i).getTime())&&seasonString.equals(matchProfile.get(i).getSeason())){
-						ArrayList<MatchProfileVO> pro = new ArrayList<MatchProfileVO>();
 						pro.add(matchProfile.get(i));
 						if (pane != null){
 							remove(pane);
 						}
-						pane = new MatchInfoTableFactory(pro,TeamGamePanel.this).getTableScrollPanel();
-						pane.setBounds(55, 285, 905, 250);
-						add(pane);
 					}
 				}
+				pane = new MatchInfoTableFactory(pro,TeamGamePanel.this).getTableScrollPanel();
+				pane.setBounds(55, 285, 905, 250);
+				add(pane);
 				TeamGamePanel.this.repaint();
 			}
 		});
