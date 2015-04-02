@@ -62,12 +62,12 @@ public class TitlePanel extends JPanel {
 		// 按钮监听
 		TitleButtonListener listener = new TitleButtonListener();
 		// 最小化按钮
-		min = new ImgButton("images/mini.png");
+		min = new ImgButton("images/mini.png", "images/miniOn.png");
 		min.addMouseListener(listener);
 		min.setPreferredSize(new Dimension(15,15));
 		this.add(min);
 		// 关闭按钮
-		exit = new ImgButton("images/close.png");
+		exit = new ImgButton("images/close.png", "images/closeOn.png");
 		exit.addMouseListener(listener);
 		exit.setPreferredSize(new Dimension(15,15));
 		this.add(exit);

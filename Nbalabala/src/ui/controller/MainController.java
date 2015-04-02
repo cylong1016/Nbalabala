@@ -49,10 +49,6 @@ public class MainController {
 	private static GamePanel gamePanel;
 	/** 球员详细信息 */
 	private static PlayerInfoPanel playerInfoPanel;
-	
-	private MainController() {
-		
-	}
 
 	/**
 	 * 初始化主界面
@@ -65,8 +61,8 @@ public class MainController {
 		frame.setPanel(mainPanel);
 		frame.start();
 	}
-	
-	public static void toMainPanel(Panel panel){
+
+	public static void toMainPanel(Panel panel) {
 		frame.remove(panel);
 		mainPanel = new MainPanel();
 		frame.setPanel(mainPanel);
@@ -131,81 +127,81 @@ public class MainController {
 		allTeamsPanel = new AllTeamsPanel(UIConfig.IMG_PATH + "teams/allTeam.png");
 		frame.setPanel(allTeamsPanel);
 	}
-	
+
 	/**
 	 * 进入球队赛季情况界面
-	 * @param panel 从哪一界面跳转 
+	 * @param panel 从哪一界面跳转
 	 * @param button 选择的球队按钮
 	 * @author lsy
-	 * @version 2015年3月20日  下午11:45:39
+	 * @version 2015年3月20日 下午11:45:39
 	 */
-	public static void toTeamSeasonPanel(BottomPanel allteams,Panel panel,TeamButton button,int x){
+	public static void toTeamSeasonPanel(BottomPanel allteams, Panel panel, TeamButton button, int x) {
 		frame.remove(panel);
-		teamSeasonpanel = new TeamSeasonPanel(allteams,"images/teams/teamSeasonBG.png",button,x);
+		teamSeasonpanel = new TeamSeasonPanel(allteams, "images/teams/teamSeasonBG.png", button, x);
 		frame.setPanel(teamSeasonpanel);
 	}
-	
+
 	/**
 	 * 球队赛季数据界面
 	 * @param panel
 	 * @author lsy
-	 * @version 2015年3月21日  上午12:31:15
+	 * @version 2015年3月21日 上午12:31:15
 	 */
-	public static void toTeamGamePanel(BottomPanel allteams,Panel panel,TeamButton button) {
+	public static void toTeamGamePanel(BottomPanel allteams, Panel panel, TeamButton button) {
 		frame.remove(panel);
-		teamGamePanel = new TeamGamePanel(allteams,UIConfig.IMG_PATH + "teams/teamSeasonBG.png",button,2);
+		teamGamePanel = new TeamGamePanel(allteams, UIConfig.IMG_PATH + "teams/teamSeasonBG.png", button, 2);
 		frame.setPanel(teamGamePanel);
 	}
-	
+
 	/**
 	 * 添加日期选择器
 	 * @param panel
 	 * @author lsy
-	 * @version 2015年3月21日  下午1:53:17
+	 * @version 2015年3月21日 下午1:53:17
 	 */
-	public static void addDateChooserPanel(JPanel panelBottom,JPanel panelAdd,int x,int y){
+	public static void addDateChooserPanel(JPanel panelBottom, JPanel panelAdd, int x, int y) {
 		panelAdd.setVisible(true);
-		panelAdd.setBounds(x,y, 153,30);
+		panelAdd.setBounds(x, y, 153, 30);
 		panelBottom.add(panelAdd);
 	}
 
 	/**
 	 * 某场比赛数据图
 	 * @author lsy
-	 * @version 2015年3月21日  下午5:03:21
+	 * @version 2015年3月21日 下午5:03:21
 	 */
-	public static void toOneGamePanel(Panel panel,MatchProfileVO matchProfile,BottomPanel gameData){
+	public static void toOneGamePanel(Panel panel, MatchProfileVO matchProfile, BottomPanel gameData) {
 		frame.remove(panel);
-		gamePanel = new GamePanel(UIConfig.IMG_PATH+"game/gameBG.png",matchProfile,gameData);
+		gamePanel = new GamePanel(UIConfig.IMG_PATH + "game/gameBG.png", matchProfile, gameData);
 		frame.setPanel(gamePanel);
 	}
-	
+
 	/**
 	 * 返回到某一界面
 	 * @author lsy
-	 * @version 2015年3月24日  上午10:28:19
+	 * @version 2015年3月24日 上午10:28:19
 	 */
-	public static void backToOnePanel(Panel panelNow,Panel panelTo){
+	public static void backToOnePanel(Panel panelNow, Panel panelTo) {
 		frame.remove(panelNow);
 		frame.setPanel(panelTo);
 		frame.repaint();
 	}
-	
+
 	/**
 	 * 球员详细信息界面
 	 * @author lsy
-	 * @version 2015年3月24日  上午11:19:21
+	 * @version 2015年3月24日 上午11:19:21
 	 */
-	public static void toPlayerInfoPanel(Panel panel,String name,BottomPanel allPanel){
+	public static void toPlayerInfoPanel(Panel panel, String name, BottomPanel allPanel) {
 		frame.remove(panel);
-		playerInfoPanel = new PlayerInfoPanel(UIConfig.IMG_PATH+"players/playerInfoBG.png",name,allPanel);
+		playerInfoPanel = new PlayerInfoPanel(UIConfig.IMG_PATH + "players/playerInfoBG.png", name, allPanel);
 		frame.setPanel(playerInfoPanel);
 	}
-	
-	public static void toPlayerSeasonInfoPanel(Panel panel,String name,BottomPanel allPanel){
+
+	public static void toPlayerSeasonInfoPanel(Panel panel, String name, BottomPanel allPanel) {
 		frame.remove(panel);
-		playerInfoPanel = new PlayerSeasonPanel(UIConfig.IMG_PATH+"players/playerGameBG.png",name,allPanel);
+		playerInfoPanel = new PlayerSeasonPanel(UIConfig.IMG_PATH + "players/playerGameBG.png", name, allPanel);
 		frame.setPanel(playerInfoPanel);
 	}
-	
+
 }

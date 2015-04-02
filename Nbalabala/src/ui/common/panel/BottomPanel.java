@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 
 import ui.UIConfig;
+import utility.Sleep;
 
 /**
  * 带有左边边框和底层的panel，其他具体功能panel的父类
@@ -36,7 +37,7 @@ public class BottomPanel extends Panel {
 		bgImage = new ImageIcon(url).getImage();
 		this.addLeftPanel(this);
 		this.addMouseMotionListener(new MouListener());
-		// new Opacity().start();
+		// new Opacity().start(); // 透明渐变效果
 	}
 
 	public void paint(Graphics g) {
@@ -69,19 +70,19 @@ public class BottomPanel extends Panel {
 		}
 	}
 
-//	private class Opacity extends Thread {
-//		@Override
-//		public void run() {
-//			while(true) {
-//				Sleep.sleep(10);
-//				BottomPanel.this.addHyaline();
-//				BottomPanel.this.repaint();
-//				if (BottomPanel.this.hyaline == 1) {
-//					break;
-//				}
-//			}
-//		}
-//	}
+	protected class Opacity extends Thread {
+		@Override
+		public void run() {
+			while(true) {
+				Sleep.sleep(10);
+				BottomPanel.this.addHyaline();
+				BottomPanel.this.repaint();
+				if (BottomPanel.this.hyaline == 1) {
+					break;
+				}
+			}
+		}
+	}
 
 	class MouListener extends MouseAdapter {
 

@@ -167,7 +167,7 @@ public class PlayerInfoPanel extends BottomPanel {
 	public void setTable() {
 		PlayerSeasonVO playerSeason = detailVO.getSeasonRecord();
 		String [][] rowData = new String[2][COLUMN_NAMES.length];
-		DecimalFormat df = UIConfig.format;
+		DecimalFormat df = UIConfig.FORMAT;
 		rowData[0][0] = "总数据";
 		rowData[1][0] = "平均数据";
 		rowData[0][1] = String.valueOf(playerSeason.getMatchCount());
