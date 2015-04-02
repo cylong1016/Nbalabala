@@ -38,12 +38,6 @@ public class PlayerQuery implements PlayerQueryBLService{
 		PlayerProfileVO profile = playerData.getPlayerProfileByName(playerName);
 		Image actionImage = playerData.getActionImageByName(playerName);
 
-//		System.out.println(profile.getAge());
-//		System.out.println(profile.getNumber());
-//		System.out.println(profile.getSchool());
-//		System.out.println(profile.getTeam());
-//		System.out.println(profile.getWeight());
-		
 		//从seasonbl获取球员的赛季数据
 		PlayerSeasonAnalysis playerSeasonAnalysis = new PlayerSeasonAnalysis();
 		PlayerSeasonVO seasonRecord = playerSeasonAnalysis.getPlayerSeasonDataByName(playerName);

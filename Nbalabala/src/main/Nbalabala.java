@@ -1,5 +1,6 @@
 package main;
 
+import data.playerdata.PlayerPortraitCache;
 import ui.controller.MainController;
 
 /**
@@ -13,6 +14,7 @@ import ui.controller.MainController;
 public class Nbalabala {
 
 	public static void main(String[] args) {
+		new PlayerPortraitCache().loadPortrait();
 		MainController.launch();
 	}
 }

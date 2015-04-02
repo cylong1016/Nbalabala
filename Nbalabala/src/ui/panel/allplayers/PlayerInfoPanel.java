@@ -70,7 +70,6 @@ public class PlayerInfoPanel extends BottomPanel {
 		this.profileVO = detailVO.getProfile();
 		this.lastPanel =  lastPanel;
 		
-		detailVO = playerQuery.getPlayerDetailByName(profileVO.getName());
 		labelStr = new String[]{"姓名: " + profileVO.getName(), "球队: " + Constants.translateTeamAbbr(profileVO.getTeam()), "号码: " + profileVO.getNumber(),
 								"位置: " + profileVO.getPosition(), "年龄: " + profileVO.getAge(), "球龄: " + profileVO.getExp(),
 								"生日: " + profileVO.getBirth(), "身高: " + profileVO.getHeight(), "体重: " + profileVO.getWeight(),

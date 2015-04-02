@@ -3,9 +3,11 @@ package data.matchdata;
 import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import data.teamdata.SVGHandler;
@@ -39,13 +41,15 @@ public class MatchData implements MatchDataService {
 			for(File file : files) {
 				
 				if ( ! file.getName().contains(keyword)) continue;
-				BufferedReader br = new BufferedReader(new FileReader(file));
+				BufferedReader br = new BufferedReader(new InputStreamReader
+						(new FileInputStream(file),"UTF-8"));
 				String [] profile = br.readLine().split(";");
 				
 				//比赛简况包括赛季、日期、两队缩写、总比分、各节比分，不涉及脏数据
 				MatchProfileVO matchProfileVO = new MatchProfileVO(season, profile[0], profile[1], 
 						profile[2], br.readLine());
 				result.add(matchProfileVO);
+				
 				br.close();
 			}
 		} catch (FileNotFoundException e) {
@@ -87,7 +91,7 @@ public class MatchData implements MatchDataService {
 		}
 		return result;
 	}
-
+	
 	/**
 	 * @see dataservice.MatchDataService#getMatchDetailByFileName(java.lang.String)
 	 */

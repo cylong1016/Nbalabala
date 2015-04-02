@@ -49,13 +49,13 @@ public class Utility {
 		return 2 * lineInt[3] + lineInt[5] + lineInt[7];
 	}
 	
-	/** 修正时间为null的脏数据，方法是总时间减去其他球员上场时间，总时间为48分钟+5分钟*加时赛场数*/
+	/** 修正时间为null的脏数据，方法是总时间减去其他球员上场时间，总时间为48分钟+5分钟*加时赛场数*5*/
 	public static int getModifiedTime(File file, TeamState teamState) {
 		BufferedReader br = null;
 		try{
 			br = new BufferedReader(new FileReader(file));
 			br.readLine();
-			int totalSeconds = ((br.readLine().split(";").length - 4) * 5 + 48) * 60;
+			int totalSeconds = ((br.readLine().split(";").length - 4) * 5 + 48) * 300;
 			br.readLine();
 			//有记录的总分钟数和秒数之和
 			int minutes = 0;

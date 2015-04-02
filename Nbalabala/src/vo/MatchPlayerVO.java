@@ -81,7 +81,7 @@ public class MatchPlayerVO {
 			int totalSeconds = Utility.getModifiedTime(file, teamState);
 			int minutes = totalSeconds / 60;
 			int seconds = totalSeconds % 60;
-			time = minutes + "-" + seconds;
+			time = minutes + ":" + seconds;
 		}else {
 			time = s[2];
 		}
@@ -104,7 +104,6 @@ public class MatchPlayerVO {
 		}catch(NumberFormatException e){
 			personalGoal = 2 * fieldGoal + threePointGoal + freethrowGoal;
 		}
-		
 	}
 
 	public String getName() {

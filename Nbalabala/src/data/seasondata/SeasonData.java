@@ -204,14 +204,9 @@ public class SeasonData implements SeasonDataService {
 		return result;
 	}
 	
-	
 	/** 向playerdata提供所有参加过比赛的球员的名字 */
 	public ArrayList<String> getPlayerNames() {
-		ArrayList<String> result = new ArrayList<String>();
-		Iterator<String> itr = playerRecords.keySet().iterator();
-		while (itr.hasNext()){
-			result.add(itr.next());
-		}
-		return result;
+		return new ArrayList<String>(playerRecords.keySet());
 	}
+	
 }

@@ -1,7 +1,9 @@
 package ui.common.frame;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -45,6 +47,8 @@ public class Frame extends JFrame {
 		this.setVisible(true);
 		this.setDragable(); // 设置可以拖动
 		this.setOSStyle(); // 设置为当前系统风格
+		Image img = Toolkit.getDefaultToolkit().getImage("images/icon.png");
+		this.setIconImage(img);
 	}
 
 	/**

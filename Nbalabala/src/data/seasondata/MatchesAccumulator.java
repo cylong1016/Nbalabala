@@ -2,16 +2,17 @@ package data.seasondata;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import enums.TeamState;
 import utility.Utility;
 import vo.PlayerSeasonVO;
 import vo.TeamSeasonVO;
+import enums.TeamState;
 
 /**
  * 通过对比赛数据的累加计算，生成球员和球队数据
@@ -40,7 +41,7 @@ public class MatchesAccumulator {
 
 		try {
 			for(File file : files) {
-				br = new BufferedReader(new FileReader(file));
+				br = new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));
 				String description = br.readLine();
 				String[] points = description.split(";")[2].split("-");
 				int homePoints = Integer.parseInt(points[0]);

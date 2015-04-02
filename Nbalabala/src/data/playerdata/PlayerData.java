@@ -3,9 +3,10 @@ package data.playerdata;
 import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -33,9 +34,6 @@ public class PlayerData implements PlayerDataService{
 	/** 存储球员信息的文件夹 */
 	private static final String INFO_Path = "NBAdata/players/info/";
 	
-	/** 存储球员头像的文件夹 */
-	private static final String PORTRAIT_PATH = "NBAdata/players/portrait/";
-	
 	/** 存储全身像的文件夹 */
 	private static final String ACTION_Path = "NBAdata/players/action/";
 	
@@ -58,9 +56,7 @@ public class PlayerData implements PlayerDataService{
 		
 		try {
 			for(File file : files) {
-				
-				String name = file.getName();
-				br = new BufferedReader(new FileReader(file));
+				br = new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));
 				ArrayList<String> playerInfo = new ArrayList<String>(9);
 				String line = null;
 				int lineNum = 0;
@@ -74,7 +70,9 @@ public class PlayerData implements PlayerDataService{
 					playerInfo.add(line.split("│")[1].trim());
 				}
 				
-				Image portrait = getPotraitImageByName(name);
+				String name = playerInfo.get(0);
+				
+				Image portrait = PlayerPortraitCache.getPortraitByName(name);
 				PlayerProfileVO player = new PlayerProfileVO(portrait, playerInfo.get(0), 
 						seasonData.getTeamAbbrByPlayer(name), playerInfo.get(1), playerInfo.get(2), 
 						playerInfo.get(3), playerInfo.get(4), playerInfo.get(5), playerInfo.get(6), 
@@ -91,8 +89,7 @@ public class PlayerData implements PlayerDataService{
 		ArrayList<String> names = new SeasonData().getPlayerNames();
 		for (String name : names){
 			if (!players.containsKey(name)) {
-				players.put(name, new PlayerProfileVO(getPotraitImageByName("NULL_PLAYER_FOUND"), 
-						name));
+				players.put(name, new PlayerProfileVO(PlayerPortraitCache.getNullPortrait(), name));
 			}
 		}
 	}
@@ -141,7 +138,7 @@ public class PlayerData implements PlayerDataService{
 		if (players.get(name) != null)
 			return players.get(name);
 		else 
-			return new PlayerProfileVO(getPotraitImageByName("NULL_PLAYER_FOUND"), name);
+			return new PlayerProfileVO(PlayerPortraitCache.getNullPortrait(), name);
 	}
 	
 	/**
@@ -155,18 +152,6 @@ public class PlayerData implements PlayerDataService{
 		return result;
 	}
 	
-	private Image getPotraitImageByName(String name) {
-		try {
-			return  ImageIO.read(new File(PORTRAIT_PATH + name + ".png"));
-		} catch (IOException e) {
-			try {
-				return ImageIO.read(new File("images/nullPortrait.png"));
-			} catch (IOException e1) {
-				return null;
-			}
-		}
-	}
-
 	/**
 	 * @see dataservice.PlayerDataService#searchPlayers(java.lang.String)
 	 */
@@ -187,4 +172,5 @@ public class PlayerData implements PlayerDataService{
 		Collections.sort(result, comparator);
 		return result;
 	}
+
 }
