@@ -9,6 +9,6 @@ import vo.TeamDetailVO;
  */
 public interface TeamQueryBLService {
 	
-	public TeamDetailVO getTeamDetailByAbbr(String abbr);
+	public TeamDetailVO getTeamDetailByAbbr(String abbr, String season);
 
 }

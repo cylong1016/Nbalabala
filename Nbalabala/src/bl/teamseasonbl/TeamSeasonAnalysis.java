@@ -30,22 +30,15 @@ public class TeamSeasonAnalysis implements TeamSeasonBLService {
 	private SeasonDataService seasonData = new SeasonData();
 
 	/** 刚进入界面时调用此方法，得到按名字排序的球队数据 */
-	public ArrayList<TeamSeasonVO> getTeamDataSortedByName() {
-		currentList = seasonData.getScreenedTeamSeasonData(ScreenDivision.ALL);
+	public ArrayList<TeamSeasonVO> getTeamDataSortedByName(String season) {
+		currentList = seasonData.getScreenedTeamSeasonData(ScreenDivision.ALL, season);
 		sortTeamDataByName(currentList);
 		return currentList;
 	}
 
-	public static void main(String[] args) {
-		ArrayList<TeamSeasonVO> records = new TeamSeasonAnalysis().getScreenedTeamData(ScreenDivision.ALL);
-		for(TeamSeasonVO record : records) {
-			System.out.println(record.getTeamName());
-		}
-	}
-
 	/** 返回按地区筛选的 */
-	public ArrayList<TeamSeasonVO> getScreenedTeamData(ScreenDivision division) {
-		currentList = seasonData.getScreenedTeamSeasonData(division);
+	public ArrayList<TeamSeasonVO> getScreenedTeamData(ScreenDivision division, String season) {
+		currentList = seasonData.getScreenedTeamSeasonData(division, season);
 		return currentList;
 	}
 
@@ -63,8 +56,8 @@ public class TeamSeasonAnalysis implements TeamSeasonBLService {
 	}
 
 	/** 根据球队缩写返回其赛季数据 */
-	public TeamSeasonVO getTeamDataByAbbr(String abbr) {
-		return seasonData.getTeamDataByAbbr(abbr);
+	public TeamSeasonVO getTeamDataByAbbr(String abbr, String season) {
+		return seasonData.getTeamDataByAbbr(abbr, season);
 	}
 
 	/** 按球队名排序 */

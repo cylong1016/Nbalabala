@@ -71,6 +71,66 @@ public class Constants {
 		}
 	}
 	
+	public static ScreenDivision getAreaByAbbr(String abbr) {
+		switch (abbr) {
+		case "BOS":
+		case "BKN":
+		case "NYK":
+		case "PHI":
+		case "TOR":
+		case "CHI":
+		case "CLE":
+		case "DET":
+		case "IND":
+		case "MIL":
+		case "ATL":
+		case "CHA":
+		case "MIA":
+		case "ORL":
+		case "WAS":
+			return ScreenDivision.EAST;
+		default:
+			return ScreenDivision.WEST;
+		}
+	}
+	
+	public static ScreenDivision getDivisionByAbbr(String abbr) {
+		switch (abbr) {
+		case "BOS":
+		case "BKN":
+		case "NYK":
+		case "PHI":
+		case "TOR":
+			return ScreenDivision.ATLANTIC;
+		case "CHI":
+		case "CLE":
+		case "DET":
+		case "IND":
+		case "MIL":
+			return ScreenDivision.CENTRAL;
+		case "ATL":
+		case "CHA":
+		case "MIA":
+		case "ORL":
+		case "WAS":
+			return ScreenDivision.SOUTH_EAST;
+		case "GSW":
+		case "LAC":
+		case "LAL":
+		case "PHX":
+		case "SAC":
+			return ScreenDivision.PACIFIC;
+		case "DEN":
+		case "MIN":
+		case "OKC":
+		case "POR":
+		case "UTA":
+			return ScreenDivision.NORTH_WEST;
+		default:
+			return ScreenDivision.SOUTH_WEST;
+		}
+	}
+	
 	public static String translateTeamAbbr(String abbr) {
 		switch (abbr) {
 		case "BOS":
@@ -91,6 +151,8 @@ public class Constants {
 			return "灰熊";
 		case "NOP":
 			return "鹈鹕";
+		case "NOH":
+			return "黄蜂";
 		case "SAS":
 			return "马刺"; 
 		case "ATL":

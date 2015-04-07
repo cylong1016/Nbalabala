@@ -14,7 +14,7 @@ public interface PlayerQueryBLService {
 	
 	public ArrayList<PlayerProfileVO> getPlayerProfileByInitial(char initial);
 	
-	public PlayerDetailVO getPlayerDetailByName(String name);
+	public PlayerDetailVO getPlayerDetailByName(String name, String season);
 	
 	/** 在搜索框内输入文字后调用的是这个方法 */
 	public ArrayList<PlayerProfileVO> searchPlayers(String keyword);

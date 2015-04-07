@@ -28,7 +28,7 @@ public class TeamQuery implements TeamQueryBLService{
 	 * @see blservice.TeamQueryBLService#getTeamDetailByAbbr(java.lang.String)
 	 */
 	@Override
-	public TeamDetailVO getTeamDetailByAbbr(String abbr) {
+	public TeamDetailVO getTeamDetailByAbbr(String abbr, String season) {
 		TeamDataService teamData = new TeamData();
 		TeamProfileVO profile = teamData.getTeamProfileByAbbr(abbr);
 		
@@ -40,7 +40,7 @@ public class TeamQuery implements TeamQueryBLService{
 		ArrayList<PlayerProfileVO> playerProfiles = playerQuery.getPlayerProfilesByNames(playerNames);
 		
 		TeamSeasonAnalysis teamSeasonAnalysis = new TeamSeasonAnalysis();
-		TeamSeasonVO record = teamSeasonAnalysis.getTeamDataByAbbr(abbr);
+		TeamSeasonVO record = teamSeasonAnalysis.getTeamDataByAbbr(abbr, season);
 		
 		MatchQuery matchQuery = new MatchQuery();
 		ArrayList<MatchProfileVO> matchRecords = matchQuery.getMatchRecordByTeamAbbr(abbr);

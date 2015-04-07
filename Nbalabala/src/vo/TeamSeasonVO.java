@@ -5,7 +5,7 @@ package vo;
  * @version 2015年3月14日 下午4:17:09
  */
 public class TeamSeasonVO {
-
+	
 	/** 队名 */
 	public String teamName;
 

@@ -6,7 +6,7 @@ package vo;
  * @version 2015年3月14日 下午4:17:44
  */
 public class PlayerSeasonVO {
-
+	
 	/**
 	 * attempt是出手
 	 * goal命中

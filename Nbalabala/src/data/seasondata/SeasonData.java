@@ -12,39 +12,41 @@ import utility.Constants;
 import utility.Utility;
 import vo.PlayerSeasonVO;
 import vo.TeamSeasonVO;
-import data.teamdata.TeamData;
 import dataservice.SeasonDataService;
-import dataservice.TeamDataService;
 import enums.Position;
 import enums.ScreenDivision;
 
 /**
- * 读取并累加赛季数据
+ * 读取并累加赛季数据。数据结构是两层map。外层是赛季到map的映射。内层是球员/球队名到其该赛季数据的映射
  * @author Issac Ding
  * @version 2015年3月14日  下午4:04:31
  */
 
 public class SeasonData implements SeasonDataService {
 	
-	public SeasonData(){
-		if (playerRecords.size() == 0 || teamRecords.size() == 0) loadMatches();
+	public SeasonData() {
+		if (allPlayerRecords.size() == 0 || allTeamRecords.size() == 0) loadMatches();
 	}
 	
-	/** 存储所有球员的赛季数据记录 */
-	private static HashMap<String, PlayerSeasonVO> playerRecords = new HashMap<String, PlayerSeasonVO>();
+	/** 存储所有球员的所有赛季数据记录 */
+	private static HashMap<String, HashMap<String, PlayerSeasonVO>> allPlayerRecords =
+			new HashMap<String, HashMap<String,PlayerSeasonVO>>();
 	
-	/** 存储所有球队的赛季数据记录 */
-	private static HashMap<String, TeamSeasonVO> teamRecords = new HashMap<String, TeamSeasonVO>();
+	/** 存储所有球队的所有赛季数据记录 */
+	private static HashMap<String, HashMap<String, TeamSeasonVO>> allTeamRecords = 
+			new HashMap<String, HashMap<String, TeamSeasonVO>>();
 	
 	/**
 	 * @see dataservice.SeasonDataService#getScreenedPlayerSeasonData(enums.Position, enums.ScreenDivision)
 	 */
 	@Override
 	public ArrayList<PlayerSeasonVO> getScreenedPlayerSeasonData(Position position,
-			ScreenDivision division) {
+			ScreenDivision division, String season) {
 		
-		if (playerRecords.size() == 0) {
-			loadMatches();
+		HashMap<String, PlayerSeasonVO> playerRecords = allPlayerRecords.get(season);
+		
+		if (playerRecords == null) {
+			return new ArrayList<PlayerSeasonVO>();
 		}
 		
 		char posChar = '\0';
@@ -65,16 +67,13 @@ public class SeasonData implements SeasonDataService {
 		
 		Iterator<Map.Entry<String, PlayerSeasonVO>> itr = playerRecords.entrySet().iterator();
 		
-		//需要队伍信息来查询球员属于哪个分区
-		TeamDataService teamData = new TeamData();
-		
 		if (position == Position.ALL && division == ScreenDivision.ALL) {
-			return getAllPlayerSeasonData();
+			return getAllPlayerSeasonData(season);
 		}else if (position == Position.ALL && 
 				(division == ScreenDivision.WEST || division == ScreenDivision.EAST)){
 			while (itr.hasNext()) {
 				PlayerSeasonVO record = itr.next().getValue();
-				if (teamData.getAreaByAbbr(record.teamName) == division) {
+				if (Constants.getAreaByAbbr(record.teamName) == division) {
 					result.add(record);
 				}
 			}
@@ -82,7 +81,7 @@ public class SeasonData implements SeasonDataService {
 				(division != ScreenDivision.WEST && division != ScreenDivision.EAST)){
 			while (itr.hasNext()) {
 				PlayerSeasonVO record = itr.next().getValue();
-				if (teamData.getDivisionByAbbr(record.teamName) == division) {
+				if (Constants.getDivisionByAbbr(record.teamName) == division) {
 					result.add(record);
 				}
 			}
@@ -98,7 +97,7 @@ public class SeasonData implements SeasonDataService {
 			while (itr.hasNext()) {
 				PlayerSeasonVO record = itr.next().getValue();
 				if (record.getPosition() == posChar && 
-						teamData.getAreaByAbbr(record.teamName) == division) {
+						Constants.getAreaByAbbr(record.teamName) == division) {
 					result.add(record);
 				}
 			}
@@ -106,12 +105,11 @@ public class SeasonData implements SeasonDataService {
 			while (itr.hasNext()) {
 				PlayerSeasonVO record = itr.next().getValue();
 				if (record.getPosition() == posChar &&
-						teamData.getDivisionByAbbr(record.teamName) == division) {
+						Constants.getDivisionByAbbr(record.teamName) == division) {
 					result.add(record);
 				}
 			}
 		}
-
 		return result;
 	}
 	
@@ -119,7 +117,11 @@ public class SeasonData implements SeasonDataService {
 	 * @see dataservice.SeasonDataService#getAllPlayerSeasonData()
 	 */
 	@Override
-	public ArrayList<PlayerSeasonVO> getAllPlayerSeasonData() {
+	public ArrayList<PlayerSeasonVO> getAllPlayerSeasonData(String season) {
+		HashMap<String, PlayerSeasonVO> playerRecords = allPlayerRecords.get(season);
+		if (playerRecords == null) {
+			return new ArrayList<PlayerSeasonVO>();
+		}
 		return new ArrayList<PlayerSeasonVO>(playerRecords.values());
 	}
 	
@@ -127,26 +129,31 @@ public class SeasonData implements SeasonDataService {
 	 * @see dataservice.SeasonDataService#getScreenedTeamSeasonData(enums.ScreenDivision)
 	 */
 	@Override
-	public ArrayList<TeamSeasonVO> getScreenedTeamSeasonData(ScreenDivision division) {
+	public ArrayList<TeamSeasonVO> getScreenedTeamSeasonData(ScreenDivision division, String season) {
+		
+		HashMap<String, TeamSeasonVO> teamRecords = allTeamRecords.get(season);
+		if (teamRecords == null) {
+			return new ArrayList<TeamSeasonVO>();
+		}
+		
 		if (division == ScreenDivision.ALL){
 			return new ArrayList<TeamSeasonVO>(teamRecords.values());
 		}
 		
 		Iterator<Map.Entry<String, TeamSeasonVO>> itr = teamRecords.entrySet().iterator();
-		TeamDataService teamData = new TeamData();
 		ArrayList<TeamSeasonVO> result = new ArrayList<TeamSeasonVO>();
 		
 		if (division == ScreenDivision.EAST || division == ScreenDivision.WEST) {
 			while (itr.hasNext()) {
 				TeamSeasonVO record = itr.next().getValue();
-				if (teamData.getAreaByAbbr(record.getTeamName()) == division){
+				if (Constants.getAreaByAbbr(record.getTeamName()) == division){
 					result.add(record);
 				}
 			}
 		}else {
 			while (itr.hasNext()) {
 				TeamSeasonVO record = itr.next().getValue();
-				if (teamData.getDivisionByAbbr(record.getTeamName()) == division){
+				if (Constants.getDivisionByAbbr(record.getTeamName()) == division){
 					result.add(record);
 				}
 			}
@@ -158,7 +165,11 @@ public class SeasonData implements SeasonDataService {
 	 * @see dataservice.SeasonDataService#getTeamAbbrByPlayer(java.lang.String)
 	 */
 	@Override
-	public String getTeamAbbrByPlayer(String playerName) {
+	public String getTeamAbbrByPlayer(String playerName, String season) {
+		HashMap<String, PlayerSeasonVO> playerRecords = allPlayerRecords.get(season);
+		if (playerRecords == null) {
+			return Constants.UNKNOWN;
+		}
 		PlayerSeasonVO record = playerRecords.get(playerName);
 		if (record != null) return record.getTeam(); 
 		else return Constants.UNKNOWN;
@@ -168,7 +179,11 @@ public class SeasonData implements SeasonDataService {
 	 * @see dataservice.SeasonDataService#getPlayerSeasonDataByName(java.lang.String)
 	 */
 	@Override
-	public PlayerSeasonVO getPlayerSeasonDataByName(String playerName) {
+	public PlayerSeasonVO getPlayerSeasonDataByName(String playerName, String season) {
+		HashMap<String, PlayerSeasonVO> playerRecords = allPlayerRecords.get(season);
+		if (playerRecords == null) {
+			return new PlayerSeasonVO(playerName);
+		}
 		PlayerSeasonVO record = playerRecords.get(playerName);
 		if (record == null) return new PlayerSeasonVO(playerName); 
 		else return record;
@@ -178,17 +193,27 @@ public class SeasonData implements SeasonDataService {
 	 * @see dataservice.SeasonDataService#getTeamDataByAbbr(java.lang.String)
 	 */
 	@Override
-	public TeamSeasonVO getTeamDataByAbbr(String abbr) {
-		return teamRecords.get(abbr);
+	public TeamSeasonVO getTeamDataByAbbr(String abbr, String season) {
+		HashMap<String, TeamSeasonVO> teamRecords = allTeamRecords.get(season);
+		if (teamRecords == null) {
+			return new TeamSeasonVO(abbr);
+		}
+		TeamSeasonVO record = teamRecords.get(abbr);
+		if (record != null) return record;
+		else return new TeamSeasonVO(abbr);
 	}
 	
 	private void loadMatches() {
 		File[] files = Utility.getSortedMatchFiles();
-		MatchesAccumulator accumulator = new MatchesAccumulator(playerRecords, teamRecords);
+		MatchesAccumulator accumulator = new MatchesAccumulator(allPlayerRecords, allTeamRecords);
 		accumulator.accumulate(files);
-		Iterator<PlayerSeasonVO> itr = playerRecords.values().iterator();
+		Iterator<Entry<String, HashMap<String, PlayerSeasonVO>>> itr = allPlayerRecords.entrySet().iterator();
 		while(itr.hasNext()) {
-			itr.next().update();
+			HashMap<String, PlayerSeasonVO> vos = itr.next().getValue();
+			Iterator<Entry<String, PlayerSeasonVO>> iterator = vos.entrySet().iterator();
+			while (iterator.hasNext()) {
+				iterator.next().getValue().update();
+			}
 		}
 	}
 	
@@ -198,11 +223,16 @@ public class SeasonData implements SeasonDataService {
 	@Override
 	public ArrayList<String> getPlayerNamesByTeamAbbr(String abbr) {
 		ArrayList<String> result = new ArrayList<String>();
-		Iterator<Entry<String, PlayerSeasonVO>> itr = playerRecords.entrySet().iterator();
-		while (itr.hasNext()) {
-			PlayerSeasonVO record = itr.next().getValue();
-			if (record.getTeam().equals(abbr)) {
-				result.add(record.getName());
+		Iterator<Entry<String, HashMap<String, PlayerSeasonVO>>> itr = allPlayerRecords.entrySet().iterator();
+		while(itr.hasNext()) {
+			HashMap<String, PlayerSeasonVO> vos = itr.next().getValue();
+			Iterator<Entry<String, PlayerSeasonVO>> iterator = vos.entrySet().iterator();
+			while (iterator.hasNext()) {
+				PlayerSeasonVO vo = iterator.next().getValue();
+				if (vo.getTeam().equals(abbr)) {
+					result.add(vo.getName());
+				}
+				iterator.next().getValue().update();
 			}
 		}
 		return result;
@@ -210,12 +240,22 @@ public class SeasonData implements SeasonDataService {
 	
 	/** 向playerdata提供所有参加过比赛的球员的名字 */
 	public ArrayList<String> getPlayerNames() {
-		return new ArrayList<String>(playerRecords.keySet());
+		ArrayList<ArrayList<String>> listOfNameLists = new ArrayList<ArrayList<String>>();
+		Iterator<HashMap<String, PlayerSeasonVO>> itr = allPlayerRecords.values().iterator();
+		while(itr.hasNext()) {
+			listOfNameLists.add(new ArrayList<String>(itr.next().keySet()));
+		}
+		ArrayList<String> result = new ArrayList<String>();
+		for (ArrayList<String> list : listOfNameLists) {
+			list.removeAll(result);
+			result.addAll(list);
+		}
+		return result;
 	}
 	
 	public static void clear() {
-		playerRecords.clear();
-		teamRecords.clear();
+		allPlayerRecords.clear();
+		allTeamRecords.clear();
 	}
 	
 }
