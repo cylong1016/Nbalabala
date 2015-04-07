@@ -34,13 +34,13 @@ public class PlayerQuery implements PlayerQueryBLService{
 	 * @see blservice.PlayerQueryBLService#getPlayerDetailByName(java.lang.String)
 	 */
 	@Override
-	public PlayerDetailVO getPlayerDetailByName(String playerName) {
+	public PlayerDetailVO getPlayerDetailByName(String playerName, String season) {
 		PlayerProfileVO profile = playerData.getPlayerProfileByName(playerName);
 		Image actionImage = playerData.getActionImageByName(playerName);
 
 		//从seasonbl获取球员的赛季数据
 		PlayerSeasonAnalysis playerSeasonAnalysis = new PlayerSeasonAnalysis();
-		PlayerSeasonVO seasonRecord = playerSeasonAnalysis.getPlayerSeasonDataByName(playerName);
+		PlayerSeasonVO seasonRecord = playerSeasonAnalysis.getPlayerSeasonDataByName(playerName, season);
 		
 		//从matchbl获取球员所有比赛的数据
 		MatchQuery matchQuery = new MatchQuery();

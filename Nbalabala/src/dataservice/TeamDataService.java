@@ -1,7 +1,6 @@
 package dataservice;
 
 import vo.TeamProfileVO;
-import enums.ScreenDivision;
 
 /**
  * 
@@ -11,9 +10,5 @@ import enums.ScreenDivision;
 public interface TeamDataService {
 
 	public TeamProfileVO getTeamProfileByAbbr(String abbr);
-
-	public ScreenDivision getAreaByAbbr(String abbr);
-
-	public ScreenDivision getDivisionByAbbr(String abbr);
 
 }

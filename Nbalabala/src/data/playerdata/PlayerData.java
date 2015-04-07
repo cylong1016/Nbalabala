@@ -17,6 +17,7 @@ import java.util.Map.Entry;
 import javax.imageio.ImageIO;
 
 import utility.Constants;
+import utility.Utility;
 import vo.PlayerProfileVO;
 import data.seasondata.SeasonData;
 import dataservice.PlayerDataService;
@@ -75,8 +76,9 @@ public class PlayerData implements PlayerDataService{
 				
 				Image portrait = PlayerPortraitCache.getPortraitByName(name);
 				PlayerProfileVO player = new PlayerProfileVO(portrait, playerInfo.get(0), 
-						seasonData.getTeamAbbrByPlayer(name), playerInfo.get(1), playerInfo.get(2), 
-						playerInfo.get(3), playerInfo.get(4), playerInfo.get(5), playerInfo.get(6), 
+						seasonData.getTeamAbbrByPlayer(name, Utility.getDefaultSeason()), 
+						playerInfo.get(1), playerInfo.get(2), playerInfo.get(3), 
+						playerInfo.get(4), playerInfo.get(5), playerInfo.get(6), 
 						playerInfo.get(7), playerInfo.get(8));
 				players.put(name, player);
 			}

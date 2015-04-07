@@ -21,14 +21,14 @@ import enums.TeamState;
  */
 public class MatchesAccumulator {
 	
-	private HashMap<String, PlayerSeasonVO> playerRecords;
-	private HashMap<String, TeamSeasonVO> teamRecords;
+	private HashMap<String, HashMap<String, PlayerSeasonVO>> allPlayerRecords;
+	private HashMap<String, HashMap<String, TeamSeasonVO>> allTeamRecords;
 	
-	public MatchesAccumulator(HashMap<String, PlayerSeasonVO> players,
-			HashMap<String, TeamSeasonVO> teams) {
+	public MatchesAccumulator(HashMap<String, HashMap<String, PlayerSeasonVO>> players,
+			HashMap<String, HashMap<String, TeamSeasonVO>> teams) {
 		super();
-		this.playerRecords = players;
-		this.teamRecords = teams;
+		this.allPlayerRecords = players;
+		this.allTeamRecords = teams;
 	}
 	
 	/**
@@ -41,6 +41,20 @@ public class MatchesAccumulator {
 
 		try {
 			for(File file : files) {
+				String season = file.getName().substring(0, 5);
+				
+				HashMap<String, PlayerSeasonVO> playerRecords = allPlayerRecords.get(season);
+				if (playerRecords == null) {
+					allPlayerRecords.put(season, new HashMap<String, PlayerSeasonVO>());
+					playerRecords = allPlayerRecords.get(season);
+				}
+				
+				HashMap<String, TeamSeasonVO> teamRecords = allTeamRecords.get(season);
+				if (teamRecords == null) {
+					allTeamRecords.put(season, new HashMap<String, TeamSeasonVO>());
+					teamRecords = allTeamRecords.get(season);
+				}
+				
 				br = new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));
 				String description = br.readLine();
 				String[] points = description.split(";")[2].split("-");

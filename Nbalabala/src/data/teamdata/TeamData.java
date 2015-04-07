@@ -11,7 +11,6 @@ import java.util.HashMap;
 import utility.Constants;
 import vo.TeamProfileVO;
 import dataservice.TeamDataService;
-import enums.ScreenDivision;
 
 /**
  *	
@@ -58,10 +57,7 @@ public class TeamData implements TeamDataService{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
-
 
 	/**
 	 * @see dataservice.TeamDataService#getTeamProfileByAbbr(java.lang.String)
@@ -69,24 +65,6 @@ public class TeamData implements TeamDataService{
 	@Override
 	public TeamProfileVO getTeamProfileByAbbr(String abbr) {
 		return teams.get(abbr);
-	}
-	
-	// 以下两个方法主要用来根据球队缩写返回东/西或者具体赛区，主要用于球员的条件筛选
-	
-	/**
-	 * @see dataservice.TeamDataService#getAreaByAbbr(java.lang.String)
-	 */
-	@Override
-	public ScreenDivision getAreaByAbbr(String abbr) {
-		return teams.get(abbr).getArea();
-	}
-	
-	/**
-	 * @see dataservice.TeamDataService#getDivisionByAbbr(java.lang.String)
-	 */
-	@Override
-	public ScreenDivision getDivisionByAbbr(String abbr) {
-		return teams.get(abbr).getDivision();
 	}
 	
 	public static void clear() {

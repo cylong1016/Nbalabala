@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import utility.Utility;
 import vo.PlayerSeasonVO;
 import blservice.PlayerSeasonBLService;
 import data.seasondata.SeasonData;
@@ -25,9 +26,10 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService {
 	private SeasonDataService seasonData = new SeasonData();
 
 	/** 记录上一次返回给UI层，即UI层正在显示的球员列表 */
-	private ArrayList<PlayerSeasonVO> currentList = seasonData.getAllPlayerSeasonData();
+	private ArrayList<PlayerSeasonVO> currentList 
+		= seasonData.getAllPlayerSeasonData(Utility.getDefaultSeason());
 
-	/** 刚进入界面时调用此方法，得到的是全部的以名字排序的球员数据 */
+	/** 刚进入界面时调用此方法，得到的是默认赛季的以名字排序的球员数据 */
 	public ArrayList<PlayerSeasonVO> getAllPlayersSortedByName() {
 		sortPlayersByName(currentList);
 		return currentList;
@@ -47,9 +49,11 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService {
 	}
 
 	/** 根据位置、地区、筛选依据，返回含有前50个记录的表 */
-	public ArrayList<PlayerSeasonVO> getScreenedPlayers(Position position, ScreenDivision division, ScreenBasis basis) {
+	public ArrayList<PlayerSeasonVO> getScreenedPlayers(Position position, ScreenDivision division, 
+			ScreenBasis basis, String season) {
 
-		ArrayList<PlayerSeasonVO> players = seasonData.getScreenedPlayerSeasonData(position, division);
+		ArrayList<PlayerSeasonVO> players = seasonData.getScreenedPlayerSeasonData
+				(position, division, season);
 
 		// 如果没有排序指标依据，那么返回所有符合位置和分区的球员，按名字为序
 		if (basis == ScreenBasis.ALL) {
@@ -65,13 +69,13 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService {
 	}
 
 	/** 根据球员名字返回所属球队缩写 */
-	public String getTeamAbbrByPlayer(String playerName) {
-		return seasonData.getTeamAbbrByPlayer(playerName);
+	public String getTeamAbbrByPlayer(String playerName, String season) {
+		return seasonData.getTeamAbbrByPlayer(playerName, season);
 	}
 
 	/** 根据球员名字返回其赛季数据 */
-	public PlayerSeasonVO getPlayerSeasonDataByName(String playerName) {
-		return seasonData.getPlayerSeasonDataByName(playerName);
+	public PlayerSeasonVO getPlayerSeasonDataByName(String playerName, String season) {
+		return seasonData.getPlayerSeasonDataByName(playerName, season);
 	}
 
 	/** 根据球队缩写返回其当前阵容包含的球员名单 */
