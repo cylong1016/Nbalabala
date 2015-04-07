@@ -7,6 +7,8 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
+import utility.Constants;
+
 /**
  * 
  * @author Issac Ding
@@ -17,7 +19,7 @@ public class PlayerPortraitCache {
 	private static HashMap<String, Image> portraits = new HashMap<String, Image>();
 	
 	/** 存储球员头像的文件夹 */
-	private static final String PORTRAIT_PATH = "NBAdata/players/portrait/";
+	private static final String PORTRAIT_PATH = Constants.dataSourcePath + "players/portrait/";
 	
 	private static Image nullPortrait;
 	
@@ -67,5 +69,9 @@ public class PlayerPortraitCache {
 		} catch (IOException e) {
 			return nullPortrait;
 		}
+	}
+	
+	public static void clear() {
+		portraits.clear();
 	}
 }

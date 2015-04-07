@@ -186,6 +186,10 @@ public class SeasonData implements SeasonDataService {
 		File[] files = Utility.getSortedMatchFiles();
 		MatchesAccumulator accumulator = new MatchesAccumulator(playerRecords, teamRecords);
 		accumulator.accumulate(files);
+		Iterator<PlayerSeasonVO> itr = playerRecords.values().iterator();
+		while(itr.hasNext()) {
+			itr.next().update();
+		}
 	}
 	
 	/**
@@ -207,6 +211,11 @@ public class SeasonData implements SeasonDataService {
 	/** 向playerdata提供所有参加过比赛的球员的名字 */
 	public ArrayList<String> getPlayerNames() {
 		return new ArrayList<String>(playerRecords.keySet());
+	}
+	
+	public static void clear() {
+		playerRecords.clear();
+		teamRecords.clear();
 	}
 	
 }

@@ -25,11 +25,10 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService {
 	private SeasonDataService seasonData = new SeasonData();
 
 	/** 记录上一次返回给UI层，即UI层正在显示的球员列表 */
-	private ArrayList<PlayerSeasonVO> currentList = new ArrayList<PlayerSeasonVO>();
+	private ArrayList<PlayerSeasonVO> currentList = seasonData.getAllPlayerSeasonData();
 
 	/** 刚进入界面时调用此方法，得到的是全部的以名字排序的球员数据 */
 	public ArrayList<PlayerSeasonVO> getAllPlayersSortedByName() {
-		currentList = seasonData.getAllPlayerSeasonData();
 		sortPlayersByName(currentList);
 		return currentList;
 	}

@@ -48,7 +48,7 @@ public class PlayerAllSorter {
 			comparator = new Comparator<PlayerSeasonVO>() {
 
 				public int compare(PlayerSeasonVO p1, PlayerSeasonVO p2) {
-					return (int)(factor * (p1.getTimeDouble() - p2.getTimeDouble()) * 10000);
+					return (int)(factor * (p1.getMinutes() - p2.getMinutes()) * 10000);
 				}
 			};
 			break;

@@ -16,7 +16,7 @@ import enums.TeamState;
 public class Utility {
 	
 	/** 存储比赛信息的文件夹 */
-	public static String matchPath = "NBAdata/matches/"; 
+	public static String matchPath = Constants.dataSourcePath + "matches/"; 
 	
 	public static File[] getSortedMatchFiles(){
 		File dir = new File(matchPath);

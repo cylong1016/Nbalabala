@@ -173,7 +173,7 @@ public class PlayerAvgSorter {
 			comparator = new Comparator<PlayerSeasonVO>() {
 
 				public int compare(PlayerSeasonVO p1, PlayerSeasonVO p2) {
-					return (int)(factor * (p1.getTimeDoubleAvg() - p2.getTimeDoubleAvg()) * 10000);
+					return (int)(factor * (p1.getMinutesAvg() - p2.getMinutesAvg()) * 10000);
 				}
 			};
 			break;

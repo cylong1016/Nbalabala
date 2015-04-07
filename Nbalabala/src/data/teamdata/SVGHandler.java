@@ -17,6 +17,8 @@ import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.batik.transcoder.image.PNGTranscoder;
 
+import utility.Constants;
+
 /**
  * 
  * @author Issac Ding
@@ -31,7 +33,7 @@ public class SVGHandler {
 			return ImageIO.read(file);
 		} catch (Exception e) {
 			try {
-				convertSvgFile2Png(new File("NBAdata/teams/" + abbr + ".svg"), new File("temp/" + abbr +".png"));
+				convertSvgFile2Png(new File(Constants.dataSourcePath + "teams/" + abbr + ".svg"), new File("temp/" + abbr +".png"));
 				return ImageIO.read(new File("temp/" + abbr + ".png"));
 			} catch (Exception e2){
 				try {

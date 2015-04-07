@@ -1,5 +1,9 @@
 package utility;
 
+import data.playerdata.PlayerData;
+import data.playerdata.PlayerPortraitCache;
+import data.seasondata.SeasonData;
+import data.teamdata.TeamData;
 import enums.ScreenDivision;
 
 /**
@@ -11,6 +15,21 @@ public class Constants {
 	
 	/** 无资料的时候显示的提示 */
 	public static final String UNKNOWN = "无资料";
+	
+	public static String dataSourcePath = "NBAdata/";
+	
+	/** 记录数据目录已经变更了几次。如果在程序运行中第二次改变数据目录，需要清空已经读取的数据，同时由Controller控制返回首页 */
+	private static int dirChangeCount = 0;
+	public static void changeDataSourcePath(String newPath) {
+		dirChangeCount ++;
+		dataSourcePath = newPath;
+		if (dirChangeCount > 1) {
+			PlayerData.clear();
+			PlayerPortraitCache.clear();
+			SeasonData.clear();
+			TeamData.clear();
+		}
+	}
 	
 	public static final String [] TEAM_SEASON_HEADERS = {"序号", "球队名称", "胜场数", "负场数", "总场数", "胜率", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手",
 		"三分命中率", "罚球命中", "罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "进攻篮板效率", "防守篮板效率",

@@ -16,6 +16,7 @@ import java.util.Map.Entry;
 
 import javax.imageio.ImageIO;
 
+import utility.Constants;
 import vo.PlayerProfileVO;
 import data.seasondata.SeasonData;
 import dataservice.PlayerDataService;
@@ -32,10 +33,10 @@ public class PlayerData implements PlayerDataService{
 	private static HashMap<String, PlayerProfileVO> players = new HashMap<String, PlayerProfileVO>();
 
 	/** 存储球员信息的文件夹 */
-	private static final String INFO_Path = "NBAdata/players/info/";
+	private static final String INFO_Path = Constants.dataSourcePath + "players/info/";
 	
 	/** 存储全身像的文件夹 */
-	private static final String ACTION_Path = "NBAdata/players/action/";
+	private static final String ACTION_Path = Constants.dataSourcePath + "players/action/";
 	
 	public PlayerData() {
 		if (players.size() == 0) loadPlayers();
@@ -171,6 +172,10 @@ public class PlayerData implements PlayerDataService{
 		};
 		Collections.sort(result, comparator);
 		return result;
+	}
+	
+	public static void clear() {
+		players.clear();
 	}
 
 }

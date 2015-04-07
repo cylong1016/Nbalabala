@@ -29,7 +29,7 @@ public class PlayerSeasonVO {
 	public int firstCount;
 
 	/** 时间，单位是秒 */
-	public double time;
+	public int time;
 
 	/** 投篮命中 */
 	public int fieldGoal;
@@ -82,7 +82,7 @@ public class PlayerSeasonVO {
 	//以下记录球队和对手数据以计算各种率
 
 	/** 球队总上场时间 ，单位为秒 */
-	public double teamTime;
+	public int teamTime;
 
 	public int teamOffensiveRebound;
 
@@ -142,24 +142,28 @@ public class PlayerSeasonVO {
 	}
 
 	public double getFirstCountAvg() {
-		if(matchCount == 0) {
-			return 0;
-		}
-		return (double)firstCount / matchCount;
+		return firstCountAvg;
 	}
 
 	public String getTime() {
-		int timeInt = (int)time;
-		int minutes = timeInt / 60;
-		int seconds = timeInt % 60;
+		int minutes = time / 60;
+		int seconds = time % 60;
 		return minutes + ":" + seconds;
 	}
 
 	public String getTimeAvg() {
-		int timeInt = (int)(time / matchCount);
+		int timeInt = (int)((double)time / matchCount);
 		int minutes = timeInt / 60;
 		int seconds = timeInt % 60;
 		return minutes + ":" + seconds;
+	}
+	
+	public double getMinutes() {
+		return minutes;
+	}
+	
+	public double getMinutesAvg() {
+		return minutesAvg;
 	}
 
 	public int getFieldGoal() {
@@ -167,10 +171,7 @@ public class PlayerSeasonVO {
 	}
 
 	public double getFieldGoalAvg() {
-		if(matchCount == 0) {
-			return 0;
-		}
-		return (double)fieldGoal / matchCount;
+		return fieldGoalAvg;
 	}
 
 	public int getFieldAttempt() {
@@ -178,17 +179,11 @@ public class PlayerSeasonVO {
 	}
 
 	public double getFieldAttemptAvg() {
-		if(matchCount == 0) {
-			return 0;
-		}
-		return (double)fieldAttempt / matchCount;
+		return fieldAttemptAvg;
 	}
 
 	public double getFieldPercent() {
-		if (fieldAttempt == 0) {
-			return 0;
-		}
-		return (double)fieldGoal / fieldAttempt;
+		return fieldPercent;
 	}
 
 	public int getThreePointGoal() {
@@ -196,10 +191,7 @@ public class PlayerSeasonVO {
 	}
 
 	public double getThreePointGoalAvg() {
-		if(matchCount == 0) {
-			return 0;
-		}
-		return (double)threePointGoal / matchCount;
+		return threePointGoalAvg;
 	}
 
 	public int getThreePointAttempt() {
@@ -207,17 +199,11 @@ public class PlayerSeasonVO {
 	}
 
 	public double getThreePointAttemptAvg() {
-		if(matchCount == 0) {
-			return 0;
-		}
-		return (double)threePointAttempt / matchCount;
+		return threePointAttemptAvg;
 	}
 
 	public double getThreePointPercent() {
-		if (threePointAttempt == 0) {
-			return 0; // 防止除数为0
-		}
-		return (double)threePointGoal / threePointAttempt;
+		return threePointPercent;
 	}
 
 	public int getFreeThrowGoal() {
@@ -225,10 +211,7 @@ public class PlayerSeasonVO {
 	}
 
 	public double getFreethrowGoalAvg() {
-		if(matchCount == 0) {
-			return 0;
-		}
-		return (double)freethrowGoal / matchCount;
+		return freethrowGoalAvg;
 	}
 
 	public int getFreeThrowAttempt() {
@@ -236,17 +219,11 @@ public class PlayerSeasonVO {
 	}
 
 	public double getFreethrowAttemptAvg() {
-		if(matchCount == 0) {
-			return 0;
-		}
-		return (double)freethrowAttempt / matchCount;
+		return freethrowAttemptAvg;
 	}
 
 	public double getFreeThrowPercent() {
-		if(freethrowAttempt == 0) {
-			return 0;
-		}
-		return (double)freethrowGoal / freethrowAttempt;
+		return freethrowPercent;
 	}
 
 	public int getOffensiveRebound() {
@@ -254,10 +231,7 @@ public class PlayerSeasonVO {
 	}
 
 	public double getOffensiveReboundAvg() {
-		if(matchCount == 0) {
-			return 0;
-		}
-		return (double)offensiveRebound / matchCount;
+		return offensiveReboundAvg;
 	}
 
 	public int getDefensiveRebound() {
@@ -265,10 +239,7 @@ public class PlayerSeasonVO {
 	}
 
 	public double getDefensiveReboundAvg() {
-		if(matchCount == 0) {
-			return 0;
-		}
-		return (double)defensiveRebound / matchCount;
+		return defensiveReboundAvg;
 	}
 
 	public int getTotalRebound() {
@@ -276,10 +247,7 @@ public class PlayerSeasonVO {
 	}
 
 	public double getTotalReboundAvg() {
-		if(matchCount == 0) {
-			return 0;
-		}
-		return (double)totalRebound / matchCount;
+		return totalReboundAvg;
 	}
 
 	public int getAssist() {
@@ -287,10 +255,7 @@ public class PlayerSeasonVO {
 	}
 
 	public double getAssistAvg() {
-		if(matchCount == 0) {
-			return 0;
-		}
-		return (double)assist / matchCount;
+		return assistAvg;
 	}
 
 	public int getSteal() {
@@ -298,10 +263,7 @@ public class PlayerSeasonVO {
 	}
 
 	public double getStealAvg() {
-		if(matchCount == 0) {
-			return 0;
-		}
-		return (double)steal / matchCount;
+		return stealAvg;
 	}
 
 	public int getBlock() {
@@ -309,10 +271,7 @@ public class PlayerSeasonVO {
 	}
 
 	public double getBlockAvg() {
-		if(matchCount == 0) {
-			return 0;
-		}
-		return (double)block / matchCount;
+		return blockAvg;
 	}
 
 	public int getTurnover() {
@@ -320,10 +279,7 @@ public class PlayerSeasonVO {
 	}
 
 	public double getTurnoverAvg() {
-		if(matchCount == 0) {
-			return 0;
-		}
-		return (double)turnover / matchCount;
+		return turnoverAvg;
 	}
 
 	public int getFoul() {
@@ -331,10 +287,7 @@ public class PlayerSeasonVO {
 	}
 
 	public double getFoulAvg() {
-		if(matchCount == 0) {
-			return 0;
-		}
-		return (double)foul / matchCount;
+		return foulAvg;
 	}
 
 	public int getScore() {
@@ -342,105 +295,59 @@ public class PlayerSeasonVO {
 	}
 
 	public double getScoreAvg() {
-		if(matchCount == 0) {
-			return 0;
-		}
-		return (double)score / matchCount;
+		return scoreAvg;
 	}
 
 	public int getEfficiency() {
-		return score + totalRebound + assist + steal + block - fieldAttempt + fieldGoal - freethrowAttempt
-				+ freethrowGoal - turnover;
+		return efficiency;
 	}
 
 	public double getGmSc() {
-		return score + 0.4 * fieldGoal - 0.7 * fieldAttempt - 0.4 * (freethrowAttempt - freethrowGoal) + 0.7
-				* offensiveRebound + 0.3 * defensiveRebound + steal + 0.7 * assist + 0.7 * block - 0.4 * foul
-				- turnover;
+		return gmsc;
 	}
 
 	public double getRealFieldPercent() {
-		if (fieldAttempt == 0) {
-			return 0;
-		}
-		return score / (2 * (fieldAttempt + 0.44 * freethrowAttempt));
+		return realFieldPercent;
 	}
 
 	public double getFieldEff() {
-		if (fieldAttempt == 0) {
-			return 0;
-		}
-		return (fieldGoal + 0.5 * threePointGoal) / fieldAttempt;
+		return fieldEff;
 	}
 
 	public double getOffensiveReboundPercent() {
-		if (matchCount == 0) {
-			return 0;
-		}
-		return offensiveRebound * (teamTime / 5) / time / (teamOffensiveRebound + oppoOffensiveRebound);
+		return offensiveReboundPercent;
 	}
 
 	public double getDefensiveReboundPercent() {
-		if (matchCount == 0) {
-			return 0;
-		}
-		return defensiveRebound * (teamTime / 5) / time / (teamDefensiveRebound + oppoDefensiveRebound);
+		return defensiveReboundPercent;
 	}
 
 	public double getTotalReboundPercent() {
-		if (matchCount == 0) {
-			return 0;
-		}
-		return totalRebound * (teamTime / 5) / time / (teamTotalRebound + oppoTotalRebound);
+		return totalReboundPercent;
 	}
 
 	public double getAssistPercent() {
-		if (matchCount == 0) {
-			return 0;
-		}
-		return assist / (time / (teamTime / 5) * teamFieldGoal - fieldGoal);
+		return assistPercent;
 	}
 
 	public double getStealPercent() {
-		double oppoAttack = oppoFieldAttempt + 0.4 * oppoFreethrowAttempt - 1.07
-									* ((double)oppoOffensiveRebound / (oppoOffensiveRebound + teamDefensiveRebound)
-									* (oppoFieldAttempt - oppoFieldGoal)) + 1.07 * oppoTurnover;
-		if(matchCount == 0 || oppoAttack == 0) {
-			return 0;
-		}
-		return steal * (teamTime / 5) / time / oppoAttack;
+		return stealPercent;
 	}
 
 	public double getBlockPercent() {
-		if (matchCount == 0 || oppoFieldAttempt - oppoThreePointAttempt == 0) {
-			return 0;
-		}
-		return block * (teamTime / 5) / time / (oppoFieldAttempt - oppoThreePointAttempt);
+		return blockPercent;
 	}
 
 	public double getTurnOverPercent() {
-		double temp = (fieldAttempt - threePointAttempt + 0.44 * freethrowAttempt + turnover);
-		if(temp == 0) {
-			return 0;
-		}
-		return turnover / temp;
+		return turnOverPercent;
 	}
 
 	public double getFoulPercent() {
-		if (matchCount == 0) {
-			return 0;
-		}
-		double temp = (fieldAttempt - threePointAttempt + 0.44 * freethrowAttempt + foul);
-		if (temp == 0) return 0;
-		return foul / temp;
+		return foulPercent;
 	}
 
 	public double getUsePercent() {
-		if (matchCount == 0) {
-			return 0;
-		}
-		return (fieldAttempt + 0.44 * freethrowAttempt + turnover) * (teamTime / 5) / time
-				/ (teamFieldAttempt + 0.44 * teamFreethrowAttempt + teamTurnover);
+		return usePercent;
 	}
 
 	public char getPosition() {
@@ -452,32 +359,126 @@ public class PlayerSeasonVO {
 	}
 
 	public double getDoubleDoubleAvg() {
-		if (matchCount == 0) {
-			return 0;
-		}
-		return (double)doubleDoubleCount / matchCount;
+		return doubleDoubleAvg;
 	}
 
 	/** 三项相加 */
 	public int getScoreReboundAssist() {
-		return score + totalRebound + assist;
+		return scoreReboundAssist;
 	}
-
+	
 	public double getScoreReboundAssistAvg() {
-		if (matchCount == 0) {
-			return 0;
-		}
-		return (double)getScoreReboundAssist() / matchCount;
+		return scoreReboundAssistAvg;
 	}
 
-	public double getTimeDouble() {
-		return time;
-	}
+	public double fieldGoalAvg;
+	public double fieldAttemptAvg;
+	public double fieldPercent;
+	public double threePointGoalAvg;
+	public double threePointAttemptAvg;
+	public double threePointPercent;
+	public double freethrowGoalAvg;
+	public double freethrowAttemptAvg;
+	public double freethrowPercent;
+	
+	public double firstCountAvg;
+	public double minutes;
+	public double minutesAvg;
+	public double offensiveReboundAvg;
+	public double defensiveReboundAvg;
+	public double totalReboundAvg;
+	public double assistAvg;
+	public double stealAvg;
+	public double blockAvg;
+	public double foulAvg;
+	public double turnoverAvg;
+	public double scoreAvg;
+	
+	public int efficiency;
+	public double realFieldPercent;
+	public double fieldEff;
+	public double totalReboundPercent;
+	public double stealPercent;
+	public double blockPercent;
+	public double turnOverPercent;
+	public double foulPercent;
+	public double doubleDoubleAvg;
+	public int scoreReboundAssist;
+	public double scoreReboundAssistAvg;
+	public double usePercent;
+	public double gmsc;
+	public double assistPercent;
+	public double offensiveReboundPercent;
+	public double defensiveReboundPercent;
+	
+	public void update() {
+		if (matchCount != 0) {
+			
+			double timeFactor = time / ((double)teamTime / 5);
+			
+			usePercent = (fieldAttempt + 0.44 * freethrowAttempt + turnover) * timeFactor
+					/ (teamFieldAttempt + 0.44 * teamFreethrowAttempt + teamTurnover);
+			assistPercent = assist / (timeFactor * teamFieldGoal - fieldGoal);
+			offensiveReboundPercent=offensiveRebound * timeFactor / (teamOffensiveRebound + oppoOffensiveRebound);
+			defensiveReboundPercent=defensiveRebound * timeFactor / (teamDefensiveRebound + oppoDefensiveRebound);
+			scoreReboundAssistAvg = (double)scoreReboundAssist / matchCount;
+			doubleDoubleAvg = (double)doubleDoubleCount / matchCount;
+			
+			double temp = (fieldAttempt - threePointAttempt + 0.44 * freethrowAttempt + foul);
+			if (temp != 0) foulPercent = foul / temp;
+			
+			temp = (fieldAttempt - threePointAttempt + 0.44 * freethrowAttempt + turnover);
+			if(temp != 0) turnOverPercent = turnover / temp;
+			
+			if (oppoFieldAttempt - oppoThreePointAttempt != 0) 
+				blockPercent = block * timeFactor / (oppoFieldAttempt - oppoThreePointAttempt);
+			
+			double oppoAttack = oppoFieldAttempt + 0.4 * oppoFreethrowAttempt - 1.07
+					* ((double)oppoOffensiveRebound / (oppoOffensiveRebound + teamDefensiveRebound)
+					* (oppoFieldAttempt - oppoFieldGoal)) + 1.07 * oppoTurnover;
+			if(oppoAttack != 0) 
+				stealPercent = steal * timeFactor / oppoAttack;
+			
+			totalReboundPercent = totalRebound * timeFactor / (teamTotalRebound + oppoTotalRebound);
+			
+			if (fieldAttempt != 0) {
+				fieldEff = (fieldGoal + 0.5 * threePointGoal) / fieldAttempt;
+			}
+			
+			realFieldPercent = score / (2 * (fieldAttempt + 0.44 * freethrowAttempt));
+			
+			fieldGoalAvg = (double)fieldGoal / matchCount;
+			fieldAttemptAvg = (double)fieldAttempt / matchCount;
+			if (fieldAttempt != 0) fieldPercent = (double)fieldGoal / fieldAttempt;
+			
+			threePointGoalAvg = (double)threePointGoal / matchCount;
+			threePointAttemptAvg = (double)threePointAttempt / matchCount;
+			if (threePointAttempt != 0) threePointPercent = (double)threePointGoal / threePointAttempt;
+			
+			freethrowGoalAvg = (double)freethrowGoal / matchCount;
+			freethrowAttemptAvg = (double)freethrowAttempt / matchCount;
+			if (freethrowAttempt != 0) freethrowPercent = (double)freethrowGoal / freethrowAttempt;
+			
+			minutes = time / 60;
+			minutesAvg = minutes / matchCount;
 
-	public double getTimeDoubleAvg() {
-		if (matchCount == 0) {
-			return 0;
+			firstCountAvg = (double) firstCount / matchCount;
+			offensiveReboundAvg = (double) offensiveRebound / matchCount;
+			defensiveReboundAvg = (double) defensiveRebound / matchCount;
+			totalReboundAvg = (double) totalRebound / matchCount;
+			assistAvg = (double) assist / matchCount;
+			stealAvg = (double) steal / matchCount;
+			blockAvg = (double) block / matchCount;
+			foulAvg = (double) foul / matchCount;
+			turnoverAvg = (double) turnover / matchCount;
 		}
-		return time / matchCount;
+		
+		gmsc = score + 0.4 * fieldGoal - 0.7 * fieldAttempt - 0.4 * (freethrowAttempt - freethrowGoal) + 0.7
+				* offensiveRebound + 0.3 * defensiveRebound + steal + 0.7 * assist + 0.7 * block - 0.4 * foul
+				- turnover;
+		scoreReboundAssist = score + totalRebound + assist;
+		efficiency =  score + totalRebound + assist + steal + block - fieldAttempt + fieldGoal - freethrowAttempt
+				+ freethrowGoal - turnover;
+		
 	}
 }
