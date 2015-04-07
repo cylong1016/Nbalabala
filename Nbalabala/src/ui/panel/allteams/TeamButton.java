@@ -1,5 +1,6 @@
 package ui.panel.allteams;
 
+import ui.UIConfig;
 import ui.common.button.ImgButton;
 
 /**
@@ -13,8 +14,11 @@ public class TeamButton extends ImgButton{
 	private static final long serialVersionUID = 3789882441719172108L;
 	/** 标记自己是哪知球队 */
 	String team;
-	public TeamButton(String imgPath, int x, int y, String stopImgPath, String pressOnImgPath) {
-		super(imgPath, x, y, stopImgPath, pressOnImgPath);
+	private static final String MOUSE_ON_PATH = UIConfig.IMG_PATH + "teams/mouseOn.png";
+	private static final String OFF_PATH = UIConfig.IMG_PATH + "teams/tran.png";
+	
+	public TeamButton(int x, int y) {
+		super(OFF_PATH, x, y, MOUSE_ON_PATH, MOUSE_ON_PATH);
 	}
 	
 	public TeamButton(String team){
