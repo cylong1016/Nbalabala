@@ -20,8 +20,6 @@ public class SeasonInputPanel extends JPanel{
 	
 	/** serialVersionUID */
 	private static final long serialVersionUID = 8335944304725379626L;
-	private ImgButton leftUpButton;
-	private ImgButton leftDownButton;
 	private ImgButton rightUpButton;
 	private ImgButton rightDownButton;
 	private JLabel leftYearLabel;
@@ -36,20 +34,12 @@ public class SeasonInputPanel extends JPanel{
 		rightYearLabel = new JLabel(defaultSeason[1]);
 		middleLabel = new JLabel("-");
 		textLabel = new JLabel("赛季");
-		leftUpButton = new ImgButton("images/SeasonInputUpOff.png", "images/SeasonInputUpOn.png");
 		rightUpButton = new ImgButton("images/SeasonInputUpOff.png", "images/SeasonInputUpOn.png");
-		leftDownButton = new ImgButton("images/SeasonInputDownOff.png", "images/SeasonInputDownOn.png");
 		rightDownButton = new ImgButton("images/SeasonInputDownOff.png", "images/SeasonInputDownOn.png");
 		this.setSize(142, 26);
 		
 		leftYearLabel.setBounds(0,0,30,26);
 		this.add(leftYearLabel);
-		
-		leftUpButton.setBounds(30, 0, 22, 13);
-		this.add(leftUpButton);
-		
-		leftDownButton.setBounds(30,14,22,13);
-		this.add(leftDownButton);
 		
 		middleLabel.setBounds(52, 0, 5, 26);
 		this.add(middleLabel);
@@ -74,25 +64,11 @@ public class SeasonInputPanel extends JPanel{
 	}
 	
 	private void setAction() {
-		leftUpButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				leftYearLabel.setText(yearIncrease(leftYearLabel.getText()));
-				rightYearLabel.setText(yearIncrease(rightYearLabel.getText()));
-			}
-		});
 		rightUpButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				leftYearLabel.setText(yearIncrease(leftYearLabel.getText()));
 				rightYearLabel.setText(yearIncrease(rightYearLabel.getText()));
-			}
-		});
-		leftDownButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				leftYearLabel.setText(yearDecrease(leftYearLabel.getText()));
-				rightYearLabel.setText(yearDecrease(rightYearLabel.getText()));
 			}
 		});
 		rightDownButton.addActionListener(new ActionListener() {
