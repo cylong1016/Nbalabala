@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import utility.Utility;
 import vo.PlayerSeasonVO;
@@ -22,6 +23,9 @@ public class MatchesAccumulator {
 	private HashMap<String, HashMap<String, PlayerSeasonVO>> allPlayerRecords;
 	private HashMap<String, HashMap<String, TeamSeasonVO>> allTeamRecords;
 	
+	private HashSet<PlayerSeasonVO> playerUpdated = new HashSet<PlayerSeasonVO>();
+	private HashSet<TeamSeasonVO> teamUpdated = new HashSet<TeamSeasonVO>(); 
+	
 	public MatchesAccumulator(HashMap<String, HashMap<String, PlayerSeasonVO>> players,
 			HashMap<String, HashMap<String, TeamSeasonVO>> teams) {
 		super();
@@ -29,12 +33,23 @@ public class MatchesAccumulator {
 		this.allTeamRecords = teams;
 	}
 	
+	public HashSet<PlayerSeasonVO> getUpdatedPlayers() {
+		return playerUpdated;
+	}
+	
+	public HashSet<TeamSeasonVO> getUpdatedTeams() {
+		return teamUpdated;
+	}
+	
 	/**
 	 * @param files 按时间排序好的比赛文件
 	 * @author Issac Ding
 	 * @version 2015年4月1日  下午10:16:53
+	 * needRecord表示是否需要把发生更新的球员名和球队缩写记录到HashSet中
 	 */
-	public void accumulate(File[] files) {
+	public void accumulate(File[] files, boolean needRecordUpdate) {
+		playerUpdated.clear();
+		teamUpdated.clear();
 		BufferedReader br = null;
 
 		for (File file : files) {
@@ -98,6 +113,8 @@ public class MatchesAccumulator {
 					if (!playerRecords.containsKey(s[0]))
 						playerRecords.put(s[0], new PlayerSeasonVO(s[0]));
 					PlayerSeasonVO playerRecord = playerRecords.get(s[0]);
+					
+					if (needRecordUpdate) playerUpdated.add(playerRecord);
 
 					// 如果这条记录是最新的，更新其球队和位置
 					if (playerRecord.isThisRecordLatest(month, day)) {
@@ -122,6 +139,8 @@ public class MatchesAccumulator {
 					if (!playerRecords.containsKey(s[0]))
 						playerRecords.put(s[0], new PlayerSeasonVO(s[0]));
 					PlayerSeasonVO playerRecord = playerRecords.get(s[0]);
+					
+					if (needRecordUpdate) playerUpdated.add(playerRecord);
 
 					// 如果这条记录是最新的，更新其球队和位置
 					if (playerRecord.isThisRecordLatest(month, day)) {
@@ -160,6 +179,11 @@ public class MatchesAccumulator {
 
 				teamAccumulate(homeTeamRecord, homeTeamData, roadTeamData);
 				teamAccumulate(roadTeamRecord, roadTeamData, homeTeamData);
+				
+				if (needRecordUpdate) {
+					teamUpdated.add(homeTeamRecord);
+					teamUpdated.add(roadTeamRecord);
+				}
 
 				if (homePoints > roadPoints) {
 					homeTeamRecord.wins++;
@@ -293,7 +317,7 @@ public class MatchesAccumulator {
 		teamRecord.oppoFieldGoal += oppoData[3];
 		teamRecord.oppoFreethrowAttempt += oppoData[8];
 		teamRecord.oppoOffensiveRebound += oppoData[9];
-		teamRecord.oppoGoal += oppoData[17];
+		teamRecord.oppoScore += oppoData[17];
 		teamRecord.oppoTurnover += oppoData[15];
 	}
 

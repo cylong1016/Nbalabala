@@ -52,7 +52,7 @@ public class TeamSeasonAnalysis implements TeamSeasonBLService {
 	/** 平均数据排序时调用此方法，order的AS为升序，DE为降序 */
 	@Override
 	public ArrayList<TeamSeasonVO> getResortedTeamAvgData(TeamAvgSortBasis basis, SortOrder order) {
-		TeamAvgSorter.sort(currentList, basis, order);
+		new TeamAvgSorter().sort(currentList, basis, order);
 		return currentList;
 	}
 

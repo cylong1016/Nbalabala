@@ -489,6 +489,7 @@ public class PlayerSeasonVO {
 			blockAvg = (double) block / matchCount;
 			foulAvg = (double) foul / matchCount;
 			turnoverAvg = (double) turnover / matchCount;
+			scoreAvg = (double) score / matchCount;
 			
 			if (matchCount > 9) {
 				scorePromotion = scoreQueue.getPromotion();
@@ -547,4 +548,8 @@ public class PlayerSeasonVO {
 			else return false;
 		}
 	}
+	
+	public int hashCode() {
+		return teamName.hashCode();
+    }
 }

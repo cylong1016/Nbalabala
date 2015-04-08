@@ -20,6 +20,12 @@ public interface SeasonDataService {
 
 	/** 返回全部球员赛季数据 */
 	public ArrayList<PlayerSeasonVO> getAllPlayerSeasonData(String season);
+	
+	/** 返回最近赛季全部球员数据 */
+	public ArrayList<PlayerSeasonVO> getAllPlayerRecentSeasonData();
+	
+	/** 返回最近赛季全部球队数据 */
+	public ArrayList<TeamSeasonVO> getAllTeamRecentSeasonData();
 
 	/** 根据赛区返回符合条件的记录 */
 	public ArrayList<TeamSeasonVO> getScreenedTeamSeasonData(

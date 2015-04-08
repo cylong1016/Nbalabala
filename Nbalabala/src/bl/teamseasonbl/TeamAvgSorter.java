@@ -15,9 +15,9 @@ import enums.TeamAvgSortBasis;
  */
 public class TeamAvgSorter {
 
-	private static int factor = 1;
+	private int factor = 1;
 
-	public static void sort(ArrayList<TeamSeasonVO> teams, TeamAvgSortBasis basis, SortOrder order) {
+	public void sort(ArrayList<TeamSeasonVO> teams, TeamAvgSortBasis basis, SortOrder order) {
 		Comparator<TeamSeasonVO> comparator = null;
 
 		if (order == SortOrder.DE)

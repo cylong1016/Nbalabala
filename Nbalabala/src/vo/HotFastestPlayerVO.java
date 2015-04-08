@@ -10,17 +10,19 @@ import java.awt.Image;
 public class HotFastestPlayerVO {
 	
 	public HotFastestPlayerVO(Image portrait, String name, String teamAbbr,
-			double property) {
+			String position, double property) {
 		super();
 		this.portrait = portrait;
 		this.name = name;
 		this.teamAbbr = teamAbbr;
+		this.position = position;
 		this.property = property;
 	}
 	
 	private Image portrait;
 	private String name;
 	private String teamAbbr;
+	private String position;
 	private double property;
 	
 	public Image getPortrait() {
@@ -31,6 +33,9 @@ public class HotFastestPlayerVO {
 	}
 	public String getTeamAbbr() {
 		return teamAbbr;
+	}
+	public String getPosition() {
+		return position;
 	}
 	public double getProperty() {
 		return property;

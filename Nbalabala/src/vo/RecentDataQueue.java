@@ -39,6 +39,7 @@ public class RecentDataQueue {
 				index ++;
 				if (index == 10) index = 0;
 			}
+			if (formerFiveSum == 0) return 0;
 			for (; i<10; i++) {
 				latterFiveSum += recent[index];
 				index ++;

@@ -4,6 +4,7 @@ package data.seasondata;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -205,12 +206,23 @@ public class SeasonData implements SeasonDataService {
 	
 	private void loadMatches() {
 		File[] files = Utility.getSortedMatchFiles();
+		
 		MatchesAccumulator accumulator = new MatchesAccumulator(allPlayerRecords, allTeamRecords);
-		accumulator.accumulate(files);
-		Iterator<Entry<String, HashMap<String, PlayerSeasonVO>>> itr = allPlayerRecords.entrySet().iterator();
-		while(itr.hasNext()) {
-			HashMap<String, PlayerSeasonVO> vos = itr.next().getValue();
+		accumulator.accumulate(files, false);
+		
+		Iterator<Entry<String, HashMap<String, PlayerSeasonVO>>> playerItr = allPlayerRecords.entrySet().iterator();
+		while(playerItr.hasNext()) {
+			HashMap<String, PlayerSeasonVO> vos = playerItr.next().getValue();
 			Iterator<Entry<String, PlayerSeasonVO>> iterator = vos.entrySet().iterator();
+			while (iterator.hasNext()) {
+				iterator.next().getValue().update();
+			}
+		}
+		
+		Iterator<Entry<String, HashMap<String, TeamSeasonVO>>> teamItr = allTeamRecords.entrySet().iterator();
+		while(teamItr.hasNext()) {
+			HashMap<String, TeamSeasonVO> vos = teamItr.next().getValue();
+			Iterator<Entry<String, TeamSeasonVO>> iterator = vos.entrySet().iterator();
 			while (iterator.hasNext()) {
 				iterator.next().getValue().update();
 			}
@@ -265,14 +277,70 @@ public class SeasonData implements SeasonDataService {
 		for (int i=0;i<size;i++) {
 			newFiles[i] = files.get(i);
 		}
-		new MatchesAccumulator(allPlayerRecords, allTeamRecords).accumulate(newFiles);
+		MatchesAccumulator accumulator = 
+				new MatchesAccumulator(allPlayerRecords, allTeamRecords);
+		accumulator.accumulate(newFiles, true);
+		
+		HashSet<PlayerSeasonVO> playerUpdated = accumulator.getUpdatedPlayers();
+		HashSet<TeamSeasonVO> teamUpdated = accumulator.getUpdatedTeams();
+		
+		for (PlayerSeasonVO vo : playerUpdated) {
+			vo.update();
+		}
+		for (TeamSeasonVO vo : teamUpdated) {
+			vo.update();
+		}
 	}
 	
 	/** 发现有文件被删除时，重新读取所有文件 */
 	public void reloadMatches() {
 		allPlayerRecords.clear();
 		allTeamRecords.clear();
-		new MatchesAccumulator(allPlayerRecords, allTeamRecords).accumulate(Utility.getSortedMatchFiles());
+		new MatchesAccumulator(allPlayerRecords, allTeamRecords).accumulate(Utility.getSortedMatchFiles(), false);
+	}
+
+	/**
+	 * @see dataservice.SeasonDataService#getAllPlayerRecentSeasonData()
+	 */
+	@Override
+	public ArrayList<PlayerSeasonVO> getAllPlayerRecentSeasonData() {
+		HashMap<String, PlayerSeasonVO> map = allPlayerRecords.get(getRecentSeason());
+		if (map == null) {
+			return new ArrayList<PlayerSeasonVO>();
+		}else {
+			return new ArrayList<PlayerSeasonVO>(map.values());
+		}
+	}
+	
+	private String getRecentSeason() {
+		Iterator<Entry<String, HashMap<String, TeamSeasonVO>>> itr = 
+				allTeamRecords.entrySet().iterator();
+		int lastStartYear = 0;
+		String lastSeason = null;
+		while(itr.hasNext()) {
+			String season = itr.next().getKey();
+			String [] seasonS = season.split("-");
+			int startYear = Integer.parseInt(seasonS[0]);
+			if (startYear > 20) startYear -= 100;
+			if (startYear > lastStartYear) {
+				lastSeason = season;
+				lastStartYear = startYear;
+			}
+		}
+		return lastSeason == null? "13-14": lastSeason;
+	}
+
+	/**
+	 * @see dataservice.SeasonDataService#getAllTeamRecentSeasonData()
+	 */
+	@Override
+	public ArrayList<TeamSeasonVO> getAllTeamRecentSeasonData() {
+		HashMap<String, TeamSeasonVO> map = allTeamRecords.get(getRecentSeason());
+		if (map == null) {
+			return new ArrayList<TeamSeasonVO>();
+		}else {
+			return new ArrayList<TeamSeasonVO>(map.values());
+		}
 	}
 	
 }
