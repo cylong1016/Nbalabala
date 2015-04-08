@@ -1,4 +1,4 @@
-package ui;
+package ui.common.date;
 
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
@@ -35,6 +35,8 @@ import javax.swing.PopupFactory;
 import javax.swing.SwingUtilities;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
+
+import ui.UIConfig;
 
 /**
  * 龙哥：这个类原本是这样的：原来是一个显示"2015年3月21日"的panel，点击之后，弹出一个大的panel，在这个大的panel上选择日期

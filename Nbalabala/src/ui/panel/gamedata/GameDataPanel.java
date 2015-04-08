@@ -6,10 +6,10 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Date;
 
-import ui.DateChooser;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.comboBox.MyComboBox;
+import ui.common.date.NewDateChooser;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.MatchInfoTable;
@@ -55,7 +55,7 @@ public class GameDataPanel extends BottomPanel {
 	int analyX = 825, analyY = 293;
 
 	MatchQueryBLService matchQuery = new MatchQuery();
-	DateChooser dateChooser;
+	NewDateChooser dateChooser;
 	ArrayList<MatchProfileVO> matchProfile;
 	/** 画线 */
 	GameDataButton[] detailImg;
@@ -94,7 +94,7 @@ public class GameDataPanel extends BottomPanel {
 
 	public void addConfirmBtn() {
 		confirmBtn1 = new ImgButton(confirmPath, 917, 123, confirmClickPath, confirmOnPath);
-		confirmBtn2 = new ImgButton(confirmPath, 450, box1Y, confirmClickPath, confirmOnPath);
+		confirmBtn2 = new ImgButton(confirmPath, 450, 123, confirmClickPath, confirmOnPath);
 		this.add(confirmBtn1);
 		this.add(confirmBtn2);
 		confirmBtn1.addMouseListener(new MouseAdapter() {
@@ -156,8 +156,8 @@ public class GameDataPanel extends BottomPanel {
 	 * @version 2015年3月21日 下午4:29:57
 	 */
 	public void addDateChooser() {
-		dateChooser = new DateChooser();
-		MainController.addDateChooserPanel(this, dateChooser, 257, box1Y-3);
+		dateChooser = new NewDateChooser();
+		MainController.addDateChooserPanel(this, dateChooser, 140, box1Y-5,307,180);
 	}
 
 	/**

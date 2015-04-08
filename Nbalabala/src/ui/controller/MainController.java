@@ -159,9 +159,9 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月21日 下午1:53:17
 	 */
-	public static void addDateChooserPanel(JPanel panelBottom, JPanel panelAdd, int x, int y) {
+	public static void addDateChooserPanel(JPanel panelBottom, JPanel panelAdd, int x, int y,int width,int height) {
 		panelAdd.setVisible(true);
-		panelAdd.setBounds(x, y, 153, 30);
+		panelAdd.setBounds(x, y, width, height);
 		panelBottom.add(panelAdd);
 	}
 

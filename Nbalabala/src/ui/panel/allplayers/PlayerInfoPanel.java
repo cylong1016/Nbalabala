@@ -206,6 +206,8 @@ public class PlayerInfoPanel extends BottomPanel {
 		rowData[0][34] = df.format(playerSeason.getTurnOverPercent());
 		rowData[0][35] = df.format(playerSeason.getUsePercent());
 
+		rowData[1][1] = String.valueOf(playerSeason.getMatchCount());
+		rowData[1][2] = String.valueOf(playerSeason.getFirstCount());
 		rowData[1][3] = playerSeason.getTimeAvg();
 		rowData[1][4] = df.format(playerSeason.getFieldGoalAvg());
 		rowData[1][5] = df.format(playerSeason.getFieldAttemptAvg());

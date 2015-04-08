@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import ui.DateChooser;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
+import ui.common.date.DateChooser;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.MatchInfoTableFactory;
@@ -85,7 +85,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 
 	public void addDateChooser() {
 		dateChooser = new DateChooser();
-		MainController.addDateChooserPanel(this, dateChooser, 722, 245);
+		MainController.addDateChooserPanel(this, dateChooser, 722, 245,153,30);
 	}
 
 	public void addFindButton() {
