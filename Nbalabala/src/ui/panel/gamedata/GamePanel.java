@@ -82,7 +82,6 @@ public class GamePanel extends BottomPanel {
 		playerQuery = new PlayerQuery();
 		getScore();
 		getTeam();
-		getDetailVO();
 		addButton();
 		addLabel();
 		addTime();
@@ -115,16 +114,6 @@ public class GamePanel extends BottomPanel {
 		}
 	}
 
-	/**
-	 * 获得详细的vo
-	 * 
-	 * @author lsy
-	 * @version 2015年3月22日 下午6:44:44
-	 */
-	public void getDetailVO() {
-		teamVO_1 = teamQuery.getTeamDetailByAbbr(teamShort1);
-		teamVO_2 = teamQuery.getTeamDetailByAbbr(teamShort2);
-	}
 
 	public void initSetTabel() {
 		matchVO = matchQuery.getMatchDetail(matchPro.getSeason(), matchPro.getTime(), teamShort1, teamShort2);

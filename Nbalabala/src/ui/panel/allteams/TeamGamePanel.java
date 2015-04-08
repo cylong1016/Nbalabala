@@ -18,7 +18,6 @@ import ui.common.table.MatchInfoTableFactory;
 import ui.controller.MainController;
 import ui.panel.gamedata.GameDataPanel;
 import vo.MatchProfileVO;
-import vo.TeamDetailVO;
 import vo.TeamSeasonVO;
 import bl.teamquerybl.TeamQuery;
 import blservice.TeamQueryBLService;
@@ -37,7 +36,6 @@ public class TeamGamePanel extends TeamSeasonPanel {
 	DateChooser dateChooser;
 	TeamQueryBLService teamQuery = new TeamQuery();
 	TeamButton teamButton;
-	TeamDetailVO teamDetail;
 	GameDataPanel gameData;
 	ArrayList<MatchProfileVO> matchProfile;
 	BottomScrollPane pane;
@@ -48,7 +46,6 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		this.teamButton = teamButton;
 		addFindButton();
 		addDateChooser();
-		teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team);
 		matchProfile = teamDetail.getMatchRecords();
 		gameData = new GameDataPanel("",1); 
 		pane = new MatchInfoTableFactory(matchProfile,this).getTableScrollPanel();
