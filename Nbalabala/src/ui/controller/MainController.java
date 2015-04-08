@@ -203,5 +203,9 @@ public class MainController {
 		playerInfoPanel = new PlayerSeasonPanel(UIConfig.IMG_PATH + "players/playerGameBG.png", name, allPanel);
 		frame.setPanel(playerInfoPanel);
 	}
+	
+	public static void refreshUI() {
+		System.out.println("UI refreshed!");
+	}
 
 }

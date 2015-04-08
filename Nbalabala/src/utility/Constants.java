@@ -71,10 +71,17 @@ public class Constants {
 		}
 	}
 	
+	public static String correctOldAbbr(String old) {
+		if (old.equals("NJN")) return "BKN";
+		else if (old.equals("NOH")) return "NOP";
+		else return old;
+	}
+	
 	public static ScreenDivision getAreaByAbbr(String abbr) {
 		switch (abbr) {
 		case "BOS":
 		case "BKN":
+		case "NJN":	//篮网队以前 新泽西篮网队，缩写NJN
 		case "NYK":
 		case "PHI":
 		case "TOR":
@@ -98,6 +105,7 @@ public class Constants {
 		switch (abbr) {
 		case "BOS":
 		case "BKN":
+		case "NJN":
 		case "NYK":
 		case "PHI":
 		case "TOR":
@@ -136,6 +144,7 @@ public class Constants {
 		case "BOS":
 			return "凯尔特人";
 		case "BKN":
+		case "NJN":
 			return "篮网";
 		case "NYK":
 			return "尼克斯";
@@ -150,9 +159,8 @@ public class Constants {
 		case "MEM":
 			return "灰熊";
 		case "NOP":
-			return "鹈鹕";
 		case "NOH":
-			return "黄蜂";
+			return "鹈鹕";
 		case "SAS":
 			return "马刺"; 
 		case "ATL":

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import utility.Constants;
 import utility.Utility;
 import vo.PlayerSeasonVO;
 import blservice.PlayerSeasonBLService;
@@ -80,6 +81,7 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService {
 
 	/** 根据球队缩写返回其当前阵容包含的球员名单 */
 	public ArrayList<String> getPlayerNamesByTeamAbbr(String abbr) {
+		abbr = Constants.correctOldAbbr(abbr);
 		return seasonData.getPlayerNamesByTeamAbbr(abbr);
 	}
 

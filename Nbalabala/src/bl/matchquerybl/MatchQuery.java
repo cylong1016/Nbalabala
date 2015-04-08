@@ -66,6 +66,25 @@ public class MatchQuery implements MatchQueryBLService{
 		ArrayList<MatchProfileVO> list2 = matchData.getMatchProfileByTeam(abbr2 + "-" + abbr1);
 		list2.removeAll(list1);
 		list1.addAll(list2);
+		// 考虑到黄蜂、鹈鹕、篮网队改名的问题
+		if (abbr1.equals("NOP")) {
+			ArrayList<MatchProfileVO> list3 = matchData.getMatchProfileByTeam("NOH-" + abbr2);
+			list3.removeAll(list1);
+			list1.addAll(list3);
+		}else if (abbr1.equals("BKN")) {
+			ArrayList<MatchProfileVO> list4 = matchData.getMatchProfileByTeam("NJN-" + abbr2);
+			list4.removeAll(list1);
+			list1.addAll(list4);
+		}
+		if (abbr2.equals("NOP")) {
+			ArrayList<MatchProfileVO> list3 = matchData.getMatchProfileByTeam(abbr1 + "-NOH");
+			list3.removeAll(list1);
+			list1.addAll(list3);
+		}else if (abbr2.equals("BKN")) {
+			ArrayList<MatchProfileVO> list4 = matchData.getMatchProfileByTeam(abbr1 + "-NJN");
+			list4.removeAll(list1);
+			list1.addAll(list4);
+		}
 		return list1;
 	}
 

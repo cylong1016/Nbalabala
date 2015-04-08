@@ -258,4 +258,21 @@ public class SeasonData implements SeasonDataService {
 		allTeamRecords.clear();
 	}
 	
+	/** 发现新文件加入时调用此方法 */
+	public void appendMatches(ArrayList<File> files) {
+		int size = files.size();
+		File[] newFiles = new File[size];
+		for (int i=0;i<size;i++) {
+			newFiles[i] = files.get(i);
+		}
+		new MatchesAccumulator(allPlayerRecords, allTeamRecords).accumulate(newFiles);
+	}
+	
+	/** 发现有文件被删除时，重新读取所有文件 */
+	public void reloadMatches() {
+		allPlayerRecords.clear();
+		allTeamRecords.clear();
+		new MatchesAccumulator(allPlayerRecords, allTeamRecords).accumulate(Utility.getSortedMatchFiles());
+	}
+	
 }

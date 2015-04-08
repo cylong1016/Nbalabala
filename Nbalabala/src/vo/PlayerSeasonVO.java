@@ -7,6 +7,28 @@ package vo;
  */
 public class PlayerSeasonVO {
 	
+	/** 存储最近10场的得分、篮板、助攻、盖帽、抢断、三分命中、投篮命中、罚球命中、三分出手、投篮出手、罚球出手 */
+	public RecentDataQueue scoreQueue = new RecentDataQueue();
+	public RecentDataQueue reboundQueue = new RecentDataQueue();
+	public RecentDataQueue assistQueue = new RecentDataQueue();
+	public RecentDataQueue blockQueue = new RecentDataQueue();
+	public RecentDataQueue stealQueue = new RecentDataQueue();
+	public RecentDataQueue threePointGoalQueue = new RecentDataQueue();
+	public RecentDataQueue threePointAttemptQueue = new RecentDataQueue();
+	public RecentDataQueue fieldGoalQueue = new RecentDataQueue();
+	public RecentDataQueue fieldAttemptQueue = new RecentDataQueue();
+	public RecentDataQueue freethrowGoalQueue = new RecentDataQueue();
+	public RecentDataQueue freethrowAttemptQueue = new RecentDataQueue();
+	
+	public double scorePromotion;
+	public double reboundPromotion;
+	public double assistPromotion;
+	public double blockPromotion;
+	public double stealPromotion;
+	public double threePointPercentPromotion;
+	public double fieldPercentPromotion;
+	public double freethrowPercentPromotion;
+	
 	/**
 	 * attempt是出手
 	 * goal命中
@@ -119,10 +141,6 @@ public class PlayerSeasonVO {
 	/** 如果没有关于此球员的比赛记录，但是在球员信息里有这个球员的话，用这个构造方法产生一个空的赛季纪录 */
 	public PlayerSeasonVO(String name) {
 		this.name = name;
-	}
-
-	public PlayerSeasonVO() {
-
 	}
 
 	public String getName() {
@@ -471,6 +489,42 @@ public class PlayerSeasonVO {
 			blockAvg = (double) block / matchCount;
 			foulAvg = (double) foul / matchCount;
 			turnoverAvg = (double) turnover / matchCount;
+			
+			if (matchCount > 9) {
+				scorePromotion = scoreQueue.getPromotion();
+				reboundPromotion = reboundQueue.getPromotion();
+				assistPromotion = assistQueue.getPromotion();
+				blockPromotion = blockQueue.getPromotion();
+				stealPromotion = stealQueue.getPromotion();
+				
+				int formerFieldAttempt = fieldAttemptQueue.getFormerFiveSum();
+				int latterFieldAttempt = fieldAttemptQueue.getFormerFiveSum();
+				if (formerFieldAttempt == 0 || latterFieldAttempt == 0) fieldPercentPromotion = 0;
+				else{
+					double formerFieldPercent = fieldGoalQueue.getFormerFiveSum() / formerFieldAttempt;
+					double latterFieldPercent = fieldGoalQueue.getLatterFiveSum() / latterFieldAttempt;
+					fieldPercentPromotion = (latterFieldPercent - formerFieldPercent) / formerFieldPercent;
+				}
+				
+				int formerThreePointAttempt = threePointAttemptQueue.getFormerFiveSum();
+				int latterThreePointAttempt = threePointAttemptQueue.getFormerFiveSum();
+				if (formerThreePointAttempt == 0 || latterThreePointAttempt == 0) threePointPercentPromotion = 0;
+				else{
+					double formerThreePointPercent = threePointGoalQueue.getFormerFiveSum() / formerThreePointAttempt;
+					double latterThreePointPercent = threePointGoalQueue.getLatterFiveSum() / latterThreePointAttempt;
+					threePointPercentPromotion = (latterThreePointPercent - formerThreePointPercent) / formerThreePointPercent;
+				}
+				
+				int formerFreethrowAttempt = freethrowAttemptQueue.getFormerFiveSum();
+				int latterFreethrowAttempt = freethrowAttemptQueue.getFormerFiveSum();
+				if (formerFreethrowAttempt == 0 || latterFreethrowAttempt == 0) freethrowPercentPromotion = 0;
+				else{
+					double formerFreethrowPercent = freethrowGoalQueue.getFormerFiveSum() / formerFreethrowAttempt;
+					double latterFreethrowPercent = freethrowGoalQueue.getLatterFiveSum() / latterFreethrowAttempt;
+					freethrowPercentPromotion = (latterFreethrowPercent - formerFreethrowPercent) / formerFreethrowPercent;
+				}
+			}
+			
 		}
 		
 		gmsc = score + 0.4 * fieldGoal - 0.7 * fieldAttempt - 0.4 * (freethrowAttempt - freethrowGoal) + 0.7
@@ -479,6 +533,18 @@ public class PlayerSeasonVO {
 		scoreReboundAssist = score + totalRebound + assist;
 		efficiency =  score + totalRebound + assist + steal + block - fieldAttempt + fieldGoal - freethrowAttempt
 				+ freethrowGoal - turnover;
-		
+	}
+	
+	/** 记录最近一次比赛的日期，month以12代表12月，13代表1月，14代表2月，以此类推 */
+	public int latestMonth;
+	public int latestDay;
+	
+	public boolean isThisRecordLatest(int month, int day) {
+		if (month < latestMonth) return false;
+		else if (month > latestMonth) return true;
+		else {
+			if (day > latestDay) return true;
+			else return false;
+		}
 	}
 }

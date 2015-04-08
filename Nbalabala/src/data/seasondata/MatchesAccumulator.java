@@ -3,8 +3,6 @@ package data.seasondata;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,115 +37,138 @@ public class MatchesAccumulator {
 	public void accumulate(File[] files) {
 		BufferedReader br = null;
 
-		try {
-			for(File file : files) {
-				String season = file.getName().substring(0, 5);
-				
-				HashMap<String, PlayerSeasonVO> playerRecords = allPlayerRecords.get(season);
+		for (File file : files) {
+			try {
+				String fileName = file.getName();
+				String season = fileName.substring(0, 5);
+				int month = Integer.parseInt(fileName.substring(6, 8));
+				int day = Integer.parseInt(fileName.substring(9, 11));
+				if (month < 7)
+					month += 12;
+
+				HashMap<String, PlayerSeasonVO> playerRecords = allPlayerRecords
+						.get(season);
 				if (playerRecords == null) {
-					allPlayerRecords.put(season, new HashMap<String, PlayerSeasonVO>());
+					allPlayerRecords.put(season,
+							new HashMap<String, PlayerSeasonVO>());
 					playerRecords = allPlayerRecords.get(season);
 				}
-				
-				HashMap<String, TeamSeasonVO> teamRecords = allTeamRecords.get(season);
+
+				HashMap<String, TeamSeasonVO> teamRecords = allTeamRecords
+						.get(season);
 				if (teamRecords == null) {
-					allTeamRecords.put(season, new HashMap<String, TeamSeasonVO>());
+					allTeamRecords.put(season,
+							new HashMap<String, TeamSeasonVO>());
 					teamRecords = allTeamRecords.get(season);
 				}
-				
-				br = new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));
+
+				br = new BufferedReader(new InputStreamReader(
+						new FileInputStream(file), "UTF-8"));
 				String description = br.readLine();
 				String[] points = description.split(";")[2].split("-");
 				int homePoints = Integer.parseInt(points[0]);
 				int roadPoints = Integer.parseInt(points[1]);
-				
+
 				br.readLine();
 				String homeTeam = br.readLine();
 				String line = null;
-				
+
 				ArrayList<PlayerSeasonVO> homePlayers = new ArrayList<PlayerSeasonVO>();
 				ArrayList<PlayerSeasonVO> roadPlayers = new ArrayList<PlayerSeasonVO>();
-				
-				//该数组存储本场比赛主场队的总数据，0,1位置不用，2为所有球员上场秒数，3之后是s的对应位置转化为整数的和，
-				int [] homeTeamData = new int [18];
-				//客场队总数据
-				int [] roadTeamData = new int [18];
-				
-				for (int i=0; i< 17;i++){
+
+				// 该数组存储本场比赛主场队的总数据，0,1位置不用，2为所有球员上场秒数，3之后是s的对应位置转化为整数的和，
+				int[] homeTeamData = new int[18];
+				// 客场队总数据
+				int[] roadTeamData = new int[18];
+
+				for (int i = 0; i < 17; i++) {
 					homeTeamData[i] = 0;
 					roadTeamData[i] = 0;
 				}
-				
+
 				homeTeamData[17] = homePoints;
 				roadTeamData[17] = roadPoints;
-				
-				while(true){
+
+				while (true) {
 					line = br.readLine();
-					
-					if (line.length() < 5) break; 	//读到客场队队名时说明主场队读完了
+
+					if (line.length() < 5)
+						break; // 读到客场队队名时说明主场队读完了
 					String[] s = line.split(";");
-					if ( !playerRecords.containsKey(s[0])) playerRecords.put(s[0], 
-							new PlayerSeasonVO());
+					if (!playerRecords.containsKey(s[0]))
+						playerRecords.put(s[0], new PlayerSeasonVO(s[0]));
 					PlayerSeasonVO playerRecord = playerRecords.get(s[0]);
-					
-					playerRecord.name = s[0];
-					// 如果是首发，更新其位置信息
-					if (s[1].length() != 0) playerRecord.position = s[1].charAt(0);
-					playerRecord.teamName = homeTeam;
-					
+
+					// 如果这条记录是最新的，更新其球队和位置
+					if (playerRecord.isThisRecordLatest(month, day)) {
+						// 如果是首发，更新其位置信息
+						if (s[1].length() != 0)
+							playerRecord.position = s[1].charAt(0);
+						playerRecord.teamName = homeTeam;
+						playerRecord.latestMonth = month;
+						playerRecord.latestDay = day;
+					}
+
 					homePlayers.add(playerRecord);
-					
-					lineAccumulate(homeTeamData, playerRecord, s, file, TeamState.HOME);
+
+					lineAccumulate(homeTeamData, playerRecord, s, file,
+							TeamState.HOME);
 				}
-				
-				//下面读取客场队
+
+				// 下面读取客场队
 				String roadTeam = line;
 				while ((line = br.readLine()) != null) {
 					String[] s = line.split(";");
-					if ( !playerRecords.containsKey(s[0])) playerRecords.put(s[0], 
-							new PlayerSeasonVO());
+					if (!playerRecords.containsKey(s[0]))
+						playerRecords.put(s[0], new PlayerSeasonVO(s[0]));
 					PlayerSeasonVO playerRecord = playerRecords.get(s[0]);
-					
-					playerRecord.name = s[0];
-					// 如果是首发，更新其位置信息
-					if (s[1].length() != 0) playerRecord.position = s[1].charAt(0);
-					playerRecord.teamName = roadTeam;
-					
+
+					// 如果这条记录是最新的，更新其球队和位置
+					if (playerRecord.isThisRecordLatest(month, day)) {
+						// 如果是首发，更新其位置信息
+						if (s[1].length() != 0)
+							playerRecord.position = s[1].charAt(0);
+						playerRecord.teamName = homeTeam;
+						playerRecord.latestMonth = month;
+						playerRecord.latestDay = day;
+					}
+
 					roadPlayers.add(playerRecord);
-					
-					lineAccumulate(roadTeamData, playerRecord, s, file, TeamState.ROAD);
+
+					lineAccumulate(roadTeamData, playerRecord, s, file,
+							TeamState.ROAD);
 				}
-				
+
+				br.close();
+
 				for (PlayerSeasonVO record : homePlayers) {
 					playerAccumulate(record, homeTeamData, roadTeamData);
 				}
 				for (PlayerSeasonVO record : roadPlayers) {
 					playerAccumulate(record, roadTeamData, homeTeamData);
 				}
-				
+
 				if (!teamRecords.containsKey(homeTeam)) {
 					teamRecords.put(homeTeam, new TeamSeasonVO(homeTeam));
 				}
 				if (!teamRecords.containsKey(roadTeam)) {
 					teamRecords.put(roadTeam, new TeamSeasonVO(roadTeam));
 				}
-				
+
 				TeamSeasonVO homeTeamRecord = teamRecords.get(homeTeam);
 				TeamSeasonVO roadTeamRecord = teamRecords.get(roadTeam);
-				
+
 				teamAccumulate(homeTeamRecord, homeTeamData, roadTeamData);
 				teamAccumulate(roadTeamRecord, roadTeamData, homeTeamData);
-				
+
 				if (homePoints > roadPoints) {
-					homeTeamRecord.wins ++;
-				}else {
-					roadTeamRecord.wins ++;
+					homeTeamRecord.wins++;
+				} else {
+					roadTeamRecord.wins++;
 				}
+			} catch (Exception e) {
+				continue;
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 	
@@ -187,20 +208,31 @@ public class MatchesAccumulator {
 		}
 		playerRecord.time += lineInt[2];
 		playerRecord.fieldGoal += lineInt[3];
+		playerRecord.fieldGoalQueue.enqueue(lineInt[3]);
 		playerRecord.fieldAttempt += lineInt[4];
+		playerRecord.fieldAttemptQueue.enqueue(lineInt[4]);
 		playerRecord.threePointGoal += lineInt[5];
+		playerRecord.threePointGoalQueue.enqueue(lineInt[5]);
 		playerRecord.threePointAttempt += lineInt[6];
+		playerRecord.threePointAttemptQueue.enqueue(lineInt[6]);
 		playerRecord.freethrowGoal += lineInt[7];
+		playerRecord.freethrowGoalQueue.enqueue(lineInt[7]);
 		playerRecord.freethrowAttempt += lineInt[8];
+		playerRecord.freethrowAttemptQueue.enqueue(lineInt[8]);
 		playerRecord.offensiveRebound += lineInt[9];
 		playerRecord.defensiveRebound += lineInt[10];
 		playerRecord.totalRebound += lineInt[11];
+		playerRecord.reboundQueue.enqueue(lineInt[11]);
 		playerRecord.assist += lineInt[12];
+		playerRecord.assistQueue.enqueue(lineInt[12]);
 		playerRecord.steal += lineInt[13];
+		playerRecord.stealQueue.enqueue(lineInt[13]);
 		playerRecord.block += lineInt[14];
+		playerRecord.blockQueue.enqueue(lineInt[14]);
 		playerRecord.turnover += lineInt[15];
 		playerRecord.foul += lineInt[16];
 		playerRecord.score += lineInt[17];
+		playerRecord.scoreQueue.enqueue(lineInt[17]);
 		playerRecord.matchCount ++;
 		
 		if (isDoubleDouble(lineInt)) playerRecord.doubleDoubleCount++;
