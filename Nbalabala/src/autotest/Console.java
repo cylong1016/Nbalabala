@@ -1,8 +1,7 @@
 package autotest;
 
-import data.seasondata.SeasonData;
-import test.data.PlayerNormalInfo;
 import utility.Constants;
+import data.seasondata.SeasonData;
 
 /**
  * 

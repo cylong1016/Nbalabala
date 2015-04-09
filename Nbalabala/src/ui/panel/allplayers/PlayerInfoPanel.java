@@ -9,11 +9,13 @@ import java.text.DecimalFormat;
 import javax.swing.SwingConstants;
 
 import ui.UIConfig;
+import ui.common.SeasonInputPanel;
 import ui.common.button.ImgButton;
 import ui.common.button.TextButton;
 import ui.common.label.ImgLabel;
 import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
+import ui.common.panel.CartogramPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
@@ -61,12 +63,17 @@ public class PlayerInfoPanel extends BottomPanel {
 	
 	protected BottomScrollPane scroll;
 	protected BottomTable table;
+	/** 赛季选择器 */
+	protected SeasonInputPanel seasonInput;
 
 	public PlayerInfoPanel(String url, String name, BottomPanel lastPanel) {
 		super(url);
 		playerQuery = new PlayerQuery();
 		this.name = name;
-		this.detailVO = playerQuery.getPlayerDetailByName(name);
+		seasonInput = new SeasonInputPanel();
+		seasonInput.setLocation(600, 40);
+		this.add(seasonInput); // TODO 位置需要重新设定
+		this.detailVO = playerQuery.getPlayerDetailByName(name, seasonInput.getSeason());
 		this.profileVO = detailVO.getProfile();
 		this.lastPanel =  lastPanel;
 		
@@ -80,6 +87,10 @@ public class PlayerInfoPanel extends BottomPanel {
 		addActionImg();
 		addBackButton();
 		addLabel();
+		
+		CartogramPanel ca = new CartogramPanel(20, 10, 30);
+		ca.setLocation(100, 380);
+		this.add(ca);
 	}
 
 	private void addLabel() {

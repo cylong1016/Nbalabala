@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.table.JTableHeader;
 
 import ui.UIConfig;
+import ui.common.SeasonInputPanel;
 import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
 import ui.common.button.TextButton;
@@ -87,6 +88,9 @@ public class TeamDataPanel extends BottomPanel {
 	
 	private ArrayList<TeamSeasonVO> seasonArray;
 
+	/** 赛季选择器 */
+	private SeasonInputPanel seasonInput; 
+	
 	public TeamDataPanel(String url) {
 		super(url);
 		addButton();
@@ -96,8 +100,11 @@ public class TeamDataPanel extends BottomPanel {
 		setEffect(divisionSelectButtons[0]);
 		setEffect(totalAvgSelectButtons[0]);
 		addListener();
+		seasonInput = new SeasonInputPanel();
+		seasonInput.setLocation(600, 40);
+		this.add(seasonInput); // TODO 位置需要重新设定
 		// 初始化表格和球队总数据
-		seasonArray = teamSeason.getTeamDataSortedByName();
+		seasonArray = teamSeason.getTeamDataSortedByName(seasonInput.getSeason());
 		createTable(seasonArray); // 设置表格数据
 	}
 
@@ -113,7 +120,7 @@ public class TeamDataPanel extends BottomPanel {
 		findButton.addMouseListener(new MouseAdapter() {
 
 			public void mousePressed(MouseEvent e) {
-				seasonArray = teamSeason.getScreenedTeamData(TeamDivisionSelectButton.current.division);
+				seasonArray = teamSeason.getScreenedTeamData(TeamDivisionSelectButton.current.division, seasonInput.getSeason());
 				createTable(seasonArray);
 			}
 		});
@@ -176,7 +183,7 @@ public class TeamDataPanel extends BottomPanel {
 			}
 			TeamDivisionSelectButton.current.back();
 			TeamDivisionSelectButton.current = (TeamDivisionSelectButton)e.getSource();
-			seasonArray = teamSeason.getScreenedTeamData(TeamDivisionSelectButton.current.division);
+			seasonArray = teamSeason.getScreenedTeamData(TeamDivisionSelectButton.current.division, seasonInput.getSeason());
 
 			createTable(seasonArray); // 添加筛选出的数据
 		}
@@ -190,7 +197,7 @@ public class TeamDataPanel extends BottomPanel {
 			}
 			TeamTotalAvgSelectButton.current.back();
 			TeamTotalAvgSelectButton.current = (TeamTotalAvgSelectButton)e.getSource();
-			seasonArray = teamSeason.getScreenedTeamData(TeamDivisionSelectButton.current.division);
+			seasonArray = teamSeason.getScreenedTeamData(TeamDivisionSelectButton.current.division, seasonInput.getSeason());
 			if (TeamTotalAvgSelectButton.current == totalAvgSelectButtons[0]) {
 				updateTotalTeamDataTable(seasonArray); // 添加总数据
 			} else if (TeamTotalAvgSelectButton.current == totalAvgSelectButtons[1]) {

@@ -9,6 +9,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 import ui.UIConfig;
+import ui.common.SeasonInputPanel;
 import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
 import ui.common.button.TextButton;
@@ -100,6 +101,9 @@ public class PlayerDataPanel extends BottomPanel {
 	
 	/** 通过接口调用方法 */
 	private PlayerSeasonBLService playerSeason = new PlayerSeasonAnalysis();
+	
+	/** 赛季选择器 */
+	private SeasonInputPanel seasonInput;
 
 	public PlayerDataPanel(String url) {
 		super(url);
@@ -109,6 +113,9 @@ public class PlayerDataPanel extends BottomPanel {
 		iniSet();
 		addListener();
 		addFindButton();
+		seasonInput = new SeasonInputPanel();
+		seasonInput.setLocation(600, 40);
+		this.add(seasonInput); // TODO 位置需要重新设定
 		// 初始化界面的表格
 		ArrayList<PlayerSeasonVO> iniArray = playerSeason.getAllPlayersSortedByName();
 		createTable(iniArray);
@@ -122,7 +129,7 @@ public class PlayerDataPanel extends BottomPanel {
 
 			public void mousePressed(MouseEvent e) {
 				ArrayList<PlayerSeasonVO> playerRecords = playerSeason.getScreenedPlayers(
-						PlayerPositionSelectButton.current.position, PlayerDivisionSelectButton.current.division, PlayerScreenSelectButton.current.basis);
+						PlayerPositionSelectButton.current.position, PlayerDivisionSelectButton.current.division, PlayerScreenSelectButton.current.basis, seasonInput.getSeason());
 				if (PlayerTotalAvgButton.current == totalAvgButtons[0]) {
 					createTable(playerRecords); // 添加球员总数居
 				} else if (PlayerTotalAvgButton.current == totalAvgButtons[1]) {
@@ -296,7 +303,7 @@ public class PlayerDataPanel extends BottomPanel {
 			PlayerTotalAvgButton.current.back();
 			PlayerTotalAvgButton.current = (PlayerTotalAvgButton) e.getSource();
 			ArrayList<PlayerSeasonVO> playerRecords = playerSeason.getScreenedPlayers(PlayerPositionSelectButton.current.position,
-					PlayerDivisionSelectButton.current.division, PlayerScreenSelectButton.current.basis);
+					PlayerDivisionSelectButton.current.division, PlayerScreenSelectButton.current.basis, seasonInput.getSeason());
 			if (PlayerTotalAvgButton.current == totalAvgButtons[0]) {
 				updateTotalPlayerDataTable(playerRecords); // 添加球员总数居
 			} else if (PlayerTotalAvgButton.current == totalAvgButtons[1]) {
