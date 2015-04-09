@@ -1,7 +1,7 @@
 package utility;
 
 import data.playerdata.PlayerData;
-import data.playerdata.PlayerPortraitCache;
+import data.playerdata.PlayerImageCache;
 import data.seasondata.SeasonData;
 import data.teamdata.TeamData;
 import enums.ScreenDivision;
@@ -25,7 +25,7 @@ public class Constants {
 		dataSourcePath = newPath;
 		if (dirChangeCount > 1) {
 			PlayerData.clear();
-			PlayerPortraitCache.clear();
+			PlayerImageCache.clear();
 			SeasonData.clear();
 			TeamData.clear();
 		}

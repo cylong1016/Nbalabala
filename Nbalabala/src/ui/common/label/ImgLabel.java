@@ -23,4 +23,5 @@ public class ImgLabel extends JLabel {
 		this.setIcon(icon);
 		this.repaint();
 	}
+	
 }

@@ -319,7 +319,17 @@ public class MatchesAccumulator {
 		teamRecord.oppoOffensiveRebound += oppoData[9];
 		teamRecord.oppoScore += oppoData[17];
 		teamRecord.oppoTurnover += oppoData[15];
+		
+		int tmp = teamData[9] + oppoData[10];
+		if (tmp != 0)
+			teamRecord.offensiveRound += teamData[4] + 0.4 * (teamData[8]) - 1.07
+				* ((double)teamData[9] / (tmp) * 
+						(teamData[4] - teamData[3])) + 1.07 * teamData[15];
+		
+		tmp = teamData[10] + oppoData[9];
+		if (tmp != 0)
+			teamRecord.defensiveRound += oppoData[4] + 0.4 * (oppoData[8]) - 1.07 
+				* ((double)oppoData[9] / (tmp) * 
+						(oppoData[4] - oppoData[3])) + 1.07 * oppoData[15];
 	}
-
-
 }

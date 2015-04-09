@@ -22,7 +22,14 @@ public class PlayerMatchPerformanceVO {
 		this.date = date;
 		this.twoTeams = twoTeams;
 	}
-
+	
+	public PlayerMatchPerformanceVO(String name) {
+		this.matchPlayerRecord = new MatchPlayerVO(name);
+		this.season = Constants.UNKNOWN;
+		this.date = Constants.UNKNOWN;
+		this.twoTeams = Constants.UNKNOWN;
+	}
+	
 	private MatchPlayerVO matchPlayerRecord;
 	
 	private String season;

@@ -8,19 +8,37 @@ package vo;
  */
 public class HotFastestPlayerVO {
 	
-	public HotFastestPlayerVO(String name, String teamAbbr,
-			String position, double property) {
+	public HotFastestPlayerVO(int top, String name, String teamAbbr,
+			String position, double formerFiveAvg, double[]recentFive, double promotion) {
 		super();
+		this.top = top;
 		this.name = name;
 		this.teamAbbr = teamAbbr;
 		this.position = position;
-		this.property = property;
+		this.formerFiveAvg = formerFiveAvg;
+		this.recentFive = recentFive;
+		this.promotion = promotion;
 	}
 	
+	private int top;
 	private String name;
 	private String teamAbbr;
 	private String position;
-	private double property;
+	private double formerFiveAvg;
+	private double [] recentFive;
+	private double promotion;
+	
+	public double[] getRecentFive() {
+		return recentFive;
+	}
+	
+	public double getPromotion() {
+		return promotion;
+	}
+	
+	public int getTop() {
+		return top;
+	}
 	
 	public String getName() {
 		return name;
@@ -32,7 +50,7 @@ public class HotFastestPlayerVO {
 		return position;
 	}
 	public double getProperty() {
-		return property;
+		return formerFiveAvg;
 	}
 
 }

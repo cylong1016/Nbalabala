@@ -14,8 +14,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import javax.imageio.ImageIO;
-
 import utility.Constants;
 import utility.Utility;
 import vo.PlayerProfileVO;
@@ -33,12 +31,6 @@ public class PlayerData implements PlayerDataService{
 	/** 全部球员基本信息 */
 	private static HashMap<String, PlayerProfileVO> players = new HashMap<String, PlayerProfileVO>();
 
-	/** 存储球员信息的文件夹 */
-	private static final String INFO_Path = Constants.dataSourcePath + "players/info/";
-	
-	/** 存储全身像的文件夹 */
-	private static final String ACTION_Path = Constants.dataSourcePath + "players/action/";
-	
 	public PlayerData() {
 		if (players.size() == 0) loadPlayers();
 	}
@@ -50,7 +42,7 @@ public class PlayerData implements PlayerDataService{
 	 * @version 2015年3月13日 下午7:33:17
 	 */
 	private void loadPlayers() {
-		File dir = new File(INFO_Path);
+		File dir = new File(Constants.dataSourcePath + "players/info/");
 		File[] files = dir.listFiles();
 		BufferedReader br = null;
 		
@@ -74,7 +66,7 @@ public class PlayerData implements PlayerDataService{
 				
 				String name = playerInfo.get(0);
 				
-				Image portrait = PlayerPortraitCache.getPortraitByName(name);
+				Image portrait = PlayerImageCache.getPortraitByName(name);
 				PlayerProfileVO player = new PlayerProfileVO(portrait, playerInfo.get(0), 
 						seasonData.getTeamAbbrByPlayer(name, Utility.getDefaultSeason()), 
 						playerInfo.get(1), playerInfo.get(2), playerInfo.get(3), 
@@ -92,27 +84,11 @@ public class PlayerData implements PlayerDataService{
 		ArrayList<String> names = new SeasonData().getPlayerNames();
 		for (String name : names){
 			if (!players.containsKey(name)) {
-				players.put(name, new PlayerProfileVO(PlayerPortraitCache.getNullPortrait(), name));
+				players.put(name, new PlayerProfileVO(PlayerImageCache.getNullPortrait(), name));
 			}
 		}
 	}
 	
-	/**
-	 * @see dataservice.PlayerDataService#getActionImageByName(java.lang.String)
-	 */
-	@Override
-	public Image getActionImageByName(String name) {
-		try {
-			return  ImageIO.read(new File(ACTION_Path + name + ".png"));
-		} catch (IOException e) {
-			try {
-				return ImageIO.read(new File("images/nullAction.png"));
-			} catch (IOException e1) {
-				return null;
-			}
-		}
-	}
-
 	/**
 	 * @see dataservice.PlayerDataService#getPlayerProfileByInitial(char)
 	 */
@@ -141,7 +117,7 @@ public class PlayerData implements PlayerDataService{
 		if (players.get(name) != null)
 			return players.get(name);
 		else 
-			return new PlayerProfileVO(PlayerPortraitCache.getNullPortrait(), name);
+			return new PlayerProfileVO(PlayerImageCache.getNullPortrait(), name);
 	}
 	
 	/**

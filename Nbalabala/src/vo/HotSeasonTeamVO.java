@@ -8,17 +8,23 @@ package vo;
  */
 public class HotSeasonTeamVO {
 	
-	public HotSeasonTeamVO(String abbr, String league,
+	public HotSeasonTeamVO(int top, String abbr, String league,
 			double property) {
 		super();
+		this.top = top;
 		this.abbr = abbr;
 		this.league = league;
 		this.property = property;
 	}
 	
+	private int top;
 	private String abbr;
 	private String league; //值为 "东部" 或者 "西部"
 	private double property;
+	
+	public int getTop() {
+		return top;
+	}
 	
 	public String getAbbr() {
 		return abbr;

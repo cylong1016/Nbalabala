@@ -23,7 +23,7 @@ import utility.Constants;
 import vo.PlayerProfileVO;
 import vo.PlayerSeasonVO;
 import vo.PlayerSimpleVO;
-import data.playerdata.PlayerPortraitCache;
+import data.playerdata.PlayerImageCache;
 import data.seasondata.SeasonData;
 import enums.PlayerAllSortBasis;
 import enums.PlayerAvgSortBasis;

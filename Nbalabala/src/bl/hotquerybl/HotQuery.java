@@ -9,8 +9,10 @@ import vo.HotFastestPlayerVO;
 import vo.HotSeasonPlayerVO;
 import vo.HotSeasonTeamVO;
 import vo.HotTodayPlayerVO;
+import vo.PlayerMatchPerformanceVO;
 import vo.PlayerSeasonVO;
 import vo.TeamSeasonVO;
+import bl.matchquerybl.MatchQuery;
 import bl.playerseasonbl.PlayerAvgSorter;
 import bl.teamseasonbl.TeamAvgSorter;
 import blservice.HotBLService;
@@ -44,6 +46,7 @@ public class HotQuery implements HotBLService{
 	public ArrayList<HotTodayPlayerVO> getHotTodayPlayers(
 			HotTodayPlayerProperty property) {
 		Comparator<PlayerSeasonVO> comparator = null;
+		MatchQuery matchQuery = new MatchQuery();
 		switch (property) {
 		case SCORE:
 			comparator = new Comparator<PlayerSeasonVO>() {
@@ -113,7 +116,16 @@ public class HotQuery implements HotBLService{
 			}
 			String name = seasonVO.name;
 			String position = playerService.getPlayerProfileByName(name).getPosition();
-			result.add(new HotTodayPlayerVO(name, seasonVO.teamName, position,value));
+			ArrayList<PlayerMatchPerformanceVO> performanceList = 
+					matchQuery.getMatchRecordByPlayerName(name);
+			if (performanceList.size() != 0) {
+				result.add(new HotTodayPlayerVO(i+1, name, seasonVO.teamName, position,
+						value, performanceList.get(performanceList.size() - 1)));
+			}else{
+				result.add(new HotTodayPlayerVO(i+1, name, seasonVO.teamName, position,
+						value, new PlayerMatchPerformanceVO(name)));
+			}
+			
 		}
 		return result;
 	}
@@ -191,7 +203,7 @@ public class HotQuery implements HotBLService{
 			}
 			String name = seasonVO.name;
 			String position = playerService.getPlayerProfileByName(name).getPosition();
-			result.add(new HotSeasonPlayerVO(name, seasonVO.teamName, position, value));
+			result.add(new HotSeasonPlayerVO(i+1, name, seasonVO.teamName, position, value));
 		}
 		return result;
 	}
@@ -275,7 +287,7 @@ public class HotQuery implements HotBLService{
 			}else {
 				league = "西部";
 			}
-			result.add(new HotSeasonTeamVO(abbr, league, value));
+			result.add(new HotSeasonTeamVO(i+1, abbr, league, value));
 		}
 		return result;
 	}
@@ -353,40 +365,86 @@ public class HotQuery implements HotBLService{
 		if (size > 5) size = 5;
 		int i;
 		ArrayList<HotFastestPlayerVO> result = new ArrayList<HotFastestPlayerVO>();
-		for (i=0; i<size; i++) {
+		for (i=1; i<=size; i++) {
 			PlayerSeasonVO seasonVO = players.get(i);
-			double value = 0;
+			int tmp = 0;
+			double promotion = 0;
+			double formerFiveAvg = 0;
+			double [] recentFive = null;
+			double [] recentFiveDivisor = null;
 			switch (property) {
 			case SCORE_AVG:
-				value = seasonVO.scorePromotion;
+				promotion = seasonVO.scorePromotion;
+				formerFiveAvg = seasonVO.scoreQueue.getFormerFiveAvg();
+				recentFive = seasonVO.scoreQueue.getRecentFive();
 				break;
 			case REBOUND_AVG:
-				value = seasonVO.reboundPromotion;
+				promotion = seasonVO.reboundPromotion;
+				formerFiveAvg = seasonVO.reboundQueue.getFormerFiveAvg();
+				recentFive = seasonVO.reboundQueue.getRecentFive();
 				break;
 			case ASSIST_AVG:
-				value = seasonVO.assistPromotion;
+				promotion = seasonVO.assistPromotion;
+				formerFiveAvg = seasonVO.assistQueue.getFormerFiveAvg();
+				recentFive = seasonVO.assistQueue.getRecentFive();
 				break;
 			case BLOCK_AVG:
-				value = seasonVO.blockPromotion;
+				promotion = seasonVO.blockPromotion;
+				formerFiveAvg = seasonVO.blockQueue.getFormerFiveAvg();
+				recentFive = seasonVO.blockQueue.getRecentFive();
 				break;
 			case STEAL_AVG:
-				value = seasonVO.stealPromotion;
+				promotion = seasonVO.stealPromotion;
+				formerFiveAvg = seasonVO.stealQueue.getFormerFiveAvg();
+				recentFive = seasonVO.stealQueue.getRecentFive();
 				break;
 			case FIELD_PERCENT:
-				value = seasonVO.fieldPercentPromotion;
+				promotion = seasonVO.fieldPercentPromotion;
+				tmp = seasonVO.fieldAttemptQueue.getFormerFiveSum();
+				if (tmp != 0) {
+					formerFiveAvg = (seasonVO.fieldGoalQueue.getFormerFiveSum() / tmp);
+				}
+				recentFive = seasonVO.fieldGoalQueue.getRecentFive();
+				recentFiveDivisor = seasonVO.fieldAttemptQueue.getRecentFive();
 				break;
 			case THREE_POINT_PERCENT:
-				value = seasonVO.threePointPercentPromotion;
+				promotion = seasonVO.threePointPercentPromotion;
+				tmp = seasonVO.threePointAttemptQueue.getFormerFiveSum();
+				if (tmp != 0) {
+					formerFiveAvg = (seasonVO.threePointGoalQueue.getFormerFiveSum() / tmp);
+				}
+				recentFive = seasonVO.threePointGoalQueue.getRecentFive();
+				recentFiveDivisor = seasonVO.threePointAttemptQueue.getRecentFive();
 				break;
 			case FREETHROW_PERCENT:
-				value = seasonVO.freethrowPercentPromotion;
+				promotion = seasonVO.freethrowPercentPromotion;
+				tmp = seasonVO.freethrowAttemptQueue.getFormerFiveSum();
+				if (tmp != 0) {
+					formerFiveAvg = (seasonVO.freethrowGoalQueue.getFormerFiveSum() / tmp);
+				}
+				recentFive = seasonVO.freethrowGoalQueue.getRecentFive();
+				recentFiveDivisor = seasonVO.freethrowAttemptQueue.getRecentFive();
 				break;
 			default:
 				break;
 			}
 			String name = seasonVO.name;
 			String position = playerService.getPlayerProfileByName(name).getPosition();
-			result.add(new HotFastestPlayerVO(name, seasonVO.teamName, position,value));
+			if (recentFiveDivisor == null) {
+				result.add(new HotFastestPlayerVO(i+1, name, seasonVO.teamName, position,
+						formerFiveAvg, recentFive, promotion));
+			}else {
+				double [] recentPercent = new double[5];
+				for(int j=0;i<5;j++) {
+					if (recentFiveDivisor[j] != 0) {
+						recentPercent[j] = recentFive[j] / recentFiveDivisor[j];
+					}else{
+						recentPercent[j] = 0;
+					}
+				}
+				result.add(new HotFastestPlayerVO(i+1, name, seasonVO.teamName, position,
+						formerFiveAvg, recentPercent, promotion));
+			}
 		}
 		return result;
 	}

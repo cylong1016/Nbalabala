@@ -311,21 +311,15 @@ public class TeamSeasonVO {
 			winning = (double)wins / matchCount;
 			
 			int tmp1 = offensiveRebound + oppoDefensiveRebound;
-			if ( tmp1 != 0) {
+			if ( tmp1 != 0 || offensiveRound != 0) {
 				offensiveReboundEff = (double)offensiveRebound / (tmp1);
-				offensiveRound = fieldAttempt + 0.4 * (freethrowAttempt) - 1.07
-						* ((double)offensiveRebound / (tmp1) * (fieldAttempt - fieldGoal))
-						+ 1.07 * turnover;
 				assistEff = assist / offensiveRound * 100;
 				offensiveEff = score / offensiveRound * 100;
 			}
 			
 			int tmp2 = defensiveRebound + oppoOffensiveRebound;
-			if (tmp2 != 0) {
+			if (tmp2 != 0 || defensiveRound != 0) {
 				defensiveReboundEff = (double)defensiveRebound / (tmp2);
-				defensiveRound = oppoFieldAttempt + 0.4 * (oppoFreethrowAttempt)
-						- 1.07 * ((double)oppoOffensiveRebound / (tmp2) * (oppoFieldAttempt - oppoFieldGoal))
-						+ 1.07 * oppoTurnover;
 				stealEff = steal / defensiveRound * 100;
 				defensiveEff = oppoScore / defensiveRound * 100;
 			}

@@ -14,12 +14,9 @@ import utility.Constants;
  * @author Issac Ding
  * @version 2015年4月2日  上午10:37:09
  */
-public class PlayerPortraitCache {
+public class PlayerImageCache {
 	
 	private static HashMap<String, Image> portraits = new HashMap<String, Image>();
-	
-	/** 存储球员头像的文件夹 */
-	private static final String PORTRAIT_PATH = Constants.dataSourcePath + "players/portrait/";
 	
 	private static Image nullPortrait;
 	
@@ -49,10 +46,22 @@ public class PlayerPortraitCache {
 		}
 	}
 	
+	public static Image getActionImageByName(String name) {
+		try {
+			return  ImageIO.read(new File(Constants.dataSourcePath + "players/action/" + name + ".png"));
+		} catch (IOException e) {
+			try {
+				return ImageIO.read(new File("images/nullAction.png"));
+			} catch (IOException e1) {
+				return null;
+			}
+		}
+	}
+	
 	private class CacheThread extends Thread{
 		
 		public void start() {
-			File file = new File(PORTRAIT_PATH);
+			File file = new File(Constants.dataSourcePath + "players/portrait/");
 			File [] files = file.listFiles();
 			for (File imgFile : files) {
 				String fileName = imgFile.getName();

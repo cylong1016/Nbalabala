@@ -20,6 +20,21 @@ public class RecentDataQueue {
 		}
 	}
 	
+	public double getFormerFiveAvg() {
+		return getFormerFiveSum() / 5;
+	}
+	
+	public double[] getRecentFive() {
+		double[] result = new double[5];
+		int index = last;
+		for (int i=4; i>=0; i++) {
+			index --;
+			if (index < 0) index = 9;
+			result[i] = recent[i];
+		}
+		return result;
+	}
+	
 	public void enqueue(int data) {
 		recent[last] = data;
 		if (size < 10) {

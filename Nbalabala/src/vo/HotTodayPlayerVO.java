@@ -8,19 +8,31 @@ package vo;
  */
 public class HotTodayPlayerVO {
 	
-	public HotTodayPlayerVO(String name, String teamAbbr,
-			String position, int property) {
+	public HotTodayPlayerVO(int top, String name, String teamAbbr,
+			String position, int property, PlayerMatchPerformanceVO matchPerformanceVO) {
 		super();
+		this.top = top;
 		this.name = name;
 		this.teamAbbr = teamAbbr;
 		this.position = position;
 		this.property = property;
+		this.matchPerformanceVO = matchPerformanceVO;
 	}
 	
+	private int top;
 	private String name;
 	private String teamAbbr;
 	private String position;
 	private int property;
+	private PlayerMatchPerformanceVO matchPerformanceVO;
+	
+	public PlayerMatchPerformanceVO getMatchPerformance() {
+		return matchPerformanceVO;
+	}
+	
+	public int getTop() {
+		return top;
+	}
 	
 	public String getName() {
 		return name;

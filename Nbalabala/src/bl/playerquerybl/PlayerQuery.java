@@ -11,6 +11,8 @@ import bl.matchquerybl.MatchQuery;
 import bl.playerseasonbl.PlayerSeasonAnalysis;
 import blservice.PlayerQueryBLService;
 import data.playerdata.PlayerData;
+import data.playerdata.PlayerImageCache;
+import data.seasondata.SeasonData;
 import dataservice.PlayerDataService;
 
 /**
@@ -36,7 +38,7 @@ public class PlayerQuery implements PlayerQueryBLService{
 	@Override
 	public PlayerDetailVO getPlayerDetailByName(String playerName, String season) {
 		PlayerProfileVO profile = playerData.getPlayerProfileByName(playerName);
-		Image actionImage = playerData.getActionImageByName(playerName);
+		Image actionImage = PlayerImageCache.getActionImageByName(playerName);
 
 		//从seasonbl获取球员的赛季数据
 		PlayerSeasonAnalysis playerSeasonAnalysis = new PlayerSeasonAnalysis();
@@ -60,5 +62,56 @@ public class PlayerQuery implements PlayerQueryBLService{
 	@Override
 	public ArrayList<PlayerProfileVO> searchPlayers(String keyword) {
 		return playerData.searchPlayers(keyword);
+	}
+
+	/**
+	 * @see blservice.PlayerQueryBLService#getHighestScoreReboundAssist()
+	 */
+	@Override
+	public double[] getHighestScoreReboundAssist() {
+		ArrayList<PlayerSeasonVO> list = new SeasonData().getAllPlayerRecentSeasonData();
+		double highestScore = 0;
+		double highestRebound = 0;
+		double highestAssist = 0;
+		for (PlayerSeasonVO vo : list) {
+			if (vo.scoreAvg > highestScore)
+				highestScore = vo.scoreAvg;
+			if (vo.totalReboundAvg > highestRebound)
+				highestRebound = vo.totalReboundAvg;
+			if (vo.assistAvg > highestAssist)
+				highestAssist = vo.assistAvg;
+		}
+		double[] result = {highestScore, highestRebound, highestRebound};
+		return result;
+	}
+
+	/**
+	 * @see blservice.PlayerQueryBLService#getFiveArgsAvg()
+	 */
+	@Override
+	public double[] getFiveArgsAvg() {
+		ArrayList<PlayerSeasonVO> list = new SeasonData().getAllPlayerRecentSeasonData();
+		int matchCount = 0;
+		int score = 0;
+		int rebound = 0;
+		int assist = 0;
+		int threePointGoal = 0;
+		int threePointAttempt = 0;
+		int freethrowGoal = 0;
+		int freethrowAttempt = 0;
+		for (PlayerSeasonVO vo : list) {
+			matchCount += vo.matchCount;
+			score += vo.score;
+			rebound += vo.totalRebound;
+			assist += vo.assist;
+			threePointGoal += vo.threePointGoal;
+			threePointAttempt += vo.threePointAttempt;
+			freethrowAttempt += vo.freethrowAttempt;
+			freethrowGoal += vo.freethrowGoal;
+		}
+		double[]result = {(double)score / matchCount, (double)rebound / matchCount,
+				(double)assist / matchCount, (double)freethrowGoal / freethrowAttempt,
+				(double)threePointGoal / threePointAttempt};
+		return result;
 	}
 }
