@@ -429,6 +429,12 @@ public class PlayerSeasonVO {
 	public double offensiveReboundPercent;
 	public double defensiveReboundPercent;
 	
+	public int latestScore;
+	public int latestRebound;
+	public int latestAssist;
+	public int latestBlock;
+	public int latestSteal;
+	
 	public void update() {
 		if (matchCount != 0) {
 			
@@ -490,6 +496,12 @@ public class PlayerSeasonVO {
 			foulAvg = (double) foul / matchCount;
 			turnoverAvg = (double) turnover / matchCount;
 			scoreAvg = (double) score / matchCount;
+			
+			latestScore = scoreQueue.getLastData();
+			latestRebound = reboundQueue.getLastData();
+			latestAssist = assistQueue.getLastData();
+			latestBlock = blockQueue.getLastData();
+			latestSteal = blockQueue.getLastData();
 			
 			if (matchCount > 9) {
 				scorePromotion = scoreQueue.getPromotion();

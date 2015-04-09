@@ -12,6 +12,14 @@ public class RecentDataQueue {
 	private int start = 0;
 	private int size = 0;
 	
+	public int getLastData() {
+		if (last == 0) {
+			return recent[9];
+		}else {
+			return recent[last - 1];
+		}
+	}
+	
 	public void enqueue(int data) {
 		recent[last] = data;
 		if (size < 10) {

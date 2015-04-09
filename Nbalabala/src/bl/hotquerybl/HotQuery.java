@@ -15,9 +15,7 @@ import bl.playerseasonbl.PlayerAvgSorter;
 import bl.teamseasonbl.TeamAvgSorter;
 import blservice.HotBLService;
 import data.playerdata.PlayerData;
-import data.playerdata.PlayerPortraitCache;
 import data.seasondata.SeasonData;
-import data.teamdata.SVGHandler;
 import dataservice.PlayerDataService;
 import dataservice.SeasonDataService;
 import enums.HotFastestPlayerProperty;
@@ -30,14 +28,14 @@ import enums.SortOrder;
 import enums.TeamAvgSortBasis;
 
 /**
- * 
+ * 查看热点的类
  * @author Issac Ding
  * @version 2015年4月8日  下午8:47:51
  */
 public class HotQuery implements HotBLService{
 	
-	SeasonDataService seasonService = new SeasonData();
-	PlayerDataService playerService = new PlayerData();
+	private SeasonDataService seasonService = new SeasonData();
+	private PlayerDataService playerService = new PlayerData();
 	
 	/**
 	 * @see blservice.HotBLService#getHotTodayPlayers(enums.HotTodayPlayerProperty)
@@ -45,8 +43,79 @@ public class HotQuery implements HotBLService{
 	@Override
 	public ArrayList<HotTodayPlayerVO> getHotTodayPlayers(
 			HotTodayPlayerProperty property) {
-		// TODO Auto-generated method stub
-		return null;
+		Comparator<PlayerSeasonVO> comparator = null;
+		switch (property) {
+		case SCORE:
+			comparator = new Comparator<PlayerSeasonVO>() {
+				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
+					return vo2.latestScore - vo1.latestScore;
+				}
+			};
+			break;
+		case REBOUND:
+			comparator = new Comparator<PlayerSeasonVO>() {
+				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
+					return vo2.latestRebound - vo1.latestRebound;
+				}
+			};
+			break;
+		case ASSIST:
+			comparator = new Comparator<PlayerSeasonVO>() {
+				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
+					return vo2.latestAssist - vo1.latestAssist;
+				}
+			};
+			break;
+		case BLOCK:
+			comparator = new Comparator<PlayerSeasonVO>() {
+				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
+					return vo2.latestBlock - vo1.latestBlock;
+				}
+			};
+			break;
+		case STEAL:
+			comparator = new Comparator<PlayerSeasonVO>() {
+				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
+					return vo2.latestSteal - vo1.latestSteal;
+				}
+			};
+			break;
+		default:
+			break;
+		}
+		ArrayList<PlayerSeasonVO> players = seasonService.getAllPlayerRecentSeasonData();
+		Collections.sort(players, comparator);
+		int size = players.size();
+		if (size > 5) size = 5;
+		int i;
+		ArrayList<HotTodayPlayerVO> result = new ArrayList<HotTodayPlayerVO>();
+		for (i=0; i<size; i++) {
+			PlayerSeasonVO seasonVO = players.get(i);
+			int value = 0;
+			switch (property) {
+			case SCORE:
+				value = seasonVO.latestScore;
+				break;
+			case REBOUND:
+				value = seasonVO.latestRebound;
+				break;
+			case ASSIST:
+				value = seasonVO.latestAssist;
+				break;
+			case BLOCK:
+				value = seasonVO.latestBlock;
+				break;
+			case STEAL:
+				value = seasonVO.latestSteal;
+				break;
+			default:
+				break;
+			}
+			String name = seasonVO.name;
+			String position = playerService.getPlayerProfileByName(name).getPosition();
+			result.add(new HotTodayPlayerVO(name, seasonVO.teamName, position,value));
+		}
+		return result;
 	}
 
 	/**
@@ -122,8 +191,7 @@ public class HotQuery implements HotBLService{
 			}
 			String name = seasonVO.name;
 			String position = playerService.getPlayerProfileByName(name).getPosition();
-			result.add(new HotSeasonPlayerVO(PlayerPortraitCache.getPortraitByName(name), 
-					name, seasonVO.teamName, position, value));
+			result.add(new HotSeasonPlayerVO(name, seasonVO.teamName, position, value));
 		}
 		return result;
 	}
@@ -207,8 +275,7 @@ public class HotQuery implements HotBLService{
 			}else {
 				league = "西部";
 			}
-			result.add(new HotSeasonTeamVO(SVGHandler.getTeamLogo(abbr), abbr, 
-					league, value));
+			result.add(new HotSeasonTeamVO(abbr, league, value));
 		}
 		return result;
 	}
@@ -319,8 +386,7 @@ public class HotQuery implements HotBLService{
 			}
 			String name = seasonVO.name;
 			String position = playerService.getPlayerProfileByName(name).getPosition();
-			result.add(new HotFastestPlayerVO(PlayerPortraitCache.getPortraitByName(name), 
-					name, seasonVO.teamName, position,value));
+			result.add(new HotFastestPlayerVO(name, seasonVO.teamName, position,value));
 		}
 		return result;
 	}
