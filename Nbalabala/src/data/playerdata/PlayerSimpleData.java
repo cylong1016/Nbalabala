@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
+import autotest.PlayerSimpleVO;
 import utility.Constants;
-import vo.PlayerSimpleVO;
 
 /**
  * 供测试用的球员数据模块，不涉及球员头像和全身像的读取

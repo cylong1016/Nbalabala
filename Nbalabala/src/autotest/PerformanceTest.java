@@ -22,7 +22,6 @@ import bl.playerseasonbl.PlayerSeasonAnalysis;
 import utility.Constants;
 import vo.PlayerProfileVO;
 import vo.PlayerSeasonVO;
-import vo.PlayerSimpleVO;
 import data.playerdata.PlayerImageCache;
 import data.seasondata.SeasonData;
 import enums.PlayerAllSortBasis;
