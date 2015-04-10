@@ -69,6 +69,7 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 				if (e.getClickCount() < 2) return;
 //				这个跳转方法。。好奇怪哦
 				MainController.toTeamSeasonPanel((BottomPanel)HotSeasonTeamLabel.this.getParent(), 
+						(BottomPanel)HotSeasonTeamLabel.this.getParent(), teamAbbr,0);
 			}
 		});
 	}
