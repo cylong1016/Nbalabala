@@ -106,6 +106,11 @@ public class TeamDataPanel extends BottomPanel {
 		seasonArray = teamSeason.getTeamDataSortedByName(seasonInput.getSeason());
 		createTable(seasonArray); // 设置表格数据
 	}
+	
+	public void refresh(){
+		seasonArray = teamSeason.getTeamDataSortedByName(seasonInput.getSeason());
+		createTable(seasonArray); 
+	}
 
 	/**
 	 * 添加查询按钮

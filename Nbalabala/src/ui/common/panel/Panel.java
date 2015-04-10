@@ -15,5 +15,9 @@ public class Panel extends JPanel {
 		this.setOpaque(false);
 		this.setLayout(null);
 	}
+	
+	public void refresh(){
+		
+	}
 
 }

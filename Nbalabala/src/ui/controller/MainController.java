@@ -183,6 +183,7 @@ public class MainController {
 	public static void backToOnePanel(Panel panelNow, Panel panelTo) {
 		frame.remove(panelNow);
 		frame.setPanel(panelTo);
+		panelTo.refresh();
 		frame.repaint();
 	}
 

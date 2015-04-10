@@ -74,6 +74,13 @@ public class AllPlayersPanel extends BottomPanel {
 		setTable(playerInfoArr);
 	}
 	
+	public void refresh(){
+		ArrayList<PlayerProfileVO> playerInfoArr = playerInfo.getPlayerProfileByInitial('A');
+		AllPlayersPanel.this.remove(scroll);
+		setTable(playerInfoArr);
+		AllPlayersPanel.this.repaint();
+	}
+	
 	public void setTable(final ArrayList<PlayerProfileVO> players) {
 		int size = players.size();
 		int lth = COLUMN_NAMES.length;

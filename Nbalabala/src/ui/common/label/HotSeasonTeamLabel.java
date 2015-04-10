@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 import ui.UIConfig;
 import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
-import ui.panel.allteams.TeamButton;
 import utility.Constants;
 import vo.HotSeasonTeamVO;
 import data.teamdata.SVGHandler;
@@ -21,6 +20,8 @@ import enums.HotSeasonTeamProperty;
  */
 public class HotSeasonTeamLabel extends HotSeasonLabel{
 	
+	/** serialVersionUID */
+	private static final long serialVersionUID = -8406263855199884283L;
 	private String teamAbbr;
 
 	/**

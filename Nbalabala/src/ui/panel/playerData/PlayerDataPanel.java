@@ -120,6 +120,11 @@ public class PlayerDataPanel extends BottomPanel {
 		ArrayList<PlayerSeasonVO> iniArray = playerSeason.getAllPlayersSortedByName();
 		createTable(iniArray);
 	}
+	
+	public void refresh(){
+		ArrayList<PlayerSeasonVO> iniArray = playerSeason.getAllPlayersSortedByName();
+		createTable(iniArray);
+	}
 
 	public void addFindButton() {
 		findButton = new ImgButton("images/playerData/search.png", 856, 124, "images/playerData/searchOn.png",
