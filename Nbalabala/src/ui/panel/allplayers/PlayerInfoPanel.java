@@ -15,7 +15,6 @@ import ui.common.button.TextButton;
 import ui.common.label.ImgLabel;
 import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
-import ui.common.panel.CartogramPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
@@ -36,19 +35,20 @@ public class PlayerInfoPanel extends BottomPanel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 2506795997614982399L;
-	protected static final int TOTAL_X = 676, GAME_X = 765, GAME_Y = 190, 
-			TOTAL_WIDTH = 63, GAME_WIDTH = 83, HEIGHT = 25;
+	protected static final int TOTAL_X = 676, GAME_X = 765, GAME_Y = 190, TOTAL_WIDTH = 63, GAME_WIDTH = 83,
+			HEIGHT = 25;
 	private static final String IMG_URL = UIConfig.IMG_PATH + "players/";
 	private static final String BACK_BUTTON_OFF = IMG_URL + "back.png";
 	private static final String BACK_BUTTON_ON = IMG_URL + "back.png";
 	private static final String BACK_BUTTON_CLICK = IMG_URL + "back.png";
-	private static final int LABEL_X = 350, LABEL_Y = 40, INTER_X = 220, INTER_Y = 30, 
-			LABEL_WIDTH = 200, LABEL_HEIGHT = 35;
-	private static final String [] COLUMN_NAMES = new String[]{"", "参赛场数", "先发场数", "在场时间", "投篮命中数", "投篮出手数", "投篮命中率", "三分命中数", "三分出手数", "三分命中率",
-		"罚球命中数", "罚球出手数", "罚球命中率", "进攻篮板", "防守篮板", "总篮板", "助攻数", "抢断数", "盖帽数", "失误数",
-		"犯规数", "得分", "两双", "得分/篮板/助攻", "效率", "GmSc 效率值", "真实命中率", "投篮效率", "进攻篮板率", "防守篮板率",
-		"篮板率", "助攻率", "抢断率", "盖帽率", "失误率", "使用率"};
-	
+	private static final int LABEL_X = 350, LABEL_Y = 40, INTER_X = 220, INTER_Y = 30, LABEL_WIDTH = 200, LABEL_HEIGHT = 35;
+	private static final String[] COLUMN_NAMES = new String[]{"", "参赛场数", "先发场数", "在场时间", "投篮命中数", "投篮出手数", "投篮命中率",
+																"三分命中数", "三分出手数", "三分命中率", "罚球命中数", "罚球出手数", "罚球命中率",
+																"进攻篮板", "防守篮板", "总篮板", "助攻数", "抢断数", "盖帽数", "失误数",
+																"犯规数", "得分", "两双", "得分/篮板/助攻", "效率", "GmSc 效率值",
+																"真实命中率", "投篮效率", "进攻篮板率", "防守篮板率", "篮板率", "助攻率", "抢断率",
+																"盖帽率", "失误率", "使用率"};
+
 	protected TextButton totalButton, gameButton;
 	protected String name;
 	protected PlayerProfileVO profileVO;
@@ -56,11 +56,11 @@ public class PlayerInfoPanel extends BottomPanel {
 	private PlayerQueryBLService playerQuery;
 	protected PlayerDetailVO detailVO;
 	private ImgButton backButton;
-	
+
 	protected BottomPanel lastPanel;
 	private MyLabel profileLabel[] = new MyLabel[10];
 	private String[] labelStr;
-	
+
 	protected BottomScrollPane scroll;
 	protected BottomTable table;
 	/** 赛季选择器 */
@@ -75,22 +75,39 @@ public class PlayerInfoPanel extends BottomPanel {
 		this.add(seasonInput); // TODO 位置需要重新设定
 		this.detailVO = playerQuery.getPlayerDetailByName(name, seasonInput.getSeason());
 		this.profileVO = detailVO.getProfile();
-		this.lastPanel =  lastPanel;
-		
-		labelStr = new String[]{"姓名: " + profileVO.getName(), "球队: " + Constants.translateTeamAbbr(profileVO.getTeam()), "号码: " + profileVO.getNumber(),
-								"位置: " + profileVO.getPosition(), "年龄: " + profileVO.getAge(), "球龄: " + profileVO.getExp(),
-								"生日: " + profileVO.getBirth(), "身高: " + profileVO.getHeight(), "体重: " + profileVO.getWeight(),
-								"毕业学校: " + profileVO.getSchool()};
+		this.lastPanel = lastPanel;
+
+		labelStr = new String[]{"姓名: " + profileVO.getName(),
+									"球队: " + Constants.translateTeamAbbr(profileVO.getTeam()),
+									"号码: " + profileVO.getNumber(), "位置: " + profileVO.getPosition(),
+									"年龄: " + profileVO.getAge(), "球龄: " + profileVO.getExp(),
+									"生日: " + profileVO.getBirth(), "身高: " + profileVO.getHeight(),
+									"体重: " + profileVO.getWeight(), "毕业学校: " + profileVO.getSchool()};
 		addButton();
 		setTable();
 		addPortrait();
 		addActionImg();
 		addBackButton();
 		addLabel();
-		
-		CartogramPanel ca = new CartogramPanel(20, 10, 30);
-		ca.setLocation(100, 380);
-		this.add(ca);
+		addContrastDiagram();
+	}
+
+	/**
+	 * 添加球员和联盟平均的比较图
+	 * @author cylong
+	 * @version 2015年4月11日 上午1:14:43
+	 */
+	private void addContrastDiagram() {
+		/* 球员的场均得分、助攻、篮板、 罚球命中率、三分命中率的平均值 */
+		PlayerSeasonVO playerSeason = detailVO.getSeasonRecord();
+		double[] fivePlayersData = {playerSeason.getScoreAvg(), playerSeason.getAssistAvg(),
+										playerSeason.getTotalReboundAvg(), playerSeason.getFreeThrowPercent(),
+										playerSeason.getThreePointPercent()};
+		double[] fiveArgsAvg = playerQuery.getFiveArgsAvg();
+		double[] highestScoreReboundAssist = playerQuery.getHighestScoreReboundAssist();
+		ContrastDiagram cd = new ContrastDiagram(fivePlayersData, fiveArgsAvg, highestScoreReboundAssist);
+		cd.setBounds(57, 380, 888, 165);
+		this.add(cd);
 	}
 
 	private void addLabel() {
@@ -106,8 +123,8 @@ public class PlayerInfoPanel extends BottomPanel {
 		for(int i = 8; i < 9; i++) {
 			profileLabel[i] = new MyLabel(LABEL_X + (i - 8) * INTER_X, LABEL_Y + 3 * INTER_Y, LABEL_WIDTH, LABEL_HEIGHT, labelStr[i]);
 		}
-		for (int i = 9; i < 10; i++) {
-			profileLabel[i] = new MyLabel(LABEL_X + (i - 8) * INTER_X, LABEL_Y + 3 * INTER_Y, LABEL_WIDTH+150, LABEL_HEIGHT, labelStr[i]);
+		for(int i = 9; i < 10; i++) {
+			profileLabel[i] = new MyLabel(LABEL_X + (i - 8) * INTER_X, LABEL_Y + 3 * INTER_Y, LABEL_WIDTH + 150, LABEL_HEIGHT, labelStr[i]);
 		}
 		for(int i = 0; i < 10; i++) {
 			profileLabel[i].setHorizontalAlignment(SwingConstants.LEFT);
@@ -150,10 +167,10 @@ public class PlayerInfoPanel extends BottomPanel {
 	public void addActionImg() {
 		ActionPhotoPanel actionPhotoPanel = new ActionPhotoPanel(detailVO.getAction());
 		actionPhotoPanel.setOpaque(true);
-		actionPhotoPanel.setBounds(885,6, 1000, 1000);
+		actionPhotoPanel.setBounds(885, 6, 1000, 1000);
 		this.add(actionPhotoPanel);
 	}
-	
+
 	public void addButton() {
 		totalButton = new GameDetailButton(TOTAL_X, GAME_Y, TOTAL_WIDTH, HEIGHT, "总数据");
 		totalButton.setOpaque(true);
@@ -177,7 +194,7 @@ public class PlayerInfoPanel extends BottomPanel {
 
 	public void setTable() {
 		PlayerSeasonVO playerSeason = detailVO.getSeasonRecord();
-		String [][] rowData = new String[2][COLUMN_NAMES.length];
+		String[][] rowData = new String[2][COLUMN_NAMES.length];
 		DecimalFormat df = UIConfig.FORMAT;
 		rowData[0][0] = "总数据";
 		rowData[1][0] = "平均数据";
