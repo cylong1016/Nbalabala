@@ -16,7 +16,6 @@ import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
-import ui.panel.allteams.TeamButton;
 import utility.Constants;
 import vo.TeamSeasonVO;
 import bl.teamseasonbl.TeamSeasonAnalysis;
@@ -262,7 +261,7 @@ public class TeamDataPanel extends BottomPanel {
 					if (rowI > -1) {
 						String abbr = seasonArray.get(rowI).getTeamName();
 						MainController.toTeamSeasonPanel(TeamDataPanel.this,TeamDataPanel.this,
-								new TeamButton(abbr),0);
+								abbr,0);
 					}
 
 				}

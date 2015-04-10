@@ -10,7 +10,6 @@ import ui.panel.allplayers.AllPlayersPanel;
 import ui.panel.allplayers.PlayerInfoPanel;
 import ui.panel.allplayers.PlayerSeasonPanel;
 import ui.panel.allteams.AllTeamsPanel;
-import ui.panel.allteams.TeamButton;
 import ui.panel.allteams.TeamGamePanel;
 import ui.panel.allteams.TeamSeasonPanel;
 import ui.panel.gamedata.GameDataPanel;
@@ -135,9 +134,9 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月20日 下午11:45:39
 	 */
-	public static void toTeamSeasonPanel(BottomPanel allteams, Panel panel, TeamButton button, int x) {
+	public static void toTeamSeasonPanel(BottomPanel allteams, Panel panel, String abbr, int x) {
 		frame.remove(panel);
-		teamSeasonpanel = new TeamSeasonPanel(allteams, "images/teams/teamSeasonBG.png", button, x);
+		teamSeasonpanel = new TeamSeasonPanel(allteams, "images/teams/teamSeasonBG.png", abbr, x);
 		frame.setPanel(teamSeasonpanel);
 	}
 
@@ -147,9 +146,9 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月21日 上午12:31:15
 	 */
-	public static void toTeamGamePanel(BottomPanel allteams, Panel panel, TeamButton button) {
+	public static void toTeamGamePanel(BottomPanel allteams, Panel panel,String abbr) {
 		frame.remove(panel);
-		teamGamePanel = new TeamGamePanel(allteams, UIConfig.IMG_PATH + "teams/teamSeasonBG.png", button, 2);
+		teamGamePanel = new TeamGamePanel(allteams, UIConfig.IMG_PATH + "teams/teamSeasonBG.png", abbr, 2);
 		frame.setPanel(teamGamePanel);
 	}
 

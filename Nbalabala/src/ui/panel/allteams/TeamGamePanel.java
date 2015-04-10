@@ -35,15 +35,15 @@ public class TeamGamePanel extends TeamSeasonPanel {
 	ImgButton imgButton;
 	DateChooser dateChooser;
 	TeamQueryBLService teamQuery = new TeamQuery();
-	TeamButton teamButton;
+	String abbr;
 	GameDataPanel gameData;
 	ArrayList<MatchProfileVO> matchProfile;
 	BottomScrollPane pane;
 
-	public TeamGamePanel(BottomPanel allteams, String url, TeamButton teamButton,
+	public TeamGamePanel(BottomPanel allteams, String url,String abbr,
 			int x) {
-		super(allteams, url, teamButton, x);
-		this.teamButton = teamButton;
+		super(allteams, url, abbr, x);
+		this.abbr = abbr;
 		addFindButton();
 		addDateChooser();
 		matchProfile = teamDetail.getMatchRecords();
@@ -154,9 +154,9 @@ public class TeamGamePanel extends TeamSeasonPanel {
 	class MouListener extends MouseAdapter {
 		public void mousePressed(MouseEvent e) {
 			if (e.getSource() == button[0]) {
-				MainController.toTeamSeasonPanel(allteams, TeamGamePanel.this, teamButton, 0);
+				MainController.toTeamSeasonPanel(allteams, TeamGamePanel.this, abbr, 0);
 			} else if (e.getSource() == button[1]) {
-				MainController.toTeamSeasonPanel(allteams, TeamGamePanel.this, teamButton, 1);
+				MainController.toTeamSeasonPanel(allteams, TeamGamePanel.this, abbr, 1);
 			} else if (e.getSource() == button[2]) {
 				return;
 			}

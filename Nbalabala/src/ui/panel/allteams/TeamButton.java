@@ -20,8 +20,5 @@ public class TeamButton extends ImgButton{
 	public TeamButton(int x, int y) {
 		super(OFF_PATH, x, y, MOUSE_ON_PATH, MOUSE_ON_PATH);
 	}
-	
-	public TeamButton(String team){
-		this.team = team;
-	}
+
 }

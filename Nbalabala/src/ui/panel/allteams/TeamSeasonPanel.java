@@ -44,7 +44,7 @@ public class TeamSeasonPanel extends BottomPanel {
 	TeamSeasonButton[] button = new TeamSeasonButton[3];
 	TeamQueryBLService teamQuery = new TeamQuery();
 	MainController controller;
-	TeamButton teamButton;
+	String abbr;
 	MatchQueryBLService matchQuery = new MatchQuery();
 
 	/** 队伍数据表格 */
@@ -77,10 +77,10 @@ public class TeamSeasonPanel extends BottomPanel {
 	protected SeasonInputPanel seasonInput;
 
 	// 用x来判断此时是赛季数据还是阵容 0代表赛季 1代表阵容
-	public TeamSeasonPanel(BottomPanel allteams,String url, TeamButton teamButton, int x) {
+	public TeamSeasonPanel(BottomPanel allteams,String url, String abbr, int x) {
 		super(url);
 		this.allteams = allteams;
-		this.teamButton = teamButton;
+		this.abbr = abbr;
 		setButton();
 		addButton();
 		setEffect(x);
@@ -89,7 +89,7 @@ public class TeamSeasonPanel extends BottomPanel {
 		seasonInput = new SeasonInputPanel();
 		seasonInput.setLocation(600, 40);
 		this.add(seasonInput); // TODO 位置需要重新设定
-		teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team, seasonInput.getSeason());
+		teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
 		addLabel(teamDetail.getLogo());
 		iniTable(x);
 	}
@@ -282,19 +282,19 @@ public class TeamSeasonPanel extends BottomPanel {
 			TeamSeasonButton.current = (TeamSeasonButton) e.getSource();
 			if (e.getSource() == button[0]) {
 				TeamSeasonPanel.this.remove(scroll);
-				teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team, seasonInput.getSeason());
+				teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
 				addSeasonTable(teamDetail.getSeasonRecord());
 				TeamSeasonPanel.this.repaint();
 				return;
 			} else if (e.getSource() == button[1]) {
 				TeamSeasonPanel.this.remove(scroll);
-				TeamDetailVO teamDetail = teamQuery.getTeamDetailByAbbr(teamButton.team, seasonInput.getSeason());
+				TeamDetailVO teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
 				ArrayList<PlayerProfileVO> players = teamDetail.getPlayers();
 				setPlayerTable(players);
 				TeamSeasonPanel.this.repaint();
 			} else if (e.getSource() == button[2]) {
 				TeamSeasonPanel.this.remove(scroll);
-				MainController.toTeamGamePanel(allteams,TeamSeasonPanel.this, teamButton);
+				MainController.toTeamGamePanel(allteams,TeamSeasonPanel.this, abbr);
 			}
 		}
 	}

@@ -4,13 +4,13 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import data.teamdata.SVGHandler;
 import ui.UIConfig;
 import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
-import ui.panel.allplayers.ActionPhotoPanel;
+import ui.panel.allteams.TeamButton;
 import utility.Constants;
 import vo.HotSeasonTeamVO;
+import data.teamdata.SVGHandler;
 import enums.HotSeasonTeamProperty;
 
 /**
@@ -67,9 +67,8 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() < 2) return;
-				这个跳转方法。。好奇怪哦
+//				这个跳转方法。。好奇怪哦
 				MainController.toTeamSeasonPanel((BottomPanel)HotSeasonTeamLabel.this.getParent(), 
-						teamAbbr, (BottomPanel)HotSeasonTeamLabel.this.getParent());
 			}
 		});
 	}
