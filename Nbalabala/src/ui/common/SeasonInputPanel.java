@@ -13,11 +13,12 @@ import utility.Utility;
 
 /**
  * 用于选择赛季的组件，外观待美化
+ * 
  * @author Issac Ding
- * @version 2015年4月7日  下午10:13:46
+ * @version 2015年4月7日 下午10:13:46
  */
-public class SeasonInputPanel extends JPanel{
-	
+public class SeasonInputPanel extends JPanel {
+
 	/** serialVersionUID */
 	private static final long serialVersionUID = 8335944304725379626L;
 	private ImgButton rightUpButton;
@@ -26,43 +27,45 @@ public class SeasonInputPanel extends JPanel{
 	private JLabel rightYearLabel;
 	private JLabel middleLabel;
 	private JLabel textLabel;
-	
+
 	public SeasonInputPanel() {
 		this.setLayout(null);
-		String [] defaultSeason = Utility.getDefaultSeason().split("-");
+		String[] defaultSeason = Utility.getDefaultSeason().split("-");
 		leftYearLabel = new JLabel(defaultSeason[0]);
 		rightYearLabel = new JLabel(defaultSeason[1]);
-		middleLabel = new JLabel("-");
+		middleLabel = new JLabel("—");
 		textLabel = new JLabel("赛季");
-		rightUpButton = new ImgButton("images/SeasonInputUpOff.png", "images/SeasonInputUpOn.png");
-		rightDownButton = new ImgButton("images/SeasonInputDownOff.png", "images/SeasonInputDownOn.png");
+		rightUpButton = new ImgButton("images/SeasonInputUpOff.png",
+				"images/SeasonInputUpOn.png");
+		rightDownButton = new ImgButton("images/SeasonInputDownOff.png",
+				"images/SeasonInputDownOn.png");
 		this.setSize(142, 26);
-		
-		leftYearLabel.setBounds(0,0,30,26);
+
+		leftYearLabel.setBounds(0, 0, 20, 26);
 		this.add(leftYearLabel);
-		
-		middleLabel.setBounds(52, 0, 5, 26);
+
+		middleLabel.setBounds(23, 0, 20, 26);
 		this.add(middleLabel);
-		
-		rightYearLabel.setBounds(58, 0, 30, 26);
+
+		rightYearLabel.setBounds(44, 0, 20, 26);
 		this.add(rightYearLabel);
 		
-		rightUpButton.setBounds(88,0,22,13);
-		this.add(rightUpButton);
-		
-		rightDownButton.setBounds(88,14,22,13);
-		this.add(rightDownButton);
-		
-		textLabel.setBounds(111,0,31,26);
+		textLabel.setBounds(68, 0, 31, 26);
 		this.add(textLabel);
-		
+
+		rightUpButton.setBounds(95, 0, 22, 13);
+		this.add(rightUpButton);
+
+		rightDownButton.setBounds(95, 14, 22, 13);
+		this.add(rightDownButton);
+
 		setAction();
 	}
-	
+
 	public String getSeason() {
 		return leftYearLabel.getText() + "-" + rightYearLabel.getText();
 	}
-	
+
 	private void setAction() {
 		rightUpButton.addActionListener(new ActionListener() {
 			@Override
@@ -79,34 +82,34 @@ public class SeasonInputPanel extends JPanel{
 			}
 		});
 	}
-	
+
 	private String yearIncrease(String oldYear) {
 		int old = Integer.parseInt(oldYear);
 		int newYear = old + 1;
 		if (newYear == 100) {
 			return "00";
-		}else if (newYear < 10){
+		} else if (newYear < 10) {
 			return "0" + newYear;
-		}else {
+		} else {
 			return Integer.toString(newYear);
 		}
 	}
-	
-	private String yearDecrease(String oldYear){
+
+	private String yearDecrease(String oldYear) {
 		int old = Integer.parseInt(oldYear);
 		int newYear = old - 1;
 		if (newYear == -1) {
 			return "99";
-		}else if (newYear < 10) {
+		} else if (newYear < 10) {
 			return "0" + newYear;
-		}else {
+		} else {
 			return Integer.toString(newYear);
 		}
 	}
-	
+
 	public static SeasonInputPanel panel = new SeasonInputPanel();
-	
-	public static void main(String[]args) {
+
+	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(panel);
@@ -117,7 +120,7 @@ public class SeasonInputPanel extends JPanel{
 				System.out.println(panel.getSeason());
 			}
 		});
-//		frame.getContentPane().add(new JButton());
+		// frame.getContentPane().add(new JButton());
 		frame.setVisible(true);
 	}
 
