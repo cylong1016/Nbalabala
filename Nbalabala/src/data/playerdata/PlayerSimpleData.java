@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
-import autotest.PlayerSimpleVO;
+import autotest.playertest.PlayerSimpleVO;
 import utility.Constants;
 
 /**

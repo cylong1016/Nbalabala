@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import autotest.playertest.PlayerSimpleSeasonVO;
+import autotest.teamtest.TeamSimpleSeasonVO;
 import utility.Utility;
 import enums.TeamState;
 
@@ -190,6 +192,10 @@ public class SimpleMatchesAccumulator {
 		// 球队的总得分在之前已经写好，故不参与累加
 		for (int i=2;i<17;i++){
 			teamData[i] += lineInt[i];
+		}
+		
+		if (s[1].length() != 0){
+			playerRecord.firstCount ++;
 		}
 		
 		playerRecord.time += lineInt[2];

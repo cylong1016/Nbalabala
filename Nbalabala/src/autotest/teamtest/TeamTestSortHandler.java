@@ -1,9 +1,10 @@
-package autotest;
+package autotest.teamtest;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import autotest.ComparatorChain;
 import enums.SortOrder;
 import enums.TeamAllSortBasis;
 import enums.TeamAvgSortBasis;

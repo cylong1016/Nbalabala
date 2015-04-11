@@ -1,4 +1,4 @@
-package autotest;
+package autotest.teamtest;
 
 import java.util.ArrayList;
 import java.util.Collections;

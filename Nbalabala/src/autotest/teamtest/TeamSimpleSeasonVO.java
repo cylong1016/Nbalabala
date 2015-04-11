@@ -1,4 +1,4 @@
-package autotest;
+package autotest.teamtest;
 
 /**
  * @author Issac Ding

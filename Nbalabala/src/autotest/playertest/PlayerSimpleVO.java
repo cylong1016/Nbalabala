@@ -1,4 +1,4 @@
-package autotest;
+package autotest.playertest;
 
 /**
  * 供自动测试使用，不涉及球员头像、全身像等

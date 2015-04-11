@@ -1,4 +1,4 @@
-package autotest;
+package autotest.playertest;
 
 
 /**
@@ -284,6 +284,7 @@ public class PlayerSimpleSeasonVO {
 		return doubleDoubleAvg;
 	}
 
+	public int firstCount;
 	
 	/** 下面是要测试的属性： */
 	//基本数据有：
@@ -310,6 +311,10 @@ public class PlayerSimpleSeasonVO {
 	public double freethrowPercent;
 	public int doubleDoubleCount;
 	public double doubleDoubleAvg;
+	
+	public double offensiveReboundAvg;
+	public double defensiveReboundAvg;
+	public double firstCountAvg;
 	
 	//高阶数据有：
 	public double realFieldPercent;
@@ -366,8 +371,12 @@ public class PlayerSimpleSeasonVO {
 			
 			if (freethrowAttempt != 0) freethrowPercent = (double)freethrowGoal / freethrowAttempt;
 			
-			minutes = time / 60;
+			minutes = (double)time / 60;
 			minutesAvg = minutes / matchCount;
+			
+			firstCountAvg = (double)firstCount / matchCount;
+			defensiveReboundAvg = (double)defensiveRebound/ matchCount;
+			offensiveReboundAvg = (double)offensiveRebound / matchCount;
 
 			totalReboundAvg = (double) totalRebound / matchCount;
 			assistAvg = (double) assist / matchCount;

@@ -18,6 +18,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import autotest.playertest.PlayerSimpleVO;
 import bl.playerseasonbl.PlayerSeasonAnalysis;
 import utility.Constants;
 import vo.PlayerProfileVO;

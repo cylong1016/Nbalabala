@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import autotest.playertest.PlayerSimpleSeasonVO;
+import autotest.teamtest.TeamSimpleSeasonVO;
 import utility.Utility;
 
 /**
@@ -33,6 +35,9 @@ public class SeasonSimpleData{
 	/**  position = F G C表示按位置筛选，""表示无要求。 league为"East或West"*/
 	public ArrayList<PlayerSimpleSeasonVO> getFilteredPlayerSeasonData(String position,
 			String league, String ageLimit) {
+		
+		if (position.equals("All")) position = "";
+		if (league.equals("All")) league = "";
 		
 		Iterator<Map.Entry<String, PlayerSimpleSeasonVO>> itr = playerRecords.entrySet().iterator();
 		

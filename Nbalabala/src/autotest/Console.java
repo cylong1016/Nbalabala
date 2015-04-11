@@ -6,7 +6,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import autotest.playertest.PlayerSimpleSeasonVO;
+import autotest.playertest.PlayerTestSortHandler;
+import autotest.playertest.SimplePlayerAvgSorter;
+import autotest.teamtest.SimpleTeamAvgSorter;
+import autotest.teamtest.TeamSimpleSeasonVO;
+import autotest.teamtest.TeamTestSortHandler;
 import bl.teamseasonbl.TeamAvgSorter;
+import test.data.PlayerNormalInfo;
 import test.data.TeamHighInfo;
 import test.data.TeamHotInfo;
 import test.data.TeamNormalInfo;
@@ -36,38 +43,52 @@ public class Console {
 		switch (args[0]) {
 		case "--datasource":
 			Constants.changeDataSourcePath(args[1]);
-			break;
+			return;
 		case "-player":
-			break;
+			ArrayList<PlayerSimpleSeasonVO> playerVOs;
+			int neededPlayerCount = 50;
+			if (args.length < 2) {
+				playerVOs = seasonData.getAllPlayerSeasonData();
+				Collections.sort(playerVOs, SimplePlayerAvgSorter.getPlayerAvgAndHighComparator("score", "desc"));
+				for (int i = 0; i< 50;i++) {
+					outputPlayerNormalAvgInfo(out, playerVOs.get(i));
+				}
+			}else{
+				neededPlayerCount = getNeededPlayerCount(args);
+				playerVOs = getFilteredPlayers(args);
+				PlayerTestSortHandler.playerSortHandle(args, playerVOs);
+				
+			}
+			return;
 		case "-team":
-			ArrayList<TeamSimpleSeasonVO> vos = seasonData.getAllTeamSeasonData();
+			ArrayList<TeamSimpleSeasonVO> teamVOs = seasonData.getAllTeamSeasonData();
 			int neededTeamCount = 30;
 			if (args.length < 2) {
-				SimpleTeamAvgSorter.sort(vos, TeamAvgSortBasis.SCORE_AVG, SortOrder.DE);
-				for (TeamSimpleSeasonVO vo : vos) {
+				SimpleTeamAvgSorter.sort(teamVOs, TeamAvgSortBasis.SCORE_AVG, SortOrder.DE);
+				for (TeamSimpleSeasonVO vo : teamVOs) {
 					outputTeamNormalAvgInfo(out, vo);
 				}
 			}else{
 				neededTeamCount = getNeededTeamCount(args);
-				TeamTestSortHandler.teamSortHandle(args, vos);
-				if (neededTeamCount > vos.size())
-					neededTeamCount = vos.size();
+				TeamTestSortHandler.teamSortHandle(args, teamVOs);
+				if (neededTeamCount > teamVOs.size())
+					neededTeamCount = teamVOs.size();
 				for (int i = 1;i<args.length;i++) {
 					switch (args[i]) {
 					case "-total":
 						for (int j = 0;j<neededTeamCount;j++) {
-							outputTeamNormalTotalInfo(out, vos.get(j));
+							outputTeamNormalTotalInfo(out, teamVOs.get(j));
 						}
 						return;
 					case "-high":
 						for (int j = 0;j<neededTeamCount;j++) {
-							outputTeamHighInfo(out, vos.get(j));
+							outputTeamHighInfo(out, teamVOs.get(j));
 						}
 						return;
 					case "-hot":
 						int index = i + 1;
 						for (int j = 0;j<neededTeamCount;j++) {
-							outputTeamHotInfo(out, args[index], vos.get(j));
+							outputTeamHotInfo(out, args[index], teamVOs.get(j));
 						}
 						return;
 					default:
@@ -76,7 +97,7 @@ public class Console {
 				}
 				// 如果没有发现这三个字段，就是-avg -all了
 				for (int j = 0;j<neededTeamCount;j++) {
-					outputTeamNormalAvgInfo(out, vos.get(j));
+					outputTeamNormalAvgInfo(out, teamVOs.get(j));
 				}
 			}
 		}
@@ -89,6 +110,42 @@ public class Console {
 				return Integer.parseInt(args[i + 1]);
 		}
 		return 30;
+	}
+	
+	private int getNeededPlayerCount(String[]args) {
+		for (int i=0;i<args.length;i++) {
+			if (args[i].equals("-n"))
+				return Integer.parseInt(args[i + 1]);
+		}
+		return 50;
+	}
+	
+	private ArrayList<PlayerSimpleSeasonVO> getFilteredPlayers(String[]args) {
+		for (int i=1;i<args.length;i++) {
+			if (args[i].equals("-filter")) {
+				String[] filterArgs = args[i+1].split(",|\\.");
+				int length = filterArgs.length;
+				
+				String positionArg = "";
+				String leagueArg = "";
+				String ageArg = "";
+				
+				for (int j=0;j<length;j++) {
+					if (filterArgs[j].equals("position")){
+						j++;
+						positionArg = filterArgs[j];
+					}else if(filterArgs[j].equals("league")){
+						j++;
+						leagueArg = filterArgs[j];
+					}else if(filterArgs[j].equals("age")) {
+						j++;
+						ageArg = filterArgs[j];
+					}
+				}
+				return seasonData.getFilteredPlayerSeasonData(positionArg, leagueArg, ageArg);
+			}
+		}
+		return seasonData.getAllPlayerSeasonData();
 	}
 	
 	private void outputTeamNormalAvgInfo(PrintStream out, TeamSimpleSeasonVO vo) {
@@ -189,6 +246,52 @@ public class Console {
 			break;
 		}
 		out.print(info);
+	}
+	
+	private void outputPlayerNormalTotalInfo(PrintStream out, PlayerSimpleSeasonVO vo) {
+		PlayerNormalInfo info = new PlayerNormalInfo();
+		info.setAge(vo.age);
+		info.setAssist(vo.assist);
+		info.setBlockShot(vo.block);
+		info.setDefend(vo.defensiveRebound);
+		info.setEfficiency(vo.efficiency);
+		info.setFault(vo.turnover);
+		info.setFoul(vo.foul);
+		info.setMinute(vo.minutes);
+		info.setName(vo.name);
+		info.setNumOfGame(vo.matchCount);
+		info.setOffend(vo.offensiveRebound);
+		info.setPenalty(vo.freethrowPercent);
+		info.setPoint(vo.score);
+		info.setRebound(vo.totalRebound);
+		info.setShot(vo.fieldPercent);
+		info.setStart(vo.firstCount);
+		info.setSteal(vo.steal);
+		info.setTeamName(vo.teamName);
+		info.setThree(vo.threePointPercent);
+	}
+	
+	private void outputPlayerNormalAvgInfo(PrintStream out, PlayerSimpleSeasonVO vo) {
+		PlayerNormalInfo info = new PlayerNormalInfo();
+		info.setAge(vo.age);
+		info.setAssist(vo.assistAvg);
+		info.setBlockShot(vo.blockAvg);
+		info.setDefend(vo.defensiveReboundAvg);
+		info.setEfficiency(vo.efficiencyAvg);
+		info.setFault(vo.turnoverAvg);
+		info.setFoul(vo.foulAvg);
+		info.setMinute(vo.minutesAvg);
+		info.setName(vo.name);
+		info.setNumOfGame(vo.matchCount);
+		info.setOffend(vo.offensiveReboundAvg);
+		info.setPenalty(vo.freethrowPercent);
+		info.setPoint(vo.scoreAvg);
+		info.setRebound(vo.totalReboundAvg);
+		info.setShot(vo.fieldPercent);
+		info.setStart(vo.firstCount);
+		info.setSteal(vo.stealAvg);
+		info.setTeamName(vo.teamName);
+		info.setThree(vo.threePointPercent);
 	}
 	
 	
