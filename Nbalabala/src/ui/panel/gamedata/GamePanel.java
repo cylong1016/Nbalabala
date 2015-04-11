@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import data.teamdata.SVGHandler;
 import ui.UIConfig;
 import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
@@ -68,7 +69,6 @@ public class GamePanel extends BottomPanel {
 	/** 球队队标 */
 	ImgLabel sign1, sign2;
 	TeamQueryBLService teamQuery;
-	TeamDetailVO teamVO_1, teamVO_2;
 	MatchDetailVO matchVO;
 	MyLabel[] lb_1, lb_2;
 	ImgButton back;
@@ -128,8 +128,8 @@ public class GamePanel extends BottomPanel {
 		teamLabel2.setFont(labelFont);
 		placeLabel1 = new MyLabel(labelX, labelY_1, width, height, place1);
 		placeLabel2 = new MyLabel(labelX, labelY_3, width, height, place2);
-		sign1 = new ImgLabel(165, 10,80,80, teamVO_1.getLogo());
-		sign2 = new ImgLabel(165, 95, 80,80,teamVO_2.getLogo());
+		sign1 = new ImgLabel(165, 10,80,80, SVGHandler.getTeamLogo(teamShort1));
+		sign2 = new ImgLabel(165, 95, 80,80,SVGHandler.getTeamLogo(teamShort2));
 		this.add(teamLabel1);
 		this.add(teamLabel2);
 		this.add(placeLabel1);
