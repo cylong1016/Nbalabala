@@ -37,124 +37,121 @@ public class TeamTestSortHandler {
 	}
 	
 	private static void tryToSortAvgByOneComparator(String[]args, ArrayList<TeamSimpleSeasonVO> list) {
-		int comparatorCount = 0;
-		int index = 0;
 		for (int i = 1; i< args.length ; i++) {
 			if (args[i].contains(".")) {
-				comparatorCount ++;
-				index = i;
+				if (args[i].contains(",")) {
+					sortHighAndAvgByComparatorChain(args[i], list);
+					return;
+				}else {
+					String[]s = args[i].split("\\.");
+					SortOrder order;
+					TeamAvgSortBasis basis;
+					if (s[1].equals("asc"))
+						order = SortOrder.AS;
+					else 
+						order = SortOrder.DE;
+					switch (s[0]) {
+					case "point":
+						basis = TeamAvgSortBasis.SCORE_AVG;
+						break;
+					case "rebound":
+						basis = TeamAvgSortBasis.TOTAL_REBOUND_AVG;
+						break;
+					case "assist":
+						basis = TeamAvgSortBasis.ASSIST_AVG;
+						break;
+					case "blockShot":
+						basis = TeamAvgSortBasis.BLOCK_AVG;
+						break;
+					case "steal":
+						basis = TeamAvgSortBasis.STEAL_AVG;
+						break;
+					case "foul":
+						basis = TeamAvgSortBasis.FOUL_AVG;
+						break;
+					case "fault":
+						basis = TeamAvgSortBasis.TURNOVER_AVG;
+						break;
+					case "shot":
+						basis = TeamAvgSortBasis.FIELD_PERCENT;
+						break;
+					case "three":
+						basis = TeamAvgSortBasis.THREE_POINT_PERCENT;
+						break;
+					case "penalty":
+						basis = TeamAvgSortBasis.FREETHROW_PERCENT;
+						break;
+					case "defendRebound":
+						basis = TeamAvgSortBasis.DEFENSIVE_REBOUND_AVG;
+						break;
+					default:
+						basis = TeamAvgSortBasis.OFFENSIVE_REBOUND_AVG;
+						break;
+					}
+					SimpleTeamAvgSorter.sort(list, basis, order);
+					return;
+				}
 			}
 		}
-		if (comparatorCount == 0)
-			SimpleTeamAvgSorter.sort(list, TeamAvgSortBasis.SCORE_AVG, SortOrder.DE);
-		else if (comparatorCount > 1)
-			sortHighAndAvgByComparatorChain(args, list);
-		else{
-			String[]s = args[index].split(".");
-			SortOrder order;
-			TeamAvgSortBasis basis;
-			if (s[1].equals("asc"))
-				order = SortOrder.AS;
-			else 
-				order = SortOrder.DE;
-			switch (s[0]) {
-			case "point":
-				basis = TeamAvgSortBasis.SCORE_AVG;
-				break;
-			case "rebound":
-				basis = TeamAvgSortBasis.TOTAL_REBOUND_AVG;
-				break;
-			case "assist":
-				basis = TeamAvgSortBasis.ASSIST_AVG;
-				break;
-			case "blockShot":
-				basis = TeamAvgSortBasis.BLOCK_AVG;
-				break;
-			case "steal":
-				basis = TeamAvgSortBasis.STEAL_AVG;
-				break;
-			case "foul":
-				basis = TeamAvgSortBasis.FOUL_AVG;
-				break;
-			case "fault":
-				basis = TeamAvgSortBasis.TURNOVER_AVG;
-				break;
-			case "shot":
-				basis = TeamAvgSortBasis.FIELD_PERCENT;
-				break;
-			case "three":
-				basis = TeamAvgSortBasis.THREE_POINT_PERCENT;
-				break;
-			case "penalty":
-				basis = TeamAvgSortBasis.FREETHROW_PERCENT;
-				break;
-			case "defendRebound":
-				basis = TeamAvgSortBasis.DEFENSIVE_REBOUND_AVG;
-				break;
-			default:
-				basis = TeamAvgSortBasis.OFFENSIVE_REBOUND_AVG;
-				break;
-			}
-			SimpleTeamAvgSorter.sort(list, basis, order);
-		}
+		// 默认排序
+		SimpleTeamAvgSorter.sort(list, TeamAvgSortBasis.SCORE_AVG, SortOrder.DE);
 	}
 	
 	private static void tryToSortHighByOneComparator(String[]args, ArrayList<TeamSimpleSeasonVO> list) {
-		int comparatorCount = 0;
-		int index = 0;
 		for (int i = 1; i< args.length ; i++) {
 			if (args[i].contains(".")) {
-				comparatorCount ++;
-				index = i;
+				if (args[i].contains(",")) {
+					sortHighAndAvgByComparatorChain(args[i], list);
+					return;
+				}else {
+					String[]s = args[i].split("\\.");
+					SortOrder order;
+					TeamAllSortBasis basis;
+					if (s[1].equals("asc"))
+						order = SortOrder.AS;
+					else 
+						order = SortOrder.DE;
+					switch (s[0]) {
+					case "winRate":
+						basis = TeamAllSortBasis.WINNING;
+						break;
+					case "offendRound":
+						basis = TeamAllSortBasis.OFFENSIVE_ROUND;
+						break;
+					case "offendEfficient":
+						basis = TeamAllSortBasis.OFFENSIVE_EFF;
+						break;
+					case "defendEfficient":
+						basis = TeamAllSortBasis.DEFENSIVE_EFF;
+						break;
+					case "offendReboundEfficient":
+						basis = TeamAllSortBasis.OFFENSIVE_REBOUND_EFF;
+						break;
+					case "defendReboundEfficient":
+						basis = TeamAllSortBasis.DEFENSIVE_REBOUND_EFF;
+						break;
+					case "stealEfficient":
+						basis = TeamAllSortBasis.STEAL_EFF;
+						break;
+					default:
+						basis = TeamAllSortBasis.ASSIST_EFF;
+						break;
+					}
+					SimpleTeamTotalSorter.sort(list, basis, order);
+					return;
+				}
 			}
 		}
-		if (comparatorCount == 0)
-			SimpleTeamTotalSorter.sort(list, TeamAllSortBasis.WINNING, SortOrder.DE);
-		else if (comparatorCount > 1)
-			sortHighAndAvgByComparatorChain(args, list);
-		else{
-			String[]s = args[index].split(".");
-			SortOrder order;
-			TeamAllSortBasis basis;
-			if (s[1].equals("asc"))
-				order = SortOrder.AS;
-			else 
-				order = SortOrder.DE;
-			switch (s[0]) {
-			case "winRate":
-				basis = TeamAllSortBasis.WINNING;
-				break;
-			case "offendRound":
-				basis = TeamAllSortBasis.OFFENSIVE_ROUND;
-				break;
-			case "offendEfficient":
-				basis = TeamAllSortBasis.OFFENSIVE_EFF;
-				break;
-			case "defendEfficient":
-				basis = TeamAllSortBasis.DEFENSIVE_EFF;
-				break;
-			case "offendReboundEfficient":
-				basis = TeamAllSortBasis.OFFENSIVE_REBOUND_EFF;
-				break;
-			case "defendReboundEfficient":
-				basis = TeamAllSortBasis.DEFENSIVE_REBOUND_EFF;
-				break;
-			case "stealEfficient":
-				basis = TeamAllSortBasis.STEAL_EFF;
-				break;
-			default:
-				basis = TeamAllSortBasis.ASSIST_EFF;
-				break;
-			}
-			SimpleTeamTotalSorter.sort(list, basis, order);
-		}
+		// 默认排序
+		SimpleTeamTotalSorter.sort(list, TeamAllSortBasis.WINNING, SortOrder.DE);
 	}
 	
-	private static void sortHighAndAvgByComparatorChain(String[]args, ArrayList<TeamSimpleSeasonVO> list){
+	private static void sortHighAndAvgByComparatorChain(String arg, ArrayList<TeamSimpleSeasonVO> list){
 		ArrayList<Comparator<TeamSimpleSeasonVO>> comparators = new ArrayList<Comparator<TeamSimpleSeasonVO>>();
-		for (int i = 1; i<args.length ; i++) {
+		String[]args = arg.split(",");
+		for (int i = 0; i<args.length ; i++) {
 			if (args[i].contains(".")) {
-				String[]s = args[i].split(".");
+				String[]s = args[i].split("\\.");
 				if (args[1].equals("desc"))
 					factor = -1;
 				else

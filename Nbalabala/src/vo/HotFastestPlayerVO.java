@@ -20,12 +20,20 @@ public class HotFastestPlayerVO {
 		this.promotion = promotion;
 	}
 	
+	/** 此人是第几名，top=1代表第一名 */
 	private int top;
+	
 	private String name;
+	
+	/** 所属球队缩写 */
 	private String teamAbbr;
+	/** 位置 */
 	private String position;
+	/** 之前第六场到第十场的平均 */
 	private double formerFiveAvg;
+	/** 5元数组，最近五场的数据 */
 	private double [] recentFive;
+	/** 五场提升率 */
 	private double promotion;
 	
 	public double[] getRecentFive() {

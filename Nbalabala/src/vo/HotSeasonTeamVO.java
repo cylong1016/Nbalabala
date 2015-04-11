@@ -17,9 +17,12 @@ public class HotSeasonTeamVO {
 		this.property = property;
 	}
 	
+	/** 第几名 */
 	private int top;
 	private String abbr;
 	private String league; //值为 "东部" 或者 "西部"
+	
+	/** 作为依据的那一项属性的数值 */
 	private double property;
 	
 	public int getTop() {

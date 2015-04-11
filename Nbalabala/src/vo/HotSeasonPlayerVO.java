@@ -17,10 +17,14 @@ public class HotSeasonPlayerVO {
 		this.property = property;
 	}
 	
+	/** 第几名 */
 	private int top;
+	
 	private String name;
 	private String teamAbbr;
 	private String position;
+	
+	/** 作为依据的那一项属性的数值 */
 	private double property;
 	
 	public int getTop() {

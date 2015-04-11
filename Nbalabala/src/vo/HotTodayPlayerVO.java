@@ -19,11 +19,14 @@ public class HotTodayPlayerVO {
 		this.matchPerformanceVO = matchPerformanceVO;
 	}
 	
+	/** 第几名 */
 	private int top;
 	private String name;
 	private String teamAbbr;
 	private String position;
+	/** 作为依据的那一项属性的数值 */
 	private int property;
+	/** 当天那一场比赛的记录，包括日期、对阵双方、该球员的各种数据 */
 	private PlayerMatchPerformanceVO matchPerformanceVO;
 	
 	public PlayerMatchPerformanceVO getMatchPerformance() {

@@ -9,14 +9,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import utility.Constants;
 import utility.Utility;
-import data.seasondata.MatchesAccumulator;
-import enums.Position;
-import enums.ScreenDivision;
 
 /**
- * 读取并累加赛季数据。数据结构是两层map。外层是赛季到map的映射。内层是球员/球队名到其该赛季数据的映射
  * @author Issac Ding
  * @version 2015年3月14日  下午4:04:31
  */
@@ -35,119 +30,46 @@ public class SeasonSimpleData{
 	private static HashMap<String, TeamSimpleSeasonVO> teamRecords = 
 			new HashMap<String, TeamSimpleSeasonVO>();
 	
-	public ArrayList<PlayerSimpleSeasonVO> getScreenedPlayerSeasonData(Position position,
-			ScreenDivision division) {
-		
-		if (playerRecords == null) {
-			return new ArrayList<PlayerSimpleSeasonVO>();
-		}
-		
-		char posChar = '\0';
-		switch (position) {
-		case F:
-			posChar = 'F';
-			break;
-		case C:
-			posChar = 'C';
-			break;
-		case G:
-			posChar = 'G';
-		default:
-			break;
-		}
-		
-		ArrayList<PlayerSimpleSeasonVO> result = new ArrayList<PlayerSimpleSeasonVO>();
+	/**  position = F G C表示按位置筛选，""表示无要求。 league为"East或West"*/
+	public ArrayList<PlayerSimpleSeasonVO> getFilteredPlayerSeasonData(String position,
+			String league, String ageLimit) {
 		
 		Iterator<Map.Entry<String, PlayerSimpleSeasonVO>> itr = playerRecords.entrySet().iterator();
 		
-		if (position == Position.ALL && division == ScreenDivision.ALL) {
-			return getAllPlayerSeasonData();
-		}else if (position == Position.ALL && 
-				(division == ScreenDivision.WEST || division == ScreenDivision.EAST)){
-			while (itr.hasNext()) {
-				PlayerSimpleSeasonVO record = itr.next().getValue();
-				if (Constants.getAreaByAbbr(record.teamName) == division) {
-					result.add(record);
-				}
+		ArrayList<PlayerSimpleSeasonVO> result = new ArrayList<PlayerSimpleSeasonVO>();
+		
+		while (itr.hasNext()) {
+			PlayerSimpleSeasonVO vo = itr.next().getValue();
+			int ageMin;
+			int ageMax;
+			switch (ageLimit) {
+			case "<=22":
+				ageMin = 0;
+				ageMax = 22;
+				break;
+			case "22< X <=25":
+				ageMin = 22;
+				ageMax = 25;
+				break;
+			case "25< X <=30":
+				ageMin = 25;
+				ageMax = 30;
+				break;
+			case ">30":
+				ageMin = 30;
+				ageMax = 128;
+				break;
+			default:
+				ageMin = 0;
+				ageMax = 128;
 			}
-		}else if (position == Position.ALL && 
-				(division != ScreenDivision.WEST && division != ScreenDivision.EAST)){
-			while (itr.hasNext()) {
-				PlayerSimpleSeasonVO record = itr.next().getValue();
-				if (Constants.getDivisionByAbbr(record.teamName) == division) {
-					result.add(record);
-				}
-			}
-		}else if (position != Position.ALL && division == ScreenDivision.ALL) {
-			while (itr.hasNext()) {
-				PlayerSimpleSeasonVO record = itr.next().getValue();
-				if (record.getPosition() == posChar) {
-					result.add(record);
-				}
-			}
-		}else if (position != Position.ALL && 
-				(division == ScreenDivision.WEST || division == ScreenDivision.EAST)){
-			while (itr.hasNext()) {
-				PlayerSimpleSeasonVO record = itr.next().getValue();
-				if (record.getPosition() == posChar && 
-						Constants.getAreaByAbbr(record.teamName) == division) {
-					result.add(record);
-				}
-			}
-		}else{
-			while (itr.hasNext()) {
-				PlayerSimpleSeasonVO record = itr.next().getValue();
-				if (record.getPosition() == posChar &&
-						Constants.getDivisionByAbbr(record.teamName) == division) {
-					result.add(record);
-				}
+			if (vo.position.contains(position) && 
+					SimpleConstants.getLeagueByAbbr(vo.teamName).contains(league) && 
+					vo.age > ageMin && vo.age < ageMax) {
+				result.add(vo);
 			}
 		}
 		return result;
-	}
-	
-	public ArrayList<TeamSimpleSeasonVO> getScreenedTeamSeasonData(ScreenDivision division) {
-		if (division == ScreenDivision.ALL){
-			return new ArrayList<TeamSimpleSeasonVO>(teamRecords.values());
-		}
-		
-		Iterator<Map.Entry<String, TeamSimpleSeasonVO>> itr = teamRecords.entrySet().iterator();
-		ArrayList<TeamSimpleSeasonVO> result = new ArrayList<TeamSimpleSeasonVO>();
-		
-		if (division == ScreenDivision.EAST || division == ScreenDivision.WEST) {
-			while (itr.hasNext()) {
-				TeamSimpleSeasonVO record = itr.next().getValue();
-				if (Constants.getAreaByAbbr(record.getTeamName()) == division){
-					result.add(record);
-				}
-			}
-		}else {
-			while (itr.hasNext()) {
-				TeamSimpleSeasonVO record = itr.next().getValue();
-				if (Constants.getDivisionByAbbr(record.getTeamName()) == division){
-					result.add(record);
-				}
-			}
-		}
-		return result;
-	}
-	
-	public String getTeamAbbrByPlayer(String playerName, String season) {
-		PlayerSimpleSeasonVO record = playerRecords.get(playerName);
-		if (record != null) return record.getTeam(); 
-		else return Constants.UNKNOWN;
-	}
-	
-	public PlayerSimpleSeasonVO getPlayerSeasonDataByName(String playerName) {
-		PlayerSimpleSeasonVO record = playerRecords.get(playerName);
-		if (record == null) return new PlayerSimpleSeasonVO(playerName); 
-		else return record;
-	}
-	
-	public TeamSimpleSeasonVO getTeamDataByAbbr(String abbr) {
-		TeamSimpleSeasonVO record = teamRecords.get(abbr);
-		if (record != null) return record;
-		else return new TeamSimpleSeasonVO(abbr);
 	}
 	
 	private void loadMatches() {
@@ -202,15 +124,11 @@ public class SeasonSimpleData{
 	}
 
 	public ArrayList<PlayerSimpleSeasonVO> getAllPlayerSeasonData() {
-		
-			return new ArrayList<PlayerSimpleSeasonVO>(playerRecords.values());
-		}
+		return new ArrayList<PlayerSimpleSeasonVO>(playerRecords.values());
+	}
 	
-	
-	public ArrayList<TeamSimpleSeasonVO> getAllTeamSeasonData() {
-		
-			return new ArrayList<TeamSimpleSeasonVO>(teamRecords.values());
-		
+	public ArrayList<TeamSimpleSeasonVO> getAllTeamSeasonData() {	
+		return new ArrayList<TeamSimpleSeasonVO>(teamRecords.values());
 	}
 	
 }
