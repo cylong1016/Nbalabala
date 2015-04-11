@@ -26,6 +26,7 @@ public class Frame extends JFrame {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 5359481363535358093L;
 
+	public static Panel currentPanel;
 	/** 标题栏 */
 	protected TitlePanel title;
 
@@ -61,6 +62,7 @@ public class Frame extends JFrame {
 	
 	public void setPanel(Panel panel) {
 		this.add(panel);
+		currentPanel = panel;
 		this.setVisible(true);
 	}
 

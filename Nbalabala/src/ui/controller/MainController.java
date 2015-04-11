@@ -213,7 +213,7 @@ public class MainController {
 	}
 	
 	public static void refreshUI() {
-		System.out.println("UI refreshed!");
+		Frame.currentPanel.refresh();
 	}
 	
 	public static void toHotPanel(Panel panel){
