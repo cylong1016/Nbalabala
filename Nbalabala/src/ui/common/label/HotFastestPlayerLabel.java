@@ -54,7 +54,7 @@ public class HotFastestPlayerLabel extends JLabel{
 		if (vo.getTop() == 1) {
 			Image actionImage = PlayerImageCache.getActionImageByName(playerName);
 			ActionPhotoPanel actionPhotoPanel = new ActionPhotoPanel(actionImage);
-			actionPhotoPanel.setBounds(262,0,107,295);
+			actionPhotoPanel.setBounds(262,0,157,295);
 			this.add(actionPhotoPanel);
 			
 			MyLabel nameLabel = new MyLabel(108, 59, 146, 26, playerName);

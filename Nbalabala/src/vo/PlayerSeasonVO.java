@@ -516,7 +516,8 @@ public class PlayerSeasonVO {
 				else{
 					double formerFieldPercent = fieldGoalQueue.getFormerFiveSum() / formerFieldAttempt;
 					double latterFieldPercent = fieldGoalQueue.getLatterFiveSum() / latterFieldAttempt;
-					fieldPercentPromotion = (latterFieldPercent - formerFieldPercent) / formerFieldPercent;
+					if (formerFieldPercent != 0)
+						fieldPercentPromotion = (latterFieldPercent - formerFieldPercent) / formerFieldPercent;
 				}
 				
 				int formerThreePointAttempt = threePointAttemptQueue.getFormerFiveSum();
@@ -525,7 +526,8 @@ public class PlayerSeasonVO {
 				else{
 					double formerThreePointPercent = threePointGoalQueue.getFormerFiveSum() / formerThreePointAttempt;
 					double latterThreePointPercent = threePointGoalQueue.getLatterFiveSum() / latterThreePointAttempt;
-					threePointPercentPromotion = (latterThreePointPercent - formerThreePointPercent) / formerThreePointPercent;
+					if (formerThreePointPercent != 0)
+						threePointPercentPromotion = (latterThreePointPercent - formerThreePointPercent) / formerThreePointPercent;
 				}
 				
 				int formerFreethrowAttempt = freethrowAttemptQueue.getFormerFiveSum();
@@ -534,7 +536,8 @@ public class PlayerSeasonVO {
 				else{
 					double formerFreethrowPercent = freethrowGoalQueue.getFormerFiveSum() / formerFreethrowAttempt;
 					double latterFreethrowPercent = freethrowGoalQueue.getLatterFiveSum() / latterFreethrowAttempt;
-					freethrowPercentPromotion = (latterFreethrowPercent - formerFreethrowPercent) / formerFreethrowPercent;
+					if (formerFreethrowPercent != 0)
+						freethrowPercentPromotion = (latterFreethrowPercent - formerFreethrowPercent) / formerFreethrowPercent;
 				}
 			}
 			

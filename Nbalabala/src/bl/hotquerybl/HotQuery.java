@@ -331,21 +331,21 @@ public class HotQuery implements HotBLService{
 		case STEAL_AVG:
 			comparator = new Comparator<PlayerSeasonVO>() {
 				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
-					return (int)((vo2.stealPromotion - vo1.stealPromotion)*10000);
+					return (int)((vo2.stealPromotion - vo1.stealPromotion)*10000000);
 				}
 			};
 			break;
 		case FIELD_PERCENT:
 			comparator = new Comparator<PlayerSeasonVO>() {
 				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
-					return (int)((vo2.fieldPercentPromotion - vo1.fieldPercentPromotion)*10000);
+					return (int)((vo2.fieldPercentPromotion - vo1.fieldPercentPromotion)*100000000);
 				}
 			};
 			break;
 		case THREE_POINT_PERCENT:
 			comparator = new Comparator<PlayerSeasonVO>() {
 				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
-					return (int)((vo2.threePointPercentPromotion - vo1.threePointPercentPromotion)*10000);
+					return (int)((vo2.threePointPercentPromotion - vo1.threePointPercentPromotion)*100000000);
 				}
 			};
 			break;
@@ -431,18 +431,18 @@ public class HotQuery implements HotBLService{
 			String name = seasonVO.name;
 			String position = playerService.getPlayerProfileByName(name).getPosition();
 			if (recentFiveDivisor == null) {
-				result.add(new HotFastestPlayerVO(i+1, name, seasonVO.teamName, position,
+				result.add(new HotFastestPlayerVO(i, name, seasonVO.teamName, position,
 						formerFiveAvg, recentFive, promotion));
 			}else {
 				double [] recentPercent = new double[5];
-				for(int j=0;i<5;j++) {
+				for(int j=0;j<5;j++) {
 					if (recentFiveDivisor[j] != 0) {
 						recentPercent[j] = recentFive[j] / recentFiveDivisor[j];
 					}else{
 						recentPercent[j] = 0;
 					}
 				}
-				result.add(new HotFastestPlayerVO(i+1, name, seasonVO.teamName, position,
+				result.add(new HotFastestPlayerVO(i, name, seasonVO.teamName, position,
 						formerFiveAvg, recentPercent, promotion));
 			}
 		}
