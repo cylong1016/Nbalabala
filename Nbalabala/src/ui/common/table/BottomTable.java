@@ -26,11 +26,20 @@ public class BottomTable extends JTable {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 3966419405700478023L;
 
+	/** 默认的表格前景色 */
+	private Color headerF = new Color(255, 221, 31);
+	
 	/** 表格每一行的高 */
 	private static final int ROW_HEIGHT = 23;
 
 	public BottomTable(Object[][] rowData, String[] columnNames) {
 		super(rowData, columnNames);
+		this.decorateTable();
+	}
+	
+	public BottomTable(Object[][] rowData, String[] columnNames,Color color) {
+		super(rowData, columnNames);
+		this.headerF = color;
 		this.decorateTable();
 	}
 
@@ -72,7 +81,7 @@ public class BottomTable extends JTable {
 		this.setShowVerticalLines(false);
 		JTableHeader header = this.getTableHeader();// 获取头部
 		header.setOpaque(false); // 设置头部为透明
-		header.setForeground(UIConfig.TABLE_HEADER_FORE_COLOR);	
+		header.setForeground(headerF);	
 		header.getTable().setOpaque(false);// 设置头部里面的表格透明
 		// 头部的表格也像前面的表格设置一样，还需要将里面的单元项设置为透明 因此同样需要对头部单元项进行透明度设置，这里还是用渲染器。
 		// 但这里有个问题就是，若将头部渲染器直接像上文一样设置，则它的下面没有横线 因此，我们需要一个专用的头部渲染器来手动画横线
@@ -155,7 +164,7 @@ public class BottomTable extends JTable {
 		JTableHeader header = this.getTableHeader();// 获取头部
 		// header.setPreferredSize(new Dimension(30, rowHeight));
 		header.setBackground(UIConfig.TABLE_HEADER_BACK_COLOR);	// 设置头部背景色
-		header.setForeground(UIConfig.TABLE_HEADER_FORE_COLOR);	// 设置头部前景色
+		header.setForeground(headerF);	// 设置头部前景色
 		// header.getTable().setOpaque(false);// 设置头部里面的表格透明
 		// 头部的表格也像前面的表格设置一样，还需要将里面的单元项设置为透明 因此同样需要对头部单元项进行透明度设置，这里还是用渲染器。
 		// 但这里有个问题就是，若将头部渲染器直接像上文一样设置，则它的下面没有横线 因此，我们需要一个专用的头部渲染器来手动画横线
@@ -195,7 +204,7 @@ public class BottomTable extends JTable {
 			label.setText(value != null ? value.toString() : "unknown");
 			label.setHorizontalAlignment(JLabel.CENTER);
 			label.setFont(UIConfig.TABLE_FONT);
-			label.setForeground(UIConfig.TABLE_HEADER_FORE_COLOR);	// 表头前景色
+			label.setForeground(headerF);	// 表头前景色
 			return label;
 		}
 
@@ -228,7 +237,7 @@ public class BottomTable extends JTable {
 			label.setText(value != null ? value.toString() : "unknown");
 			label.setHorizontalAlignment(JLabel.CENTER);
 			label.setFont(UIConfig.TABLE_FONT);
-			label.setForeground(UIConfig.TABLE_HEADER_FORE_COLOR);	// 表头前景色
+			label.setForeground(headerF);	// 表头前景色
 			return label;
 		}
 

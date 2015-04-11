@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.table.JTableHeader;
 
 import ui.UIConfig;
 import ui.common.UserMouseAdapter;
@@ -36,7 +37,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 4256548887751307664L;
 
-	private int x = 103, y = 50, width = 55, height = 25, inter = 70;
+	private int x = 103, y = 50, width = 55, height = 25, inter = 60, cellWidth = 70;
 	HotTodayButton button[] = new HotTodayButton[5];
 	String[] lbStr = new String[] { "得分", "篮板", "盖帽", "助攻", "抢断" };
 	HotBLService hot = new HotQuery();
@@ -94,7 +95,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 		}
 		Object [][] rowData = new String[size][lth];
 		ArrayList<ImageIcon> iconArr = new ArrayList<ImageIcon>();
-		table = new BottomTable(rowData, columns);
+		table = new BottomTable(rowData, columns, new Color(215, 72, 72));
 		for (int i = 0; i < size; i++) {
 			HotTodayPlayerVO ppVO = players.get(i);
 			PlayerMatchPerformanceVO matchVO = ppVO.getMatchPerformance();
@@ -151,10 +152,17 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 			e.printStackTrace();
 		}
 		table.setRowHeight(57);
-		
 		table.setForeground(Color.black);
 		table.cancelVerticalLines();
 		table.setRealOpaque();
+		int []cells = new int[25];
+		for (int j = 0; j < cells.length; j++) {
+			cells[j] = cellWidth;
+		}
+		cells[2] = cells[8] = 120;
+		table.setWidth(cells);
+		JTableHeader header = table.getTableHeader();
+		header.setForeground(Color.red);
 		
 		scroll = new BottomScrollPane(table);
 		scroll.setBounds(90, 260, 810, 320);
