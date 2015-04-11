@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 
 import ui.UIConfig;
+import ui.common.button.ImgButton;
 import ui.common.panel.Panel;
 import ui.controller.MainController;
 
@@ -35,6 +36,7 @@ public class MainPanel extends Panel {
 	private Image allPlayersImg = new ImageIcon(imgUrl + "allPlayers.png").getImage();
 	private Image allTeamsImg = new ImageIcon(imgUrl + "allTeams.png").getImage();
 	private Image hotImg = new ImageIcon(imgUrl + "hot.png").getImage();
+	private ImgButton fileSelect;
 	
 	/** 球队数据六边形按钮 */
 	private Polygon tdPolygon;
@@ -48,6 +50,7 @@ public class MainPanel extends Panel {
 	private Polygon atPolygon;
 	/** 热点六边形按钮 */
 	private Polygon hotPolygon;
+	
 
 	/** 六边形的顶点数 */
 	private int npoints = 6;
@@ -89,8 +92,24 @@ public class MainPanel extends Panel {
 		
 		this.addMouseListener(listener);
 		this.addMouseMotionListener(listener);
+		
+		addFileSelect();
 	}
 
+	/**
+	 * 添加文件夹选择按钮
+	 * @author lsy
+	 * @version 2015年4月11日  下午8:44:18
+	 */
+	public void addFileSelect(){
+		fileSelect = new ImgButton(imgUrl+"fileSelect.png",911,464,imgUrl+"fileSelectOn.png",imgUrl+"fileSelect.png");
+		this.add(fileSelect);
+		fileSelect.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+			}
+		});
+	}
+	
 	@Override
 	public void paint(Graphics g) {
 		g.drawImage(bgImg, 0, 0, this);
