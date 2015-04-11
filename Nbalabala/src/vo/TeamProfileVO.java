@@ -23,6 +23,20 @@ public class TeamProfileVO {
 	private String home;
 	/** 建立时间 */
 	private String since;
+	
+	private String divisionStr;
+	
+	public TeamProfileVO(String name, String abbr) {
+		this.name = name;
+		this.abbr = abbr;
+		this.location = Constants.UNKNOWN;
+		this.area = ScreenDivision.ALL;
+		this.division = ScreenDivision.ALL;
+		this.divisionStr = Constants.UNKNOWN;
+		this.home = Constants.UNKNOWN;
+		this.since = Constants.UNKNOWN;
+
+	}
 
 	public TeamProfileVO(String name, String abbr, String location, String division, String home, String since) {
 		this.name = name;
@@ -64,6 +78,10 @@ public class TeamProfileVO {
 		
 		this.home = home;
 		this.since = since;
+		
+		String areaString = Constants.translateDivision(area);
+		String divisionString = Constants.translateDivision(this.division);
+		this.divisionStr = areaString + "-" + divisionString;
 	}
 
 	public String getName() {
@@ -95,9 +113,7 @@ public class TeamProfileVO {
 	}
 	
 	public String getDivisionString() {
-		String areaString = Constants.translateDivision(area);
-		String divisionString = Constants.translateDivision(division);
-		return areaString + "-" + divisionString;
+		return divisionStr;
 	}
 	
 

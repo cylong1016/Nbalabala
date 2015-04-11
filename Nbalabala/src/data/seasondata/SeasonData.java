@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 
 import utility.Constants;
 import utility.Utility;
+import vo.PlayerProfileVO;
 import vo.PlayerSeasonVO;
 import vo.TeamSeasonVO;
 import dataservice.SeasonDataService;
@@ -292,10 +293,12 @@ public class SeasonData implements SeasonDataService {
 	}
 	
 	/** 发现有文件被删除时，重新读取所有文件 */
-	public void reloadMatches() {
+	public static void reloadMatches() {
 		allPlayerRecords.clear();
 		allTeamRecords.clear();
 		new MatchesAccumulator(allPlayerRecords, allTeamRecords).accumulate(Utility.getSortedMatchFiles(), false);
+		
+		updateData();
 	}
 
 	/**
@@ -339,6 +342,26 @@ public class SeasonData implements SeasonDataService {
 			return new ArrayList<TeamSeasonVO>();
 		}else {
 			return new ArrayList<TeamSeasonVO>(map.values());
+		}
+	}
+	
+	private static void updateData() {
+		Iterator<Entry<String, HashMap<String, PlayerSeasonVO>>> playerItr = allPlayerRecords.entrySet().iterator();
+		while(playerItr.hasNext()) {
+			HashMap<String, PlayerSeasonVO> vos = playerItr.next().getValue();
+			Iterator<Entry<String, PlayerSeasonVO>> iterator = vos.entrySet().iterator();
+			while (iterator.hasNext()) {
+				iterator.next().getValue().update();
+			}
+		}
+		
+		Iterator<Entry<String, HashMap<String, TeamSeasonVO>>> teamItr = allTeamRecords.entrySet().iterator();
+		while(teamItr.hasNext()) {
+			HashMap<String, TeamSeasonVO> vos = teamItr.next().getValue();
+			Iterator<Entry<String, TeamSeasonVO>> iterator = vos.entrySet().iterator();
+			while (iterator.hasNext()) {
+				iterator.next().getValue().update();
+			}
 		}
 	}
 	

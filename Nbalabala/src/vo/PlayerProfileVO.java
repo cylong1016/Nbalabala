@@ -145,5 +145,20 @@ public class PlayerProfileVO {
 	public String getSchool() {
 		return school;
 	}
+	
+	public PlayerProfileVO(Image portrait, String name, String abbr) {
+		this.portrait = portrait;
+		this.name = name;
+		this.team = abbr;
+		this.team = Constants.UNKNOWN;
+		this.number = Constants.UNKNOWN;
+		this.position = Constants.UNKNOWN;
+		this.height = Constants.UNKNOWN;
+		this.weight = Constants.UNKNOWN;
+		this.birth = Constants.UNKNOWN;
+		this.age = Constants.UNKNOWN;
+		this.exp = Constants.UNKNOWN;
+		this.school = Constants.UNKNOWN;
+	}
 
 }

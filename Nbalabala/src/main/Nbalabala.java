@@ -2,6 +2,7 @@ package main;
 
 import data.playerdata.PlayerImageCache;
 import ui.controller.MainController;
+import utility.DataSourceMonitor;
 
 /**
  * Nbalabala程序主入口
@@ -15,6 +16,8 @@ public class Nbalabala {
 
 	public static void main(String[] args) {
 		new PlayerImageCache().loadPortrait();
+
 		MainController.launch();
+		new DataSourceMonitor();
 	}
 }

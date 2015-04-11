@@ -60,7 +60,7 @@ public class Console {
 				Collections.sort(playerVOs, SimplePlayerTotalSorter.getPlayerTotalComparator(args[2], "desc"));
 				outputPlayerHotInfo(args[2], out, playerVOs, getNeededPlayerCount(args));
 			}else if(args[1].equals("-king")) {
-				outputPlayerKingInfo(args[2], args[3])
+				outputPlayerKingInfo(args[2], args[3], seasonData.getAllPlayerSeasonData());
 			}
 			
 			else{
@@ -343,6 +343,11 @@ public class Console {
 		info.setSteal(vo.stealAvg);
 		info.setTeamName(vo.teamName);
 		info.setThree(vo.threePointPercent);
+	}
+	
+	private void outputPlayerKingInfo(String[]field, String period, ArrayList<PlayerSimpleSeasonVO> vos) {
+		Comparator<PlayerSimpleSeasonVO> comparator = null;
+		if ()
 	}
 	
 	

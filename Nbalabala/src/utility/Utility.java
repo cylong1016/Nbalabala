@@ -15,9 +15,6 @@ import enums.TeamState;
  */
 public class Utility {
 	
-	/** 存储比赛信息的文件夹 */
-	public static String matchPath = Constants.dataSourcePath + "matches/"; 
-	
 	/** 根据比赛信息文件夹下的现有比赛数据，返回最新赛季作为默认赛季，形如13-14 */
 	public static String getDefaultSeason() {
 		File[] files = getSortedMatchFiles();
@@ -27,7 +24,13 @@ public class Utility {
 	}
 	
 	public static File[] getSortedMatchFiles(){
-		File dir = new File(matchPath);
+		File dir = new File(Constants.dataSourcePath + "matches/");
+		if (!dir.exists()) {
+			try {
+				dir.mkdirs();
+			} catch (Exception e) {
+			}
+		}
 		File[] files = dir.listFiles();
 		Arrays.sort(files, new Comparator<File>() {
 			public int compare(File f1, File f2) {

@@ -19,7 +19,6 @@ import utility.Utility;
 import vo.PlayerProfileVO;
 import data.seasondata.SeasonData;
 import dataservice.PlayerDataService;
-import dataservice.SeasonDataService;
 
 /**
  * @see dataservice.playerdataservice.PlayerDataService
@@ -41,12 +40,16 @@ public class PlayerData implements PlayerDataService{
 	 * @author cylong
 	 * @version 2015年3月13日 下午7:33:17
 	 */
-	private void loadPlayers() {
+	private static void loadPlayers() {
 		File dir = new File(Constants.dataSourcePath + "players/info/");
+		SeasonData seasonData = new SeasonData();
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
 		File[] files = dir.listFiles();
 		BufferedReader br = null;
 		
-		SeasonDataService seasonData = new SeasonData();
+		String season = Utility.getDefaultSeason();
 		
 		try {
 			for(File file : files) {
@@ -68,7 +71,7 @@ public class PlayerData implements PlayerDataService{
 				
 				Image portrait = PlayerImageCache.getPortraitByName(name);
 				PlayerProfileVO player = new PlayerProfileVO(portrait, playerInfo.get(0), 
-						seasonData.getTeamAbbrByPlayer(name, Utility.getDefaultSeason()), 
+						seasonData.getTeamAbbrByPlayer(name, season), 
 						playerInfo.get(1), playerInfo.get(2), playerInfo.get(3), 
 						playerInfo.get(4), playerInfo.get(5), playerInfo.get(6), 
 						playerInfo.get(7), playerInfo.get(8));
@@ -81,7 +84,7 @@ public class PlayerData implements PlayerDataService{
 		}
 		
 		//有些球员参加过比赛却没有球员资料，也应该将其加入
-		ArrayList<String> names = new SeasonData().getPlayerNames();
+		ArrayList<String> names = seasonData.getPlayerNames();
 		for (String name : names){
 			if (!players.containsKey(name)) {
 				players.put(name, new PlayerProfileVO(PlayerImageCache.getNullPortrait(), name));
@@ -154,6 +157,11 @@ public class PlayerData implements PlayerDataService{
 	
 	public static void clear() {
 		players.clear();
+	}
+	
+	public static void reloadPlayers() {
+		players.clear();
+		loadPlayers();
 	}
 
 }

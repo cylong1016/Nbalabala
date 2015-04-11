@@ -39,7 +39,7 @@ public class TeamTestSortHandler {
 	
 	private static void tryToSortAvgByOneComparator(String[]args, ArrayList<TeamSimpleSeasonVO> list) {
 		for (int i = 1; i< args.length ; i++) {
-			if (args[i].contains(".")) {
+			if (args[i].contains("\\.")) {
 				if (args[i].contains(",")) {
 					sortHighAndAvgByComparatorChain(args[i], list);
 					return;

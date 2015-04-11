@@ -59,13 +59,13 @@ public class DataSourceMonitor {
 					oldFilesCount = currentCount;
 					MainController.refreshUI();
 				}else if (currentCount < oldFilesCount) {
-					new SeasonData().reloadMatches();
+					SeasonData.reloadMatches();
 					reloadNames(files);
 					oldFilesCount = currentCount;
 					MainController.refreshUI();
 				}
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(3000);
 				} catch (InterruptedException e) {
 					continue;
 				}

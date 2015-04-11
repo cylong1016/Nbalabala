@@ -22,9 +22,6 @@ public class TeamData implements TeamDataService{
 	/** 全部球队信息 */
 	private static HashMap<String, TeamProfileVO> teams = new HashMap<String, TeamProfileVO>();
 
-	/** 存储球队信息的文件 */
-	private static final String PATH = Constants.dataSourcePath + "teams/teams";
-
 	public TeamData() {
 		if (teams.size() == 0) {
 			loadTeams();
@@ -36,8 +33,11 @@ public class TeamData implements TeamDataService{
 	 * @author cylong
 	 * @version 2015年3月13日 下午9:05:33
 	 */
-	private void loadTeams() {
-		File file = new File(PATH);
+	private static void loadTeams() {
+		File file = new File(Constants.dataSourcePath + "teams/teams");
+		if ( !file.exists()){
+			return;
+		}
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));
@@ -64,10 +64,20 @@ public class TeamData implements TeamDataService{
 	 */
 	@Override
 	public TeamProfileVO getTeamProfileByAbbr(String abbr) {
-		return teams.get(abbr);
+		TeamProfileVO vo = teams.get(abbr);
+		if (vo == null) {
+			return new TeamProfileVO(Constants.translateTeamAbbr(abbr), abbr);
+		}else{
+			return vo;
+		}
 	}
 	
 	public static void clear() {
 		teams.clear();
+	}
+	
+	public static void reloadTeams() {
+		teams.clear();
+		loadTeams();
 	}
 }

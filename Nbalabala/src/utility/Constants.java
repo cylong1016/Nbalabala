@@ -19,16 +19,12 @@ public class Constants {
 	public static String dataSourcePath = "NBAdata/";
 	
 	/** 记录数据目录已经变更了几次。如果在程序运行中第二次改变数据目录，需要清空已经读取的数据，同时由Controller控制返回首页 */
-	private static int dirChangeCount = 0;
 	public static void changeDataSourcePath(String newPath) {
-		dirChangeCount ++;
-		dataSourcePath = newPath;
-		if (dirChangeCount > 1) {
-			PlayerData.clear();
-			PlayerImageCache.clear();
-			SeasonData.clear();
-			TeamData.clear();
-		}
+		dataSourcePath = newPath + "/";
+		PlayerData.reloadPlayers();
+		PlayerImageCache.reloadImages();
+		SeasonData.reloadMatches();
+		TeamData.reloadTeams();
 	}
 	
 	public static final String [] TEAM_SEASON_HEADERS = {"序号", "球队名称", "胜场数", "负场数", "总场数", "胜率", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手",

@@ -58,10 +58,18 @@ public class PlayerImageCache {
 		}
 	}
 	
+	public static void reloadImages() {
+		portraits.clear();
+		new PlayerImageCache();
+	}
+	
 	private class CacheThread extends Thread{
 		
 		public void start() {
 			File file = new File(Constants.dataSourcePath + "players/portrait/");
+			if (!file.exists()) {
+				return;
+			}
 			File [] files = file.listFiles();
 			for (File imgFile : files) {
 				String fileName = imgFile.getName();

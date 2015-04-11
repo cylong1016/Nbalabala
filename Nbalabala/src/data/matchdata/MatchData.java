@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import data.teamdata.SVGHandler;
 import dataservice.MatchDataService;
 import enums.TeamState;
+import utility.Constants;
 import utility.Utility;
 import vo.MatchDetailVO;
 import vo.MatchPlayerVO;
@@ -100,7 +101,7 @@ public class MatchData implements MatchDataService {
 		
 		//文件名的开头部分就是赛季
 		String season = fileName.split("_")[0];
-		File file = new File(Utility.matchPath + fileName);
+		File file = new File(Constants.dataSourcePath + "matches/" + fileName);
 		
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
