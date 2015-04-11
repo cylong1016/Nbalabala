@@ -31,7 +31,7 @@ public class HotSeasonPlayerPanel extends HotThreeFatherPanel {
 		add_bt_Listener();
 		addLabel();
 	}
-
+	
 	/**
 	 * 添加监听
 	 * @author lsy
