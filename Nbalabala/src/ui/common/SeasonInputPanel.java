@@ -3,8 +3,6 @@ package ui.common;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -39,7 +37,7 @@ public class SeasonInputPanel extends JPanel {
 				"images/SeasonInputUpOn.png");
 		rightDownButton = new ImgButton("images/SeasonInputDownOff.png",
 				"images/SeasonInputDownOn.png");
-		this.setSize(142, 26);
+		this.setSize(115, 26);
 
 		leftYearLabel.setBounds(0, 0, 20, 26);
 		this.add(leftYearLabel);
@@ -108,20 +106,5 @@ public class SeasonInputPanel extends JPanel {
 	}
 
 	public static SeasonInputPanel panel = new SeasonInputPanel();
-
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().add(panel);
-		JButton jButton = new JButton();
-		jButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.println(panel.getSeason());
-			}
-		});
-		// frame.getContentPane().add(new JButton());
-		frame.setVisible(true);
-	}
 
 }
