@@ -45,12 +45,13 @@ public class PlayerInfoPanel extends BottomPanel {
 	private static final String BACK_BUTTON_ON = IMG_URL + "back.png";
 	private static final String BACK_BUTTON_CLICK = IMG_URL + "back.png";
 	private static final int LABEL_X = 350, LABEL_Y = 40, INTER_X = 220, INTER_Y = 30, LABEL_WIDTH = 200, LABEL_HEIGHT = 35;
-	private static final String[] COLUMN_NAMES = new String[]{"", "参赛场数", "先发场数", "在场时间", "投篮命中数", "投篮出手数", "投篮命中率",
-																"三分命中数", "三分出手数", "三分命中率", "罚球命中数", "罚球出手数", "罚球命中率",
-																"进攻篮板", "防守篮板", "总篮板", "助攻数", "抢断数", "盖帽数", "失误数",
-																"犯规数", "得分", "两双", "得分/篮板/助攻", "效率", "GmSc 效率值",
-																"真实命中率", "投篮效率", "进攻篮板率", "防守篮板率", "篮板率", "助攻率", "抢断率",
-																"盖帽率", "失误率", "使用率"};
+	private static final String[] COLUMN_NAMES
+	= new String[]{"", "参赛场数", "先发场数", "在场时间", "投篮命中数", "投篮出手数", "投篮命中率",
+	"三分命中数", "三分出手数", "三分命中率", "罚球命中数", "罚球出手数", "罚球命中率",
+	"进攻篮板", "防守篮板", "总篮板", "助攻数", "抢断数", "盖帽数", "失误数",
+	"犯规数", "得分", "两双", "得分/篮板/助攻", "效率", "GmSc 效率值",
+	"真实命中率", "投篮效率", "进攻篮板率", "防守篮板率", "篮板率", "助攻率", "抢断率",
+	"盖帽率", "失误率", "使用率"};
 
 	protected TextButton totalButton, gameButton;
 	protected String name;
