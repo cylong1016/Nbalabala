@@ -35,7 +35,7 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 		teamAbbr = vo.getAbbr();
 		if (vo.getTop() == 1) {
 			Image logo = SVGHandler.getTeamLogo(teamAbbr);
-			ImgLabel imgLabel = new ImgLabel(262,0,107,295,logo);
+			ImgLabel imgLabel = new ImgLabel(250,0,150,200,logo);
 			this.add(imgLabel);
 			
 			MyLabel nameLabel = new MyLabel(108, 59, 146, 26, "队名：" + Constants.translateTeamAbbr(teamAbbr));
@@ -58,7 +58,7 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 			
 			String propertyName = getPropertyName(property);
 			String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
-			MyLabel propertyLabel = new MyLabel(70, 37, 87, 20, propertyName+"："+propertyStr);
+			MyLabel propertyLabel = new MyLabel(70, 37, 120, 20, propertyName+"："+propertyStr);
 			this.add(propertyLabel);
 			
 			MyLabel leagueLabel = new MyLabel(80, 67, 87, 20, "联盟：" + vo.getLeague());

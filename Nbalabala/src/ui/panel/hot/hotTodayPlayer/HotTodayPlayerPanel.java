@@ -1,4 +1,4 @@
-package ui.panel.hot;
+package ui.panel.hot.hotTodayPlayer;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -16,6 +16,7 @@ import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
 import ui.panel.allplayers.MyTableCellRenderer;
+import ui.panel.hot.HotFatherPanel;
 import utility.Constants;
 import vo.HotTodayPlayerVO;
 import vo.MatchPlayerVO;

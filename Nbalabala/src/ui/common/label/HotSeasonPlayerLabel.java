@@ -49,7 +49,7 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 			this.add(propertyLabel);
 			
 			String team = Constants.translateTeamAbbr(vo.getTeamAbbr());
-			MyLabel teamLabel = new MyLabel(108, 161, 146, 26, "球队：" + team);
+			MyLabel teamLabel = new MyLabel(108, 161, 180, 26, "球队：" + team);
 			this.add(teamLabel);
 			
 			MyLabel positionLabel = new MyLabel(108, 212, 146, 26, "位置：" + vo.getPosition());
@@ -68,7 +68,7 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 			this.add(propertyLabel);
 			
 			String team = Constants.translateTeamAbbr(vo.getTeamAbbr());
-			MyLabel teamLabel = new MyLabel(80, 67, 87, 20, "球队：" + team);
+			MyLabel teamLabel = new MyLabel(80, 67, 120, 20, "球队：" + team);
 			this.add(teamLabel);
 			
 			MyLabel positionLabel = new MyLabel(109, 97, 68, 20, "位置：" + vo.getPosition());

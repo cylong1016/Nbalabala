@@ -1,4 +1,6 @@
-package ui.panel.hot;
+package ui.panel.hot.hotFast;
+
+import ui.panel.hot.HotFatherPanel;
 
 /**
  * 进步最快球员界面

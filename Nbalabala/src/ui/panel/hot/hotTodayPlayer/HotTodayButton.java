@@ -1,4 +1,4 @@
-package ui.panel.hot;
+package ui.panel.hot.hotTodayPlayer;
 
 import ui.common.button.TextButton;
 import enums.HotTodayPlayerProperty;
