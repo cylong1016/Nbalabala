@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-import data.teamdata.SVGHandler;
 import ui.UIConfig;
 import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
@@ -22,13 +21,13 @@ import utility.Constants;
 import vo.MatchDetailVO;
 import vo.MatchPlayerVO;
 import vo.MatchProfileVO;
-import vo.TeamDetailVO;
 import bl.matchquerybl.MatchQuery;
 import bl.playerquerybl.PlayerQuery;
 import bl.teamquerybl.TeamQuery;
 import blservice.MatchQueryBLService;
 import blservice.PlayerQueryBLService;
 import blservice.TeamQueryBLService;
+import data.teamdata.SVGHandler;
 
 /**
  * 某场比赛数据界面

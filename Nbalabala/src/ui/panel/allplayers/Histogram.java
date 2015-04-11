@@ -50,12 +50,12 @@ public class Histogram extends JPanel {
 	 * @version 2015年4月9日 下午8:43:02
 	 */
 	public Histogram(double playerData, double avgData, double max, String name) {
-		this.setPreferredSize(size);
-		this.setLayout(new BorderLayout());
 		this.playerData = playerData;
 		this.avgData = avgData;
 		this.maxData = max;
+		this.setLayout(new BorderLayout());
 		this.addNameLabel(name);
+		this.setPreferredSize(size);
 		this.setOpaque(false);
 	}
 
@@ -86,6 +86,7 @@ public class Histogram extends JPanel {
 		DecimalFormat df = UIConfig.FORMAT;
 		g.drawString(df.format(playerData), interval + 5, playerY - 10);
 		g.drawString(df.format(avgData), interval * 2 + width + 5, avgY - 10);
+		super.paint(g);
 	}
 
 }

@@ -8,7 +8,6 @@ import ui.common.panel.BottomPanel;
 import ui.common.panel.Panel;
 import ui.panel.allplayers.AllPlayersPanel;
 import ui.panel.allplayers.PlayerInfoPanel;
-import ui.panel.allplayers.PlayerSeasonPanel;
 import ui.panel.allteams.AllTeamsPanel;
 import ui.panel.allteams.TeamGamePanel;
 import ui.panel.allteams.TeamSeasonPanel;
@@ -31,7 +30,7 @@ import vo.MatchProfileVO;
 public class MainController {
 
 	/** 主Frame */
-	private static Frame frame;
+	public static Frame frame;
 	/** 主界面 */
 	private static MainPanel mainPanel;
 	/** 球队数据界面 */
@@ -210,12 +209,6 @@ public class MainController {
 	public static void toPlayerInfoPanel(Panel panel, String name, BottomPanel allPanel) {
 		frame.remove(panel);
 		playerInfoPanel = new PlayerInfoPanel(UIConfig.IMG_PATH + "players/playerInfoBG.png", name, allPanel);
-		frame.setPanel(playerInfoPanel);
-	}
-
-	public static void toPlayerSeasonInfoPanel(Panel panel, String name, BottomPanel allPanel) {
-		frame.remove(panel);
-		playerInfoPanel = new PlayerSeasonPanel(UIConfig.IMG_PATH + "players/playerGameBG.png", name, allPanel);
 		frame.setPanel(playerInfoPanel);
 	}
 	

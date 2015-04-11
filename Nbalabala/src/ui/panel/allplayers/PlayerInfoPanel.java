@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import javax.swing.SwingConstants;
 
@@ -20,7 +21,9 @@ import ui.common.table.BottomTable;
 import ui.controller.MainController;
 import ui.panel.gamedata.GameDetailButton;
 import utility.Constants;
+import vo.MatchPlayerVO;
 import vo.PlayerDetailVO;
+import vo.PlayerMatchPerformanceVO;
 import vo.PlayerProfileVO;
 import vo.PlayerSeasonVO;
 import bl.playerquerybl.PlayerQuery;
@@ -56,6 +59,7 @@ public class PlayerInfoPanel extends BottomPanel {
 	private PlayerQueryBLService playerQuery;
 	protected PlayerDetailVO detailVO;
 	private ImgButton backButton;
+	ContrastDiagram cd;
 
 	protected BottomPanel lastPanel;
 	private MyLabel profileLabel[] = new MyLabel[10];
@@ -68,8 +72,8 @@ public class PlayerInfoPanel extends BottomPanel {
 
 	public PlayerInfoPanel(String url, String name, BottomPanel lastPanel) {
 		super(url);
-		playerQuery = new PlayerQuery();
 		this.name = name;
+		playerQuery = new PlayerQuery();
 		seasonInput = new SeasonInputPanel();
 		seasonInput.setLocation(600, 40);
 		this.add(seasonInput); // TODO 位置需要重新设定
@@ -84,14 +88,13 @@ public class PlayerInfoPanel extends BottomPanel {
 									"生日: " + profileVO.getBirth(), "身高: " + profileVO.getHeight(),
 									"体重: " + profileVO.getWeight(), "毕业学校: " + profileVO.getSchool()};
 		addButton();
-		setTable();
 		addPortrait();
 		addActionImg();
 		addBackButton();
 		addLabel();
+		addTotalTable();
 		addContrastDiagram();
 	}
-
 	/**
 	 * 添加球员和联盟平均的比较图
 	 * @author cylong
@@ -105,11 +108,13 @@ public class PlayerInfoPanel extends BottomPanel {
 										playerSeason.getThreePointPercent()};
 		double[] fiveArgsAvg = playerQuery.getFiveArgsAvg();
 		double[] highestScoreReboundAssist = playerQuery.getHighestScoreReboundAssist();
-		ContrastDiagram cd = new ContrastDiagram(fivePlayersData, fiveArgsAvg, highestScoreReboundAssist);
+		cd = new ContrastDiagram(fivePlayersData, fiveArgsAvg, highestScoreReboundAssist);
 		cd.setBounds(57, 380, 888, 165);
 		this.add(cd);
+		cd.repaint();
+		cd.updateUI();
 	}
-
+	
 	private void addLabel() {
 		for(int i = 0; i < 3; i++) {
 			profileLabel[i] = new MyLabel(LABEL_X + i * INTER_X, LABEL_Y, LABEL_WIDTH, LABEL_HEIGHT, labelStr[i]);
@@ -170,7 +175,7 @@ public class PlayerInfoPanel extends BottomPanel {
 		actionPhotoPanel.setBounds(885, 6, 1000, 1000);
 		this.add(actionPhotoPanel);
 	}
-
+	
 	public void addButton() {
 		totalButton = new GameDetailButton(TOTAL_X, GAME_Y, TOTAL_WIDTH, HEIGHT, "总数据");
 		totalButton.setOpaque(true);
@@ -182,17 +187,71 @@ public class PlayerInfoPanel extends BottomPanel {
 		totalButton.addMouseListener(new MouseAdapter() {
 
 			public void mousePressed(MouseEvent e) {
+				gameButton.back();
+				if(scroll!=null){
+				PlayerInfoPanel.this.remove(scroll);
+				}
+				if(cd!=null){
+					PlayerInfoPanel.this.remove(cd);
+				}
+				addContrastDiagram();
+				addTotalTable();
+				PlayerInfoPanel.this.repaint();
 			}
 		});
 		gameButton.addMouseListener(new MouseAdapter() {
 
 			public void mousePressed(MouseEvent e) {
-				MainController.toPlayerSeasonInfoPanel(PlayerInfoPanel.this, profileVO.getName(), lastPanel);
+				totalButton.back();
+				if(scroll!=null){
+				PlayerInfoPanel.this.remove(scroll);
+				}
+				addGameTable();
+				if(cd!=null){
+				PlayerInfoPanel.this.remove(cd);
+				}
+				PlayerInfoPanel.this.repaint();
 			}
 		});
 	}
 
-	public void setTable() {
+	public void addGameTable() {
+		ArrayList<PlayerMatchPerformanceVO> playerMatch = detailVO.getMatchRecords();
+		int lth = playerMatch.size();
+		
+		String [][]rowData = new String[lth][COLUMN_NAMES.length];
+		for(int i = 0; i<lth; i++){
+			PlayerMatchPerformanceVO vo = playerMatch.get(i);
+			MatchPlayerVO player = vo.getMatchPlayerRecord();
+			rowData[i][0] = vo.getSeason();
+			rowData[i][1] = vo.getDate();
+			rowData[i][2] = vo.getTwoTeams();
+			rowData[i][3] = player.getPosition();
+			rowData[i][4] = player.getTime();
+			rowData[i][5] = player.getFieldGoal()+"";
+			rowData[i][6] = player.getFieldAttempt()+"";
+			rowData[i][7] = player.getThreePointGoal()+"";
+			rowData[i][8] = player.getThreePointAttempt()+"";
+			rowData[i][9] = player.getFreethrowGoal()+"";
+			rowData[i][10] = player.getFreethrowAttempt()+"";
+			rowData[i][11] = player.getOffensiveRebound()+"";
+			rowData[i][12] = player.getDefensiveRebound()+"";
+			rowData[i][13] = player.getTotalRebound()+"";
+			rowData[i][14] = player.getAssist()+"";
+			rowData[i][15] = player.getSteal()+"";
+			rowData[i][16] = player.getBlock()+"";
+			rowData[i][17] = player.getTurnover()+"";
+			rowData[i][18] = player.getFoul()+"";
+			rowData[i][19] = player.getPersonalGoal()+"";
+		}
+		table = new BottomTable(rowData, COLUMN_NAMES);
+		table.getColumnModel().getColumn(2).setPreferredWidth(110);
+		scroll = new BottomScrollPane(table);
+		scroll.setBounds(57, 260, 888, 265); // 表格的位置
+		this.add(scroll);
+	}
+	
+	public void addTotalTable() {
 		PlayerSeasonVO playerSeason = detailVO.getSeasonRecord();
 		String[][] rowData = new String[2][COLUMN_NAMES.length];
 		DecimalFormat df = UIConfig.FORMAT;
