@@ -97,7 +97,7 @@ public class PlayerInfoPanel extends BottomPanel {
 	 * @author cylong
 	 * @version 2015年4月11日 上午1:14:43
 	 */
-	private void addContrastDiagram() {
+	protected void addContrastDiagram() {
 		/* 球员的场均得分、助攻、篮板、 罚球命中率、三分命中率的平均值 */
 		PlayerSeasonVO playerSeason = detailVO.getSeasonRecord();
 		double[] fivePlayersData = {playerSeason.getScoreAvg(), playerSeason.getAssistAvg(),

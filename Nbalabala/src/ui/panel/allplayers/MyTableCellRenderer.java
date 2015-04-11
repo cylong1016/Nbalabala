@@ -16,7 +16,7 @@ import javax.swing.table.TableCellRenderer;
  */
 public class MyTableCellRenderer implements TableCellRenderer {
 	
-	ArrayList<ImageIcon> icon;
+	public ArrayList<ImageIcon> icon;
 	
 
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,

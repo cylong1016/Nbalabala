@@ -2,25 +2,18 @@ package ui.panel.allplayers;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
 import ui.UIConfig;
-import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
 import ui.common.panel.BottomPanel;
-import ui.common.table.BottomScrollPane;
-import ui.common.table.BottomTable;
 import ui.common.textField.MyTextField;
-import ui.controller.MainController;
-import utility.Constants;
 import vo.PlayerProfileVO;
 import bl.playerquerybl.PlayerQuery;
 import blservice.PlayerQueryBLService;
@@ -41,9 +34,6 @@ public class AllPlayersPanel extends BottomPanel {
 	private static final char[] LETTERS = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 
 		'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P','Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
 	private static final String IMG_PATH = UIConfig.IMG_PATH + "players/";
-	private static final String[]COLUMN_NAMES = {"球员头像","英文名", "所属球队", "球衣号码", "位置", "生日" };
-	/** 头像宽度 */
-	private static final int PORTRAIT_WIDTH = 70;
 	private static final String SEARCH_BUTTON_OFF = IMG_PATH + "search.png";
 	private static final String SEARCH_BUTTON_ON = IMG_PATH + "searchOn.png";
 	private static final String SEARCH_BUTTON_CLICK = IMG_PATH + "searchClick.png";
@@ -54,11 +44,11 @@ public class AllPlayersPanel extends BottomPanel {
 	private ImgButton queryButton;
 	/** 查询的文本框 */
 	private MyTextField queryTextField;
-	private BottomScrollPane scroll;
-	private BottomTable table;
 	
 	private PlayerQueryBLService playerInfo = new PlayerQuery();
-
+	/** 球员信息界面 */
+	PlayerTable playerTable;
+	
 	/**
 	 * @param url 背景图片的Url
 	 */
@@ -71,69 +61,16 @@ public class AllPlayersPanel extends BottomPanel {
 		iniSet();		//一开始默认A选中
 		addListener();
 		ArrayList<PlayerProfileVO> playerInfoArr = playerInfo.getPlayerProfileByInitial('A');
-		setTable(playerInfoArr);
+		playerTable  = new PlayerTable(playerInfoArr,this);
 	}
 	
 	public void refresh(){
 		ArrayList<PlayerProfileVO> playerInfoArr = playerInfo.getPlayerProfileByInitial('A');
-		AllPlayersPanel.this.remove(scroll);
-		setTable(playerInfoArr);
+		this.remove(PlayerTable.SCROLL); 
+		playerTable = new PlayerTable(playerInfoArr,this);
 		AllPlayersPanel.this.repaint();
 	}
 	
-	public void setTable(final ArrayList<PlayerProfileVO> players) {
-		int size = players.size();
-		int lth = COLUMN_NAMES.length;
-		
-		Object [][] rowData = new String[size][lth];
-		ArrayList<ImageIcon> iconArr = new ArrayList<ImageIcon>();
-		table = new BottomTable(rowData, COLUMN_NAMES);
-		for (int i = 0; i < size; i++) {
-			PlayerProfileVO ppVO = players.get(i);
-			Image protrait = ppVO.getPortrait();
-		    int  height =  protrait.getHeight(null)*70/protrait.getWidth(null);//按比例，将高度缩减
-		    Image smallImg =protrait.getScaledInstance(PORTRAIT_WIDTH, height, Image.SCALE_SMOOTH);
-			ImageIcon ic = new ImageIcon(smallImg);
-			iconArr.add(ic);
-			rowData[i][1] = ppVO.getName();
-			rowData[i][2] = Constants.translateTeamAbbr(ppVO.getTeam());
-			rowData[i][3] = ppVO.getNumber();
-			rowData[i][4] = ppVO.getPosition();
-			rowData[i][5] = ppVO.getBirth();
-		}
-		MyTableCellRenderer myRenderer = new MyTableCellRenderer();
-		myRenderer.icon = iconArr;
-//		iconArr.clear();
-		table.getColumnModel().getColumn(0).setCellRenderer(myRenderer);
-		
-		try{
-			table.addMouseListener(new UserMouseAdapter(){
-				
-				public void mouseClicked(MouseEvent e){
-					if (e.getClickCount() < 2) return;
-					int rowI  = table.rowAtPoint(e.getPoint());// 得到table的行号
-					if ( rowI > -1){
-						MainController.toPlayerInfoPanel(AllPlayersPanel.this, 
-								players.get(rowI).getName(), AllPlayersPanel.this);
-					}
-					
-				}
-			});
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		table.setRowHeight(57);
-		table.setWidth(new int[]{123, 200, 150, 104, 89, 116});
-		table.setForeground(Color.WHITE);
-		table.cancelVerticalLines();
-		table.setRealOpaque();
-		
-		scroll = new BottomScrollPane(table);
-		scroll.setBounds(101, 160, 802, 365);
-		scroll.cancelBgImage();
-		this.add(scroll);
-	}
-
 	/**
 	 * 添加查询按钮
 	 * 
@@ -146,8 +83,8 @@ public class AllPlayersPanel extends BottomPanel {
 		queryButton.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				ArrayList<PlayerProfileVO> playerInfoArr = playerInfo.searchPlayers(queryTextField.getText());
-				AllPlayersPanel.this.remove(scroll);
-				setTable(playerInfoArr);
+				AllPlayersPanel.this.remove(PlayerTable.SCROLL);
+				playerTable = new PlayerTable(playerInfoArr,AllPlayersPanel.this);
 				AllPlayersPanel.this.repaint();
 			}
 		});
@@ -194,8 +131,8 @@ public class AllPlayersPanel extends BottomPanel {
 			LetterButton.current = (LetterButton) e.getSource();
 			char goal = LetterButton.current.letter;
 			ArrayList<PlayerProfileVO> vo = playerInfo.getPlayerProfileByInitial(goal);
-			AllPlayersPanel.this.remove(scroll);
-			setTable(vo);
+			AllPlayersPanel.this.remove(PlayerTable.SCROLL);
+			playerTable  = new PlayerTable(vo,AllPlayersPanel.this);
 		}
 		
 	}

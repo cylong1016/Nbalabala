@@ -57,5 +57,4 @@ public class UIConfig {
 	/** 表格中数据显示的小数点位数 */
 	public static final DecimalFormat FORMAT = new DecimalFormat("0.000");
 	/*----------------------------表格配置--------------------------------*/
-
 }

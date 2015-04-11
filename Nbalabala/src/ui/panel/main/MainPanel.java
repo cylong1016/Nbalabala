@@ -28,13 +28,14 @@ public class MainPanel extends Panel {
 
 	/** 背景图片 */
 	private static Image bgImg = new ImageIcon(imgUrl + "main.png").getImage();
-	/** 主界面5个按钮的图片 */
+	/** 主界面6个按钮的图片 */
 	private Image teamDataImg = new ImageIcon(imgUrl + "teamData.png").getImage();
 	private Image playerDataImg = new ImageIcon(imgUrl + "playerData.png").getImage();
 	private Image gameDataImg = new ImageIcon(imgUrl + "gameData.png").getImage();
 	private Image allPlayersImg = new ImageIcon(imgUrl + "allPlayers.png").getImage();
 	private Image allTeamsImg = new ImageIcon(imgUrl + "allTeams.png").getImage();
-
+	private Image hotImg = new ImageIcon(imgUrl + "hot.png").getImage();
+	
 	/** 球队数据六边形按钮 */
 	private Polygon tdPolygon;
 	/** 球员数据六边形按钮 */
@@ -45,6 +46,8 @@ public class MainPanel extends Panel {
 	private Polygon apPolygon;
 	/** 全部球队数据六边形按钮 */
 	private Polygon atPolygon;
+	/** 热点六边形按钮 */
+	private Polygon hotPolygon;
 
 	/** 六边形的顶点数 */
 	private int npoints = 6;
@@ -79,6 +82,11 @@ public class MainPanel extends Panel {
 		int[] atypoints = {260, 306, 399, 445, 399, 306};
 		atPolygon = new Polygon(atxpoints, atypoints, npoints);
 
+		//热点按钮
+		int[] hotxpoints = {244,244,324,404,404,324};
+		int[] hotypoints = {540,446,401,446,540,586};
+		hotPolygon = new Polygon(hotxpoints,hotypoints,npoints);
+		
 		this.addMouseListener(listener);
 		this.addMouseMotionListener(listener);
 	}
@@ -97,6 +105,8 @@ public class MainPanel extends Panel {
 			g.drawImage(allPlayersImg, 734, 118, this);
 		} else if (atPolygon.contains(mousePoint)) {
 			g.drawImage(allTeamsImg, 816, 260, this);
+		} else if (hotPolygon.contains(mousePoint)) {
+			g.drawImage(hotImg, 244, 401, this);
 		}
 	}
 
@@ -119,6 +129,8 @@ public class MainPanel extends Panel {
 				MainController.toAllPlayersPanel(MainPanel.this);
 			} else if (atPolygon.contains(mousePoint)) {
 				MainController.toAllTeamsPanel(MainPanel.this);
+			} else if (hotPolygon.contains(mousePoint)) {
+				MainController.toHotPanel(MainPanel.this);
 			}
 		}
 

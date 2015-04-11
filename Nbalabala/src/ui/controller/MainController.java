@@ -14,6 +14,10 @@ import ui.panel.allteams.TeamGamePanel;
 import ui.panel.allteams.TeamSeasonPanel;
 import ui.panel.gamedata.GameDataPanel;
 import ui.panel.gamedata.GamePanel;
+import ui.panel.hot.HotFastPanel;
+import ui.panel.hot.HotSeasonPlayerPanel;
+import ui.panel.hot.HotSeasonTeamPanel;
+import ui.panel.hot.HotTodayPlayerPanel;
 import ui.panel.main.MainPanel;
 import ui.panel.playerData.PlayerDataPanel;
 import ui.panel.teamdata.TeamDataPanel;
@@ -48,7 +52,14 @@ public class MainController {
 	private static GamePanel gamePanel;
 	/** 球员详细信息 */
 	private static PlayerInfoPanel playerInfoPanel;
-
+	/** 当天热点球员界面 */
+	private static HotTodayPlayerPanel hotTodayPlayerPanel;
+	/** 赛季热点球员界面 */
+	private static HotSeasonPlayerPanel hotSeasonPlayerPanel;
+	/** 赛季热点球队界面 */
+	private static HotSeasonTeamPanel hotSeasonTeamPanel;
+	/** 进步最快球员界面 */
+	private static HotFastPanel hotFastPanel;
 	/**
 	 * 初始化主界面
 	 * @author cylong
@@ -59,6 +70,10 @@ public class MainController {
 		mainPanel = new MainPanel();
 		frame.setPanel(mainPanel);
 		frame.start();
+	}
+	
+	public MainController(){
+		
 	}
 
 	public static void toMainPanel(Panel panel) {
@@ -207,5 +222,33 @@ public class MainController {
 	public static void refreshUI() {
 		System.out.println("UI refreshed!");
 	}
+	
+	public static void toHotPanel(Panel panel){
+		frame.remove(panel);
+		hotTodayPlayerPanel = new HotTodayPlayerPanel(UIConfig.IMG_PATH + "Hot/hotTodayBG.png");
+		frame.setPanel(hotTodayPlayerPanel);
+		frame.repaint();
+	}
 
+	public static void toHotSeasonPlayerPanel(Panel panel){
+		frame.remove(panel);
+		hotSeasonPlayerPanel = new HotSeasonPlayerPanel(UIConfig.IMG_PATH + "Hot/hotSeasonPlayerBG.png");
+		frame.setPanel(hotSeasonPlayerPanel);
+		frame.repaint();
+	}
+	
+	public static void toHotSeasonTeamPanel(Panel panel){
+		frame.remove(panel);
+		hotSeasonTeamPanel = new HotSeasonTeamPanel(UIConfig.IMG_PATH + "Hot/hotSeasonTeamBG.png");
+		frame.setPanel(hotSeasonTeamPanel);
+		frame.repaint();
+	}
+	
+	public static void toHotFastPanel(Panel panel){
+		frame.remove(panel);
+		hotFastPanel = new HotFastPanel(UIConfig.IMG_PATH + "Hot/hotFastestBG.png");
+		frame.setPanel(hotFastPanel);
+		frame.repaint();
+	}
 }
+

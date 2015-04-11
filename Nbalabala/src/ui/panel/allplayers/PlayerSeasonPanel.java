@@ -32,6 +32,10 @@ public class PlayerSeasonPanel extends PlayerInfoPanel{
 		"投篮命中"," 投篮出手","三分命中","三分出手","罚球命中","罚球出手","进攻篮板","防守篮板","总篮板","助攻","抢断",
 		"盖帽","失误","犯规","个人得分"};
 	
+	protected void addContrastDiagram() {
+		
+	}
+	
 	public void addButton() {
 		totalButton = new GameDetailButton(TOTAL_X, GAME_Y, TOTAL_WIDTH, HEIGHT, "总数据");
 		gameButton = new GameDetailButton(GAME_X, GAME_Y, GAME_WIDTH, HEIGHT, "比赛数据");
@@ -51,6 +55,7 @@ public class PlayerSeasonPanel extends PlayerInfoPanel{
 		});
 	}
 
+	
 	public void setTable() {
 		ArrayList<PlayerMatchPerformanceVO> playerMatch = detailVO.getMatchRecords();
 		int lth = playerMatch.size();
