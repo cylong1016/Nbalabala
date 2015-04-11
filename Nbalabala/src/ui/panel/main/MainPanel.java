@@ -8,11 +8,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.panel.Panel;
 import ui.controller.MainController;
+import utility.Constants;
 
 /**
  * 主界面的Panel
@@ -37,7 +39,7 @@ public class MainPanel extends Panel {
 	private Image allTeamsImg = new ImageIcon(imgUrl + "allTeams.png").getImage();
 	private Image hotImg = new ImageIcon(imgUrl + "hot.png").getImage();
 	private ImgButton fileSelect;
-	
+
 	/** 球队数据六边形按钮 */
 	private Polygon tdPolygon;
 	/** 球员数据六边形按钮 */
@@ -50,7 +52,6 @@ public class MainPanel extends Panel {
 	private Polygon atPolygon;
 	/** 热点六边形按钮 */
 	private Polygon hotPolygon;
-	
 
 	/** 六边形的顶点数 */
 	private int npoints = 6;
@@ -86,30 +87,43 @@ public class MainPanel extends Panel {
 		atPolygon = new Polygon(atxpoints, atypoints, npoints);
 
 		//热点按钮
-		int[] hotxpoints = {244,244,324,404,404,324};
-		int[] hotypoints = {540,446,401,446,540,586};
-		hotPolygon = new Polygon(hotxpoints,hotypoints,npoints);
-		
+		int[] hotxpoints = {244, 244, 324, 404, 404, 324};
+		int[] hotypoints = {540, 446, 401, 446, 540, 586};
+		hotPolygon = new Polygon(hotxpoints, hotypoints, npoints);
+
 		this.addMouseListener(listener);
 		this.addMouseMotionListener(listener);
-		
+
 		addFileSelect();
 	}
 
 	/**
 	 * 添加文件夹选择按钮
 	 * @author lsy
-	 * @version 2015年4月11日  下午8:44:18
+	 * @version 2015年4月11日 下午8:44:18
 	 */
-	public void addFileSelect(){
-		fileSelect = new ImgButton(imgUrl+"fileSelect.png",911,464,imgUrl+"fileSelectOn.png",imgUrl+"fileSelect.png");
+	public void addFileSelect() {
+		fileSelect = new ImgButton(imgUrl + "fileSelect.png", 690, 59, imgUrl + "fileSelectOn.png", imgUrl + "fileSelect.png");
 		this.add(fileSelect);
-		fileSelect.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
+		fileSelect.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// 界面需要美化
+				JFileChooser c = new JFileChooser();
+				c.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				c.setDialogTitle("Select path to save");
+				int result = c.showOpenDialog(null);
+				if (result == JFileChooser.APPROVE_OPTION) {
+					String path = c.getSelectedFile().getAbsolutePath();
+					System.out.println("打开路径" + path);
+					Constants.changeDataSourcePath(path);
+				}
 			}
+			
 		});
 	}
-	
+
 	@Override
 	public void paint(Graphics g) {
 		g.drawImage(bgImg, 0, 0, this);
@@ -125,7 +139,7 @@ public class MainPanel extends Panel {
 		} else if (atPolygon.contains(mousePoint)) {
 			g.drawImage(allTeamsImg, 816, 260, this);
 		} else if (hotPolygon.contains(mousePoint)) {
-			g.drawImage(hotImg, 244, 401, this);
+			g.drawImage(hotImg, 243, 401, this);
 		}
 	}
 
