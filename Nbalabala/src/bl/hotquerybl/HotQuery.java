@@ -366,7 +366,7 @@ public class HotQuery implements HotBLService{
 		int i;
 		ArrayList<HotFastestPlayerVO> result = new ArrayList<HotFastestPlayerVO>();
 		for (i=1; i<=size; i++) {
-			PlayerSeasonVO seasonVO = players.get(i);
+			PlayerSeasonVO seasonVO = players.get(i - 1);
 			int tmp = 0;
 			double promotion = 0;
 			double formerFiveAvg = 0;
@@ -402,7 +402,7 @@ public class HotQuery implements HotBLService{
 				promotion = seasonVO.fieldPercentPromotion;
 				tmp = seasonVO.fieldAttemptQueue.getFormerFiveSum();
 				if (tmp != 0) {
-					formerFiveAvg = (seasonVO.fieldGoalQueue.getFormerFiveSum() / tmp);
+					formerFiveAvg = ((double)seasonVO.fieldGoalQueue.getFormerFiveSum() / tmp);
 				}
 				recentFive = seasonVO.fieldGoalQueue.getRecentFive();
 				recentFiveDivisor = seasonVO.fieldAttemptQueue.getRecentFive();
@@ -411,7 +411,7 @@ public class HotQuery implements HotBLService{
 				promotion = seasonVO.threePointPercentPromotion;
 				tmp = seasonVO.threePointAttemptQueue.getFormerFiveSum();
 				if (tmp != 0) {
-					formerFiveAvg = (seasonVO.threePointGoalQueue.getFormerFiveSum() / tmp);
+					formerFiveAvg = ((double)seasonVO.threePointGoalQueue.getFormerFiveSum() / tmp);
 				}
 				recentFive = seasonVO.threePointGoalQueue.getRecentFive();
 				recentFiveDivisor = seasonVO.threePointAttemptQueue.getRecentFive();
@@ -420,7 +420,7 @@ public class HotQuery implements HotBLService{
 				promotion = seasonVO.freethrowPercentPromotion;
 				tmp = seasonVO.freethrowAttemptQueue.getFormerFiveSum();
 				if (tmp != 0) {
-					formerFiveAvg = (seasonVO.freethrowGoalQueue.getFormerFiveSum() / tmp);
+					formerFiveAvg = ((double)seasonVO.freethrowGoalQueue.getFormerFiveSum() / tmp);
 				}
 				recentFive = seasonVO.freethrowGoalQueue.getRecentFive();
 				recentFiveDivisor = seasonVO.freethrowAttemptQueue.getRecentFive();
@@ -437,7 +437,7 @@ public class HotQuery implements HotBLService{
 				double [] recentPercent = new double[5];
 				for(int j=0;j<5;j++) {
 					if (recentFiveDivisor[j] != 0) {
-						recentPercent[j] = recentFive[j] / recentFiveDivisor[j];
+						recentPercent[j] = (double)recentFive[j] / recentFiveDivisor[j];
 					}else{
 						recentPercent[j] = 0;
 					}

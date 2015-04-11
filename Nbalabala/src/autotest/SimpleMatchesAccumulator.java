@@ -208,14 +208,17 @@ public class SimpleMatchesAccumulator {
 		playerRecord.offensiveRebound += lineInt[9];
 		playerRecord.defensiveRebound += lineInt[10];
 		playerRecord.totalRebound += lineInt[11];
+		playerRecord.reboundQueue.enqueue(lineInt[11]);
 		playerRecord.latestRebound = lineInt[11];
 		playerRecord.assist += lineInt[12];
+		playerRecord.assistQueue.enqueue(lineInt[12]);
 		playerRecord.assist = lineInt[12];
 		playerRecord.steal += lineInt[13];
 		playerRecord.block += lineInt[14];
 		playerRecord.turnover += lineInt[15];
 		playerRecord.foul += lineInt[16];
 		playerRecord.score += lineInt[17];
+		playerRecord.scoreQueue.enqueue(lineInt[17]);
 		playerRecord.latestScore = lineInt[17];
 		playerRecord.matchCount ++;
 		

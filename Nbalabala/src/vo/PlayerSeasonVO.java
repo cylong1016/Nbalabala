@@ -514,8 +514,8 @@ public class PlayerSeasonVO {
 				int latterFieldAttempt = fieldAttemptQueue.getLatterFiveSum();
 				if (formerFieldAttempt == 0 || latterFieldAttempt == 0) fieldPercentPromotion = 0;
 				else{
-					double formerFieldPercent = fieldGoalQueue.getFormerFiveSum() / formerFieldAttempt;
-					double latterFieldPercent = fieldGoalQueue.getLatterFiveSum() / latterFieldAttempt;
+					double formerFieldPercent = (double)fieldGoalQueue.getFormerFiveSum() / formerFieldAttempt;
+					double latterFieldPercent = (double)fieldGoalQueue.getLatterFiveSum() / latterFieldAttempt;
 					if (formerFieldPercent != 0)
 						fieldPercentPromotion = (latterFieldPercent - formerFieldPercent) / formerFieldPercent;
 				}
@@ -524,8 +524,8 @@ public class PlayerSeasonVO {
 				int latterThreePointAttempt = threePointAttemptQueue.getLatterFiveSum();
 				if (formerThreePointAttempt == 0 || latterThreePointAttempt == 0) threePointPercentPromotion = 0;
 				else{
-					double formerThreePointPercent = threePointGoalQueue.getFormerFiveSum() / formerThreePointAttempt;
-					double latterThreePointPercent = threePointGoalQueue.getLatterFiveSum() / latterThreePointAttempt;
+					double formerThreePointPercent = (double)threePointGoalQueue.getFormerFiveSum() / formerThreePointAttempt;
+					double latterThreePointPercent = (double)threePointGoalQueue.getLatterFiveSum() / latterThreePointAttempt;
 					if (formerThreePointPercent != 0)
 						threePointPercentPromotion = (latterThreePointPercent - formerThreePointPercent) / formerThreePointPercent;
 				}
@@ -534,8 +534,8 @@ public class PlayerSeasonVO {
 				int latterFreethrowAttempt = freethrowAttemptQueue.getLatterFiveSum();
 				if (formerFreethrowAttempt == 0 || latterFreethrowAttempt == 0) freethrowPercentPromotion = 0;
 				else{
-					double formerFreethrowPercent = freethrowGoalQueue.getFormerFiveSum() / formerFreethrowAttempt;
-					double latterFreethrowPercent = freethrowGoalQueue.getLatterFiveSum() / latterFreethrowAttempt;
+					double formerFreethrowPercent = (double)freethrowGoalQueue.getFormerFiveSum() / formerFreethrowAttempt;
+					double latterFreethrowPercent = (double)freethrowGoalQueue.getLatterFiveSum() / latterFreethrowAttempt;
 					if (formerFreethrowPercent != 0)
 						freethrowPercentPromotion = (latterFreethrowPercent - formerFreethrowPercent) / formerFreethrowPercent;
 				}

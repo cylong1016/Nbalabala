@@ -244,7 +244,6 @@ public class SeasonData implements SeasonDataService {
 				if (vo.getTeam().equals(abbr)) {
 					result.add(vo.getName());
 				}
-				iterator.next().getValue().update();
 			}
 		}
 		return result;

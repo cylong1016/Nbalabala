@@ -9,10 +9,12 @@ import java.util.List;
 import autotest.playertest.PlayerSimpleSeasonVO;
 import autotest.playertest.PlayerTestSortHandler;
 import autotest.playertest.SimplePlayerAvgSorter;
+import autotest.playertest.SimplePlayerTotalSorter;
 import autotest.teamtest.SimpleTeamAvgSorter;
 import autotest.teamtest.TeamSimpleSeasonVO;
 import autotest.teamtest.TeamTestSortHandler;
 import bl.teamseasonbl.TeamAvgSorter;
+import test.data.PlayerHotInfo;
 import test.data.PlayerNormalInfo;
 import test.data.TeamHighInfo;
 import test.data.TeamHotInfo;
@@ -53,7 +55,15 @@ public class Console {
 				for (int i = 0; i< 50;i++) {
 					outputPlayerNormalAvgInfo(out, playerVOs.get(i));
 				}
-			}else{
+			}else if(args[1].equals("-hot")) {
+				playerVOs = seasonData.getAllPlayerSeasonData();
+				Collections.sort(playerVOs, SimplePlayerTotalSorter.getPlayerTotalComparator(args[2], "desc"));
+				outputPlayerHotInfo(args[2], out, playerVOs, getNeededPlayerCount(args));
+			}else if(args[1].equals("-king")) {
+				outputPlayerKingInfo(args[2], args[3])
+			}
+			
+			else{
 				neededPlayerCount = getNeededPlayerCount(args);
 				playerVOs = getFilteredPlayers(args);
 				PlayerTestSortHandler.playerSortHandle(args, playerVOs);
@@ -269,6 +279,47 @@ public class Console {
 		info.setSteal(vo.steal);
 		info.setTeamName(vo.teamName);
 		info.setThree(vo.threePointPercent);
+	}
+	
+	private void outputPlayerHotInfo(String field, PrintStream out, ArrayList<PlayerSimpleSeasonVO> vos, int count) {
+		int i;
+		switch (field) {
+		case "score":
+			for (i=0; i< count;i++){
+				PlayerSimpleSeasonVO vo = vos.get(i);
+				PlayerHotInfo info = new PlayerHotInfo();
+				info.setField(field);
+				info.setName(vo.name);
+				info.setPosition(vo.position);
+				info.setTeamName(vo.teamName);
+				info.setValue(vo.scoreAvg);
+				info.setUpgradeRate(vo.scoreQueue.getPromotion());
+			}
+			return;
+		case "assist":
+			for (i=0; i< count;i++){
+				PlayerSimpleSeasonVO vo = vos.get(i);
+				PlayerHotInfo info = new PlayerHotInfo();
+				info.setField(field);
+				info.setName(vo.name);
+				info.setPosition(vo.position);
+				info.setTeamName(vo.teamName);
+				info.setValue(vo.assistAvg);
+				info.setUpgradeRate(vo.assistQueue.getPromotion());
+			}
+			return;
+		default:
+			for (i=0; i< count;i++){
+				PlayerHotInfo info = new PlayerHotInfo();
+				PlayerSimpleSeasonVO vo = vos.get(i);
+				info.setField(field);
+				info.setName(vo.name);
+				info.setPosition(vo.position);
+				info.setTeamName(vo.teamName);
+				info.setValue(vo.totalReboundAvg);
+				info.setUpgradeRate(vo.reboundQueue.getPromotion());
+			}
+		}
 	}
 	
 	private void outputPlayerNormalAvgInfo(PrintStream out, PlayerSimpleSeasonVO vo) {

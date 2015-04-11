@@ -1,5 +1,7 @@
 package autotest.playertest;
 
+import vo.RecentDataQueue;
+
 
 /**
  * 用来记录计算球员赛季数据所需的各种指标
@@ -329,6 +331,10 @@ public class PlayerSimpleSeasonVO {
 	public double foulPercent;
 	public double turnOverPercent;
 	public double usePercent;
+	
+	public RecentDataQueue scoreQueue = new RecentDataQueue();
+	public RecentDataQueue reboundQueue = new RecentDataQueue();
+	public RecentDataQueue assistQueue = new RecentDataQueue();
 	
 	public void update() {
 		if (matchCount != 0) {

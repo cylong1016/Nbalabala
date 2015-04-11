@@ -21,7 +21,7 @@ public class RecentDataQueue {
 	}
 	
 	public double getFormerFiveAvg() {
-		return getFormerFiveSum() / 5;
+		return (double)getFormerFiveSum() / 5;
 	}
 	
 	public double[] getRecentFive() {
