@@ -5,6 +5,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import ui.common.label.HotSeasonTeamLabel;
+import ui.panel.hot.HotThreeFatherPanel;
+import ui.panel.hot.ThreeButton;
 import vo.HotSeasonTeamVO;
 import bl.hotquerybl.HotQuery;
 import blservice.HotBLService;
@@ -15,7 +17,7 @@ import enums.HotSeasonTeamProperty;
  * @author lsy
  * @version 2015年4月11日  下午4:03:34
  */
-public class HotSeasonTeamPanel extends HotSeasonFatherPanel{
+public class HotSeasonTeamPanel extends HotThreeFatherPanel{
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 6863346413128750821L;
@@ -47,9 +49,9 @@ public class HotSeasonTeamPanel extends HotSeasonFatherPanel{
 	}
 
 	public void addLabel() {
-		teamVO = hot.getHotSeasonTeams(HotSeasonButton.current.team);
+		teamVO = hot.getHotSeasonTeams(ThreeButton.current.team);
 		for (int j = 0; j < 5; j++) {
-			label[j] = new HotSeasonTeamLabel(teamVO.get(j), HotSeasonButton.current.team);
+			label[j] = new HotSeasonTeamLabel(teamVO.get(j), ThreeButton.current.team);
 			this.add(label[j]);
 		}
 		this.repaint();
