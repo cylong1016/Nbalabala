@@ -36,7 +36,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 4256548887751307664L;
 
-	private int x = 103, y = 60, width = 55, height = 25, inter = 150;
+	private int x = 103, y = 50, width = 55, height = 25, inter = 70;
 	HotTodayButton button[] = new HotTodayButton[5];
 	String[] lbStr = new String[] { "得分", "篮板", "盖帽", "助攻", "抢断" };
 	HotBLService hot = new HotQuery();
@@ -61,7 +61,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 	public void addButton() {
 		for (int i = 0; i < 5; i++) {
 			button[i] = new HotTodayButton(x + i * inter, y, width, height, lbStr[i]);
-			button[i].setFont(new Font("微软雅黑", 0, 15));
+			button[i].setFont(new Font("微软雅黑", 0, 14));
 			button[i].pro = HOT_TODAY_ARRAY[i];
 			this.add(button[i]);
 		}
@@ -151,12 +151,13 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 			e.printStackTrace();
 		}
 		table.setRowHeight(57);
+		
 		table.setForeground(Color.black);
 		table.cancelVerticalLines();
 		table.setRealOpaque();
 		
 		scroll = new BottomScrollPane(table);
-		scroll.setLocation(90,260);
+		scroll.setBounds(90, 260, 810, 320);
 		scroll.cancelBgImage();
 		this.add(scroll);
 	}

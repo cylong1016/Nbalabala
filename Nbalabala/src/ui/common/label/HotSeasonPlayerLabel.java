@@ -1,5 +1,7 @@
 package ui.common.label;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -36,11 +38,15 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 		playerName = vo.getName();
 		if (vo.getTop() == 1) {
 			Image actionImage = PlayerImageCache.getActionImageByName(playerName);
+//			Image protrait = PlayerImageCache.getActionImageByName(playerName);
+//		    Image smallImg =protrait.getScaledInstance(176, 280, Image.SCALE_SMOOTH);
 			ActionPhotoPanel actionPhotoPanel = new ActionPhotoPanel(actionImage);
-			actionPhotoPanel.setBounds(262,0,107,295);
+			actionPhotoPanel.setBounds(262,50,176,280);
+//			actionPhotoPanel.setLocation(262, 50);
 			this.add(actionPhotoPanel);
 			
-			MyLabel nameLabel = new MyLabel(108, 59, 146, 26, playerName);
+			MyLabel nameLabel = new MyLabel(68, 40, 250, 26, playerName);
+			nameLabel.setFont(new Font("微软雅黑", Font.BOLD, 30));
 			this.add(nameLabel);
 			
 			String propertyName = getPropertyName(property);
@@ -56,7 +62,7 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 			this.add(positionLabel);
 		}else{
 			Image portrait = PlayerImageCache.getPortraitByName(vo.getName());
-			ImgLabel portaitLabel = new ImgLabel(0, 36, 92, 75, portrait);
+			ImgLabel portaitLabel = new ImgLabel(0, 39, 92, 75, portrait);
 			this.add(portaitLabel);
 			
 			MyLabel nameLabel = new MyLabel(30,7,132,20,vo.getName());
@@ -97,11 +103,11 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 		case STEAL_AVG:
 			return "抢断";
 		case FIELD_PERCENT:
-			return "投篮";
+			return "投篮%";
 		case THREE_POINT_PERCENT:
-			return "三分";
+			return "三分%";
 		default:
-			return "罚球";
+			return "罚球%";
 		}
 	}
 }
