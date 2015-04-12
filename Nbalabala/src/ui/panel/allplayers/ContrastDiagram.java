@@ -44,6 +44,18 @@ public class ContrastDiagram extends JPanel {
 		}
 		this.setBackground(new Color(243, 243, 243, 70));
 	}
+	
+	public void setData(double[] fivePlayersData, double[] fiveArgsAvg, double[] highestScoreReboundAssist) {
+		double[] temp = {1, 1};
+		for(int i = 0; i < histogram.length; i++) {
+			if (i < 3) {
+				histogram[i].setData(fivePlayersData[i], fiveArgsAvg[i], highestScoreReboundAssist[i]);
+			} else {
+				histogram[i].setData(fivePlayersData[i], fiveArgsAvg[i], temp[i - 3]);
+			}
+			this.add(histogram[i]);
+		}
+	}
 
 	/**
 	 * @see javax.swing.JComponent#paint(java.awt.Graphics)

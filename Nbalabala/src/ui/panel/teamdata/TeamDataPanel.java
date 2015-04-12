@@ -337,7 +337,7 @@ public class TeamDataPanel extends BottomPanel {
 		String[][] rowData = new String[teamArr.size()][Constants.TEAM_SEASON_HEADERS.length];
 		teamDataTable = new BottomTable(rowData, Constants.TEAM_SEASON_HEADERS);
 		teamDataTable.getColumnModel().getColumn(18).setPreferredWidth(80);
-		//表头太长，显示不出来
+		// 表头太长，显示不出来
 		teamDataTable.getColumnModel().getColumn(19).setPreferredWidth(80);
 		addScrollPane(teamDataTable);
 		

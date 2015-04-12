@@ -58,6 +58,13 @@ public class Histogram extends JPanel {
 		this.setPreferredSize(size);
 		this.setOpaque(false);
 	}
+	
+	public void setData(double playerData, double avgData, double max) {
+		this.playerData = playerData;
+		this.avgData = avgData;
+		this.maxData = max;
+		repaint();
+	}
 
 	private void addNameLabel(String name) {
 		JLabel nameLabel = new JLabel(name, JLabel.CENTER);
