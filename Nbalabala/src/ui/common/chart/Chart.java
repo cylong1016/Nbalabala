@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import ui.common.panel.Panel;
@@ -15,7 +16,7 @@ import ui.common.panel.Panel;
  * @author cylong
  * @version 2015年4月12日 上午12:47:19
  */
-public class Chart extends Panel {
+public class Chart extends JPanel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -7071018403808043886L;
@@ -52,6 +53,8 @@ public class Chart extends Panel {
 		this.columns = columns;
 		this.maxRange = maxRange;
 		this.setBorder(BorderFactory.createTitledBorder(getBorder(), title, TitledBorder.CENTER, TitledBorder.TOP, titleFont));
+		this.setBackground(new Color(243, 243, 243, 70));
+		this.setLayout(null);
 		inPanel = new InPanel();
 		this.add(inPanel);
 	}
@@ -74,12 +77,14 @@ public class Chart extends Panel {
 	 * @author cylong
 	 * @version 2015年4月12日 上午1:51:13
 	 */
-	private class InPanel extends Panel {
+	private class InPanel extends JPanel {
 
 		/** serialVersionUID */
 		private static final long serialVersionUID = -5964393499545913607L;
 		
 		public InPanel() {
+			this.setLayout(null);
+			this.setOpaque(false);
 			// 添加数据
 			for(int i = 0; i < columns.size(); i++) {
 				this.add(columns.get(i));
