@@ -61,6 +61,10 @@ public class TeamGamePanel extends TeamSeasonPanel {
 	public void iniTable(int X){
 		
 	}
+	
+	protected void addContrastDiagram() {
+		
+	}
 
 	DecimalFormat df = UIConfig.FORMAT;
 	

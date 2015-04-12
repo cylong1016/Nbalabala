@@ -345,6 +345,15 @@ public class SeasonData implements SeasonDataService {
 		}
 	}
 	
+	public ArrayList<TeamSeasonVO> getAllTeamSeasonData(String season) {
+		HashMap<String, TeamSeasonVO> map = allTeamRecords.get(season);
+		if (map == null) {
+			return new ArrayList<TeamSeasonVO>();
+		}else {
+			return new ArrayList<TeamSeasonVO>(map.values());
+		}
+	}
+	
 	private static void updateData() {
 		Iterator<Entry<String, HashMap<String, PlayerSeasonVO>>> playerItr = allPlayerRecords.entrySet().iterator();
 		while(playerItr.hasNext()) {

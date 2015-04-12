@@ -354,4 +354,9 @@ public class TeamSeasonVO {
 	public int hashCode() {
 		return teamName.hashCode();
     }
+	
+	public double getLosing() {
+		if (matchCount == 0) return 0;
+		else return 1 - getWinning();
+	}
 }
