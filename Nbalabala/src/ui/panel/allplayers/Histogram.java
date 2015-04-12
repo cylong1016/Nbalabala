@@ -40,6 +40,11 @@ public class Histogram extends JPanel {
 	private double avgData;
 	/** 最大数据 */
 	private double maxData;
+	
+	/** 显示球员数据 */
+	private TempColumn playerColumn;
+	/** 显示球队数据 */
+	private TempColumn avgColumn;
 
 	/**
 	 * @param playerData 球员数据
@@ -57,8 +62,30 @@ public class Histogram extends JPanel {
 		this.addNameLabel(name);
 		this.setPreferredSize(size);
 		this.setOpaque(false);
+		// addColumn();
 	}
 	
+	public void addColumn() {
+		JPanel panel = new JPanel(); // 放两列数据
+		panel.setLayout(null);
+		this.add(panel);
+		panel.setOpaque(false);
+		
+		int playerH = (int)((playerData / maxData) * maxHeight);
+		int playerY = size.height - nameLabelSize.height - playerH;
+		playerColumn = new TempColumn(playerData);
+		playerColumn.setBounds(interval, playerY, width, playerH);
+		playerColumn.setBackground(UIConfig.HIST_PLAYER_COLOR);
+		panel.add(playerColumn);
+
+		int avgH = (int)((avgData / maxData) * maxHeight);
+		int avgY = size.height - nameLabelSize.height - avgH;
+		avgColumn = new TempColumn(avgData);
+		avgColumn.setBounds(interval * 2 + width, avgY, width, avgH);
+		avgColumn.setBackground(UIConfig.HIST_AVG_COLOR);
+		panel.add(avgColumn);
+	}
+
 	public void setData(double playerData, double avgData, double max) {
 		this.playerData = playerData;
 		this.avgData = avgData;
@@ -77,7 +104,6 @@ public class Histogram extends JPanel {
 
 	@Override
 	public void paint(Graphics g) {
-		super.paint(g);
 		int playerH = (int)((playerData / maxData) * maxHeight);
 		int playerY = size.height - nameLabelSize.height - playerH;
 		g.setColor(UIConfig.HIST_PLAYER_COLOR);
@@ -94,6 +120,26 @@ public class Histogram extends JPanel {
 		g.drawString(df.format(playerData), interval + 5, playerY - 10);
 		g.drawString(df.format(avgData), interval * 2 + width + 5, avgY - 10);
 		super.paint(g);
+	}
+	
+	/**
+	 * 每一列
+	 * @author cylong
+	 * @version 2015年4月12日  下午9:13:34
+	 */
+	class TempColumn extends JPanel {
+
+		/** serialVersionUID */
+		private static final long serialVersionUID = -8852275713103504413L;
+		
+		public TempColumn(double num) {
+			this.setLayout(new BorderLayout());
+			DecimalFormat df = UIConfig.FORMAT;
+			JLabel numLabel = new JLabel(df.format(num), JLabel.CENTER);
+			numLabel.setPreferredSize(new Dimension(width, 15));
+			this.add(numLabel, BorderLayout.NORTH);
+		}
+		
 	}
 
 }

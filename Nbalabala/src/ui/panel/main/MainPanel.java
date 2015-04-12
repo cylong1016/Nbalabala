@@ -109,7 +109,6 @@ public class MainPanel extends Panel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO 界面需要美化
 				JFileChooser chooser = new JFileChooser();
 				chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				chooser.setDialogTitle("选择数据文件夹");
