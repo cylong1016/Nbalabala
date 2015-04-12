@@ -38,7 +38,7 @@ public class LeftPanel extends Panel {
 	private static final String trans = URL + "trans.png";
 	private static final String on = URL + "mouseOn.png";
 	/** button */
-	private ImgButton allPlayers, allTeams, game, playerData, returnButton, teamData;
+	private ImgButton allPlayers, allTeams, game, playerData, returnButton, teamData, hot;
 	/** button数组 */
 	private ImgButton[] buttonArr;
 	private MouListener mou = new MouListener();
@@ -60,7 +60,7 @@ public class LeftPanel extends Panel {
 	 * @version 2015年3月20日 上午12:02:28
 	 */
 	public void setButton() {
-		returnButton = new ImgButton(URL + "return.png", 13, 529, URL + "returnOn.png", URL
+		returnButton = new ImgButton(URL + "return.png", 119, 557, URL + "returnOn.png", URL
 				+ "returnClick.png");
 
 		allPlayers = new ImgButton(trans, x, y, on, on);
@@ -68,6 +68,7 @@ public class LeftPanel extends Panel {
 		game = new ImgButton(trans, x, y + 2 * inter, on, on);
 		playerData = new ImgButton(trans, x, y + 3 * inter, on, on);
 		teamData = new ImgButton(trans, x, y + 4 * inter, on, on);
+		hot = new ImgButton(trans, x, y + 5 * inter, on, on);
 //		buttonArr = new ImgButton[]{allPlayers,allTeams,game,playerData,teamData,returnButton};
 //		for (int i = 0; i < buttonArr.length; i++) {
 //			buttonArr[i] = new ImgButton(trans, x, i * inter + y, on, on);
@@ -78,7 +79,7 @@ public class LeftPanel extends Panel {
 	}
 	
 	public void addButton(){
-		buttonArr = new ImgButton[]{allPlayers,allTeams,game,playerData,teamData,returnButton};
+		buttonArr = new ImgButton[]{allPlayers,allTeams,game,playerData,teamData,hot,returnButton};
 		for(int i =0;i<buttonArr.length;i++){
 			this.add(buttonArr[i]);
 			buttonArr[i].addMouseListener(mou);
@@ -97,7 +98,9 @@ public class LeftPanel extends Panel {
 				 MainController.toPlayerPanel(panel);
 			 }else if(e.getSource() == teamData){
 				 MainController.toTeamPanel(panel);
-			 }else if(e.getSource() == returnButton){
+			 }else if (e.getSource() == hot) {
+				MainController.toHotPanel(panel);
+			}else if(e.getSource() == returnButton){
 				 MainController.toMainPanel(panel);
 			 }
 		 }
