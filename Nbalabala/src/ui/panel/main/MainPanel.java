@@ -109,14 +109,13 @@ public class MainPanel extends Panel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// 界面需要美化
-				JFileChooser c = new JFileChooser();
-				c.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				c.setDialogTitle("Select path to save");
-				int result = c.showOpenDialog(null);
+				// TODO 界面需要美化
+				JFileChooser chooser = new JFileChooser();
+				chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				chooser.setDialogTitle("选择数据文件夹");
+				int result = chooser.showOpenDialog(null);
 				if (result == JFileChooser.APPROVE_OPTION) {
-					String path = c.getSelectedFile().getAbsolutePath();
-					System.out.println("打开路径" + path);
+					String path = chooser.getSelectedFile().getAbsolutePath();
 					Constants.changeDataSourcePath(path);
 				}
 			}

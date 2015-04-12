@@ -21,7 +21,6 @@ import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
 import ui.panel.allplayers.ContrastDiagram;
-import ui.panel.allplayers.PlayerInfoPanel;
 import utility.Constants;
 import vo.PlayerProfileVO;
 import vo.TeamDetailVO;
