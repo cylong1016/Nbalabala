@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import ui.UIConfig;
+import ui.common.button.ImgButton;
 import ui.common.chart.Chart;
 import ui.common.chart.Column;
 import ui.common.label.HotFastestPlayerLabel;
@@ -30,32 +31,63 @@ public class HotFastPanel extends HotThreeFatherPanel{
 	HotBLService hot = new HotQuery();
 	HotFastestPlayerLabel label[] = new HotFastestPlayerLabel[5];
 	Chart chart;
+	ImgButton left,right;
+	public static int CURRENTI = 0;
 	
 	public HotFastPanel(String url) {
 		super(url);
+		addlrButton();
 		add_bt_Listener();
 		addLabel();
 		addChart();
 	}
 	
-	
+	public void addlrButton(){
+		left = new ImgButton("images/Hot/left.png",110,194,"images/Hot/leftOn.png","images/Hot/left.png");
+		right = new ImgButton("images/Hot/right.png",855,194,"images/Hot/rightOn.png","images/Hot/right.png");
+		this.add(left);
+		this.add(right);
+		left.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				CURRENTI--;
+				addChart();
+				HotFastPanel.this.repaint();
+			}
+		});
+		right.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				CURRENTI++;
+				addChart();
+				HotFastPanel.this.repaint();
+			}
+		});
+	}
 
 	private void addChart() {
 		if(chart!=null){
 			this.remove(chart);
 		}
+		
+		if(CURRENTI == 5){
+			CURRENTI = 0;
+		}else if(CURRENTI == -1){
+			CURRENTI = 4;
+		}
 		if (fastVO.size() < 5) return;
 		ArrayList<Column> columns = new ArrayList<Column>();
-		double max = fastVO.get(0).getPromotion();
+		double max = fastVO.get(CURRENTI).getPromotion();
 		double promotion = max;
+		double formerFiveAvg = fastVO.get(CURRENTI).getProperty();
+		columns.add(new Column("前五场平均",formerFiveAvg, UIConfig.HIST_COLORS[CURRENTI]));
 		for (int i = 0; i < 5; i++) {
-			promotion = fastVO.get(i).getPromotion();
-			columns.add(new Column(fastVO.get(i).getName(), promotion, UIConfig.HIST_COLORS[i]));
+			promotion = fastVO.get(CURRENTI).getPromotion();
+			double[] recentFive = fastVO.get(CURRENTI).getRecentFive();
+			columns.add(new Column("第"+(i+1)+"场", recentFive[i], UIConfig.HIST_COLORS[i]));
 			if (max < promotion) {
 				max = promotion;
 			}
 		}
-		chart = new Chart(text, columns, max);
+		chart = new Chart((CURRENTI+1)+" "+fastVO.get(CURRENTI).getName()+" "+text, columns, max);
 		chart.setBounds(95, 103, 809, 145);
 		this.add(chart);
 		chart.updateUI();

@@ -74,5 +74,5 @@ public class UIConfig {
 	public static final Color HIST_FIFTH_COLOR = new Color(85, 145, 204);
 	/** 颜色组合 */
 	public static final Color[] HIST_COLORS= {HIST_FIRST_COLOR, HIST_SECOND_COLOR,
-		HIST_THIRD_COLOR, HIST_FORTH_COLOR, HIST_FIFTH_COLOR};
+		HIST_THIRD_COLOR, HIST_FORTH_COLOR, HIST_FIFTH_COLOR,HIST_FIRST_COLOR};
 }
