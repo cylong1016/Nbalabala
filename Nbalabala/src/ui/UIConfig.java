@@ -57,4 +57,9 @@ public class UIConfig {
 	/** 表格中数据显示的小数点位数 */
 	public static final DecimalFormat FORMAT = new DecimalFormat("0.000");
 	/*----------------------------表格配置--------------------------------*/
+	/*----------------------------柱状图配置--------------------------------*/
+	/** 平均的柱状图颜色 */
+	public static final Color HIST_AVG_COLOR = new Color(41, 80, 160);
+	/** 球员的柱状图颜色 */
+	public static final Color HIST_PLAYER_COLOR = new Color(243, 196, 72);
 }

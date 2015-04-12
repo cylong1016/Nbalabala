@@ -42,9 +42,9 @@ public class PlayerInfoPanel extends BottomPanel {
 			HEIGHT = 25;
 	private static final String IMG_URL = UIConfig.IMG_PATH + "players/";
 	private static final String BACK_BUTTON_OFF = IMG_URL + "back.png";
-	private static final String BACK_BUTTON_ON = IMG_URL + "back.png";
+	private static final String BACK_BUTTON_ON = IMG_URL + "backOn.png";
 	private static final String BACK_BUTTON_CLICK = IMG_URL + "back.png";
-	private static final int LABEL_X = 350, LABEL_Y = 40, INTER_X = 220, INTER_Y = 30, LABEL_WIDTH = 200, LABEL_HEIGHT = 35;
+	private static final int LABEL_X = 350, LABEL_Y = 30, INTER_X = 220, INTER_Y = 30, LABEL_WIDTH = 200, LABEL_HEIGHT = 35;
 	private static final String[] COLUMN_NAMES
 	= new String[]{"", "参赛场数", "先发场数", "在场时间", "投篮命中数", "投篮出手数", "投篮命中率",
 	"三分命中数", "三分出手数", "三分命中率", "罚球命中数", "罚球出手数", "罚球命中率",
@@ -110,7 +110,7 @@ public class PlayerInfoPanel extends BottomPanel {
 		double[] fiveArgsAvg = playerQuery.getFiveArgsAvg();
 		double[] highestScoreReboundAssist = playerQuery.getHighestScoreReboundAssist();
 		cd = new ContrastDiagram(fivePlayersData, fiveArgsAvg, highestScoreReboundAssist);
-		cd.setBounds(57, 380, 888, 165);
+		cd.setBounds(57, 260, 888, 160);
 		this.add(cd);
 		cd.repaint();
 		cd.updateUI();
@@ -331,7 +331,7 @@ public class PlayerInfoPanel extends BottomPanel {
 		rowData[1][35] = df.format(playerSeason.getUsePercent());
 		table = new BottomTable(rowData, COLUMN_NAMES);
 		scroll = new BottomScrollPane(table);
-		scroll.setBounds(57, 270, 888, 80); // 表格的位置
+		scroll.setBounds(57, 450, 888, 80); // 表格的位置
 		this.add(scroll);
 	}
 }

@@ -155,7 +155,7 @@ public class TeamSeasonPanel extends BottomPanel {
 	 * @version 2015年3月25日  上午11:02:11
 	 */
 	public void addBack() {
-		back = new ImgButton(url + "back.png", 50, 50, url + "back.png", url + "back.png");
+		back = new ImgButton(url + "back.png", 50, 50, url + "backOn.png", url + "back.png");
 		this.add(back);
 		back.addMouseListener(new MouseAdapter() {
 

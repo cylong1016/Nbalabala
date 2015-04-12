@@ -5,6 +5,8 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import ui.UIConfig;
+
 /**
  * 球员数据与联盟平均的对比图
  * @author cylong
@@ -36,7 +38,7 @@ public class ContrastDiagram extends JPanel {
 			}
 			this.add(histogram[i]);
 		}
-		this.setBackground(new Color(200, 200, 200, 70));
+		this.setBackground(new Color(243, 243, 243, 70));
 	}
 
 	/**
@@ -47,9 +49,9 @@ public class ContrastDiagram extends JPanel {
 		super.paint(g);
 		int interval = 10;
 		int size = 10;
-		g.setColor(Color.BLUE);
+		g.setColor(UIConfig.HIST_PLAYER_COLOR);
 		g.fillRect(interval, interval, size, size);
-		g.setColor(Color.LIGHT_GRAY);
+		g.setColor(UIConfig.HIST_AVG_COLOR);
 		g.fillRect(interval, interval * 2 + size, size, size);
 
 		g.setColor(Color.BLACK);

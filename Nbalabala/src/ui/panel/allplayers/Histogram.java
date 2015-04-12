@@ -64,7 +64,7 @@ public class Histogram extends JPanel {
 		nameLabel.setOpaque(true);
 		nameLabel.setFont(nameFont);
 		nameLabel.setPreferredSize(nameLabelSize);
-		nameLabel.setBackground(new Color(230, 230, 230, 80));
+		nameLabel.setBackground(new Color(230, 230, 230, 90));
 		this.add(nameLabel, BorderLayout.SOUTH);
 	}
 
@@ -73,12 +73,12 @@ public class Histogram extends JPanel {
 		super.paint(g);
 		int playerH = (int)((playerData / maxData) * maxHeight);
 		int playerY = size.height - nameLabelSize.height - playerH;
-		g.setColor(Color.BLUE);
+		g.setColor(UIConfig.HIST_PLAYER_COLOR);
 		g.fillRect(interval, playerY, width, playerH);
 
 		int avgH = (int)((avgData / maxData) * maxHeight);
 		int avgY = size.height - nameLabelSize.height - avgH;
-		g.setColor(Color.LIGHT_GRAY);
+		g.setColor(UIConfig.HIST_AVG_COLOR);
 		g.fillRect(interval * 2 + width, avgY, width, avgH);
 
 		// 画数字
