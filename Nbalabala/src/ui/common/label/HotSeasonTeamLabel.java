@@ -1,5 +1,6 @@
 package ui.common.label;
 
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -35,33 +36,55 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 		teamAbbr = vo.getAbbr();
 		if (vo.getTop() == 1) {
 			Image logo = SVGHandler.getTeamLogo(teamAbbr);
-			ImgLabel imgLabel = new ImgLabel(250,0,150,200,logo);
+			int width = 210;
+			int height = logo.getHeight(null) * width / logo.getWidth(null);//按比例，将高度缩减
+			ImgLabel imgLabel = new ImgLabel(180,100,width,height,logo);
 			this.add(imgLabel);
 			
-			MyLabel nameLabel = new MyLabel(108, 59, 146, 26, "队名：" + Constants.translateTeamAbbr(teamAbbr));
-			this.add(nameLabel);
+			int labelX = 90;
+			
+			MyLabel nameLabel = new MyLabel(labelX, 40, 146, 33, Constants.translateTeamAbbr(teamAbbr));
+			nameLabel.setFont(new Font("微软雅黑", Font.BOLD, 30));
+			nameLabel.setLeft();
 			
 			String propertyName = getPropertyName(property);
 			String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
-			MyLabel propertyLabel = new MyLabel(108, 110, 146, 26, propertyName+"："+propertyStr);
-			this.add(propertyLabel);
+			MyLabel propertyLabel = new MyLabel(labelX, 85, 146, 26, propertyName+"："+propertyStr);
+			propertyLabel.setFont(new Font("微软雅黑", Font.BOLD, 20));
+			propertyLabel.setForeground(UIConfig.HIST_FIRST_COLOR);
+			propertyLabel.setLeft();
 			
-			MyLabel leagueLabel = new MyLabel(108, 161, 146, 26, "联盟：" + vo.getLeague());
+			MyLabel leagueLabel = new MyLabel(labelX, 130, 146, 26, "联盟：" + vo.getLeague());
+			leagueLabel.setLeft();
+			
+			this.add(propertyLabel);
+			this.add(nameLabel);
 			this.add(leagueLabel);
 		}else{
 			Image logo = SVGHandler.getTeamLogo(teamAbbr);
-			ImgLabel imgLabel = new ImgLabel(0, 36, 92, 75, logo);
+			int width = 75;
+			int height = logo.getHeight(null) * width / logo.getWidth(null);//按比例，将高度缩减
+			ImgLabel imgLabel = new ImgLabel(0, 46,width,height,logo);
+			
 			this.add(imgLabel);
 			
-			MyLabel nameLabel = new MyLabel(30,7,132,20,"队名：" + Constants.translateTeamAbbr(teamAbbr));
-			this.add(nameLabel);
+			int labelWid = 175;
+			
+			MyLabel nameLabel = new MyLabel(0,7,labelWid,20, Constants.translateTeamAbbr(teamAbbr));
 			
 			String propertyName = getPropertyName(property);
 			String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
-			MyLabel propertyLabel = new MyLabel(70, 37, 120, 20, propertyName+"："+propertyStr);
-			this.add(propertyLabel);
+			MyLabel propertyLabel = new MyLabel(0, 37, labelWid, 20, propertyName+"："+propertyStr);
 			
-			MyLabel leagueLabel = new MyLabel(80, 67, 87, 20, "联盟：" + vo.getLeague());
+			MyLabel leagueLabel = new MyLabel(0, 67, labelWid, 20, "联盟：" + vo.getLeague());
+			
+			MyLabel labels[] = {nameLabel, propertyLabel, leagueLabel};
+			for (int i = 0; i < labels.length; i++) {
+				labels[i].setRight();
+			}
+			
+			this.add(propertyLabel);
+			this.add(nameLabel);
 			this.add(leagueLabel);
 		}
 		

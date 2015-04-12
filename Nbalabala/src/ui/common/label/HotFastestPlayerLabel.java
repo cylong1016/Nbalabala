@@ -1,5 +1,6 @@
 package ui.common.label;
 
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -57,36 +58,52 @@ public class HotFastestPlayerLabel extends JLabel{
 			actionPhotoPanel.setBounds(262,0,157,295);
 			this.add(actionPhotoPanel);
 			
-			MyLabel nameLabel = new MyLabel(108, 59, 146, 26, playerName);
+			int labelX = 80;
+			
+			MyLabel nameLabel = new MyLabel(labelX, 30, 300, 33, playerName);
+			nameLabel.setFont(new Font("微软雅黑", Font.BOLD, 30));
+			nameLabel.setLeft();
 			this.add(nameLabel);
 			
 			String propertyStr = UIConfig.FORMAT.format(vo.getPromotion());
-			MyLabel propertyLabel = new MyLabel(108, 110, 146, 26, "五场提升："+propertyStr);
+			MyLabel propertyLabel = new MyLabel(labelX, 70, 200, 26, "五场提升："+propertyStr);
+			propertyLabel.setFont(new Font("微软雅黑", Font.BOLD, 20));
+			propertyLabel.setForeground(UIConfig.HIST_FIRST_COLOR);
+			propertyLabel.setLeft();
 			this.add(propertyLabel);
 			
 			String team = Constants.translateTeamAbbr(vo.getTeamAbbr());
-			MyLabel teamLabel = new MyLabel(108, 161, 146, 26, "球队：" + team);
+			MyLabel teamLabel = new MyLabel(labelX, 120, 146, 26, "球队：" + team);
+			teamLabel.setLeft();
 			this.add(teamLabel);
 			
-			MyLabel positionLabel = new MyLabel(108, 212, 146, 26, "位置：" + vo.getPosition());
+			MyLabel positionLabel = new MyLabel(labelX, 150, 146, 26, "位置：" + vo.getPosition());
+			positionLabel.setLeft();
 			this.add(positionLabel);
 		}else{
 			Image portrait = PlayerImageCache.getPortraitByName(vo.getName());
 			ImgLabel portaitLabel = new ImgLabel(0, 36, 92, 75, portrait);
 			this.add(portaitLabel);
 			
-			MyLabel nameLabel = new MyLabel(30,7,132,20,vo.getName());
-			this.add(nameLabel);
+			int labelWid = 175;
+			
+			MyLabel nameLabel = new MyLabel(0,7,labelWid,20,vo.getName());
 			
 			String propertyStr = UIConfig.FORMAT.format(vo.getPromotion());
-			MyLabel propertyLabel = new MyLabel(70, 37, 120, 20, "五场提升："+propertyStr);
-			this.add(propertyLabel);
+			MyLabel propertyLabel = new MyLabel(0, 37, labelWid, 20, "五场提升："+propertyStr);
 			
 			String team = Constants.translateTeamAbbr(vo.getTeamAbbr());
-			MyLabel teamLabel = new MyLabel(80, 67, 87, 20, "球队：" + team);
-			this.add(teamLabel);
+			MyLabel teamLabel = new MyLabel(0, 67, labelWid, 20, "球队：" + team);
 			
-			MyLabel positionLabel = new MyLabel(95, 97, 100, 20, "位置：" + vo.getPosition());
+			MyLabel positionLabel = new MyLabel(0, 97, labelWid, 20, "位置：" + vo.getPosition());
+			
+			MyLabel labels[] = {nameLabel, propertyLabel, teamLabel, positionLabel};
+			for (int i = 0; i < labels.length; i++) {
+				labels[i].setRight();
+			}
+			this.add(teamLabel);
+			this.add(propertyLabel);
+			this.add(nameLabel);
 			this.add(positionLabel);
 		}
 		

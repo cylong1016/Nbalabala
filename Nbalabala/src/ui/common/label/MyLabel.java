@@ -22,4 +22,12 @@ public class MyLabel extends JLabel {
 		this.setHorizontalAlignment(CENTER);
 		this.text = text;
 	}
+	
+	public void setLeft(){
+		this.setHorizontalAlignment(LEFT);
+	}
+	
+	public void setRight(){
+		this.setHorizontalAlignment(RIGHT);
+	}
 }

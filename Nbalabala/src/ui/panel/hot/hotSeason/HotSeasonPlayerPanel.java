@@ -47,7 +47,7 @@ public class HotSeasonPlayerPanel extends HotThreeFatherPanel {
 		double property = max;
 		for (int i = 0; i < 5; i++) {
 			property = playerVO.get(i).getProperty();
-			columns.add(new Column(playerVO.get(i).getName(), property, UIConfig.HIST_COLORS[i]));
+			columns.add(new Column(Integer.toString(i+1), property, UIConfig.HIST_COLORS[i]));
 			if (max < property) {
 				max = property;
 			}
