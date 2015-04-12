@@ -10,6 +10,7 @@ import autotest.playertest.PlayerSimpleSeasonVO;
 import autotest.playertest.PlayerTestSortHandler;
 import autotest.playertest.SimplePlayerAvgSorter;
 import autotest.playertest.SimplePlayerTotalSorter;
+import autotest.teamtest.SimpleTeamAvgAndHighSorter;
 import autotest.teamtest.SimpleTeamAvgSorter;
 import autotest.teamtest.TeamSimpleSeasonVO;
 import autotest.teamtest.TeamTestSortHandler;
@@ -72,44 +73,31 @@ public class Console {
 				
 			}
 			return;
-		case "-team":
+		case "-team": //TODO hot king 的默认数量是多少
 			ArrayList<TeamSimpleSeasonVO> teamVOs = seasonData.getAllTeamSeasonData();
 			int neededTeamCount = 30;
 			if (args.length < 2) {
-				SimpleTeamAvgSorter.sort(teamVOs, TeamAvgSortBasis.SCORE_AVG, SortOrder.DE);
-				for (TeamSimpleSeasonVO vo : teamVOs) {
-					outputTeamNormalAvgInfo(out, vo);
-				}
+				Comparator<TeamSimpleSeasonVO> comparator = 
+						SimpleTeamAvgAndHighSorter.getTeamAvgAndHighComparator("point", "desc");
+				Collections.sort(teamVOs, comparator);
+				outputTeamNormalAvgInfo(out, teamVOs, 30);
 			}else{
+				
 				neededTeamCount = getNeededTeamCount(args);
-				TeamTestSortHandler.teamSortHandle(args, teamVOs);
-				if (neededTeamCount > teamVOs.size())
-					neededTeamCount = teamVOs.size();
-				for (int i = 1;i<args.length;i++) {
-					switch (args[i]) {
-					case "-total":
-						for (int j = 0;j<neededTeamCount;j++) {
-							outputTeamNormalTotalInfo(out, teamVOs.get(j));
-						}
-						return;
-					case "-high":
-						for (int j = 0;j<neededTeamCount;j++) {
-							outputTeamHighInfo(out, teamVOs.get(j));
-						}
-						return;
-					case "-hot":
-						int index = i + 1;
-						for (int j = 0;j<neededTeamCount;j++) {
-							outputTeamHotInfo(out, args[index], teamVOs.get(j));
-						}
-						return;
-					default:
-						break;
-					}
-				}
-				// 如果没有发现这三个字段，就是-avg -all了
-				for (int j = 0;j<neededTeamCount;j++) {
-					outputTeamNormalAvgInfo(out, teamVOs.get(j));
+				TeamTestSortHandler.sortTeamByArgs(args, teamVOs);
+				
+				switch(args[1]) {
+				case "-hot":
+					outputTeamHotInfo(out, args[2], teamVOs, neededTeamCount);
+					break;
+				case "-high":
+					outputTeamHighInfo(out, teamVOs, neededTeamCount);
+					break;
+				case "-total":
+					outputTeamNormalTotalInfo(out, teamVOs, neededTeamCount);
+					break;
+				default:
+					outputTeamNormalAvgInfo(out, teamVOs, neededTeamCount);
 				}
 			}
 		}
@@ -160,104 +148,124 @@ public class Console {
 		return seasonData.getAllPlayerSeasonData();
 	}
 	
-	private void outputTeamNormalAvgInfo(PrintStream out, TeamSimpleSeasonVO vo) {
-		TeamNormalInfo info = new TeamNormalInfo();
-		info.setAssist(vo.assistAvg);
-		info.setBlockShot(vo.blockAvg);
-		info.setDefendRebound(vo.defensiveReboundAvg);
-		info.setFault(vo.turnoverAvg);
-		info.setFoul(vo.foulAvg);
-		info.setNumOfGame(vo.matchCount);
-		info.setOffendRebound(vo.offensiveReboundAvg);
-		info.setPenalty(vo.freethrowPercent);
-		info.setPoint(vo.scoreAvg);
-		info.setRebound(vo.totalReboundAvg);
-		info.setShot(vo.fieldPercent);
-		info.setSteal(vo.stealAvg);
-		info.setTeamName(vo.teamName);
-		info.setThree(vo.threePointPercent);
-		out.print(info);
-	}
-	
-	private void outputTeamNormalTotalInfo(PrintStream out, TeamSimpleSeasonVO vo) {
-		TeamNormalInfo info = new TeamNormalInfo();
-		info.setAssist(vo.assist);
-		info.setBlockShot(vo.block);
-		info.setDefendRebound(vo.defensiveRebound);
-		info.setFault(vo.turnover);
-		info.setFoul(vo.foul);
-		info.setNumOfGame(vo.matchCount);
-		info.setOffendRebound(vo.offensiveRebound);
-		info.setPenalty(vo.freethrowPercent);
-		info.setPoint(vo.score);
-		info.setRebound(vo.totalRebound);
-		info.setShot(vo.fieldPercent);
-		info.setSteal(vo.steal);
-		info.setTeamName(vo.teamName);
-		info.setThree(vo.threePointPercent);
-		out.print(info);
-	}
-	
-	private void outputTeamHighInfo(PrintStream out, TeamSimpleSeasonVO vo) {
-		TeamHighInfo info = new TeamHighInfo();
-		info.setAssistEfficient(vo.assistEff);
-		info.setDefendEfficient(vo.defensiveEff);
-		info.setDefendReboundEfficient(vo.defensiveReboundEff);
-		info.setOffendEfficient(vo.offensiveReboundEff);
-		info.setOffendReboundEfficient(vo.offensiveReboundEff);
-		info.setOffendRound(vo.offensiveRound);
-		info.setStealEfficient(vo.stealEff);
-		info.setTeamName(vo.teamName);
-		info.setWinRate(vo.winning);
-		out.print(info);
-	}
-	
-	private void outputTeamHotInfo(PrintStream out, String field, TeamSimpleSeasonVO vo) {
-		TeamHotInfo info = new TeamHotInfo();
-		info.setField(field);
-		info.setLeague(SimpleConstants.getLeagueByAbbr(vo.teamName));
-		info.setTeamName(vo.teamName);
-		switch (field) {
-		case "score":
-			info.setValue(vo.scoreAvg);
-			break;
-		case "rebound":
-			info.setValue(vo.totalReboundAvg);
-			break;
-		case "assist":
-			info.setValue(vo.assistAvg);
-			break;
-		case "blockShot":
-			info.setValue(vo.blockAvg);
-			break;
-		case "steal":
-			info.setValue(vo.stealAvg);
-			break;
-		case "foul":
-			info.setValue(vo.foulAvg);
-			break;
-		case "fault":
-			info.setValue(vo.turnoverAvg);
-			break;
-		case "shot":
-			info.setValue(vo.fieldPercent);
-			break;
-		case "three":
-			info.setValue(vo.threePointPercent);
-			break;
-		case "penalty":
-			info.setValue(vo.freethrowPercent);
-			break;
-		case "defendRebound":
-			info.setValue(vo.defensiveReboundAvg);
-			break;
-		case "offendRebound":
-			info.setValue(vo.offensiveReboundAvg);
-			break;
-		default:
-			break;
+	private void outputTeamNormalAvgInfo(PrintStream out, ArrayList<TeamSimpleSeasonVO> vos, int count) {
+		if (vos.size() < count) count = vos.size();
+		int i;
+		for (i = 0; i<count;i++) {
+			TeamSimpleSeasonVO vo = vos.get(i);
+			TeamNormalInfo info = new TeamNormalInfo();
+			info.setAssist(vo.assistAvg);
+			info.setBlockShot(vo.blockAvg);
+			info.setDefendRebound(vo.defensiveReboundAvg);
+			info.setFault(vo.turnoverAvg);
+			info.setFoul(vo.foulAvg);
+			info.setNumOfGame(vo.matchCount);
+			info.setOffendRebound(vo.offensiveReboundAvg);
+			info.setPenalty(vo.freethrowPercent);
+			info.setPoint(vo.scoreAvg);
+			info.setRebound(vo.totalReboundAvg);
+			info.setShot(vo.fieldPercent);
+			info.setSteal(vo.stealAvg);
+			info.setTeamName(vo.teamName);
+			info.setThree(vo.threePointPercent);
+			out.print(info);
 		}
-		out.print(info);
+	}
+	
+	private void outputTeamNormalTotalInfo(PrintStream out, ArrayList<TeamSimpleSeasonVO> vos, int count) {
+		if (vos.size() < count) count = vos.size();
+		int i;
+		for (i=0;i<count;i++) {
+			TeamSimpleSeasonVO vo = vos.get(i);
+			TeamNormalInfo info = new TeamNormalInfo();
+			info.setAssist(vo.assist);
+			info.setBlockShot(vo.block);
+			info.setDefendRebound(vo.defensiveRebound);
+			info.setFault(vo.turnover);
+			info.setFoul(vo.foul);
+			info.setNumOfGame(vo.matchCount);
+			info.setOffendRebound(vo.offensiveRebound);
+			info.setPenalty(vo.freethrowPercent);
+			info.setPoint(vo.score);
+			info.setRebound(vo.totalRebound);
+			info.setShot(vo.fieldPercent);
+			info.setSteal(vo.steal);
+			info.setTeamName(vo.teamName);
+			info.setThree(vo.threePointPercent);
+			out.print(info);
+		}
+	}
+	
+	private void outputTeamHighInfo(PrintStream out, ArrayList<TeamSimpleSeasonVO> vos, int count) {
+		if (vos.size() < count) count = vos.size();
+		int i;
+		for (i=0;i<count;i++) {
+			TeamSimpleSeasonVO vo = vos.get(i);
+			TeamHighInfo info = new TeamHighInfo();
+			info.setAssistEfficient(vo.assistEff);
+			info.setDefendEfficient(vo.defensiveEff);
+			info.setDefendReboundEfficient(vo.defensiveReboundEff);
+			info.setOffendEfficient(vo.offensiveReboundEff);
+			info.setOffendReboundEfficient(vo.offensiveReboundEff);
+			info.setOffendRound(vo.offensiveRound);
+			info.setStealEfficient(vo.stealEff);
+			info.setTeamName(vo.teamName);
+			info.setWinRate(vo.winning);
+			out.print(info);
+		}
+	}
+	
+	private void outputTeamHotInfo(PrintStream out, String field, ArrayList<TeamSimpleSeasonVO> vos, int count) {
+		if (vos.size() < count) count = vos.size();
+		int i;
+		for (i=0;i<count;i++) {
+			TeamSimpleSeasonVO vo = vos.get(i);
+			TeamHotInfo info = new TeamHotInfo();
+			info.setField(field);
+			info.setLeague(SimpleConstants.getLeagueByAbbr(vo.teamName));
+			info.setTeamName(vo.teamName);
+			switch (field) {
+			case "score":
+				info.setValue(vo.scoreAvg);
+				break;
+			case "rebound":
+				info.setValue(vo.totalReboundAvg);
+				break;
+			case "assist":
+				info.setValue(vo.assistAvg);
+				break;
+			case "blockShot":
+				info.setValue(vo.blockAvg);
+				break;
+			case "steal":
+				info.setValue(vo.stealAvg);
+				break;
+			case "foul":
+				info.setValue(vo.foulAvg);
+				break;
+			case "fault":
+				info.setValue(vo.turnoverAvg);
+				break;
+			case "shot":
+				info.setValue(vo.fieldPercent);
+				break;
+			case "three":
+				info.setValue(vo.threePointPercent);
+				break;
+			case "penalty":
+				info.setValue(vo.freethrowPercent);
+				break;
+			case "defendRebound":
+				info.setValue(vo.defensiveReboundAvg);
+				break;
+			case "offendRebound":
+				info.setValue(vo.offensiveReboundAvg);
+				break;
+			default:
+				break;
+			}
+			out.print(info);
+		}
 	}
 	
 	private void outputPlayerNormalTotalInfo(PrintStream out, PlayerSimpleSeasonVO vo) {

@@ -1,11 +1,6 @@
 package autotest.teamtest;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-
-import enums.SortOrder;
-import enums.TeamAvgSortBasis;
 
 /**
  * 球队平均数据根据不同字段的排序
@@ -26,6 +21,7 @@ public class SimpleTeamAvgAndHighSorter {
 		
 		switch(basis) {
 
+		case "score":
 		case "point":
 			comparator = new Comparator<TeamSimpleSeasonVO>() {
 				private int factor = SimpleTeamAvgAndHighSorter.factor;
@@ -70,10 +66,62 @@ public class SimpleTeamAvgAndHighSorter {
 				}
 			};
 			break;
-
+			
+		case "foul":
+			comparator = new Comparator<TeamSimpleSeasonVO>() {
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
+				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
+					return (int)(factor * (t1.foulAvg - t2.foulAvg) * 10000);
+				}
+			};
+			break;
+			
+		case "fault":
+			comparator = new Comparator<TeamSimpleSeasonVO>() {
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
+				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
+					return (int)(factor * (t1.getTurnoverAvg() - t2.getTurnoverAvg()) * 10000);
+				}
+			};
+			break;
 		
+		case "shot":
+			comparator = new Comparator<TeamSimpleSeasonVO>() {
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
+				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
+					return (int)(factor * (t1.getFieldPercent() - t2.getFieldPercent()) * 10000);
+				}
+			};
+			break;
+		
+		case "three":
+			comparator = new Comparator<TeamSimpleSeasonVO>() {
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
+				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
+					return (int)(factor * (t1.getThreePointPercent() - t2.getThreePointPercent()) * 10000);
+				}
+			};
+			break;
+			
+		case "penalty":
+			comparator = new Comparator<TeamSimpleSeasonVO>() {
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
+				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
+					return (int)(factor * (t1.getFreeThrowPercent() - t2.getFreeThrowPercent()) * 10000);
+				}
+			};
+			break;
+			
+		case "defendRebound":
+			comparator = new Comparator<TeamSimpleSeasonVO>() {
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
+				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
+					return (int)(factor * (t1.getDefensiveReboundAvg() - t2.getDefensiveReboundAvg()) * 10000);
+				}
+			};
+			break;
 
-		case OFFENSIVE_REBOUND_AVG:
+		case "offendRebound":
 			comparator = new Comparator<TeamSimpleSeasonVO>() {
 				private int factor = SimpleTeamAvgAndHighSorter.factor;
 				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
@@ -81,184 +129,83 @@ public class SimpleTeamAvgAndHighSorter {
 				}
 			};
 			break;
-
-		case DEFENSIVE_REBOUND_AVG:
+			
+		case "winRate":
 			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
 				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getDefensiveReboundAvg() - t2.getDefensiveReboundAvg()) * 10000);
+					return (int)(factor * (t1.winning - t2.winning) * 10000);
+				}
+			};
+			break;
+			
+		case "offendRound":
+			comparator = new Comparator<TeamSimpleSeasonVO>() {
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
+				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
+					return (int)(factor * (t1.offensiveRound - t2.offensiveRound) * 10000);
+				}
+			};
+			break;
+			//TODO 进攻回合的含义是什么
+		case "offendEfficient":
+			comparator = new Comparator<TeamSimpleSeasonVO>() {
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
+				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
+					return (int)(factor * (t1.offensiveEff - t2.offensiveEff) * 10000);
+				}
+			};
+			break;			
+			
+		case "defendEfficient":
+			comparator = new Comparator<TeamSimpleSeasonVO>() {
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
+				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
+					return (int)(factor * (t1.defensiveEff - t2.defensiveEff) * 10000);
 				}
 			};
 			break;
 
-		case TOTAL_REBOUND_AVG:
+		case "offendReboundEfficient":
 			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
 				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getTotalReboundAvg() - t2.getTotalReboundAvg()) * 10000);
+					return (int)(factor * (t1.offensiveReboundEff - t2.offensiveReboundEff) * 10000);
 				}
 			};
 			break;
-
-		
-
-		case TURNOVER_AVG:
+			
+		case "defendReboundEfficient":
 			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
 				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getTurnoverAvg() - t2.getTurnoverAvg()) * 10000);
+					return (int)(factor * (t1.defensiveReboundEff - t2.defensiveReboundEff) * 10000);
 				}
 			};
 			break;
-
-		case FOUL_AVG:
+			
+		case "assistEfficient":
 			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
 				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getFoulAvg() - t2.getFoulAvg()) * 10000);
+					return (int)(factor * (t1.assistEff - t2.assistEff) * 10000);
 				}
 			};
 			break;
-
-		case SCORE_AVG:
+			
+		case "stealEfficient":
 			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
 				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getScoreAvg() - t2.getScoreAvg()) * 10000);
+					return (int)(factor * (t1.stealEff - t2.stealEff) * 10000);
 				}
 			};
 			break;
-
-		case ASSIST_EFF:
-			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
-				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getAssistEff() - t2.getAssistEff()) * 10000);
-				}
-			};
-			break;
-
-		case DEFENSIVE_EFF:
-			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
-				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getDefensiveEff() - t2.getDefensiveEff()) * 10000);
-				}
-			};
-			break;
-
-		case DEFENSIVE_REBOUND_EFF:
-			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
-				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getDefensiveReboundEff() - t2.getDefensiveReboundEff()) * 10000);
-				}
-			};
-			break;
-
-		case FIELD_PERCENT:
-			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
-				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getFieldPercent() - t2.getFieldPercent()) * 10000);
-				}
-			};
-			break;
-
-		case FREETHROW_PERCENT:
-			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
-				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getFreeThrowPercent() - t2.getFreeThrowPercent()) * 10000);
-				}
-			};
-			break;
-
-		case LOSES:
-			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
-				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return factor * (t1.getLoses() - t2.getLoses());
-				}
-			};
-			break;
-
-		case MATCH_COUNT:
-			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
-				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return factor * (t1.getMatchCount() - t2.getMatchCount());
-				}
-			};
-			break;
-
-		case OFFENSIVE_EFF:
-			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
-				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getOffensiveEff() - t2.getOffensiveEff()) * 10000);
-				}
-			};
-			break;
-
-		case OFFENSIVE_REBOUND_EFF:
-			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
-				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getOffensiveReboundEff() - t2.getOffensiveReboundEff()) * 10000);
-				}
-			};
-			break;
-
-		case STEAL_EFF:
-			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
-				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getStealEff() - t2.getStealEff()) * 10000);
-				}
-			};
-			break;
-
-		case THREE_POINT_PERCENT:
-			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
-				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getThreePointPercent() - t2.getThreePointPercent()) * 10000);
-				}
-			};
-			break;
-
-		case WINNING:
-			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
-				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getWinning() - t2.getWinning()) * 10000);
-				}
-			};
-			break;
-
-		case WINS:
-			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
-				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return factor * (t1.getWins() - t2.getWins());
-				}
-			};
-			break;
-
 		default:
 			break;
 
 		}
-		
-		
+		return comparator;
 	}
 
-	public static void sort(ArrayList<TeamSimpleSeasonVO> teams, TeamAvgSortBasis basis, SortOrder order) {
-		
-
-		
-
-		Collections.sort(teams, comparator);
-	}
 }
