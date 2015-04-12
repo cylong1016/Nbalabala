@@ -80,15 +80,15 @@ public class HotFastPanel extends HotThreeFatherPanel{
 		double formerFiveAvg = fastVO.get(CURRENTI).getProperty();
 		columns.add(new Column("前五场平均",formerFiveAvg, UIConfig.HIST_COLORS[CURRENTI]));
 		for (int i = 0; i < 5; i++) {
-			promotion = fastVO.get(CURRENTI).getPromotion();
 			double[] recentFive = fastVO.get(CURRENTI).getRecentFive();
+			promotion = recentFive[i];
 			columns.add(new Column("第"+(i+1)+"场", recentFive[i], UIConfig.HIST_COLORS[i]));
 			if (max < promotion) {
 				max = promotion;
 			}
 		}
 		chart = new Chart((CURRENTI+1)+" "+fastVO.get(CURRENTI).getName()+" "+text, columns, max);
-		chart.setBounds(95, 103, 809, 145);
+		chart.setBounds(95, 103, 809, 180);
 		this.add(chart);
 		chart.updateUI();
 		chart.repaint();
