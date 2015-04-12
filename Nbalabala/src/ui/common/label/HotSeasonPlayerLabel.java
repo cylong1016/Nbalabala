@@ -68,7 +68,7 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 			
 			String propertyName = getPropertyName(property);
 			String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
-			MyLabel propertyLabel = new MyLabel(70, 37, 87, 20, propertyName+"："+propertyStr);
+			MyLabel propertyLabel = new MyLabel(70, 37, 120, 20, propertyName+"："+propertyStr);
 			this.add(propertyLabel);
 			
 			String team = Constants.translateTeamAbbr(vo.getTeamAbbr());

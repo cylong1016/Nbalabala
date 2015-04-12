@@ -51,6 +51,9 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 	BottomScrollPane scroll;
 	private static final int PORTRAIT_WIDTH = 70;
 	private static final HotTodayPlayerProperty[] HOT_TODAY_ARRAY = HotTodayPlayerProperty.values();
+	ArrayList<HotTodayPlayerVO> playerVO;
+	Chart chart;
+	String text = "得分";
 
 	public HotTodayPlayerPanel(String url) {
 		super(url);
@@ -58,7 +61,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 		HotTodayButton.current = button[0];
 		setEffect(button[0]);
 		addListener();
-		ArrayList<HotTodayPlayerVO> playerVO = hot.getHotTodayPlayers(HOT_TODAY_ARRAY[0]);
+		playerVO = hot.getHotTodayPlayers(HOT_TODAY_ARRAY[0]);
 		setTable(playerVO);
 		addChart(); // 添加柱状图
 	}
@@ -69,15 +72,20 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 	 * @version 2015年4月12日 上午1:12:06
 	 */
 	private void addChart() {
+		if(chart!=null){
+			this.remove(chart);
+		}
 		ArrayList<Column> columns = new ArrayList<Column>();
-		columns.add(new Column("hhh1", 2, Color.blue));
-		columns.add(new Column("hhh2", 15, Color.blue));
-		columns.add(new Column("hhh3", 7, Color.blue));
-		columns.add(new Column("hhh4", 18, Color.blue));
-		columns.add(new Column("hhh5", 21.1, Color.blue));
-		Chart chart = new Chart("测试", columns, 21.1);
+		columns.add(new Column(playerVO.get(0).getName(), playerVO.get(0).getProperty(), Color.blue));
+		columns.add(new Column(playerVO.get(1).getName(),playerVO.get(1).getProperty(), Color.blue));
+		columns.add(new Column(playerVO.get(2).getName(), playerVO.get(2).getProperty(), Color.blue));
+		columns.add(new Column(playerVO.get(3).getName(), playerVO.get(3).getProperty(), Color.blue));
+		columns.add(new Column(playerVO.get(4).getName(), playerVO.get(4).getProperty(), Color.blue));
+		chart = new Chart(text, columns, 21.1);
 		chart.setBounds(95, 103, 809, 145);
 		this.add(chart);
+		chart.updateUI();
+		chart.repaint();
 	}
 
 	public void addButton() {
@@ -99,10 +107,13 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 					}
 					HotTodayButton.current.back();
 					HotTodayButton.current = (HotTodayButton)e.getSource();
-					HotTodayButton button = (HotTodayButton)e.getSource();
-					columns[5] = button.text;
-					ArrayList<HotTodayPlayerVO> playerVO = hot.getHotTodayPlayers(button.pro);
+					HotTodayButton currentButton = (HotTodayButton)e.getSource();
+					text =  currentButton.text;
+					columns[5] = currentButton.text;
+					playerVO = hot.getHotTodayPlayers(currentButton.pro);
 					setTable(playerVO);
+					addChart();
+					HotTodayPlayerPanel.this.repaint();
 				}
 			});
 		}
