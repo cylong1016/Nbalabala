@@ -118,7 +118,7 @@ public class TeamSeasonPanel extends BottomPanel {
 										teamSeason.getThreePointPercent()};
 		double[] fiveArgsAvg = teamQuery.getFiveArgsAvg(seasonInput.getSeason());
 		double[] highestScoreReboundAssist = teamQuery.getHighestScoreReboundAssist(seasonInput.getSeason());
-		cd = new ContrastDiagram(fivePlayersData, fiveArgsAvg, highestScoreReboundAssist);
+		cd = new ContrastDiagram(fivePlayersData, fiveArgsAvg, highestScoreReboundAssist, "球队平均");
 		cd.setBounds(57, 260, 888, 160);
 		this.add(cd);
 		cd.repaint();

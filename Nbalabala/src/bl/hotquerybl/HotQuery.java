@@ -161,6 +161,7 @@ public class HotQuery implements HotBLService{
 			HotSeasonPlayerProperty property) {
 		ArrayList<PlayerSeasonVO> players = seasonService.getAllPlayerRecentSeasonData();
 		PlayerAvgSorter sorter = new PlayerAvgSorter();
+		if (property == null) return new ArrayList<HotSeasonPlayerVO>();
 		switch (property) {
 		case SCORE_AVG:
 			sorter.sort(players, PlayerAvgSortBasis.SCORE_AVG, SortOrder.DE);
@@ -337,6 +338,7 @@ public class HotQuery implements HotBLService{
 	public ArrayList<HotFastestPlayerVO> getHotFastestPlayers(
 			HotFastestPlayerProperty property) {
 		Comparator<PlayerSeasonVO> comparator = null;
+		if (property == null) return new ArrayList<HotFastestPlayerVO>();
 		switch (property) {
 		case SCORE_AVG:
 			comparator = new Comparator<PlayerSeasonVO>() {

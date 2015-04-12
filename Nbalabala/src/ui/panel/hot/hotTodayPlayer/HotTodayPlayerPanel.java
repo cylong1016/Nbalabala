@@ -76,6 +76,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 			this.remove(chart);
 		}
 		ArrayList<Column> columns = new ArrayList<Column>();
+		if (playerVO.size() < 5) return;
 		columns.add(new Column(playerVO.get(0).getName(), playerVO.get(0).getProperty(), Color.blue));
 		columns.add(new Column(playerVO.get(1).getName(),playerVO.get(1).getProperty(), Color.blue));
 		columns.add(new Column(playerVO.get(2).getName(), playerVO.get(2).getProperty(), Color.blue));
@@ -129,6 +130,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 		Object[][] rowData = new String[size][lth];
 		ArrayList<ImageIcon> iconArr = new ArrayList<ImageIcon>();
 		table = new BottomTable(rowData, columns, new Color(215, 72, 72));
+		if (players.size() < 5) size = players.size();
 		for(int i = 0; i < size; i++) {
 			HotTodayPlayerVO ppVO = players.get(i);
 			PlayerMatchPerformanceVO matchVO = ppVO.getMatchPerformance();
