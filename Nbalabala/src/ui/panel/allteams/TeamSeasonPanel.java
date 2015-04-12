@@ -91,7 +91,7 @@ public class TeamSeasonPanel extends BottomPanel {
 		addListener();
 		addBack();
 		seasonInput = new SeasonInputPanel(this);
-		seasonInput.setLocation(515, 190);
+		seasonInput.setLocation(515, y);
 		this.add(seasonInput); // TODO 位置需要重新设定
 		teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
 		addLabel(teamDetail.getLogo());
@@ -152,16 +152,17 @@ public class TeamSeasonPanel extends BottomPanel {
 	 */
 	public void addLabel(Image img){
 		logo = new ImgLabel(130,6,150,150,img);
-		teamName = new MyLabel(280,50,300,50,match());
+		teamName = new MyLabel(240,50,300,50,match());
 		teamName.setForeground(UIConfig.BUTTON_COLOR);
 		teamName.setFont(new Font("微软雅黑",0,30));
 		this.add(logo);
 		this.add(teamName);
-		teamInfo[0] = new MyLabel(350,100,lbWidth,lbHeight,teamDetail.getProfile().getAbbr());
-		teamInfo[1] = new MyLabel(600,15,lbWidth*4,lbHeight,"所在地:  "+teamDetail.getProfile().getLocation());
-		teamInfo[2] = new MyLabel(600,50,lbWidth*4,lbHeight, "所属赛区： "+teamDetail.getProfile().getDivisionString());
-		teamInfo[3] = new MyLabel(600,85,lbWidth*4,lbHeight,"主场:  "+teamDetail.getProfile().getHome());
-		teamInfo[4] = new MyLabel(600,120,lbWidth*4,lbHeight,"建队时间:  "+teamDetail.getProfile().getSince());
+		int label_x = 530;
+		teamInfo[0] = new MyLabel(310,90,lbWidth,lbHeight,teamDetail.getProfile().getAbbr());
+		teamInfo[1] = new MyLabel(label_x,15,lbWidth*4,lbHeight,"所在地:  "+teamDetail.getProfile().getLocation());
+		teamInfo[2] = new MyLabel(label_x,50,lbWidth*4,lbHeight, "所属赛区： "+teamDetail.getProfile().getDivisionString());
+		teamInfo[3] = new MyLabel(label_x,85,lbWidth*4,lbHeight,"主场:  "+teamDetail.getProfile().getHome());
+		teamInfo[4] = new MyLabel(label_x,120,lbWidth*4,lbHeight,"建队时间:  "+teamDetail.getProfile().getSince());
 
 		for(int i = 0;i<teamInfo.length;i++){
 			teamInfo[i].setFont(new Font("微软雅黑",0,20));

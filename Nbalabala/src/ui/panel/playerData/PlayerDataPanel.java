@@ -65,7 +65,7 @@ public class PlayerDataPanel extends BottomPanel {
 	/** 罚球 两双 */
 	private static final int  FREETHROW_X = X3 + INTER, DOUBLE_DOUBLE_X = FREETHROW_X + INTER;
 	/** 总计 平均 */
-	private static final int TOTAL_X = 756, AVERAGE_X = 823;
+	private static final int TOTAL_X = 800, AVERAGE_X = 867;
 
 	/** 所有button横坐标集合 */
 	private static final int[] POSITION_SELECT_X = new int[] { ALL_X, X1, X2, X3 };
@@ -114,7 +114,7 @@ public class PlayerDataPanel extends BottomPanel {
 		addListener();
 		addFindButton();
 		seasonInput = new SeasonInputPanel();
-		seasonInput.setLocation(600, 40);
+		seasonInput.setLocation(660, 171);
 		this.add(seasonInput); // TODO 位置需要重新设定
 		// 初始化界面的表格
 		ArrayList<PlayerSeasonVO> iniArray = playerSeason.getAllPlayersSortedByName();

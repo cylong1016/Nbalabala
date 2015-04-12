@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.panel.BottomPanel;
 import utility.Utility;
@@ -75,7 +76,7 @@ public class SeasonInputPanel extends JPanel {
 	
 	private void setLook() {
 		this.setLayout(null);
-		this.setBackground(new Color(255, 169, 75));
+		this.setBackground(UIConfig.BUTTON_COLOR);
 		String[] defaultSeason = Utility.getDefaultSeason().split("-");
 		leftYearLabel = new JLabel(defaultSeason[0]);
 		rightYearLabel = new JLabel(defaultSeason[1]);

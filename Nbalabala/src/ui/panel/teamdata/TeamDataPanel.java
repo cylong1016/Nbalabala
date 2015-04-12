@@ -56,7 +56,7 @@ public class TeamDataPanel extends BottomPanel {
 			NORTH_WEST_X = PACIFIC_X + INTER + WIDTH_THREE - WIDTH_X,
 			SOUTH_WEST = NORTH_WEST_X + INTER;
 	/** 总计 平均  按钮的X坐标*/
-	private static final int TOTAL_X = 756, AVG_X = 823;
+	private static final int TOTAL_X = 800, AVG_X = 867;
 	/** 所有button的横坐标 */
 	private static final int[] SELECT_BUTTON_X = new int[]{ALL_X, SOUTH_EAST_X, CENTER_X, 
 		ATLANTIC_X, EAST_X, WEST_X, PACIFIC_X, NORTH_WEST_X, SOUTH_WEST};
@@ -100,7 +100,7 @@ public class TeamDataPanel extends BottomPanel {
 		setEffect(totalAvgSelectButtons[0]);
 		addListener();
 		seasonInput = new SeasonInputPanel(this);
-		seasonInput.setLocation(600, 40);
+		seasonInput.setLocation(660, Y5);
 		this.add(seasonInput); // TODO 位置需要重新设定
 		// 初始化表格和球队总数据
 		seasonArray = teamSeason.getTeamDataSortedByName(seasonInput.getSeason());
