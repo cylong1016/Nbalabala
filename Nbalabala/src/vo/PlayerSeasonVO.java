@@ -501,7 +501,6 @@ public class PlayerSeasonVO {
 			latestRebound = reboundQueue.getLastData();
 			latestAssist = assistQueue.getLastData();
 			latestBlock = blockQueue.getLastData();
-			latestSteal = blockQueue.getLastData();
 			
 			if (matchCount > 9) {
 				scorePromotion = scoreQueue.getPromotion();
