@@ -62,9 +62,13 @@ public class Histogram extends JPanel {
 		this.addNameLabel(name);
 		this.setPreferredSize(size);
 		this.setOpaque(false);
-		// addColumn();
 	}
 	
+	/**
+	 * 暂时不用这个方法
+	 * @author cylong
+	 * @version 2015年4月13日  上午12:08:12
+	 */
 	public void addColumn() {
 		JPanel panel = new JPanel(); // 放两列数据
 		panel.setLayout(null);

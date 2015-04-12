@@ -42,7 +42,8 @@ public class ContrastDiagram extends JPanel {
 			}
 			this.add(histogram[i]);
 		}
-		this.setBackground(new Color(243, 243, 243, 70));
+		// this.setBackground(new Color(243, 243, 243, 70)); // 半透明在刷新数据的时候会闪
+		this.setOpaque(false);
 	}
 	
 	public void setData(double[] fivePlayersData, double[] fiveArgsAvg, double[] highestScoreReboundAssist) {
