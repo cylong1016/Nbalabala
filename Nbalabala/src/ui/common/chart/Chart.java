@@ -9,8 +9,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import ui.common.panel.Panel;
-
 /**
  * 柱状图
  * @author cylong
@@ -53,7 +51,7 @@ public class Chart extends JPanel {
 		this.columns = columns;
 		this.maxRange = maxRange;
 		this.setBorder(BorderFactory.createTitledBorder(getBorder(), title, TitledBorder.CENTER, TitledBorder.TOP, titleFont));
-		this.setBackground(new Color(243, 243, 243, 70));
+		this.setBackground(new Color(243, 243, 243, 70)); // 半透明背景
 		this.setLayout(null);
 		inPanel = new InPanel();
 		this.add(inPanel);
