@@ -9,6 +9,8 @@ import utility.Constants;
  */
 public class PlayerSeasonVO {
 	
+	public String lastMatchFileName;
+	
 	/** 存储最近10场的得分、篮板、助攻、盖帽、抢断、三分命中、投篮命中、罚球命中、三分出手、投篮出手、罚球出手 */
 	public RecentDataQueue scoreQueue = new RecentDataQueue();
 	public RecentDataQueue reboundQueue = new RecentDataQueue();

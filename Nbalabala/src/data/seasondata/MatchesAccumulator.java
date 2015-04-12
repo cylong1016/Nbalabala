@@ -114,6 +114,8 @@ public class MatchesAccumulator {
 						playerRecords.put(s[0], new PlayerSeasonVO(s[0]));
 					PlayerSeasonVO playerRecord = playerRecords.get(s[0]);
 					
+					playerRecord.lastMatchFileName = fileName;
+					
 					if (needRecordUpdate) playerUpdated.add(playerRecord);
 
 					// 如果这条记录是最新的，更新其球队和位置
@@ -139,6 +141,8 @@ public class MatchesAccumulator {
 					if (!playerRecords.containsKey(s[0]))
 						playerRecords.put(s[0], new PlayerSeasonVO(s[0]));
 					PlayerSeasonVO playerRecord = playerRecords.get(s[0]);
+					
+					playerRecord.lastMatchFileName = fileName;
 					
 					if (needRecordUpdate) playerUpdated.add(playerRecord);
 

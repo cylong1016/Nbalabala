@@ -9,13 +9,15 @@ import vo.HotFastestPlayerVO;
 import vo.HotSeasonPlayerVO;
 import vo.HotSeasonTeamVO;
 import vo.HotTodayPlayerVO;
+import vo.MatchDetailVO;
+import vo.MatchPlayerVO;
 import vo.PlayerMatchPerformanceVO;
 import vo.PlayerSeasonVO;
 import vo.TeamSeasonVO;
-import bl.matchquerybl.MatchQuery;
 import bl.playerseasonbl.PlayerAvgSorter;
 import bl.teamseasonbl.TeamAvgSorter;
 import blservice.HotBLService;
+import data.matchdata.MatchData;
 import data.playerdata.PlayerData;
 import data.seasondata.SeasonData;
 import dataservice.PlayerDataService;
@@ -49,7 +51,7 @@ public class HotQuery implements HotBLService{
 	public ArrayList<HotTodayPlayerVO> getHotTodayPlayers(
 			HotTodayPlayerProperty property) {
 		Comparator<PlayerSeasonVO> comparator = null;
-		MatchQuery matchQuery = new MatchQuery();
+		MatchData matchData = new MatchData();
 		switch (property) {
 		case SCORE:
 			comparator = new Comparator<PlayerSeasonVO>() {
@@ -119,15 +121,33 @@ public class HotQuery implements HotBLService{
 			}
 			String name = seasonVO.name;
 			String position = playerService.getPlayerProfileByName(name).getPosition();
-			ArrayList<PlayerMatchPerformanceVO> performanceList = 
-					matchQuery.getMatchRecordByPlayerName(name);
-			if (performanceList.size() != 0) {
-				result.add(new HotTodayPlayerVO(i+1, name, seasonVO.teamName, position,
-						value, performanceList.get(performanceList.size() - 1)));
-			}else{
-				result.add(new HotTodayPlayerVO(i+1, name, seasonVO.teamName, position,
-						value, new PlayerMatchPerformanceVO(name)));
+			MatchDetailVO matchDetail =
+					matchData.getMatchDetailByFileName(seasonVO.lastMatchFileName);
+			for (MatchPlayerVO vo : matchDetail.getHomePlayers()) {
+				if (vo.getName().equals(name)) {
+					PlayerMatchPerformanceVO performance = 
+							new PlayerMatchPerformanceVO(vo, matchDetail.getProfile().getSeason(), 
+									matchDetail.getProfile().getTime(), matchDetail.getProfile().getTeam());
+					result.add(new HotTodayPlayerVO(i+1, name, seasonVO.teamName, position,
+							value, performance));
+					break;
+				}
 			}
+			for (MatchPlayerVO vo : matchDetail.getRoadPlayers()) {
+				if (vo.getName().equals(name)) {
+					PlayerMatchPerformanceVO performance = 
+							new PlayerMatchPerformanceVO(vo, matchDetail.getProfile().getSeason(), 
+									matchDetail.getProfile().getTime(), matchDetail.getProfile().getTeam());
+					result.add(new HotTodayPlayerVO(i+1, name, seasonVO.teamName, position,
+							value, performance));
+					break;
+				}
+			}
+//				
+//			}else{
+//				result.add(new HotTodayPlayerVO(i+1, name, seasonVO.teamName, position,
+//						value, new PlayerMatchPerformanceVO(name)));
+//			}
 			
 		}
 		return result;
