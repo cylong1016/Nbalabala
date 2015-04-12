@@ -147,7 +147,7 @@ public class MatchesAccumulator {
 						// 如果是首发，更新其位置信息
 						if (s[1].length() != 0)
 							playerRecord.position = s[1].charAt(0);
-						playerRecord.teamName = homeTeam;
+						playerRecord.teamName = roadTeam;
 						playerRecord.latestMonth = month;
 						playerRecord.latestDay = day;
 					}

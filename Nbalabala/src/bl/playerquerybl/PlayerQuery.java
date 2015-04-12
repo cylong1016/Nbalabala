@@ -68,8 +68,8 @@ public class PlayerQuery implements PlayerQueryBLService{
 	 * @see blservice.PlayerQueryBLService#getHighestScoreReboundAssist()
 	 */
 	@Override
-	public double[] getHighestScoreReboundAssist() {
-		ArrayList<PlayerSeasonVO> list = new SeasonData().getAllPlayerRecentSeasonData();
+	public double[] getHighestScoreReboundAssist(String season) {
+		ArrayList<PlayerSeasonVO> list = new SeasonData().getAllPlayerSeasonData(season);
 		double highestScore = 0;
 		double highestRebound = 0;
 		double highestAssist = 0;
@@ -89,8 +89,8 @@ public class PlayerQuery implements PlayerQueryBLService{
 	 * @see blservice.PlayerQueryBLService#getFiveArgsAvg()
 	 */
 	@Override
-	public double[] getFiveArgsAvg() {
-		ArrayList<PlayerSeasonVO> list = new SeasonData().getAllPlayerRecentSeasonData();
+	public double[] getFiveArgsAvg(String season) {
+		ArrayList<PlayerSeasonVO> list = new SeasonData().getAllPlayerSeasonData(season);
 		int matchCount = 0;
 		int score = 0;
 		int rebound = 0;

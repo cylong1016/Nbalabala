@@ -117,7 +117,7 @@ public class SimpleMatchesAccumulator {
 						// 如果是首发，更新其位置信息
 						if (s[1].length() != 0)
 							playerRecord.position = s[1];
-						playerRecord.teamName = homeTeam;
+						playerRecord.teamName = roadTeam;
 
 					roadPlayers.add(playerRecord);
 

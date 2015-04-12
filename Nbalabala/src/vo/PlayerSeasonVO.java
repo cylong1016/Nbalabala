@@ -1,5 +1,7 @@
 package vo;
 
+import utility.Constants;
+
 /**
  * 用来记录计算球员赛季数据所需的各种指标
  * @author Issac Ding
@@ -42,7 +44,7 @@ public class PlayerSeasonVO {
 	public char position = '\0';
 
 	/** 记录最后一次比赛时的队伍 */
-	public String teamName = "无记录";
+	public String teamName = Constants.UNKNOWN;
 
 	/** 上场数 */
 	public int matchCount;

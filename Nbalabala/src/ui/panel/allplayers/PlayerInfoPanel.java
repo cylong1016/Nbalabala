@@ -75,7 +75,7 @@ public class PlayerInfoPanel extends BottomPanel {
 		super(url);
 		this.name = name;
 		playerQuery = new PlayerQuery();
-		seasonInput = new SeasonInputPanel();
+		seasonInput = new SeasonInputPanel(this);
 		seasonInput.setLocation(600, 40);
 		this.add(seasonInput); // TODO 位置需要重新设定
 		this.detailVO = playerQuery.getPlayerDetailByName(name, seasonInput.getSeason());
@@ -102,13 +102,18 @@ public class PlayerInfoPanel extends BottomPanel {
 	 * @version 2015年4月11日 上午1:14:43
 	 */
 	protected void addContrastDiagram() {
+		if (cd != null) {
+			this.remove(cd);
+			repaint();
+		}
+
 		/* 球员的场均得分、助攻、篮板、 罚球命中率、三分命中率的平均值 */
 		PlayerSeasonVO playerSeason = detailVO.getSeasonRecord();
 		double[] fivePlayersData = {playerSeason.getScoreAvg(), playerSeason.getAssistAvg(),
 										playerSeason.getTotalReboundAvg(), playerSeason.getFreeThrowPercent(),
 										playerSeason.getThreePointPercent()};
-		double[] fiveArgsAvg = playerQuery.getFiveArgsAvg();
-		double[] highestScoreReboundAssist = playerQuery.getHighestScoreReboundAssist();
+		double[] fiveArgsAvg = playerQuery.getFiveArgsAvg(seasonInput.getSeason());
+		double[] highestScoreReboundAssist = playerQuery.getHighestScoreReboundAssist(seasonInput.getSeason());
 		cd = new ContrastDiagram(fivePlayersData, fiveArgsAvg, highestScoreReboundAssist);
 		cd.setBounds(57, 260, 888, 160);
 		this.add(cd);
@@ -136,6 +141,13 @@ public class PlayerInfoPanel extends BottomPanel {
 			profileLabel[i].setHorizontalAlignment(SwingConstants.LEFT);
 			this.add(profileLabel[i]);
 		}
+	}
+	
+	public void refresh() {
+		detailVO = playerQuery.getPlayerDetailByName(name, seasonInput.getSeason());
+		addContrastDiagram();
+		addTotalTable();
+		
 	}
 
 	/**
@@ -253,6 +265,11 @@ public class PlayerInfoPanel extends BottomPanel {
 	}
 	
 	public void addTotalTable() {
+		if (scroll != null) {
+			this.remove(scroll);
+			repaint();
+		}
+
 		PlayerSeasonVO playerSeason = detailVO.getSeasonRecord();
 		String[][] rowData = new String[2][COLUMN_NAMES.length];
 		DecimalFormat df = UIConfig.FORMAT;
