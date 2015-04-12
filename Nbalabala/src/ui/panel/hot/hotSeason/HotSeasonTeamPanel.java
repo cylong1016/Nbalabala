@@ -42,6 +42,7 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel{
 		if(chart!=null){
 			this.remove(chart);
 		}
+		if (teamVO == null || teamVO.size() < 5) return;
 		ArrayList<Column> columns = new ArrayList<Column>();
 		double max = teamVO.get(0).getProperty();
 		double property = max;
@@ -61,6 +62,7 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel{
 	
 	public void add_bt_Listener() {
 		for (int i = 0; i < select.length; i++) {
+			if (label[i] == null) return;
 			hotButton[i].team = HOT_TEAM_ARRAY[i];
 			hotButton[i].addMouseListener(new MouseAdapter() {
 				public void mousePressed(MouseEvent e) {
@@ -76,7 +78,9 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel{
 	}
 
 	public void addLabel() {
+		if (ThreeButton.current.team == null) return;
 		teamVO = hot.getHotSeasonTeams(ThreeButton.current.team);
+		if (teamVO.size() < 5) return;
 		for (int j = 0; j < 5; j++) {
 			label[j] = new HotSeasonTeamLabel(teamVO.get(j), ThreeButton.current.team);
 			this.add(label[j]);

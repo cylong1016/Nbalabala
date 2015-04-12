@@ -33,6 +33,7 @@ public class HotThreeFatherPanel extends HotFatherPanel {
 		for (int i = 0; i < select.length; i++) {
 			hotButton[i] = new ThreeButton(bt_x + i * inter, bt_y, bt_width, bt_height, select[i]);
 			this.add(hotButton[i]);
+			hotButton[i].text = select[i];
 		}
 	}
 

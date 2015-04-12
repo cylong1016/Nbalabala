@@ -44,6 +44,7 @@ public class HotFastPanel extends HotThreeFatherPanel{
 		if(chart!=null){
 			this.remove(chart);
 		}
+		if (fastVO.size() < 5) return;
 		ArrayList<Column> columns = new ArrayList<Column>();
 		double max = fastVO.get(0).getPromotion();
 		double promotion = max;
@@ -68,6 +69,7 @@ public class HotFastPanel extends HotThreeFatherPanel{
 	 */
 	public void add_bt_Listener() {
 		for (int i = 0; i < select.length; i++) {
+			if (label[i] == null) return;
 			hotButton[i].fast = HOT_FAST_ARRAY[i];
 			hotButton[i].addMouseListener(new MouseAdapter() {
 				public void mousePressed(MouseEvent e) {
@@ -89,6 +91,7 @@ public class HotFastPanel extends HotThreeFatherPanel{
 	 */
 	public void addLabel() {
 		fastVO = hot.getHotFastestPlayers(ThreeButton.current.fast);
+		if (fastVO.size() < 5) return;
 		for (int j = 0; j < 5; j++) {
 			label[j] = new HotFastestPlayerLabel(fastVO.get(j));
 			this.add(label[j]);

@@ -37,7 +37,12 @@ public class Utility {
 				String name1 = f1.getName();
 				String name2 = f2.getName();
 				String[]s1 = name1.split("_|-");
-				String[]s2 = name2.split("_|-"); 
+				String[]s2 = name2.split("_|-");
+				int startYear1 = Integer.parseInt(s1[0]);
+				int startYear2 = Integer.parseInt(s2[0]);
+				if (startYear1 != startYear2) {
+					return startYear1 - startYear2;
+				}
 				int month1 = Integer.parseInt(s1[2]);
 				int month2 = Integer.parseInt(s2[2]);
 				if (month1 < 8) month1 += 12;

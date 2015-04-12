@@ -76,7 +76,9 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 			this.remove(chart);
 		}
 		ArrayList<Column> columns = new ArrayList<Column>();
-		// 每一条柱子
+
+		// 每一条柱子		
+		if (playerVO.size() < 5) return;
 		double max = playerVO.get(0).getProperty();
 		double property = max;
 		for (int i = 0; i < 5; i++) {
@@ -87,6 +89,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 			}
 		}
 		chart = new Chart(text, columns, max);
+
 		chart.setBounds(95, 103, 809, 145);
 		this.add(chart);
 		chart.updateUI();
@@ -134,6 +137,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 		Object[][] rowData = new String[size][lth];
 		ArrayList<ImageIcon> iconArr = new ArrayList<ImageIcon>();
 		table = new BottomTable(rowData, columns, new Color(215, 72, 72));
+		if (players.size() < 5) size = players.size();
 		for(int i = 0; i < size; i++) {
 			HotTodayPlayerVO ppVO = players.get(i);
 			PlayerMatchPerformanceVO matchVO = ppVO.getMatchPerformance();

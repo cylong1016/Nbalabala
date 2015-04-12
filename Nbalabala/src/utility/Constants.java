@@ -21,9 +21,9 @@ public class Constants {
 	/** 记录数据目录已经变更了几次。如果在程序运行中第二次改变数据目录，需要清空已经读取的数据，同时由Controller控制返回首页 */
 	public static void changeDataSourcePath(String newPath) {
 		dataSourcePath = newPath + "/";
+		SeasonData.reloadMatches();
 		PlayerData.reloadPlayers();
 		PlayerImageCache.reloadImages();
-		SeasonData.reloadMatches();
 		TeamData.reloadTeams();
 	}
 	

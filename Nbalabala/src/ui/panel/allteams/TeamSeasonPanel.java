@@ -20,6 +20,8 @@ import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
+import ui.panel.allplayers.ContrastDiagram;
+import ui.panel.allplayers.PlayerInfoPanel;
 import utility.Constants;
 import vo.PlayerProfileVO;
 import vo.TeamDetailVO;
@@ -73,6 +75,9 @@ public class TeamSeasonPanel extends BottomPanel {
 	TeamDetailVO teamDetail;
 	int order = 0;
 	
+	private int state = 0;
+	private ContrastDiagram cd;
+	
 	/** 赛季选择器 */
 	protected SeasonInputPanel seasonInput;
 
@@ -86,13 +91,41 @@ public class TeamSeasonPanel extends BottomPanel {
 		setEffect(x);
 		addListener();
 		addBack();
-		seasonInput = new SeasonInputPanel();
+		seasonInput = new SeasonInputPanel(this);
 		seasonInput.setLocation(600, 40);
 		this.add(seasonInput); // TODO 位置需要重新设定
 		teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
 		addLabel(teamDetail.getLogo());
 		iniTable(x);
+		addContrastDiagram();
 	}
+	
+	/**
+	 * 添加球员和联盟平均的比较图
+	 * @author cylong
+	 * @version 2015年4月11日 上午1:14:43
+	 */
+	protected void addContrastDiagram() {
+		if (cd != null) {
+			this.remove(cd);
+			repaint();
+		}
+
+		/* 球隊的场均得分、助攻、篮板、 罚球命中率、三分命中率的平均值 */
+		TeamSeasonVO teamSeason = teamDetail.getSeasonRecord();
+		double[] fivePlayersData = {teamSeason.getScoreAvg(), teamSeason.getAssistAvg(),
+										teamSeason.getTotalReboundAvg(), teamSeason.getFreeThrowPercent(),
+										teamSeason.getThreePointPercent()};
+		double[] fiveArgsAvg = teamQuery.getFiveArgsAvg(seasonInput.getSeason());
+		double[] highestScoreReboundAssist = teamQuery.getHighestScoreReboundAssist(seasonInput.getSeason());
+		cd = new ContrastDiagram(fivePlayersData, fiveArgsAvg, highestScoreReboundAssist, "球队平均");
+		cd.setBounds(57, 260, 888, 160);
+		this.add(cd);
+		cd.repaint();
+		cd.updateUI();
+	}
+	
+	
 	
 	/**
 	 * 判断哪个表格应该被显示出来
@@ -101,6 +134,7 @@ public class TeamSeasonPanel extends BottomPanel {
 	 * @version 2015年3月25日  下午1:15:54
 	 */
 	public void iniTable(int i){
+		state = i;
 		if(i==0){
 			addSeasonTable(teamDetail.getSeasonRecord());
 		}else{
@@ -138,6 +172,17 @@ public class TeamSeasonPanel extends BottomPanel {
 			}
 		}
 		teamInfo[0].setFont(new Font("微软雅黑",0,25));
+	}
+	
+	public void refresh(){
+		teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
+		if (state == 0 && scroll != null) {
+			remove(scroll);
+			iniTable(0);
+			addContrastDiagram();
+			repaint();
+		}
+		
 	}
 	
 	public String match(){
@@ -214,8 +259,8 @@ public class TeamSeasonPanel extends BottomPanel {
 
 		rowData[1][0] = "平均数据";
 		rowData[1][1] = Constants.translateTeamAbbr(record.getTeamName());
-		rowData[1][2] = format.format(((double)record.getWins()/record.getMatchCount()));
-		rowData[1][3] = format.format(((double)record.getLoses()/record.getMatchCount()));
+		rowData[1][2] = format.format((record.getWinning()));
+		rowData[1][3] = format.format((record.getLosing()));
 		rowData[1][4] = Integer.toString(record.getMatchCount());
 		rowData[1][5] = format.format(record.getWinning());
 		rowData[1][6] = format.format(record.getFieldGoalAvg());
@@ -249,7 +294,7 @@ public class TeamSeasonPanel extends BottomPanel {
 		table.getColumnModel().getColumn(18).setPreferredWidth(80);
 		table.getColumnModel().getColumn(19).setPreferredWidth(80);
 		scroll = new BottomScrollPane(table);
-		scroll.setBounds(57, 270, 888, 80); // 表格的位置
+		scroll.setBounds(57, 450, 888, 80); // 表格的位置
 		
 		this.add(scroll);
 	}
@@ -279,21 +324,42 @@ public class TeamSeasonPanel extends BottomPanel {
 				return;
 			}
 			TeamSeasonButton.current.back();
+			
 			TeamSeasonButton.current = (TeamSeasonButton) e.getSource();
 			if (e.getSource() == button[0]) {
-				TeamSeasonPanel.this.remove(scroll);
+				state = 0;
+				if(scroll!=null){
+					TeamSeasonPanel.this.remove(scroll);
+				}
+				if(cd!=null){
+					TeamSeasonPanel.this.remove(cd);
+				}
+				addContrastDiagram();
 				teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
 				addSeasonTable(teamDetail.getSeasonRecord());
 				TeamSeasonPanel.this.repaint();
 				return;
 			} else if (e.getSource() == button[1]) {
-				TeamSeasonPanel.this.remove(scroll);
+				state = 1;
+				if(scroll!=null){
+					TeamSeasonPanel.this.remove(scroll);
+				}
+				if(cd!=null){
+					TeamSeasonPanel.this.remove(cd);
+				}
 				TeamDetailVO teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
 				ArrayList<PlayerProfileVO> players = teamDetail.getPlayers();
 				setPlayerTable(players);
 				TeamSeasonPanel.this.repaint();
 			} else if (e.getSource() == button[2]) {
-				TeamSeasonPanel.this.remove(scroll);
+				state = 2;
+				if(scroll!=null){
+					TeamSeasonPanel.this.remove(scroll);
+				}
+				if(cd!=null){
+					TeamSeasonPanel.this.remove(cd);
+				}
+				repaint();
 				MainController.toTeamGamePanel(allteams,TeamSeasonPanel.this, abbr);
 			}
 		}
@@ -342,7 +408,7 @@ public class TeamSeasonPanel extends BottomPanel {
 		table.setRowHeight(40);
 		table.setWidth(new int[]{140, 44, 44, 44, 44, 151, 118, 77, 209});
 		scroll = new BottomScrollPane(table);
-		scroll.setBounds(57, 250, 888, 280);
+		scroll.setBounds(57, 270, 888, 290);
 		this.add(scroll);
 	}
 	
