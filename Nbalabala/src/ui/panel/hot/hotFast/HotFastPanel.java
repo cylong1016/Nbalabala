@@ -69,12 +69,12 @@ public class HotFastPanel extends HotThreeFatherPanel{
 	 */
 	public void add_bt_Listener() {
 		for (int i = 0; i < select.length; i++) {
-			if (label[i] == null) return;
 			hotButton[i].fast = HOT_FAST_ARRAY[i];
 			hotButton[i].addMouseListener(new MouseAdapter() {
 				public void mousePressed(MouseEvent e) {
 					for(int i = 0;i<label.length;i++){
-						HotFastPanel.this.remove(label[i]);
+						if (label[i] != null)
+							HotFastPanel.this.remove(label[i]);
 					}
 					addLabel();
 					addChart();

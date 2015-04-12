@@ -66,12 +66,12 @@ public class HotSeasonPlayerPanel extends HotThreeFatherPanel {
 	 */
 	public void add_bt_Listener() {
 		for (int i = 0; i < select.length; i++) {
-			if (label[i] == null) return;
 			hotButton[i].player = HOT_PLAYER_ARRAY[i];
 			hotButton[i].addMouseListener(new MouseAdapter() {
 				public void mousePressed(MouseEvent e) {
 					for(int i = 0;i<label.length;i++){
-						HotSeasonPlayerPanel.this.remove(label[i]);
+						if (label[i] != null)
+							HotSeasonPlayerPanel.this.remove(label[i]);
 					}
 					addLabel();
 					addChart();
