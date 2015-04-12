@@ -62,8 +62,12 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 		setEffect(button[0]);
 		addListener();
 		playerVO = hot.getHotTodayPlayers(HOT_TODAY_ARRAY[0]);
+		refresh();
+	}
+	
+	public void refresh(){
 		setTable(playerVO);
-		addChart(); // 添加柱状图
+		addChart(); // 添加柱状图	
 	}
 
 	/**
@@ -119,8 +123,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 					text =  currentButton.text;
 					columns[5] = currentButton.text;
 					playerVO = hot.getHotTodayPlayers(currentButton.pro);
-					setTable(playerVO);
-					addChart();
+					refresh();
 					HotTodayPlayerPanel.this.repaint();
 				}
 			});

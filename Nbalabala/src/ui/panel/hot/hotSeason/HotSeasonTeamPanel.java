@@ -38,6 +38,11 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel{
 		addChart();
 	}
 	
+	public void refresh(){
+		addLabel();
+		addChart();
+	}
+	
 	private void addChart() {
 		if(chart!=null){
 			this.remove(chart);

@@ -42,6 +42,11 @@ public class HotFastPanel extends HotThreeFatherPanel{
 		addChart();
 	}
 	
+	public void refresh(){
+		addLabel();
+		addChart();
+	}
+	
 	public void addlrButton(){
 		left = new ImgButton("images/Hot/left.png",110,194,"images/Hot/leftOn.png","images/Hot/left.png");
 		right = new ImgButton("images/Hot/right.png",855,194,"images/Hot/rightOn.png","images/Hot/right.png");
