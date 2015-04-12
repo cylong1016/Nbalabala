@@ -17,7 +17,9 @@ public class ImgLabel extends JLabel {
 
 	public ImgLabel(int x, int y, int width, int height, Image img) {
 		this.setOpaque(false);
-		ImageIcon icon = new ImageIcon(img);
+		// 使图片不失真的方法
+		Image smallImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+		ImageIcon icon = new ImageIcon(smallImg);
 		icon.setImage(icon.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
 		this.setBounds(x, y, icon.getImage().getWidth(null), icon.getImage().getWidth(null));
 		this.setIcon(icon);

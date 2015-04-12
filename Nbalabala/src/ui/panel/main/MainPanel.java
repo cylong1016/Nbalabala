@@ -103,7 +103,7 @@ public class MainPanel extends Panel {
 	 * @version 2015年4月11日 下午8:44:18
 	 */
 	public void addFileSelect() {
-		fileSelect = new ImgButton(imgUrl + "fileSelect.png", 780, 480, imgUrl + "fileSelectOn.png", imgUrl + "fileSelect.png");
+		fileSelect = new ImgButton(imgUrl + "fileSelect.png", 911, 461, imgUrl + "fileSelectOn.png", imgUrl + "fileSelect.png");
 		this.add(fileSelect);
 		fileSelect.addMouseListener(new MouseAdapter() {
 

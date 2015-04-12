@@ -37,11 +37,10 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 		playerName = vo.getName();
 		if (vo.getTop() == 1) {
 			Image actionImage = PlayerImageCache.getActionImageByName(playerName);
-//			Image protrait = PlayerImageCache.getActionImageByName(playerName);
-//		    Image smallImg =protrait.getScaledInstance(176, 280, Image.SCALE_SMOOTH);
 			ActionPhotoPanel actionPhotoPanel = new ActionPhotoPanel(actionImage);
-			actionPhotoPanel.setBounds(262,50,176,280);
-//			actionPhotoPanel.setLocation(262, 50);
+			actionPhotoPanel.setSize(176, 280);
+			actionPhotoPanel.setBounds(242,10,176,280);
+//			actionPhotoPanel.setLocation(2625, 50);
 			this.add(actionPhotoPanel);
 			
 			MyLabel nameLabel = new MyLabel(68, 40, 250, 26, playerName);
@@ -61,7 +60,7 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 			this.add(positionLabel);
 		}else{
 			Image portrait = PlayerImageCache.getPortraitByName(vo.getName());
-			ImgLabel portaitLabel = new ImgLabel(0, 39, 92, 75, portrait);
+			ImgLabel portaitLabel = new ImgLabel(0, 37, 92, 75, portrait);
 			this.add(portaitLabel);
 			
 			MyLabel nameLabel = new MyLabel(30,7,132,20,vo.getName());

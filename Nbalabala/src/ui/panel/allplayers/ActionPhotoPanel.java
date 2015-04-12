@@ -16,19 +16,26 @@ public class ActionPhotoPanel extends JPanel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -5072767650175982844L;
-	private static final int WIDTH = 151;
-	private static final int HEIGHT = 240;
+	private  int width= 151;
+	private  int height = 240;
 	private Image action;
 
 	public ActionPhotoPanel(Image action) {
 		this.action = action;
+	}
+	
+	public void setSize(int width, int height){
+		this.width = width;
+		this.height = height;
 	}
 
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;
 		AlphaComposite newComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .85f);
 		g2d.setComposite(newComposite);
-		g2d.drawImage(action, 0, 0, WIDTH, HEIGHT, null);
+		// 使图片不失真的方法
+		Image smallImg = action.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+		g2d.drawImage(smallImg, 0, 0, width, height, null);
 	}
 
 }
