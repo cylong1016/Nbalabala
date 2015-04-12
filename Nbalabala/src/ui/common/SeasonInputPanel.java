@@ -1,5 +1,6 @@
 package ui.common;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -74,21 +75,26 @@ public class SeasonInputPanel extends JPanel {
 	
 	private void setLook() {
 		this.setLayout(null);
+		this.setBackground(new Color(255, 169, 75));
 		String[] defaultSeason = Utility.getDefaultSeason().split("-");
 		leftYearLabel = new JLabel(defaultSeason[0]);
 		rightYearLabel = new JLabel(defaultSeason[1]);
 		middleLabel = new JLabel("—");
 		textLabel = new JLabel("赛季");
+		JLabel labels[] = {leftYearLabel, rightYearLabel, middleLabel, textLabel};
+		for (int i = 0; i < labels.length; i++) {
+			labels[i].setForeground(Color.white);
+		}
 		rightUpButton = new ImgButton("images/SeasonInputUpOff.png",
 				"images/SeasonInputUpOn.png");
 		rightDownButton = new ImgButton("images/SeasonInputDownOff.png",
 				"images/SeasonInputDownOn.png");
 		this.setSize(115, 26);
 
-		leftYearLabel.setBounds(0, 0, 20, 26);
+		leftYearLabel.setBounds(5, 0, 20, 26);
 		this.add(leftYearLabel);
 
-		middleLabel.setBounds(23, 0, 20, 26);
+		middleLabel.setBounds(25, 0, 20, 26);
 		this.add(middleLabel);
 
 		rightYearLabel.setBounds(44, 0, 20, 26);
