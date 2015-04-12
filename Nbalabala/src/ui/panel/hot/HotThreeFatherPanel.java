@@ -19,6 +19,7 @@ public class HotThreeFatherPanel extends HotFatherPanel {
 	protected String[] select = new String[] { "场均得分", "场均篮板", "场均助攻", "场均盖帽", "场均抢断", "三分命中率", "投篮命中率", "罚球命中率", };
 	protected ThreeButton[] hotButton = new ThreeButton[8];
 	int bt_x = 90, bt_y = 52, bt_width = 80, bt_height = 25, inter = 90;
+	protected String text = "场均得分";
 	
 	public HotThreeFatherPanel(String url) {
 		super(url);
@@ -27,7 +28,7 @@ public class HotThreeFatherPanel extends HotFatherPanel {
 		addListener();
 		setEffect();
 	}
-
+	
 	public void addButton() {
 		for (int i = 0; i < select.length; i++) {
 			hotButton[i] = new ThreeButton(bt_x + i * inter, bt_y, bt_width, bt_height, select[i]);
@@ -44,6 +45,8 @@ public class HotThreeFatherPanel extends HotFatherPanel {
 					}
 					ThreeButton.current.back();
 					ThreeButton.current = (ThreeButton) e.getSource();
+					ThreeButton tempButton = (ThreeButton) e.getSource();
+					text = tempButton.text;
 				}
 
 			});

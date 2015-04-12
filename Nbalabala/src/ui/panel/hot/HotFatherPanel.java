@@ -23,6 +23,7 @@ public class HotFatherPanel extends BottomPanel {
 	protected String[] url = new String[] { allURL + "todayOn.png", allURL + "seasonPlayerOn.png",
 			allURL + "seasonTeamOn.png", allURL + "fastestOn.png" };
 
+
 	public HotFatherPanel(String url) {
 		super(url);
 		addSelectButton();

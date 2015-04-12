@@ -1,9 +1,12 @@
 package ui.panel.hot.hotFast;
 
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import ui.common.chart.Chart;
+import ui.common.chart.Column;
 import ui.common.label.HotFastestPlayerLabel;
 import ui.panel.hot.HotThreeFatherPanel;
 import ui.panel.hot.ThreeButton;
@@ -26,11 +29,32 @@ public class HotFastPanel extends HotThreeFatherPanel{
 	private static final HotFastestPlayerProperty[] HOT_FAST_ARRAY = HotFastestPlayerProperty.values();
 	HotBLService hot = new HotQuery();
 	HotFastestPlayerLabel label[] = new HotFastestPlayerLabel[5];
+	Chart chart;
 	
 	public HotFastPanel(String url) {
 		super(url);
 		add_bt_Listener();
 		addLabel();
+		addChart();
+	}
+	
+	
+
+	private void addChart() {
+		if(chart!=null){
+			this.remove(chart);
+		}
+		ArrayList<Column> columns = new ArrayList<Column>();
+		columns.add(new Column(fastVO.get(0).getName(), fastVO.get(0).getProperty(), Color.blue));
+		columns.add(new Column(fastVO.get(1).getName(),fastVO.get(1).getProperty(), Color.blue));
+		columns.add(new Column(fastVO.get(2).getName(), fastVO.get(2).getProperty(), Color.blue));
+		columns.add(new Column(fastVO.get(3).getName(), fastVO.get(3).getProperty(), Color.blue));
+		columns.add(new Column(fastVO.get(4).getName(), fastVO.get(4).getProperty(), Color.blue));
+		chart = new Chart(text, columns, 21.1);
+		chart.setBounds(95, 103, 809, 145);
+		this.add(chart);
+		chart.updateUI();
+		chart.repaint();
 	}
 	
 	/**
@@ -47,6 +71,7 @@ public class HotFastPanel extends HotThreeFatherPanel{
 						HotFastPanel.this.remove(label[i]);
 					}
 					addLabel();
+					addChart();
 				}
 
 			});
