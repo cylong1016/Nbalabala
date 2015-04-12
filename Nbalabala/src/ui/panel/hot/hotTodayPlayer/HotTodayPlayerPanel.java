@@ -76,12 +76,17 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 			this.remove(chart);
 		}
 		ArrayList<Column> columns = new ArrayList<Column>();
-		columns.add(new Column(playerVO.get(0).getName(), playerVO.get(0).getProperty(), Color.blue));
-		columns.add(new Column(playerVO.get(1).getName(),playerVO.get(1).getProperty(), Color.blue));
-		columns.add(new Column(playerVO.get(2).getName(), playerVO.get(2).getProperty(), Color.blue));
-		columns.add(new Column(playerVO.get(3).getName(), playerVO.get(3).getProperty(), Color.blue));
-		columns.add(new Column(playerVO.get(4).getName(), playerVO.get(4).getProperty(), Color.blue));
-		chart = new Chart(text, columns, 21.1);
+		// 每一条柱子
+		double max = playerVO.get(0).getProperty();
+		double property = max;
+		for (int i = 0; i < 5; i++) {
+			property = playerVO.get(i).getProperty();
+			columns.add(new Column(playerVO.get(i).getName(), property, UIConfig.HIST_COLORS[i]));
+			if (max < property) {
+				max = property;
+			}
+		}
+		chart = new Chart(text, columns, max);
 		chart.setBounds(95, 103, 809, 145);
 		this.add(chart);
 		chart.updateUI();
@@ -185,7 +190,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 			e.printStackTrace();
 		}
 		table.setRowHeight(57);
-		table.setForeground(Color.black);
+		table.setForeground(UIConfig.TABLE_HEADER_BACK_COLOR);
 		table.cancelVerticalLines();
 		table.setRealOpaque();
 		int[] cells = new int[25];

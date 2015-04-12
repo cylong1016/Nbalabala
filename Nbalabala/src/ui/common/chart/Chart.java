@@ -44,7 +44,7 @@ public class Chart extends Panel {
 	/**
 	 * @param title 标题
 	 * @param columns 柱状图的全部柱子
-	 * @param maxRange 数据的最大范围，计算每个煮的比例
+	 * @param maxRange 数据的最大范围，计算每个柱的比例
 	 * @author cylong
 	 * @version 2015年4月12日  上午3:08:12
 	 */

@@ -62,4 +62,17 @@ public class UIConfig {
 	public static final Color HIST_AVG_COLOR = new Color(41, 80, 160);
 	/** 球员的柱状图颜色 */
 	public static final Color HIST_PLAYER_COLOR = new Color(243, 196, 72);
+	/** 第一名的柱子颜色 */
+	public static final Color HIST_FIRST_COLOR = new Color(236, 31, 34);
+	/** 第二名 */
+	public static final Color HIST_SECOND_COLOR = new Color(180, 63, 86);
+	/** 第三名 */
+	public static final Color HIST_THIRD_COLOR = new Color(165, 107, 141);
+	/** 第四名 */
+	public static final Color HIST_FORTH_COLOR = new Color(115, 122, 171);
+	/** 第五名 */
+	public static final Color HIST_FIFTH_COLOR = new Color(85, 145, 204);
+	/** 颜色组合 */
+	public static final Color[] HIST_COLORS= {HIST_FIRST_COLOR, HIST_SECOND_COLOR,
+		HIST_THIRD_COLOR, HIST_FORTH_COLOR, HIST_FIFTH_COLOR};
 }

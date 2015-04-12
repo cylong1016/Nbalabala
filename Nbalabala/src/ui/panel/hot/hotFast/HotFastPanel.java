@@ -1,10 +1,10 @@
 package ui.panel.hot.hotFast;
 
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import ui.UIConfig;
 import ui.common.chart.Chart;
 import ui.common.chart.Column;
 import ui.common.label.HotFastestPlayerLabel;
@@ -45,12 +45,16 @@ public class HotFastPanel extends HotThreeFatherPanel{
 			this.remove(chart);
 		}
 		ArrayList<Column> columns = new ArrayList<Column>();
-		columns.add(new Column(fastVO.get(0).getName(), fastVO.get(0).getProperty(), Color.blue));
-		columns.add(new Column(fastVO.get(1).getName(),fastVO.get(1).getProperty(), Color.blue));
-		columns.add(new Column(fastVO.get(2).getName(), fastVO.get(2).getProperty(), Color.blue));
-		columns.add(new Column(fastVO.get(3).getName(), fastVO.get(3).getProperty(), Color.blue));
-		columns.add(new Column(fastVO.get(4).getName(), fastVO.get(4).getProperty(), Color.blue));
-		chart = new Chart(text, columns, 21.1);
+		double max = fastVO.get(0).getPromotion();
+		double promotion = max;
+		for (int i = 0; i < 5; i++) {
+			promotion = fastVO.get(i).getPromotion();
+			columns.add(new Column(fastVO.get(i).getName(), promotion, UIConfig.HIST_COLORS[i]));
+			if (max < promotion) {
+				max = promotion;
+			}
+		}
+		chart = new Chart(text, columns, max);
 		chart.setBounds(95, 103, 809, 145);
 		this.add(chart);
 		chart.updateUI();

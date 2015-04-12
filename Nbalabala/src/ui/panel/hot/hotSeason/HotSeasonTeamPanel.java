@@ -1,16 +1,15 @@
 package ui.panel.hot.hotSeason;
 
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import ui.UIConfig;
 import ui.common.chart.Chart;
 import ui.common.chart.Column;
 import ui.common.label.HotSeasonTeamLabel;
 import ui.panel.hot.HotThreeFatherPanel;
 import ui.panel.hot.ThreeButton;
-import utility.Constants;
 import vo.HotSeasonTeamVO;
 import bl.hotquerybl.HotQuery;
 import blservice.HotBLService;
@@ -44,12 +43,16 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel{
 			this.remove(chart);
 		}
 		ArrayList<Column> columns = new ArrayList<Column>();
-		columns.add(new Column(Constants.translateTeamAbbr(teamVO.get(0).getAbbr()), teamVO.get(0).getProperty(), Color.blue));
-		columns.add(new Column(Constants.translateTeamAbbr(teamVO.get(1).getAbbr()),teamVO.get(1).getProperty(), Color.blue));
-		columns.add(new Column(Constants.translateTeamAbbr(teamVO.get(2).getAbbr()), teamVO.get(2).getProperty(), Color.blue));
-		columns.add(new Column(Constants.translateTeamAbbr(teamVO.get(3).getAbbr()), teamVO.get(3).getProperty(), Color.blue));
-		columns.add(new Column(Constants.translateTeamAbbr(teamVO.get(4).getAbbr()), teamVO.get(4).getProperty(), Color.blue));
-		chart = new Chart(text, columns, 21.1);
+		double max = teamVO.get(0).getProperty();
+		double property = max;
+		for (int i = 0; i < 5; i++) {
+			property = teamVO.get(i).getProperty();
+			columns.add(new Column(teamVO.get(i).getAbbr(), property, UIConfig.HIST_COLORS[i]));
+			if (max < property) {
+				max = property;
+			}
+		}
+		chart = new Chart(text, columns, max);
 		chart.setBounds(511, 121, 399, 306);
 		this.add(chart);
 		chart.updateUI();
