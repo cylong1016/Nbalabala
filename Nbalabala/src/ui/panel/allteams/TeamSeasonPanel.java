@@ -178,6 +178,7 @@ public class TeamSeasonPanel extends BottomPanel {
 		teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
 		if (state == 0 && scroll != null) {
 			remove(scroll);
+			repaint();
 			iniTable(0);
 			addContrastDiagram();
 			repaint();

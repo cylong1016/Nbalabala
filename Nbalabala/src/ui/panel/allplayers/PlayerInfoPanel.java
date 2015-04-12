@@ -104,7 +104,6 @@ public class PlayerInfoPanel extends BottomPanel {
 	protected void addContrastDiagram() {
 		if (cd != null) {
 			this.remove(cd);
-			repaint();
 		}
 
 		/* 球员的场均得分、助攻、篮板、 罚球命中率、三分命中率的平均值 */
