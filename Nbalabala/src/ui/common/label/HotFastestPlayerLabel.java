@@ -60,7 +60,7 @@ public class HotFastestPlayerLabel extends JLabel{
 			MyLabel nameLabel = new MyLabel(108, 59, 146, 26, playerName);
 			this.add(nameLabel);
 			
-			String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
+			String propertyStr = UIConfig.FORMAT.format(vo.getPromotion());
 			MyLabel propertyLabel = new MyLabel(108, 110, 146, 26, "五场提升："+propertyStr);
 			this.add(propertyLabel);
 			
@@ -78,7 +78,7 @@ public class HotFastestPlayerLabel extends JLabel{
 			MyLabel nameLabel = new MyLabel(30,7,132,20,vo.getName());
 			this.add(nameLabel);
 			
-			String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
+			String propertyStr = UIConfig.FORMAT.format(vo.getPromotion());
 			MyLabel propertyLabel = new MyLabel(70, 37, 120, 20, "五场提升："+propertyStr);
 			this.add(propertyLabel);
 			

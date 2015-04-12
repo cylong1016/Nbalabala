@@ -49,18 +49,20 @@ public class Console {
 		case "-player":
 			ArrayList<PlayerSimpleSeasonVO> playerVOs;
 			int neededPlayerCount = 50;
+			//默认情况下
 			if (args.length < 2) {
 				playerVOs = seasonData.getAllPlayerSeasonData();
+				if (playerVOs.size() < 50)
+					neededPlayerCount = playerVOs.size();
 				Collections.sort(playerVOs, SimplePlayerAvgSorter.getPlayerAvgAndHighComparator("score", "desc"));
-				for (int i = 0; i< 50;i++) {
-					outputPlayerNormalAvgInfo(out, playerVOs.get(i));
-				}
+				outputPlayerNormalAvgInfo(out, playerVOs, neededPlayerCount);
 			}else if(args[1].equals("-hot")) {
 				playerVOs = seasonData.getAllPlayerSeasonData();
-				Collections.sort(playerVOs, SimplePlayerTotalSorter.getPlayerTotalComparator(args[2], "desc"));
+				Collections.sort(playerVOs, SimplePlayerAvgSorter.getPlayerAvgAndHighComparator(args[2], "desc"));
 				outputPlayerHotInfo(args[2], out, playerVOs, getNeededPlayerCount(args));
 			}else if(args[1].equals("-king")) {
-				outputPlayerKingInfo(args[2], args[3], seasonData.getAllPlayerSeasonData());
+				playerVOs = seasonData.getAllPlayerSeasonData();
+				outputPlayerKingInfo(args[2], args[3], );
 			}
 			
 			else{
@@ -322,27 +324,32 @@ public class Console {
 		}
 	}
 	
-	private void outputPlayerNormalAvgInfo(PrintStream out, PlayerSimpleSeasonVO vo) {
-		PlayerNormalInfo info = new PlayerNormalInfo();
-		info.setAge(vo.age);
-		info.setAssist(vo.assistAvg);
-		info.setBlockShot(vo.blockAvg);
-		info.setDefend(vo.defensiveReboundAvg);
-		info.setEfficiency(vo.efficiencyAvg);
-		info.setFault(vo.turnoverAvg);
-		info.setFoul(vo.foulAvg);
-		info.setMinute(vo.minutesAvg);
-		info.setName(vo.name);
-		info.setNumOfGame(vo.matchCount);
-		info.setOffend(vo.offensiveReboundAvg);
-		info.setPenalty(vo.freethrowPercent);
-		info.setPoint(vo.scoreAvg);
-		info.setRebound(vo.totalReboundAvg);
-		info.setShot(vo.fieldPercent);
-		info.setStart(vo.firstCount);
-		info.setSteal(vo.stealAvg);
-		info.setTeamName(vo.teamName);
-		info.setThree(vo.threePointPercent);
+	private void outputPlayerNormalAvgInfo(PrintStream out, ArrayList<PlayerSimpleSeasonVO> vos,int count) {
+		int i;
+		for (i=0;i<count;i++) {
+			PlayerNormalInfo info = new PlayerNormalInfo();
+			PlayerSimpleSeasonVO vo = vos.get(i);
+			info.setAge(vo.age);
+			info.setAssist(vo.assistAvg);
+			info.setBlockShot(vo.blockAvg);
+			info.setDefend(vo.defensiveReboundAvg);
+			info.setEfficiency(vo.efficiencyAvg);
+			info.setFault(vo.turnoverAvg);
+			info.setFoul(vo.foulAvg);
+			info.setMinute(vo.minutesAvg);
+			info.setName(vo.name);
+			info.setNumOfGame(vo.matchCount);
+			info.setOffend(vo.offensiveReboundAvg);
+			info.setPenalty(vo.freethrowPercent);
+			info.setPoint(vo.scoreAvg);
+			info.setRebound(vo.totalReboundAvg);
+			info.setShot(vo.fieldPercent);
+			info.setStart(vo.firstCount);
+			info.setSteal(vo.stealAvg);
+			info.setTeamName(vo.teamName);
+			info.setThree(vo.threePointPercent);
+		}
+		
 	}
 	
 	private void outputPlayerKingInfo(String[]field, String period, ArrayList<PlayerSimpleSeasonVO> vos) {

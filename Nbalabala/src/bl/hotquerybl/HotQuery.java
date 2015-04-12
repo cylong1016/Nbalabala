@@ -39,6 +39,9 @@ public class HotQuery implements HotBLService{
 	private SeasonDataService seasonService = new SeasonData();
 	private PlayerDataService playerService = new PlayerData();
 	
+	// 至少这么多个投篮、三分、罚球，才能参与命中率排名
+	private static final int MIN_DIVISOR = 4;
+	
 	/**
 	 * @see blservice.HotBLService#getHotTodayPlayers(enums.HotTodayPlayerProperty)
 	 */
@@ -170,8 +173,23 @@ public class HotQuery implements HotBLService{
 		if (size > 5) size = 5;
 		int i;
 		ArrayList<HotSeasonPlayerVO> result = new ArrayList<HotSeasonPlayerVO>();
+		
+		int index = 0;
 		for (i=0; i<size; i++) {
-			PlayerSeasonVO seasonVO = players.get(i);
+			PlayerSeasonVO seasonVO = players.get(index);
+			index ++;
+			
+			if (property == HotSeasonPlayerProperty.FIELD_PERCENT && seasonVO.fieldAttempt <MIN_DIVISOR) {
+				i--;
+				continue;
+			}else if(property == HotSeasonPlayerProperty.FREETHROW_PERCENT && seasonVO.freethrowAttempt <MIN_DIVISOR){
+				i--;
+				continue;
+			}else if (property == HotSeasonPlayerProperty.THREE_POINT_PERCENT && seasonVO.threePointAttempt <MIN_DIVISOR) {
+				i--;
+				continue;
+			}
+			
 			double value = 0;
 			switch (property) {
 			case SCORE_AVG:

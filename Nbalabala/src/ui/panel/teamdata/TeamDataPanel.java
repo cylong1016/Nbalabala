@@ -99,7 +99,7 @@ public class TeamDataPanel extends BottomPanel {
 		setEffect(divisionSelectButtons[0]);
 		setEffect(totalAvgSelectButtons[0]);
 		addListener();
-		seasonInput = new SeasonInputPanel();
+		seasonInput = new SeasonInputPanel(this);
 		seasonInput.setLocation(600, 40);
 		this.add(seasonInput); // TODO 位置需要重新设定
 		// 初始化表格和球队总数据
@@ -108,8 +108,8 @@ public class TeamDataPanel extends BottomPanel {
 	}
 	
 	public void refresh(){
-		seasonArray = teamSeason.getTeamDataSortedByName(seasonInput.getSeason());
-		createTable(seasonArray); 
+		seasonArray = teamSeason.getScreenedTeamData(TeamDivisionSelectButton.current.division, seasonInput.getSeason());
+		createTable(seasonArray); // 添加筛选出的数据
 	}
 
 	/**

@@ -12,32 +12,70 @@ import enums.TeamAvgSortBasis;
  * @author cylong
  * @version 2015年3月29日 下午11:26:57
  */
-public class SimpleTeamAvgSorter {
+public class SimpleTeamAvgAndHighSorter {
 
 	private static int factor = 1;
-
-	public static void sort(ArrayList<TeamSimpleSeasonVO> teams, TeamAvgSortBasis basis, SortOrder order) {
+	
+	public static Comparator<TeamSimpleSeasonVO> getTeamAvgAndHighComparator(String basis, String order) {
 		Comparator<TeamSimpleSeasonVO> comparator = null;
 
-		if (order == SortOrder.DE)
+		if (order.equals("desc"))
 			factor = -1;
 		else
 			factor = 1;
-
+		
 		switch(basis) {
 
-		case NAME:
+		case "point":
 			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
 				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return factor * t1.getTeamName().compareTo(t2.getTeamName());
+					return (int)(factor * (t1.scoreAvg - t2.scoreAvg) * 10000);
+				}
+			};
+			break;
+			
+		case "rebound":
+			comparator = new Comparator<TeamSimpleSeasonVO>() {
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
+				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
+					return (int)(factor * (t1.totalReboundAvg - t2.totalReboundAvg) * 10000);
+				}
+			};
+			break;
+			
+		case "assist":
+			comparator = new Comparator<TeamSimpleSeasonVO>() {
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
+				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
+					return (int)(factor * (t1.assistAvg - t2.assistAvg) * 10000);
+				}
+			};
+			break;
+			
+		case "blockShot":
+			comparator = new Comparator<TeamSimpleSeasonVO>() {
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
+				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
+					return (int)(factor * (t1.blockAvg - t2.blockAvg) * 10000);
 				}
 			};
 			break;
 
+		case "steal":
+			comparator = new Comparator<TeamSimpleSeasonVO>() {
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
+				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
+					return (int)(factor * (t1.stealAvg - t2.stealAvg) * 10000);
+				}
+			};
+			break;
+
+		
+
 		case OFFENSIVE_REBOUND_AVG:
 			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
+				private int factor = SimpleTeamAvgAndHighSorter.factor;
 				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
 					return (int)(factor * (t1.getOffensiveReboundAvg() - t2.getOffensiveReboundAvg()) * 10000);
 				}
@@ -62,32 +100,7 @@ public class SimpleTeamAvgSorter {
 			};
 			break;
 
-		case ASSIST_AVG:
-			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
-				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getAssistAvg() - t2.getAssistAvg()) * 10000);
-				}
-			};
-			break;
-
-		case STEAL_AVG:
-			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
-				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getStealAvg() - t2.getStealAvg()) * 10000);
-				}
-			};
-			break;
-
-		case BLOCK_AVG:
-			comparator = new Comparator<TeamSimpleSeasonVO>() {
-
-				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getBlockAvg() - t2.getBlockAvg()) * 10000);
-				}
-			};
-			break;
+		
 
 		case TURNOVER_AVG:
 			comparator = new Comparator<TeamSimpleSeasonVO>() {
@@ -237,6 +250,14 @@ public class SimpleTeamAvgSorter {
 			break;
 
 		}
+		
+		
+	}
+
+	public static void sort(ArrayList<TeamSimpleSeasonVO> teams, TeamAvgSortBasis basis, SortOrder order) {
+		
+
+		
 
 		Collections.sort(teams, comparator);
 	}

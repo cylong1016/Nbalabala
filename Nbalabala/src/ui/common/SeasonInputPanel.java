@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import ui.common.button.ImgButton;
+import ui.common.panel.BottomPanel;
 import utility.Utility;
 
 /**
@@ -26,7 +27,52 @@ public class SeasonInputPanel extends JPanel {
 	private JLabel middleLabel;
 	private JLabel textLabel;
 
+	/** 有些界面需要改变赛季的同时刷新，则调用该方法 */
+	private BottomPanel bottomPanel = null;
+
+	public SeasonInputPanel(BottomPanel panel) {
+		this.bottomPanel = panel;
+		setLook();
+
+		rightUpButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				leftYearLabel.setText(yearIncrease(leftYearLabel.getText()));
+				rightYearLabel.setText(yearIncrease(rightYearLabel.getText()));
+				bottomPanel.refresh();
+			}
+		});
+		rightDownButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				leftYearLabel.setText(yearDecrease(leftYearLabel.getText()));
+				rightYearLabel.setText(yearDecrease(rightYearLabel.getText()));
+				bottomPanel.refresh();
+			}
+		});
+	}
+
 	public SeasonInputPanel() {
+		
+		setLook();
+		
+		rightUpButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				leftYearLabel.setText(yearIncrease(leftYearLabel.getText()));
+				rightYearLabel.setText(yearIncrease(rightYearLabel.getText()));
+			}
+		});
+		rightDownButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				leftYearLabel.setText(yearDecrease(leftYearLabel.getText()));
+				rightYearLabel.setText(yearDecrease(rightYearLabel.getText()));
+			}
+		});
+	}
+	
+	private void setLook() {
 		this.setLayout(null);
 		String[] defaultSeason = Utility.getDefaultSeason().split("-");
 		leftYearLabel = new JLabel(defaultSeason[0]);
@@ -47,7 +93,7 @@ public class SeasonInputPanel extends JPanel {
 
 		rightYearLabel.setBounds(44, 0, 20, 26);
 		this.add(rightYearLabel);
-		
+
 		textLabel.setBounds(68, 0, 31, 26);
 		this.add(textLabel);
 
@@ -56,29 +102,10 @@ public class SeasonInputPanel extends JPanel {
 
 		rightDownButton.setBounds(95, 14, 22, 13);
 		this.add(rightDownButton);
-
-		setAction();
 	}
 
 	public String getSeason() {
 		return leftYearLabel.getText() + "-" + rightYearLabel.getText();
-	}
-
-	private void setAction() {
-		rightUpButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				leftYearLabel.setText(yearIncrease(leftYearLabel.getText()));
-				rightYearLabel.setText(yearIncrease(rightYearLabel.getText()));
-			}
-		});
-		rightDownButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				leftYearLabel.setText(yearDecrease(leftYearLabel.getText()));
-				rightYearLabel.setText(yearDecrease(rightYearLabel.getText()));
-			}
-		});
 	}
 
 	private String yearIncrease(String oldYear) {
