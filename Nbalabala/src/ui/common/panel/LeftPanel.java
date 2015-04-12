@@ -60,7 +60,7 @@ public class LeftPanel extends Panel {
 	 * @version 2015年3月20日 上午12:02:28
 	 */
 	public void setButton() {
-		returnButton = new ImgButton(URL + "return.png", 119, 557, URL + "returnOn.png", URL
+		returnButton = new ImgButton(URL + "return.png", 20, 557, URL + "returnOn.png", URL
 				+ "returnClick.png");
 
 		allPlayers = new ImgButton(trans, x, y, on, on);

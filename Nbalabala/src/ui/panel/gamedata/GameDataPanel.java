@@ -94,7 +94,7 @@ public class GameDataPanel extends BottomPanel {
 
 	public void addConfirmBtn() {
 		confirmBtn1 = new ImgButton(confirmPath, 917, 123, confirmClickPath, confirmOnPath);
-		confirmBtn2 = new ImgButton(confirmPath, 450, 123, confirmClickPath, confirmOnPath);
+		confirmBtn2 = new ImgButton(confirmPath, 550, 123, confirmClickPath, confirmOnPath);
 		this.add(confirmBtn1);
 		this.add(confirmBtn2);
 		confirmBtn1.addMouseListener(new MouseAdapter() {
@@ -157,7 +157,7 @@ public class GameDataPanel extends BottomPanel {
 	 */
 	public void addDateChooser() {
 		dateChooser = new NewDateChooser();
-		MainController.addDateChooserPanel(this, dateChooser, 140, box1Y-5,307,180);
+		MainController.addDateChooserPanel(this, dateChooser, 200, -5 ,307,180);
 	}
 
 	/**
