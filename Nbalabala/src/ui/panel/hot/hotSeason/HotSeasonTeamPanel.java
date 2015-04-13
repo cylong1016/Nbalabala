@@ -127,7 +127,9 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel {
 		if (teamVO.size() < 5)
 			return;
 		for(int j = 0; j < 5; j++) {
+//			System.out.println(ThreeButton.current.team);
 			label[j] = new HotSeasonTeamLabel(teamVO.get(j), ThreeButton.current.team);
+			
 			this.add(label[j]);
 		}
 		this.repaint();
