@@ -8,6 +8,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
 import ui.UIConfig;
 import ui.common.SeasonInputPanel;
@@ -74,6 +75,7 @@ public class PlayerInfoPanel extends BottomPanel {
 	protected BottomTable table;
 	/** 赛季选择器 */
 	protected SeasonInputPanel seasonInput;
+	String[][] rowData ;
 
 	public PlayerInfoPanel(String url, String name, BottomPanel lastPanel) {
 		super(url);
@@ -218,6 +220,7 @@ public class PlayerInfoPanel extends BottomPanel {
 
 			public void mousePressed(MouseEvent e) {
 				gameButton.back();
+<<<<<<< HEAD
 				if (scroll != null) {
 					PlayerInfoPanel.this.remove(scroll);
 				}
@@ -225,8 +228,10 @@ public class PlayerInfoPanel extends BottomPanel {
 					PlayerInfoPanel.this.remove(cd);
 				}
 				seasonInput.setVisible(true);
+=======
+>>>>>>> origin/master
 				addContrastDiagram();
-				addTotalTable();
+				setTotalTable();
 				PlayerInfoPanel.this.repaint();
 			}
 		});
@@ -234,61 +239,60 @@ public class PlayerInfoPanel extends BottomPanel {
 
 			public void mousePressed(MouseEvent e) {
 				totalButton.back();
+<<<<<<< HEAD
 				if (scroll != null) {
 					PlayerInfoPanel.this.remove(scroll);
 				}
 				addGameTable();
 				seasonInput.setVisible(false);
+=======
+>>>>>>> origin/master
 				if (cd != null) {
 					PlayerInfoPanel.this.remove(cd);
 				}
+				updateGameTable();
 				PlayerInfoPanel.this.repaint();
 			}
 		});
 	}
 
-	public void addGameTable() {
+	public void updateGameTable() {
 		ArrayList<PlayerMatchPerformanceVO> playerMatch = detailVO.getMatchRecords();
 		int lth = playerMatch.size();
-
-		String[][] rowData = new String[lth][GAME_COLUMN_NAMES.length];
+		rowData = new String[lth][GAME_COLUMN_NAMES.length];
+		table.setModel(new DefaultTableModel(rowData,GAME_COLUMN_NAMES));
+		table.getColumnModel().getColumn(2).setPreferredWidth(110);
+		scroll.setBounds(57, 260, 888, 270); // 表格的位置
 		for(int i = 0; i < lth; i++) {
 			PlayerMatchPerformanceVO vo = playerMatch.get(i);
 			MatchPlayerVO player = vo.getMatchPlayerRecord();
-			rowData[i][0] = vo.getSeason();
-			rowData[i][1] = vo.getDate();
-			rowData[i][2] = vo.getTwoTeams();
-			rowData[i][3] = player.getPosition();
-			rowData[i][4] = player.getTime();
-			rowData[i][5] = player.getFieldGoal() + "";
-			rowData[i][6] = player.getFieldAttempt() + "";
-			rowData[i][7] = player.getThreePointGoal() + "";
-			rowData[i][8] = player.getThreePointAttempt() + "";
-			rowData[i][9] = player.getFreethrowGoal() + "";
-			rowData[i][10] = player.getFreethrowAttempt() + "";
-			rowData[i][11] = player.getOffensiveRebound() + "";
-			rowData[i][12] = player.getDefensiveRebound() + "";
-			rowData[i][13] = player.getTotalRebound() + "";
-			rowData[i][14] = player.getAssist() + "";
-			rowData[i][15] = player.getSteal() + "";
-			rowData[i][16] = player.getBlock() + "";
-			rowData[i][17] = player.getTurnover() + "";
-			rowData[i][18] = player.getFoul() + "";
-			rowData[i][19] = player.getPersonalGoal() + "";
+			table.setValueAt(vo.getSeason(), i, 0);
+			table.setValueAt(vo.getDate(), i, 1);
+			table.setValueAt(vo.getTwoTeams(), i, 2);
+			table.setValueAt(player.getPosition(), i, 3);
+			table.setValueAt(player.getTime(), i, 4);
+			table.setValueAt(player.getFieldGoal() + "", i, 5);
+			table.setValueAt(player.getFieldAttempt() + "", i, 6);
+			table.setValueAt(player.getThreePointGoal() + "", i, 7);
+			table.setValueAt(player.getThreePointAttempt() + "", i, 8);
+			table.setValueAt(player.getFreethrowGoal() + "", i, 9);
+			table.setValueAt(player.getFreethrowAttempt() + "", i, 10);
+			table.setValueAt(player.getOffensiveRebound() + "", i, 11);
+			table.setValueAt(player.getDefensiveRebound() + "", i, 12);
+			table.setValueAt(player.getTotalRebound() + "", i, 13);
+			table.setValueAt(player.getAssist() + "", i, 14);
+			table.setValueAt(player.getSteal() + "", i, 15);
+			table.setValueAt(player.getBlock() + "", i, 16);
+			table.setValueAt(player.getTurnover() + "", i, 17);
+			table.setValueAt(player.getFoul() + "", i, 18);
+			table.setValueAt(player.getPersonalGoal() + "", i, 19);
 		}
-		table = new BottomTable(rowData, GAME_COLUMN_NAMES);
-		table.getColumnModel().getColumn(2).setPreferredWidth(110);
-		scroll = new BottomScrollPane(table);
-		scroll.setBounds(57, 260, 888, 270); // 表格的位置
-		this.add(scroll);
 	}
-
 	public void addTotalTable() {
-		String[][] rowData = new String[2][COLUMN_NAMES.length];
+		rowData = new String[2][COLUMN_NAMES.length];
 		rowData[0][0] = "总数据";
 		rowData[1][0] = "平均数据";
 		table = new BottomTable(rowData, COLUMN_NAMES);
-		setTotalTable();
 		scroll = new BottomScrollPane(table);
 		scroll.setBounds(57, 450, 888, 80); // 表格的位置
 		this.add(scroll);
@@ -300,6 +304,11 @@ public class PlayerInfoPanel extends BottomPanel {
 	 * @version 2015年4月12日 下午6:56:20
 	 */
 	public void setTotalTable() {
+		rowData = new String[2][COLUMN_NAMES.length];
+		rowData[0][0] = "总数据";
+		rowData[1][0] = "平均数据";
+		scroll.setBounds(57, 450, 888, 80); // 表格的位置
+		table.setModel(new DefaultTableModel(rowData,COLUMN_NAMES));
 		PlayerSeasonVO playerSeason = detailVO.getSeasonRecord();
 		DecimalFormat df = UIConfig.FORMAT;
 		table.setValueAt(String.valueOf(playerSeason.getMatchCount()), 0, 1);
