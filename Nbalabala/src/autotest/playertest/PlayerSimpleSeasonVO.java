@@ -336,6 +336,10 @@ public class PlayerSimpleSeasonVO {
 	public RecentDataQueue reboundQueue = new RecentDataQueue();
 	public RecentDataQueue assistQueue = new RecentDataQueue();
 	
+	public double scorePromotion;
+	public double reboundPromotion;
+	public double assistPromotion;
+	
 	public void update() {
 		if (matchCount != 0) {
 			
@@ -367,6 +371,29 @@ public class PlayerSimpleSeasonVO {
 			
 			if (fieldAttempt != 0) {
 				fieldEff = (fieldGoal + 0.5 * threePointGoal) / fieldAttempt;
+			}
+			
+			if (matchCount > 5) {
+				double formerMatchCount = matchCount - 5;
+				int recentScoreSum = scoreQueue.getFiveSum();
+				double formerScoreAvg = (score - recentScoreSum) / formerMatchCount;
+				if (formerScoreAvg != 0){
+					scorePromotion = recentScoreSum / 5.0 / formerScoreAvg - 1; 
+				}
+				
+				int recentReboundSum = reboundQueue.getFiveSum();
+				double formerReboundAvg = (totalRebound - recentReboundSum) / formerMatchCount;
+				if (formerReboundAvg != 0){
+					reboundPromotion = recentReboundSum / 5.0 / formerReboundAvg - 1; 
+				}
+				
+				int recentAssistSum = assistQueue.getFiveSum();
+				double formerAssistAvg = (assist - recentAssistSum) / formerMatchCount;
+				if (formerAssistAvg != 0){
+					assistPromotion = recentAssistSum / 5.0 / formerAssistAvg - 1; 
+				}
+				
+				
 			}
 			
 			realFieldPercent = score / (2 * (fieldAttempt + 0.44 * freethrowAttempt));

@@ -1,4 +1,4 @@
-package autotest;
+package test;
 
 import java.applet.Applet;
 import java.awt.Dimension;

@@ -4,28 +4,19 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
-import autotest.playertest.PlayerSimpleSeasonVO;
-import autotest.playertest.PlayerTestSortHandler;
-import autotest.playertest.SimplePlayerAvgSorter;
-import autotest.playertest.SimplePlayerTotalSorter;
-import autotest.teamtest.SimpleTeamAvgAndHighSorter;
-import autotest.teamtest.SimpleTeamAvgSorter;
-import autotest.teamtest.TeamSimpleSeasonVO;
-import autotest.teamtest.TeamTestSortHandler;
-import bl.teamseasonbl.TeamAvgSorter;
 import test.data.PlayerHotInfo;
 import test.data.PlayerNormalInfo;
 import test.data.TeamHighInfo;
 import test.data.TeamHotInfo;
 import test.data.TeamNormalInfo;
 import utility.Constants;
-import data.seasondata.SeasonData;
-import enums.ScreenDivision;
-import enums.SortOrder;
-import enums.TeamAllSortBasis;
-import enums.TeamAvgSortBasis;
+import autotest.playertest.PlayerSimpleSeasonVO;
+import autotest.playertest.PlayerTestSortHandler;
+import autotest.playertest.SimplePlayerAvgSorter;
+import autotest.teamtest.SimpleTeamAvgAndHighSorter;
+import autotest.teamtest.TeamSimpleSeasonVO;
+import autotest.teamtest.TeamTestSortHandler;
 
 /**
  * 
@@ -63,7 +54,7 @@ public class Console {
 				outputPlayerHotInfo(args[2], out, playerVOs, getNeededPlayerCount(args));
 			}else if(args[1].equals("-king")) {
 				playerVOs = seasonData.getAllPlayerSeasonData();
-				outputPlayerKingInfo(args[2], args[3], );
+//				outputPlayerKingInfo(args[2], args[3], );
 			}
 			
 			else{
@@ -268,28 +259,28 @@ public class Console {
 		}
 	}
 	
-	private void outputPlayerNormalTotalInfo(PrintStream out, PlayerSimpleSeasonVO vo) {
-		PlayerNormalInfo info = new PlayerNormalInfo();
-		info.setAge(vo.age);
-		info.setAssist(vo.assist);
-		info.setBlockShot(vo.block);
-		info.setDefend(vo.defensiveRebound);
-		info.setEfficiency(vo.efficiency);
-		info.setFault(vo.turnover);
-		info.setFoul(vo.foul);
-		info.setMinute(vo.minutes);
-		info.setName(vo.name);
-		info.setNumOfGame(vo.matchCount);
-		info.setOffend(vo.offensiveRebound);
-		info.setPenalty(vo.freethrowPercent);
-		info.setPoint(vo.score);
-		info.setRebound(vo.totalRebound);
-		info.setShot(vo.fieldPercent);
-		info.setStart(vo.firstCount);
-		info.setSteal(vo.steal);
-		info.setTeamName(vo.teamName);
-		info.setThree(vo.threePointPercent);
-	}
+//	private void outputPlayerNormalTotalInfo(PrintStream out, PlayerSimpleSeasonVO vo) {
+//		PlayerNormalInfo info = new PlayerNormalInfo();
+//		info.setAge(vo.age);
+//		info.setAssist(vo.assist);
+//		info.setBlockShot(vo.block);
+//		info.setDefend(vo.defensiveRebound);
+//		info.setEfficiency(vo.efficiency);
+//		info.setFault(vo.turnover);
+//		info.setFoul(vo.foul);
+//		info.setMinute(vo.minutes);
+//		info.setName(vo.name);
+//		info.setNumOfGame(vo.matchCount);
+//		info.setOffend(vo.offensiveRebound);
+//		info.setPenalty(vo.freethrowPercent);
+//		info.setPoint(vo.score);
+//		info.setRebound(vo.totalRebound);
+//		info.setShot(vo.fieldPercent);
+//		info.setStart(vo.firstCount);
+//		info.setSteal(vo.steal);
+//		info.setTeamName(vo.teamName);
+//		info.setThree(vo.threePointPercent);
+//	}
 	
 	private void outputPlayerHotInfo(String field, PrintStream out, ArrayList<PlayerSimpleSeasonVO> vos, int count) {
 		int i;
@@ -303,7 +294,7 @@ public class Console {
 				info.setPosition(vo.position);
 				info.setTeamName(vo.teamName);
 				info.setValue(vo.scoreAvg);
-				info.setUpgradeRate(vo.scoreQueue.getPromotion());
+				info.setUpgradeRate(vo.scorePromotion);
 			}
 			return;
 		case "assist":
@@ -315,7 +306,7 @@ public class Console {
 				info.setPosition(vo.position);
 				info.setTeamName(vo.teamName);
 				info.setValue(vo.assistAvg);
-				info.setUpgradeRate(vo.assistQueue.getPromotion());
+				info.setUpgradeRate(vo.assistPromotion);
 			}
 			return;
 		default:
@@ -327,7 +318,7 @@ public class Console {
 				info.setPosition(vo.position);
 				info.setTeamName(vo.teamName);
 				info.setValue(vo.totalReboundAvg);
-				info.setUpgradeRate(vo.reboundQueue.getPromotion());
+				info.setUpgradeRate(vo.reboundPromotion);
 			}
 		}
 	}
@@ -360,10 +351,9 @@ public class Console {
 		
 	}
 	
-	private void outputPlayerKingInfo(String[]field, String period, ArrayList<PlayerSimpleSeasonVO> vos) {
-		Comparator<PlayerSimpleSeasonVO> comparator = null;
-		if ()
-	}
+//	private void outputPlayerKingInfo(String[]field, String period, ArrayList<PlayerSimpleSeasonVO> vos) {
+//		Comparator<PlayerSimpleSeasonVO> comparator = null;
+//	}
 	
 	
 

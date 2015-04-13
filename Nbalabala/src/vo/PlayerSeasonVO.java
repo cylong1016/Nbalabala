@@ -523,15 +523,15 @@ public class PlayerSeasonVO {
 				double stealDivisor = (steal - recentSteal) / formerMatchCount;
 				
 				if (scoreDivisor != 0)
-					scorePromotion = recentScore / 5 / scoreDivisor - 1;
+					scorePromotion = recentScore / 5.0 / scoreDivisor - 1;
 				if (reboundDivisor != 0)
-					reboundPromotion = recentRebound / 5 / reboundDivisor - 1;
+					reboundPromotion = recentRebound / 5.0 / reboundDivisor - 1;
 				if (assistDivisor != 0)
-					assistPromotion = recentAssist / 5 / assistDivisor - 1;
+					assistPromotion = recentAssist / 5.0 / assistDivisor - 1;
 				if (blockDivisor != 0)
-					blockPromotion = recentBlock / 5 / blockDivisor - 1;
+					blockPromotion = recentBlock / 5.0 / blockDivisor - 1;
 				if (stealDivisor != 0)
-					stealPromotion = recentSteal / 5 / stealDivisor - 1;
+					stealPromotion = recentSteal / 5.0 / stealDivisor - 1;
 				
 				int formerFieldAttempt = fieldAttempt - fieldAttemptQueue.getFiveSum();
 				int formerFieldGoal = fieldGoal - fieldGoalQueue.getFiveSum();
