@@ -1,5 +1,10 @@
 package autotest;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +34,16 @@ public class Console {
 	
 	public static void main(String[]args) {
 		String[]s = {"-team", "-avg" ,"-n", "5", "-sort", "shot.asc,winrate.desc"};
-		new Console().execute(System.out, s );
+		
+		try {
+			PrintStream printStream = new PrintStream(new File("dxh.txt"));
+			new Console().execute(printStream, s);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	public void execute(java.io.PrintStream out, java.lang.String[] args) {

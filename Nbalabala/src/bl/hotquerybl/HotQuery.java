@@ -143,11 +143,6 @@ public class HotQuery implements HotBLService{
 					break;
 				}
 			}
-//				
-//			}else{
-//				result.add(new HotTodayPlayerVO(i+1, name, seasonVO.teamName, position,
-//						value, new PlayerMatchPerformanceVO(name)));
-//			}
 			
 		}
 		return result;
