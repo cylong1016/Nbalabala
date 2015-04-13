@@ -90,7 +90,7 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel{
 			label[j] = new HotSeasonTeamLabel(teamVO.get(j), ThreeButton.current.team);
 			this.add(label[j]);
 		}
-		this.repaint();
+		this.repaint(); 
 	}
 
 }
