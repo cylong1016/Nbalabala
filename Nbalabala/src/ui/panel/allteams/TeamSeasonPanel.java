@@ -116,8 +116,8 @@ public class TeamSeasonPanel extends BottomPanel {
 		cd = new ContrastDiagram(fivePlayersData, fiveArgsAvg, highestScoreReboundAssist, "球队平均");
 		cd.setBounds(57, 260, 888, 160);
 		this.add(cd);
-		cd.repaint();
 		cd.updateUI();
+		cd.repaint();
 	}
 	
 	protected void updateContrastDiagram() {
@@ -138,12 +138,12 @@ public class TeamSeasonPanel extends BottomPanel {
 	 * @author lsy
 	 * @version 2015年3月25日  下午1:15:54
 	 */
-	public void iniTable(int i){
+	public void iniTable(int i) {
 		addplayerTable(teamDetail.getSeasonRecord());
 		state = i;
-		if(i==0){
+		if(i == 0) {
 			updateSeasonTable(teamDetail.getSeasonRecord());
-		}else{
+		} else if(i == 1) {
 			ArrayList<PlayerProfileVO> players = teamDetail.getPlayers();
 			updatePlayerTable(players);
 		}
@@ -231,6 +231,7 @@ public class TeamSeasonPanel extends BottomPanel {
 				"三分命中率", "罚球命中", "罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "进攻篮板效率", "防守篮板效率", "进攻回合", "进攻效率",
 				"防守回合", "防守效率", "抢断", "抢断效率", "助攻", "助攻率", "盖帽", "失误", "犯规", "得分" };
 		rowData = new String[2][columns.length];
+		playerTable.setModel(new DefaultTableModel(rowData, columns));
 		playerTable.getColumnModel().getColumn(18).setPreferredWidth(80);
 		playerTable.getColumnModel().getColumn(19).setPreferredWidth(80);
 		scroll.setBounds(57, 450, 888, 80); // 表格的位置
@@ -269,7 +270,7 @@ public class TeamSeasonPanel extends BottomPanel {
 		playerTable.setValueAt(Integer.toString(record.getScore()), 0, 31);
 		
 		
-		playerTable.setValueAt("平均数据", 0, 0);
+		playerTable.setValueAt("平均数据", 1, 0);
 		playerTable.setValueAt(Constants.translateTeamAbbr(record.getTeamName()), 1, 1);
 		playerTable.setValueAt(format.format((record.getWinning())), 1, 2);
 		playerTable.setValueAt(format.format((record.getLosing())), 1, 3);
@@ -332,17 +333,7 @@ public class TeamSeasonPanel extends BottomPanel {
 			TeamSeasonButton.current = (TeamSeasonButton) e.getSource();
 			if (e.getSource() == button[0]) {
 				state = 0;
-<<<<<<< HEAD
-				if(cd!=null){
-					TeamSeasonPanel.this.remove(cd);
-				}
-				addContrastDiagram();
-=======
-				if(scroll!=null){
-					TeamSeasonPanel.this.remove(scroll);
-				}
 				updateContrastDiagram();
->>>>>>> origin/master
 				teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
 				updateSeasonTable(teamDetail.getSeasonRecord());
 				TeamSeasonPanel.this.repaint();
@@ -396,7 +387,7 @@ public class TeamSeasonPanel extends BottomPanel {
 		int size = players.size();
 		int lth = columns.length;
 		rowData = new String[size][lth];
-		playerTable.setModel(new DefaultTableModel(rowData,columns));
+		playerTable.setModel(new DefaultTableModel(rowData, columns));
 		playerTable.setRowHeight(40);
 		playerTable.setWidth(new int[]{140, 44, 44, 44, 44, 151, 118, 77, 209});
 		scroll.setBounds(57, 260, 888, 270);
