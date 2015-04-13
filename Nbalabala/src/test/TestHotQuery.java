@@ -25,7 +25,7 @@ public class TestHotQuery {
 		ArrayList<HotFastestPlayerVO> list = query.getHotFastestPlayers(HotFastestPlayerProperty.ASSIST_AVG);
 		for (HotFastestPlayerVO  vo: list) {
 			System.out.println(vo.getName());
-			System.out.println(vo.getProperty());
+			System.out.println(vo.getFormerFiveAvg());
 		}
 	}
 	

@@ -106,11 +106,6 @@ public class TeamSeasonPanel extends BottomPanel {
 	 * @version 2015年4月11日 上午1:14:43
 	 */
 	protected void addContrastDiagram() {
-		if (cd != null) {
-			this.remove(cd);
-			repaint();
-		}
-
 		/* 球隊的场均得分、助攻、篮板、 罚球命中率、三分命中率的平均值 */
 		TeamSeasonVO teamSeason = teamDetail.getSeasonRecord();
 		double[] fivePlayersData = {teamSeason.getScoreAvg(), teamSeason.getAssistAvg(),
@@ -125,6 +120,16 @@ public class TeamSeasonPanel extends BottomPanel {
 		cd.updateUI();
 	}
 	
+	protected void updateContrastDiagram() {
+		/* 球隊的场均得分、助攻、篮板、 罚球命中率、三分命中率的平均值 */
+		TeamSeasonVO teamSeason = teamDetail.getSeasonRecord();
+		double[] fivePlayersData = {teamSeason.getScoreAvg(), teamSeason.getAssistAvg(),
+										teamSeason.getTotalReboundAvg(), teamSeason.getFreeThrowPercent(),
+										teamSeason.getThreePointPercent()};
+		double[] fiveArgsAvg = teamQuery.getFiveArgsAvg(seasonInput.getSeason());
+		double[] highestScoreReboundAssist = teamQuery.getHighestScoreReboundAssist(seasonInput.getSeason());
+		cd.setData(fivePlayersData, fiveArgsAvg, highestScoreReboundAssist);
+	}
 	
 	
 	/**
@@ -182,7 +187,7 @@ public class TeamSeasonPanel extends BottomPanel {
 			remove(scroll);
 			repaint();
 			iniTable(0);
-			addContrastDiagram();
+			updateContrastDiagram();
 			repaint();
 		}
 		
@@ -327,10 +332,17 @@ public class TeamSeasonPanel extends BottomPanel {
 			TeamSeasonButton.current = (TeamSeasonButton) e.getSource();
 			if (e.getSource() == button[0]) {
 				state = 0;
+<<<<<<< HEAD
 				if(cd!=null){
 					TeamSeasonPanel.this.remove(cd);
 				}
 				addContrastDiagram();
+=======
+				if(scroll!=null){
+					TeamSeasonPanel.this.remove(scroll);
+				}
+				updateContrastDiagram();
+>>>>>>> origin/master
 				teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
 				updateSeasonTable(teamDetail.getSeasonRecord());
 				TeamSeasonPanel.this.repaint();

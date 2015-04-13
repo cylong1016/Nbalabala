@@ -57,7 +57,7 @@ public class HotFastestPlayerVO {
 	public String getPosition() {
 		return position;
 	}
-	public double getProperty() {
+	public double getFormerFiveAvg() {
 		return formerFiveAvg;
 	}
 

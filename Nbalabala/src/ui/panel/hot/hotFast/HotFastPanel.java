@@ -84,9 +84,9 @@ public class HotFastPanel extends HotThreeFatherPanel {
 		if (fastVO.size() < 5)
 			return;
 		ArrayList<Column> columns = new ArrayList<Column>();
-		double max = fastVO.get(CURRENTI).getProperty();
+		double max = fastVO.get(CURRENTI).getFormerFiveAvg();
 		double promotion = max;
-		double formerFiveAvg = fastVO.get(CURRENTI).getProperty();
+		double formerFiveAvg = fastVO.get(CURRENTI).getFormerFiveAvg();
 		columns.add(new Column("五场前平均", formerFiveAvg, UIConfig.HIST_COLORS[CURRENTI]));
 		for(int i = 0; i < 5; i++) {
 			double[] recentFive = fastVO.get(CURRENTI).getRecentFive();
