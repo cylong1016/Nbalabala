@@ -1,5 +1,6 @@
 package ui.panel.hot.hotFast;
 
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -87,7 +88,7 @@ public class HotFastPanel extends HotThreeFatherPanel {
 		double max = fastVO.get(CURRENTI).getFormerFiveAvg();
 		double promotion = max;
 		double formerFiveAvg = fastVO.get(CURRENTI).getFormerFiveAvg();
-		columns.add(new Column("五场前平均", formerFiveAvg, UIConfig.HIST_COLORS[CURRENTI]));
+		columns.add(new Column("五场前平均", formerFiveAvg, Color.GRAY));
 		for(int i = 0; i < 5; i++) {
 			double[] recentFive = fastVO.get(CURRENTI).getRecentFive();
 			promotion = recentFive[i];
