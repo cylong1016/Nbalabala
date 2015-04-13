@@ -51,7 +51,8 @@ public class Chart extends JPanel {
 		this.columns = columns;
 		this.maxRange = maxRange;
 		this.setBorder(BorderFactory.createTitledBorder(getBorder(), title, TitledBorder.CENTER, TitledBorder.TOP, titleFont));
-		this.setBackground(new Color(243, 243, 243, 70)); // 半透明背景
+		// this.setBackground(new Color(243, 243, 243, 70)); // 半透明背景 刷新会出问题
+		this.setOpaque(false);
 		this.setLayout(null);
 		inPanel = new InPanel();
 		this.add(inPanel);
