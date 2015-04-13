@@ -31,7 +31,7 @@ public class BottomTable extends JTable {
 	
 	/** 表格每一行的高 */
 	private static final int ROW_HEIGHT = 23;
-
+	
 	public BottomTable(Object[][] rowData, String[] columnNames) {
 		super(rowData, columnNames);
 		this.decorateTable();
