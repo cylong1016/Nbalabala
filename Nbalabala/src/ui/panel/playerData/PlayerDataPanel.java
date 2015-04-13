@@ -45,7 +45,7 @@ public class PlayerDataPanel extends BottomPanel {
 	private static final int POSITION_COUNT = 4, DIVISION_COUNT = 9, BASIS_COUNT = 15, 
 			TOTAL_AVG_COUNT = 2;
 	/** 分别代表第一行到第五行的纵坐标 */
-	private static final int Y1 = 27, Y2 = 66, Y3 = 107, Y4 = 138, Y5 = 171;
+	private static final int Y1 = 27, Y2 = 66, Y3 = 107, Y4 = 138, Y5 = 190;
 	/** 代表所有列的前三个button的横坐标 */
 	private static final int X1 = 227, X2 = 288, X3 = 349;
 	/** “所有”的横坐标 */
@@ -114,8 +114,8 @@ public class PlayerDataPanel extends BottomPanel {
 		addListener();
 		addFindButton();
 		seasonInput = new SeasonInputPanel();
-		seasonInput.setLocation(660, 171);
-		this.add(seasonInput); // TODO 位置需要重新设定
+		seasonInput.setLocation(660, Y5);
+		this.add(seasonInput); 
 		// 初始化界面的表格
 		ArrayList<PlayerSeasonVO> iniArray = playerSeason.getAllPlayersSortedByName();
 		createTable(iniArray);
@@ -127,7 +127,7 @@ public class PlayerDataPanel extends BottomPanel {
 	}
 
 	public void addFindButton() {
-		findButton = new ImgButton("images/playerData/search.png", 856, 124, "images/playerData/searchOn.png",
+		findButton = new ImgButton("images/playerData/search.png", 856, 130, "images/playerData/searchOn.png",
 				"images/playerData/searchClick.png");
 		this.add(findButton);
 		findButton.addMouseListener(new MouseAdapter() {
@@ -524,7 +524,7 @@ public class PlayerDataPanel extends BottomPanel {
 			this.remove(scroll);
 		}
 		scroll = new BottomScrollPane(table);
-		scroll.setLocation(57, 239); // 表格的位置
+		scroll.setLocation(57, 260); // 表格的位置
 		this.add(scroll);
 	}
 

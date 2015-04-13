@@ -94,7 +94,7 @@ public class MatchInfoTableFactory {
 	private void setLook() {
 		int scoresWidth = 70;
 		int addsWidth = 80;
-		table.setWidth(new int[]{120,scoresWidth, scoresWidth, scoresWidth, scoresWidth, addsWidth, addsWidth, addsWidth, scoresWidth, 89, 89});
+		table.setWidth(new int[]{111,scoresWidth, scoresWidth, scoresWidth, scoresWidth, addsWidth, addsWidth, addsWidth, scoresWidth, 85, 85});
 	}
 	
 }

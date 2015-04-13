@@ -96,7 +96,7 @@ public class GamePanel extends BottomPanel {
 	 * @version 2015年3月23日 下午6:20:43
 	 */
 	public void addBack() {
-		back = new ImgButton(url + "back.png", 50, 50, url + "back.png", url + "back.png");
+		back = new ImgButton(url + "back.png", 50, 50, url + "backOn.png", url + "back.png");
 		this.add(back);
 		back.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {

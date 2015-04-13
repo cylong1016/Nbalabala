@@ -46,7 +46,7 @@ public class TeamDataPanel extends BottomPanel {
 	/** 宽 高 */
 	private static final int WIDTH_X = 60, HEIGHT = 24, WIDTH_THREE = 75;
 	/** 纵坐标及间隔 */
-	private static final int Y = 66, INTER = 61, Y5 = 171;
+	private static final int Y = 66, INTER = 61, Y5 = 190;
 	/** “所有”的横坐标 */
 	private static final int ALL_X = 156;
 	/** 东南 中央 大西洋 东部 西部 太平洋 西北 西南  等按钮的X坐标*/
@@ -101,7 +101,7 @@ public class TeamDataPanel extends BottomPanel {
 		addListener();
 		seasonInput = new SeasonInputPanel(this);
 		seasonInput.setLocation(660, Y5);
-		this.add(seasonInput); // TODO 位置需要重新设定
+		this.add(seasonInput); 
 		// 初始化表格和球队总数据
 		seasonArray = teamSeason.getTeamDataSortedByName(seasonInput.getSeason());
 		createTable(seasonArray); // 设置表格数据
@@ -393,7 +393,7 @@ public class TeamDataPanel extends BottomPanel {
 			this.remove(scroll);
 		}
 		scroll = new BottomScrollPane(table);
-		scroll.setLocation(57, 239); // 表格的位置
+		scroll.setLocation(57, 260); // 表格的位置
 		this.add(scroll);
 	}
 

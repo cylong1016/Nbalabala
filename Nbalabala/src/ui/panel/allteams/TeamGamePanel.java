@@ -49,7 +49,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		matchProfile = teamDetail.getMatchRecords();
 		gameData = new GameDataPanel("",1); 
 		pane = new MatchInfoTableFactory(matchProfile,this).getTableScrollPanel();
-		pane.setBounds(55, 285, 905, 250);
+		pane.setBounds(57, 285, 888, 245);
 		add(pane);
 		iniTable(x);
 	}
@@ -131,7 +131,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 					}
 				}
 				pane = new MatchInfoTableFactory(pro,TeamGamePanel.this).getTableScrollPanel();
-				pane.setBounds(55, 285, 905, 250);
+				pane.setBounds(57, 285, 888, 250);
 				add(pane);
 				TeamGamePanel.this.repaint();
 			}

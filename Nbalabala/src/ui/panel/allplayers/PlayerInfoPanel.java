@@ -196,7 +196,7 @@ public class PlayerInfoPanel extends BottomPanel {
 	public void addActionImg() {
 		ActionPhotoPanel actionPhotoPanel = new ActionPhotoPanel(detailVO.getAction());
 		actionPhotoPanel.setOpaque(true);
-		actionPhotoPanel.setBounds(885, 6, 1000, 1000);
+		actionPhotoPanel.setBounds(880, 6, 1000, 1000);
 		this.add(actionPhotoPanel);
 	}
 
@@ -271,7 +271,7 @@ public class PlayerInfoPanel extends BottomPanel {
 		table = new BottomTable(rowData, COLUMN_NAMES);
 		table.getColumnModel().getColumn(2).setPreferredWidth(110);
 		scroll = new BottomScrollPane(table);
-		scroll.setBounds(57, 260, 888, 265); // 表格的位置
+		scroll.setBounds(57, 260, 888, 270); // 表格的位置
 		this.add(scroll);
 	}
 
