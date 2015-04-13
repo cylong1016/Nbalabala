@@ -46,7 +46,7 @@ public class PlayerQuery implements PlayerQueryBLService{
 		
 		//从matchbl获取球员所有比赛的数据
 		MatchQuery matchQuery = new MatchQuery();
-		ArrayList<PlayerMatchPerformanceVO> matchRecords = matchQuery.getMatchRecordByPlayerName(playerName);
+		ArrayList<PlayerMatchPerformanceVO> matchRecords = matchQuery.getMatchRecordByPlayerName(playerName, season);
 
 		return new PlayerDetailVO(profile, seasonRecord, matchRecords, actionImage);
 	}
