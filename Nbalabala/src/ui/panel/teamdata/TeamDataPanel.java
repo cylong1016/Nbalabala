@@ -265,8 +265,8 @@ public class TeamDataPanel extends BottomPanel {
 					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
 					if (rowI > -1) {
 						String abbr = seasonArray.get(rowI).getTeamName();
-						MainController.toTeamSeasonPanel(TeamDataPanel.this,TeamDataPanel.this,
-								abbr,0);
+						MainController.toTeamSeasonPanel(TeamDataPanel.this,
+								abbr);
 					}
 
 				}

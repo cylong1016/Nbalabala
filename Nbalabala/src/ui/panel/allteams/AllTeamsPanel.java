@@ -65,7 +65,7 @@ public class AllTeamsPanel extends BottomPanel {
 	class MouListener extends MouseAdapter {
 		public void mouseClicked(MouseEvent e) {
 			TeamButton buttonSelect = (TeamButton) e.getSource();
-			MainController.toTeamSeasonPanel(AllTeamsPanel.this,AllTeamsPanel.this, buttonSelect.team,0);
+			MainController.toTeamSeasonPanel(AllTeamsPanel.this, buttonSelect.team);
 		}
 
 	}

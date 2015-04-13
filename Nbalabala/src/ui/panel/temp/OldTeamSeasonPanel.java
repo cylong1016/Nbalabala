@@ -1,56 +1,110 @@
-package ui.panel.allteams;
+package ui.panel.temp;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
 import ui.UIConfig;
 import ui.common.SeasonInputPanel;
+import ui.common.UserMouseAdapter;
+import ui.common.button.ImgButton;
+import ui.common.label.ImgLabel;
+import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
+import ui.controller.MainController;
 import ui.panel.allplayers.ContrastDiagram;
+import ui.panel.allteams.TeamSeasonButton;
 import utility.Constants;
+import vo.PlayerProfileVO;
+import vo.TeamDetailVO;
 import vo.TeamSeasonVO;
+import bl.matchquerybl.MatchQuery;
+import bl.teamquerybl.TeamQuery;
+import blservice.MatchQueryBLService;
+import blservice.TeamQueryBLService;
 
 /**
- * 球队赛季数据界面
+ * 球队赛季数据
+ * 
  * @author lsy
- * @version 2015年4月13日  下午8:31:55
+ * @version 2015年3月20日 下午11:32:02
  */
-public class TeamSeasonPanel extends TeamFatherPanel{
+public class OldTeamSeasonPanel extends BottomPanel {
 
 	/** serialVersionUID */
-	private static final long serialVersionUID = -5523253635537412179L;
-	private ContrastDiagram cd;
+	private static final long serialVersionUID = 4901174711583565164L;
+	int seasonX = 672, lineupX = 782, gameX = 857, y = 190;
+	int width1 = 83, width2 = 48, height = 25;
+	TeamSeasonButton[] button = new TeamSeasonButton[3];
+	TeamQueryBLService teamQuery = new TeamQuery();
+	MainController controller;
+	String abbr;
+	MatchQueryBLService matchQuery = new MatchQuery();
+
 	/** 队伍数据表格 */
 	private BottomTable playerTable;
 	/** 放表格的滚动条 */
 	private BottomScrollPane scroll;
 	/** 表格中数据显示的小数点位数 */
 	private DecimalFormat format = new DecimalFormat("0.000");
-	private String[] columns;
-	private String[][] rowData;
+	String[] columns;
+	String[][] rowData;
+	protected ImgButton back;
+	protected String url = UIConfig.IMG_PATH + "players/";
+	protected BottomPanel allteams;
+	ImgLabel logo;
+	MyLabel teamName;
+	String[] teamPlace = { "波士顿", "布鲁克林", "纽约", "费城", "多伦多", "芝加哥", "克利夫兰", "底特律", "印第安纳", "密尔沃基", "亚特兰大", "夏洛特",
+			"迈阿密", "奥兰多", "华盛顿", "金洲", "洛杉矶", "洛杉矶", "菲尼克斯", "萨克拉门托", "丹佛", "明尼苏达", "俄克拉荷马", "波特兰", "犹他", "达拉斯",
+			"休斯敦", "孟菲斯", "新奥尔良", "圣安东尼奥" };
+	String[] teamShort = new String[] { "BOS", "BKN", "NYK", "PHI", "TOR", "CHI", "CLE", "DET", "IND", "MIL",
+			"ATL", "CHA", "MIA", "ORL", "WAS", "GSW", "LAC", "LAL", "PHX", "SAC", "DEN", "MIN", "OKC", "POR",
+			"UTA", "DAL", "HOU", "MEM", "NOP", "SAS" };
+	String[] team = new String[] { "凯尔特人", "篮网", "尼克斯", "76人", "猛龙", "公牛", "骑士", "活塞", "步行者", "雄鹿", "老鹰", "黄蜂",
+			"热火", "魔术", "奇才", "勇士", "快船", "湖人", "太阳", "国王", "掘金", "森林狼", "雷霆", "开拓者", "爵士", "小牛", "火箭", "灰熊",
+			"鹈鹕", "马刺" };
+	/** 球队详细信息 */
+	TeamDetailVO teamDetail;
+	int order = 0;
+	
+	private int state = 0;
+	private ContrastDiagram cd;
+	
 	/** 赛季选择器 */
 	protected SeasonInputPanel seasonInput;
-	
-	public TeamSeasonPanel(BottomPanel panelFrom,String url, String abbr) {
-		super(panelFrom,url, abbr);
-		setEffect(0);
+
+	// 用x来判断此时是赛季数据还是阵容 0代表赛季 1代表阵容
+	public OldTeamSeasonPanel(BottomPanel allteams,String url, String abbr, int x) {
+		super(url);
+		this.allteams = allteams;
+		this.abbr = abbr;
+		setButton();
+		addButton();
+		setEffect(x);
+		addListener();
+		addBack();
 		seasonInput = new SeasonInputPanel(this);
 		seasonInput.setLocation(515, y);
 		this.add(seasonInput);
 		teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
+		addLabel(teamDetail.getLogo());
+		iniTable(x);
 		addContrastDiagram();
-		updateContrastDiagram();
-		addplayerTable(teamDetail.getSeasonRecord());
-		updateSeasonTable(teamDetail.getSeasonRecord());
 	}
 	
 	/**
-	 * 添加柱状图
-	 * @author lsy
-	 * @version 2015年4月13日  下午8:44:12
+	 * 添加球员和联盟平均的比较图
+	 * @author cylong
+	 * @version 2015年4月11日 上午1:14:43
 	 */
 	protected void addContrastDiagram() {
 		/* 球隊的场均得分、助攻、篮板、 罚球命中率、三分命中率的平均值 */
@@ -67,11 +121,6 @@ public class TeamSeasonPanel extends TeamFatherPanel{
 		cd.repaint();
 	}
 	
-	/**
-	 * 更新柱状图
-	 * @author lsy
-	 * @version 2015年4月13日  下午8:44:22
-	 */
 	protected void updateContrastDiagram() {
 		/* 球隊的场均得分、助攻、篮板、 罚球命中率、三分命中率的平均值 */
 		TeamSeasonVO teamSeason = teamDetail.getSeasonRecord();
@@ -83,11 +132,73 @@ public class TeamSeasonPanel extends TeamFatherPanel{
 		cd.setData(fivePlayersData, fiveArgsAvg, highestScoreReboundAssist);
 	}
 	
+	
 	/**
-	 * 更新赛季数据表格
-	 * @param record
+	 * 判断哪个表格应该被显示出来
+	 * @param i
 	 * @author lsy
-	 * @version 2015年4月13日  下午8:46:11
+	 * @version 2015年3月25日  下午1:15:54
+	 */
+	public void iniTable(int i) {
+		addplayerTable(teamDetail.getSeasonRecord());
+		state = i;
+		if(i == 0) {
+			updateSeasonTable(teamDetail.getSeasonRecord());
+		} else if(i == 1) {
+			ArrayList<PlayerProfileVO> players = teamDetail.getPlayers();
+			updatePlayerTable(players);
+		}
+	}
+	
+	
+	MyLabel[] teamInfo = new MyLabel[5];
+	int lbWidth = 100,lbHeight = 50, lbx = 450, lby = 50;
+
+	
+	public void refresh(){
+		teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
+		if (state == 0 && scroll != null) {
+			remove(scroll);
+			repaint();
+			iniTable(0);
+			updateContrastDiagram();
+			repaint();
+		}
+		
+	}
+	
+	public String match(){
+		for(order = 0;order<30;order++){
+			if(teamDetail.getProfile().getAbbr().equals(teamShort[order])){
+				return teamPlace[order]+" "+team[order];
+			}
+		}
+		return "";
+	}
+
+	/**
+	 * 添加返回按钮
+	 * @author lsy
+	 * @version 2015年3月25日  上午11:02:11
+	 */
+	public void addBack() {
+		back = new ImgButton(url + "back.png", 50, 50, url + "backOn.png", url + "back.png");
+		this.add(back);
+		back.addMouseListener(new MouseAdapter() {
+
+			public void mousePressed(MouseEvent e) {
+				MainController.backToOnePanel(OldTeamSeasonPanel.this, allteams);
+			}
+
+		});
+	}
+
+	
+	/**
+	 * 球队赛季数据表格
+	 * 
+	 * @author lsy
+	 * @version 2015年3月25日 上午10:34:45
 	 */
 	public void updateSeasonTable(TeamSeasonVO record) {
 		columns = new String[]{ "", "球队名称", "胜场数", "负场数", "总场数", "胜率", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手",
@@ -167,13 +278,66 @@ public class TeamSeasonPanel extends TeamFatherPanel{
 		playerTable.setValueAt(format.format(record.getFoulAvg()), 1, 30);
 		playerTable.setValueAt(format.format(record.getScoreAvg()), 1, 31);
 	}
+
+	public void setButton() {
+		button[0] = new TeamSeasonButton(seasonX, y, width1, height, "赛季数据");
+		button[1] = new TeamSeasonButton(lineupX, y, width2, height, "阵容");
+		button[2] = new TeamSeasonButton(gameX, y, width1, height, "赛程数据");
+	}
+
+	public void addButton() {
+		for (int i = 0; i < 3; i++) {
+			this.add(button[i]);
+		}
+	}
+
+	public void addListener() {
+		MouListener mou1 = new MouListener();
+		for (int i = 0; i < 3; i++) {
+			button[i].addMouseListener(mou1);
+		}
+	}
+
+	class MouListener extends MouseAdapter {
+		public void mousePressed(MouseEvent e) {
+			if (e.getSource() == TeamSeasonButton.current) {
+				return;
+			}
+			TeamSeasonButton.current.back();
+			
+			TeamSeasonButton.current = (TeamSeasonButton) e.getSource();
+			if (e.getSource() == button[0]) {
+				state = 0;
+				addContrastDiagram();
+				updateContrastDiagram();
+				teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
+				updateSeasonTable(teamDetail.getSeasonRecord());
+				OldTeamSeasonPanel.this.repaint();
+				return;
+			} else if (e.getSource() == button[1]) {
+				state = 1;
+				if(cd != null) {
+					OldTeamSeasonPanel.this.remove(cd);
+				}
+				TeamDetailVO teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
+				ArrayList<PlayerProfileVO> players = teamDetail.getPlayers();
+				updatePlayerTable(players);
+				OldTeamSeasonPanel.this.repaint();
+			} else if (e.getSource() == button[2]) {
+				state = 2;
+				if(scroll != null){
+					OldTeamSeasonPanel.this.remove(scroll);
+				}
+				if(cd != null){
+					OldTeamSeasonPanel.this.remove(cd);
+				}
+				MainController.toTeamGamePanel(allteams,OldTeamSeasonPanel.this, abbr);
+				repaint();
+			}
+		}
+	}
 	
-	/**
-	 * 添加表格
-	 * @param record
-	 * @author lsy
-	 * @version 2015年4月13日  下午8:46:00
-	 */
+	
 	public void addplayerTable(TeamSeasonVO record){
 		columns = new String[]{ "", "球队名称", "胜场数", "负场数", "总场数", "胜率", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手",
 				"三分命中率", "罚球命中", "罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "进攻篮板效率", "防守篮板效率", "进攻回合", "进攻效率",
@@ -188,12 +352,56 @@ public class TeamSeasonPanel extends TeamFatherPanel{
 		this.add(scroll);
 	}
 	
-
-	public void setButton() {
-		button[0] = new TeamSeasonButton(seasonX, y, width1, height, "赛季数据");
-		button[1] = new TeamSeasonButton(lineupX, y, width2, height, "阵容");
-		button[2] = new TeamSeasonButton(gameX, y, width1, height, "赛程数据");
+	/**
+	 * 球队阵容表格
+	 * @author lsy
+	 * @version 2015年3月25日  上午10:49:28
+	 */
+	public void updatePlayerTable(final ArrayList<PlayerProfileVO> players) {
+		columns = new String[] {"姓名", "号码", "位置", "年龄","球龄","身高","体重","生日","毕业学校"};
+		int size = players.size();
+		int lth = columns.length;
+		rowData = new String[size][lth];
+		playerTable.setRowHeight(40);
+		playerTable.setWidth(new int[]{140, 44, 44, 44, 44, 151, 118, 77, 209});
+		scroll.setBounds(57, 260, 888, 270);
+		playerTable.setModel(new DefaultTableModel(rowData, columns));
+		for (int i = 0; i < players.size(); i++) {
+			PlayerProfileVO ppVO = players.get(i);
+			playerTable.setValueAt(ppVO.getName(), i, 0);
+			playerTable.setValueAt(ppVO.getNumber(), i, 1);
+			playerTable.setValueAt(ppVO.getPosition(), i, 2);
+			playerTable.setValueAt(ppVO.getAge(), i, 3);
+			playerTable.setValueAt(ppVO.getExp(), i, 4);
+			playerTable.setValueAt(ppVO.getHeight(), i, 5);
+			playerTable.setValueAt( ppVO.getWeight(), i, 6);
+			playerTable.setValueAt(ppVO.getBirth(), i, 7);
+			playerTable.setValueAt(ppVO.getSchool(), i, 8);
+			
+		}
+		//将头像放入表格的第一列 监听已加好 双击球员某一信息进入下一界面
+		try{
+			playerTable.addMouseListener(new UserMouseAdapter(){
+				
+				public void mouseClicked(MouseEvent e){
+					if (e.getClickCount() < 2) return;
+					int rowI  = playerTable.rowAtPoint(e.getPoint());// 得到table的行号
+					if ( rowI > -1){
+						MainController.toPlayerInfoPanel(OldTeamSeasonPanel.this, 
+								players.get(rowI).getName(),OldTeamSeasonPanel.this);
+					}
+					
+				}
+			});
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
-
-
+	
+	public void setEffect(int i) {
+		button[i].setOpaque(true);
+		button[i].setBackground(UIConfig.BUTTON_COLOR);
+		button[i].setForeground(Color.white);
+		TeamSeasonButton.current = button[i];
+	}
 }

@@ -36,7 +36,6 @@ public class SVGHandler {
     	
     	Image result = logos.get(abbr);
     	if (result != null) {
-    		System.out.println("get");
     		return result;
     	}
     	

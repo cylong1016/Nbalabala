@@ -10,6 +10,7 @@ import ui.panel.allplayers.AllPlayersPanel;
 import ui.panel.allplayers.PlayerInfoPanel;
 import ui.panel.allteams.AllTeamsPanel;
 import ui.panel.allteams.TeamGamePanel;
+import ui.panel.allteams.TeamPlayerPanel;
 import ui.panel.allteams.TeamSeasonPanel;
 import ui.panel.gamedata.GameDataPanel;
 import ui.panel.gamedata.GamePanel;
@@ -45,6 +46,8 @@ public class MainController {
 	private static GameDataPanel gameDataPanel;
 	/** 球队赛季数据 */
 	private static TeamSeasonPanel teamSeasonpanel;
+	/** 球队阵容数据 */
+	private static TeamPlayerPanel teamplayerpanel;
 	/** 球队比赛数据 */
 	private static TeamGamePanel teamGamePanel;
 	/** 某场比赛数据 */
@@ -148,11 +151,18 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月20日 下午11:45:39
 	 */
-	public static void toTeamSeasonPanel(BottomPanel allteams, Panel panel, String abbr, int x) {
+	public static void toTeamSeasonPanel(Panel panel, String abbr) {
 		frame.remove(panel);
-		teamSeasonpanel = new TeamSeasonPanel(allteams, "images/teams/teamSeasonBG.png", abbr, x);
+		teamSeasonpanel = new TeamSeasonPanel((BottomPanel)panel,"images/teams/teamSeasonBG.png", abbr);
 		frame.setPanel(teamSeasonpanel);
 	}
+	
+	public static void toTeamPlayerPanel(Panel panel, String abbr) {
+		frame.remove(panel);
+		teamplayerpanel = new TeamPlayerPanel((BottomPanel)panel,"images/teams/teamSeasonBG.png", abbr);
+		frame.setPanel(teamplayerpanel);
+	}
+	
 
 	/**
 	 * 球队赛季数据界面
@@ -160,9 +170,9 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月21日 上午12:31:15
 	 */
-	public static void toTeamGamePanel(BottomPanel allteams, Panel panel,String abbr) {
+	public static void toTeamGamePanel(Panel panel,String abbr) {
 		frame.remove(panel);
-		teamGamePanel = new TeamGamePanel(allteams, UIConfig.IMG_PATH + "teams/teamSeasonBG.png", abbr, 2);
+		teamGamePanel = new TeamGamePanel((BottomPanel)panel,UIConfig.IMG_PATH + "teams/teamSeasonBG.png", abbr);
 		frame.setPanel(teamGamePanel);
 	}
 
