@@ -43,6 +43,6 @@ public interface SeasonDataService {
 	public TeamSeasonVO getTeamDataByAbbr(String abbr, String season);
 
 	/** 根据球队缩写返回其阵容名单 */
-	public ArrayList<String> getPlayerNamesByTeamAbbr(String abbr);
+	public ArrayList<String> getPlayerNamesByTeamAbbr(String abbr, String season);
 
 }

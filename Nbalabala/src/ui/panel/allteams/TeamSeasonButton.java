@@ -11,7 +11,8 @@ public class TeamSeasonButton extends TextButton{
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 8106302891957695746L;
-	static TeamSeasonButton current;
+	public static TeamSeasonButton current;
+	
 	public TeamSeasonButton(int x, int y, int width, int height, String text) {
 		super(x, y, width, height, text);
 	}
