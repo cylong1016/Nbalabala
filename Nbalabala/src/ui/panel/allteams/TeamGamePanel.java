@@ -70,7 +70,7 @@ public class TeamGamePanel extends TeamFatherPanel{
 				int seasonEnd;
 				if (month < 8) {
 					seasonStart = year -1;
-					seasonEnd = year;
+					seasonEnd = year;  
 				}else {
 					seasonStart = year;
 					seasonEnd = year +1;
