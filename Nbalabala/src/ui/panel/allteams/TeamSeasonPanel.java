@@ -338,6 +338,7 @@ public class TeamSeasonPanel extends BottomPanel {
 				updateContrastDiagram();
 				teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
 				updateSeasonTable(teamDetail.getSeasonRecord());
+				seasonInput.setVisible(true);
 				TeamSeasonPanel.this.repaint();
 				return;
 			} else if (e.getSource() == button[1]) {
@@ -345,6 +346,7 @@ public class TeamSeasonPanel extends BottomPanel {
 				if(cd != null) {
 					TeamSeasonPanel.this.remove(cd);
 				}
+				seasonInput.setVisible(false);
 				TeamDetailVO teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
 				ArrayList<PlayerProfileVO> players = teamDetail.getPlayers();
 				updatePlayerTable(players);
@@ -357,6 +359,7 @@ public class TeamSeasonPanel extends BottomPanel {
 				if(cd != null){
 					TeamSeasonPanel.this.remove(cd);
 				}
+				seasonInput.setVisible(false);
 				MainController.toTeamGamePanel(allteams,TeamSeasonPanel.this, abbr);
 				repaint();
 			}

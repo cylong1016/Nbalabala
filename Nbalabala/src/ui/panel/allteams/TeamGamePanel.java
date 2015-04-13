@@ -46,6 +46,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 		this.abbr = abbr;
 		addFindButton();
 		addDateChooser();
+		this.seasonInput.setVisible(false);
 		matchProfile = teamDetail.getMatchRecords();
 		gameData = new GameDataPanel("",1); 
 		pane = new MatchInfoTableFactory(matchProfile,this).getTableScrollPanel();
@@ -161,6 +162,7 @@ public class TeamGamePanel extends TeamSeasonPanel {
 				MainController.toTeamSeasonPanel(allteams, TeamGamePanel.this, abbr, 0);
 			} else if (e.getSource() == button[1]) {
 				MainController.toTeamSeasonPanel(allteams, TeamGamePanel.this, abbr, 1);
+				
 			} else if (e.getSource() == button[2]) {
 				return;
 			}
