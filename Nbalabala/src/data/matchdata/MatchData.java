@@ -147,16 +147,19 @@ public class MatchData implements MatchDataService {
 	 * @see dataservice.MatchDataService#getMatchRecordByPlayerName(java.lang.String)
 	 */
 	@Override
-	public ArrayList<PlayerMatchPerformanceVO> getMatchRecordByPlayerName(String playerName) {
+	public ArrayList<PlayerMatchPerformanceVO> getMatchRecordByPlayerName(String playerName,String seasonStr) {
 		File [] files = Utility.getSortedMatchFiles();
 		
 		ArrayList<PlayerMatchPerformanceVO> result = new ArrayList<PlayerMatchPerformanceVO>();
 		
 		FILELOOP: for (File file : files) {
 			try {
+				String season = file.getName().split("_")[0];
+				if (!season.equals(seasonStr))
+					continue;
+					
 				BufferedReader br = new BufferedReader(new FileReader(file));
 				
-				String season = file.getName().split("_")[0];
 				String[] profile = br.readLine().split(";");
 				String date = profile[0];
 				String twoTeams = profile[1];

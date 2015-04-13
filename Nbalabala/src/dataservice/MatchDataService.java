@@ -25,6 +25,6 @@ public interface MatchDataService {
 
 	/** 通过运动员名字返回其全部比赛记录 */
 	public ArrayList<PlayerMatchPerformanceVO> getMatchRecordByPlayerName(
-			String playerName);
+			String playerName, String seasonStr);
 
 }
