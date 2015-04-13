@@ -52,6 +52,10 @@ public class PlayerInfoPanel extends BottomPanel {
 																"犯规数", "得分", "两双", "得分/篮板/助攻", "效率", "GmSc 效率值",
 																"真实命中率", "投篮效率", "进攻篮板率", "防守篮板率", "篮板率", "助攻率", "抢断率",
 																"盖帽率", "失误率", "使用率"};
+	private static final String[] GAME_COLUMN_NAMES = new String[]{"赛季", "日期", "对阵", "首发位置","在场时间", "投篮命中数", "投篮出手数",
+		"三分命中数", "三分出手数", "罚球命中数", "罚球出手数", 
+		"进攻篮板", "防守篮板", "总篮板", "助攻数", "抢断数", "盖帽数", "失误数",
+		"犯规数", "得分"};
 
 	protected TextButton totalButton, gameButton;
 	protected String name;
@@ -245,7 +249,7 @@ public class PlayerInfoPanel extends BottomPanel {
 		ArrayList<PlayerMatchPerformanceVO> playerMatch = detailVO.getMatchRecords();
 		int lth = playerMatch.size();
 
-		String[][] rowData = new String[lth][COLUMN_NAMES.length];
+		String[][] rowData = new String[lth][GAME_COLUMN_NAMES.length];
 		for(int i = 0; i < lth; i++) {
 			PlayerMatchPerformanceVO vo = playerMatch.get(i);
 			MatchPlayerVO player = vo.getMatchPlayerRecord();
@@ -270,7 +274,7 @@ public class PlayerInfoPanel extends BottomPanel {
 			rowData[i][18] = player.getFoul() + "";
 			rowData[i][19] = player.getPersonalGoal() + "";
 		}
-		table = new BottomTable(rowData, COLUMN_NAMES);
+		table = new BottomTable(rowData, GAME_COLUMN_NAMES);
 		table.getColumnModel().getColumn(2).setPreferredWidth(110);
 		scroll = new BottomScrollPane(table);
 		scroll.setBounds(57, 260, 888, 270); // 表格的位置
