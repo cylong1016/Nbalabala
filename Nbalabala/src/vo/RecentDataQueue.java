@@ -7,29 +7,25 @@ package vo;
  */
 public class RecentDataQueue {
 	
-	private int [] recent = new int[10];
+	private int [] recent = new int[5];
 	private int last = 0;
 	private int start = 0;
 	private int size = 0;
 	
 	public int getLastData() {
 		if (last == 0) {
-			return recent[9];
+			return recent[4];
 		}else {
 			return recent[last - 1];
 		}
 	}
 	
-	public double getFormerFiveAvg() {
-		return (double)getFormerFiveSum() / 5;
-	}
-	
-	public double[] getRecentFive() {
-		double[] result = new double[5];
+	public int[] getRecentFive() {
+		int[] result = new int[5];
 		int index = last;
 		for (int i=4; i>=0; i--) {
 			index --;
-			if (index < 0) index = 9;
+			if (index < 0) index = 4;
 			result[i] = recent[i];
 		}
 		return result;
@@ -37,71 +33,32 @@ public class RecentDataQueue {
 	
 	public void enqueue(int data) {
 		recent[last] = data;
-		if (size < 10) {
+		if (size < 5) {
 			size ++;
 		}else{
 			start ++;
-			if (start > 9) start = 0;
+			if (start > 4) start = 0;
 		}
 		last ++;
-		if (last == 10) {
+		if (last > 4) {
 			last = 0;
 		}
 	}
 	
-	public double getPromotion() {
-		if (size < 10) {
+	public int getFiveSum() {
+		if (size < 5) {
 			return 0;
-		}else {
-			int i;
-			int index = start;
-			int formerFiveSum = 0;
-			int latterFiveSum = 0;
-			for (i=0; i<5; i++) {
-				formerFiveSum += recent[index];
-				index ++;
-				if (index == 10) index = 0;
+		}else{
+			int result = 0;
+			for (Integer i : recent) {
+				result += i;
 			}
-			if (formerFiveSum == 0) return 0;
-			for (; i<10; i++) {
-				latterFiveSum += recent[index];
-				index ++;
-				if (index == 10) index = 0;
-			}
-			return (latterFiveSum - formerFiveSum) / (double)formerFiveSum;
+			return result;
 		}
 	}
 	
-	public int getFormerFiveSum() {
-		if (size < 10) {
-			return 0;
-		}else {
-			int i;
-			int index = start;
-			int formerFiveSum = 0;
-			for (i=0; i<5; i++) {
-				formerFiveSum += recent[index];
-				index ++;
-				if (index == 10) index = 0;
-			}
-			return formerFiveSum;
-		}
+	public double getFiveAvg() {
+		return (double)getFiveSum() / 5;
 	}
 	
-	public int getLatterFiveSum() {
-		if (size < 10) {
-			return 0;
-		}else {
-			int i;
-			int index = last;
-			int latterFiveSum = 0;
-			for (i=0; i<5; i++) {
-				index --;
-				if (index < 0) index = 9;
-				latterFiveSum += recent[index];
-			}
-			return latterFiveSum;
-		}
-	}
-
 }

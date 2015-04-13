@@ -407,72 +407,82 @@ public class HotQuery implements HotBLService{
 		ArrayList<HotFastestPlayerVO> result = new ArrayList<HotFastestPlayerVO>();
 		for (i=1; i<=size; i++) {
 			PlayerSeasonVO seasonVO = players.get(i - 1);
-			int tmp = 0;
 			double promotion = 0;
-			double formerFiveAvg = 0;
-			double [] recentFive = null;
-			double [] recentFiveDivisor = null;
-			switch (property) {
-			case SCORE_AVG:
-				promotion = seasonVO.scorePromotion;
-				formerFiveAvg = seasonVO.scoreQueue.getFormerFiveAvg();
-				recentFive = seasonVO.scoreQueue.getRecentFive();
-				break;
-			case REBOUND_AVG:
-				promotion = seasonVO.reboundPromotion;
-				formerFiveAvg = seasonVO.reboundQueue.getFormerFiveAvg();
-				recentFive = seasonVO.reboundQueue.getRecentFive();
-				break;
-			case ASSIST_AVG:
-				promotion = seasonVO.assistPromotion;
-				formerFiveAvg = seasonVO.assistQueue.getFormerFiveAvg();
-				recentFive = seasonVO.assistQueue.getRecentFive();
-				break;
-			case BLOCK_AVG:
-				promotion = seasonVO.blockPromotion;
-				formerFiveAvg = seasonVO.blockQueue.getFormerFiveAvg();
-				recentFive = seasonVO.blockQueue.getRecentFive();
-				break;
-			case STEAL_AVG:
-				promotion = seasonVO.stealPromotion;
-				formerFiveAvg = seasonVO.stealQueue.getFormerFiveAvg();
-				recentFive = seasonVO.stealQueue.getRecentFive();
-				break;
-			case FIELD_PERCENT:
-				promotion = seasonVO.fieldPercentPromotion;
-				tmp = seasonVO.fieldAttemptQueue.getFormerFiveSum();
-				if (tmp != 0) {
-					formerFiveAvg = ((double)seasonVO.fieldGoalQueue.getFormerFiveSum() / tmp);
+			double formerAvg = 0;
+			int [] recentFive = null;
+			int [] recentFiveDivisor = null;
+			double formerMatchCount = seasonVO.matchCount - 5;
+			
+			double formerAttempt = 0;
+			
+			if (formerMatchCount != 0) {
+				switch (property) {
+				case SCORE_AVG:
+					promotion = seasonVO.scorePromotion;
+					formerAvg = (seasonVO.score - seasonVO.scoreQueue.getFiveSum())/formerMatchCount;
+					recentFive = seasonVO.scoreQueue.getRecentFive();
+					break;
+				case REBOUND_AVG:
+					promotion = seasonVO.reboundPromotion;
+					formerAvg = (seasonVO.totalRebound - seasonVO.reboundQueue.getFiveSum())/formerMatchCount;
+					recentFive = seasonVO.reboundQueue.getRecentFive();
+					break;
+				case ASSIST_AVG:
+					promotion = seasonVO.assistPromotion;
+					formerAvg = (seasonVO.assist - seasonVO.assistQueue.getFiveSum())/formerMatchCount;
+					recentFive = seasonVO.assistQueue.getRecentFive();
+					break;
+				case BLOCK_AVG:
+					promotion = seasonVO.blockPromotion;
+					formerAvg = (seasonVO.block - seasonVO.blockQueue.getFiveSum())/formerMatchCount;
+					recentFive = seasonVO.blockQueue.getRecentFive();
+					break;
+				case STEAL_AVG:
+					promotion = seasonVO.stealPromotion;
+					formerAvg = (seasonVO.steal - seasonVO.stealQueue.getFiveSum())/formerMatchCount;
+					recentFive = seasonVO.stealQueue.getRecentFive();
+					break;
+				case FIELD_PERCENT:
+					promotion = seasonVO.fieldPercentPromotion;
+					formerAttempt = seasonVO.fieldAttempt - seasonVO.fieldAttemptQueue.getFiveSum();
+					if (formerAttempt != 0) {
+						formerAvg = (seasonVO.fieldGoal - seasonVO.fieldGoalQueue.getFiveSum()) / formerAttempt;
+					}
+					recentFive = seasonVO.fieldGoalQueue.getRecentFive();
+					recentFiveDivisor = seasonVO.fieldAttemptQueue.getRecentFive();
+					break;
+				case THREE_POINT_PERCENT:
+					promotion = seasonVO.threePointPercentPromotion;
+					formerAttempt = seasonVO.threePointAttempt - seasonVO.threePointAttemptQueue.getFiveSum();
+					if (formerAttempt != 0) {
+						formerAvg = (seasonVO.threePointGoal - seasonVO.threePointGoalQueue.getFiveSum()) / formerAttempt;
+					}
+					recentFive = seasonVO.threePointGoalQueue.getRecentFive();
+					recentFiveDivisor = seasonVO.threePointAttemptQueue.getRecentFive();
+					break;
+				case FREETHROW_PERCENT:
+					promotion = seasonVO.freethrowPercentPromotion;
+					formerAttempt = seasonVO.freethrowAttempt - seasonVO.freethrowAttemptQueue.getFiveSum();
+					if (formerAttempt != 0) {
+						formerAvg = (seasonVO.freethrowGoal - seasonVO.freethrowGoalQueue.getFiveSum()) / formerAttempt;
+					}
+					recentFive = seasonVO.freethrowGoalQueue.getRecentFive();
+					recentFiveDivisor = seasonVO.freethrowAttemptQueue.getRecentFive();
+					break;
+				default:
+					break;
 				}
-				recentFive = seasonVO.fieldGoalQueue.getRecentFive();
-				recentFiveDivisor = seasonVO.fieldAttemptQueue.getRecentFive();
-				break;
-			case THREE_POINT_PERCENT:
-				promotion = seasonVO.threePointPercentPromotion;
-				tmp = seasonVO.threePointAttemptQueue.getFormerFiveSum();
-				if (tmp != 0) {
-					formerFiveAvg = ((double)seasonVO.threePointGoalQueue.getFormerFiveSum() / tmp);
-				}
-				recentFive = seasonVO.threePointGoalQueue.getRecentFive();
-				recentFiveDivisor = seasonVO.threePointAttemptQueue.getRecentFive();
-				break;
-			case FREETHROW_PERCENT:
-				promotion = seasonVO.freethrowPercentPromotion;
-				tmp = seasonVO.freethrowAttemptQueue.getFormerFiveSum();
-				if (tmp != 0) {
-					formerFiveAvg = ((double)seasonVO.freethrowGoalQueue.getFormerFiveSum() / tmp);
-				}
-				recentFive = seasonVO.freethrowGoalQueue.getRecentFive();
-				recentFiveDivisor = seasonVO.freethrowAttemptQueue.getRecentFive();
-				break;
-			default:
-				break;
 			}
+			
 			String name = seasonVO.name;
 			String position = playerService.getPlayerProfileByName(name).getPosition();
 			if (recentFiveDivisor == null) {
+				double[]recentResult = new double[5];
+				for (int k=0;k<5;k++) {
+					recentResult[k] = (double)recentFive[k];
+				}
 				result.add(new HotFastestPlayerVO(i, name, seasonVO.teamName, position,
-						formerFiveAvg, recentFive, promotion));
+						formerAvg, recentResult, promotion));
 			}else {
 				double [] recentPercent = new double[5];
 				for(int j=0;j<5;j++) {
@@ -483,7 +493,7 @@ public class HotQuery implements HotBLService{
 					}
 				}
 				result.add(new HotFastestPlayerVO(i, name, seasonVO.teamName, position,
-						formerFiveAvg, recentPercent, promotion));
+						formerAvg, recentPercent, promotion));
 			}
 		}
 		return result;

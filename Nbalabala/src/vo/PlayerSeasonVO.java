@@ -507,42 +507,74 @@ public class PlayerSeasonVO {
 			latestBlock = blockQueue.getLastData();
 			latestSteal = stealQueue.getLastData();
 			
-			if (matchCount > 9) {
-				scorePromotion = scoreQueue.getPromotion();
-				reboundPromotion = reboundQueue.getPromotion();
-				assistPromotion = assistQueue.getPromotion();
-				blockPromotion = blockQueue.getPromotion();
-				stealPromotion = stealQueue.getPromotion();
+			if (matchCount > 5) {
+				double formerMatchCount = matchCount - 5;
 				
-				int formerFieldAttempt = fieldAttemptQueue.getFormerFiveSum();
-				int latterFieldAttempt = fieldAttemptQueue.getLatterFiveSum();
-				if (formerFieldAttempt == 0 || latterFieldAttempt == 0) fieldPercentPromotion = 0;
-				else{
-					double formerFieldPercent = (double)fieldGoalQueue.getFormerFiveSum() / formerFieldAttempt;
-					double latterFieldPercent = (double)fieldGoalQueue.getLatterFiveSum() / latterFieldAttempt;
-					if (formerFieldPercent != 0)
-						fieldPercentPromotion = (latterFieldPercent - formerFieldPercent) / formerFieldPercent;
+				int recentScore = scoreQueue.getFiveSum();
+				int recentRebound = reboundQueue.getFiveSum();
+				int recentAssist = assistQueue.getFiveSum();
+				int recentBlock  = blockQueue.getFiveSum();
+				int recentSteal = stealQueue.getFiveSum();
+				
+				double scoreDivisor = (score - recentScore) / formerMatchCount;
+				double reboundDivisor = (totalRebound - recentRebound) / formerMatchCount;
+				double assistDivisor = (assist - recentAssist) / formerMatchCount;
+				double blockDivisor = (block - recentBlock) / formerMatchCount;
+				double stealDivisor = (steal - recentSteal) / formerMatchCount;
+				
+				if (scoreDivisor != 0)
+					scorePromotion = recentScore / 5 / scoreDivisor - 1;
+				if (reboundDivisor != 0)
+					reboundPromotion = recentRebound / 5 / reboundDivisor - 1;
+				if (assistDivisor != 0)
+					assistPromotion = recentAssist / 5 / assistDivisor - 1;
+				if (blockDivisor != 0)
+					blockPromotion = recentBlock / 5 / blockDivisor - 1;
+				if (stealDivisor != 0)
+					stealPromotion = recentSteal / 5 / stealDivisor - 1;
+				
+				int formerFieldAttempt = fieldAttempt - fieldAttemptQueue.getFiveSum();
+				int formerFieldGoal = fieldGoal - fieldGoalQueue.getFiveSum();
+				if (formerFieldAttempt != 0 && formerFieldGoal != 0){
+					double formerFieldPercent = (double)formerFieldGoal / formerFieldAttempt;
+					int [] recentFieldGoal = fieldGoalQueue.getRecentFive();
+					int [] recentFieldAttempt = fieldAttemptQueue.getRecentFive();
+					double recentFivePercentSum = 0;
+					for (int i=0;i<5;i++) {
+						if (recentFieldAttempt[i] != 0)
+							recentFivePercentSum += recentFieldGoal[i] / (double)recentFieldAttempt[i];
+					}
+					fieldPercentPromotion = recentFivePercentSum / 5 / formerFieldPercent- 1;
 				}
 				
-				int formerThreePointAttempt = threePointAttemptQueue.getFormerFiveSum();
-				int latterThreePointAttempt = threePointAttemptQueue.getLatterFiveSum();
-				if (formerThreePointAttempt == 0 || latterThreePointAttempt == 0) threePointPercentPromotion = 0;
-				else{
-					double formerThreePointPercent = (double)threePointGoalQueue.getFormerFiveSum() / formerThreePointAttempt;
-					double latterThreePointPercent = (double)threePointGoalQueue.getLatterFiveSum() / latterThreePointAttempt;
-					if (formerThreePointPercent != 0)
-						threePointPercentPromotion = (latterThreePointPercent - formerThreePointPercent) / formerThreePointPercent;
+				int formerThreePointAttempt = threePointAttempt - threePointAttemptQueue.getFiveSum();
+				int formerThreePointGoal = threePointGoal - threePointGoalQueue.getFiveSum();
+				if (formerThreePointAttempt != 0 && formerThreePointGoal != 0){
+					double formerThreePointPercent = (double)formerThreePointGoal / formerThreePointAttempt;
+					int [] recentThreePointGoal = threePointGoalQueue.getRecentFive();
+					int [] recentThreePointAttempt = threePointAttemptQueue.getRecentFive();
+					double recentFivePercentSum = 0;
+					for (int i=0;i<5;i++) {
+						if (recentThreePointAttempt[i] != 0)
+							recentFivePercentSum += recentThreePointGoal[i] / (double)recentThreePointAttempt[i];
+					}
+					threePointPercentPromotion = recentFivePercentSum / 5 / formerThreePointPercent - 1;
 				}
 				
-				int formerFreethrowAttempt = freethrowAttemptQueue.getFormerFiveSum();
-				int latterFreethrowAttempt = freethrowAttemptQueue.getLatterFiveSum();
-				if (formerFreethrowAttempt == 0 || latterFreethrowAttempt == 0) freethrowPercentPromotion = 0;
-				else{
-					double formerFreethrowPercent = (double)freethrowGoalQueue.getFormerFiveSum() / formerFreethrowAttempt;
-					double latterFreethrowPercent = (double)freethrowGoalQueue.getLatterFiveSum() / latterFreethrowAttempt;
-					if (formerFreethrowPercent != 0)
-						freethrowPercentPromotion = (latterFreethrowPercent - formerFreethrowPercent) / formerFreethrowPercent;
+				int formerFreethrowAttempt = freethrowAttempt - freethrowAttemptQueue.getFiveSum();
+				int formerFreethrowGoal = freethrowGoal - freethrowGoalQueue.getFiveSum();
+				if (formerFreethrowAttempt != 0 && formerFreethrowGoal != 0){
+					double formerFreethrowPercent = (double)formerFreethrowGoal / formerFreethrowAttempt;
+					int [] recentFreethrowGoal = freethrowGoalQueue.getRecentFive();
+					int [] recentFreethrowAttempt = freethrowAttemptQueue.getRecentFive();
+					double recentFivePercentSum = 0;
+					for (int i=0;i<5;i++) {
+						if (recentFreethrowAttempt[i] != 0)
+							recentFivePercentSum += recentFreethrowGoal[i] / (double)recentFreethrowAttempt[i];
+					}
+					freethrowPercentPromotion = recentFivePercentSum / 5 / formerFreethrowPercent- 1;
 				}
+				
 			}
 			
 		}

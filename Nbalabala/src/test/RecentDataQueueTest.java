@@ -17,32 +17,24 @@ public class RecentDataQueueTest {
 	/**
 	 * Test method for {@link vo.RecentDataQueue#enqueue(int)}.
 	 */
-	@Before
+	@Test
 	public void testEnqueue() {
-		for (int i=1; i< 15; i++){
+		for (int i=1; i< 16; i++){
 			queue.enqueue(i);
 		}
-//		queue.print();
+		System.out.println(queue.getFiveSum());
 	}
 	
 	public void print() {
 //		queue.print();
 	}
 
-	/**
-	 * Test method for {@link vo.RecentDataQueue#getPromotion()}.
-	 */
-	@Test
-	public void testGetPromotion() {
-		System.out.println(queue.getPromotion());
-	}
 
 	/**
 	 * Test method for {@link vo.RecentDataQueue#getFormerFiveSum()}.
 	 */
 	@Test
 	public void testGetFormerFiveSum() {
-		System.out.println(queue.getFormerFiveSum());
 	}
 
 	/**
@@ -50,7 +42,6 @@ public class RecentDataQueueTest {
 	 */
 	@Test
 	public void testGetLatterFiveSum() {
-		System.out.println(queue.getLatterFiveSum());
 	}
 
 }
