@@ -24,6 +24,9 @@ public interface SeasonDataService {
 	/** 返回最近赛季全部球员数据 */
 	public ArrayList<PlayerSeasonVO> getAllPlayerRecentSeasonData();
 	
+	/** 返回最近赛季当天上场的球员数据 */
+	public ArrayList<PlayerSeasonVO> getAllPlayerRecentSeasonTodayData();
+	
 	/** 返回最近赛季全部球队数据 */
 	public ArrayList<TeamSeasonVO> getAllTeamRecentSeasonData();
 

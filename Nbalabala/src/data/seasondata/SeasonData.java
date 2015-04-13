@@ -372,5 +372,26 @@ public class SeasonData implements SeasonDataService {
 			}
 		}
 	}
+
+	/**
+	 * @see dataservice.SeasonDataService#getAllPlayerRecentSeasonTodayData()
+	 */
+	@Override
+	public ArrayList<PlayerSeasonVO> getAllPlayerRecentSeasonTodayData() {
+		HashMap<String, PlayerSeasonVO> map = allPlayerRecords.get(getRecentSeason());
+		if (map == null) {
+			return new ArrayList<PlayerSeasonVO>();
+		}else {
+			ArrayList<PlayerSeasonVO> result = new ArrayList<PlayerSeasonVO>();
+			Iterator<Entry<String, PlayerSeasonVO>> itr = map.entrySet().iterator();
+			while(itr.hasNext()) {
+				PlayerSeasonVO vo = itr.next().getValue();
+				if (vo.latestMonth == Utility.latestMonth && vo.latestDay == Utility.latestDay) {
+					result.add(vo);
+				}
+			}
+			return result;
+		}
+	}
 	
 }

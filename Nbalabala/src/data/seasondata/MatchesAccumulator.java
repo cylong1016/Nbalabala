@@ -51,15 +51,19 @@ public class MatchesAccumulator {
 		playerUpdated.clear();
 		teamUpdated.clear();
 		BufferedReader br = null;
-
+		
 		for (File file : files) {
 			try {
+
 				String fileName = file.getName();
 				String season = fileName.substring(0, 5);
 				int month = Integer.parseInt(fileName.substring(6, 8));
 				int day = Integer.parseInt(fileName.substring(9, 11));
 				if (month < 7)
 					month += 12;
+				
+				Utility.latestMonth = month;
+				Utility.latestDay = day;
 
 				HashMap<String, PlayerSeasonVO> playerRecords = allPlayerRecords
 						.get(season);
@@ -68,6 +72,8 @@ public class MatchesAccumulator {
 							new HashMap<String, PlayerSeasonVO>());
 					playerRecords = allPlayerRecords.get(season);
 				}
+				
+				
 
 				HashMap<String, TeamSeasonVO> teamRecords = allTeamRecords
 						.get(season);

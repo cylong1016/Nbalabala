@@ -37,7 +37,7 @@ public class Console {
 		
 		try {
 			PrintStream printStream = new PrintStream(new File("dxh.txt"));
-			new Console().execute(printStream, s);
+//			new Console().execute(printStream, {"-team"});
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -173,7 +173,7 @@ public class Console {
 			info.setSteal(vo.stealAvg);
 			info.setTeamName(vo.teamName);
 			info.setThree(vo.threePointPercent);
-			out.print(info);
+			out.println(info);
 		}
 	}
 	
@@ -197,7 +197,7 @@ public class Console {
 			info.setSteal(vo.steal);
 			info.setTeamName(vo.teamName);
 			info.setThree(vo.threePointPercent);
-			out.print(info);
+			out.println(info);
 		}
 	}
 	
@@ -216,7 +216,7 @@ public class Console {
 			info.setStealEfficient(vo.stealEff);
 			info.setTeamName(vo.teamName);
 			info.setWinRate(vo.winning);
-			out.print(info);
+			out.println(info);
 		}
 	}
 	
@@ -269,7 +269,7 @@ public class Console {
 			default:
 				break;
 			}
-			out.print(info);
+			out.println(info);
 		}
 	}
 	
@@ -309,6 +309,7 @@ public class Console {
 				info.setTeamName(vo.teamName);
 				info.setValue(vo.scoreAvg);
 				info.setUpgradeRate(vo.scorePromotion);
+				out.println(info);
 			}
 			return;
 		case "assist":
@@ -321,6 +322,7 @@ public class Console {
 				info.setTeamName(vo.teamName);
 				info.setValue(vo.assistAvg);
 				info.setUpgradeRate(vo.assistPromotion);
+				out.println(info);
 			}
 			return;
 		default:
@@ -333,6 +335,7 @@ public class Console {
 				info.setTeamName(vo.teamName);
 				info.setValue(vo.totalReboundAvg);
 				info.setUpgradeRate(vo.reboundPromotion);
+				out.println(info);
 			}
 		}
 	}
@@ -361,6 +364,7 @@ public class Console {
 			info.setSteal(vo.stealAvg);
 			info.setTeamName(vo.teamName);
 			info.setThree(vo.threePointPercent);
+			out.println(info);
 		}
 		
 	}

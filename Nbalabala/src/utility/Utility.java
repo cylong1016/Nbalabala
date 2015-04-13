@@ -15,6 +15,9 @@ import enums.TeamState;
  */
 public class Utility {
 	
+	public static int latestMonth = 0;
+	public static int latestDay = 0;
+	
 	/** 根据比赛信息文件夹下的现有比赛数据，返回最新赛季作为默认赛季，形如13-14 */
 	public static String getDefaultSeason() {
 		File[] files = getSortedMatchFiles();

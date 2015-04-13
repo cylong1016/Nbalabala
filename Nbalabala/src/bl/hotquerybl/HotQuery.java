@@ -91,7 +91,7 @@ public class HotQuery implements HotBLService{
 		default:
 			break;
 		}
-		ArrayList<PlayerSeasonVO> players = seasonService.getAllPlayerRecentSeasonData();
+		ArrayList<PlayerSeasonVO> players = seasonService.getAllPlayerRecentSeasonTodayData();
 		Collections.sort(players, comparator);
 		int size = players.size();
 		if (size > 5) size = 5;
