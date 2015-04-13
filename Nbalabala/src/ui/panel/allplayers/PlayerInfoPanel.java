@@ -114,6 +114,8 @@ public class PlayerInfoPanel extends BottomPanel {
 		cd = new ContrastDiagram(fivePlayersData, fiveArgsAvg, highestScoreReboundAssist, "球员平均");
 		cd.setBounds(57, 260, 888, 160);
 		this.add(cd);
+		cd.updateUI();
+		cd.repaint();
 	}
 	
 	/**
