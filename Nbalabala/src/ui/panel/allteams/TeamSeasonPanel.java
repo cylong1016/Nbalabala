@@ -9,6 +9,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
+import javax.swing.table.DefaultTableModel;
 
 import ui.UIConfig;
 import ui.common.SeasonInputPanel;
@@ -49,7 +50,7 @@ public class TeamSeasonPanel extends BottomPanel {
 	MatchQueryBLService matchQuery = new MatchQuery();
 
 	/** 队伍数据表格 */
-	private BottomTable table;
+	private BottomTable playerTable;
 	/** 放表格的滚动条 */
 	private BottomScrollPane scroll;
 	/** 表格中数据显示的小数点位数 */
@@ -133,12 +134,13 @@ public class TeamSeasonPanel extends BottomPanel {
 	 * @version 2015年3月25日  下午1:15:54
 	 */
 	public void iniTable(int i){
+		addplayerTable(teamDetail.getSeasonRecord());
 		state = i;
 		if(i==0){
-			addSeasonTable(teamDetail.getSeasonRecord());
+			updateSeasonTable(teamDetail.getSeasonRecord());
 		}else{
 			ArrayList<PlayerProfileVO> players = teamDetail.getPlayers();
-			setPlayerTable(players);
+			updatePlayerTable(players);
 		}
 	}
 	
@@ -211,6 +213,7 @@ public class TeamSeasonPanel extends BottomPanel {
 
 		});
 	}
+
 	
 	/**
 	 * 球队赛季数据表格
@@ -218,86 +221,81 @@ public class TeamSeasonPanel extends BottomPanel {
 	 * @author lsy
 	 * @version 2015年3月25日 上午10:34:45
 	 */
-	public void addSeasonTable(TeamSeasonVO record) {
+	public void updateSeasonTable(TeamSeasonVO record) {
 		columns = new String[]{ "", "球队名称", "胜场数", "负场数", "总场数", "胜率", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手",
 				"三分命中率", "罚球命中", "罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "进攻篮板效率", "防守篮板效率", "进攻回合", "进攻效率",
 				"防守回合", "防守效率", "抢断", "抢断效率", "助攻", "助攻率", "盖帽", "失误", "犯规", "得分" };
 		rowData = new String[2][columns.length];
-		table = new BottomTable(rowData, columns);
-		
-		rowData[0][0] = "总数据";
-		rowData[0][1] = Constants.translateTeamAbbr(record.getTeamName());
-		rowData[0][2] = Integer.toString(record.getWins());
-		rowData[0][3] = Integer.toString(record.getLoses());
-		rowData[0][4] = Integer.toString(record.getMatchCount());
-		rowData[0][5] = format.format(record.getWinning());
-		rowData[0][6] = Integer.toString(record.getFieldGoal());
-		rowData[0][7] = Integer.toString(record.getFieldAttempt());
-		rowData[0][8] = format.format(record.getFieldPercent());
-		rowData[0][9] = Integer.toString(record.getThreePointGoal());
-		rowData[0][10] = Integer.toString(record.getThreePointAttempt());
-		rowData[0][11] = format.format(record.getThreePointPercent());
-		rowData[0][12] = Integer.toString(record.getFreethrowGoal());
-		rowData[0][13] = Integer.toString(record.getFreethrowAttempt());
-		rowData[0][14] = format.format(record.getFreeThrowPercent());
-		rowData[0][15] = Integer.toString(record.getOffensiveRebound());
-		rowData[0][16] = Integer.toString(record.getDefensiveRebound());
-		rowData[0][17] = Integer.toString(record.getTotalRebound());
-		rowData[0][18] = format.format(record.getOffensiveReboundEff());
-		rowData[0][19] = format.format(record.getDefensiveReboundEff());
-		rowData[0][20] = format.format(record.getOffensiveRound());
-		rowData[0][21] = format.format(record.getOffensiveEff());
-		rowData[0][22] = format.format(record.getDefensiveRound());
-		rowData[0][23] = format.format(record.getDefensiveEff());
-		rowData[0][24] = Integer.toString(record.getSteal());
-		rowData[0][25] = format.format(record.getStealEff());
-		rowData[0][26] = Integer.toString(record.getAssist());
-		rowData[0][27] = format.format(record.getAssistEff());
-		rowData[0][28] = Integer.toString(record.getBlock());
-		rowData[0][29] = Integer.toString(record.getTurnover());
-		rowData[0][30] = Integer.toString(record.getFoul());
-		rowData[0][31] = Integer.toString(record.getScore());
-
-		rowData[1][0] = "平均数据";
-		rowData[1][1] = Constants.translateTeamAbbr(record.getTeamName());
-		rowData[1][2] = format.format((record.getWinning()));
-		rowData[1][3] = format.format((record.getLosing()));
-		rowData[1][4] = Integer.toString(record.getMatchCount());
-		rowData[1][5] = format.format(record.getWinning());
-		rowData[1][6] = format.format(record.getFieldGoalAvg());
-		rowData[1][7] = format.format(record.getFieldAttemptAvg());
-		rowData[1][8] = format.format(record.getFieldPercent());
-		rowData[1][9] = format.format(record.getThreePointGoalAvg());
-		rowData[1][10] = format.format(record.getThreePointAttemptAvg());
-		rowData[1][11] = format.format(record.getThreePointPercent());
-		rowData[1][12] = format.format(record.getFreethrowGoalAvg());
-		rowData[1][13] = format.format(record.getFreethrowAttemptAvg());
-		rowData[1][14] = format.format(record.getFreeThrowPercent());
-		rowData[1][15] = format.format(record.getOffensiveReboundAvg());
-		rowData[1][16] = format.format(record.getDefensiveReboundAvg());
-		rowData[1][17] = format.format(record.getTotalReboundAvg());
-		rowData[1][18] = format.format(record.getOffensiveReboundEff());
-		rowData[1][19] = format.format(record.getDefensiveReboundEff());
-		rowData[1][20] = format.format(record.getOffensiveRoundAvg());
-		rowData[1][21] = format.format(record.getOffensiveEff());
-		rowData[1][22] = format.format(record.getDefensiveRoundAvg());
-		rowData[1][23] = format.format(record.getDefensiveEff());
-		rowData[1][24] = format.format(record.getStealAvg());
-		rowData[1][25] = format.format(record.getStealEff());
-		rowData[1][26] = format.format(record.getAssistAvg());
-		rowData[1][27] = format.format(record.getAssistEff());
-		rowData[1][28] = format.format(record.getBlockAvg());
-		rowData[1][29] = format.format(record.getTurnoverAvg());
-		rowData[1][30] = format.format(record.getFoulAvg());
-		rowData[1][31] = format.format(record.getScoreAvg());
-		
-		//表头太长显示不开，个别设置之
-		table.getColumnModel().getColumn(18).setPreferredWidth(80);
-		table.getColumnModel().getColumn(19).setPreferredWidth(80);
-		scroll = new BottomScrollPane(table);
+		playerTable.getColumnModel().getColumn(18).setPreferredWidth(80);
+		playerTable.getColumnModel().getColumn(19).setPreferredWidth(80);
 		scroll.setBounds(57, 450, 888, 80); // 表格的位置
 		
-		this.add(scroll);
+		playerTable.setValueAt("总数据", 0, 0);
+		playerTable.setValueAt(Constants.translateTeamAbbr(record.getTeamName()), 0, 1);
+		playerTable.setValueAt(Integer.toString(record.getWins()), 0, 2);
+		playerTable.setValueAt(Integer.toString(record.getLoses()), 0, 3);
+		playerTable.setValueAt(Integer.toString(record.getMatchCount()), 0, 4);
+		playerTable.setValueAt(format.format(record.getWinning()), 0, 5);
+		playerTable.setValueAt(Integer.toString(record.getFieldGoal()), 0, 6);
+		playerTable.setValueAt( Integer.toString(record.getFieldAttempt()), 0, 7);
+		playerTable.setValueAt(format.format(record.getFieldPercent()), 0, 8);
+		playerTable.setValueAt(Integer.toString(record.getThreePointGoal()), 0, 9);
+		playerTable.setValueAt(Integer.toString(record.getThreePointAttempt()), 0, 10);
+		playerTable.setValueAt(format.format(record.getThreePointPercent()), 0, 11);
+		playerTable.setValueAt(Integer.toString(record.getFreethrowGoal()), 0, 12);
+		playerTable.setValueAt(Integer.toString(record.getFreethrowAttempt()), 0, 13);
+		playerTable.setValueAt(format.format(record.getFreeThrowPercent()), 0, 14);
+		playerTable.setValueAt(Integer.toString(record.getOffensiveRebound()), 0, 15);
+		playerTable.setValueAt(Integer.toString(record.getDefensiveRebound()), 0, 16);
+		playerTable.setValueAt(Integer.toString(record.getTotalRebound()), 0, 17);
+		playerTable.setValueAt(format.format(record.getOffensiveReboundEff()), 0, 18);
+		playerTable.setValueAt(format.format(record.getDefensiveReboundEff()), 0, 19);
+		playerTable.setValueAt(format.format(record.getOffensiveRound()), 0, 20);
+		playerTable.setValueAt(format.format(record.getOffensiveEff()), 0, 21);
+		playerTable.setValueAt(format.format(record.getDefensiveRound()), 0, 22);
+		playerTable.setValueAt(format.format(record.getDefensiveEff()), 0, 23);
+		playerTable.setValueAt(Integer.toString(record.getSteal()), 0, 24);
+		playerTable.setValueAt(format.format(record.getStealEff()), 0, 25);
+		playerTable.setValueAt(Integer.toString(record.getAssist()), 0, 26);
+		playerTable.setValueAt(format.format(record.getAssistEff()), 0, 27);
+		playerTable.setValueAt(Integer.toString(record.getBlock()), 0, 28);
+		playerTable.setValueAt(Integer.toString(record.getTurnover()), 0, 29);
+		playerTable.setValueAt(Integer.toString(record.getFoul()), 0, 30);
+		playerTable.setValueAt(Integer.toString(record.getScore()), 0, 31);
+		
+		
+		playerTable.setValueAt("平均数据", 0, 0);
+		playerTable.setValueAt(Constants.translateTeamAbbr(record.getTeamName()), 1, 1);
+		playerTable.setValueAt(format.format((record.getWinning())), 1, 2);
+		playerTable.setValueAt(format.format((record.getLosing())), 1, 3);
+		playerTable.setValueAt(Integer.toString(record.getMatchCount()), 1, 4);
+		playerTable.setValueAt( format.format(record.getWinning()), 1, 5);
+		playerTable.setValueAt(format.format(record.getFieldGoalAvg()), 1, 6);
+		playerTable.setValueAt(format.format(record.getFieldAttemptAvg()), 1, 7);
+		playerTable.setValueAt(format.format(record.getFieldPercent()), 1, 8);
+		playerTable.setValueAt(format.format(record.getThreePointGoalAvg()), 1, 9);
+		playerTable.setValueAt(format.format(record.getThreePointAttemptAvg()), 1, 10);
+		playerTable.setValueAt(format.format(record.getThreePointPercent()), 1, 11);
+		playerTable.setValueAt( format.format(record.getFreethrowGoalAvg()), 1, 12);
+		playerTable.setValueAt(format.format(record.getFreethrowAttemptAvg()), 1, 13);
+		playerTable.setValueAt(format.format(record.getFreeThrowPercent()), 1, 14);
+		playerTable.setValueAt(format.format(record.getOffensiveReboundAvg()), 1, 15);
+		playerTable.setValueAt(format.format(record.getDefensiveReboundAvg()), 1, 16);
+		playerTable.setValueAt(format.format(record.getTotalReboundAvg()), 1, 17);
+		playerTable.setValueAt(format.format(record.getOffensiveReboundEff()), 1, 18);
+		playerTable.setValueAt(format.format(record.getDefensiveReboundEff()), 1, 19);
+		playerTable.setValueAt(format.format(record.getOffensiveRoundAvg()), 1, 20);
+		playerTable.setValueAt(format.format(record.getOffensiveEff()), 1, 21);
+		playerTable.setValueAt(format.format(record.getDefensiveRoundAvg()), 1, 22);
+		playerTable.setValueAt(format.format(record.getDefensiveEff()), 1, 23);
+		playerTable.setValueAt( format.format(record.getStealAvg()), 1, 24);
+		playerTable.setValueAt(format.format(record.getStealEff()), 1, 25);
+		playerTable.setValueAt(format.format(record.getAssistAvg()), 1, 26);
+		playerTable.setValueAt(format.format(record.getAssistEff()), 1, 27);
+		playerTable.setValueAt(format.format(record.getBlockAvg()), 1, 28);
+		playerTable.setValueAt(format.format(record.getTurnoverAvg()), 1, 29);
+		playerTable.setValueAt(format.format(record.getFoulAvg()), 1, 30);
+		playerTable.setValueAt(format.format(record.getScoreAvg()), 1, 31);
 	}
 
 	public void setButton() {
@@ -329,28 +327,23 @@ public class TeamSeasonPanel extends BottomPanel {
 			TeamSeasonButton.current = (TeamSeasonButton) e.getSource();
 			if (e.getSource() == button[0]) {
 				state = 0;
-				if(scroll!=null){
-					TeamSeasonPanel.this.remove(scroll);
-				}
 				if(cd!=null){
 					TeamSeasonPanel.this.remove(cd);
 				}
 				addContrastDiagram();
 				teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
-				addSeasonTable(teamDetail.getSeasonRecord());
+				updateSeasonTable(teamDetail.getSeasonRecord());
 				TeamSeasonPanel.this.repaint();
 				return;
 			} else if (e.getSource() == button[1]) {
 				state = 1;
-				if(scroll!=null){
-					TeamSeasonPanel.this.remove(scroll);
-				}
 				if(cd!=null){
 					TeamSeasonPanel.this.remove(cd);
 				}
+				TeamSeasonPanel.this.remove(playerTable);
 				TeamDetailVO teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
 				ArrayList<PlayerProfileVO> players = teamDetail.getPlayers();
-				setPlayerTable(players);
+				updatePlayerTable(players);
 				TeamSeasonPanel.this.repaint();
 			} else if (e.getSource() == button[2]) {
 				state = 2;
@@ -365,37 +358,56 @@ public class TeamSeasonPanel extends BottomPanel {
 			}
 		}
 	}
-
+	
+	
+	public void addplayerTable(TeamSeasonVO record){
+		columns = new String[]{ "", "球队名称", "胜场数", "负场数", "总场数", "胜率", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手",
+				"三分命中率", "罚球命中", "罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "进攻篮板效率", "防守篮板效率", "进攻回合", "进攻效率",
+				"防守回合", "防守效率", "抢断", "抢断效率", "助攻", "助攻率", "盖帽", "失误", "犯规", "得分" };
+		rowData = new String[2][columns.length];
+		playerTable = new BottomTable(rowData, columns);
+		playerTable.getColumnModel().getColumn(18).setPreferredWidth(80);
+		playerTable.getColumnModel().getColumn(19).setPreferredWidth(80);
+		scroll = new BottomScrollPane(playerTable);
+		scroll.setBounds(57, 450, 888, 80); // 表格的位置
+		
+		this.add(scroll);
+	}
+	
 	/**
 	 * 球队阵容表格
 	 * @author lsy
 	 * @version 2015年3月25日  上午10:49:28
 	 */
-	public void setPlayerTable(final ArrayList<PlayerProfileVO> players) {
+	public void updatePlayerTable(final ArrayList<PlayerProfileVO> players) {
 		columns = new String[] {"姓名", "号码", "位置", "年龄","球龄","身高","体重","生日","毕业学校"};
 		int size = players.size();
 		int lth = columns.length;
 		rowData = new String[size][lth];
-		for (int i = 0; i < size; i++) {
+		playerTable.setModel(new DefaultTableModel(rowData,columns));
+		playerTable.setRowHeight(40);
+		playerTable.setWidth(new int[]{140, 44, 44, 44, 44, 151, 118, 77, 209});
+		scroll.setBounds(57, 260, 888, 270);
+		for (int i = 0; i < players.size(); i++) {
 			PlayerProfileVO ppVO = players.get(i);
-			rowData[i][0] = ppVO.getName();
-			rowData[i][1] = ppVO.getNumber();
-			rowData[i][2] = ppVO.getPosition();
-			rowData[i][3] = ppVO.getAge();
-			rowData[i][4] = ppVO.getExp();
-			rowData[i][5] = ppVO.getHeight();	//身高和体重换行显示
-			rowData[i][6] = ppVO.getWeight();
-			rowData[i][7] = ppVO.getBirth();
-			rowData[i][8] = ppVO.getSchool();
+			playerTable.setValueAt(ppVO.getName(), i, 0);
+			playerTable.setValueAt(ppVO.getNumber(), i, 1);
+			playerTable.setValueAt(ppVO.getPosition(), i, 2);
+			playerTable.setValueAt(ppVO.getAge(), i, 3);
+			playerTable.setValueAt(ppVO.getExp(), i, 4);
+			playerTable.setValueAt(ppVO.getHeight(), i, 5);
+			playerTable.setValueAt( ppVO.getWeight(), i, 6);
+			playerTable.setValueAt(ppVO.getBirth(), i, 7);
+			playerTable.setValueAt(ppVO.getSchool(), i, 8);
+			
 		}
-		table = new BottomTable(rowData, columns);
 		//将头像放入表格的第一列 监听已加好 双击球员某一信息进入下一界面
 		try{
-			table.addMouseListener(new UserMouseAdapter(){
+			playerTable.addMouseListener(new UserMouseAdapter(){
 				
 				public void mouseClicked(MouseEvent e){
 					if (e.getClickCount() < 2) return;
-					int rowI  = table.rowAtPoint(e.getPoint());// 得到table的行号
+					int rowI  = playerTable.rowAtPoint(e.getPoint());// 得到table的行号
 					if ( rowI > -1){
 						MainController.toPlayerInfoPanel(TeamSeasonPanel.this, 
 								players.get(rowI).getName(),TeamSeasonPanel.this);
@@ -406,11 +418,6 @@ public class TeamSeasonPanel extends BottomPanel {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		table.setRowHeight(40);
-		table.setWidth(new int[]{140, 44, 44, 44, 44, 151, 118, 77, 209});
-		scroll = new BottomScrollPane(table);
-		scroll.setBounds(57, 260, 888, 270);
-		this.add(scroll);
 	}
 	
 	public void setEffect(int i) {
