@@ -46,7 +46,7 @@ public class PerformanceTest {
 	public void loadPlayers() {
 		PlayerSeasonAnalysis analysis = new PlayerSeasonAnalysis();
 		ArrayList<PlayerSeasonVO> vos = analysis.getResortedPlayersAllData(PlayerAllSortBasis.USE_PERCENT, SortOrder.AS);
-		for (int i=0;i<100000;i++) {
+		for (int i=0;i<2;i++) {
 			analysis.getResortedPlayersAllData(PlayerAllSortBasis.USE_PERCENT, SortOrder.AS);
 			analysis.getResortedPlayersAllData(PlayerAllSortBasis.GMSC, SortOrder.DE);
 			analysis.getResortedPlayersAvgData(PlayerAvgSortBasis.ASSIST_PERCENT, SortOrder.AS);

@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
@@ -26,15 +27,30 @@ import utility.Constants;
  */
 public class SVGHandler {
 	
+	private static HashMap<String, Image> logos = new HashMap<String, Image>();
+	
 	/** 先检查temp文件夹下有无转换好的png，如果没有，转换之 */
     public static Image getTeamLogo(String abbr) {
+    	if (abbr.equals("NOH")) abbr = "NOP";
+    	else if (abbr.equals("NJN")) abbr = "BKN";
+    	
+    	Image result = logos.get(abbr);
+    	if (result != null) {
+    		System.out.println("get");
+    		return result;
+    	}
+    	
     	File file = new File("temp/" + abbr + ".png");
     	try {
-			return ImageIO.read(file);
+    		logos.put(abbr, ImageIO.read(file));
+			return logos.get(abbr);
 		} catch (Exception e) {
 			try {
+				File dirFile = new File("temp/");
+				if (!dirFile.exists()) dirFile.mkdirs();
 				convertSvgFile2Png(new File(Constants.dataSourcePath + "teams/" + abbr + ".svg"), new File("temp/" + abbr +".png"));
-				return ImageIO.read(new File("temp/" + abbr + ".png"));
+				logos.put(abbr, ImageIO.read(new File("temp/" + abbr + ".png")));
+				return logos.get(abbr);
 			} catch (Exception e2){
 				try {
 					return ImageIO.read(new File("images/nullTeam.png"));
@@ -43,6 +59,10 @@ public class SVGHandler {
 				}
 			}
 		}
+    }
+    
+    public void loadLogos() {
+    	new CacheThread().start();
     }
     
 	//svg转为png  
@@ -69,5 +89,23 @@ public class SVGHandler {
             in.close();  
         }
     }
+    
+	private class CacheThread extends Thread{
+		public void start() {
+			File file = new File("temp/");
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			File [] files = file.listFiles();
+			for (File imgFile : files) {
+				String fileName = imgFile.getName();
+				try {
+					logos.put(fileName.substring(0, 3), ImageIO.read(imgFile));
+				} catch (IOException e) {
+					continue;
+				}
+			}
+		}
+	}
     
 }

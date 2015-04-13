@@ -11,9 +11,9 @@ import utility.DataSourceMonitor;
  */
 public class DataSourceMonitorTest {
 	
-	@Test
-	public void TestDataSourceMonitor() {
-		new DataSourceMonitor();
-	}
+//	@Test
+//	public void TestDataSourceMonitor() {
+//		new DataSourceMonitor();
+//	}
 
 }

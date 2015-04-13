@@ -1,6 +1,7 @@
 package main;
 
 import data.playerdata.PlayerImageCache;
+import data.teamdata.SVGHandler;
 import ui.controller.MainController;
 import utility.DataSourceMonitor;
 
@@ -16,7 +17,7 @@ public class Nbalabala {
 
 	public static void main(String[] args) {
 		new PlayerImageCache().loadPortrait();
-
+		new SVGHandler().loadLogos();
 		MainController.launch();
 		new DataSourceMonitor();
 	}
