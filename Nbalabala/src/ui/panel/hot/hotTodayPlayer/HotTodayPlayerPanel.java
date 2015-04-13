@@ -62,12 +62,16 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 		setEffect(button[0]);
 		addListener();
 		playerVO = hot.getHotTodayPlayers(HOT_TODAY_ARRAY[0]);
-		refresh();
-	}
-	
-	public void refresh(){
 		setTable(playerVO);
-		addChart(); // 添加柱状图	
+		addChart();
+	}
+
+	public void refresh() {
+		playerVO = hot.getHotTodayPlayers(HOT_TODAY_ARRAY[0]);
+		if (playerVO.size() < 5)
+			return;
+		setTable(playerVO);
+		updateChart(); // 添加柱状图	
 	}
 
 	/**
@@ -76,28 +80,62 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 	 * @version 2015年4月12日 上午1:12:06
 	 */
 	private void addChart() {
-		if(chart!=null){
+		if (chart != null) {
 			this.remove(chart);
 		}
-		ArrayList<Column> columns = new ArrayList<Column>();
-
 		// 每一条柱子		
-		if (playerVO.size() < 5) return;
-		double max = playerVO.get(0).getProperty();
-		double property = max;
-		for (int i = 0; i < 5; i++) {
-			property = playerVO.get(i).getProperty();
-			columns.add(new Column(playerVO.get(i).getName(), property, UIConfig.HIST_COLORS[i]));
-			if (max < property) {
-				max = property;
-			}
-		}
-		chart = new Chart(text, columns, max);
+		if (playerVO.size() < 5)
+			return;
+		chart = new Chart(text, getColumns(), getMax());
 
 		chart.setBounds(95, 103, 809, 145);
 		this.add(chart);
 		chart.updateUI();
 		chart.repaint();
+	}
+
+	/**
+	 * 更新柱状图数据
+	 * @author cylong
+	 * @version 2015年4月13日 下午10:34:21
+	 */
+	public void updateChart() {
+		playerVO = hot.getHotTodayPlayers(HOT_TODAY_ARRAY[0]);
+		if (playerVO.size() < 5)
+			return;
+		chart.setData(getColumns(), getMax());
+	}
+
+	/**
+	 * @return 柱状图全部列
+	 * @author cylong
+	 * @version 2015年4月13日 下午10:39:29
+	 */
+	private ArrayList<Column> getColumns() {
+		ArrayList<Column> columns = new ArrayList<Column>();
+		double property = playerVO.get(0).getProperty();
+		for(int i = 0; i < 5; i++) {
+			property = playerVO.get(i).getProperty();
+			columns.add(new Column(playerVO.get(i).getName(), property, UIConfig.HIST_COLORS[i]));
+		}
+		return columns;
+	}
+
+	/**
+	 * @return 柱状图最大数据
+	 * @author cylong
+	 * @version 2015年4月13日 下午10:39:36
+	 */
+	private double getMax() {
+		double max = playerVO.get(0).getProperty();
+		double property = max;
+		for(int i = 0; i < 5; i++) {
+			property = playerVO.get(i).getProperty();
+			if (max < property) {
+				max = property;
+			}
+		}
+		return max;
 	}
 
 	public void addButton() {
@@ -120,7 +158,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 					HotTodayButton.current.back();
 					HotTodayButton.current = (HotTodayButton)e.getSource();
 					HotTodayButton currentButton = (HotTodayButton)e.getSource();
-					text =  currentButton.text;
+					text = currentButton.text;
 					columns[5] = currentButton.text;
 					playerVO = hot.getHotTodayPlayers(currentButton.pro);
 					refresh();
@@ -140,7 +178,8 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 		Object[][] rowData = new String[size][lth];
 		ArrayList<ImageIcon> iconArr = new ArrayList<ImageIcon>();
 		table = new BottomTable(rowData, columns, new Color(215, 72, 72));
-		if (players.size() < 5) size = players.size();
+		if (players.size() < 5)
+			size = players.size();
 		for(int i = 0; i < size; i++) {
 			HotTodayPlayerVO ppVO = players.get(i);
 			PlayerMatchPerformanceVO matchVO = ppVO.getMatchPerformance();

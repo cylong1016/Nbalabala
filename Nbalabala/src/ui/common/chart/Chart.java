@@ -51,7 +51,6 @@ public class Chart extends JPanel {
 		this.columns = columns;
 		this.maxRange = maxRange;
 		this.setBorder(BorderFactory.createTitledBorder(getBorder(), title, TitledBorder.CENTER, TitledBorder.TOP, titleFont));
-		// this.setBackground(new Color(243, 243, 243, 70)); // 半透明背景 刷新会出问题
 		this.setOpaque(false);
 		this.setLayout(null);
 		inPanel = new InPanel();
@@ -72,11 +71,8 @@ public class Chart extends JPanel {
 			Column current = columns.get(i);
 			before.setValue(current.getValue());
 		}
-		System.out.println(maxRange);
-		System.out.println(this.columns);
 		// 更新显示的列
 		inPanel.updateColumns();
-		this.repaint();
 	}
 
 	public void setTitle(String title) {
@@ -124,6 +120,7 @@ public class Chart extends JPanel {
 				int colHeight = (int)((col.getValue() / maxRange) * (this.getHeight() * 3 / 4));
 				col.setBounds(i * columnWidth + (i + 1) * interval, this.getHeight() - colHeight, columnWidth, colHeight);
 			}
+			this.repaint();
 		}
 
 		@Override

@@ -17,7 +17,6 @@ import enums.HotSeasonTeamProperty;
 
 /**
  * 赛季热点球队界面
- * 
  * @author lsy
  * @version 2015年4月11日 下午4:03:34
  */
@@ -40,8 +39,11 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel {
 	}
 
 	public void refresh() {
+		teamVO = hot.getHotSeasonTeams(ThreeButton.current.team);
+		if (teamVO == null || teamVO.size() < 5)
+			return;
 		addLabel();
-		addChart();
+		updateChart();
 	}
 
 	private void addChart() {
@@ -50,36 +52,70 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel {
 		}
 		if (teamVO == null || teamVO.size() < 5)
 			return;
-		ArrayList<Column> columns = new ArrayList<Column>();
-		double max = teamVO.get(0).getProperty();
-		double property = max;
-		for (int i = 0; i < 5; i++) {
-			property = teamVO.get(i).getProperty();
-			columns.add(new Column(teamVO.get(i).getAbbr(), property, UIConfig.HIST_COLORS[i]));
-			if (max < property) {
-				max = property;
-			}
-		}
-		chart = new Chart(text, columns, max);
+		chart = new Chart(text, getColumns(), getMax());
 		chart.setBounds(511, 121, 399, 306);
 		this.add(chart);
 		chart.updateUI();
 		chart.repaint();
 	}
 
+	/**
+	 * 更新柱状图数据
+	 * @author cylong
+	 * @version 2015年4月13日 下午10:33:59
+	 */
+	public void updateChart() {
+		teamVO = hot.getHotSeasonTeams(ThreeButton.current.team);
+		if (teamVO == null || teamVO.size() < 5)
+			return;
+		chart.setData(getColumns(), getMax());
+	}
+
+	/**
+	 * @return 柱状图所有列
+	 * @author cylong
+	 * @version 2015年4月13日 下午10:31:54
+	 */
+	private ArrayList<Column> getColumns() {
+		ArrayList<Column> columns = new ArrayList<Column>();
+		double property = teamVO.get(0).getProperty();
+		for(int i = 0; i < 5; i++) {
+			property = teamVO.get(i).getProperty();
+			columns.add(new Column(teamVO.get(i).getAbbr(), property, UIConfig.HIST_COLORS[i]));
+		}
+		return columns;
+	}
+
+	/**
+	 * @return 柱状图最大值
+	 * @author cylong
+	 * @version 2015年4月13日 下午10:31:44
+	 */
+	private double getMax() {
+		double max = teamVO.get(0).getProperty();
+		double property = max;
+		for(int i = 0; i < 5; i++) {
+			property = teamVO.get(i).getProperty();
+			if (max < property) {
+				max = property;
+			}
+		}
+		return max;
+	}
+
 	public void add_bt_Listener() {
-		for (int i = 0; i < select.length; i++) {
+		for(int i = 0; i < select.length; i++) {
 			hotButton[i].team = HOT_TEAM_ARRAY[i];
 			hotButton[i].addMouseListener(new MouseAdapter() {
+
 				public void mousePressed(MouseEvent e) {
-					for (int i = 0; i < label.length; i++) {
+					for(int i = 0; i < label.length; i++) {
 						if (label[i] != null)
 							HotSeasonTeamPanel.this.remove(label[i]);
 					}
 					addLabel();
 					addChart();
 				}
-
 			});
 		}
 	}
@@ -90,7 +126,7 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel {
 		teamVO = hot.getHotSeasonTeams(ThreeButton.current.team);
 		if (teamVO.size() < 5)
 			return;
-		for (int j = 0; j < 5; j++) {
+		for(int j = 0; j < 5; j++) {
 			label[j] = new HotSeasonTeamLabel(teamVO.get(j), ThreeButton.current.team);
 			this.add(label[j]);
 		}

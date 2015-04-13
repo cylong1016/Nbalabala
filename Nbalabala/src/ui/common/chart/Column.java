@@ -29,6 +29,8 @@ public class Column extends JPanel {
 	public static Dimension labelDimen = new Dimension(10, 15);
 	/** 中间的面板 */
 	private JPanel center;
+	
+	private DecimalFormat format = new DecimalFormat("0.00");
 
 	public Column(String name, double value, Color bgColor) {
 		this.value = value;
@@ -39,7 +41,6 @@ public class Column extends JPanel {
 		nameLabel.setPreferredSize(labelDimen);
 		this.add(nameLabel, BorderLayout.SOUTH);
 
-		DecimalFormat format = new DecimalFormat("0.00");
 		valLabel = new Label(format.format(value));
 		valLabel.setPreferredSize(labelDimen);
 		this.add(valLabel, BorderLayout.NORTH);
@@ -55,6 +56,7 @@ public class Column extends JPanel {
 
 	public void setValue(double value) {
 		this.value = value;
+		valLabel.setText(format.format(value));
 	}
 
 	/**
