@@ -224,6 +224,7 @@ public class PlayerInfoPanel extends BottomPanel {
 				if (cd != null) {
 					PlayerInfoPanel.this.remove(cd);
 				}
+				seasonInput.setVisible(true);
 				addContrastDiagram();
 				addTotalTable();
 				PlayerInfoPanel.this.repaint();
@@ -237,6 +238,7 @@ public class PlayerInfoPanel extends BottomPanel {
 					PlayerInfoPanel.this.remove(scroll);
 				}
 				addGameTable();
+				seasonInput.setVisible(false);
 				if (cd != null) {
 					PlayerInfoPanel.this.remove(cd);
 				}
