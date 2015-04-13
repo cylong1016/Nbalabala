@@ -233,18 +233,15 @@ public class SeasonData implements SeasonDataService {
 	 * @see dataservice.SeasonDataService#getPlayerNamesByTeamAbbr(java.lang.String)
 	 */
 	@Override
-	public ArrayList<String> getPlayerNamesByTeamAbbr(String abbr) {
+	public ArrayList<String> getPlayerNamesByTeamAbbr(String abbr, String season) {
 		ArrayList<String> result = new ArrayList<String>();
-		Iterator<Entry<String, HashMap<String, PlayerSeasonVO>>> itr = allPlayerRecords.entrySet().iterator();
+		HashMap<String, PlayerSeasonVO> seasonPlayers = allPlayerRecords.get(season);
+		if (seasonPlayers == null) return result;
+		Iterator<Entry<String, PlayerSeasonVO>> itr = seasonPlayers.entrySet().iterator();
 		while(itr.hasNext()) {
-			HashMap<String, PlayerSeasonVO> vos = itr.next().getValue();
-			Iterator<Entry<String, PlayerSeasonVO>> iterator = vos.entrySet().iterator();
-			while (iterator.hasNext()) {
-				PlayerSeasonVO vo = iterator.next().getValue();
-				if (vo.getTeam().equals(abbr)) {
-					result.add(vo.getName());
-				}
-			}
+			PlayerSeasonVO vo = itr.next().getValue();
+			if (vo.getTeam().equals(abbr))
+				result.add(vo.name);
 		}
 		return result;
 	}

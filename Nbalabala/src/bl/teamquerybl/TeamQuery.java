@@ -34,7 +34,7 @@ public class TeamQuery implements TeamQueryBLService{
 		TeamProfileVO profile = teamData.getTeamProfileByAbbr(abbr);
 		
 		PlayerSeasonAnalysis playerSeasonAnalysis = new PlayerSeasonAnalysis();
-		ArrayList<String> playerNames = playerSeasonAnalysis.getPlayerNamesByTeamAbbr(abbr);
+		ArrayList<String> playerNames = playerSeasonAnalysis.getPlayerNamesByTeamAbbr(abbr, season);
 		Collections.sort(playerNames);
 		
 		PlayerQuery playerQuery = new PlayerQuery();
