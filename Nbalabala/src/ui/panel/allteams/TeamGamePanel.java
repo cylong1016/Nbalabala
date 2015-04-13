@@ -59,6 +59,7 @@ public class TeamGamePanel extends TeamFatherPanel{
 		this.add(imgButton);
 		imgButton.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
+				TeamGamePanel.this.remove(pane);
 				Date date = dateChooser.getDate();
 				
 				Calendar calendar = Calendar.getInstance();

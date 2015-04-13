@@ -36,7 +36,8 @@ public class TeamFatherPanel extends BottomPanel{
 	MatchQueryBLService matchQuery = new MatchQuery();
 	protected ImgButton back;
 	protected String url = UIConfig.IMG_PATH + "players/";
-	protected BottomPanel panelFrom;
+	protected static BottomPanel FROM_PANEL;
+
 	ImgLabel logo;
 	MyLabel teamName;
 	String[] teamPlace = { "波士顿", "布鲁克林", "纽约", "费城", "多伦多", "芝加哥", "克利夫兰", "底特律", "印第安纳", "密尔沃基", "亚特兰大", "夏洛特",
@@ -49,15 +50,12 @@ public class TeamFatherPanel extends BottomPanel{
 			"热火", "魔术", "奇才", "勇士", "快船", "湖人", "太阳", "国王", "掘金", "森林狼", "雷霆", "开拓者", "爵士", "小牛", "火箭", "灰熊",
 			"鹈鹕", "马刺" };
 	/** 球队详细信息 */
-	TeamDetailVO teamDetail;
+	protected TeamDetailVO teamDetail;
 	int order = 0;
-	
 
-	// 用x来判断此时是赛季数据还是阵容 0代表赛季 1代表阵容
 	public TeamFatherPanel(BottomPanel panelFrom,String url, String abbr) {
 		super(url);
 		this.abbr = abbr;
-		this.panelFrom = panelFrom;
 		setButton();
 		addButton();
 		addListener();
@@ -116,7 +114,7 @@ public class TeamFatherPanel extends BottomPanel{
 		this.add(back);
 		back.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				MainController.backToOnePanel(TeamFatherPanel.this, panelFrom);
+				MainController.backToOnePanel(TeamFatherPanel.this, FROM_PANEL);
 			}
 
 		});

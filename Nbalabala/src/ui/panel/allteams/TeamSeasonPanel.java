@@ -36,6 +36,7 @@ public class TeamSeasonPanel extends TeamFatherPanel{
 	public TeamSeasonPanel(BottomPanel panelFrom,String url, String abbr) {
 		super(panelFrom,url, abbr);
 		setEffect(0);
+		FROM_PANEL = panelFrom;
 		seasonInput = new SeasonInputPanel(this);
 		seasonInput.setLocation(515, y);
 		this.add(seasonInput);
@@ -64,6 +65,12 @@ public class TeamSeasonPanel extends TeamFatherPanel{
 		this.add(cd);
 		cd.updateUI();
 		cd.repaint();
+	}
+	
+	public void refresh(){
+		teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
+		updateContrastDiagram();
+		updateSeasonTable(teamDetail.getSeasonRecord());
 	}
 	
 	/**

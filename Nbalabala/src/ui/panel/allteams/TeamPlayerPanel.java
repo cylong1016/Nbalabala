@@ -3,6 +3,8 @@ package ui.panel.allteams;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.table.DefaultTableModel;
+
 import ui.common.SeasonInputPanel;
 import ui.common.UserMouseAdapter;
 import ui.common.panel.BottomPanel;
@@ -34,17 +36,23 @@ public class TeamPlayerPanel extends TeamFatherPanel{
 		super(panelFrom,url, abbr);
 		setEffect(1);
 		ArrayList<PlayerProfileVO> players = teamDetail.getPlayers();
+		addplayerTable(players);
 		seasonInput = new SeasonInputPanel(this);
 		seasonInput.setLocation(515, y);
 		this.add(seasonInput);
-		addplayerTable(players);
 		updatePlayerTable(players);
 	}
-
+	
+	public void refresh(){
+		teamDetail = teamQuery.getTeamDetailByAbbr(abbr,seasonInput.getSeason());
+		updatePlayerTable(teamDetail.getPlayers());
+	}
+	/** 表格参数 */
+	int size,lth;
 	public void addplayerTable(ArrayList<PlayerProfileVO> players){
 		columns = new String[] {"姓名", "号码", "位置", "年龄","球龄","身高","体重","生日","毕业学校"};
-		int size = players.size();
-		int lth = columns.length;
+		size = players.size();
+		lth = columns.length;
 		rowData = new String[size][lth];
 		playerTable = new BottomTable(rowData, columns);
 		playerTable.setRowHeight(40);
@@ -55,6 +63,11 @@ public class TeamPlayerPanel extends TeamFatherPanel{
 	}
 	
 	public void updatePlayerTable(final ArrayList<PlayerProfileVO> players) {
+		int size = players.size();
+		rowData = new String[size][lth];
+		playerTable.setModel(new DefaultTableModel(rowData,columns));
+		playerTable.setWidth(new int[]{140, 44, 44, 44, 44, 151, 118, 77, 209});
+		playerTable.setRowHeight(40);
 		for (int i = 0; i < players.size(); i++) {
 			PlayerProfileVO ppVO = players.get(i);
 			playerTable.setValueAt(ppVO.getName(), i, 0);
