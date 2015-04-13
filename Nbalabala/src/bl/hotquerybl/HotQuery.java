@@ -410,7 +410,7 @@ public class HotQuery implements HotBLService{
 			
 			double formerAttempt = 0;
 			
-			if (formerMatchCount != 0) {
+			if (formerMatchCount > 0) {
 				switch (property) {
 				case SCORE_AVG:
 					promotion = seasonVO.scorePromotion;
@@ -467,28 +467,27 @@ public class HotQuery implements HotBLService{
 				default:
 					break;
 				}
-			}
-			
-			String name = seasonVO.name;
-			String position = playerService.getPlayerProfileByName(name).getPosition();
-			if (recentFiveDivisor == null) {
-				double[]recentResult = new double[5];
-				for (int k=0;k<5;k++) {
-					recentResult[k] = (double)recentFive[k];
-				}
-				result.add(new HotFastestPlayerVO(i, name, seasonVO.teamName, position,
-						formerAvg, recentResult, promotion));
-			}else {
-				double [] recentPercent = new double[5];
-				for(int j=0;j<5;j++) {
-					if (recentFiveDivisor[j] != 0) {
-						recentPercent[j] = (double)recentFive[j] / recentFiveDivisor[j];
-					}else{
-						recentPercent[j] = 0;
+				String name = seasonVO.name;
+				String position = playerService.getPlayerProfileByName(name).getPosition();
+				if (recentFiveDivisor == null) {
+					double[]recentResult = new double[5];
+					for (int k=0;k<5;k++) {
+						recentResult[k] = (double)recentFive[k];
 					}
+					result.add(new HotFastestPlayerVO(i, name, seasonVO.teamName, position,
+							formerAvg, recentResult, promotion));
+				}else {
+					double [] recentPercent = new double[5];
+					for(int j=0;j<5;j++) {
+						if (recentFiveDivisor[j] != 0) {
+							recentPercent[j] = (double)recentFive[j] / recentFiveDivisor[j];
+						}else{
+							recentPercent[j] = 0;
+						}
+					}
+					result.add(new HotFastestPlayerVO(i, name, seasonVO.teamName, position,
+							formerAvg, recentPercent, promotion));
 				}
-				result.add(new HotFastestPlayerVO(i, name, seasonVO.teamName, position,
-						formerAvg, recentPercent, promotion));
 			}
 		}
 		return result;

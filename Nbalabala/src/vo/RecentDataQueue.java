@@ -26,7 +26,7 @@ public class RecentDataQueue {
 		for (int i=4; i>=0; i--) {
 			index --;
 			if (index < 0) index = 4;
-			result[i] = recent[i];
+			result[i] = recent[index];
 		}
 		return result;
 	}
