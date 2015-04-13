@@ -57,6 +57,27 @@ public class Chart extends JPanel {
 		inPanel = new InPanel();
 		this.add(inPanel);
 	}
+	
+	/**
+	 * 修改数据
+	 * @param columns
+	 * @param maxRange
+	 * @author cylong
+	 * @version 2015年4月13日  下午8:36:38
+	 */
+	public void setData(ArrayList<Column> columns, double maxRange) {
+		this.maxRange = maxRange;
+		for(int i = 0; i < columns.size(); i++) {
+			Column before = this.columns.get(i);
+			Column current = columns.get(i);
+			before.setValue(current.getValue());
+		}
+		System.out.println(maxRange);
+		System.out.println(this.columns);
+		// 更新显示的列
+		inPanel.updateColumns();
+		this.repaint();
+	}
 
 	public void setTitle(String title) {
 		this.setBorder(BorderFactory.createTitledBorder(getBorder(), title, TitledBorder.CENTER, TitledBorder.TOP, titleFont));
@@ -67,8 +88,8 @@ public class Chart extends JPanel {
 	 */
 	@Override
 	public void setBounds(int x, int y, int width, int height) {
-		super.setBounds(x, y, width, height);
 		inPanel.setBounds(padding, height / 5, width - padding * 2, height * 4 / 5 - 5);
+		super.setBounds(x, y, width, height);
 	}
 
 	/**
@@ -90,9 +111,23 @@ public class Chart extends JPanel {
 			}
 		}
 		
+		/**
+		 * 更新显示的列
+		 * @author cylong
+		 * @version 2015年4月13日  下午9:05:53
+		 */
+		public void updateColumns() {
+			interval = this.getWidth() / (3 * columns.size() + 1);
+			columnWidth = interval * 2; // 这里设置 ：列宽度 = 2 * 列间距
+			for(int i = 0; i < columns.size(); i++) {
+				Column col = columns.get(i);
+				int colHeight = (int)((col.getValue() / maxRange) * (this.getHeight() * 3 / 4));
+				col.setBounds(i * columnWidth + (i + 1) * interval, this.getHeight() - colHeight, columnWidth, colHeight);
+			}
+		}
+
 		@Override
 		public void setBounds(int x, int y, int width, int height) {
-			super.setBounds(x, y, width, height);
 			interval = width / (3 * columns.size() + 1);
 			columnWidth = interval * 2; // 这里设置 ：列宽度 = 2 * 列间距
 			for(int i = 0; i < columns.size(); i++) {
@@ -100,6 +135,7 @@ public class Chart extends JPanel {
 				int colHeight = (int)((col.getValue() / maxRange) * (height * 3 / 4));
 				col.setBounds(i * columnWidth + (i + 1) * interval, height - colHeight, columnWidth, colHeight);
 			}
+			super.setBounds(x, y, width, height);
 		}
 		
 		/**

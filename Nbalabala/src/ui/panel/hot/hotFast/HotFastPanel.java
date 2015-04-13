@@ -45,8 +45,10 @@ public class HotFastPanel extends HotThreeFatherPanel {
 	}
 
 	public void refresh() {
+		// 重新获取数据
+		fastVO = hot.getHotFastestPlayers(ThreeButton.current.fast);
 		addLabel();
-		addChart();
+		updateChart();
 	}
 
 	public void addlrButton() {
@@ -82,28 +84,61 @@ public class HotFastPanel extends HotThreeFatherPanel {
 		} else if (CURRENTI == -1) {
 			CURRENTI = 4;
 		}
-		if (fastVO.size() < 5)
-			return;
-		ArrayList<Column> columns = new ArrayList<Column>();
-		double max = fastVO.get(CURRENTI).getFormerFiveAvg();
-		double promotion = max;
-		double formerFiveAvg = fastVO.get(CURRENTI).getFormerFiveAvg();
-		columns.add(new Column("五场前平均", formerFiveAvg, Color.GRAY));
-		for(int i = 0; i < 5; i++) {
-			double[] recentFive = fastVO.get(CURRENTI).getRecentFive();
-			promotion = recentFive[i];
-			columns.add(new Column("第" + (i + 1) + "场", recentFive[i], UIConfig.HIST_COLORS[i]));
-			if (max < promotion) {
-				max = promotion;
-			}
-		}
-		chart = new Chart((CURRENTI + 1) + " " + fastVO.get(CURRENTI).getName() + " " + text, columns, max);
+		chart = new Chart((CURRENTI + 1) + " " + fastVO.get(CURRENTI).getName() + " " + text, getColumns(), getMax());
 		chart.setBounds(95, 103, 809, 200);
 		this.add(chart);
 		chart.updateUI();
 		chart.repaint();
 	}
-
+	
+	/**
+	 * 更新柱状图数据
+	 * @author cylong
+	 * @version 2015年4月13日  下午8:18:32
+	 */
+	public void updateChart() {
+		fastVO = hot.getHotFastestPlayers(ThreeButton.current.fast);
+		chart.setData(getColumns(), getMax());
+	}
+	
+	/**
+	 * 获得柱状图全部列
+	 * @author cylong
+	 * @version 2015年4月13日  下午8:48:00
+	 */
+	private ArrayList<Column> getColumns() {
+		ArrayList<Column> columns = new ArrayList<Column>();
+		if (fastVO.size() < 5)
+			return columns;
+		double formerFiveAvg = fastVO.get(CURRENTI).getFormerFiveAvg();
+		columns.add(new Column("五场前平均", formerFiveAvg, Color.GRAY));
+		for(int i = 0; i < 5; i++) {
+			double[] recentFive = fastVO.get(CURRENTI).getRecentFive();
+			columns.add(new Column("第" + (i + 1) + "场", recentFive[i], UIConfig.HIST_COLORS[i]));
+		}
+		return columns;
+	}
+	
+	/**
+	 * @return 柱状图数据的最大值
+	 * @author cylong
+	 * @version 2015年4月13日  下午8:49:48
+	 */
+	private double getMax() {
+		if (fastVO.size() < 5)
+			return 0;
+		double max = fastVO.get(CURRENTI).getFormerFiveAvg();
+		double promotion = max;
+		for(int i = 0; i < 5; i++) {
+			double[] recentFive = fastVO.get(CURRENTI).getRecentFive();
+			promotion = recentFive[i];
+			if (max < promotion) {
+				max = promotion;
+			}
+		}
+		return max;
+	}
+	
 	/**
 	 * 添加监听
 	 * @author lsy

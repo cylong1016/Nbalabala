@@ -53,6 +53,10 @@ public class Column extends JPanel {
 		return this.value;
 	}
 
+	public void setValue(double value) {
+		this.value = value;
+	}
+
 	/**
 	 * @see java.awt.Component#setBounds(int, int, int, int)
 	 */
