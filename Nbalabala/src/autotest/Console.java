@@ -39,7 +39,6 @@ public class Console {
 			PrintStream printStream = new PrintStream(new File("dxh.txt"));
 //			new Console().execute(printStream, {"-team"});
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

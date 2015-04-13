@@ -93,7 +93,7 @@ public class TeamSeasonPanel extends BottomPanel {
 		addBack();
 		seasonInput = new SeasonInputPanel(this);
 		seasonInput.setLocation(515, y);
-		this.add(seasonInput); // TODO 位置需要重新设定
+		this.add(seasonInput);
 		teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
 		addLabel(teamDetail.getLogo());
 		iniTable(x);

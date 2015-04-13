@@ -81,7 +81,7 @@ public class PlayerInfoPanel extends BottomPanel {
 		playerQuery = new PlayerQuery();
 		seasonInput = new SeasonInputPanel(this);
 		seasonInput.setLocation(515, GAME_Y);
-		this.add(seasonInput); // TODO 位置需要重新设定
+		this.add(seasonInput);
 		this.detailVO = playerQuery.getPlayerDetailByName(name, seasonInput.getSeason());
 		this.profileVO = detailVO.getProfile();
 		this.lastPanel = lastPanel;
