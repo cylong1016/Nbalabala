@@ -35,11 +35,12 @@ public class TeamPlayerPanel extends TeamFatherPanel{
 	public TeamPlayerPanel(BottomPanel panelFrom,String url, String abbr) {
 		super(panelFrom,url, abbr);
 		setEffect(1);
-		ArrayList<PlayerProfileVO> players = teamDetail.getPlayers();
-		addplayerTable(players);
 		seasonInput = new SeasonInputPanel(this);
 		seasonInput.setLocation(515, y);
 		this.add(seasonInput);
+		teamDetail = teamQuery.getTeamDetailByAbbr(abbr,seasonInput.getSeason());
+		ArrayList<PlayerProfileVO> players = teamDetail.getPlayers();
+		addplayerTable(players);
 		updatePlayerTable(players);
 	}
 	
