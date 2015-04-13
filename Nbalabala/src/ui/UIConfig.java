@@ -56,6 +56,8 @@ public class UIConfig {
 	public static final Dimension TABLE_DIMEN = new Dimension(888, 290);
 	/** 表格中数据显示的小数点位数 */
 	public static final DecimalFormat FORMAT = new DecimalFormat("0.000");
+	/** 表格每一行的高 */
+	public static final int ROW_HEIGHT = 23;
 	/*----------------------------表格配置--------------------------------*/
 	/*----------------------------柱状图配置--------------------------------*/
 	/** 平均的柱状图颜色 */

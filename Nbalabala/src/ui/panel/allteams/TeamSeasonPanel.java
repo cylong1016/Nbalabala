@@ -234,6 +234,7 @@ public class TeamSeasonPanel extends BottomPanel {
 		playerTable.setModel(new DefaultTableModel(rowData, columns));
 		playerTable.getColumnModel().getColumn(18).setPreferredWidth(80);
 		playerTable.getColumnModel().getColumn(19).setPreferredWidth(80);
+		playerTable.setRowHeight(UIConfig.ROW_HEIGHT);
 		scroll.setBounds(57, 450, 888, 80); // 表格的位置
 		
 		playerTable.setValueAt("总数据", 0, 0);
@@ -333,6 +334,7 @@ public class TeamSeasonPanel extends BottomPanel {
 			TeamSeasonButton.current = (TeamSeasonButton) e.getSource();
 			if (e.getSource() == button[0]) {
 				state = 0;
+				addContrastDiagram();
 				updateContrastDiagram();
 				teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
 				updateSeasonTable(teamDetail.getSeasonRecord());
@@ -340,24 +342,23 @@ public class TeamSeasonPanel extends BottomPanel {
 				return;
 			} else if (e.getSource() == button[1]) {
 				state = 1;
-				if(cd!=null){
+				if(cd != null) {
 					TeamSeasonPanel.this.remove(cd);
 				}
-				TeamSeasonPanel.this.remove(playerTable);
 				TeamDetailVO teamDetail = teamQuery.getTeamDetailByAbbr(abbr, seasonInput.getSeason());
 				ArrayList<PlayerProfileVO> players = teamDetail.getPlayers();
 				updatePlayerTable(players);
 				TeamSeasonPanel.this.repaint();
 			} else if (e.getSource() == button[2]) {
 				state = 2;
-				if(scroll!=null){
+				if(scroll != null){
 					TeamSeasonPanel.this.remove(scroll);
 				}
-				if(cd!=null){
+				if(cd != null){
 					TeamSeasonPanel.this.remove(cd);
 				}
-				repaint();
 				MainController.toTeamGamePanel(allteams,TeamSeasonPanel.this, abbr);
+				repaint();
 			}
 		}
 	}

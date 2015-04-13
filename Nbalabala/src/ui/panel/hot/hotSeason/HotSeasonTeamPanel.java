@@ -17,10 +17,11 @@ import enums.HotSeasonTeamProperty;
 
 /**
  * 赛季热点球队界面
+ * 
  * @author lsy
- * @version 2015年4月11日  下午4:03:34
+ * @version 2015年4月11日 下午4:03:34
  */
-public class HotSeasonTeamPanel extends HotThreeFatherPanel{
+public class HotSeasonTeamPanel extends HotThreeFatherPanel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 6863346413128750821L;
@@ -30,24 +31,25 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel{
 	HotBLService hot = new HotQuery();
 	HotSeasonTeamLabel label[] = new HotSeasonTeamLabel[5];
 	Chart chart;
-	
+
 	public HotSeasonTeamPanel(String url) {
 		super(url);
 		add_bt_Listener();
 		addLabel();
 		addChart();
 	}
-	
-	public void refresh(){
+
+	public void refresh() {
 		addLabel();
 		addChart();
 	}
-	
+
 	private void addChart() {
-		if(chart!=null){
+		if (chart != null) {
 			this.remove(chart);
 		}
-		if (teamVO == null || teamVO.size() < 5) return;
+		if (teamVO == null || teamVO.size() < 5)
+			return;
 		ArrayList<Column> columns = new ArrayList<Column>();
 		double max = teamVO.get(0).getProperty();
 		double property = max;
@@ -64,13 +66,13 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel{
 		chart.updateUI();
 		chart.repaint();
 	}
-	
+
 	public void add_bt_Listener() {
 		for (int i = 0; i < select.length; i++) {
 			hotButton[i].team = HOT_TEAM_ARRAY[i];
 			hotButton[i].addMouseListener(new MouseAdapter() {
 				public void mousePressed(MouseEvent e) {
-					for(int i = 0;i<label.length;i++){
+					for (int i = 0; i < label.length; i++) {
 						if (label[i] != null)
 							HotSeasonTeamPanel.this.remove(label[i]);
 					}
@@ -83,14 +85,16 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel{
 	}
 
 	public void addLabel() {
-		if (ThreeButton.current.team == null) return;
+		if (ThreeButton.current.team == null)
+			return;
 		teamVO = hot.getHotSeasonTeams(ThreeButton.current.team);
-		if (teamVO.size() < 5) return;
+		if (teamVO.size() < 5)
+			return;
 		for (int j = 0; j < 5; j++) {
 			label[j] = new HotSeasonTeamLabel(teamVO.get(j), ThreeButton.current.team);
 			this.add(label[j]);
 		}
-		this.repaint(); 
+		this.repaint();
 	}
 
 }

@@ -29,9 +29,6 @@ public class BottomTable extends JTable {
 	/** 默认的表格前景色 */
 	private Color headerF = new Color(255, 221, 31);
 	
-	/** 表格每一行的高 */
-	private static final int ROW_HEIGHT = 23;
-	
 	public BottomTable(Object[][] rowData, String[] columnNames) {
 		super(rowData, columnNames);
 		this.decorateTable();
@@ -139,7 +136,7 @@ public class BottomTable extends JTable {
 		this.setSelectionForeground(UIConfig.TABLE_SELECTIONFORE);	// 选择文本的前景色
 		this.setSelectionBackground(UIConfig.TABLE_SELECTIONBACK);
 		this.setBorder(null);
-		this.setRowHeight(ROW_HEIGHT);	// 每一行的高
+		this.setRowHeight(UIConfig.ROW_HEIGHT);	// 每一行的高
 		this.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		this.setIntercellSpacing(new Dimension(0, 0));
 		// 将表格设置为透明，表格同样包括表格本身和其中的内容项 仅仅将表格本身设置为透明也没有用，应该将其中的内容项也设置为透明

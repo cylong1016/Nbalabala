@@ -20,7 +20,7 @@ public class HotThreeFatherPanel extends HotFatherPanel {
 	protected ThreeButton[] hotButton = new ThreeButton[8];
 	int bt_x = 90, bt_y = 52, bt_width = 80, bt_height = 25, inter = 90;
 	protected String text = "场均得分";
-	
+
 	public HotThreeFatherPanel(String url) {
 		super(url);
 		addButton();
@@ -28,7 +28,7 @@ public class HotThreeFatherPanel extends HotFatherPanel {
 		addListener();
 		setEffect();
 	}
-	
+
 	public void addButton() {
 		for (int i = 0; i < select.length; i++) {
 			hotButton[i] = new ThreeButton(bt_x + i * inter, bt_y, bt_width, bt_height, select[i]);
@@ -41,7 +41,7 @@ public class HotThreeFatherPanel extends HotFatherPanel {
 		for (int i = 0; i < select.length; i++) {
 			hotButton[i].addMouseListener(new MouseAdapter() {
 				public void mousePressed(MouseEvent e) {
-					if(e.getSource() == ThreeButton.current){
+					if (e.getSource() == ThreeButton.current) {
 						return;
 					}
 					ThreeButton.current.back();
@@ -53,13 +53,14 @@ public class HotThreeFatherPanel extends HotFatherPanel {
 			});
 		}
 	}
-	
+
 	/**
 	 * 设置第一个筛选条件的选中效果
+	 * 
 	 * @author lsy
-	 * @version 2015年4月11日  下午5:09:35
+	 * @version 2015年4月11日 下午5:09:35
 	 */
-	public void setEffect(){
+	public void setEffect() {
 		hotButton[0].setOpaque(true);
 		hotButton[0].setBackground(UIConfig.BUTTON_COLOR);
 		hotButton[0].setForeground(Color.white);
