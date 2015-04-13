@@ -80,9 +80,9 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService {
 	}
 
 	/** 根据球队缩写返回其当前阵容包含的球员名单 */
-	public ArrayList<String> getPlayerNamesByTeamAbbr(String abbr) {
+	public ArrayList<String> getPlayerNamesByTeamAbbr(String abbr, String season) {
 		abbr = Constants.correctOldAbbr(abbr);
-		return seasonData.getPlayerNamesByTeamAbbr(abbr);
+		return seasonData.getPlayerNamesByTeamAbbr(abbr, season);
 	}
 
 	/** 根据名字字典顺序为球员排序 */

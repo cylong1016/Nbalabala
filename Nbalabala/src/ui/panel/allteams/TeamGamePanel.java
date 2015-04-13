@@ -98,4 +98,5 @@ public class TeamGamePanel extends TeamFatherPanel{
 			}
 		});
 	}
+
 }

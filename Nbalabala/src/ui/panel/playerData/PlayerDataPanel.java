@@ -113,7 +113,7 @@ public class PlayerDataPanel extends BottomPanel {
 		iniSet();
 		addListener();
 		addFindButton();
-		seasonInput = new SeasonInputPanel();
+		seasonInput = new SeasonInputPanel(this);
 		seasonInput.setLocation(660, Y5);
 		this.add(seasonInput); 
 		// 初始化界面的表格
@@ -122,7 +122,9 @@ public class PlayerDataPanel extends BottomPanel {
 	}
 	
 	public void refresh(){
-		ArrayList<PlayerSeasonVO> iniArray = playerSeason.getAllPlayersSortedByName();
+		ArrayList<PlayerSeasonVO> iniArray = playerSeason.getScreenedPlayers
+				(PlayerPositionSelectButton.current.position, PlayerDivisionSelectButton.current.division, 
+						PlayerScreenSelectButton.current.basis, seasonInput.getSeason());
 		createTable(iniArray);
 	}
 

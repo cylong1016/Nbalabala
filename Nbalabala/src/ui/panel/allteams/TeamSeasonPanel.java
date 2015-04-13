@@ -167,6 +167,7 @@ public class TeamSeasonPanel extends TeamFatherPanel{
 		playerTable.setValueAt(format.format(record.getFoulAvg()), 1, 30);
 		playerTable.setValueAt(format.format(record.getScoreAvg()), 1, 31);
 	}
+
 	
 	/**
 	 * 添加表格
