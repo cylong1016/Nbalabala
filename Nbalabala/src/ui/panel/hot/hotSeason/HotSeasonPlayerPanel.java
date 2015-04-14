@@ -39,7 +39,7 @@ public class HotSeasonPlayerPanel extends HotThreeFatherPanel {
 
 	public void refresh() {
 		playerVO = hot.getHotSeasonPlayers(ThreeButton.current.player);
-		addLabel();
+		updateLabel();
 		updateChart();
 	}
 
@@ -65,7 +65,8 @@ public class HotSeasonPlayerPanel extends HotThreeFatherPanel {
 		playerVO = hot.getHotSeasonPlayers(ThreeButton.current.player);
 		if (playerVO.size() < 5)
 			return;
-		chart.setData(getColumns(), getMax());
+		if (chart != null)
+			chart.setData(getColumns(), getMax());
 	}
 
 	/**
@@ -135,6 +136,21 @@ public class HotSeasonPlayerPanel extends HotThreeFatherPanel {
 		for(int j = 0; j < 5; j++) {
 			label[j] = new HotSeasonPlayerLabel(playerVO.get(j), ThreeButton.current.player);
 			this.add(label[j]);
+		}
+		this.repaint();
+	}
+	
+	/**
+	 * PlayerVO更新后，调用此方法刷新5个label，而不会产生重影
+	 * @author Issac Ding
+	 * @version 2015年4月14日  下午12:43:13
+	 */
+	public void updateLabel() {
+		if (playerVO.size() < 5)
+			return;
+		for(int j = 0; j < 5; j++) {
+			if (label[j] != null)
+				label[j].updateContent(playerVO.get(j), ThreeButton.current.player);
 		}
 		this.repaint();
 	}

@@ -47,7 +47,7 @@ public class HotFastPanel extends HotThreeFatherPanel {
 	public void refresh() {
 		// 重新获取数据
 		fastVO = hot.getHotFastestPlayers(ThreeButton.current.fast);
-		addLabel();
+		updateLabel();
 		updateChart();
 	}
 
@@ -102,7 +102,9 @@ public class HotFastPanel extends HotThreeFatherPanel {
 		fastVO = hot.getHotFastestPlayers(ThreeButton.current.fast);
 		if (fastVO.size() < 5)
 			return;
-		chart.setData(getColumns(), getMax());
+		System.out.println(chart);
+		if (chart != null)
+			chart.setData(getColumns(), getMax());
 	}
 
 	/**
@@ -177,5 +179,19 @@ public class HotFastPanel extends HotThreeFatherPanel {
 		}
 		this.repaint();
 	}
-
+	
+	/**
+	 * 为了解决重影问题，不再add label而是改变之
+	 * @author Issac Ding
+	 * @version 2015年4月14日  下午12:17:43
+	 */
+	public void updateLabel() {
+		if (fastVO.size() < 5)
+			return;
+		for(int j = 0; j < 5; j++) {
+			if (label[j] != null)
+				label[j].updateContent(fastVO.get(j));
+		}
+		this.repaint();
+	}
 }

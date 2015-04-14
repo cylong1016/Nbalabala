@@ -24,6 +24,10 @@ public class ActionPhotoPanel extends JPanel {
 		this.action = action;
 	}
 	
+	public void setImage(Image image) {
+		this.action = image;
+	}
+	
 	public void setSize(int width, int height){
 		this.width = width;
 		this.height = height;

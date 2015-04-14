@@ -103,7 +103,8 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 		playerVO = hot.getHotTodayPlayers(HOT_TODAY_ARRAY[0]);
 		if (playerVO.size() < 5)
 			return;
-		chart.setData(getColumns(), getMax());
+		if (chart != null)
+			chart.setData(getColumns(), getMax());
 	}
 
 	/**

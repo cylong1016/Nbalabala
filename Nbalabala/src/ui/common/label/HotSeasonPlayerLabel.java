@@ -32,56 +32,76 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 	 * @author Issac Ding
 	 * @version 2015年4月9日  下午6:24:16
 	 */
+	
+	private ActionPhotoPanel actionPhotoPanel;
+	private ImgLabel portraitLabel;
+	private MyLabel nameLabel;
+	private MyLabel propertyLabel;
+	private MyLabel teamLabel;
+	private MyLabel positionLabel;
+	
+	public void updateContent(HotSeasonPlayerVO vo, HotSeasonPlayerProperty property) {
+		if (actionPhotoPanel != null)
+			actionPhotoPanel.setImage(PlayerImageCache.getActionImageByName(playerName));
+		if (portraitLabel != null)
+			portraitLabel.setImage(PlayerImageCache.getPortraitByName(vo.getName()));
+		nameLabel.setText(vo.getName());
+		String propertyName = getPropertyName(property);
+		String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
+		propertyLabel.setText(propertyName+"："+propertyStr);
+		teamLabel.setText("球队：" + Constants.translateTeamAbbr(vo.getTeamAbbr()));
+		positionLabel.setText("位置：" + vo.getPosition());
+	}
+	
 	public HotSeasonPlayerLabel(HotSeasonPlayerVO vo, HotSeasonPlayerProperty property) {
 		super(vo.getTop());
 		playerName = vo.getName();
 		if (vo.getTop() == 1) {
 			Image actionImage = PlayerImageCache.getActionImageByName(playerName);
-			ActionPhotoPanel actionPhotoPanel = new ActionPhotoPanel(actionImage);
+			actionPhotoPanel = new ActionPhotoPanel(actionImage);
 			actionPhotoPanel.setSize(176, 280);
 			actionPhotoPanel.setBounds(242,10,176,280);
 			this.add(actionPhotoPanel);
 			
-			
 			int labelX = 90;
-			MyLabel nameLabel = new MyLabel(labelX, 40, 250, 26, playerName);
+			nameLabel = new MyLabel(labelX, 40, 250, 26, playerName);
 			nameLabel.setFont(new Font("微软雅黑", Font.BOLD, 30));
 			nameLabel.setLeft();
 			this.add(nameLabel);
 			
 			String propertyName = getPropertyName(property);
 			String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
-			MyLabel propertyLabel = new MyLabel(labelX, 80, 146, 26, propertyName+"："+propertyStr);
+			propertyLabel = new MyLabel(labelX, 80, 146, 26, propertyName+"："+propertyStr);
 			propertyLabel.setFont(new Font("微软雅黑", Font.BOLD, 20));
 			propertyLabel.setForeground(UIConfig.HIST_FIRST_COLOR);
 			propertyLabel.setLeft();
 			this.add(propertyLabel);
 			
 			String team = Constants.translateTeamAbbr(vo.getTeamAbbr());
-			MyLabel teamLabel = new MyLabel(labelX, 130, 180, 26, "球队：" + team);
+			teamLabel = new MyLabel(labelX, 130, 180, 26, "球队：" + team);
 			teamLabel.setLeft();
 			this.add(teamLabel);
 			
-			MyLabel positionLabel = new MyLabel(labelX, 160, 146, 26, "位置：" + vo.getPosition());
+			positionLabel = new MyLabel(labelX, 160, 146, 26, "位置：" + vo.getPosition());
 			positionLabel.setLeft();
 			this.add(positionLabel);
 		}else{
 			Image portrait = PlayerImageCache.getPortraitByName(vo.getName());
-			ImgLabel portaitLabel = new ImgLabel(0, 37, 92, 75, portrait);
-			this.add(portaitLabel);
+			portraitLabel = new ImgLabel(0, 37, 92, 75, portrait);
+			this.add(portraitLabel);
 			
 			int labelWid = 175;
 			
-			MyLabel nameLabel = new MyLabel(0,7,labelWid,20,vo.getName());
+			nameLabel = new MyLabel(0,7,labelWid,20,vo.getName());
 			
 			String propertyName = getPropertyName(property);
 			String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
-			MyLabel propertyLabel = new MyLabel(0, 37, labelWid, 20, propertyName+"："+propertyStr);
+			propertyLabel = new MyLabel(0, 37, labelWid, 20, propertyName+"："+propertyStr);
 			
 			String team = Constants.translateTeamAbbr(vo.getTeamAbbr());
-			MyLabel teamLabel = new MyLabel(0, 67, labelWid, 20, "球队：" + team);
+			teamLabel = new MyLabel(0, 67, labelWid, 20, "球队：" + team);
 			
-			MyLabel positionLabel = new MyLabel(0, 97, labelWid, 20, "位置：" + vo.getPosition());
+			positionLabel = new MyLabel(0, 97, labelWid, 20, "位置：" + vo.getPosition());
 			
 			MyLabel labels[] = {propertyLabel, teamLabel, nameLabel, positionLabel};
 			for (int i = 0; i < labels.length; i++) {

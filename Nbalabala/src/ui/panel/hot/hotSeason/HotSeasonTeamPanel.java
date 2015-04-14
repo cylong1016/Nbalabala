@@ -42,7 +42,7 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel {
 		teamVO = hot.getHotSeasonTeams(ThreeButton.current.team);
 		if (teamVO == null || teamVO.size() < 5)
 			return;
-		addLabel();
+		updateLabel();
 		updateChart();
 	}
 
@@ -68,7 +68,8 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel {
 		teamVO = hot.getHotSeasonTeams(ThreeButton.current.team);
 		if (teamVO == null || teamVO.size() < 5)
 			return;
-		chart.setData(getColumns(), getMax());
+		if (chart != null)
+			chart.setData(getColumns(), getMax());
 	}
 
 	/**
@@ -121,16 +122,27 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel {
 	}
 
 	public void addLabel() {
-		if (ThreeButton.current.team == null)
-			return;
 		teamVO = hot.getHotSeasonTeams(ThreeButton.current.team);
 		if (teamVO.size() < 5)
 			return;
 		for(int j = 0; j < 5; j++) {
-//			System.out.println(ThreeButton.current.team);
 			label[j] = new HotSeasonTeamLabel(teamVO.get(j), ThreeButton.current.team);
-			
 			this.add(label[j]);
+		}
+		this.repaint();
+	}
+	
+	/**
+	 * 在TeamVO更新以后，调用此方法刷新5个label，不会产生重影
+	 * @author Issac Ding
+	 * @version 2015年4月14日  下午12:45:59
+	 */
+	public void updateLabel() {
+		if (teamVO.size() < 5)
+			return;
+		for(int j = 0; j < 5; j++) {
+			if (label[j] != null)
+				label[j].updateContent(teamVO.get(j), ThreeButton.current.team);
 		}
 		this.repaint();
 	}

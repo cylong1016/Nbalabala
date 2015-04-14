@@ -31,6 +31,21 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 	 * @author Issac Ding
 	 * @version 2015年4月9日  下午6:24:16
 	 */
+	
+	private ImgLabel imgLabel;
+	private MyLabel nameLabel;
+	private MyLabel propertyLabel;
+	private MyLabel leagueLabel;
+	
+	public void updateContent(HotSeasonTeamVO vo, HotSeasonTeamProperty property) {
+		imgLabel.setImage(SVGHandler.getTeamLogo(teamAbbr));
+		nameLabel.setText(Constants.translateTeamAbbr(teamAbbr));
+		String propertyName = getPropertyName(property);
+		String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
+		propertyLabel.setText(propertyName+"："+propertyStr);
+		leagueLabel.setText( "联盟：" + vo.getLeague());
+	}
+	
 	public HotSeasonTeamLabel(HotSeasonTeamVO vo, HotSeasonTeamProperty property) {
 		super(vo.getTop());
 		teamAbbr = vo.getAbbr();
@@ -38,23 +53,23 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 			Image logo = SVGHandler.getTeamLogo(teamAbbr);
 			int width = 210;
 			int height = logo.getHeight(null) * width / logo.getWidth(null);//按比例，将高度缩减
-			ImgLabel imgLabel = new ImgLabel(180,100,width,height,logo);
+			imgLabel = new ImgLabel(180,100,width,height,logo);
 			this.add(imgLabel);
 			
 			int labelX = 90;
 			
-			MyLabel nameLabel = new MyLabel(labelX, 40, 146, 33, Constants.translateTeamAbbr(teamAbbr));
+			nameLabel = new MyLabel(labelX, 40, 146, 33, Constants.translateTeamAbbr(teamAbbr));
 			nameLabel.setFont(new Font("微软雅黑", Font.BOLD, 30));
 			nameLabel.setLeft();
 			
 			String propertyName = getPropertyName(property);
 			String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
-			MyLabel propertyLabel = new MyLabel(labelX, 85, 146, 26, propertyName+"："+propertyStr);
+			propertyLabel = new MyLabel(labelX, 85, 146, 26, propertyName+"："+propertyStr);
 			propertyLabel.setFont(new Font("微软雅黑", Font.BOLD, 20));
 			propertyLabel.setForeground(UIConfig.HIST_FIRST_COLOR);
 			propertyLabel.setLeft();
 			
-			MyLabel leagueLabel = new MyLabel(labelX, 130, 146, 26, "联盟：" + vo.getLeague());
+			leagueLabel = new MyLabel(labelX, 130, 146, 26, "联盟：" + vo.getLeague());
 			leagueLabel.setLeft();
 			
 			this.add(propertyLabel);
@@ -64,19 +79,19 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 			Image logo = SVGHandler.getTeamLogo(teamAbbr);
 			int width = 75;
 			int height = logo.getHeight(null) * width / logo.getWidth(null);//按比例，将高度缩减
-			ImgLabel imgLabel = new ImgLabel(0, 46,width,height,logo);
+			imgLabel = new ImgLabel(0, 46,width,height,logo);
 			
 			this.add(imgLabel);
 			
 			int labelWid = 175;
 			
-			MyLabel nameLabel = new MyLabel(0,7,labelWid,20, Constants.translateTeamAbbr(teamAbbr));
+			nameLabel = new MyLabel(0,7,labelWid,20, Constants.translateTeamAbbr(teamAbbr));
 			
 			String propertyName = getPropertyName(property);
 			String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
-			MyLabel propertyLabel = new MyLabel(0, 37, labelWid, 20, propertyName+"："+propertyStr);
+			propertyLabel = new MyLabel(0, 37, labelWid, 20, propertyName+"："+propertyStr);
 			
-			MyLabel leagueLabel = new MyLabel(0, 67, labelWid, 20, "联盟：" + vo.getLeague());
+			leagueLabel = new MyLabel(0, 67, labelWid, 20, "联盟：" + vo.getLeague());
 			
 			MyLabel labels[] = {nameLabel, propertyLabel, leagueLabel};
 			for (int i = 0; i < labels.length; i++) {
