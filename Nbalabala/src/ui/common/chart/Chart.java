@@ -69,14 +69,17 @@ public class Chart extends JPanel {
 		for(int i = 0; i < columns.size(); i++) {
 			Column before = this.columns.get(i);
 			Column current = columns.get(i);
-			before.setValue(current.getValue());
+			before.setValue(current.getName(), current.getValue());
 		}
 		// 更新显示的列
 		inPanel.updateColumns();
 	}
 
 	public void setTitle(String title) {
+		this.setBorder(null);
+		repaint();
 		this.setBorder(BorderFactory.createTitledBorder(getBorder(), title, TitledBorder.CENTER, TitledBorder.TOP, titleFont));
+		repaint();
 	}
 	
 	/**

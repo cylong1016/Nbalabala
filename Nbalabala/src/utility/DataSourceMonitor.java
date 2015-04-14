@@ -18,7 +18,11 @@ public class DataSourceMonitor {
 	private static HashSet<String> oldFileNames = new HashSet<String>();
 	
 	static{
-		File[] initialFiles = new File(Constants.dataSourcePath + "matches/").listFiles();
+		File dirFile = new File(Constants.dataSourcePath + "matches/");
+		if (!dirFile.exists()){
+			dirFile.mkdirs();
+		}
+		File[] initialFiles = dirFile.listFiles();
 		oldFilesCount = initialFiles.length;
 		for (File file : initialFiles) {
 			oldFileNames.add(file.getName());
@@ -51,7 +55,11 @@ public class DataSourceMonitor {
 	class MonitorThread extends Thread{
 		public void start() {
 			while (true) {
-				File[] files = new File(Constants.dataSourcePath + "matches/").listFiles();
+				File dirFile = new File(Constants.dataSourcePath + "matches/");
+				if (!dirFile.exists()){
+					dirFile.mkdirs();
+				}
+				File[] files = dirFile.listFiles();
 				int currentCount = files.length;
 				if (currentCount > oldFilesCount) {
 					ArrayList<File> newFiles= getNewFiles(files);

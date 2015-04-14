@@ -38,10 +38,12 @@ public class HotFastPanel extends HotThreeFatherPanel {
 
 	public HotFastPanel(String url) {
 		super(url);
+		fastVO = hot.getHotFastestPlayers(ThreeButton.current.fast);
 		addlrButton();
 		add_bt_Listener();
 		addLabel();
 		addChart();
+		repaint();
 	}
 
 	public void refresh() {
@@ -49,6 +51,7 @@ public class HotFastPanel extends HotThreeFatherPanel {
 		fastVO = hot.getHotFastestPlayers(ThreeButton.current.fast);
 		updateLabel();
 		updateChart();
+		repaint();
 	}
 
 	public void addlrButton() {
@@ -99,12 +102,14 @@ public class HotFastPanel extends HotThreeFatherPanel {
 	 * @version 2015年4月13日 下午8:18:32
 	 */
 	public void updateChart() {
-		fastVO = hot.getHotFastestPlayers(ThreeButton.current.fast);
 		if (fastVO.size() < 5)
 			return;
-		System.out.println(chart);
-		if (chart != null)
+		if (chart != null) {
 			chart.setData(getColumns(), getMax());
+			chart.setTitle((CURRENTI + 1) + " " +fastVO.get(CURRENTI).getName() + " " + text);
+		}else {
+			addChart();
+		}
 	}
 
 	/**
@@ -158,6 +163,7 @@ public class HotFastPanel extends HotThreeFatherPanel {
 					}
 					addLabel();
 					addChart();
+					refresh();
 				}
 
 			});
@@ -170,7 +176,6 @@ public class HotFastPanel extends HotThreeFatherPanel {
 	 * @version 2015年4月11日 下午6:09:19
 	 */
 	public void addLabel() {
-		fastVO = hot.getHotFastestPlayers(ThreeButton.current.fast);
 		if (fastVO.size() < 5)
 			return;
 		for(int j = 0; j < 5; j++) {
@@ -191,6 +196,10 @@ public class HotFastPanel extends HotThreeFatherPanel {
 		for(int j = 0; j < 5; j++) {
 			if (label[j] != null)
 				label[j].updateContent(fastVO.get(j));
+			else{
+				label[j] = new HotFastestPlayerLabel(fastVO.get(j));
+				this.add(label[j]);
+			}
 		}
 		this.repaint();
 	}

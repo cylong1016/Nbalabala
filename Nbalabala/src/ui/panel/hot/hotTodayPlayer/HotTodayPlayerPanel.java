@@ -114,9 +114,8 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 	 */
 	private ArrayList<Column> getColumns() {
 		ArrayList<Column> columns = new ArrayList<Column>();
-		double property = playerVO.get(0).getProperty();
 		for(int i = 0; i < 5; i++) {
-			property = playerVO.get(i).getProperty();
+			double property = playerVO.get(i).getProperty();
 			columns.add(new Column(playerVO.get(i).getName(), property, UIConfig.HIST_COLORS[i]));
 		}
 		return columns;

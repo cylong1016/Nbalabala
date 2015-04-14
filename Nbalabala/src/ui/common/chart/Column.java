@@ -20,6 +20,8 @@ public class Column extends JPanel {
 
 	/** 此柱的值 */
 	private double value;
+	
+	private String name;
 
 	/** 显示名称 */
 	private Label nameLabel;
@@ -34,6 +36,7 @@ public class Column extends JPanel {
 
 	public Column(String name, double value, Color bgColor) {
 		this.value = value;
+		this.name = name;
 		this.setOpaque(false);
 		this.setLayout(new BorderLayout());
 
@@ -53,9 +56,14 @@ public class Column extends JPanel {
 	public double getValue() {
 		return this.value;
 	}
+	
+	public String getName() {
+		return name;
+	}
 
-	public void setValue(double value) {
+	public void setValue(String name, double value) {
 		this.value = value;
+		this.nameLabel.setText(name);
 		valLabel.setText(format.format(value));
 	}
 
