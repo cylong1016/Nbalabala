@@ -293,7 +293,6 @@ public class SeasonData implements SeasonDataService {
 		allPlayerRecords.clear();
 		allTeamRecords.clear();
 		new MatchesAccumulator(allPlayerRecords, allTeamRecords).accumulate(Utility.getSortedMatchFiles(), false);
-		
 		updateData();
 	}
 

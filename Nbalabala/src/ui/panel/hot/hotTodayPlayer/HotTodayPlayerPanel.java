@@ -67,7 +67,6 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 	}
 
 	public void refresh() {
-		playerVO = hot.getHotTodayPlayers(HOT_TODAY_ARRAY[0]);
 		if (playerVO.size() < 5)
 			return;
 		setTable(playerVO);
@@ -100,7 +99,6 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 	 * @version 2015年4月13日 下午10:34:21
 	 */
 	public void updateChart() {
-		playerVO = hot.getHotTodayPlayers(HOT_TODAY_ARRAY[0]);
 		if (playerVO.size() < 5)
 			return;
 		if (chart != null)
@@ -114,9 +112,8 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 	 */
 	private ArrayList<Column> getColumns() {
 		ArrayList<Column> columns = new ArrayList<Column>();
-		double property = playerVO.get(0).getProperty();
 		for(int i = 0; i < 5; i++) {
-			property = playerVO.get(i).getProperty();
+			double property = playerVO.get(i).getProperty();
 			columns.add(new Column(playerVO.get(i).getName(), property, UIConfig.HIST_COLORS[i]));
 		}
 		return columns;
