@@ -38,9 +38,9 @@ public class HotFastPanel extends HotThreeFatherPanel {
 
 	public HotFastPanel(String url) {
 		super(url);
-		fastVO = hot.getHotFastestPlayers(ThreeButton.current.fast);
 		addlrButton();
 		add_bt_Listener();
+		fastVO = hot.getHotFastestPlayers(ThreeButton.current.fast);
 		addLabel();
 		addChart();
 		repaint();
