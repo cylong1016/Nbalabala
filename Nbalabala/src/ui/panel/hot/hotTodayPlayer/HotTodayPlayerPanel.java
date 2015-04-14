@@ -62,12 +62,12 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 		setEffect(button[0]);
 		addListener();
 		playerVO = hot.getHotTodayPlayers(HOT_TODAY_ARRAY[0]);
-		setTable(playerVO);
+		addTable();
 		addChart();
 	}
 
 	public void refresh() {
-		playerVO = hot.getHotTodayPlayers(HOT_TODAY_ARRAY[0]);
+		playerVO = hot.getHotTodayPlayers(HotTodayButton.current.pro);
 		if (playerVO.size() < 5)
 			return;
 		setTable(playerVO);
@@ -100,7 +100,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 	 * @version 2015年4月13日 下午10:34:21
 	 */
 	public void updateChart() {
-		playerVO = hot.getHotTodayPlayers(HOT_TODAY_ARRAY[0]);
+		playerVO = hot.getHotTodayPlayers(HotTodayButton.current.pro);
 		if (playerVO.size() < 5)
 			return;
 		if (chart != null)
@@ -169,73 +169,14 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 		}
 	}
 
-	public void setTable(final ArrayList<HotTodayPlayerVO> players) {
-		int size = 5;
-		int lth = columns.length;
-
-		if (scroll != null) {
-			this.remove(scroll);
-		}
-		Object[][] rowData = new String[size][lth];
-		ArrayList<ImageIcon> iconArr = new ArrayList<ImageIcon>();
+	int size = 5;
+	int lth = columns.length;
+	Object[][] rowData ;
+	
+	public void addTable(){
+		rowData = new String[size][lth];
 		table = new BottomTable(rowData, columns, new Color(215, 72, 72));
-		if (players.size() < 5)
-			size = players.size();
-		for(int i = 0; i < size; i++) {
-			HotTodayPlayerVO ppVO = players.get(i);
-			PlayerMatchPerformanceVO matchVO = ppVO.getMatchPerformance();
-			MatchPlayerVO matchPlayer = matchVO.getMatchPlayerRecord();
-			Image protrait = PlayerImageCache.getPortraitByName(ppVO.getName());
-			int height = protrait.getHeight(null) * 70 / protrait.getWidth(null);//按比例，将高度缩减
-			Image smallImg = protrait.getScaledInstance(PORTRAIT_WIDTH, height, Image.SCALE_SMOOTH);
-			ImageIcon ic = new ImageIcon(smallImg);
-			iconArr.add(ic);
-			rowData[i][0] = (i + 1) + "";
-			rowData[i][2] = ppVO.getName();
-			rowData[i][3] = Constants.translateTeamAbbr(ppVO.getTeamAbbr());
-			rowData[i][4] = ppVO.getPosition();
-			rowData[i][5] = ppVO.getProperty() + "";
-			rowData[i][6] = matchVO.getSeason();
-			rowData[i][7] = matchVO.getDate();
-			rowData[i][8] = matchVO.getTwoTeams();
-			rowData[i][9] = matchPlayer.getTime();
-			rowData[i][10] = matchPlayer.getFieldGoal() + "";
-			rowData[i][11] = matchPlayer.getFieldAttempt() + "";
-			rowData[i][12] = matchPlayer.getThreePointGoal() + "";
-			rowData[i][13] = matchPlayer.getThreePointAttempt() + "";
-			rowData[i][14] = matchPlayer.getFreethrowGoal() + "";
-			rowData[i][15] = matchPlayer.getFieldAttempt() + "";
-			rowData[i][16] = matchPlayer.getOffensiveRebound() + "";
-			rowData[i][17] = matchPlayer.getDefensiveRebound() + "";
-			rowData[i][18] = matchPlayer.getTotalRebound() + "";
-			rowData[i][19] = matchPlayer.getAssist() + "";
-			rowData[i][20] = matchPlayer.getSteal() + "";
-			rowData[i][21] = matchPlayer.getBlock() + "";
-			rowData[i][22] = matchPlayer.getTurnover() + "";
-			rowData[i][23] = matchPlayer.getFoul() + "";
-			rowData[i][24] = matchPlayer.getPersonalGoal() + "";
-		}
-		MyTableCellRenderer myRenderer = new MyTableCellRenderer();
-		myRenderer.icon = iconArr;
-		// iconArr.clear();
-		table.getColumnModel().getColumn(1).setCellRenderer(myRenderer);
-
-		try {
-			table.addMouseListener(new UserMouseAdapter() {
-
-				public void mouseClicked(MouseEvent e) {
-					if (e.getClickCount() < 2)
-						return;
-					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
-					if (rowI > -1) {
-						MainController.toPlayerInfoPanel(HotTodayPlayerPanel.this, players.get(rowI).getName(), HotTodayPlayerPanel.this);
-					}
-
-				}
-			});
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 		table.setRowHeight(57);
 		table.setForeground(UIConfig.TABLE_HEADER_BACK_COLOR);
 		table.cancelVerticalLines();
@@ -248,11 +189,74 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 		table.setWidth(cells);
 		JTableHeader header = table.getTableHeader();
 		header.setForeground(Color.red);
-
+		
 		scroll = new BottomScrollPane(table);
 		scroll.setBounds(90, 260, 810, 320);
 		scroll.cancelBgImage();
 		this.add(scroll);
+		setTable(playerVO);
+		
+		try {
+			table.addMouseListener(new UserMouseAdapter() {
+				
+				public void mouseClicked(MouseEvent e) {
+					if (e.getClickCount() < 2)
+						return;
+					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
+					if (rowI > -1) {
+						MainController.toPlayerInfoPanel(HotTodayPlayerPanel.this, playerVO.get(rowI).getName(), HotTodayPlayerPanel.this);
+					}
+					
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void setTable(final ArrayList<HotTodayPlayerVO> players) {
+		ArrayList<ImageIcon> iconArr = new ArrayList<ImageIcon>();
+		if (players.size() < 5)
+			size = players.size();
+		for(int i = 0; i < size; i++) {
+			HotTodayPlayerVO ppVO = players.get(i);
+			PlayerMatchPerformanceVO matchVO = ppVO.getMatchPerformance();
+			MatchPlayerVO matchPlayer = matchVO.getMatchPlayerRecord();
+			Image protrait = PlayerImageCache.getPortraitByName(ppVO.getName());
+			int height = protrait.getHeight(null) * 70 / protrait.getWidth(null);//按比例，将高度缩减
+			Image smallImg = protrait.getScaledInstance(PORTRAIT_WIDTH, height, Image.SCALE_SMOOTH);
+			ImageIcon ic = new ImageIcon(smallImg);
+			iconArr.add(ic);
+			
+			table.setValueAt( (i + 1) + "", i, 0);
+			table.setValueAt(ppVO.getName(), i, 2);
+			table.setValueAt(Constants.translateTeamAbbr(ppVO.getTeamAbbr()), i, 3);
+			table.setValueAt(ppVO.getPosition(), i, 4);
+			table.setValueAt(ppVO.getProperty()+"", i, 5);
+			table.setValueAt(matchVO.getSeason(), i, 6);
+			table.setValueAt(matchVO.getDate(), i, 7);
+			table.setValueAt(matchVO.getTwoTeams(), i, 8);
+			table.setValueAt(matchPlayer.getTime(), i, 9);
+			table.setValueAt(matchPlayer.getFieldGoal() + "", i, 10);
+			table.setValueAt(matchPlayer.getFieldAttempt() + "", i, 11);
+			table.setValueAt(matchPlayer.getThreePointGoal() + "", i, 12);
+			table.setValueAt(matchPlayer.getThreePointAttempt() + "", i, 13);
+			table.setValueAt(matchPlayer.getFreethrowGoal() + "", i, 14);
+			table.setValueAt(matchPlayer.getFieldAttempt() + "", i, 15);
+			table.setValueAt(matchPlayer.getOffensiveRebound() + "", i, 16);
+			table.setValueAt(matchPlayer.getDefensiveRebound() + "", i, 17);
+			table.setValueAt(matchPlayer.getTotalRebound() + "", i, 18);
+			table.setValueAt(matchPlayer.getAssist() + "", i, 19);
+			table.setValueAt(matchPlayer.getSteal() + "", i, 20);
+			table.setValueAt(matchPlayer.getBlock() + "", i, 21);
+			table.setValueAt(matchPlayer.getTurnover() + "", i, 22);
+			table.setValueAt(matchPlayer.getFoul() + "", i, 23);
+			table.setValueAt(matchPlayer.getPersonalGoal() + "", i, 24);
+		}
+		MyTableCellRenderer myRenderer = new MyTableCellRenderer();
+		myRenderer.icon = iconArr;
+		// iconArr.clear();
+		table.getColumnModel().getColumn(1).setCellRenderer(myRenderer);
 	}
 
 	/**
