@@ -65,7 +65,7 @@ public class AllPlayersPanel extends BottomPanel {
 	}
 	
 	public void refresh(){
-		ArrayList<PlayerProfileVO> playerInfoArr = playerInfo.getPlayerProfileByInitial('A');
+		ArrayList<PlayerProfileVO> playerInfoArr = playerInfo.getPlayerProfileByInitial(LetterButton.current.letter);
 		this.remove(PlayerTable.SCROLL); 
 		playerTable = new PlayerTable(playerInfoArr,this);
 		AllPlayersPanel.this.repaint();
