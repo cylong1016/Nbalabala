@@ -64,8 +64,8 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 			this.add(actionPhotoPanel);
 			
 			int labelX = 90;
-			nameLabel = new MyLabel(labelX, 40, 250, 26, playerName);
-			nameLabel.setFont(new Font("微软雅黑", Font.BOLD, 30));
+			nameLabel = new MyLabel(labelX, 40, 300, 26, playerName);
+			nameLabel.setFont(new Font("微软雅黑", Font.BOLD, 27));
 			nameLabel.setLeft();
 			this.add(nameLabel);
 			

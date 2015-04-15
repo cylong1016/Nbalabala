@@ -123,7 +123,7 @@ public class HotFastPanel extends HotThreeFatherPanel {
 		columns.add(new Column("五场前平均", formerFiveAvg, Color.GRAY));
 		for(int i = 0; i < 5; i++) {
 			double[] recentFive = fastVO.get(CURRENTI).getRecentFive();
-			columns.add(new Column("第" + (i + 1) + "场", recentFive[i], UIConfig.HIST_COLORS[i]));
+			columns.add(new Column("第" + (i + 1) + "场", recentFive[i], UIConfig.HIST_COLORS[CURRENTI]));
 		}
 		return columns;
 	}

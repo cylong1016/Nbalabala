@@ -83,7 +83,7 @@ public class HotFastestPlayerLabel extends JLabel{
 			int labelX = 80;
 			
 			nameLabel = new MyLabel(labelX, 30, 300, 33, playerName);
-			nameLabel.setFont(new Font("微软雅黑", Font.BOLD, 30));
+			nameLabel.setFont(new Font("微软雅黑", Font.BOLD, 27));
 			nameLabel.setLeft();
 			this.add(nameLabel);
 			
