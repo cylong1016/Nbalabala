@@ -176,7 +176,6 @@ public class PlayerInfoPanel extends BottomPanel {
 		backButton = new ImgButton(BACK_BUTTON_OFF, 50, 50, BACK_BUTTON_ON, BACK_BUTTON_CLICK);
 		this.add(backButton);
 		backButton.addMouseListener(new MouseAdapter() {
-
 			public void mousePressed(MouseEvent e) {
 				MainController.backToOnePanel(PlayerInfoPanel.this, lastPanel);
 			}

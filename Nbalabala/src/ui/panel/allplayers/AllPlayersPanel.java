@@ -81,7 +81,6 @@ public class AllPlayersPanel extends BottomPanel {
 	}
 	
 	public void refresh(){
-		players= playerInfo.getPlayerProfileByInitial(LetterButton.current.letter);
 		setTable();
 		AllPlayersPanel.this.repaint();
 	}
