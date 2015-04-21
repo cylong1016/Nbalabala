@@ -73,6 +73,19 @@ public class BottomTable extends JTable {
 		}
 	}
 	
+	/**
+	 * 设置列宽 相同宽度时 
+	 * @param x:列宽 width:表格有多少列
+	 * @author lsy
+	 * @version 2015年4月21日  下午11:30:01
+	 */
+	public void setSameWidth(int x,int width){
+		TableColumnModel model = this.getColumnModel();
+		for (int i=0;i<width;i++){
+			 model.getColumn(i).setPreferredWidth(x);
+		}
+	}
+	
 	/** 需要个别表格不显示竖线时调用 */
 	public void cancelVerticalLines() {
 		this.setShowVerticalLines(false);

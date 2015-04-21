@@ -1,4 +1,4 @@
-package ui.common.comboBox;
+ package ui.common.comboBox;
 
 import java.awt.Color;
 
@@ -24,7 +24,7 @@ public class MyComboBox extends JComboBox{
 		this.setBounds(x, y, width, height);
 		this.setSelectedItem(roleList[0]);
 		this.setOpaque(false);
-
+		
 		this.setFont(UIConfig.FONT);
 		
 		this.setBackground(UIConfig.BUTTON_COLOR);
