@@ -24,26 +24,27 @@ public class BottomPanel extends Panel {
 	/** 背景图片 */
 	protected Image bgImage;
 	
-	/** 鼠标移动到左边出现边框的提示 */
-	private Image slider = new ImageIcon(UIConfig.IMG_PATH + "sidebar/slider.png").getImage();
+	/** 鼠标移动到左边出现边框的提示 */ // 不需要了
+	// private Image slider = new ImageIcon(UIConfig.IMG_PATH + "sidebar/slider.png").getImage();
 
 	/** 左边导航栏 */
-	private LeftPanel leftPanel;
+	private RightPanel RightPanel;
 
 	/** 画笔透明度 */
 	protected float hyaline = 1.0f;
 	
 	public BottomPanel(String url) {
 		bgImage = new ImageIcon(url).getImage();
-		this.addLeftPanel(this);
-		this.addMouseMotionListener(new MouListener());
+		this.addRightPanel(this);
+		this.setBackground(Color.black);
+		// this.addMouseMotionListener(new MouListener()); // 不需要移出的效果
 		// new Opacity().start(); // 透明渐变效果
 	}
 
 	public void paint(Graphics g) {
 		Graphics2D g2d = getPaintbrush(g);
 		g2d.drawImage(bgImage, 0, 0, this);
-		g2d.drawImage(slider, 0, 0, this);
+		// g2d.drawImage(slider, 0, 0, this);
 		super.paint(g2d);
 	}
 
@@ -89,7 +90,7 @@ public class BottomPanel extends Panel {
 		public void mouseMoved(MouseEvent e) {
 			if (e.getX() > 0 && e.getX() < UIConfig.PROMPT_WIDTH) {
 				toLeftPanel();
-			} else if (e.getX() > UIConfig.LEFT_WIDTH && e.getX() < UIConfig.WIDTH) {
+			} else if (e.getX() > UIConfig.RIGHT_WIDTH && e.getX() < UIConfig.WIDTH) {
 				outLeftPanel();
 			}
 
@@ -97,18 +98,18 @@ public class BottomPanel extends Panel {
 
 	}
 
-	public void addLeftPanel(BottomPanel panel) {
-		leftPanel = new LeftPanel(panel);
-		this.add(leftPanel);
+	public void addRightPanel(BottomPanel panel) {
+		RightPanel = new RightPanel(panel);
+		this.add(RightPanel);
 	}
 
 	public void toLeftPanel() {
-		leftPanel.moveIn();
+		RightPanel.moveIn();
 		this.repaint();
 	}
 
 	public void outLeftPanel() {
-		leftPanel.moveOut();
+		RightPanel.moveOut();
 		this.repaint();
 	}
 
