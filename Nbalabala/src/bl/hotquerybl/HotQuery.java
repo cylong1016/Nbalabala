@@ -94,7 +94,6 @@ public class HotQuery implements HotBLService{
 		ArrayList<PlayerSeasonVO> players = seasonService.getAllPlayerRecentSeasonTodayData();
 		Collections.sort(players, comparator);
 		int size = players.size();
-		System.out.println("SIze bl got" + size);
 		if (size > 5) size = 5;
 		int i;
 		ArrayList<HotTodayPlayerVO> result = new ArrayList<HotTodayPlayerVO>();
