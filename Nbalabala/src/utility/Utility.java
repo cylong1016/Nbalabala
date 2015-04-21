@@ -119,7 +119,6 @@ public class Utility {
 	
 	public static void checkLatestSeasonAndUpdate(String season, int thisMonth, int thisDay) {
 		int lastSeasonStartYear = SeasonData.getLastSeasonStartYear();
-		System.out.println(lastSeasonStartYear);
 		int thisSeasonStartYear = Integer.parseInt(season.substring(0, 2));
 		if (thisSeasonStartYear > 50) thisSeasonStartYear -= 100;
 		if (lastSeasonStartYear > thisSeasonStartYear) {
