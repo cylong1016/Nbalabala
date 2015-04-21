@@ -14,13 +14,17 @@ public class UIConfig {
 
 	/*----------------------------Frame配置--------------------------------*/
 	/** 界面的宽 */
+<<<<<<< HEAD
 	public static final int WIDTH = 1200;
+=======
+	public static final int WIDTH = 1153;
+>>>>>>> origin/master
 	/** 界面的高 */
 	public static final int HEIGHT = 631;
 	/** 主界面的背景色 */
 	public static final Color MAIN_COLOR = Color.WHITE;
-	/** 左边边框的宽度 */
-	public static final int LEFT_WIDTH = 153;
+	/** 右边边框的宽度 */
+	public static final int RIGHT_WIDTH = 153;
 	/** 会弹出左边栏的宽度 */
 	public static final int PROMPT_WIDTH = 20;
 

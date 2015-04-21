@@ -17,12 +17,12 @@ import ui.controller.MainController;
  * @author lsy
  * @version 2015年3月17日 下午6:19:16
  */
-public class LeftPanel extends Panel {
+public class RightPanel extends Panel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 1L;
 
-	private int secPanelX = UIConfig.LEFT_WIDTH * (-1);
+	private int secPanelX = UIConfig.RIGHT_WIDTH * (-1);
 	private ThreadIn threadIn;
 	private ThreadOut threadOut;
 	/** 边框移动速度 */
@@ -31,7 +31,6 @@ public class LeftPanel extends Panel {
 	private Image bgImage;
 	
 	/** 横纵坐标 间距 宽高 */
-//	private int x = 58, y = 202, inter = 54;
 	private int x = 6, y = 314, inter = 41;
 	/** 图片地址 */
 	private static final String URL = UIConfig.IMG_PATH + "sidebar/";
@@ -45,10 +44,10 @@ public class LeftPanel extends Panel {
 	/** 获得底层panel */
 	private BottomPanel panel;
 	
-	public LeftPanel(BottomPanel panel) {
+	public RightPanel(BottomPanel panel) {
 		this.panel = panel;
-		this.setBounds(secPanelX, 0, UIConfig.LEFT_WIDTH, UIConfig.WIDTH);
 		bgImage = new ImageIcon(URL + "BG.png").getImage();
+		this.setBounds(UIConfig.WIDTH - UIConfig.RIGHT_WIDTH, 0, UIConfig.RIGHT_WIDTH, bgImage.getHeight(null));
 		setButton();
 		addButton();
 	}
@@ -120,15 +119,15 @@ public class LeftPanel extends Panel {
 			while (true) {
 				if (secPanelX >= 0) {
 					secPanelX = 0;
-					LeftPanel.this.setLocation(secPanelX, 0);
-					LeftPanel.this.repaint();
+					RightPanel.this.setLocation(secPanelX, 0);
+					RightPanel.this.repaint();
 					break;
 				}
 				try {
 					secPanelX = secPanelX + speed;
-					LeftPanel.this.setLocation(secPanelX, 0);
+					RightPanel.this.setLocation(secPanelX, 0);
 					Thread.sleep(5);
-					LeftPanel.this.repaint();
+					RightPanel.this.repaint();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -140,16 +139,16 @@ public class LeftPanel extends Panel {
 
 		public void run() {
 			while (true) {
-				if (secPanelX <= UIConfig.LEFT_WIDTH * (-1)) {
-					secPanelX = UIConfig.LEFT_WIDTH * (-1);
-					LeftPanel.this.setLocation(secPanelX, 0);
-					LeftPanel.this.repaint();
+				if (secPanelX <= UIConfig.RIGHT_WIDTH * (-1)) {
+					secPanelX = UIConfig.RIGHT_WIDTH * (-1);
+					RightPanel.this.setLocation(secPanelX, 0);
+					RightPanel.this.repaint();
 					break;
 				}
 				try {
 					secPanelX = secPanelX - speed;
-					LeftPanel.this.setLocation(secPanelX, 0);
-					LeftPanel.this.repaint();
+					RightPanel.this.setLocation(secPanelX, 0);
+					RightPanel.this.repaint();
 					Thread.sleep(5);
 				} catch (InterruptedException e) {
 					e.printStackTrace();

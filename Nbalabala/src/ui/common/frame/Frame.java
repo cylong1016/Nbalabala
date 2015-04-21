@@ -40,6 +40,7 @@ public class Frame extends JFrame {
 		// 标题栏
 		title = new TitlePanel(this);
 		this.add(title, BorderLayout.NORTH); // 添加标题
+
 		this.setSize(UIConfig.WIDTH, UIConfig.HEIGHT);
 		this.setLocationRelativeTo(null); // 居中，要在设置大小之后 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
