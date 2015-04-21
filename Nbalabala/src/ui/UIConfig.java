@@ -14,9 +14,9 @@ public class UIConfig {
 
 	/*----------------------------Frame配置--------------------------------*/
 	/** 界面的宽 */
-	public static final int WIDTH = 1000;
+	public static final int WIDTH = 1200;
 	/** 界面的高 */
-	public static final int HEIGHT = 632;
+	public static final int HEIGHT = 631;
 	/** 主界面的背景色 */
 	public static final Color MAIN_COLOR = Color.WHITE;
 	/** 左边边框的宽度 */

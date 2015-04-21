@@ -290,6 +290,8 @@ public class SeasonData implements SeasonDataService {
 	
 	/** 发现有文件被删除时，重新读取所有文件 */
 	public static void reloadMatches() {
+		Utility.latestDay = 0;
+		Utility.latestMonth = 0;
 		allPlayerRecords.clear();
 		allTeamRecords.clear();
 		new MatchesAccumulator(allPlayerRecords, allTeamRecords).accumulate(Utility.getSortedMatchFiles(), false);
@@ -318,13 +320,29 @@ public class SeasonData implements SeasonDataService {
 			String season = itr.next().getKey();
 			String [] seasonS = season.split("-");
 			int startYear = Integer.parseInt(seasonS[0]);
-			if (startYear > 20) startYear -= 100;
+			if (startYear > 50) startYear -= 100;
 			if (startYear > lastStartYear) {
 				lastSeason = season;
 				lastStartYear = startYear;
 			}
 		}
 		return lastSeason == null? "13-14": lastSeason;
+	}
+	
+	public static int getLastSeasonStartYear() {
+		Iterator<Entry<String, HashMap<String, TeamSeasonVO>>> itr = 
+				allTeamRecords.entrySet().iterator();
+		int lastStartYear = -50;
+		while(itr.hasNext()) {
+			String season = itr.next().getKey();
+			String [] seasonS = season.split("-");
+			int startYear = Integer.parseInt(seasonS[0]);
+			if (startYear > 50) startYear -= 100;
+			if (startYear > lastStartYear) {
+				lastStartYear = startYear;
+			}
+		}
+		return lastStartYear == -50? 13: lastStartYear;
 	}
 
 	/**

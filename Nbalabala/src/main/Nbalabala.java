@@ -1,9 +1,9 @@
 package main;
 
-import data.playerdata.PlayerImageCache;
-import data.teamdata.SVGHandler;
 import ui.controller.MainController;
 import utility.DataSourceMonitor;
+import data.playerdata.PlayerImageCache;
+import data.teamdata.SVGHandler;
 
 /**
  * Nbalabala程序主入口
@@ -16,6 +16,8 @@ import utility.DataSourceMonitor;
 public class Nbalabala {
 
 	public static void main(String[] args) {
+
+		
 		new PlayerImageCache().loadPortrait();
 		new SVGHandler().loadLogos();
 		MainController.launch();

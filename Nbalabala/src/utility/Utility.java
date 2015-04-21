@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import data.seasondata.SeasonData;
 import enums.TeamState;
 
 /**
@@ -114,6 +115,25 @@ public class Utility {
 		}catch (Exception e){
 			return 0;
 		}
+	}
+	
+	public static void checkLatestSeasonAndUpdate(String season, int thisMonth, int thisDay) {
+		int lastSeasonStartYear = SeasonData.getLastSeasonStartYear();
+		System.out.println(lastSeasonStartYear);
+		int thisSeasonStartYear = Integer.parseInt(season.substring(0, 2));
+		if (thisSeasonStartYear > 50) thisSeasonStartYear -= 100;
+		if (lastSeasonStartYear > thisSeasonStartYear) {
+			return;
+		} else if (lastSeasonStartYear < thisSeasonStartYear){
+			latestDay = 0;
+			latestMonth = 0;
+			return;
+		}
+		if (thisMonth > latestMonth || (thisMonth == latestMonth && thisDay > latestDay)) {
+			latestDay = thisDay;
+			latestMonth = thisMonth;
+		}
+		
 	}
 
 }

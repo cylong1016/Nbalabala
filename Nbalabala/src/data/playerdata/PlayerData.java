@@ -68,7 +68,6 @@ public class PlayerData implements PlayerDataService{
 				}
 				
 				String name = playerInfo.get(0);
-				
 				Image portrait = PlayerImageCache.getPortraitByName(name);
 				PlayerProfileVO player = new PlayerProfileVO(portrait, playerInfo.get(0), 
 						seasonData.getTeamAbbrByPlayer(name, season), 

@@ -10,6 +10,7 @@ package enums;
  * @version 2015年3月29日 下午5:11:54
  */
 public enum TeamAllSortBasis {
+	
 	//AS升序，DE降序
 	/** 球队名称 */
 	NAME,

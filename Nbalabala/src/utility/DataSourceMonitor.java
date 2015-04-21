@@ -18,7 +18,7 @@ public class DataSourceMonitor {
 	private static HashSet<String> oldFileNames = new HashSet<String>();
 	
 	static{
-		File dirFile = new File(Constants.dataSourcePath + "matches/");
+		File dirFile = new File(Constants.dataSourcePath + "matches//");
 		if (!dirFile.exists()){
 			dirFile.mkdirs();
 		}
@@ -55,7 +55,8 @@ public class DataSourceMonitor {
 	class MonitorThread extends Thread{
 		public void start() {
 			while (true) {
-				File dirFile = new File(Constants.dataSourcePath + "matches/");
+				File dirFile = new File(Constants.dataSourcePath + "matches//");
+				
 				if (!dirFile.exists()){
 					dirFile.mkdirs();
 				}

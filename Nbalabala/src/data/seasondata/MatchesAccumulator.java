@@ -62,9 +62,8 @@ public class MatchesAccumulator {
 				if (month < 7)
 					month += 12;
 				
-				Utility.latestMonth = month;
-				Utility.latestDay = day;
-
+				Utility.checkLatestSeasonAndUpdate(season, month, day);
+				
 				HashMap<String, PlayerSeasonVO> playerRecords = allPlayerRecords
 						.get(season);
 				if (playerRecords == null) {

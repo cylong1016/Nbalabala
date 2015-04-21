@@ -45,6 +45,7 @@ public class TeamSeasonPanel extends TeamFatherPanel{
 		updateContrastDiagram();
 		addplayerTable(teamDetail.getSeasonRecord());
 		updateSeasonTable(teamDetail.getSeasonRecord());
+		
 	}
 	
 	/**

@@ -16,14 +16,14 @@ public class Constants {
 	/** 无资料的时候显示的提示 */
 	public static final String UNKNOWN = "无资料";
 	
-	public static String dataSourcePath = "NBAdata/";
+	public static String dataSourcePath = "NBAdata\\";
 	
 	/** 记录数据目录已经变更了几次。如果在程序运行中改变数据目录，需要清空已经读取的数据，同时由Controller控制返回首页 */
 	public static void changeDataSourcePath(String newPath) {
-		dataSourcePath = newPath + "/";
-		SeasonData.reloadMatches();
-		PlayerData.reloadPlayers();
+		dataSourcePath = newPath + "\\";
 		PlayerImageCache.reloadImages();
+		PlayerData.reloadPlayers();
+		SeasonData.reloadMatches();
 		TeamData.reloadTeams();
 	}
 	

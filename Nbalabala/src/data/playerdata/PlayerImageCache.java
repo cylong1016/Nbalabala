@@ -60,7 +60,17 @@ public class PlayerImageCache {
 	
 	public static void reloadImages() {
 		portraits.clear();
-		new PlayerImageCache();
+		File file = new File(Constants.dataSourcePath + "players//portrait//");
+		if (!file.exists()) {
+			return;
+		}
+		File [] files = file.listFiles();
+		for (File imgFile : files) {
+			String fileName = imgFile.getName();
+			
+			portraits.put(fileName.substring(0, fileName.length() - 4), 
+					getPotraitImageByFile(imgFile));
+		}
 	}
 	
 	private class CacheThread extends Thread{
@@ -73,8 +83,7 @@ public class PlayerImageCache {
 			File [] files = file.listFiles();
 			for (File imgFile : files) {
 				String fileName = imgFile.getName();
-				
-				portraits.put(fileName.substring(0, fileName.length() - 4), 
+				portraits.put(fileName.substring(fileName.lastIndexOf('\\') + 1, fileName.length() - 4), 
 						getPotraitImageByFile(imgFile));
 			}
 		}
