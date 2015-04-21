@@ -1,5 +1,6 @@
 package ui.common.panel;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -17,7 +18,7 @@ import ui.controller.MainController;
  * @author lsy
  * @version 2015年3月17日 下午6:19:16
  */
-public class RightPanel extends Panel {
+public class LeftPanel extends Panel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 1L;
@@ -41,13 +42,11 @@ public class RightPanel extends Panel {
 	/** button数组 */
 	private ImgButton[] buttonArr;
 	private MouListener mou = new MouListener();
-	/** 获得底层panel */
-	private BottomPanel panel;
 	
-	public RightPanel(BottomPanel panel) {
-		this.panel = panel;
+	public LeftPanel() {
 		bgImage = new ImageIcon(URL + "BG.png").getImage();
-		this.setBounds(UIConfig.WIDTH - UIConfig.RIGHT_WIDTH, 0, UIConfig.RIGHT_WIDTH, bgImage.getHeight(null));
+		// this.setBounds(0, 0, UIConfig.RIGHT_WIDTH, bgImage.getHeight(null));
+		this.setPreferredSize(new Dimension(bgImage.getWidth(null), bgImage.getHeight(null)));
 		setButton();
 		addButton();
 	}
@@ -81,19 +80,19 @@ public class RightPanel extends Panel {
 	class MouListener extends MouseAdapter{
 		 public void mousePressed(MouseEvent e) {
 			 if(e.getSource() == allPlayers){
-				 MainController.toAllPlayersPanel(panel);
+				 MainController.toAllPlayersPanel();
 			 }else if(e.getSource() == allTeams){
-				 MainController.toAllTeamsPanel(panel);
+				 MainController.toAllTeamsPanel();
 			 }else if(e.getSource() == game){
-				 MainController.toGamePanel(panel);
+				 MainController.toGamePanel();
 			 }else if(e.getSource() == playerData){
-				 MainController.toPlayerPanel(panel);
+				 MainController.toPlayerPanel();
 			 }else if(e.getSource() == teamData){
-				 MainController.toTeamPanel(panel);
+				 MainController.toTeamPanel();
 			 }else if (e.getSource() == hot) {
-				MainController.toHotPanel(panel);
+				MainController.toHotPanel();
 			}else if(e.getSource() == returnButton){
-				 MainController.toMainPanel(panel);
+				 MainController.toMainPanel();
 			 }
 		 }
 	}
@@ -119,15 +118,15 @@ public class RightPanel extends Panel {
 			while (true) {
 				if (secPanelX >= 0) {
 					secPanelX = 0;
-					RightPanel.this.setLocation(secPanelX, 0);
-					RightPanel.this.repaint();
+					LeftPanel.this.setLocation(secPanelX, 0);
+					LeftPanel.this.repaint();
 					break;
 				}
 				try {
 					secPanelX = secPanelX + speed;
-					RightPanel.this.setLocation(secPanelX, 0);
+					LeftPanel.this.setLocation(secPanelX, 0);
 					Thread.sleep(5);
-					RightPanel.this.repaint();
+					LeftPanel.this.repaint();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -141,14 +140,14 @@ public class RightPanel extends Panel {
 			while (true) {
 				if (secPanelX <= UIConfig.RIGHT_WIDTH * (-1)) {
 					secPanelX = UIConfig.RIGHT_WIDTH * (-1);
-					RightPanel.this.setLocation(secPanelX, 0);
-					RightPanel.this.repaint();
+					LeftPanel.this.setLocation(secPanelX, 0);
+					LeftPanel.this.repaint();
 					break;
 				}
 				try {
 					secPanelX = secPanelX - speed;
-					RightPanel.this.setLocation(secPanelX, 0);
-					RightPanel.this.repaint();
+					LeftPanel.this.setLocation(secPanelX, 0);
+					LeftPanel.this.repaint();
 					Thread.sleep(5);
 				} catch (InterruptedException e) {
 					e.printStackTrace();

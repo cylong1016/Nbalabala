@@ -6,7 +6,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import ui.UIConfig;
-import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
 import utility.Constants;
 import vo.HotSeasonTeamVO;
@@ -107,7 +106,7 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() < 2) return;
 //				这个跳转方法。。好奇怪哦
-				MainController.toTeamSeasonPanel((BottomPanel)HotSeasonTeamLabel.this.getParent(),teamAbbr);
+				MainController.toTeamSeasonPanel(teamAbbr);
 			}
 		});
 	}

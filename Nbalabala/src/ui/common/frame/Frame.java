@@ -14,6 +14,7 @@ import javax.swing.UIManager;
 
 import ui.UIConfig;
 import ui.common.frame.title.TitlePanel;
+import ui.common.panel.LeftPanel;
 import ui.common.panel.Panel;
 
 /**
@@ -29,6 +30,9 @@ public class Frame extends JFrame {
 	public static Panel currentPanel;
 	/** 标题栏 */
 	protected TitlePanel title;
+	
+	/** 左边的侧边栏 */
+	protected LeftPanel leftPanel;
 
 	/** Frame透明度 */
 	protected float hyalineValue = 0f;
@@ -40,7 +44,11 @@ public class Frame extends JFrame {
 		// 标题栏
 		title = new TitlePanel(this);
 		this.add(title, BorderLayout.NORTH); // 添加标题
-
+		
+		// 左侧边栏
+		leftPanel = new LeftPanel();
+		this.add(leftPanel, BorderLayout.WEST);
+		
 		this.setSize(UIConfig.WIDTH, UIConfig.HEIGHT);
 		this.setLocationRelativeTo(null); // 居中，要在设置大小之后 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,8 +70,11 @@ public class Frame extends JFrame {
 	}
 	
 	public void setPanel(Panel panel) {
-		this.add(panel);
+		if(currentPanel != null) {
+			this.remove(currentPanel);	// 移出当前界面
+		}
 		currentPanel = panel;
+		this.add(panel);
 		this.setVisible(true);
 	}
 

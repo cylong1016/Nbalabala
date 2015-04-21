@@ -151,17 +151,17 @@ public class MainPanel extends Panel {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if (tdPolygon.contains(mousePoint)) {
-				MainController.toTeamPanel(MainPanel.this);
+				MainController.toTeamPanel();
 			} else if (pdPolygon.contains(mousePoint)) {
-				MainController.toPlayerPanel(MainPanel.this);
+				MainController.toPlayerPanel();
 			} else if (gdPolygon.contains(mousePoint)) {
-				MainController.toGamePanel(MainPanel.this);
+				MainController.toGamePanel();
 			} else if (apPolygon.contains(mousePoint)) {
-				MainController.toAllPlayersPanel(MainPanel.this);
+				MainController.toAllPlayersPanel();
 			} else if (atPolygon.contains(mousePoint)) {
-				MainController.toAllTeamsPanel(MainPanel.this);
+				MainController.toAllTeamsPanel();
 			} else if (hotPolygon.contains(mousePoint)) {
-				MainController.toHotPanel(MainPanel.this);
+				MainController.toHotPanel();
 			}
 		}
 

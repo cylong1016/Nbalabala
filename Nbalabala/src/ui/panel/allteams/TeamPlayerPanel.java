@@ -90,8 +90,7 @@ public class TeamPlayerPanel extends TeamFatherPanel{
 					if (e.getClickCount() < 2) return;
 					int rowI  = playerTable.rowAtPoint(e.getPoint());// 得到table的行号
 					if ( rowI > -1){
-						MainController.toPlayerInfoPanel(TeamPlayerPanel.this, 
-								players.get(rowI).getName(),TeamPlayerPanel.this);
+						MainController.toPlayerInfoPanel(players.get(rowI).getName(),TeamPlayerPanel.this);
 					}
 					
 				}

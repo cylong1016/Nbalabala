@@ -52,10 +52,9 @@ public class PlayerInfoPanel extends BottomPanel {
 																"犯规数", "得分", "两双", "得分/篮板/助攻", "效率", "GmSc 效率值",
 																"真实命中率", "投篮效率", "进攻篮板率", "防守篮板率", "篮板率", "助攻率", "抢断率",
 																"盖帽率", "失误率", "使用率"};
-	private static final String[] GAME_COLUMN_NAMES = new String[]{"赛季", "日期", "对阵", "首发位置","在场时间", "投篮命中数", "投篮出手数",
-		"三分命中数", "三分出手数", "罚球命中数", "罚球出手数", 
-		"进攻篮板", "防守篮板", "总篮板", "助攻数", "抢断数", "盖帽数", "失误数",
-		"犯规数", "得分"};
+	private static final String[] GAME_COLUMN_NAMES = new String[]{"赛季", "日期", "对阵", "首发位置", "在场时间", "投篮命中数", "投篮出手数",
+																	"三分命中数", "三分出手数", "罚球命中数", "罚球出手数", "进攻篮板", "防守篮板",
+																	"总篮板", "助攻数", "抢断数", "盖帽数", "失误数", "犯规数", "得分"};
 
 	protected TextButton totalButton, gameButton;
 	protected String name;
@@ -99,7 +98,7 @@ public class PlayerInfoPanel extends BottomPanel {
 		addLabel();
 		addTotalTable();
 		addContrastDiagram(); // 添加球员信息和联盟平均比较的柱状图
-		
+
 	}
 
 	/**
@@ -121,11 +120,11 @@ public class PlayerInfoPanel extends BottomPanel {
 		cd.updateUI();
 		cd.repaint();
 	}
-	
+
 	/**
 	 * 更新柱状图
 	 * @author cylong
-	 * @version 2015年4月12日  下午8:20:20
+	 * @version 2015年4月12日 下午8:20:20
 	 */
 	protected void updateContrastDiagram() {
 		/* 球员的场均得分、助攻、篮板、 罚球命中率、三分命中率的平均值 */
@@ -176,8 +175,9 @@ public class PlayerInfoPanel extends BottomPanel {
 		backButton = new ImgButton(BACK_BUTTON_OFF, 50, 50, BACK_BUTTON_ON, BACK_BUTTON_CLICK);
 		this.add(backButton);
 		backButton.addMouseListener(new MouseAdapter() {
+
 			public void mousePressed(MouseEvent e) {
-				MainController.backToOnePanel(PlayerInfoPanel.this, lastPanel);
+				MainController.backToOnePanel(lastPanel);
 			}
 		});
 	}

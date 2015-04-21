@@ -80,8 +80,8 @@ public class MatchInfoTableFactory {
 				public void mouseClicked(MouseEvent e){
 					if (e.getClickCount() < 2) return;
 					int rowI  = table.rowAtPoint(e.getPoint());// 得到table的行号
-					if ( rowI > -1){
-						MainController.toOneGamePanel(panel, matchProfile.get(rowI/2), panel);
+					if (rowI > -1){
+						MainController.toOneGamePanel(matchProfile.get(rowI/2), panel);
 					}
 				}
 			});

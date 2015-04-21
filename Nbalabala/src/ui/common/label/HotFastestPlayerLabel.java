@@ -132,8 +132,7 @@ public class HotFastestPlayerLabel extends JLabel{
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() < 2) return;
-				MainController.toPlayerInfoPanel((BottomPanel)HotFastestPlayerLabel.this.getParent(), 
-						playerName, (BottomPanel)HotFastestPlayerLabel.this.getParent());
+				MainController.toPlayerInfoPanel(playerName, (BottomPanel)HotFastestPlayerLabel.this.getParent());
 			}
 		});
 	}

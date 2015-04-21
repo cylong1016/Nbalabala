@@ -117,8 +117,7 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() < 2) return;
-				MainController.toPlayerInfoPanel((BottomPanel)HotSeasonPlayerLabel.this.getParent(), 
-						playerName, (BottomPanel)HotSeasonPlayerLabel.this.getParent());
+				MainController.toPlayerInfoPanel(playerName, (BottomPanel)HotSeasonPlayerLabel.this.getParent());
 			}
 		});
 	}

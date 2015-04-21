@@ -100,7 +100,7 @@ public class GamePanel extends BottomPanel {
 		this.add(back);
 		back.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				MainController.backToOnePanel(GamePanel.this, gameData);
+				MainController.backToOnePanel(gameData);
 			}
 
 		});
@@ -213,8 +213,7 @@ public class GamePanel extends BottomPanel {
 						return;
 					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
 					if (rowI > -1) {
-						MainController.toPlayerInfoPanel(GamePanel.this,
-								players.get(rowI).getName(), GamePanel.this);
+						MainController.toPlayerInfoPanel(players.get(rowI).getName(), GamePanel.this);
 					}
 
 				}

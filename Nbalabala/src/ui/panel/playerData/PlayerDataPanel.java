@@ -382,8 +382,7 @@ public class PlayerDataPanel extends BottomPanel {
 						return;
 					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
 					if (rowI > -1) {
-						MainController.toPlayerInfoPanel(PlayerDataPanel.this, 
-								playerArr.get(rowI).getName(), PlayerDataPanel.this);
+						MainController.toPlayerInfoPanel(playerArr.get(rowI).getName(), PlayerDataPanel.this);
 					}
 
 				}

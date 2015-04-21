@@ -114,7 +114,7 @@ public class TeamFatherPanel extends BottomPanel{
 		this.add(back);
 		back.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				MainController.backToOnePanel(TeamFatherPanel.this, FROM_PANEL);
+				MainController.backToOnePanel(FROM_PANEL);
 			}
 
 		});
@@ -148,11 +148,11 @@ public class TeamFatherPanel extends BottomPanel{
 			
 			TeamSeasonButton.current = (TeamSeasonButton) e.getSource();
 			if (e.getSource() == button[0]) {
-				MainController.toTeamSeasonPanel(TeamFatherPanel.this, abbr);
+				MainController.toTeamSeasonPanel(abbr);
 			} else if (e.getSource() == button[1]) {
-				MainController.toTeamPlayerPanel(TeamFatherPanel.this, abbr);
+				MainController.toTeamPlayerPanel(abbr);
 			} else if (e.getSource() == button[2]) {
-				MainController.toTeamGamePanel(TeamFatherPanel.this, abbr);
+				MainController.toTeamGamePanel(abbr);
 			}
 		}
 	}

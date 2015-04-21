@@ -21,6 +21,7 @@ import utility.Sleep;
 public class BottomPanel extends Panel {
 
 	private static final long serialVersionUID = 7108387309547483359L;
+	
 	/** 背景图片 */
 	protected Image bgImage;
 	
@@ -28,14 +29,13 @@ public class BottomPanel extends Panel {
 	// private Image slider = new ImageIcon(UIConfig.IMG_PATH + "sidebar/slider.png").getImage();
 
 	/** 左边导航栏 */
-	private RightPanel RightPanel;
+	private LeftPanel leftPanel;
 
 	/** 画笔透明度 */
 	protected float hyaline = 1.0f;
 	
 	public BottomPanel(String url) {
 		bgImage = new ImageIcon(url).getImage();
-		this.addRightPanel(this);
 		this.setBackground(Color.black);
 		// this.addMouseMotionListener(new MouListener()); // 不需要移出的效果
 		// new Opacity().start(); // 透明渐变效果
@@ -98,18 +98,13 @@ public class BottomPanel extends Panel {
 
 	}
 
-	public void addRightPanel(BottomPanel panel) {
-		RightPanel = new RightPanel(panel);
-		this.add(RightPanel);
-	}
-
 	public void toLeftPanel() {
-		RightPanel.moveIn();
+		leftPanel.moveIn();
 		this.repaint();
 	}
 
 	public void outLeftPanel() {
-		RightPanel.moveOut();
+		leftPanel.moveOut();
 		this.repaint();
 	}
 

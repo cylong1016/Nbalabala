@@ -205,7 +205,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 						return;
 					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
 					if (rowI > -1) {
-						MainController.toPlayerInfoPanel(HotTodayPlayerPanel.this, playerVO.get(rowI).getName(), HotTodayPlayerPanel.this);
+						MainController.toPlayerInfoPanel(playerVO.get(rowI).getName(), HotTodayPlayerPanel.this);
 					}
 					
 				}

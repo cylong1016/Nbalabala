@@ -98,7 +98,7 @@ public class AllPlayersPanel extends BottomPanel {
 						return;
 					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
 					if (rowI > -1) {
-						MainController.toPlayerInfoPanel(AllPlayersPanel.this, players.get(rowI).getName(), AllPlayersPanel.this);
+						MainController.toPlayerInfoPanel(players.get(rowI).getName(), AllPlayersPanel.this);
 					}
 					
 				}

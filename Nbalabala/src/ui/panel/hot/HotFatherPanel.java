@@ -39,13 +39,13 @@ public class HotFatherPanel extends BottomPanel {
 			button[i].addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					if(e.getSource() == button[0]){
-						MainController.toHotPanel(HotFatherPanel.this);
+						MainController.toHotPanel();
 					}else if(e.getSource() == button[1]){
-						MainController.toHotSeasonPlayerPanel(HotFatherPanel.this);
+						MainController.toHotSeasonPlayerPanel();
 					}else if(e.getSource() == button[2]){
-						MainController.toHotSeasonTeamPanel(HotFatherPanel.this);
+						MainController.toHotSeasonTeamPanel();
 					}else if(e.getSource() == button[3]){
-						MainController.toHotFastPanel(HotFatherPanel.this);
+						MainController.toHotFastPanel();
 					}
 				}
 			});
