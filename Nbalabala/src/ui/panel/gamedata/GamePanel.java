@@ -14,6 +14,7 @@ import ui.common.button.ImgButton;
 import ui.common.label.ImgLabel;
 import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
+import ui.common.panel.ScorePanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
@@ -27,7 +28,6 @@ import bl.teamquerybl.TeamQuery;
 import blservice.MatchQueryBLService;
 import blservice.PlayerQueryBLService;
 import blservice.TeamQueryBLService;
-import data.teamdata.SVGHandler;
 
 /**
  * 某场比赛数据界面
@@ -61,16 +61,14 @@ public class GamePanel extends BottomPanel {
 	/** 球队英文缩写 */
 	String teamShort1, teamShort2;
 	/** 上方显示的球队名称和城市 */
-	MyLabel teamLabel1, teamLabel2, placeLabel1, placeLabel2;
-	int labelX = 240, labelY_1 = 32, labelY_2 = 54, labelY_3 = 114, labelY_4 = 136;
 	Font labelFont = new Font("微软雅黑", 0, 17);
 	String signurl = "NBAdata/teams/";
 	/** 球队队标 */
-	ImgLabel sign1, sign2;
 	TeamQueryBLService teamQuery;
 	MatchDetailVO matchVO;
 	MyLabel[] lb_1, lb_2;
 	ImgButton back;
+	ScorePanel scPanel;
 
 	public GamePanel(String url, MatchProfileVO matchProfile,BottomPanel gameData) {
 		super(url);
@@ -82,12 +80,13 @@ public class GamePanel extends BottomPanel {
 		getScore();
 		getTeam();
 		addButton();
-		addLabel();
-		addTime();
-		addScore();
 		initSetTabel();
 		addBack();
 		checkMatchValid();
+		scPanel = new ScorePanel(matchPro);
+		this.add(scPanel);
+		scPanel.setLocation(137, 15);
+		this.repaint();
 	}
 
 	/**
@@ -118,23 +117,6 @@ public class GamePanel extends BottomPanel {
 		matchVO = matchQuery.getMatchDetail(matchPro.getSeason(), matchPro.getTime(), teamShort1, teamShort2);
 		ArrayList<MatchPlayerVO> homePlayers = matchVO.getHomePlayers();
 		setTable(homePlayers);
-	}
-
-	public void addLabel() {
-		teamLabel1 = new MyLabel(labelX, labelY_2, width, height, teamStr1);
-		teamLabel2 = new MyLabel(labelX, labelY_4, width, height, teamStr2);
-		teamLabel1.setFont(labelFont);
-		teamLabel2.setFont(labelFont);
-		placeLabel1 = new MyLabel(labelX, labelY_1, width, height, place1);
-		placeLabel2 = new MyLabel(labelX, labelY_3, width, height, place2);
-		sign1 = new ImgLabel(165, 10,80,80, SVGHandler.getTeamLogo(teamShort1));
-		sign2 = new ImgLabel(165, 95, 80,80,SVGHandler.getTeamLogo(teamShort2));
-		this.add(teamLabel1);
-		this.add(teamLabel2);
-		this.add(placeLabel1);
-		this.add(placeLabel2);
-		this.add(sign1);
-		this.add(sign2);
 	}
 
 	public void addButton() {
@@ -223,24 +205,6 @@ public class GamePanel extends BottomPanel {
 		}
 	}
 	
-	/**
-	 * 两支球队的分割线
-	 * 
-	 * @author lsy
-	 * @version 2015年3月22日 下午5:16:21
-	 */
-	public void addTime() {
-		timeURL = url + "time" + (analyzeSection(matchPro) - 4) + ".png";
-		timeImg = new ImgButton(timeURL, 260, 80, timeURL, timeURL);
-		this.add(timeImg);
-	}
-
-	public int analyzeSection(MatchProfileVO pro) {
-		String gameInfo = pro.getEachSectionScore();
-		String[] eachSection = gameInfo.split(";");
-		return eachSection.length;
-	}
-	
 	String[] scoreAll, eachScore, score1, score2;
 
 	public void getScore() {
@@ -254,52 +218,6 @@ public class GamePanel extends BottomPanel {
 			String[] scoreTemp = eachScore[i].split("-");
 			score1[i] = scoreTemp[0];
 			score2[i] = scoreTemp[1];
-		}
-	}
-
-	/** 分数 */
-	int scoreX_1 = 355, scoreY = 44, scoreY_2 = 120, inter = 48;
-	int totalScoreX = 579, totalScoreY_1 = 35, totalScoreY_2 = 116, totalInter = 80;
-	int addX = 565, addInterX = 80;
-	int scoreWidth = 40, scoreHeight = 25;
-
-	public void addScore() {
-		int lth = score1.length;
-		lb_1 = new MyLabel[lth + 1];
-		lb_2 = new MyLabel[lth + 1];
-		for (int i = 0; i < 4; i++) {
-			lb_1[i] = new MyLabel(scoreX_1 + i * inter, scoreY, scoreWidth, scoreHeight, score1[i]);
-			lb_2[i] = new MyLabel(scoreX_1 + i * inter, scoreY_2, scoreWidth, scoreHeight, score2[i]);
-			this.add(lb_1[i]);
-			this.add(lb_2[i]);
-			setRed(lb_1[i], lb_2[i]);
-		}
-		if (lth > 4) {
-			for (int i = 4; i < lth; i++) {
-				lb_1[i] = new MyLabel(addX + (i - 4) * 80, scoreY, scoreWidth, scoreHeight, score1[i]);
-				lb_2[i] = new MyLabel(addX + (i - 4) * 80, scoreY_2, scoreWidth, scoreHeight, score2[i]);
-				this.add(lb_1[i]);
-				this.add(lb_2[i]);
-				setRed(lb_1[i], lb_2[i]);
-			}
-		}
-		lb_1[lth] = new MyLabel(totalScoreX + totalInter * (lth - 4), scoreY, scoreWidth, scoreHeight, scoreAll[0]);
-		lb_2[lth] = new MyLabel(totalScoreX + totalInter * (lth - 4), scoreY_2, scoreWidth, scoreHeight,
-				scoreAll[1]);
-		Font all = new Font("微软雅黑", 1, 20);
-		lb_1[lth].setFont(all);
-		lb_2[lth].setFont(all);
-		setRed(lb_1[lth], lb_2[lth]);
-		this.add(lb_1[lth]);
-		this.add(lb_2[lth]);
-	}
-
-	public void setRed(MyLabel l1, MyLabel l2) {
-		if (Integer.parseInt(l1.text) > Integer.parseInt(l2.text)) {
-			l1.setForeground(Color.red);
-		} else if (Integer.parseInt(l1.text) < Integer.parseInt(l2.text)) {
-			l2.setForeground(Color.red);
-		} else {
 		}
 	}
 
@@ -319,7 +237,6 @@ public class GamePanel extends BottomPanel {
 		teamStr2 = Constants.TEAM_NAMES[team_2_Order];
 		place1 = teamPlace[team_1_Order];
 		place2 = teamPlace[team_2_Order];
-
 	}
 
 	int order;// 球队在数组中的位置
