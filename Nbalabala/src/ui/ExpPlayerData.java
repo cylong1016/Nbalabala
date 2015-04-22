@@ -18,10 +18,7 @@ import vo.PlayerSeasonVO;
 public class ExpPlayerData extends PlayerDataPanel{
 	
 	Frame frame;
-	
-	public static final Dimension TABLE_DIMEN = new Dimension(888, 290);
-	
-	
+
 	public ExpPlayerData(){
 		super(UIConfig.IMG_PATH + "playerData/playerDataBG.png");
 		frame = new Frame();
