@@ -417,6 +417,7 @@ public class PlayerSeasonVO {
 	public double scoreAvg;
 	
 	public int efficiency;
+	public double efficiencyAvg;
 	public double realFieldPercent;
 	public double fieldEff;
 	public double totalReboundPercent;
@@ -429,6 +430,7 @@ public class PlayerSeasonVO {
 	public double scoreReboundAssistAvg;
 	public double usePercent;
 	public double gmsc;
+	public double gmscAvg;
 	public double assistPercent;
 	public double offensiveReboundPercent;
 	public double defensiveReboundPercent;
@@ -449,7 +451,6 @@ public class PlayerSeasonVO {
 			assistPercent = assist / (timeFactor * teamFieldGoal - fieldGoal);
 			offensiveReboundPercent=offensiveRebound * timeFactor / (teamOffensiveRebound + oppoOffensiveRebound);
 			defensiveReboundPercent=defensiveRebound * timeFactor / (teamDefensiveRebound + oppoDefensiveRebound);
-			scoreReboundAssistAvg = (double)scoreReboundAssist / matchCount;
 			doubleDoubleAvg = (double)doubleDoubleCount / matchCount;
 			
 			double temp = (fieldAttempt - threePointAttempt + 0.44 * freethrowAttempt + foul);
@@ -473,7 +474,9 @@ public class PlayerSeasonVO {
 				fieldEff = (fieldGoal + 0.5 * threePointGoal) / fieldAttempt;
 			}
 			
-			realFieldPercent = score / (2 * (fieldAttempt + 0.44 * freethrowAttempt));
+			temp = fieldAttempt + 0.44 * freethrowAttempt;
+			if (temp != 0)
+				realFieldPercent = score / (2 * temp);
 			
 			fieldGoalAvg = (double)fieldGoal / matchCount;
 			fieldAttemptAvg = (double)fieldAttempt / matchCount;
@@ -500,6 +503,16 @@ public class PlayerSeasonVO {
 			foulAvg = (double) foul / matchCount;
 			turnoverAvg = (double) turnover / matchCount;
 			scoreAvg = (double) score / matchCount;
+			
+			gmsc = score + 0.4 * fieldGoal - 0.7 * fieldAttempt - 0.4 * (freethrowAttempt - freethrowGoal) + 0.7
+					* offensiveRebound + 0.3 * defensiveRebound + steal + 0.7 * assist + 0.7 * block - 0.4 * foul
+					- turnover;
+			gmscAvg = gmsc / matchCount;
+			scoreReboundAssist = score + totalRebound + assist;
+			scoreReboundAssistAvg = (double)scoreReboundAssist / matchCount;
+			efficiency =  score + totalRebound + assist + steal + block - fieldAttempt + fieldGoal - freethrowAttempt
+					+ freethrowGoal - turnover;
+			efficiencyAvg = efficiency / (double)matchCount;
 			
 			latestScore = scoreQueue.getLastData();
 			latestRebound = reboundQueue.getLastData();
@@ -579,12 +592,6 @@ public class PlayerSeasonVO {
 			
 		}
 		
-		gmsc = score + 0.4 * fieldGoal - 0.7 * fieldAttempt - 0.4 * (freethrowAttempt - freethrowGoal) + 0.7
-				* offensiveRebound + 0.3 * defensiveRebound + steal + 0.7 * assist + 0.7 * block - 0.4 * foul
-				- turnover;
-		scoreReboundAssist = score + totalRebound + assist;
-		efficiency =  score + totalRebound + assist + steal + block - fieldAttempt + fieldGoal - freethrowAttempt
-				+ freethrowGoal - turnover;
 	}
 	
 	/** 记录最近一次比赛的日期，month以12代表12月，13代表1月，14代表2月，以此类推 */

@@ -458,7 +458,7 @@ public class PlayerDataPanel extends BottomPanel {
 	 * @author cylong
 	 * @version 2015年3月29日 下午3:59:35
 	 */
-	private void createTable(ArrayList<PlayerSeasonVO> playerRecords) {
+	public void createTable(ArrayList<PlayerSeasonVO> playerRecords) {
 		String[][] rowData = new String[playerRecords.size()][Constants.PLAYER_SEASON_HEADERS.length];
 		playerDataTable = new BottomTable(rowData, Constants.PLAYER_SEASON_HEADERS);
 		playerDataTable.getColumnModel().getColumn(26).setPreferredWidth(95);

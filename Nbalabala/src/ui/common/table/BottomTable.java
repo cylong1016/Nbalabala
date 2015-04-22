@@ -213,7 +213,7 @@ public class BottomTable extends JTable {
 			};
 			label.setText(value != null ? value.toString() : "unknown");
 			label.setHorizontalAlignment(JLabel.CENTER);
-			label.setFont(UIConfig.TABLE_FONT);
+			label.setFont(UIConfig.TABLE_HEADER_FONT);
 			label.setForeground(headerF);	// 表头前景色
 			return label;
 		}
