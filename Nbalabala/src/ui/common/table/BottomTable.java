@@ -12,7 +12,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableModel;
 
 import ui.UIConfig;
 
@@ -44,11 +43,6 @@ public class BottomTable extends JTable {
 		super();
 	}
 
-	public BottomTable(TableModel dm) {
-		super(dm);
-		this.decorateTable();
-	}
-	
 	/**
 	 * @see javax.swing.JTable#isCellEditable(int, int)
 	 */
@@ -252,5 +246,4 @@ public class BottomTable extends JTable {
 		}
 
 	}
-
 }

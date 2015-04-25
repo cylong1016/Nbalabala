@@ -18,7 +18,7 @@ public class Constants {
 	
 	public static String dataSourcePath = "NBAdata\\";
 	
-	/** 记录数据目录已经变更了几次。如果在程序运行中改变数据目录，需要清空已经读取的数据，同时由Controller控制返回首页 */
+	/** 如果在程序运行中改变数据目录，需要清空已经读取的数据，同时由Controller控制返回首页 */
 	public static void changeDataSourcePath(String newPath) {
 		dataSourcePath = newPath + "\\";
 		PlayerImageCache.reloadImages();
@@ -26,6 +26,38 @@ public class Constants {
 		SeasonData.reloadMatches();
 		TeamData.reloadTeams();
 	}
+	
+	/** 球员个人信息页面中的赛季数据的表头 */
+	public static String [] onePlayerDataHeaders = {
+		"赛季","场数","先发","在场时间","投篮%","三分%","罚球%","进攻","防守","篮板","助攻","抢断","盖帽","失误","犯规","得分"
+	};
+	
+	/** 所有球员赛季数据中的表格分成四部分，为基本、进攻、防守、高阶 */
+	public static String []basicPlayerHeaders = {"序号","球员名称","所属球队","参赛","先发","在场时间","得分","篮板",
+		"助攻","盖帽","抢断","两双","得分篮板助攻","犯规","失误"};
+	public static String []advancedPlayerHeaders = {"序号","球员名称","效率","GmSc","使用率","进攻篮板率","防守篮板率",
+		"总篮板率","助攻率","真实命中率","投篮效率","盖帽率","抢断率","犯规率","失误率"};
+	public static String []offensivePlayerHeaders = {"序号","球员名称","投篮命中","投篮出手","投篮%","罚球命中","罚球出手",
+		"罚球%","三分命中","三分出手","三分%","助攻","助攻率","真实命中率","投篮效率"};
+	public static String []defensivePlayerHeaders = {"序号","球员名称","所属球队","参赛","先发","进攻篮板","防守篮板",
+		"总篮板","盖帽","抢断","进攻篮板率","防守篮板率","总篮板率","盖帽率","抢断率"};
+	
+	/** 所有球员赛季数据中的表格分成三部分，为基本、进攻、防守 */
+	public static String []basicTeamHeaders = {"序号","球队名称","胜场数","总场数","胜率","得分","篮板","助攻","盖帽",
+		"抢断","犯规","失误","进攻效率","防守效率"}; //14
+	public static String []offensiveTeamHeaders = {"序号","球队名称","投篮命中","投篮出手","投篮%","罚球命中","罚球出手",
+		"罚球%","三分命中","三分出手","三分%","助攻率","进攻回合","进攻效率"};
+	public static String []defensiveTeamHeaders = {"序号","球队名称","进攻篮板","防守篮板","总篮板","进攻篮板效率",
+		"防守篮板效率","盖帽","抢断","抢断效率","防守回合","防守效率","对手得分","对手投篮%"};
+	
+	
+	
+	/** 球员个人信息页面中的赛季数据的空表 */
+	public static Object [][] onePlayerDataTableEmptyContent = 
+		{{"赛季平均","","","","","","","","","","","","","",""},
+		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{"赛季总计","","","","","","","","","","","","","",""},
+		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
 	
 	public static final String [] TEAM_SEASON_HEADERS = {"序号", "球队名称", "胜场数", "负场数", "总场数", "胜率", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手",
 		"三分命中率", "罚球命中", "罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "进攻篮板效率", "防守篮板效率",

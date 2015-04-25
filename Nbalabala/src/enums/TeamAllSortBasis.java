@@ -18,9 +18,6 @@ public enum TeamAllSortBasis {
 	/** 胜场数 */
 	WINS,
 
-	/** 负场数 */
-	LOSES,
-
 	/** 总场数 */
 	MATCH_COUNT,
 
@@ -104,5 +101,11 @@ public enum TeamAllSortBasis {
 
 	/** 球队总得分 */
 	SCORE,
+	
+	/** 对手场均得分 */
+	OPPO_SCORE,
+	
+	/** 对手投篮命中率 */
+	OPPO_FIELD_PERCENT
 
 }

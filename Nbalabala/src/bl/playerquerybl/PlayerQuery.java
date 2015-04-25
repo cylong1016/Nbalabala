@@ -8,12 +8,16 @@ import vo.PlayerMatchPerformanceVO;
 import vo.PlayerProfileVO;
 import vo.PlayerSeasonVO;
 import bl.matchquerybl.MatchQuery;
+import bl.playerseasonbl.PlayerAvgSorter;
 import bl.playerseasonbl.PlayerSeasonAnalysis;
 import blservice.PlayerQueryBLService;
 import data.playerdata.PlayerData;
 import data.playerdata.PlayerImageCache;
 import data.seasondata.SeasonData;
 import dataservice.PlayerDataService;
+import dataservice.SeasonDataService;
+import enums.PlayerAvgSortBasis;
+import enums.SortOrder;
 
 /**
  * 负责查询球员信息的类
@@ -112,6 +116,48 @@ public class PlayerQuery implements PlayerQueryBLService{
 		double[]result = {(double)score / matchCount, (double)rebound / matchCount,
 				(double)assist / matchCount, (double)freethrowGoal / freethrowAttempt,
 				(double)threePointGoal / threePointAttempt};
+		return result;
+	}
+
+	/**
+	 * @see blservice.PlayerQueryBLService#getScoreRankAvg(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public int[] getScoreRankAvg(String name, String season) {
+		SeasonDataService dataService = new SeasonData();
+		int [] result = new int[3];
+		ArrayList<PlayerSeasonVO> vos = dataService.getAllPlayerSeasonData(season);
+		if (vos.size() == 0) {
+			result[0]=0;
+			result[1]=0;
+			result[2]=0;
+			return result;
+		}
+		PlayerAvgSorter sorter = new PlayerAvgSorter();
+		sorter.sort(vos, PlayerAvgSortBasis.SCORE_AVG, SortOrder.DE);
+		for (int i=0;i<vos.size();i++) {
+			if (vos.get(i).name.equals(name)) {
+				result[0] = i + 1;
+				break;
+			}
+			result[0] = 0;
+		}
+		sorter.sort(vos, PlayerAvgSortBasis.TOTAL_REBOUND_AVG, SortOrder.DE);
+		for (int i=0;i<vos.size();i++) {
+			if (vos.get(i).name.equals(name)) {
+				result[1] = i + 1;
+				break;
+			}
+			result[1] = 0;
+		}
+		sorter.sort(vos, PlayerAvgSortBasis.ASSIST_AVG, SortOrder.DE);
+		for (int i=0;i<vos.size();i++) {
+			if (vos.get(i).name.equals(name)) {
+				result[2] = i + 1;
+				break;
+			}
+			result[2] = 0;
+		}
 		return result;
 	}
 }

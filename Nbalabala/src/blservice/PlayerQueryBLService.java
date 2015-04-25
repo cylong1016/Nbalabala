@@ -25,5 +25,8 @@ public interface PlayerQueryBLService {
 	/** 返回一个长度为5数组，分别是所有球员的场均得分、助攻、篮板、 罚球命中率、三分命中率的平均值*/
 	public double [] getFiveArgsAvg(String season);
 	
+	/** 返回一个长度为3的数组，分别是该球员该赛季得分、篮板、助攻的排名 。若某个元素为0，表示没有此人的排名，应不予显示该项排名*/
+	public int[] getScoreRankAvg(String name, String season);
+	
 
 }

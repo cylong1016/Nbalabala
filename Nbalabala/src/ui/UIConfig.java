@@ -57,7 +57,9 @@ public class UIConfig {
 	/** 表格预设大小 */
 	public static final Dimension TABLE_DIMEN = new Dimension(888, 290);
 	/** 表格中数据显示的小数点位数 */
-	public static final DecimalFormat FORMAT = new DecimalFormat("0.000");
+	public static final DecimalFormat FORMAT = new DecimalFormat("0.0");
+	/** 表格中百分数的数据格式*/
+	public static final DecimalFormat PERCENT_FORMAT = new DecimalFormat("0.0%");
 	/** 表格每一行的高 */
 	public static final int ROW_HEIGHT = 23;
 	/*----------------------------表格配置--------------------------------*/

@@ -24,7 +24,7 @@ import enums.SortOrder;
  */
 public class PlayerSeasonAnalysis implements PlayerSeasonBLService {
 
-	private SeasonDataService seasonData = new SeasonData();
+	private static SeasonDataService seasonData = new SeasonData();
 
 	/** 记录上一次返回给UI层，即UI层正在显示的球员列表 */
 	private ArrayList<PlayerSeasonVO> currentList 

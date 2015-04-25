@@ -1,5 +1,8 @@
 package blservice;
 
+import java.util.ArrayList;
+
+import vo.PlayerProfileVO;
 import vo.TeamDetailVO;
 
 /**
@@ -16,5 +19,7 @@ public interface TeamQueryBLService {
 	
 	/** 返回一个长度为5数组，分别是所有球员的场均得分、助攻、篮板、 罚球命中率、三分命中率的平均值*/
 	public double [] getFiveArgsAvg(String season);
+	
+//	public ArrayList<PlayerProfileVO>
 
 }

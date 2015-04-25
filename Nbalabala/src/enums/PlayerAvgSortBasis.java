@@ -86,10 +86,10 @@ public enum PlayerAvgSortBasis {
 	SCORE_REBOUND_ASSIST_AVG,
 
 	/** 效率 */
-	EFFICIENCY,
+	EFFICIENCY_AVG,
 
 	/** GmSc效率值 */
-	GMSC,
+	GMSC_AVG,
 
 	/** 真实投篮命中率 */
 	REAL_FIELD_PERCENT,

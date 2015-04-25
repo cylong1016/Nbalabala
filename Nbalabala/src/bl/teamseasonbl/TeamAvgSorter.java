@@ -234,15 +234,6 @@ public class TeamAvgSorter {
 			};
 			break;
 
-		case LOSES:
-			comparator = new Comparator<TeamSeasonVO>() {
-
-				public int compare(TeamSeasonVO t1, TeamSeasonVO t2) {
-					return factor * (t1.getLoses() - t2.getLoses());
-				}
-			};
-			break;
-
 		case MATCH_COUNT:
 			comparator = new Comparator<TeamSeasonVO>() {
 
@@ -302,6 +293,24 @@ public class TeamAvgSorter {
 
 				public int compare(TeamSeasonVO t1, TeamSeasonVO t2) {
 					return factor * (t1.getWins() - t2.getWins());
+				}
+			};
+			break;
+			
+		case OPPO_FIELD_PERCENT:
+			comparator = new Comparator<TeamSeasonVO>() {
+
+				public int compare(TeamSeasonVO t1, TeamSeasonVO t2) {
+					return (int)(factor * (t1.oppoFieldPercent - t2.oppoFieldPercent) * 10000);
+				}
+			};
+			break;
+			
+		case OPPO_SCORE_AVG:
+			comparator = new Comparator<TeamSeasonVO>() {
+
+				public int compare(TeamSeasonVO t1, TeamSeasonVO t2) {
+					return (int)(factor * (t1.oppoScoreAvg - t2.oppoScoreAvg) * 10000);
 				}
 			};
 			break;

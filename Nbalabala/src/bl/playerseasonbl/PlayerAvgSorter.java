@@ -217,11 +217,11 @@ public class PlayerAvgSorter {
 				}
 			};
 			break;
-		case EFFICIENCY:
+		case EFFICIENCY_AVG:
 			comparator = new Comparator<PlayerSeasonVO>() {
 
 				public int compare(PlayerSeasonVO p1, PlayerSeasonVO p2) {
-					return factor * (p1.getEfficiency() - p2.getEfficiency());
+					return (int)(factor * (p1.efficiencyAvg - p2.efficiencyAvg) * 10000);
 				}
 			};
 			break;
@@ -257,11 +257,11 @@ public class PlayerAvgSorter {
 				}
 			};
 			break;
-		case GMSC:
+		case GMSC_AVG:
 			comparator = new Comparator<PlayerSeasonVO>() {
 
 				public int compare(PlayerSeasonVO p1, PlayerSeasonVO p2) {
-					return (int)(factor * (p1.getGmSc() - p2.getGmSc()) * 10000);
+					return (int)(factor * (p1.gmscAvg - p2.gmscAvg) * 10000);
 				}
 			};
 			break;

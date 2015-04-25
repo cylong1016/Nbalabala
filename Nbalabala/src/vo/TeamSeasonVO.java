@@ -304,6 +304,9 @@ public class TeamSeasonVO {
 	public double stealEff;
 	public double defensiveEff;
 	
+	public double oppoFieldPercent;
+	public double oppoScoreAvg;
+	
 	
 	public void update() {
 		if (matchCount != 0) {
@@ -348,6 +351,14 @@ public class TeamSeasonVO {
 			foulAvg = (double) foul / matchCount;
 			turnoverAvg = (double) turnover / matchCount;
 			scoreAvg = (double) score / matchCount;
+			
+			if (oppoScore != 0) {
+				oppoScoreAvg = (double)oppoScore / matchCount;
+			}
+			
+			if (oppoFieldAttempt != 0) {
+				oppoFieldPercent = (double)oppoFieldGoal / oppoFieldAttempt;
+			}
 		}
 	}
 	

@@ -1,14 +1,19 @@
 package ui;
 
-import java.awt.Dimension;
 import java.util.ArrayList;
 
 import ui.common.frame.Frame;
-import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
-import ui.panel.main.MainPanel;
+import ui.panel.playerData.AllPlayerSeasonTable;
 import ui.panel.playerData.PlayerDataPanel;
+import ui.panel.teamdata.AllTeamSeasonTable;
 import vo.PlayerSeasonVO;
+import bl.playerseasonbl.PlayerSeasonAnalysis;
+import bl.teamseasonbl.TeamAllSorter;
+import bl.teamseasonbl.TeamSeasonAnalysis;
+import enums.AllPlayerSeasonTableCategory;
+import enums.AllTeamSeasonTableCategory;
+import enums.TotalOrAvg;
 
 /**
  * 
@@ -27,8 +32,10 @@ public class ExpPlayerData extends PlayerDataPanel{
 	}
 	
 	public void createTable(ArrayList<PlayerSeasonVO> playerRecords){
-		ExpPlayerBasicTable table = new ExpPlayerBasicTable();
-//		table.getColumnModel().getColumn(1).setHeaderValue("hahaha"); 就是想试试 能不能改变表头名字
+		TeamSeasonAnalysis seasonAnalysis = new TeamSeasonAnalysis();
+		AllTeamSeasonTable table = new AllTeamSeasonTable(seasonAnalysis, seasonAnalysis.getTeamDataSortedByName("13-14"),
+				AllTeamSeasonTableCategory.DEFENSIVE,
+				TotalOrAvg.TOTAL);
 		BottomScrollPane pane = new BottomScrollPane(table);	//原来的
 		pane.setLocation(57, 260);
 		//可以直接在此处用setBounds修改表格的位置大小
@@ -38,6 +45,7 @@ public class ExpPlayerData extends PlayerDataPanel{
 	
 	
 	public static void main(String[]args){
+		
 		new ExpPlayerData();
 	}
 
