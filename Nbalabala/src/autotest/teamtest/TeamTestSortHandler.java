@@ -13,16 +13,17 @@ public class TeamTestSortHandler {
 	
 	//TODO 如果出现total就按总数排，否则是avg
 	public static void sortTeamByArgs(String[]args, ArrayList<TeamSimpleSeasonVO> vos) {
+		
 		int i;
 		
-		//如果是热门，则不会有排序
-		
+		//如果是热门，则按热门类型降序排序
 		Comparator<TeamSimpleSeasonVO> comparator;
 		if (args[1].equals("-hot")) {
 			comparator = SimpleTeamTotalSorter.getTeamTotalComparator(args[2], "desc");
 			Collections.sort(vos, comparator);
 			return;
 		}
+		
 		for (i=1;i<args.length;i++) {
 			if (args[i].equals("-sort")) {
 				String[] sortArgs = args[i+1].split("\\.");
@@ -38,11 +39,12 @@ public class TeamTestSortHandler {
 		
 		//TODO 到底是score还是point
 		
-		//默认排序
-		
+		//默认排序：分为高阶、基础场均、基础总计
 		if (args[1].equals("-high"))
 			comparator = SimpleTeamAvgAndHighSorter.getTeamAvgAndHighComparator("winRate", "desc");
-		else
+		else if (args[1].equals("-total"))
+			comparator = SimpleTeamTotalSorter.getTeamTotalComparator("score", "desc");
+		else 
 			comparator = SimpleTeamAvgAndHighSorter.getTeamAvgAndHighComparator("score", "desc");
 		Collections.sort(vos, comparator);
 	}

@@ -21,6 +21,7 @@ public class SimpleTeamTotalSorter {
 		
 		switch(basis) {
 		case "score":
+			//TODO 到底是score还是point
 		case "point":
 			comparator = new Comparator<TeamSimpleSeasonVO>() {
 				private int factor = SimpleTeamTotalSorter.factor;
