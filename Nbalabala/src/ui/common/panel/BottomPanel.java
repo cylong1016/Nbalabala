@@ -40,6 +40,13 @@ public class BottomPanel extends Panel {
 		// this.addMouseMotionListener(new MouListener()); // 不需要移出的效果
 		// new Opacity().start(); // 透明渐变效果
 	}
+	
+	public BottomPanel(Image bg) {
+		bgImage = bg;
+		this.setBackground(Color.black);
+		// this.addMouseMotionListener(new MouListener()); // 不需要移出的效果
+		// new Opacity().start(); // 透明渐变效果
+	}
 
 	public void paint(Graphics g) {
 		Graphics2D g2d = getPaintbrush(g);

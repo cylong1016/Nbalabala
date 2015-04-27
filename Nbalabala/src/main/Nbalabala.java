@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.Font;
+
 import ui.controller.MainController;
 import utility.DataSourceMonitor;
 import data.playerdata.PlayerImageCache;
@@ -17,7 +19,6 @@ public class Nbalabala {
 
 	public static void main(String[] args) {
 
-		
 		new PlayerImageCache().loadPortrait();
 		new SVGHandler().loadLogos();
 		MainController.launch();

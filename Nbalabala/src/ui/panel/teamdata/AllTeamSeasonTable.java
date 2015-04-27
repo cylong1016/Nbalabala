@@ -185,9 +185,9 @@ public class AllTeamSeasonTable extends BottomTable{
 			case 9:
 				return TeamAvgSortBasis.STEAL_AVG;
 			case 10:
-				return TeamAvgSortBasis.FOUL_AVG;
-			case 11:
 				return TeamAvgSortBasis.TURNOVER_AVG;
+			case 11:
+				return TeamAvgSortBasis.FOUL_AVG;
 			case 12:
 				return TeamAvgSortBasis.OFFENSIVE_EFF;
 			default:
@@ -205,17 +205,17 @@ public class AllTeamSeasonTable extends BottomTable{
 			case 4:
 				return TeamAvgSortBasis.FIELD_PERCENT;
 			case 5:
-				return TeamAvgSortBasis.FREETHROW_GOAL_AVG;
-			case 6:
-				return TeamAvgSortBasis.FREETHROW_ATTEMPT_AVG;
-			case 7:
-				return TeamAvgSortBasis.FREETHROW_PERCENT;
-			case 8:
 				return TeamAvgSortBasis.THREE_POINT_GOAL_AVG;
-			case 9:
+			case 6:
 				return TeamAvgSortBasis.THREE_POINT_ATTEMPT_AVG;
-			case 10:
+			case 7:
 				return TeamAvgSortBasis.THREE_POINT_PERCENT;
+			case 8:
+				return TeamAvgSortBasis.FREETHROW_GOAL_AVG;
+			case 9:
+				return TeamAvgSortBasis.FREETHROW_ATTEMPT_AVG;
+			case 10:
+				return TeamAvgSortBasis.FREETHROW_PERCENT;
 			case 11:
 				return TeamAvgSortBasis.ASSIST_EFF;
 			case 12:
@@ -280,9 +280,9 @@ public class AllTeamSeasonTable extends BottomTable{
 			case 9:
 				return TeamAllSortBasis.STEAL;
 			case 10:
-				return TeamAllSortBasis.FOUL;
-			case 11:
 				return TeamAllSortBasis.TURNOVER;
+			case 11:
+				return TeamAllSortBasis.FOUL;
 			case 12:
 				return TeamAllSortBasis.OFFENSIVE_EFF;
 			default:
@@ -300,17 +300,17 @@ public class AllTeamSeasonTable extends BottomTable{
 			case 4:
 				return TeamAllSortBasis.FIELD_PERCENT;
 			case 5:
-				return TeamAllSortBasis.FREETHROW_GOAL;
-			case 6:
-				return TeamAllSortBasis.FREETHROW_ATTEMPT;
-			case 7:
-				return TeamAllSortBasis.FREETHROW_PERCENT;
-			case 8:
 				return TeamAllSortBasis.THREE_POINT_GOAL;
-			case 9:
+			case 6:
 				return TeamAllSortBasis.THREE_POINT_ATTEMPT;
-			case 10:
+			case 7:
 				return TeamAllSortBasis.THREE_POINT_PERCENT;
+			case 8:
+				return TeamAllSortBasis.FREETHROW_GOAL;
+			case 9:
+				return TeamAllSortBasis.FREETHROW_ATTEMPT;
+			case 10:
+				return TeamAllSortBasis.FREETHROW_PERCENT;
 			case 11:
 				return TeamAllSortBasis.ASSIST_EFF;
 			case 12:
@@ -369,8 +369,8 @@ public class AllTeamSeasonTable extends BottomTable{
 				setValueAt(df.format(vo.assistAvg), i, 7);
 				setValueAt(df.format(vo.blockAvg), i, 8);
 				setValueAt(df.format(vo.stealAvg), i, 9);
-				setValueAt(df.format(vo.foulAvg), i, 10);
-				setValueAt(df.format(vo.turnoverAvg), i, 11);
+				setValueAt(df.format(vo.turnoverAvg), i, 10);
+				setValueAt(df.format(vo.foulAvg), i, 11);
 				setValueAt(UIConfig.PERCENT_FORMAT.format(vo.offensiveEff), i, 12);
 				setValueAt(UIConfig.PERCENT_FORMAT.format(vo.defensiveEff), i, 13);
 			}
@@ -387,8 +387,8 @@ public class AllTeamSeasonTable extends BottomTable{
 				setValueAt(vo.assist, i, 7);
 				setValueAt(vo.block, i, 8);
 				setValueAt(vo.steal, i, 9);
-				setValueAt(vo.foul, i, 10);
-				setValueAt(vo.turnover, i, 11);
+				setValueAt(vo.turnover, i, 10);
+				setValueAt(vo.foul, i, 11);
 				setValueAt(df.format(vo.offensiveEff), i, 12);
 				setValueAt(df.format(vo.defensiveEff), i, 13);
 			}
@@ -409,12 +409,12 @@ public class AllTeamSeasonTable extends BottomTable{
 				setValueAt(df.format(vo.fieldGoalAvg), i, 2);
 				setValueAt(df.format(vo.fieldAttemptAvg), i, 3);
 				setValueAt(percentDf.format(vo.fieldPercent), i, 4);
-				setValueAt(df.format(vo.freethrowGoalAvg), i, 5);
-				setValueAt(df.format(vo.freethrowAttemptAvg), i, 6);
-				setValueAt(percentDf.format(vo.freethrowPercent), i, 7);
-				setValueAt(df.format(vo.threePointGoalAvg), i, 8);
-				setValueAt(df.format(vo.threePointAttemptAvg), i, 9);
-				setValueAt(percentDf.format(vo.threePointPercent), i, 10);
+				setValueAt(df.format(vo.threePointGoalAvg), i, 5);
+				setValueAt(df.format(vo.threePointAttemptAvg), i, 6);
+				setValueAt(percentDf.format(vo.threePointPercent), i, 7);
+				setValueAt(df.format(vo.freethrowGoalAvg), i, 8);
+				setValueAt(df.format(vo.freethrowAttemptAvg), i, 9);
+				setValueAt(percentDf.format(vo.freethrowPercent), i, 10);
 				setValueAt(percentDf.format(vo.assistEff), i, 11);
 				setValueAt(df.format(vo.offensiveRoundAvg), i, 12);
 				setValueAt(df.format(vo.offensiveEff), i, 13);
@@ -427,12 +427,12 @@ public class AllTeamSeasonTable extends BottomTable{
 				setValueAt(vo.fieldGoal, i, 2);
 				setValueAt(vo.fieldAttempt, i, 3);
 				setValueAt(percentDf.format(vo.fieldPercent), i, 4);
-				setValueAt(vo.freethrowGoal, i, 5);
-				setValueAt(vo.freethrowAttempt, i, 6);
-				setValueAt(percentDf.format(vo.freethrowPercent), i, 7);
-				setValueAt(vo.threePointGoal, i, 8);
-				setValueAt(vo.threePointAttempt, i, 9);
-				setValueAt(percentDf.format(vo.threePointPercent), i, 10);
+				setValueAt(vo.threePointGoal, i, 5);
+				setValueAt(vo.threePointAttempt, i, 6);
+				setValueAt(percentDf.format(vo.threePointPercent), i, 7);
+				setValueAt(vo.freethrowGoal, i, 8);
+				setValueAt(vo.freethrowAttempt, i, 9);
+				setValueAt(percentDf.format(vo.freethrowPercent), i, 10);
 				setValueAt(percentDf.format(vo.assistEff), i, 11);
 				setValueAt(vo.offensiveRound, i, 12);
 				setValueAt(df.format(vo.offensiveEff), i, 13);

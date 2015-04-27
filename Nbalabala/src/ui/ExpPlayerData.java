@@ -1,17 +1,17 @@
 package ui;
 
+import java.awt.Font;
+import java.io.File;
 import java.util.ArrayList;
+
+import javax.swing.JLabel;
 
 import ui.common.frame.Frame;
 import ui.common.table.BottomScrollPane;
-import ui.panel.playerData.AllPlayerSeasonTable;
 import ui.panel.playerData.PlayerDataPanel;
 import ui.panel.teamdata.AllTeamSeasonTable;
 import vo.PlayerSeasonVO;
-import bl.playerseasonbl.PlayerSeasonAnalysis;
-import bl.teamseasonbl.TeamAllSorter;
 import bl.teamseasonbl.TeamSeasonAnalysis;
-import enums.AllPlayerSeasonTableCategory;
 import enums.AllTeamSeasonTableCategory;
 import enums.TotalOrAvg;
 
@@ -45,8 +45,23 @@ public class ExpPlayerData extends PlayerDataPanel{
 	
 	
 	public static void main(String[]args){
+//		
+//		new ExpPlayerData();
+//		try {
+//	        java.io.FileInputStream fi = new java.io.FileInputStream(new File("Hiragino.otf"));
+//	        java.io.BufferedInputStream fb = new java.io.BufferedInputStream(fi);
+//	        Font nf = Font.createFont(Font.TRUETYPE_FONT, fb);
+//	        nf = nf.deriveFont(Font.BOLD, 10);
+//	        System.out.println(nf.getFontName());
+//	        System.out.println(nf.getSize());
+//	      }
+//	      catch (Exception e) {
+//	        System.out.println(e.getMessage());
+//	      }
 		
-		new ExpPlayerData();
+		JLabel label = new JLabel("hkasjdflkaj");
+		System.out.println(label.getPreferredSize());
+	    
 	}
 
 }

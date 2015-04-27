@@ -7,7 +7,10 @@ import ui.common.frame.Frame;
 import ui.common.panel.BottomPanel;
 import ui.common.panel.Panel;
 import ui.panel.allplayers.AllPlayersPanel;
+import ui.panel.allplayers.PlayerInfoBriefPanel;
+import ui.panel.allplayers.PlayerInfoMatchesDataPanel;
 import ui.panel.allplayers.PlayerInfoPanel;
+import ui.panel.allplayers.PlayerInfoSeasonDataPanel;
 import ui.panel.allteams.AllTeamsPanel;
 import ui.panel.allteams.TeamGamePanel;
 import ui.panel.allteams.TeamPlayerPanel;
@@ -62,6 +65,8 @@ public class MainController {
 	private static HotSeasonTeamPanel hotSeasonTeamPanel;
 	/** 进步最快球员界面 */
 	private static HotFastPanel hotFastPanel;
+	
+	
 	/**
 	 * 初始化主界面
 	 * @author cylong
@@ -193,7 +198,7 @@ public class MainController {
 	}
 
 	/**
-	 * 球员详细信息界面
+	 * 跳到球员详细信息
 	 * @author lsy
 	 * @version 2015年3月24日 上午11:19:21
 	 */
@@ -201,6 +206,7 @@ public class MainController {
 		playerInfoPanel = new PlayerInfoPanel(UIConfig.IMG_PATH + "players/playerInfoBG.png", name, allPanel);
 		frame.setPanel(playerInfoPanel);
 	}
+	
 	
 	public static void refreshUI() {
 		Frame.currentPanel.refresh();
@@ -229,5 +235,6 @@ public class MainController {
 		frame.setPanel(hotFastPanel);
 		frame.repaint();
 	}
+	
 }
 

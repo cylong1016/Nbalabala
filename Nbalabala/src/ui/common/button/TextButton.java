@@ -47,7 +47,6 @@ public class TextButton extends JButton {
 				TextButton.this.setBackground(UIConfig.BUTTON_COLOR);
 			}
 		});
-		
 	}
 
 	public void back() {

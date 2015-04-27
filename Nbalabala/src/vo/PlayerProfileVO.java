@@ -1,7 +1,6 @@
 package vo;
 
 import java.awt.Image;
-import java.text.DecimalFormat;
 
 import utility.Constants;
 
@@ -41,7 +40,7 @@ public class PlayerProfileVO {
 	private String age;
 	
 	/** 球龄 */
-	private String exp;
+	private String veteran;
 	
 	/** 毕业学校 */
 	private String school;
@@ -59,7 +58,7 @@ public class PlayerProfileVO {
 		this.weight = weight;
 		this.birth = birth;
 		this.age = age;
-		this.exp = exp;
+		this.veteran = exp;
 		this.school = school;
 	}
 	
@@ -73,7 +72,7 @@ public class PlayerProfileVO {
 		this.weight = Constants.UNKNOWN;
 		this.birth = Constants.UNKNOWN;
 		this.age = Constants.UNKNOWN;
-		this.exp = Constants.UNKNOWN;
+		this.veteran = Constants.UNKNOWN;
 		this.school = Constants.UNKNOWN;
 	}
 
@@ -100,46 +99,21 @@ public class PlayerProfileVO {
 	public String getBirth() {
 		return Constants.translateDate(birth);
 	}
-
-	public String getHeight() {
-		// 身高除了显示英尺、英寸以外还换算为厘米，保留一位小数
-		try{
-		String [] s = height.split("-");
-		int feet = Integer.parseInt(s[0]);
-		int inches = Integer.parseInt(s[1]);
-		double cms = feet * 30.48 + inches * 2.54;
-		DecimalFormat decimalFormat = new DecimalFormat(".#");
-		String cmsString = decimalFormat.format(cms);	
-		return s[0] + "英尺" + s[1] + "英寸（" +cmsString + "cm）";
-		}catch(Exception e){
-			return "无资料";
-		}
+	
+	public String getWeight() {
+		return Constants.translateWeight(weight);
+	}
+	
+	public String getExp() {
+		return Constants.translateVeteran(veteran);
 	}
 
-	public String getWeight() {
-		//体重显示磅和千克，保留一位小数
-		try{
-		double kgs = 0.4536 * Integer.parseInt(weight);
-		DecimalFormat decimalFormat = new DecimalFormat(".#");
-		String kgsString = decimalFormat.format(kgs);
-		return weight + "磅（" + kgsString +"kg）";
-		}catch(Exception e){
-			return "无资料";
-		}
+	public String getHeight() {
+		return Constants.translateHeight(height);
 	}
 
 	public String getAge() {
 		return age;
-	}
-
-	public String getExp() {
-		if (exp.equals("R")){
-			return "新秀";
-		}else if (exp.equals("无资料")){
-			return exp;
-		}else {
-			return exp + "年";
-		}
 	}
 
 	public String getSchool() {
@@ -157,7 +131,7 @@ public class PlayerProfileVO {
 		this.weight = Constants.UNKNOWN;
 		this.birth = Constants.UNKNOWN;
 		this.age = Constants.UNKNOWN;
-		this.exp = Constants.UNKNOWN;
+		this.veteran = Constants.UNKNOWN;
 		this.school = Constants.UNKNOWN;
 	}
 

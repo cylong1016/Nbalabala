@@ -14,9 +14,12 @@ import vo.PlayerSeasonVO;
  */
 public class OnePlayerDataTable extends BottomTable{
 	
+	/** serialVersionUID */
+	private static final long serialVersionUID = -3205098453283073458L;
+
 	public OnePlayerDataTable(){
 		super(Constants.onePlayerDataTableEmptyContent, Constants.onePlayerDataHeaders);
-		cancelVerticalLines();
+//		cancelVerticalLines();
 	}
 	
 	public OnePlayerDataTable(String season, PlayerSeasonVO seasonVO) {
@@ -48,21 +51,21 @@ public class OnePlayerDataTable extends BottomTable{
 		
 		DecimalFormat df = UIConfig.FORMAT;
 		
-		setValueAt(season, 2, 0);
-		setValueAt(vo.matchCount, 2, 1);
-		setValueAt(df.format(vo.firstCountAvg), 2, 2);
-		setValueAt(vo.getTimeAvg(), 2, 3);
-		setValueAt(percentDf.format(vo.fieldPercent), 2, 4);
-		setValueAt(percentDf.format(vo.threePointPercent), 2, 5);
-		setValueAt(percentDf.format(vo.freethrowPercent), 2, 6);
-		setValueAt(df.format(vo.offensiveReboundAvg), 2, 7);
-		setValueAt(df.format(vo.defensiveReboundAvg), 2, 8);
-		setValueAt(df.format(vo.totalReboundAvg), 2, 9);
-		setValueAt(df.format(vo.assistAvg), 2, 10);
-		setValueAt(df.format(vo.stealAvg), 2, 11);
-		setValueAt(df.format(vo.blockAvg), 2, 12);
-		setValueAt(df.format(vo.turnoverAvg), 2, 13);
-		setValueAt(df.format(vo.foulAvg), 2, 14);
-		setValueAt(df.format(vo.scoreAvg), 2, 15);
+		setValueAt(season, 3, 0);
+		setValueAt(vo.matchCount, 3, 1);
+		setValueAt(df.format(vo.firstCountAvg), 3, 2);
+		setValueAt(vo.getTimeAvg(), 3, 3);
+		setValueAt(percentDf.format(vo.fieldPercent), 3, 4);
+		setValueAt(percentDf.format(vo.threePointPercent), 3, 5);
+		setValueAt(percentDf.format(vo.freethrowPercent), 3, 6);
+		setValueAt(df.format(vo.offensiveReboundAvg), 3, 7);
+		setValueAt(df.format(vo.defensiveReboundAvg), 3, 8);
+		setValueAt(df.format(vo.totalReboundAvg), 3, 9);
+		setValueAt(df.format(vo.assistAvg), 3, 10);
+		setValueAt(df.format(vo.stealAvg), 3, 11);
+		setValueAt(df.format(vo.blockAvg), 3, 12);
+		setValueAt(df.format(vo.turnoverAvg), 3, 13);
+		setValueAt(df.format(vo.foulAvg), 3, 14);
+		setValueAt(df.format(vo.scoreAvg), 3, 15);
 	}
 }

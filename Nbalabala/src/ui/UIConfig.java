@@ -3,6 +3,7 @@ package ui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.io.File;
 import java.text.DecimalFormat;
 
 /**
@@ -81,4 +82,24 @@ public class UIConfig {
 	/** 颜色组合 */
 	public static final Color[] HIST_COLORS= {HIST_FIRST_COLOR, HIST_SECOND_COLOR,
 		HIST_THIRD_COLOR, HIST_FORTH_COLOR, HIST_FIFTH_COLOR,HIST_FIRST_COLOR};
+	
+	
+	/** 第一级选项卡按钮弹起的颜色 */
+	public static final Color FIRST_LEVEL_TAB_OFF_COLOR = new Color(81,81,81);
+	/** 第一级选项卡按钮按下的颜色 */
+	public static final Color FIRST_LEVEL_TAB_ON_COLOR = new Color(31,31,31);
+	
+	public static Font HiraginoFont;
+	static{
+		try {
+	        java.io.FileInputStream fi = new java.io.FileInputStream(new File("Hiragino.ttf"));
+	        java.io.BufferedInputStream fb = new java.io.BufferedInputStream(fi);
+	        Font nf = Font.createFont(Font.TRUETYPE_FONT, fb);
+	        HiraginoFont = nf.deriveFont(Font.PLAIN, 12);
+	      }
+	      catch (Exception e) {
+	      }
+	}
+	 public static final Font FZYT_FONT = new Font("方正姚体", Font.PLAIN, 10);
+	 public static final Font ArialMT_FONT = new Font("ArialMT Regular", Font.PLAIN, 10);
 }

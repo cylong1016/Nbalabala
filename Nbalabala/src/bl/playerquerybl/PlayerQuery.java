@@ -123,7 +123,7 @@ public class PlayerQuery implements PlayerQueryBLService{
 	 * @see blservice.PlayerQueryBLService#getScoreRankAvg(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public int[] getScoreRankAvg(String name, String season) {
+	public int[] getScoreReboundAssistRank(String name, String season) {
 		SeasonDataService dataService = new SeasonData();
 		int [] result = new int[3];
 		ArrayList<PlayerSeasonVO> vos = dataService.getAllPlayerSeasonData(season);

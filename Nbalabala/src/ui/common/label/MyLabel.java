@@ -23,6 +23,17 @@ public class MyLabel extends JLabel {
 		this.text = text;
 	}
 	
+	public MyLabel() {
+		this.setOpaque(false);
+		this.setFont(UIConfig.FONT);
+		this.setHorizontalAlignment(LEFT);
+	}
+	
+	public MyLabel(String text) {
+		this();
+		setText(text);
+	}
+	
 	public void setLeft(){
 		this.setHorizontalAlignment(LEFT);
 	}

@@ -51,6 +51,9 @@ public class Console {
 		case "--datasource":
 			Constants.changeDataSourcePath(args[1]);
 			return;
+			
+			// 球员的
+			
 		case "-player":
 			ArrayList<PlayerSimpleSeasonVO> playerVOs;
 			int neededPlayerCount = 50;
@@ -77,16 +80,19 @@ public class Console {
 				
 			}
 			return;
+			
+		// 球队的
 		case "-team": //TODO hot king 的默认数量是多少
 			ArrayList<TeamSimpleSeasonVO> teamVOs = seasonData.getAllTeamSeasonData();
 			int neededTeamCount = 30;
+			
+			//
 			if (args.length < 2) {
 				Comparator<TeamSimpleSeasonVO> comparator = 
-						SimpleTeamAvgAndHighSorter.getTeamAvgAndHighComparator("point", "desc");
+						SimpleTeamAvgAndHighSorter.getTeamAvgAndHighComparator("score", "desc");
 				Collections.sort(teamVOs, comparator);
 				outputTeamNormalAvgInfo(out, teamVOs, 30);
 			}else{
-				
 				neededTeamCount = getNeededTeamCount(args);
 				TeamTestSortHandler.sortTeamByArgs(args, teamVOs);
 				
@@ -105,11 +111,10 @@ public class Console {
 				}
 			}
 		}
-
 	}
 	
 	private int getNeededTeamCount(String[]args) {
-		for (int i=0;i<args.length;i++) {
+		for (int i=1;i<args.length;i++) {
 			if (args[i].equals("-n"))
 				return Integer.parseInt(args[i + 1]);
 		}

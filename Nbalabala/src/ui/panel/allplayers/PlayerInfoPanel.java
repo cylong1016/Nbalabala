@@ -373,4 +373,5 @@ public class PlayerInfoPanel extends BottomPanel {
 		table.setValueAt(df.format(playerSeason.getTurnOverPercent()), 1, 34);
 		table.setValueAt(df.format(playerSeason.getUsePercent()), 1, 35);
 	}
+
 }

@@ -587,11 +587,8 @@ public class PlayerSeasonVO {
 					}
 					freethrowPercentPromotion = recentFivePercentSum / 5 / formerFreethrowPercent- 1;
 				}
-				
 			}
-			
-		}
-		
+		}		
 	}
 	
 	/** 记录最近一次比赛的日期，month以12代表12月，13代表1月，14代表2月，以此类推 */
