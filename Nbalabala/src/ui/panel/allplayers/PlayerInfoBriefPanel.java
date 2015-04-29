@@ -33,11 +33,11 @@ public class PlayerInfoBriefPanel extends Panel{
 	private void addContrastDiagram(PlayerSeasonVO playerSeason, double[] fiveArgsAvg, 
 			double[] highestScoreReboundAssist) {
 		/* 球员的场均得分、助攻、篮板、 罚球命中率、三分命中率的平均值 */
-		double[] fivePlayersData = {playerSeason.getScoreAvg(), playerSeason.getAssistAvg(),
-										playerSeason.getTotalReboundAvg(), playerSeason.getFreeThrowPercent(),
+		double[] fivePlayersData = {playerSeason.getScoreAvg(), 
+										playerSeason.getTotalReboundAvg(), playerSeason.getAssistAvg(),playerSeason.getFreeThrowPercent(),
 										playerSeason.getThreePointPercent()};
 		cd = new ContrastDiagram(fivePlayersData, fiveArgsAvg, highestScoreReboundAssist, "球员平均");
-		cd.setBounds(57, 260, 888, 160);
+		cd.setBounds(57, 160, 888, 160);
 		this.add(cd);
 		cd.updateUI();
 		cd.repaint();

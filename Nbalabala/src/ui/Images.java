@@ -13,7 +13,15 @@ public class Images {
 	
 	//public static final Image yunlongLoveSiyu = ......
 	
-	public static Image PLAYER_INFO_BG = new ImageIcon("images2.0/players/playersBG.png").getImage();
+	public static final Image PLAYER_INFO_BG = new ImageIcon("images2.0/players/playersBG.png").getImage();
+	
+	public static final Image PLAYER_TAB_MOVE_ON = 
+			new ImageIcon("images2.0/players/buttonOn.png").getImage();
+	
+	public static final Image PLAYER_TAB_CHOSEN = 
+			new ImageIcon("images2.0/players/buttonClick.png").getImage();
+	
+//	public static final Image FIRST_LEVEL_TAB_MOVE_ON = new ImageIcon(images2.0/players/playersBG.png)
 	
 
 }

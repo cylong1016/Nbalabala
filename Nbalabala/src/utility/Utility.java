@@ -134,5 +134,29 @@ public class Utility {
 		}
 		
 	}
+	
+	public static String getRankStr(int rank) {
+		if (rank ==0) return "";
+		return rank + getRankEnd(rank);
+	}
+	
+	public static String getRankEnd(int rank) {
+		String th = null;
+		int end = rank % 10;
+		switch (end) {
+		case 1:
+			th = "st";
+			break;
+		case 2:
+			th = "nd";
+			break;
+		case 3:
+			th = "rd";
+			break;
+		default:
+			th = "th";
+		}
+		return th;
+	}
 
 }

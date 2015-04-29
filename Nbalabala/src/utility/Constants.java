@@ -308,6 +308,14 @@ public class Constants {
 	public static String schoolText = "毕业学校";
 	public static String veteranText = "球龄";
 	
+	public static String winsText = "胜";
+	public static String losesText = "负";
+	public static String divisionText = "所属赛区";
+	public static String homeText = "主场";
+	public static String sinceText = "建队时间";
+	public static String kingText = "数据王";
+	public static String lineupText = "阵容";
+	
 	public static String scoreAvgText = "场均得分";
 	public static String reboundAvgText = "场均篮板";
 	public static String assistAvgText = "场均助攻";

@@ -2,48 +2,38 @@ package ui.panel.allplayers;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
-import data.playerdata.PlayerImageCache;
 import ui.Images;
 import ui.UIConfig;
 import ui.common.SeasonInputPanel;
 import ui.common.button.ImgButton;
 import ui.common.button.TabButton;
-import ui.common.button.TextButton;
 import ui.common.frame.Frame;
 import ui.common.label.ImgLabel;
 import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
 import ui.common.panel.Panel;
-import ui.common.table.BottomScrollPane;
-import ui.common.table.BottomTable;
 import ui.controller.MainController;
-import ui.panel.gamedata.GameDetailButton;
 import utility.Constants;
-import vo.MatchPlayerVO;
 import vo.PlayerDetailVO;
-import vo.PlayerMatchPerformanceVO;
 import vo.PlayerProfileVO;
 import vo.PlayerSeasonVO;
 import bl.playerquerybl.PlayerQuery;
 import blservice.PlayerQueryBLService;
+import data.playerdata.PlayerImageCache;
 
 /**
  * 具体球员信息界面
  * @author lsy
  * @version 2015年3月24日 上午10:26:48
  */
+@SuppressWarnings("serial")
 public class PlayerInfoBottomPanel extends BottomPanel {
 
 	private static final String IMG_URL = UIConfig.IMG_PATH + "players/";
@@ -64,22 +54,25 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	/** 赛季选择器 */
 	private SeasonInputPanel seasonInput;
 	
-	private ScoreReboundAssistLabel scoreLabel;
-	private ScoreReboundAssistLabel reboundLabel;
-	private ScoreReboundAssistLabel assistLabel;
+	private PlayerScoreReboundAssistLabel scoreLabel;
+	private PlayerScoreReboundAssistLabel reboundLabel;
+	private PlayerScoreReboundAssistLabel assistLabel;
 	
+	/** 选项卡按钮,分为当前和非当前状态 */
 	private TabButton briefTab = new TabButton(Constants.briefText, 
-			UIConfig.FIRST_LEVEL_TAB_OFF_COLOR, UIConfig.FIRST_LEVEL_TAB_ON_COLOR);
+			Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
 	private TabButton seasonDataTab = new TabButton(Constants.seasonDataText, 
-			UIConfig.FIRST_LEVEL_TAB_OFF_COLOR, UIConfig.FIRST_LEVEL_TAB_ON_COLOR);
+			Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
 	private TabButton matchesDataTab = new TabButton(Constants.matchesDataText, 
-			UIConfig.FIRST_LEVEL_TAB_OFF_COLOR, UIConfig.FIRST_LEVEL_TAB_ON_COLOR);
+			Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
 	
+	/** 所属球队 */
 	private JLabel teamLabel;
 	
+	/** 四条Label之间的Y的差值 */
 	private static final int PROFILE_LABEL_INTER_Y = 20;
 	
-	// 子面板。通过切换子面板实现三个页面的切换，其他部分不变
+	// 子面板。通过切换子面板实现三个页面的切换，公共部分不变
 	private Panel currentPanel;
 	private PlayerInfoBriefPanel briefPanel;
 	private PlayerInfoSeasonDataPanel seasonDataPanel;
@@ -87,17 +80,14 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	
 	public PlayerInfoBottomPanel(String name, BottomPanel lastPanel) {
 		super(Images.PLAYER_INFO_BG);
-		
 		seasonInput = new SeasonInputPanel(this);
-		seasonInput.setLocation(515, 400);	//TODO 赛季选择器还没定位置
+		seasonInput.setLocation(515, 255);	//TODO 赛季选择器还没定位置
 		this.add(seasonInput);
 		
 		this.name = name;
 		this.detailVO = playerQuery.getPlayerDetailByName(name, seasonInput.getSeason());
 		this.profileVO = detailVO.getProfile();
 		this.lastPanel = lastPanel;
-		
-		
 		
 		addTitles();
 		addScoreReboundAssistLabels();
@@ -110,7 +100,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		// 刚进入的时候显示的是柱状对比图的那个页面
 		briefPanel = new PlayerInfoBriefPanel(detailVO.getSeasonRecord(), 
 				playerQuery.getFiveArgsAvg(seasonInput.getSeason()), 
-						playerQuery.getHighestScoreReboundAssist(seasonInput.getSeason()));
+				playerQuery.getHighestScoreReboundAssist(seasonInput.getSeason()));
 		currentPanel = briefPanel;
 		addCurrentPanel();
 	}
@@ -120,37 +110,43 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				remove(currentPanel);
-				briefPanel = new PlayerInfoBriefPanel(detailVO.getSeasonRecord(), 
-						playerQuery.getFiveArgsAvg(seasonInput.getSeason()), 
-								playerQuery.getHighestScoreReboundAssist(seasonInput.getSeason()));
+				String season = seasonInput.getSeason();
+				PlayerSeasonVO seasonVO = detailVO.getSeasonRecord();
+				
 				currentPanel = briefPanel;
 				addCurrentPanel();
+				briefPanel.update(seasonVO, playerQuery.getFiveArgsAvg(season), 
+						playerQuery.getHighestScoreReboundAssist(season));
+				
 				briefTab.setOn();
 				seasonDataTab.setOff();
 				matchesDataTab.setOff();
 				repaint();
 			}
 		});
-		briefTab.setBounds(24,197,315,39);
+		briefTab.setLocation(24,198);
 		this.add(briefTab);
-		briefTab.setEnabled(false);
-		
+		briefTab.setOn();
 		
 		seasonDataTab.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				remove(currentPanel);
-				seasonDataPanel = new PlayerInfoSeasonDataPanel();
+				if (seasonDataPanel == null) {
+					seasonDataPanel = new PlayerInfoSeasonDataPanel();
+				}
 				seasonDataPanel.update(seasonInput.getSeason(), detailVO.getSeasonRecord());
 				currentPanel = seasonDataPanel;
 				addCurrentPanel();
+				
 				briefTab.setOff();
 				seasonDataTab.setOn();
 				matchesDataTab.setOff();
+				
 				repaint();
 			}
 		});
-		seasonDataTab.setBounds(341,197,315,39);
+		seasonDataTab.setLocation(341,198);
 		this.add(seasonDataTab);
 		
 		matchesDataTab.addActionListener(new ActionListener() {
@@ -164,7 +160,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 				repaint();
 			}
 		});
-		matchesDataTab.setBounds(657,197,315,39);
+		matchesDataTab.setLocation(657,198);
 		this.add(matchesDataTab);
 	}
 	
@@ -201,16 +197,16 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		int[] ranks = playerQuery.getScoreReboundAssistRank(name, seasonInput.getSeason());
 		PlayerSeasonVO seasonVO = detailVO.getSeasonRecord();
 		
-		scoreLabel = new ScoreReboundAssistLabel(Constants.scoreAvgText, seasonVO.scoreAvg, ranks[0]);
+		scoreLabel = new PlayerScoreReboundAssistLabel(Constants.scoreAvgText, seasonVO.scoreAvg, ranks[0]);
 		scoreLabel.setLocation(277, 102);
 		this.add(scoreLabel);
 		
-		reboundLabel = new ScoreReboundAssistLabel(Constants.reboundAvgText, 
+		reboundLabel = new PlayerScoreReboundAssistLabel(Constants.reboundAvgText, 
 				seasonVO.totalReboundAvg, ranks[1]);
 		reboundLabel.setLocation(385, 102);
 		this.add(reboundLabel);
 		
-		assistLabel = new ScoreReboundAssistLabel(Constants.assistAvgText, 
+		assistLabel = new PlayerScoreReboundAssistLabel(Constants.assistAvgText, 
 				seasonVO.assistAvg, ranks[2]);
 		assistLabel.setLocation(493, 102);
 		this.add(assistLabel);

@@ -1,11 +1,16 @@
 package ui.common.button;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.border.EmptyBorder;
 
 import ui.UIConfig;
 
@@ -17,9 +22,16 @@ import ui.UIConfig;
 @SuppressWarnings("serial")
 public class TabButton extends JButton{
 	
-	private Color offColor;
-	private Color onColor;
+	
+	private Image moveOn;
+	private Image chosen;
+	private String text;
+	private int width;
+	private int height;
 	private boolean isActive = true;
+	private boolean isMouseOn = false;
+	private int textX;
+	private int textY;
 	
 	
 	/**
@@ -29,49 +41,65 @@ public class TabButton extends JButton{
 	 * @author Issac Ding
 	 * @version 2015年4月27日  上午9:31:37
 	 */
-	public TabButton(String text, Color off, Color on) {
-		this.offColor = off;
-		this.onColor = on;
-		this.setText(text);
-		this.setBorderPainted(false);
-		this.setContentAreaFilled(false);
-		this.setOpaque(true);
+	public TabButton(String text, Image moveOn, Image chosen) {
+		this.text = text;
+		this.width = moveOn.getWidth(null);
+		this.height = moveOn.getHeight(null);
+		this.moveOn = moveOn;
+		this.chosen = chosen;
+		
+		this.setBorder(new EmptyBorder(0, 0, 0, 0));
+		this.setContentAreaFilled(true);
+		this.setOpaque(false);
 		this.setFocusPainted(false);
-		this.setText(text);
 		this.setMargin(new Insets(0,0,0,0));
 		this.setFont(UIConfig.FONT);
 		this.setForeground(Color.white);
-		this.setBackground(off);
+		this.setSize(width, height);
+		
+		JLabel label = new JLabel(text);
+		label.setFont(UIConfig.FONT);
+		Dimension textSize = label.getPreferredSize();
+		textX = (int)(width - textSize.getWidth()) / 2;
+		textY = (int)(height - textSize.getHeight() / 2) - 3;
+		
 		this.addMouseListener(new MouseHandler());
 	}
 	
 	public void setOff() {
-		setBackground(offColor);
-		setEnabled(true);
 		isActive = true;
+		setEnabled(true);
 		repaint();
 	}
 	
 	public void setOn() {
-		setBackground(onColor);
-		setEnabled(false);
 		isActive = false;
+		setEnabled(false);
 		repaint();
 	}
 	
+	public void paintComponent(Graphics g) {
+		if (!isActive) {
+			g.drawImage(chosen,0,0,width,height,null);
+		}else if(isMouseOn){
+			g.drawImage(moveOn,0,0,width,height,null);
+		}
+		g.setFont(UIConfig.FONT);
+		g.setColor(Color.WHITE);
+		g.drawString(text, textX, textY);
+	}
 	
-    class MouseHandler extends MouseAdapter  {
-        public void mouseExited(MouseEvent e){
-        	if (isActive) {
-        		setBackground(offColor);
-                repaint();
-        	}
-        }
-        public void mouseEntered(MouseEvent e){
-        	if (isActive) {
-        		setBackground(onColor);
-                repaint();
-        	}
-        }
-    }
+	class MouseHandler extends MouseAdapter{
+		public void mouseEntered(MouseEvent e) {
+			isMouseOn = true;
+			repaint();
+		}
+		public void mouseExited(MouseEvent e) {
+			isMouseOn = false;
+			repaint();
+		}
+	}
+	
+	
+	
 }

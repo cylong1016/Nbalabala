@@ -120,7 +120,13 @@ public class Histogram extends JPanel {
 
 		// 画数字
 		g.setColor(Color.BLACK);
-		DecimalFormat df = UIConfig.FORMAT;
+		DecimalFormat df;
+		if (maxData == 1) {
+			df = UIConfig.PERCENT_FORMAT;
+		}else {
+			df = UIConfig.FORMAT;
+		}
+		
 		g.drawString(df.format(playerData), interval + 5, playerY - 10);
 		g.drawString(df.format(avgData), interval * 2 + width + 5, avgY - 10);
 		super.paint(g);
