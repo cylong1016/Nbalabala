@@ -21,6 +21,8 @@ public class Images {
 	public static final Image PLAYER_TAB_CHOSEN = 
 			new ImageIcon("images2.0/players/buttonClick.png").getImage();
 	
+	public static final ImageIcon ARROW_ICON =new ImageIcon("images2.0/teams/arrow.png");
+	
 //	public static final Image FIRST_LEVEL_TAB_MOVE_ON = new ImageIcon(images2.0/players/playersBG.png)
 	
 

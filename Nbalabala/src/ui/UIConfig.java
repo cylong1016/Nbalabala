@@ -84,10 +84,23 @@ public class UIConfig {
 		HIST_THIRD_COLOR, HIST_FORTH_COLOR, HIST_FIFTH_COLOR,HIST_FIRST_COLOR};
 	
 	
-	/** 第一级选项卡按钮弹起的颜色 */
-	public static final Color FIRST_LEVEL_TAB_OFF_COLOR = new Color(81,81,81);
-	/** 第一级选项卡按钮按下的颜色 */
-	public static final Color FIRST_LEVEL_TAB_ON_COLOR = new Color(31,31,31);
+	/** 第一级选项卡按钮的字体 */
+	public static final Font FIRST_LEVEL_TAB_FONT = new Font("黑体", Font.PLAIN, 15);
+	/** 第二级选项卡按钮的字体 */
+	public static final Font SECOND_LEVEL_TAB_FONT = new Font("黑体", Font.PLAIN, 13);
+	
+	/** 显示 中锋 等文字的字体 */
+	public static final Font LABEL_PLAIN_FONT = new Font("黑体", Font.PLAIN, 13);
+	
+	/** 显示 毕业学校  等文字的字体 */
+	public static final Font LABEL_SMALL_FONT = new Font("黑体", Font.PLAIN, 12);
+	
+	public static final Color ORANGE_TEXT_COLOR = new Color(235,148,24);
+	
+	public static final Color BLUE_TEXT_COLOR = new Color(50, 126, 196);
+	
+	/** 球员和球队界面，简况Label之间的Y的差值 */
+	public static final int PROFILE_LABEL_INTER_Y = 20;
 	
 	public static Font HiraginoFont;
 	static{

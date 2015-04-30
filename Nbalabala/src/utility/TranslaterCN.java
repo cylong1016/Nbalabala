@@ -2,6 +2,8 @@ package utility;
 
 import java.text.DecimalFormat;
 
+import enums.ScreenDivision;
+
 /**
  * 
  * @author Issac Ding
@@ -206,4 +208,115 @@ public class TranslaterCN implements Translater{
 		}
 	}
 
+	/**
+	 * @see utility.Translater#translateTeamAbbrToLocation(java.lang.String)
+	 */
+	@Override
+	public String translateTeamAbbrToLocation(String abbr) {
+		switch (abbr) {
+		case "BOS":
+			return "波士顿";
+		case "BKN":
+		case "NJN":
+			return "布鲁克林";
+		case "NYK":
+			return "纽约";
+		case "PHI":
+			return "费城";	
+		case "TOR":
+			return "多伦多";
+		case "DAL":
+			return "达拉斯";
+		case "HOU":
+			return "休斯敦";
+		case "MEM":
+			return "孟菲斯";
+		case "NOP":
+		case "NOH":
+			return "新奥尔良";
+		case "SAS":
+			return "圣安东尼奥"; 
+		case "ATL":
+			return "亚特兰大";
+		case "CHA":
+			return "夏洛特";
+		case "MIA":
+			return "迈阿密";
+		case "ORL":
+			return "奥兰多";
+		case "WAS":
+			return "华盛顿"; 
+		case "GSW":
+			return "金洲";
+		case "LAC":
+		case "LAL":
+			return "洛杉矶";
+		case "PHX":
+			return "菲尼克斯";
+		case "SAC":
+			return "萨克拉门托";
+		case "CHI":
+			return "芝加哥";
+		case "CLE":
+			return "克利夫兰";
+		case "DET":
+			return "底特律";
+		case "IND":
+			return "印第安纳";
+		case "MIL":
+			return "密尔沃基";
+		case "DEN":
+			return "丹佛";
+		case "MIN":
+			return "明尼苏达";
+		case "OKC":
+			return "俄克拉荷马";
+		case "POR":
+			return "波特兰";
+		case "UTA":
+			return "犹他";
+		default:
+			return "无资料";
+		}
+	}
+
+	/**
+	 * @see utility.Translater#translateTeamDivision(enums.ScreenDivision)
+	 */
+	@Override
+	public String translateTeamDivision(ScreenDivision division) {
+		switch (division) {
+		case EAST:
+			return "东部";
+		case WEST:
+			return "西部";
+		case PACIFIC:
+			return "太平洋";
+		case ATLANTIC:
+			return "大西洋";
+		case SOUTH_EAST:
+			return "东南";
+		case SOUTH_WEST:
+			return "西南";
+		case CENTRAL:
+			return "中央";
+		case NORTH_WEST:
+			return "西北";
+		default:
+			return "";
+		}
+	}
+
+	/**
+	 * @see utility.Translater#translateTeamLeague(enums.ScreenDivision)
+	 */
+	@Override
+	public String translateTeamLeague(ScreenDivision league) {
+		if (league == ScreenDivision.EAST) {
+			return "东部联盟";
+		}else {
+			return "西部联盟";
+		}
+	}
+	
 }

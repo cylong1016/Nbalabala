@@ -1,5 +1,7 @@
 package utility;
 
+import enums.ScreenDivision;
+
 /**
  * 
  * @author Issac Ding
@@ -13,5 +15,8 @@ public interface Translater {
 	String translateVeteran(String veteran);
 	String translatePosition(String position);
 	String translateTeamAbbr(String abbr);
+	String translateTeamAbbrToLocation(String abbr);
+	String translateTeamDivision(ScreenDivision division);
+	String translateTeamLeague(ScreenDivision league);
 
 }

@@ -43,4 +43,10 @@ public class ImgLabel extends JLabel {
 		this.repaint();
 	}
 	
+	/** 不考虑失真问题，只是存放图片的容器 */
+	public ImgLabel(ImageIcon arrowIcon) {
+		setOpaque(false);
+		setIcon(arrowIcon);
+	}
+	
 }

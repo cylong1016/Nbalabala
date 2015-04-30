@@ -1,6 +1,7 @@
 package ui.panel.allteams;
 
 import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.JLabel;
 
@@ -18,13 +19,12 @@ public class TeamWinsLosesLabel extends JLabel{
 	private static final long serialVersionUID = -1833510881213891733L;
 	private JLabel winsLabel;
 	private JLabel losesLabel;
-	
-	//TODO 两种字体字号不造是啥
+	private static final Font BIG_FONT = UIConfig.FONT; //TODO几胜几负的大字体
 	
 	public TeamWinsLosesLabel(int wins, int loses) {
 		winsLabel = new JLabel(String.valueOf(wins));
 		winsLabel.setOpaque(false);
-		winsLabel.setFont(UIConfig.FONT);
+		winsLabel.setFont(BIG_FONT);
 		winsLabel.setForeground(new Color(190,45,45));
 		winsLabel.setBounds(0,3, 42,35);
 		winsLabel.setHorizontalAlignment(RIGHT);
@@ -33,19 +33,19 @@ public class TeamWinsLosesLabel extends JLabel{
 		JLabel winTextLabel = new JLabel(Constants.winsText);
 		winTextLabel.setBounds(43,19,25,25);
 		winTextLabel.setOpaque(false);
-		winTextLabel.setFont(UIConfig.FONT);
+		winTextLabel.setFont(UIConfig.LABEL_SMALL_FONT);
 		this.add(winTextLabel);
 		
 		losesLabel = new JLabel(String.valueOf(loses));
 		losesLabel.setOpaque(false);
-		losesLabel.setFont(UIConfig.FONT);
+		losesLabel.setFont(BIG_FONT);
 		losesLabel.setBounds(82, 3, 42, 35);
 		this.add(losesLabel);
 		
 		JLabel losesTextLabel = new JLabel(Constants.losesText);
 		losesTextLabel.setBounds(115, 19, 25, 25);
 		losesTextLabel.setOpaque(false);
-		losesLabel.setFont(UIConfig.FONT);
+		losesLabel.setFont(UIConfig.LABEL_SMALL_FONT);
 		this.add(losesTextLabel);
 	}
 	

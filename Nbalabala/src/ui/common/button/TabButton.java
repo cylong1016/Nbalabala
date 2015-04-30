@@ -84,7 +84,7 @@ public class TabButton extends JButton{
 		}else if(isMouseOn){
 			g.drawImage(moveOn,0,0,width,height,null);
 		}
-		g.setFont(UIConfig.FONT);
+		g.setFont(UIConfig.FIRST_LEVEL_TAB_FONT);
 		g.setColor(Color.WHITE);
 		g.drawString(text, textX, textY);
 	}

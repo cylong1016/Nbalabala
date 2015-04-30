@@ -14,7 +14,11 @@ import ui.common.label.ImgLabel;
 import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
+import utility.Constants;
+import vo.PlayerSeasonVO;
 import vo.TeamDetailVO;
+import vo.TeamProfileVO;
+import vo.TeamSeasonVO;
 import bl.matchquerybl.MatchQuery;
 import bl.teamquerybl.TeamQuery;
 import blservice.MatchQueryBLService;
@@ -32,7 +36,7 @@ public class TeamFatherPanel extends BottomPanel{
 	int width1 = 83, width2 = 48, height = 25;
 	TeamSeasonButton[] button = new TeamSeasonButton[3];
 	TeamQueryBLService teamQuery = new TeamQuery();
-	String abbr;
+	
 	MatchQueryBLService matchQuery = new MatchQuery();
 	protected ImgButton back;
 	protected String url = UIConfig.IMG_PATH + "players/";
@@ -40,18 +44,31 @@ public class TeamFatherPanel extends BottomPanel{
 
 	ImgLabel logo;
 	MyLabel teamName;
-	String[] teamPlace = { "波士顿", "布鲁克林", "纽约", "费城", "多伦多", "芝加哥", "克利夫兰", "底特律", "印第安纳", "密尔沃基", "亚特兰大", "夏洛特",
-			"迈阿密", "奥兰多", "华盛顿", "金洲", "洛杉矶", "洛杉矶", "菲尼克斯", "萨克拉门托", "丹佛", "明尼苏达", "俄克拉荷马", "波特兰", "犹他", "达拉斯",
-			"休斯敦", "孟菲斯", "新奥尔良", "圣安东尼奥" };
-	String[] teamShort = new String[] { "BOS", "BKN", "NYK", "PHI", "TOR", "CHI", "CLE", "DET", "IND", "MIL",
-			"ATL", "CHA", "MIA", "ORL", "WAS", "GSW", "LAC", "LAL", "PHX", "SAC", "DEN", "MIN", "OKC", "POR",
-			"UTA", "DAL", "HOU", "MEM", "NOP", "SAS" };
-	String[] team = new String[] { "凯尔特人", "篮网", "尼克斯", "76人", "猛龙", "公牛", "骑士", "活塞", "步行者", "雄鹿", "老鹰", "黄蜂",
-			"热火", "魔术", "奇才", "勇士", "快船", "湖人", "太阳", "国王", "掘金", "森林狼", "雷霆", "开拓者", "爵士", "小牛", "火箭", "灰熊",
-			"鹈鹕", "马刺" };
 	/** 球队详细信息 */
 	protected TeamDetailVO teamDetail;
 	int order = 0;
+	
+	/** 左边一列三行开始的横坐标 */
+	private static final int LEFT_LABEL_COLUMN_X = 350;	
+	/** 右边一列三行开始的横坐标 */
+	private static final int RIGHT_LABEL_COLUMN_X = 655;	
+	/** 两列label最上面一行的纵坐标 */
+	private static final int FIRST_LABEL_ROW_Y = 10;
+	/** 左边一列“东部联盟1st这一行的Y坐标” */
+	private static final int LEFT_LABEL_SECOND_ROW_Y = 46;
+	/** 标题中球队名字的大字体 */
+	private static final Font TITLE_NAME_FONT = UIConfig.FONT;	//TODO 标题中球队名字的大字体
+	
+	private String abbr;
+	private JLabel rankLabel;
+	private JLabel[] profileLabels;
+	private TeamWinsLosesLabel winsLosesLabel;
+	private TeamScoreReboundAssistLabel scoreLabel;
+	private TeamScoreReboundAssistLabel reboundLabel;
+	private TeamScoreReboundAssistLabel assistLabel;
+	
+	private TeamProfileVO profileVO;
+	
 
 	public TeamFatherPanel(BottomPanel panelFrom,String url, String abbr) {
 		super(url);
@@ -62,6 +79,12 @@ public class TeamFatherPanel extends BottomPanel{
 		addBack();
 		teamDetail = teamQuery.getTeamDetailByAbbr(abbr,"13-14");
 		addLabel(teamDetail.getLogo());
+		
+		addTitles();	//	标题，包括队名、联盟、几胜几负
+		addRanks();	//	胜率、得分、篮板、助攻的联盟内排名
+		addProfileLabels();		//简况label，包括所属赛区、主场、建队时间
+		addLogo();	
+		addTabButtons();	// 四个选项卡按钮
 	}
 	
 	MyLabel[] teamInfo = new MyLabel[5];
@@ -95,15 +118,6 @@ public class TeamFatherPanel extends BottomPanel{
 		teamInfo[0].setFont(new Font("微软雅黑",0,25));
 	}
 	
-	public String match(){
-		for(order = 0;order<30;order++){
-			if(teamDetail.getProfile().getAbbr().equals(teamShort[order])){
-				return teamPlace[order]+" "+team[order];
-			}
-		}
-		return "";
-	}
-
 	/**
 	 * 添加返回按钮
 	 * @author lsy
@@ -162,6 +176,25 @@ public class TeamFatherPanel extends BottomPanel{
 		button[i].setBackground(UIConfig.BUTTON_COLOR);
 		button[i].setForeground(Color.white);
 		TeamSeasonButton.current = button[i];
+	}
+	
+	/** 标题，包括队名、联盟、几胜几负 */
+	private void addTitles() {
+		JLabel nameLabel = new JLabel(Constants.translateTeamAbbrToLocation(abbr) + " " +
+				Constants.translateTeamAbbr(abbr));
+		nameLabel.setFont(TITLE_NAME_FONT);
+		nameLabel.setBounds(LEFT_LABEL_COLUMN_X, FIRST_LABEL_ROW_Y, 300, 50);
+		this.add(nameLabel);
+		
+		JLabel leagueLabel = new JLabel(Constants.translateLeague(profileVO.getArea()));
+		leagueLabel.setBounds(LEFT_LABEL_COLUMN_X, LEFT_LABEL_SECOND_ROW_Y, 60, 20);
+		leagueLabel.setFont(UIConfig.LABEL_PLAIN_FONT);
+		this.add(leagueLabel);
+
+		TeamSeasonVO seasonVO = teamDetail.getSeasonRecord();
+		winsLosesLabel = new TeamWinsLosesLabel(seasonVO.getWins(), seasonVO.getLoses());
+		winsLosesLabel.setBounds(LEFT_LABEL_COLUMN_X, 78,150,50);
+		this.add(winsLosesLabel);
 	}
 	
 }

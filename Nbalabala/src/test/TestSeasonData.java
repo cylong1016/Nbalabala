@@ -17,8 +17,8 @@ public class TestSeasonData {
 	@Test
 	public void test() {
 		
-		for (int i=0;i<100;i++) {
-			new SeasonSimpleData().clear();
+		for (int i=0;i<1000;i++) {
+			new SeasonData().clear();
 		}
 	}
 

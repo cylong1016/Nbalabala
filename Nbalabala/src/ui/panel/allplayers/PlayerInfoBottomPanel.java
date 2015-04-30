@@ -69,9 +69,6 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	/** 所属球队 */
 	private JLabel teamLabel;
 	
-	/** 四条Label之间的Y的差值 */
-	private static final int PROFILE_LABEL_INTER_Y = 20;
-	
 	// 子面板。通过切换子面板实现三个页面的切换，公共部分不变
 	private Panel currentPanel;
 	private PlayerInfoBriefPanel briefPanel;
@@ -81,7 +78,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	public PlayerInfoBottomPanel(String name, BottomPanel lastPanel) {
 		super(Images.PLAYER_INFO_BG);
 		seasonInput = new SeasonInputPanel(this);
-		seasonInput.setLocation(515, 255);	//TODO 赛季选择器还没定位置
+		seasonInput.setLocation(515, 255);	//TODO 赛季选择器还没定位置，这里是随便写的
 		this.add(seasonInput);
 		
 		this.name = name;
@@ -126,7 +123,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		});
 		briefTab.setLocation(24,198);
 		this.add(briefTab);
-		briefTab.setOn();
+		briefTab.setOn();	//一开始本选项卡是当前选项卡
 		
 		seasonDataTab.addActionListener(new ActionListener() {
 			@Override
@@ -168,14 +165,16 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	// TODO 这里的字体字号不造都是啥
 	private void addTitles() {
 		JLabel numLabel = new JLabel(profileVO.getNumber());
-		numLabel.setForeground(new Color(235,148,24));
+		numLabel.setForeground(UIConfig.ORANGE_TEXT_COLOR);
 		numLabel.setHorizontalAlignment(JLabel.RIGHT);
+		//TODO 球衣号码，那个硕大的橙色的文字的字体和bounds
 		numLabel.setBounds(280, 23, 50, 50);
 		this.add(numLabel);
 		
 		JLabel nameLabel = new JLabel(name);
 		nameLabel.setOpaque(false);
 		nameLabel.setHorizontalAlignment(JLabel.LEFT);
+		//TODO 球员名字的字体和bounds
 		nameLabel.setBounds(352, 22, 350, 50);
 		this.add(nameLabel);
 		
@@ -183,12 +182,15 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		JLabel positionLabel = new JLabel(Constants.translatePosition(profileVO.getPosition())
 				+ " / ");
 		Dimension preferred = positionLabel.getPreferredSize();
+		positionLabel.setFont(UIConfig.LABEL_PLAIN_FONT);
 		positionLabel.setBounds(351, 63, (int)preferred.getWidth(), (int)preferred.getHeight());
 		this.add(positionLabel);
 		
 		// 改变赛季以后teamLabel可能会改变
-		teamLabel = new JLabel(Constants.translateTeamAbbr(profileVO.getTeam()));
-		teamLabel.setForeground(new Color(50, 126, 196));
+		teamLabel = new JLabel(Constants.translateTeamAbbrToLocation(profileVO.getTeam()) + 
+				Constants.translateTeamAbbr(profileVO.getTeam()));
+		teamLabel.setFont(UIConfig.LABEL_PLAIN_FONT);
+		teamLabel.setForeground(UIConfig.BLUE_TEXT_COLOR);
 		teamLabel.setBounds((int)preferred.getWidth() + 351, 63, 120, 25);
 		this.add(teamLabel);
 	}
@@ -219,7 +221,8 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 				Constants.schoolText + "：" + profileVO.getSchool()};
 		for(int i = 0; i < 4; i++) {
 			profileLabel[i] = new MyLabel(profileLabelStr[i]);
-			profileLabel[i].setBounds(588, 20 + i * PROFILE_LABEL_INTER_Y, 250, 16);
+			profileLabel[i].setBounds(588, 20 + i * UIConfig.PROFILE_LABEL_INTER_Y, 250, 16);
+			profileLabel[i].setFont(UIConfig.LABEL_SMALL_FONT);
 			this.add(profileLabel[i]);
 		}
 	}
@@ -240,7 +243,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		}else if (currentPanel == seasonDataPanel) {
 			seasonDataPanel.update(season, seasonVO);
 		}else {
-			//TODO
+			//TODO	赛程数据那边
 		}
 		
 		teamLabel.setText(Constants.translateTeamAbbr(seasonVO.getTeam()));
@@ -289,10 +292,11 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		this.add(currentPanel);
 	}
 	
+	//TODO 测试代码
 	public static void main(String[]args) {
 		Frame frame = new Frame();
 		MainController.frame = frame;
-		new PlayerImageCache();
+		new PlayerImageCache().loadPortrait();;
 		frame.setPanel(new PlayerInfoBottomPanel("Kobe Bryant", null));
 		frame.start();
 	}

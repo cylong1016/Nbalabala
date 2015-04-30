@@ -20,6 +20,9 @@ public interface TeamQueryBLService {
 	/** 返回一个长度为5数组，分别是所有球员的场均得分、助攻、篮板、 罚球命中率、三分命中率的平均值*/
 	public double [] getFiveArgsAvg(String season);
 	
+	/** 返回长度为4数组，分别是联盟内胜率、得分、篮板、助攻的排名。若无，则为0 */
+	public int [] getRanks(String abbr, String season);
+	
 //	public ArrayList<PlayerProfileVO>
 
 }

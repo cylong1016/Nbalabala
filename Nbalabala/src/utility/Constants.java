@@ -92,26 +92,11 @@ public class Constants {
 		"火箭", "灰熊", "鹈鹕", "马刺"};
 	
 	public static String translateDivision(ScreenDivision division) {
-		switch (division) {
-		case EAST:
-			return "东部";
-		case WEST:
-			return "西部";
-		case PACIFIC:
-			return "太平洋";
-		case ATLANTIC:
-			return "大西洋";
-		case SOUTH_EAST:
-			return "东南";
-		case SOUTH_WEST:
-			return "西南";
-		case CENTRAL:
-			return "中央";
-		case NORTH_WEST:
-			return "西北";
-		default:
-			return "";
-		}
+		return translater.translateTeamDivision(division);
+	}
+	
+	public static String translateLeague(ScreenDivision league) {
+		return translater.translateTeamLeague(league);
 	}
 	
 	public static String correctOldAbbr(String old) {
@@ -314,6 +299,7 @@ public class Constants {
 	public static String homeText = "主场";
 	public static String sinceText = "建队时间";
 	public static String kingText = "数据王";
+	public static String overallRankText = "总排名";
 	public static String lineupText = "阵容";
 	
 	public static String scoreAvgText = "场均得分";
@@ -335,6 +321,11 @@ public class Constants {
 	}
 	public static String translatePosition(String position) {
 		return translater.translatePosition(position);
+	}
+	
+	/** 球队的所在地，显示在球队信息标题上 如   休斯顿 火箭 */
+	public static String translateTeamAbbrToLocation(String abbr) {
+		return translater.translateTeamAbbrToLocation(abbr);
 	}
 
 }
