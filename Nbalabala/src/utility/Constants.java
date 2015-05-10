@@ -295,9 +295,9 @@ public class Constants {
 	
 	public static String winsText = "胜";
 	public static String losesText = "负";
-	public static String divisionText = "所属赛区";
-	public static String homeText = "主场";
-	public static String sinceText = "建队时间";
+	public static String divisionText = "所属赛区:";
+	public static String homeText = "主场:";
+	public static String sinceText = "建队时间:";
 	public static String kingText = "数据王";
 	public static String overallRankText = "总排名";
 	public static String lineupText = "阵容";

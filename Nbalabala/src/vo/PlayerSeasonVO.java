@@ -449,8 +449,6 @@ public class PlayerSeasonVO {
 			usePercent = (fieldAttempt + 0.44 * freethrowAttempt + turnover) * timeFactor
 					/ (teamFieldAttempt + 0.44 * teamFreethrowAttempt + teamTurnover);
 			assistPercent = assist / (timeFactor * teamFieldGoal - fieldGoal);
-			offensiveReboundPercent=offensiveRebound * timeFactor / (teamOffensiveRebound + oppoOffensiveRebound);
-			defensiveReboundPercent=defensiveRebound * timeFactor / (teamDefensiveRebound + oppoDefensiveRebound);
 			doubleDoubleAvg = (double)doubleDoubleCount / matchCount;
 			
 			double temp = (fieldAttempt - threePointAttempt + 0.44 * freethrowAttempt + foul);
@@ -468,6 +466,8 @@ public class PlayerSeasonVO {
 			if(oppoAttack != 0) 
 				stealPercent = steal * timeFactor / oppoAttack;
 			
+			offensiveReboundPercent=offensiveRebound * timeFactor / (teamOffensiveRebound + oppoDefensiveRebound);
+			defensiveReboundPercent=defensiveRebound * timeFactor / (teamDefensiveRebound + oppoOffensiveRebound);
 			totalReboundPercent = totalRebound * timeFactor / (teamTotalRebound + oppoTotalRebound);
 			
 			if (fieldAttempt != 0) {

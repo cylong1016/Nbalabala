@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import autotest.playertest.PlayerSimpleVO;
-import utility.Constants;
 
 /**
  * 供测试用的球员数据模块，不涉及球员头像和全身像的读取
@@ -18,17 +17,14 @@ import utility.Constants;
  */
 public class PlayerSimpleData {
 	/** 全部球员基本信息 */
-	private static HashMap<String, PlayerSimpleVO> players = new HashMap<String, PlayerSimpleVO>();
-
-	/** 存储球员信息的文件夹 */
-	private static final String INFO_Path = Constants.dataSourcePath + "players/info/";
+	public static HashMap<String, PlayerSimpleVO> players;
 	
-	public PlayerSimpleData() {
-		if (players.size() == 0) loadPlayers();
-	}
-	
-	private void loadPlayers() {
-		File dir = new File(INFO_Path);
+	public static void loadPlayers() {
+		if (players != null && players.size() != 0) return;
+		
+		players = new HashMap<String, PlayerSimpleVO>();
+		
+		File dir = new File(SimpleConstants.sourcePath + "players\\info");
 		File[] files = dir.listFiles();
 		BufferedReader br = null;
 		
@@ -36,11 +32,11 @@ public class PlayerSimpleData {
 			for(File file : files) {
 				br = new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));
 				br.readLine();
-				String name = br.readLine().split("║|│")[1].trim();
+				String name = br.readLine().split("║|│")[2].trim();
 				br.readLine();
 				br.readLine();
 				br.readLine();
-				String position = br.readLine().split("║|│")[1].trim();
+				String position = br.readLine().split("║|│")[2].trim();
 				br.readLine();
 				br.readLine();
 				br.readLine();
@@ -48,7 +44,7 @@ public class PlayerSimpleData {
 				br.readLine();
 				br.readLine();
 				br.readLine();
-				String age = br.readLine().split("║|│")[1].trim();
+				String age = br.readLine().split("║|│")[2].trim();
 				players.put(name, new PlayerSimpleVO(name, position, Integer.parseInt(age)));
 			}
 		} catch (FileNotFoundException e) {
@@ -57,4 +53,5 @@ public class PlayerSimpleData {
 			e.printStackTrace();
 		}
 	}
+	
 }

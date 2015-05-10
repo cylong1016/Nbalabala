@@ -1,5 +1,6 @@
 package autotest.teamtest;
 
+
 /**
  * @author Issac Ding
  * @version 2015年3月14日 下午4:17:09
@@ -264,7 +265,7 @@ public class TeamSimpleSeasonVO {
 			}
 			
 			int tmp2 = defensiveRebound + oppoOffensiveRebound;
-			if (tmp2 != 0 || defensiveRound != 0) {
+			if (tmp2 != 0) {
 				defensiveReboundEff = (double)defensiveRebound / (tmp2);
 				stealEff = steal / defensiveRound * 100;
 				defensiveEff = oppoScore / defensiveRound * 100;
@@ -289,4 +290,8 @@ public class TeamSimpleSeasonVO {
 	public int hashCode() {
 		return teamName.hashCode();
     }
+	
+	public boolean equals(Object o) {
+		return teamName.equals(((TeamSimpleSeasonVO)o).teamName);
+	}
 }

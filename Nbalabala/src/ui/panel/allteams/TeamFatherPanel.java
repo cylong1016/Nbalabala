@@ -15,6 +15,7 @@ import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
 import utility.Constants;
+import utility.Utility;
 import vo.PlayerSeasonVO;
 import vo.TeamDetailVO;
 import vo.TeamProfileVO;
@@ -56,6 +57,8 @@ public class TeamFatherPanel extends BottomPanel{
 	private static final int FIRST_LABEL_ROW_Y = 10;
 	/** 左边一列“东部联盟1st这一行的Y坐标” */
 	private static final int LEFT_LABEL_SECOND_ROW_Y = 46;
+	/** 得分篮板助攻三个排名label的纵坐标 */
+	private static final int SCORE_REBOUND_ASSIST_Y = 90;
 	/** 标题中球队名字的大字体 */
 	private static final Font TITLE_NAME_FONT = UIConfig.FONT;	//TODO 标题中球队名字的大字体
 	
@@ -130,7 +133,6 @@ public class TeamFatherPanel extends BottomPanel{
 			public void mousePressed(MouseEvent e) {
 				MainController.backToOnePanel(FROM_PANEL);
 			}
-
 		});
 	}
 
@@ -195,6 +197,48 @@ public class TeamFatherPanel extends BottomPanel{
 		winsLosesLabel = new TeamWinsLosesLabel(seasonVO.getWins(), seasonVO.getLoses());
 		winsLosesLabel.setBounds(LEFT_LABEL_COLUMN_X, 78,150,50);
 		this.add(winsLosesLabel);
+	}
+	
+	/** 添加所属赛区、主场、建队时间labels */
+	private void addProfileLabels() {
+		TeamProfileVO profileVO = teamDetail.getProfile();
+		String [] profileStr = new String[] {Constants.divisionText + profileVO.getDivisionString(),
+				Constants.homeText + profileVO.getHome(), Constants.sinceText + profileVO.getSince()};
+		for (int i=0;i<3;i++) {
+			profileLabels[i] = new JLabel(profileStr[i]);
+			profileLabels[i].setFont(UIConfig.LABEL_SMALL_FONT);
+			profileLabels[i].setBounds(RIGHT_LABEL_COLUMN_X, UIConfig.PROFILE_LABEL_INTER_Y * i,
+					300, 30);
+			this.add(profileLabels[i]);
+		}
+	}
+	
+	/** 添加联盟内胜率、得分、篮板、助攻排名的label */
+	private void addRanks() {
+		int [] ranks = teamQuery.getRanks(abbr, Utility.getDefaultSeason());
+		int interX = 80;
+		
+		rankLabel = new JLabel(Utility.getRankStr(ranks[0]));
+		rankLabel.setFont(UIConfig.LABEL_PLAIN_FONT);
+		rankLabel.setBounds(419, LEFT_LABEL_SECOND_ROW_Y, 40, 40);
+		this.add(rankLabel);
+		
+
+		scoreLabel = new TeamScoreReboundAssistLabel(Constants.scoreAvgText, ranks[0]);
+		scoreLabel.setLocation(660, SCORE_REBOUND_ASSIST_Y);
+		this.add(scoreLabel);
+		
+		reboundLabel = new TeamScoreReboundAssistLabel(Constants.reboundAvgText, ranks[1]);
+		reboundLabel.setLocation(660, SCORE_REBOUND_ASSIST_Y + interX);
+		this.add(reboundLabel);
+		
+		assistLabel = new TeamScoreReboundAssistLabel(Constants.assistAvgText, ranks[2]);
+		assistLabel.setLocation(660, SCORE_REBOUND_ASSIST_Y + interX * 2);
+		this.add(assistLabel);
+	}
+	
+	public void update() {
+		
 	}
 	
 }

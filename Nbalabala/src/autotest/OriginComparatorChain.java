@@ -47,7 +47,7 @@ import java.util.List;
  * @since 2.0
  * @version $Id: ComparatorChain.java 1533984 2013-10-20 21:12:51Z tn $
  */
-public class ComparatorChain<E> implements Comparator<E>, Serializable {
+public class OriginComparatorChain<E> implements Comparator<E>, Serializable {
 
     /** Serialization version from Collections 2.0. */
     private static final long serialVersionUID = -721644942746081630L;
@@ -66,7 +66,7 @@ public class ComparatorChain<E> implements Comparator<E>, Serializable {
      * the compare(Object,Object) method, or an
      * UnsupportedOperationException is thrown
      */
-    public ComparatorChain() {
+    public OriginComparatorChain() {
         this(new ArrayList<Comparator<E>>(), new BitSet());
     }
 
@@ -76,7 +76,7 @@ public class ComparatorChain<E> implements Comparator<E>, Serializable {
      *
      * @param comparator First comparator in the Comparator chain
      */
-    public ComparatorChain(final Comparator<E> comparator) {
+    public OriginComparatorChain(final Comparator<E> comparator) {
         this(comparator, false);
     }
 
@@ -87,7 +87,7 @@ public class ComparatorChain<E> implements Comparator<E>, Serializable {
      * @param comparator First Comparator in the ComparatorChain
      * @param reverse    false = forward sort; true = reverse sort
      */
-    public ComparatorChain(final Comparator<E> comparator, final boolean reverse) {
+    public OriginComparatorChain(final Comparator<E> comparator, final boolean reverse) {
         comparatorChain = new ArrayList<Comparator<E>>(1);
         comparatorChain.add(comparator);
         orderingBits = new BitSet(1);
@@ -104,7 +104,7 @@ public class ComparatorChain<E> implements Comparator<E>, Serializable {
      * @param list   List of Comparators
      * @see #ComparatorChain(List,BitSet)
      */
-    public ComparatorChain(final List<Comparator<E>> list) {
+    public OriginComparatorChain(final List<Comparator<E>> list) {
         this(list, new BitSet(list.size()));
     }
 
@@ -123,7 +123,7 @@ public class ComparatorChain<E> implements Comparator<E>, Serializable {
      * @param bits   Sort order for each Comparator.  Extra bits are ignored,
      *               unless extra Comparators are added by another method.
      */
-    public ComparatorChain(final List<Comparator<E>> list, final BitSet bits) {
+    public OriginComparatorChain(final List<Comparator<E>> list, final BitSet bits) {
         comparatorChain = list;
         orderingBits = bits;
     }
@@ -231,9 +231,9 @@ public class ComparatorChain<E> implements Comparator<E>, Serializable {
     }
 
     /**
-     * Throws an exception if the {@link ComparatorChain} is locked.
+     * Throws an exception if the {@link OriginComparatorChain} is locked.
      *
-     * @throws UnsupportedOperationException if the {@link ComparatorChain} is locked
+     * @throws UnsupportedOperationException if the {@link OriginComparatorChain} is locked
      */
     private void checkLocked() {
         if (isLocked == true) {
@@ -243,9 +243,9 @@ public class ComparatorChain<E> implements Comparator<E>, Serializable {
     }
 
     /**
-     * Throws an exception if the {@link ComparatorChain} is empty.
+     * Throws an exception if the {@link OriginComparatorChain} is empty.
      *
-     * @throws UnsupportedOperationException if the {@link ComparatorChain} is empty
+     * @throws UnsupportedOperationException if the {@link OriginComparatorChain} is empty
      */
     private void checkChainIntegrity() {
         if (comparatorChain.size() == 0) {
@@ -337,7 +337,7 @@ public class ComparatorChain<E> implements Comparator<E>, Serializable {
             return false;
         }
         if (object.getClass().equals(this.getClass())) {
-            final ComparatorChain<?> chain = (ComparatorChain<?>) object;
+            final OriginComparatorChain<?> chain = (OriginComparatorChain<?>) object;
             return (null == orderingBits ? null == chain.orderingBits : orderingBits.equals(chain.orderingBits)) &&
                    (null == comparatorChain ? null == chain.comparatorChain :
                                               comparatorChain.equals(chain.comparatorChain));

@@ -3,15 +3,15 @@ package autotest;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import autotest.playertest.PlayerSimpleSeasonVO;
+import autotest.playertest.PlayerSimpleVO;
 import autotest.teamtest.TeamSimpleSeasonVO;
-import utility.Utility;
 
 /**
  * @author Issac Ding
@@ -22,70 +22,40 @@ public class SeasonSimpleData{
 	
 	public SeasonSimpleData() {
 		if (playerRecords.size() == 0 || teamRecords.size() == 0) loadMatches();
+//		System.out.println(playerRecords.get("DeMarcus Cousins").doubleDoubleAvg);
+//		System.out.println(playerRecords.get("DeMarcus Cousins").doubleDoubleCount);
+//		System.out.println(playerRecords.get("Andre Drummond").doubleDoubleAvg);
 	}
 	
 	/** 存储所有球员的所有赛季数据记录 */
-	private static HashMap<String, PlayerSimpleSeasonVO> playerRecords =
+	public static HashMap<String, PlayerSimpleSeasonVO> playerRecords =
 			new HashMap<String,PlayerSimpleSeasonVO>();
 	
 	/** 存储所有球队的所有赛季数据记录 */
 	private static HashMap<String, TeamSimpleSeasonVO> teamRecords = 
 			new HashMap<String, TeamSimpleSeasonVO>();
 	
-	/**  position = F G C表示按位置筛选，""表示无要求。 league为"East或West"*/
-	public ArrayList<PlayerSimpleSeasonVO> getFilteredPlayerSeasonData(String position,
-			String league, String ageLimit) {
-		
-		if (position.equals("All")) position = "";
-		if (league.equals("All")) league = "";
-		
-		Iterator<Map.Entry<String, PlayerSimpleSeasonVO>> itr = playerRecords.entrySet().iterator();
-		
-		ArrayList<PlayerSimpleSeasonVO> result = new ArrayList<PlayerSimpleSeasonVO>();
-		
-		while (itr.hasNext()) {
-			PlayerSimpleSeasonVO vo = itr.next().getValue();
-			int ageMin;
-			int ageMax;
-			switch (ageLimit) {
-			case "<=22":
-				ageMin = 0;
-				ageMax = 22;
-				break;
-			case "22< X <=25":
-				ageMin = 22;
-				ageMax = 25;
-				break;
-			case "25< X <=30":
-				ageMin = 25;
-				ageMax = 30;
-				break;
-			case ">30":
-				ageMin = 30;
-				ageMax = 128;
-				break;
-			default:
-				ageMin = 0;
-				ageMax = 128;
-			}
-			if (vo.position.contains(position) && 
-					SimpleConstants.getLeagueByAbbr(vo.teamName).contains(league) && 
-					vo.age > ageMin && vo.age < ageMax) {
-				result.add(vo);
-			}
-		}
-		return result;
-	}
-	
-	private void loadMatches() {
-		File[] files = Utility.getSortedMatchFiles();
+	public static void loadMatches() {
+		File[] files = SimpleUtility.getSortedMatchFiles();
 		
 		SimpleMatchesAccumulator accumulator = new SimpleMatchesAccumulator(playerRecords, teamRecords);
-		accumulator.accumulate(files, false);
+		accumulator.accumulate(files, false);	//第一次读取，不需要记录哪些球员和球队发生了更新
 		
 		Iterator<Entry<String, PlayerSimpleSeasonVO>> playerItr = playerRecords.entrySet().iterator();
 		while(playerItr.hasNext()) {
-			playerItr.next().getValue().update();
+			PlayerSimpleSeasonVO vo = playerItr.next().getValue();
+			vo.update();
+			
+			if (PlayerSimpleData.players==null) {
+				PlayerSimpleData.loadPlayers();
+			}
+			
+			PlayerSimpleVO playerVO = PlayerSimpleData.players.get(vo.name);
+			
+			if (playerVO != null) {
+				vo.age = playerVO.age;
+				vo.position = playerVO.position;
+			}
 		}
 		
 		Iterator<Entry<String, TeamSimpleSeasonVO>> teamItr = teamRecords.entrySet().iterator();
@@ -100,12 +70,13 @@ public class SeasonSimpleData{
 	}
 	
 	/** 发现新文件加入时调用此方法 */
-	public void appendMatches(ArrayList<File> files) {
+	public void appendMatches(ArrayList<File> files) {	
 		int size = files.size();
 		File[] newFiles = new File[size];
 		for (int i=0;i<size;i++) {
 			newFiles[i] = files.get(i);
 		}
+		Arrays.sort(newFiles, new FileComparator());
 		SimpleMatchesAccumulator accumulator = 
 				new SimpleMatchesAccumulator(playerRecords, teamRecords);
 		accumulator.accumulate(newFiles, true);
@@ -113,20 +84,24 @@ public class SeasonSimpleData{
 		HashSet<PlayerSimpleSeasonVO> playerUpdated = accumulator.getUpdatedPlayers();
 		HashSet<TeamSimpleSeasonVO> teamUpdated = accumulator.getUpdatedTeams();
 		
+		if (PlayerSimpleData.players==null) {
+			PlayerSimpleData.loadPlayers();
+		}
+		
 		for (PlayerSimpleSeasonVO vo : playerUpdated) {
 			vo.update();
+			
+			PlayerSimpleVO playerVO = PlayerSimpleData.players.get(vo.name);
+			if (playerVO != null) {
+				vo.age = playerVO.age;
+				vo.position = playerVO.position;
+			}
 		}
 		for (TeamSimpleSeasonVO vo : teamUpdated) {
 			vo.update();
 		}
 	}
 	
-	/** 发现有文件被删除时，重新读取所有文件 */
-	public void reloadMatches() {
-		playerRecords.clear();
-		teamRecords.clear();
-		new SimpleMatchesAccumulator(playerRecords, teamRecords).accumulate(Utility.getSortedMatchFiles(), false);
-	}
 
 	public ArrayList<PlayerSimpleSeasonVO> getAllPlayerSeasonData() {
 		return new ArrayList<PlayerSimpleSeasonVO>(playerRecords.values());
@@ -136,4 +111,9 @@ public class SeasonSimpleData{
 		return new ArrayList<TeamSimpleSeasonVO>(teamRecords.values());
 	}
 	
+	public static void reload() {
+		playerRecords.clear();
+		teamRecords.clear();
+		loadMatches();
+	}
 }

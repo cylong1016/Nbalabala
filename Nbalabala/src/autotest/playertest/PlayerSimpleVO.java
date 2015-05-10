@@ -14,7 +14,7 @@ public class PlayerSimpleVO {
 		this.age = age;
 	}
 	public String name;
-	public String position;
+	public String position = "";
 	public int age;
 
 }

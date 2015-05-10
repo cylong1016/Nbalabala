@@ -118,5 +118,14 @@ public class TeamQuery implements TeamQueryBLService{
 		double[]result = {arg1,arg2,arg3,arg4,arg5};
 		return result;
 	}
+
+	/* (non-Javadoc)
+	 * @see blservice.TeamQueryBLService#getRanks(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public int[] getRanks(String abbr, String season) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

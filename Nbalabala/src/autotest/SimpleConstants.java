@@ -7,6 +7,12 @@ package autotest;
  */
 public class SimpleConstants {
 	
+	public static String lastMonth = "";
+	
+	public static String lastDay = "";
+	
+	public static String sourcePath = "NBAdata\\";
+	
 	public static String getLeagueByAbbr(String abbr) {
 		switch (abbr) {
 		case "BOS":
