@@ -105,6 +105,10 @@ public class Constants {
 		else return old;
 	}
 	
+	public static String getLeagueStringByAbbr(String abbr) {
+		return translater.translateTeamLeague(getAreaByAbbr(abbr));
+	}
+	
 	public static ScreenDivision getAreaByAbbr(String abbr) {
 		switch (abbr) {
 		case "BOS":

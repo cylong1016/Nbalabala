@@ -1,0 +1,22 @@
+备忘：
+
+可复用组件：		位置			用法示例
+1、选项卡按钮:					
+	ui.common.button.TabButton	ui.panel.PlayerInfoBottomPanel
+2、显示球员全身像的panel：
+	ui.panel.allplayers.ActionPhotoPanel	热点那边
+3、球队排名Label
+	ui.common.label.TeamRankLabel		TeamFatherPanel(还没写出来)
+4、
+
+可复用方法：
+
+
+
+球员数据界面设计：
+位置、赛区、得分篮板助攻……等三组筛选条件决定了什么人能出现在表格里。
+总计平均、基础\进攻\防守\高阶两组数据决定了显示这些人的什么数据
+
+球队数据界面设计：
+赛区这一筛选条件决定了什么队能出现在表格里。
+总计平均、基础\进攻\防守两组数据决定了显示这些队的什么数据
