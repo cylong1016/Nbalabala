@@ -20,6 +20,30 @@ public class MatchDetailVO {
 	
 	private Image roadLogo;
 	
+	private String homeHighestScoreName;
+	
+	private String homeHighestReboundName;
+	
+	private String homeHighestAssistName;
+	
+	private int homeHighestScoreValue;
+	
+	private int homeHighestReboundValue;
+	
+	private int homeHighestAssistValue;
+	
+	private String roadHighestScoreName;
+	
+	private String roadHighestReboundName;
+	
+	private String roadHighestAssistName;
+	
+	private int roadHighestScoreValue;
+	
+	private int roadHighestReboundValue;
+	
+	private int roadHighestAssistValue;
+	
 	/** 标记本场比赛数据是否有效，指的是有无所有球员上场时间加起来是否明显大于总时间，以及所有球员得分相加是否等于总分 */
 	private boolean isValid;
 	
@@ -67,6 +91,53 @@ public class MatchDetailVO {
 		boolean roadScoreValid = roadScore == roadPlayersScore;
 		
 		isValid = homeTimeValid && roadTimeValid && homeScoreValid && roadScoreValid;
+		
+		//找出得分篮板助攻最多的球员名字和值
+		for (MatchPlayerVO matchPlayerVO : homePlayers) {
+			if (matchPlayerVO.getPersonalGoal() > homeHighestScoreValue) {
+				homeHighestScoreValue = matchPlayerVO.getPersonalGoal();
+				homeHighestScoreName = matchPlayerVO.getName();
+			}
+			if (matchPlayerVO.getTotalRebound() > homeHighestReboundValue) {
+				homeHighestReboundValue = matchPlayerVO.getTotalRebound();
+				homeHighestReboundName = matchPlayerVO.getName();
+			}
+			if (matchPlayerVO.getAssist() > homeHighestAssistValue) {
+				homeHighestAssistValue = matchPlayerVO.getAssist();
+				homeHighestAssistName = matchPlayerVO.getName();
+			}
+		} 
+		for (MatchPlayerVO matchPlayerVO : roadPlayers) {
+			if (matchPlayerVO.getPersonalGoal() > roadHighestScoreValue) {
+				roadHighestScoreValue = matchPlayerVO.getPersonalGoal();
+				roadHighestScoreName = matchPlayerVO.getName();
+			}
+			if (matchPlayerVO.getTotalRebound() > roadHighestReboundValue) {
+				roadHighestReboundValue = matchPlayerVO.getTotalRebound();
+				roadHighestReboundName = matchPlayerVO.getName();
+			}
+			if (matchPlayerVO.getAssist() > roadHighestAssistValue) {
+				roadHighestAssistValue = matchPlayerVO.getAssist();
+				roadHighestAssistName = matchPlayerVO.getName();
+			}
+		}
+	}
+	
+	/** 得到3元数组，分别是客场球队本场比赛最高得分、篮板、助攻的人名 */
+	public String[] getRoadHighestNames() {
+		return new String[] {roadHighestScoreName, roadHighestReboundName, roadHighestAssistName};
+	}
+	/** 得到3元数组，分别是客场球队本场比赛最高得分、篮板、助攻的数值 */
+	public int[] getRoadHighestValues() {
+		return new int[] {roadHighestScoreValue, roadHighestReboundValue, roadHighestAssistValue};
+	}
+	/** 得到3元数组，分别是客场球队本场比赛最高得分、篮板、助攻的人名 */
+	public String[] gethomeHighestNames() {
+		return new String[] {homeHighestScoreName, homeHighestReboundName, homeHighestAssistName};
+	}
+	/** 得到3元数组，分别是主场球队本场比赛最高得分、篮板、助攻的人名 */
+	public int[] gethomeHighestValues() {
+		return new int[] {homeHighestScoreValue, homeHighestReboundValue, homeHighestAssistValue};
 	}
 
 	public MatchProfileVO getProfile() {

@@ -50,9 +50,9 @@ public class TeamFatherPanel extends BottomPanel{
 	int order = 0;
 	
 	/** 左边一列三行开始的横坐标 */
-	private static final int LEFT_LABEL_COLUMN_X = 350;	
+	private static final int LEFT_LABEL_COLUMN_X = 350;
 	/** 右边一列三行开始的横坐标 */
-	private static final int RIGHT_LABEL_COLUMN_X = 655;	
+	private static final int RIGHT_LABEL_COLUMN_X = 655;
 	/** 两列label最上面一行的纵坐标 */
 	private static final int FIRST_LABEL_ROW_Y = 10;
 	/** 左边一列“东部联盟1st这一行的Y坐标” */
@@ -72,7 +72,6 @@ public class TeamFatherPanel extends BottomPanel{
 	
 	private TeamProfileVO profileVO;
 	
-
 	public TeamFatherPanel(BottomPanel panelFrom,String url, String abbr) {
 		super(url);
 		this.abbr = abbr;

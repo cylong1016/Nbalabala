@@ -24,7 +24,7 @@ public class MatchQuery implements MatchQueryBLService{
 	 * @see blservice.MatchQueryBLService#screenMatchByDate(java.util.Date)
 	 */
 	@Override
-	public ArrayList<MatchProfileVO> screenMatchByDate(Date date) {
+	public ArrayList<MatchDetailVO> screenMatchByDate(Date date) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		int year = calendar.get(Calendar.YEAR);
@@ -53,14 +53,14 @@ public class MatchQuery implements MatchQueryBLService{
 		}else {
 			dayString = String.valueOf(day);
 		}
-		return matchData.getMatchProfileBySeasonAndDate(seasonString, monthString + "-" + dayString);
+		return getMatchDetailByProfile(matchData.getMatchProfileBySeasonAndDate(seasonString, monthString + "-" + dayString));
 	}
 	
 	/**
 	 * @see blservice.MatchQueryBLService#screenMatchByTeam(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public ArrayList<MatchProfileVO> screenMatchByTeam(String abbr1,
+	public ArrayList<MatchDetailVO> screenMatchByTeam(String abbr1,
 			String abbr2) {
 		ArrayList<MatchProfileVO> list1 = matchData.getMatchProfileByTeam(abbr1 + "-" + abbr2);
 		ArrayList<MatchProfileVO> list2 = matchData.getMatchProfileByTeam(abbr2 + "-" + abbr1);
@@ -85,7 +85,17 @@ public class MatchQuery implements MatchQueryBLService{
 			list4.removeAll(list1);
 			list1.addAll(list4);
 		}
-		return list1;
+		return getMatchDetailByProfile(list1);
+	}
+	
+	private ArrayList<MatchDetailVO> getMatchDetailByProfile(ArrayList<MatchProfileVO> profileVOs) {
+		ArrayList<MatchDetailVO> result = new ArrayList<MatchDetailVO>();
+		for (MatchProfileVO profileVO : profileVOs) {
+			String[] teams = profileVO.getTeam().split("-");
+			result.add(getMatchDetail(profileVO.getSeason(), profileVO.getTime(), 
+					teams[0], teams[1]));
+		}
+		return result;
 	}
 
 	/**
