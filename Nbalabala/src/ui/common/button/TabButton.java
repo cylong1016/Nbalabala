@@ -36,7 +36,7 @@ public class TabButton extends JButton{
 	
 	/**
 	 * @param text 标签名
-	 * @param off	非当前选项卡时的背景色
+	 * @param moveOn	鼠标
 	 * @param on	当前选项卡的背景色
 	 * @author Issac Ding
 	 * @version 2015年4月27日  上午9:31:37

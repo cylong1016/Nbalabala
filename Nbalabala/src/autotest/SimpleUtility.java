@@ -15,6 +15,8 @@ import java.util.Comparator;
  */
 public class SimpleUtility {
 	
+	public static int fileCount = 0;
+	
 	public static File[] getSortedMatchFiles(){
 		File dir = new File(SimpleConstants.sourcePath + "matches\\");
 		if (!dir.exists()) {

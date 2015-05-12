@@ -12,6 +12,12 @@ public class OneExcuteTest {
 	@BeforeClass
 	public  static void setUP() {
 		c.execute(null, new String[] {"--datasource", "E:\\autotest\\nba"});
+		try {
+			Thread.sleep(90000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	@Test
 	public void executableTest()

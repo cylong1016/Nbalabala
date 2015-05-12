@@ -20,6 +20,8 @@ import autotest.teamtest.TeamSimpleSeasonVO;
 
 public class SeasonSimpleData{
 	
+	public static boolean isReading = false;
+	
 	public SeasonSimpleData() {
 		if (playerRecords.size() == 0 || teamRecords.size() == 0) loadMatches();
 //		System.out.println(playerRecords.get("DeMarcus Cousins").doubleDoubleAvg);
@@ -36,7 +38,16 @@ public class SeasonSimpleData{
 			new HashMap<String, TeamSimpleSeasonVO>();
 	
 	public static void loadMatches() {
+		
+		isReading = true;
+		
 		File[] files = SimpleUtility.getSortedMatchFiles();
+		
+		SimpleUtility.fileCount += files.length;
+		
+		if (PlayerSimpleData.players==null) {
+			PlayerSimpleData.loadPlayers();
+		}
 		
 		SimpleMatchesAccumulator accumulator = new SimpleMatchesAccumulator(playerRecords, teamRecords);
 		accumulator.accumulate(files, false);	//第一次读取，不需要记录哪些球员和球队发生了更新
@@ -45,10 +56,6 @@ public class SeasonSimpleData{
 		while(playerItr.hasNext()) {
 			PlayerSimpleSeasonVO vo = playerItr.next().getValue();
 			vo.update();
-			
-			if (PlayerSimpleData.players==null) {
-				PlayerSimpleData.loadPlayers();
-			}
 			
 			PlayerSimpleVO playerVO = PlayerSimpleData.players.get(vo.name);
 			
@@ -62,6 +69,8 @@ public class SeasonSimpleData{
 		while(teamItr.hasNext()) {
 			teamItr.next().getValue().update();
 		}
+		
+		isReading = false;
 	}
 	
 	public static void clear() {
@@ -71,12 +80,16 @@ public class SeasonSimpleData{
 	
 	/** 发现新文件加入时调用此方法 */
 	public void appendMatches(ArrayList<File> files) {	
+		isReading = true;
 		int size = files.size();
 		File[] newFiles = new File[size];
 		for (int i=0;i<size;i++) {
 			newFiles[i] = files.get(i);
 		}
 		Arrays.sort(newFiles, new FileComparator());
+		
+		SimpleUtility.fileCount += newFiles.length;
+		
 		SimpleMatchesAccumulator accumulator = 
 				new SimpleMatchesAccumulator(playerRecords, teamRecords);
 		accumulator.accumulate(newFiles, true);
@@ -100,6 +113,8 @@ public class SeasonSimpleData{
 		for (TeamSimpleSeasonVO vo : teamUpdated) {
 			vo.update();
 		}
+		
+		isReading = false;
 	}
 	
 

@@ -33,7 +33,7 @@ public class Console {
 
 	public void execute(java.io.PrintStream out, java.lang.String[] args) {
 
-		try {
+		
 			if (args == null || args.length ==0) return;
 			switch (args[0]) {
 			case "--datasource":	//TODO 注意一下要改变什么东西
@@ -69,14 +69,13 @@ public class Console {
 					}
 				}
 				testTeams(out, args);
+				System.out.println(SimpleUtility.fileCount);
 			}
-		}catch(Exception e) {
-			return;
 		}
 			
 
 
-	}
+	
 //	
 //	public static void main(String[]args) {
 //		Console console= new Console();

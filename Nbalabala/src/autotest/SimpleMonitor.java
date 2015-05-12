@@ -55,12 +55,13 @@ public class SimpleMonitor {
 	class MonitorThread extends Thread{
 		public void run() {
 			while (true) {
+				
 				try {
 					Thread.sleep(500);
-					
 				} catch (InterruptedException e) {
 					continue;
 				}
+				
 				File dirFile = new File(SimpleConstants.sourcePath + "matches//");
 				
 				if (!dirFile.exists()){
@@ -68,7 +69,17 @@ public class SimpleMonitor {
 				}
 				File[] files = dirFile.listFiles();
 				int currentCount = files.length;
+				
 				if (currentCount > oldFilesCount) {
+					
+					while (SeasonSimpleData.isReading) {
+						try {
+							Thread.sleep(5);
+						} catch (InterruptedException e) {
+							continue;
+						}
+					} 
+					
 					matchesAppending = true;
 					ArrayList<File> newFiles= getNewFiles(files);
 					new SeasonSimpleData().appendMatches(newFiles);

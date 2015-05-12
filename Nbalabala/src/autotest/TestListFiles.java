@@ -21,7 +21,7 @@ public class TestListFiles {
 	public void test() {
 		File file = new File("NBAdata\\matches");
 		int s;
-		for (int i=0;i<10000;i++) {
+		for (int i=0;i<1000;i++) {
 			s = (file.listFiles().length);
 		}
 	}
