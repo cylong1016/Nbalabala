@@ -12,6 +12,7 @@ import vo.TeamSeasonVO;
 import bl.teamquerybl.TeamQuery;
 import blservice.MatchQueryBLService;
 import data.matchdata.MatchData;
+import data.seasondata.SeasonData;
 import dataservice.MatchDataService;
 
 /**
@@ -137,4 +138,27 @@ public class MatchQuery implements MatchQueryBLService{
 		return new int[] {seasonVO.getWins(), seasonVO.getLoses()};
 	}
 
+	/* (non-Javadoc)
+	 * @see blservice.MatchQueryBLService#getLatestMatches()
+	 */
+	@Override
+	public ArrayList<MatchDetailVO> getLatestMatches() {
+		new SeasonData();//TODO 是为了读取比赛
+		String monthString;
+		String dayString;
+		if (Utility.latestMonth < 10) {
+			monthString = "0" + String.valueOf(Utility.latestMonth);
+		}else if (Utility.latestMonth > 12){
+			monthString = "0" + String.valueOf(Utility.latestMonth - 12);
+		}else {
+			monthString = String.valueOf(Utility.latestMonth);
+		}
+		if (Utility.latestDay < 10) {
+			dayString = "0" + String.valueOf(Utility.latestDay);
+		}else {
+			dayString = String.valueOf(Utility.latestDay);
+		}
+		return getMatchDetailByProfile(matchData.getMatchProfileBySeasonAndDate
+				(Utility.getDefaultSeason(), monthString + "-" + dayString));
+	}
 }

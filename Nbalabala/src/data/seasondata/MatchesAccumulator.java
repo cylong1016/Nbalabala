@@ -59,6 +59,9 @@ public class MatchesAccumulator {
 				String season = fileName.substring(0, 5);
 				int month = Integer.parseInt(fileName.substring(6, 8));
 				int day = Integer.parseInt(fileName.substring(9, 11));
+				
+				
+				
 				if (month < 7)
 					month += 12;
 				
