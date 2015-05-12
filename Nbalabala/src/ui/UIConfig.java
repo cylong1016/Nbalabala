@@ -29,6 +29,9 @@ public class UIConfig {
 
 	/** 图片路径 */
 	public static final String IMG_PATH = "images/";
+	
+	/** 2.0图片路径 */
+	public static final String IMG_PATH_2 = "images2.0/";
 
 	/** 界面显示的字体 */
 	public static final Font FONT = new Font("微软雅黑", 0, 14);

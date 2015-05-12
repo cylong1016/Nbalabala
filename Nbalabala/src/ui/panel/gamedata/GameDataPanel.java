@@ -1,6 +1,8 @@
 package ui.panel.gamedata;
 
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -9,7 +11,7 @@ import java.util.Date;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.comboBox.MyComboBox;
-import ui.common.date.NewDateChooser;
+import ui.common.date.DateChooser;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.MatchInfoTable;
@@ -25,7 +27,7 @@ import blservice.MatchQueryBLService;
  * @author cylong
  * @version 2015年3月19日 上午3:55:49
  */
-public class GameDataPanel extends BottomPanel {
+public class GameDataPanel extends BottomPanel{
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -6986506405843542454L;
@@ -47,7 +49,7 @@ public class GameDataPanel extends BottomPanel {
 
 
 	/** 下拉框的坐标 宽高 */
-	int box1X = 629, box2X = 818, box1Y = 44, box2Y = 80, boxWidth = 153, boxHeight = 30;
+	int box1X = 722, box2X = 863, box1Y = 9, box2Y = 9, boxWidth = 110, boxHeight = 34;
 	int teamY_1 = 280, teamY_2 = 308, inter = 54;
 	int teamX_1 = 123, score_1 = 249, score_2 = 305, score_3 = 361, score_4 = 417, addTime_1 = 478, addTime_2 = 562,
 			addTime_3 = 646, score = 730;
@@ -55,7 +57,7 @@ public class GameDataPanel extends BottomPanel {
 	int analyX = 825, analyY = 293;
 
 	MatchQueryBLService matchQuery = new MatchQuery();
-	NewDateChooser dateChooser;
+	DateChooser dateChooser;
 	ArrayList<MatchProfileVO> matchProfile;
 	/** 画线 */
 	GameDataButton[] detailImg;
@@ -74,10 +76,10 @@ public class GameDataPanel extends BottomPanel {
 //		addDataPanel();
 		addComboBox();
 		addDateChooser();
-		addConfirmBtn();
-		scrollPane = new MatchInfoTableFactory(new ArrayList<MatchProfileVO>(), this)
-			.getTableScrollPanel();
-		add(scrollPane);
+//		addConfirmBtn();
+//		scrollPane = new MatchInfoTableFactory(new ArrayList<MatchProfileVO>(), this)
+//			.getTableScrollPanel();
+//		add(scrollPane);
 	}
 	
 	public GameDataPanel(String url,int i) {
@@ -156,8 +158,8 @@ public class GameDataPanel extends BottomPanel {
 	 * @version 2015年3月21日 下午4:29:57
 	 */
 	public void addDateChooser() {
-		dateChooser = new NewDateChooser();
-		MainController.addDateChooserPanel(this, dateChooser, 200, -5 ,307,172);
+		dateChooser = new DateChooser();
+		MainController.addDateChooserPanel(this, dateChooser, 565, 10,153,30);
 	}
 
 	/**
@@ -166,10 +168,33 @@ public class GameDataPanel extends BottomPanel {
 	 * @version 2015年3月21日 下午4:30:04
 	 */
 	public void addComboBox() {
-		box1 = new MyComboBox(Constants.TEAM_NAMES, box1X, box1Y, boxWidth, boxHeight);
-		box2 = new MyComboBox(Constants.TEAM_NAMES, box2X, box2Y, boxWidth, boxHeight);
+		box1 = new MyComboBox(Constants.ALL_TEAM_NAMES, box1X, box1Y, boxWidth, boxHeight);
+		box2 = new MyComboBox(Constants.ALL_TEAM_NAMES, box2X, box2Y, boxWidth, boxHeight);
 		this.add(box1);
 		this.add(box2);
+		AcListener acLis = new AcListener();
+		box1.addActionListener(acLis);
+		box2.addActionListener(acLis);
+	}
+	
+	class AcListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			int team1 = box1.getSelectedIndex();
+			int team2 = box2.getSelectedIndex();
+			String teamAbbr_1 = Constants.TEAM_ABBR[team1+1];
+			String teamAbbr_2 = Constants.TEAM_ABBR[team2+1];
+			if(team1 == 0){
+				teamAbbr_1 = "";
+			}
+			if(team2 == 0){
+				teamAbbr_2 = "";
+			}
+			matchProfile = matchQuery.screenMatchByTeam(teamAbbr_1, teamAbbr_2);
+			gameSum = matchProfile.size();
+		}
+		
 	}
 
 }

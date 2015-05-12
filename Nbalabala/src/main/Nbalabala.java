@@ -1,7 +1,5 @@
 package main;
 
-import java.awt.Font;
-
 import ui.controller.MainController;
 import utility.DataSourceMonitor;
 import data.playerdata.PlayerImageCache;

@@ -2,8 +2,11 @@
 
 import java.awt.Color;
 
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 
 import ui.UIConfig;
@@ -26,20 +29,28 @@ public class MyComboBox extends JComboBox{
 		this.setOpaque(false);
 		
 		this.setFont(UIConfig.FONT);
+		this.setBorder(BorderFactory.createEmptyBorder());
 		
 		this.setBackground(UIConfig.BUTTON_COLOR);
 		this.setForeground(Color.white);
+		this.setFocusable(false);
 		
 		this.setUI(new BasicComboBoxUI() {
 	            public void installUI(JComponent comboBox) {
 	                super.installUI(comboBox);
 	                listBox.setOpaque(false);
-	                listBox.setForeground(Color.white);
 	                
 	                listBox.setSelectionBackground(Color.white);
 	                listBox.setSelectionForeground(UIConfig.BUTTON_COLOR);
-	                
 	            }
+	            
+	            protected JButton createArrowButton() {            
+	            	JButton button = new BasicArrowButton(0);   
+	            	button.setOpaque(true);
+	            	button.setBorder(BorderFactory.createEmptyBorder());
+	            	button.setFocusable(false);
+	            	button.setBackground(UIConfig.BUTTON_COLOR);
+	            	return button;        }   
 	             
 	        });
 		this.repaint();

@@ -7,10 +7,7 @@ import ui.common.frame.Frame;
 import ui.common.panel.BottomPanel;
 import ui.common.panel.Panel;
 import ui.panel.allplayers.AllPlayersPanel;
-import ui.panel.allplayers.PlayerInfoBriefPanel;
-import ui.panel.allplayers.PlayerInfoMatchesDataPanel;
 import ui.panel.allplayers.PlayerInfoPanel;
-import ui.panel.allplayers.PlayerInfoSeasonDataPanel;
 import ui.panel.allteams.AllTeamsPanel;
 import ui.panel.allteams.TeamGamePanel;
 import ui.panel.allteams.TeamPlayerPanel;
@@ -114,7 +111,7 @@ public class MainController {
 	 * @version 2015年3月18日 上午11:11:51
 	 */
 	public static void toGamePanel() {
-		gameDataPanel = new GameDataPanel(UIConfig.IMG_PATH + "gameData/gameDataBG.png");
+		gameDataPanel = new GameDataPanel(UIConfig.IMG_PATH_2 + "gameData/GameDataBG.png");
 		frame.setPanel(gameDataPanel);
 	}
 
