@@ -11,12 +11,15 @@ import vo.TeamSeasonVO;
 import bl.matchquerybl.MatchQuery;
 import bl.playerquerybl.PlayerQuery;
 import bl.playerseasonbl.PlayerSeasonAnalysis;
+import bl.teamseasonbl.TeamAvgSorter;
 import bl.teamseasonbl.TeamSeasonAnalysis;
 import blservice.TeamQueryBLService;
 import data.seasondata.SeasonData;
 import data.teamdata.SVGHandler;
 import data.teamdata.TeamData;
 import dataservice.TeamDataService;
+import enums.SortOrder;
+import enums.TeamAvgSortBasis;
 
 /**
  * 负责查询球队信息的类
@@ -123,9 +126,49 @@ public class TeamQuery implements TeamQueryBLService{
 	 * @see blservice.TeamQueryBLService#getRanks(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public int[] getRanks(String abbr, String season) {
-		// TODO Auto-generated method stub
-		return null;
+	public int[] getRanks(String abbr) {
+		ArrayList<TeamSeasonVO> vos = new SeasonData().getAllTeamRecentSeasonData();
+		int [] result = new int[4];
+		if (vos.size() == 0) {
+			result[0]=0;
+			result[1]=0;
+			result[2]=0;
+			result[3]=0;
+			return result;
+		}
+		TeamAvgSorter sorter = new TeamAvgSorter();
+		sorter.sort(vos, TeamAvgSortBasis.WINNING, SortOrder.DE);
+		for (int i=0;i<vos.size();i++) {
+			if (vos.get(i).teamName.equals(abbr)) {
+				result[0] = i + 1;
+				break;
+			}
+			result[0] = 0;
+		}
+		sorter.sort(vos, TeamAvgSortBasis.SCORE_AVG, SortOrder.DE);
+		for (int i=0;i<vos.size();i++) {
+			if (vos.get(i).teamName.equals(abbr)) {
+				result[1] = i + 1;
+				break;
+			}
+			result[1] = 0;
+		}
+		sorter.sort(vos, TeamAvgSortBasis.TOTAL_REBOUND_AVG, SortOrder.DE);
+		for (int i=0;i<vos.size();i++) {
+			if (vos.get(i).teamName.equals(abbr)) {
+				result[2] = i + 1;
+				break;
+			}
+			result[2] = 0;
+		}
+		sorter.sort(vos, TeamAvgSortBasis.ASSIST_AVG, SortOrder.DE);
+		for (int i=0;i<vos.size();i++) {
+			if (vos.get(i).teamName.equals(abbr)) {
+				result[3] = i + 1;
+				break;
+			}
+			result[3] = 0;
+		}
+		return result;
 	}
-	
 }

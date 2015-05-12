@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import utility.Utility;
 import vo.MatchDetailVO;
 import vo.MatchProfileVO;
 import vo.PlayerMatchPerformanceVO;
+import vo.TeamSeasonVO;
+import bl.teamquerybl.TeamQuery;
 import blservice.MatchQueryBLService;
 import data.matchdata.MatchData;
 import dataservice.MatchDataService;
@@ -98,11 +101,8 @@ public class MatchQuery implements MatchQueryBLService{
 		return result;
 	}
 
-	/**
-	 * @see blservice.MatchQueryBLService#getMatchDetail(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
-	 */
-	@Override
-	public MatchDetailVO getMatchDetail(String season, String date,
+
+	private MatchDetailVO getMatchDetail(String season, String date,
 			String homeAbbr, String roadAbbr) {
 		String fileName = season + "_" + date + "_" + homeAbbr + "-" + roadAbbr;
 		return matchData.getMatchDetailByFileName(fileName);
@@ -116,6 +116,25 @@ public class MatchQuery implements MatchQueryBLService{
 	/** 根据球队缩写返回其参加的所有比赛简报 */
 	public ArrayList<MatchProfileVO> getMatchRecordByTeamAbbr(String abbr){
 		return matchData.getMatchProfileByTeam(abbr);
+	}
+
+	/* (non-Javadoc)
+	 * @see blservice.MatchQueryBLService#getTeamRamkByAbbr(java.lang.String)
+	 */
+	@Override
+	public int getTeamRamkByAbbr(String abbr) {
+		TeamQuery teamQuery = new TeamQuery();
+		return teamQuery.getRanks(abbr)[0];
+	}
+
+	/* (non-Javadoc)
+	 * @see blservice.MatchQueryBLService#getTeamWinsLosesByAbbr(java.lang.String)
+	 */
+	@Override
+	public int[] getTeamWinsLosesByAbbr(String abbr) {
+		TeamQuery teamQuery = new TeamQuery();
+		TeamSeasonVO seasonVO = teamQuery.getTeamDetailByAbbr(abbr, Utility.getDefaultSeason()).getSeasonRecord();
+		return new int[] {seasonVO.getWins(), seasonVO.getLoses()};
 	}
 
 }

@@ -1,8 +1,5 @@
 package blservice;
 
-import java.util.ArrayList;
-
-import vo.PlayerProfileVO;
 import vo.TeamDetailVO;
 
 /**
@@ -21,7 +18,7 @@ public interface TeamQueryBLService {
 	public double [] getFiveArgsAvg(String season);
 	
 	/** 返回长度为4数组，分别是联盟内胜率、得分、篮板、助攻的排名。若无，则为0 */
-	public int [] getRanks(String abbr, String season);
+	public int [] getRanks(String abbr);
 	
 //	public ArrayList<PlayerProfileVO>
 
