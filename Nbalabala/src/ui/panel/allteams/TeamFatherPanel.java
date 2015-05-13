@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 
+import ui.Images;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.label.ImgLabel;
@@ -72,8 +73,8 @@ public class TeamFatherPanel extends BottomPanel{
 	
 	private TeamProfileVO profileVO;
 	
-	public TeamFatherPanel(BottomPanel panelFrom,String url, String abbr) {
-		super(url);
+	public TeamFatherPanel(BottomPanel panelFrom, String abbr) {
+		super(Images.);
 		this.abbr = abbr;
 		setButton();
 		addButton();
