@@ -29,7 +29,9 @@ public interface MatchQueryBLService {
 	
 	/** 通过缩写查询其胜负数，数组0位为胜场数，1位为负场数 */
 	public int[] getTeamWinsLosesByAbbr(String abbr);
-	
+
+	/** 返回最近一个比赛日的比赛 */
+	public ArrayList<MatchDetailVO> getLatestMatches(); 
 	
 //	
 //	/** 根据赛季、日期、主客场球队缩写，返回比赛详情 */
