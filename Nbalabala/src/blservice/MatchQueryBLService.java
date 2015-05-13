@@ -31,7 +31,6 @@ public interface MatchQueryBLService {
 	public int[] getTeamWinsLosesByAbbr(String abbr);
 	
 	
-	
 //	
 //	/** 根据赛季、日期、主客场球队缩写，返回比赛详情 */
 //	//在筛选出来的比赛简况中每一行都显示该场比赛的赛季、日期、两队缩写，这样要查看详情的话只要把这四个参数从表格中拿出来就行了

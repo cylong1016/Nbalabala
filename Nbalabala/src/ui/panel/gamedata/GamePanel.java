@@ -114,9 +114,9 @@ public class GamePanel extends BottomPanel {
 
 
 	public void initSetTabel() {
-		matchVO = matchQuery.getMatchDetail(matchPro.getSeason(), matchPro.getTime(), teamShort1, teamShort2);
-		ArrayList<MatchPlayerVO> homePlayers = matchVO.getHomePlayers();
-		setTable(homePlayers);
+//		matchVO = matchQuery.getMatchDetail(matchPro.getSeason(), matchPro.getTime(), teamShort1, teamShort2);
+//		ArrayList<MatchPlayerVO> homePlayers = matchVO.getHomePlayers();
+//		setTable(homePlayers);
 	}
 
 	public void addButton() {

@@ -12,12 +12,14 @@ import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.comboBox.MyComboBox;
 import ui.common.date.DateChooser;
+import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
+import ui.common.panel.ScorePanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.MatchInfoTable;
-import ui.common.table.MatchInfoTableFactory;
 import ui.controller.MainController;
 import utility.Constants;
+import vo.MatchDetailVO;
 import vo.MatchProfileVO;
 import bl.matchquerybl.MatchQuery;
 import blservice.MatchQueryBLService;
@@ -36,6 +38,7 @@ public class GameDataPanel extends BottomPanel{
 
 	/** 确认按钮 */
 	private ImgButton confirmBtn1, confirmBtn2;
+	private MyLabel number1,number2;
 	/** 确认按钮图片路径 */
 	private String confirmPath = gameImgPath + "confirm.png";
 	/** 移动到确认按钮上的图片路径 */
@@ -47,7 +50,7 @@ public class GameDataPanel extends BottomPanel{
 	
 	private BottomScrollPane scrollPane;
 
-
+	ProfilePanel proPanel;
 	/** 下拉框的坐标 宽高 */
 	int box1X = 722, box2X = 863, box1Y = 9, box2Y = 9, boxWidth = 110, boxHeight = 34;
 	int teamY_1 = 280, teamY_2 = 308, inter = 54;
@@ -58,7 +61,7 @@ public class GameDataPanel extends BottomPanel{
 
 	MatchQueryBLService matchQuery = new MatchQuery();
 	DateChooser dateChooser;
-	ArrayList<MatchProfileVO> matchProfile;
+	ArrayList<MatchDetailVO> matchDetailfile;
 	/** 画线 */
 	GameDataButton[] detailImg;
 	/** 显示数据的panel */
@@ -80,6 +83,10 @@ public class GameDataPanel extends BottomPanel{
 //		scrollPane = new MatchInfoTableFactory(new ArrayList<MatchProfileVO>(), this)
 //			.getTableScrollPanel();
 //		add(scrollPane);
+		matchDetailfile = 
+		proPanel = new ScorePanel(matchPro);
+		this.add(scPanel);
+		scPanel.setLocation(137, 15);
 	}
 	
 	public GameDataPanel(String url,int i) {
@@ -108,12 +115,12 @@ public class GameDataPanel extends BottomPanel{
 				clickTime++;
 				int team1 = box1.getSelectedIndex();
 				int team2 = box2.getSelectedIndex();
-				matchProfile = matchQuery.screenMatchByTeam(Constants.TEAM_ABBR[team1], Constants.TEAM_ABBR[team2]);
-				gameSum = matchProfile.size();
+//				matchProfile = matchQuery.screenMatchByTeam(Constants.TEAM_ABBR[team1], Constants.TEAM_ABBR[team2]);
+				gameSum = matchDetailfile.size();
 				remove(scrollPane);
-				scrollPane = new MatchInfoTableFactory(matchProfile,GameDataPanel.this)
-					.getTableScrollPanel();
-				GameDataPanel.this.add(scrollPane);
+//				scrollPane = new MatchInfoTableFactory(matchProfile,GameDataPanel.this)
+//					.getTableScrollPanel();
+//				GameDataPanel.this.add(scrollPane);
 			}
 		});
 		confirmBtn2.addMouseListener(new MouseAdapter() {
@@ -124,11 +131,11 @@ public class GameDataPanel extends BottomPanel{
 				}
 				clickTime++;
 				Date date = dateChooser.getDate();
-				matchProfile = matchQuery.screenMatchByDate(date);
+//				matchProfile = matchQuery.screenMatchByDate(date);
 				remove(scrollPane);
-				scrollPane = new MatchInfoTableFactory(matchProfile,GameDataPanel.this)
-					.getTableScrollPanel();
-				GameDataPanel.this.add(scrollPane);
+//				scrollPane = new MatchInfoTableFactory(matchProfile,GameDataPanel.this)
+//					.getTableScrollPanel();
+//				GameDataPanel.this.add(scrollPane);
 			}
 		});
 	}
@@ -191,8 +198,13 @@ public class GameDataPanel extends BottomPanel{
 			if(team2 == 0){
 				teamAbbr_2 = "";
 			}
-			matchProfile = matchQuery.screenMatchByTeam(teamAbbr_1, teamAbbr_2);
-			gameSum = matchProfile.size();
+			matchDetailfile = matchQuery.screenMatchByTeam(teamAbbr_1, teamAbbr_2);
+			gameSum = matchDetailfile.size();
+			int pageNum = (int) Math.ceil(gameSum/3);
+			number1 = new MyLabel(575,330,200,200,pageNum+"");
+			GameDataPanel.this.add(number1);
+			GameDataPanel.this.repaint();
+			System.out.println(pageNum);
 		}
 		
 	}

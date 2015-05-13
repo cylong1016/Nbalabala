@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import ui.UIConfig;
 
 /**
+ * 带有文字的label
  * @author lsy
  * @version 2015年3月22日 下午5:47:50
  */
@@ -18,9 +19,13 @@ public class MyLabel extends JLabel {
 		this.setBounds(x, y, width, height);
 		this.setOpaque(false);
 		this.setFont(UIConfig.FONT);
-		this.setText(text);
 		this.setHorizontalAlignment(CENTER);
 		this.text = text;
+		setText();
+	}
+	
+	public void setText(){
+		this.setText(text);
 	}
 	
 	public MyLabel() {

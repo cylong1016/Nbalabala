@@ -1,34 +1,40 @@
-package ui.common.panel;
+package ui.panel.gamedata;
 
 import java.awt.Color;
 import java.awt.Font;
 
 import blservice.TeamQueryBLService;
+import data.teamdata.SVGHandler;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.label.ImgLabel;
 import ui.common.label.MyLabel;
+import ui.common.panel.Panel;
 import utility.Constants;
 import vo.MatchDetailVO;
 import vo.MatchProfileVO;
-import data.teamdata.SVGHandler;
 
 /**
- * 显示球队比赛分数的panel
- * 
+ * 比赛简况panel
  * @author lsy
- * @version 2015年4月22日 上午12:14:54
+ * @version 2015年5月12日  下午11:54:40
  */
-public class ScorePanel extends Panel {
+public class ProfilePanel extends Panel{
 
 	/** serialVersionUID */
-	private static final long serialVersionUID = 1683422262550183367L;
+	private static final long serialVersionUID = 8001991883273314717L;
 
+	MatchDetailVO matchDetail;
 	String[] teamPlace = { "波士顿", "布鲁克林", "纽约", "费城", "多伦多", "芝加哥", "克利夫兰", "底特律", "印第安纳", "密尔沃基", "亚特兰大", "夏洛特",
 			"迈阿密", "奥兰多", "华盛顿", "金洲", "洛杉矶", "洛杉矶", "菲尼克斯", "萨克拉门托", "丹佛", "明尼苏达", "俄克拉荷马", "波特兰", "犹他", "达拉斯",
 			"休斯敦", "孟菲斯", "新奥尔良", "圣安东尼奥" };
 
 	int teamX1 = 736, teamX2 = 828, teamY = 190, width = 74, height = 24;
+	/** 分数 */
+	int scoreX_1 = 218, scoreY = 29, scoreY_2 = 105, inter = 48;
+	int totalScoreX = 442, totalScoreY_1 = 20, totalScoreY_2 = 101, totalInter = 80;
+	int addX = 428, addInterX = 80;
+	int scoreWidth = 40, scoreHeight = 25;
 	/** 球队中文全称 */
 	String teamStr1, teamStr2;
 	/** 球队所处位置 */
@@ -50,22 +56,17 @@ public class ScorePanel extends Panel {
 	String timeURL;
 	ImgButton timeImg;
 	MatchProfileVO matchPro;
-
-	/**
-	 * @param url
-	 * @author lsy
-	 * @version 2015年4月22日 上午10:49:01
-	 */
-	public ScorePanel(MatchProfileVO matchPro) {
-		this.matchPro = matchPro;
+	
+	public ProfilePanel(MatchDetailVO matchDetail){
+		this.matchDetail = matchDetail;
+		matchPro = matchDetail.getProfile();
 		getTeam();
 		getScore();
 		addLabel();
 		addScore();
-		addTime();
-		this.setSize(680, 157);
+		this.setSize(916,161);
 	}
-
+	
 	public void getTeam() {
 		String[] teamTemp = matchPro.getTeam().split("-");
 		teamShort1 = teamTemp[0];
@@ -76,7 +77,6 @@ public class ScorePanel extends Panel {
 		teamStr2 = Constants.TEAM_NAMES[team_2_Order];
 		place1 = teamPlace[team_1_Order];
 		place2 = teamPlace[team_2_Order];
-
 	}
 
 	int order;// 球队在数组中的位置
@@ -89,7 +89,22 @@ public class ScorePanel extends Panel {
 		}
 		return 0;
 	}
+	String[] scoreAll, eachScore, score1, score2;
 
+	public void getScore() {
+		scoreAll = matchPro.getScore().split("-");// 两支球队比赛总分
+		eachScore = matchPro.getEachSectionScore().split(";");
+
+		int eachlth = eachScore.length;
+		score1 = new String[eachlth];
+		score2 = new String[eachlth];
+		for (int i = 0; i < eachlth; i++) {
+			String[] scoreTemp = eachScore[i].split("-");
+			score1[i] = scoreTemp[0];
+			score2[i] = scoreTemp[1];
+		}
+	}
+	
 	public void addLabel() {
 		teamLabel1 = new MyLabel(labelX, labelY_2, width, height, teamStr1);
 		teamLabel2 = new MyLabel(labelX, labelY_4, width, height, teamStr2);
@@ -106,41 +121,7 @@ public class ScorePanel extends Panel {
 		this.add(sign1);
 		this.add(sign2);
 	}
-
-	public void addTime() {
-		timeURL = url + "time" + (analyzeSection(matchPro) - 4) + ".png";
-		timeImg = new ImgButton(timeURL, 123, 65, timeURL, timeURL);
-		this.add(timeImg);
-	}
-
-	public int analyzeSection(MatchProfileVO pro) {
-		String gameInfo = pro.getEachSectionScore();
-		String[] eachSection = gameInfo.split(";");
-		return eachSection.length;
-	}
-
-	String[] scoreAll, eachScore, score1, score2;
-
-	public void getScore() {
-		scoreAll = matchPro.getScore().split("-");// 两支球队比赛总分
-		eachScore = matchPro.getEachSectionScore().split(";");
-
-		int eachlth = eachScore.length;
-		score1 = new String[eachlth];
-		score2 = new String[eachlth];
-		for (int i = 0; i < eachlth; i++) {
-			String[] scoreTemp = eachScore[i].split("-");
-			score1[i] = scoreTemp[0];
-			score2[i] = scoreTemp[1];
-		}
-	}
-
-	/** 分数 */
-	int scoreX_1 = 218, scoreY = 29, scoreY_2 = 105, inter = 48;
-	int totalScoreX = 442, totalScoreY_1 = 20, totalScoreY_2 = 101, totalInter = 80;
-	int addX = 428, addInterX = 80;
-	int scoreWidth = 40, scoreHeight = 25;
-
+	
 	public void addScore() {
 		int lth = score1.length;
 		lb_1 = new MyLabel[lth + 1];
@@ -171,7 +152,7 @@ public class ScorePanel extends Panel {
 		this.add(lb_1[lth]);
 		this.add(lb_2[lth]);
 	}
-
+	
 	public void setRed(MyLabel l1, MyLabel l2) {
 		if (Integer.parseInt(l1.text) > Integer.parseInt(l2.text)) {
 			l1.setForeground(Color.red);
@@ -180,5 +161,4 @@ public class ScorePanel extends Panel {
 		} else {
 		}
 	}
-
 }
