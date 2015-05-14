@@ -192,4 +192,35 @@ public class MatchData implements MatchDataService {
 		}
 		return result;
 	}
+
+	/* (non-Javadoc)
+	 * @see dataservice.MatchDataService#getMatchProfileByTeam(java.lang.String)
+	 */
+	@Override	//TODO MatchProfileVO的内容要改
+	public ArrayList<MatchProfileVO> getMatchProfileByTeam(String abbr) {
+		
+		File[] files = Utility.getSortedMatchFiles();
+		
+		ArrayList<MatchProfileVO> result = new ArrayList<MatchProfileVO>();
+
+		try {
+			for(File file : files) {
+				if ( ! file.getName().contains(abbr)) continue;
+				
+				String season = file.getName().split("_")[0];
+				
+				BufferedReader br = new BufferedReader(new FileReader(file));
+				String [] profile = br.readLine().split(";");
+				MatchProfileVO matchProfileVO = new MatchProfileVO(season, profile[0], profile[1],
+						profile[2], br.readLine());
+				result.add(matchProfileVO);
+				br.close();
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

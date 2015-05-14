@@ -51,14 +51,14 @@ public class TeamKingPanel extends BottomPanel{
 		repaint();
 	}
 	
-	private void addKingLabel(KingVO[] kings) {
+	private void changeKingLabel(KingVO[] kings) {
 		for (int i=0;i<5;i++) {
-			if (this.kingLabels[i] != null) {
-				this.remove(kingLabels[i]);
+			if (kings[i] == null) return;
+			if (this.kingLabels[i] == null) {
+				kingLabels[i] = new KingLabel(kings[i]);
+			}else {
+				kingLabels[i].updateContent(kings[i]);
 			}
-			if (kings[i] == null) continue;
-			kingLabels[i] = new KingLabel(kings[i]);
-			this.add(kingLabels[i]);
 		}
 	}
 	
@@ -71,7 +71,7 @@ public class TeamKingPanel extends BottomPanel{
 				reboundTab.setOff();
 				assistTab.setOff();
 				KingVO [] kings = service.getScoreKings(abbr);
-				addKingLabel(kings);
+				changeKingLabel(kings);
 			}
 		});
 		scoreTab.setLocation(29, 3);
@@ -85,7 +85,7 @@ public class TeamKingPanel extends BottomPanel{
 				reboundTab.setOn();
 				assistTab.setOff();
 				KingVO [] kings = service.getReboundKings(abbr);
-				addKingLabel(kings);
+				changeKingLabel(kings);
 			}
 		});
 		reboundTab.setLocation(325, 3);
@@ -99,7 +99,7 @@ public class TeamKingPanel extends BottomPanel{
 				reboundTab.setOff();
 				assistTab.setOn();
 				KingVO [] kings = service.getAssistKings(abbr);
-				addKingLabel(kings);
+				changeKingLabel(kings);
 			}
 		});
 		assistTab.setLocation(622, 3);

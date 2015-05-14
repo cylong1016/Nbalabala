@@ -34,7 +34,7 @@ public class KingLabel extends JLabel{
 	private static final int ELSE_LAST_LINE_Y = 46;
 	private static final Font DATA_FONT = new Font("微软雅黑", Font.BOLD, 27);
 	private static final Font NAME_FONT = new Font("微软雅黑", Font.BOLD, 27);
-	private static final Font SMALL_FONT = new Font("微软雅黑", Font.BOLD, 20);
+	private static final Font SMALL_FONT = new Font("微软雅黑", Font.BOLD, 15);
 	
 	private String playerName;
 	private ImgLabel arrowImgLabel = new ImgLabel(Images.ARROW_ICON);
@@ -59,19 +59,19 @@ public class KingLabel extends JLabel{
 		int top = vo.getTop();
 		switch (top) {
 		case 1:
-			setBounds(54, 273, 444, 267);
+			setBounds(29, 36, 444, 267);
 			break;
 		case 2:
-			setBounds(588, 273, 380, 70);
+			setBounds(563, 36, 380, 70);
 			break;
 		case 3:
-			setBounds(588, 341, 380, 70);
+			setBounds(563, 104, 380, 70);
 			break;
 		case 4:
-			setBounds(588, 409, 380, 70);
+			setBounds(563, 172, 380, 70);
 			break;
 		default:
-			setBounds(588, 481, 380, 70);
+			setBounds(563, 244, 380, 70);
 			break;
 		}
 		setContent(vo);
@@ -87,6 +87,7 @@ public class KingLabel extends JLabel{
 			propertyLabel.setText(UIConfig.FORMAT.format(vo.getData()));
 			nameLabel.setText(vo.getName());
 			positionLabel.setText(vo.getPosition() + " / ");
+			rankLabel.setText(String.valueOf(vo.getOverallRank()));
 			
 			int textX = (int)(TOP_ONE_LABEL_X + positionLabel.getPreferredSize().getWidth());
 			textLabel.setLocation(textX, TOP_ONE_LAST_LINE_Y);
@@ -101,6 +102,7 @@ public class KingLabel extends JLabel{
 			propertyLabel.setText(UIConfig.FORMAT.format(vo.getData()));
 			nameLabel.setText(playerName);
 			positionLabel.setText(vo.getPosition());
+			rankLabel.setText(String.valueOf(vo.getOverallRank()));
 			
 			int arrowX = ELSE_LABEL_X + (int)(positionLabel.getPreferredSize().getWidth());
 			arrowImgLabel.setLocation(arrowX, ELSE_LAST_LINE_Y);

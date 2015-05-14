@@ -17,8 +17,11 @@ public interface MatchDataService {
 	public ArrayList<MatchDetailVO> getMatchDetailBySeasonAndDate(
 			String season, String date);
 
-	/** 根据参赛队伍返回比赛简报，team形如ABC-DEF */
+	/** 根据参赛队伍返回比赛详情，team形如ABC-DEF */
 	public ArrayList<MatchDetailVO> getMatchDetailByTeam(String team);
+	
+	/** 根据队伍缩写返回比赛简报，team形如SAS */
+	public ArrayList<MatchProfileVO> getMatchProfileByTeam(String abbr);
 
 	/** 通过比赛文件名返回详情 */
 	public MatchDetailVO getMatchDetailByFileName(String fileName);

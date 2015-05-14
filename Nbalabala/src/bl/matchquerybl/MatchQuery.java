@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.swing.border.MatteBorder;
-
 import utility.Utility;
 import vo.MatchDetailVO;
 import vo.MatchProfileVO;
@@ -14,7 +12,6 @@ import vo.TeamSeasonVO;
 import bl.teamquerybl.TeamQuery;
 import blservice.MatchQueryBLService;
 import data.matchdata.MatchData;
-import data.seasondata.SeasonData;
 import dataservice.MatchDataService;
 
 /**
@@ -163,8 +160,4 @@ public class MatchQuery implements MatchQueryBLService{
 				(Utility.getDefaultSeason(), monthString + "-" + dayString);
 	}
 	
-	public static void main(String[]args) {
-		System.out.println(new MatchQuery().getLatestMatches().size());
-		System.out.println(new MatchQuery().screenMatchByTeam("SAS", "NYK").size());
-	}
 }
