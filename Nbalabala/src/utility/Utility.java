@@ -18,13 +18,21 @@ public class Utility {
 	
 	public static int latestMonth = 0;
 	public static int latestDay = 0;
+	public static String latestSeason;
+	
+	static {
+		File[] files = getSortedMatchFiles();
+		if (files == null || files.length == 0) latestSeason = "13-14";
+		String name = files[files.length - 1].getName();
+		latestSeason = name.substring(0, 5);
+		latestMonth = Integer.parseInt(name.substring(6,8));
+		latestDay = Integer.parseInt(name.substring(9, 11));
+		if (latestMonth < 9) latestMonth += 12;
+	}
 	
 	/** 根据比赛信息文件夹下的现有比赛数据，返回最新赛季作为默认赛季，形如13-14 */
 	public static String getDefaultSeason() {
-		File[] files = getSortedMatchFiles();
-		if (files == null || files.length == 0) return "13-14";
-		String name = files[files.length - 1].getName();
-		return name.substring(0, 5);
+		return latestSeason;
 	}
 	
 	public static File[] getSortedMatchFiles(){

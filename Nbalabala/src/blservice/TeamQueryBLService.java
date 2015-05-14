@@ -1,5 +1,6 @@
 package blservice;
 
+import vo.KingVO;
 import vo.TeamDetailVO;
 
 /**
@@ -19,6 +20,15 @@ public interface TeamQueryBLService {
 	
 	/** 返回长度为4数组，分别是联盟内胜率、得分、篮板、助攻的排名。若无，则为0 */
 	public int [] getRanks(String abbr);
+	
+	/** 得到得分数据王 */
+	public KingVO[] getScoreKings(String abbr);
+	
+	/** 得到篮板数据王  */
+	public KingVO[] getReboundKings(String abbr);
+	
+	/** 得到助攻数据王  */
+	public KingVO[] getAssistKings(String abbr);
 	
 //	public ArrayList<PlayerProfileVO>
 

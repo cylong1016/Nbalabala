@@ -2,6 +2,7 @@ package ui.common.button;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
@@ -32,6 +33,7 @@ public class TabButton extends JButton{
 	private boolean isMouseOn = false;
 	private int textX;
 	private int textY;
+	private Font font = UIConfig.FIRST_LEVEL_TAB_FONT;
 	
 	
 	/**
@@ -53,16 +55,9 @@ public class TabButton extends JButton{
 		this.setOpaque(false);
 		this.setFocusPainted(false);
 		this.setMargin(new Insets(0,0,0,0));
-		this.setFont(UIConfig.FONT);
-		this.setForeground(Color.white);
 		this.setSize(width, height);
 		
-		JLabel label = new JLabel(text);
-		label.setFont(UIConfig.FONT);
-		Dimension textSize = label.getPreferredSize();
-		textX = (int)(width - textSize.getWidth()) / 2;
-		textY = (int)(height - textSize.getHeight() / 2) - 3;
-		
+		calculateTextLocation();
 		this.addMouseListener(new MouseHandler());
 	}
 	
@@ -84,9 +79,23 @@ public class TabButton extends JButton{
 		}else if(isMouseOn){
 			g.drawImage(moveOn,0,0,width,height,null);
 		}
-		g.setFont(UIConfig.FIRST_LEVEL_TAB_FONT);
+		g.setFont(font);
 		g.setColor(Color.WHITE);
 		g.drawString(text, textX, textY);
+	}
+	
+	/** 改变字体，调用此方法 */
+	public void setFont(Font font) {
+		this.font = font;
+		calculateTextLocation();
+	}
+	
+	private void calculateTextLocation() {
+		JLabel label = new JLabel(text);
+		label.setFont(font);
+		Dimension textSize = label.getPreferredSize();
+		textX = (int)(width - textSize.getWidth()) / 2;
+		textY = (int)(height - textSize.getHeight() / 2) - 3;
 	}
 	
 	class MouseHandler extends MouseAdapter{

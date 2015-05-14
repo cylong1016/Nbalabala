@@ -24,10 +24,10 @@ public class TeamWinsLosesLabel extends JLabel{
 	public TeamWinsLosesLabel(int wins, int loses) {
 		winsLabel = new JLabel(String.valueOf(wins));
 		winsLabel.setOpaque(false);
-		winsLabel.setFont(BIG_FONT);
 		winsLabel.setForeground(new Color(190,45,45));
 		winsLabel.setBounds(0,3, 42,35);
 		winsLabel.setHorizontalAlignment(RIGHT);
+		winsLabel.setFont(BIG_FONT);
 		this.add(winsLabel);
 		
 		JLabel winTextLabel = new JLabel(Constants.winsText);
@@ -38,8 +38,9 @@ public class TeamWinsLosesLabel extends JLabel{
 		
 		losesLabel = new JLabel(String.valueOf(loses));
 		losesLabel.setOpaque(false);
-		losesLabel.setFont(BIG_FONT);
 		losesLabel.setBounds(82, 3, 42, 35);
+		losesLabel.setHorizontalAlignment(RIGHT);
+		losesLabel.setFont(BIG_FONT);
 		this.add(losesLabel);
 		
 		JLabel losesTextLabel = new JLabel(Constants.losesText);

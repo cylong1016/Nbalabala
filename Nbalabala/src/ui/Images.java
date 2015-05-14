@@ -27,5 +27,20 @@ public class Images {
 	
 //	public static final Image FIRST_LEVEL_TAB_MOVE_ON = new ImageIcon(images2.0/players/playersBG.png)
 	
-
+	public static final Image TEAM_INFO_BG = new ImageIcon("images2.0/teams/TeamsBG-Others.png").getImage();
+	
+	public static final Image TEAM_FIRST_LEVEL_TAB_MOVE_ON = 
+			new ImageIcon("images2.0/teams/buttonOn.png").getImage();
+	
+	public static final Image TEAM_FIRST_LEVEL_TAB_CHOSEN = 
+			new ImageIcon("images2.0/teams/buttonClick.png").getImage();
+	
+	public static final Image TEAM_SECOND_LEVEL_TAB_MOVE_ON = 
+			new ImageIcon("images2.0/teams/dataChamOn.png").getImage();
+	
+	public static final Image TEAM_SECOND_LEVEL_TAB_CHOSEN = 
+			new ImageIcon("images2.0/teams/dataChamClick.png").getImage();
+	
+	public static final Image KING_BG = 
+			new ImageIcon("images2.0/teams/KingBG.png").getImage();
 }

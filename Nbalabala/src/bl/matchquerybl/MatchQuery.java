@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.swing.border.MatteBorder;
+
 import utility.Utility;
 import vo.MatchDetailVO;
 import vo.MatchProfileVO;
@@ -57,7 +59,7 @@ public class MatchQuery implements MatchQueryBLService{
 		}else {
 			dayString = String.valueOf(day);
 		}
-		return getMatchDetailByProfile(matchData.getMatchProfileBySeasonAndDate(seasonString, monthString + "-" + dayString));
+		return matchData.getMatchDetailBySeasonAndDate(seasonString, monthString + "-" + dayString);
 	}
 	
 	/**
@@ -66,49 +68,49 @@ public class MatchQuery implements MatchQueryBLService{
 	@Override
 	public ArrayList<MatchDetailVO> screenMatchByTeam(String abbr1,
 			String abbr2) {
-		ArrayList<MatchProfileVO> list1 = matchData.getMatchProfileByTeam(abbr1 + "-" + abbr2);
-		ArrayList<MatchProfileVO> list2 = matchData.getMatchProfileByTeam(abbr2 + "-" + abbr1);
+		ArrayList<MatchDetailVO> list1 = matchData.getMatchDetailByTeam(abbr1 + "-" + abbr2);
+		ArrayList<MatchDetailVO> list2 = matchData.getMatchDetailByTeam(abbr2 + "-" + abbr1);
 		list2.removeAll(list1);
 		list1.addAll(list2);
 		// 考虑到黄蜂、鹈鹕、篮网队改名的问题
 		if (abbr1.equals("NOP")) {
-			ArrayList<MatchProfileVO> list3 = matchData.getMatchProfileByTeam("NOH-" + abbr2);
+			ArrayList<MatchDetailVO> list3 = matchData.getMatchDetailByTeam("NOH-" + abbr2);
 			list3.removeAll(list1);
 			list1.addAll(list3);
 		}else if (abbr1.equals("BKN")) {
-			ArrayList<MatchProfileVO> list4 = matchData.getMatchProfileByTeam("NJN-" + abbr2);
+			ArrayList<MatchDetailVO> list4 = matchData.getMatchDetailByTeam("NJN-" + abbr2);
 			list4.removeAll(list1);
 			list1.addAll(list4);
 		}
 		if (abbr2.equals("NOP")) {
-			ArrayList<MatchProfileVO> list3 = matchData.getMatchProfileByTeam(abbr1 + "-NOH");
+			ArrayList<MatchDetailVO> list3 = matchData.getMatchDetailByTeam(abbr1 + "-NOH");
 			list3.removeAll(list1);
 			list1.addAll(list3);
 		}else if (abbr2.equals("BKN")) {
-			ArrayList<MatchProfileVO> list4 = matchData.getMatchProfileByTeam(abbr1 + "-NJN");
+			ArrayList<MatchDetailVO> list4 = matchData.getMatchDetailByTeam(abbr1 + "-NJN");
 			list4.removeAll(list1);
 			list1.addAll(list4);
 		}
-		return getMatchDetailByProfile(list1);
+		return list1;
 	}
 	
-	private ArrayList<MatchDetailVO> getMatchDetailByProfile(ArrayList<MatchProfileVO> profileVOs) {
-		ArrayList<MatchDetailVO> result = new ArrayList<MatchDetailVO>();
-		for (MatchProfileVO profileVO : profileVOs) {
-			String[] teams = profileVO.getTeam().split("-");
-			result.add(getMatchDetail(profileVO.getSeason(), profileVO.getTime(), 
-					teams[0], teams[1]));
-		}
-		return result;
-	}
+//	private ArrayList<MatchDetailVO> getMatchDetailByProfile(ArrayList<MatchProfileVO> profileVOs) {
+//		ArrayList<MatchDetailVO> result = new ArrayList<MatchDetailVO>();
+//		for (MatchProfileVO profileVO : profileVOs) {
+//			String[] teams = profileVO.getTeam().split("-");
+//			result.add(getMatchDetail(profileVO.getSeason(), profileVO.getTime(), 
+//					teams[0], teams[1]));
+//		}
+//		return result;
+//	}
 
 
-	private MatchDetailVO getMatchDetail(String season, String date,
-			String homeAbbr, String roadAbbr) {
-		String fileName = season + "_" + date + "_" + homeAbbr + "-" + roadAbbr;
-		return matchData.getMatchDetailByFileName(fileName);
-	}
-	
+//	private MatchDetailVO getMatchDetail(String season, String date,
+//			String homeAbbr, String roadAbbr) {
+//		String fileName = season + "_" + date + "_" + homeAbbr + "-" + roadAbbr;
+//		return matchData.getMatchDetailByFileName(fileName);
+//	}
+//	
 	/** 根据球员名字返回其所有比赛记录 */
 	public ArrayList<PlayerMatchPerformanceVO> getMatchRecordByPlayerName(String playerName, String season) {
 		return matchData.getMatchRecordByPlayerName(playerName, season);
@@ -143,7 +145,6 @@ public class MatchQuery implements MatchQueryBLService{
 	 */
 	@Override
 	public ArrayList<MatchDetailVO> getLatestMatches() {
-		new SeasonData();//TODO 是为了读取比赛
 		String monthString;
 		String dayString;
 		if (Utility.latestMonth < 10) {
@@ -158,7 +159,12 @@ public class MatchQuery implements MatchQueryBLService{
 		}else {
 			dayString = String.valueOf(Utility.latestDay);
 		}
-		return getMatchDetailByProfile(matchData.getMatchProfileBySeasonAndDate
-				(Utility.getDefaultSeason(), monthString + "-" + dayString));
+		return matchData.getMatchDetailBySeasonAndDate
+				(Utility.getDefaultSeason(), monthString + "-" + dayString);
+	}
+	
+	public static void main(String[]args) {
+		System.out.println(new MatchQuery().getLatestMatches().size());
+		System.out.println(new MatchQuery().screenMatchByTeam("SAS", "NYK").size());
 	}
 }

@@ -3,21 +3,27 @@ package bl.teamquerybl;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import utility.Constants;
+import vo.KingVO;
 import vo.MatchProfileVO;
 import vo.PlayerProfileVO;
+import vo.PlayerSeasonVO;
 import vo.TeamDetailVO;
 import vo.TeamProfileVO;
 import vo.TeamSeasonVO;
 import bl.matchquerybl.MatchQuery;
 import bl.playerquerybl.PlayerQuery;
+import bl.playerseasonbl.PlayerAvgSorter;
 import bl.playerseasonbl.PlayerSeasonAnalysis;
 import bl.teamseasonbl.TeamAvgSorter;
 import bl.teamseasonbl.TeamSeasonAnalysis;
 import blservice.TeamQueryBLService;
+import data.playerdata.PlayerData;
 import data.seasondata.SeasonData;
 import data.teamdata.SVGHandler;
 import data.teamdata.TeamData;
 import dataservice.TeamDataService;
+import enums.PlayerAvgSortBasis;
 import enums.SortOrder;
 import enums.TeamAvgSortBasis;
 
@@ -171,4 +177,81 @@ public class TeamQuery implements TeamQueryBLService{
 		}
 		return result;
 	}
+
+	/* (non-Javadoc)
+	 * @see blservice.TeamQueryBLService#getScoreKings()
+	 */
+	@Override
+	public KingVO[] getScoreKings(String abbr) {
+		KingVO[] result = new KingVO[5];
+		int index = 0;
+		SeasonData seasonData = new SeasonData();
+		PlayerData playerData = new PlayerData();
+		ArrayList<PlayerSeasonVO> allPlayers = seasonData.getAllPlayerRecentSeasonData();
+		ArrayList<String> teamPlayers = seasonData.getRecentPlayerNamesByTeamAbbr(abbr);
+		new PlayerAvgSorter().sort(allPlayers, PlayerAvgSortBasis.SCORE_AVG, SortOrder.DE);
+		for (int i=0;i<allPlayers.size();i++) {
+			PlayerSeasonVO vo = allPlayers.get(i);
+			if (teamPlayers.contains(vo.name)) {
+				result[index] = new KingVO(index + 1, vo.getName(), vo.getScoreAvg(), i + 1, 
+						Constants.translatePosition(playerData.getPlayerProfileByName(vo.getName())
+								.getPosition()));
+				index ++;
+			}
+			if (index > 4) break;
+		}
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see blservice.TeamQueryBLService#getReboundKings()
+	 */
+	@Override
+	public KingVO[] getReboundKings(String abbr) {
+		KingVO[] result = new KingVO[5];
+		int index = 0;
+		SeasonData seasonData = new SeasonData();
+		PlayerData playerData = new PlayerData();
+		ArrayList<PlayerSeasonVO> allPlayers = seasonData.getAllPlayerRecentSeasonData();
+		ArrayList<String> teamPlayers = seasonData.getRecentPlayerNamesByTeamAbbr(abbr);
+		new PlayerAvgSorter().sort(allPlayers, PlayerAvgSortBasis.TOTAL_REBOUND_AVG, SortOrder.DE);
+		for (int i=0;i<allPlayers.size();i++) {
+			PlayerSeasonVO vo = allPlayers.get(i);
+			if (teamPlayers.contains(vo.name)) {
+				result[index] = new KingVO(index + 1, vo.getName(), vo.getTotalReboundAvg(), i + 1, 
+						Constants.translatePosition(playerData.getPlayerProfileByName(vo.getName())
+								.getPosition()));
+				index ++;
+			}
+			if (index > 4) break;
+		}
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see blservice.TeamQueryBLService#getAssistKings()
+	 */
+	@Override
+	public KingVO[] getAssistKings(String abbr) {
+		KingVO[] result = new KingVO[5];
+		int index = 0;
+		SeasonData seasonData = new SeasonData();
+		PlayerData playerData = new PlayerData();
+		ArrayList<PlayerSeasonVO> allPlayers = seasonData.getAllPlayerRecentSeasonData();
+		ArrayList<String> teamPlayers = seasonData.getRecentPlayerNamesByTeamAbbr(abbr);
+		new PlayerAvgSorter().sort(allPlayers, PlayerAvgSortBasis.ASSIST_AVG, SortOrder.DE);
+		for (int i=0;i<allPlayers.size();i++) {
+			PlayerSeasonVO vo = allPlayers.get(i);
+			if (teamPlayers.contains(vo.name)) {
+				result[index] = new KingVO(index + 1, vo.getName(), vo.getAssistAvg(), i + 1, 
+						Constants.translatePosition(playerData.getPlayerProfileByName(vo.getName())
+								.getPosition()));
+				index ++;
+			}
+			if (index > 4) break;
+		}
+		return result;
+	}
+	
+	
 }

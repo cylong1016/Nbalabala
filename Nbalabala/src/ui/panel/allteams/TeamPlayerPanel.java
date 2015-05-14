@@ -19,7 +19,7 @@ import vo.PlayerProfileVO;
  * @author lsy
  * @version 2015年4月13日  下午8:32:02
  */
-public class TeamPlayerPanel extends TeamFatherPanel{
+public class TeamPlayerPanel extends TeamBottomPanel{
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 7928034817468828593L;

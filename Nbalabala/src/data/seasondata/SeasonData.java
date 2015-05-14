@@ -408,4 +408,8 @@ public class SeasonData implements SeasonDataService {
 		}
 	}
 	
+	public ArrayList<String> getRecentPlayerNamesByTeamAbbr(String abbr) {
+		return getPlayerNamesByTeamAbbr(abbr, getRecentSeason());
+	}
+	
 }

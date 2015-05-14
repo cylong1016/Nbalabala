@@ -17,7 +17,7 @@ import vo.TeamSeasonVO;
  * @author lsy
  * @version 2015年4月13日  下午8:31:55
  */
-public class TeamSeasonPanel extends TeamFatherPanel{
+public class TeamSeasonPanel extends TeamBottomPanel{
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -5523253635537412179L;

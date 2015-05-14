@@ -3,22 +3,20 @@ package data.matchdata;
 import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import data.teamdata.SVGHandler;
-import dataservice.MatchDataService;
-import enums.TeamState;
 import utility.Constants;
 import utility.Utility;
 import vo.MatchDetailVO;
 import vo.MatchPlayerVO;
 import vo.MatchProfileVO;
 import vo.PlayerMatchPerformanceVO;
+import data.teamdata.SVGHandler;
+import dataservice.MatchDataService;
+import enums.TeamState;
 
 /**
  * 读取比赛信息，检索并返回符合条件的比赛信息的类
@@ -31,33 +29,36 @@ public class MatchData implements MatchDataService {
 	 * @see dataservice.MatchDataService#getMatchProfileBySeasonAndDate(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public ArrayList<MatchProfileVO> getMatchProfileBySeasonAndDate(String season, String date) {
+	public ArrayList<MatchDetailVO> getMatchDetailBySeasonAndDate(String season, String date) {
 		
 		File[] files = Utility.getSortedMatchFiles();
 		
-		ArrayList<MatchProfileVO> result = new ArrayList<MatchProfileVO>();
+		ArrayList<MatchDetailVO> result = new ArrayList<MatchDetailVO>();
 		String keyword = season + "_" + date;
 
-		try {
+//		try {
 			for(File file : files) {
 				
 				if ( ! file.getName().contains(keyword)) continue;
-				BufferedReader br = new BufferedReader(new InputStreamReader
-						(new FileInputStream(file),"UTF-8"));
-				String [] profile = br.readLine().split(";");
+				result.add(getMatchDetailByFile(file));
 				
-				//比赛简况包括赛季、日期、两队缩写、总比分、各节比分，不涉及脏数据
-				MatchProfileVO matchProfileVO = new MatchProfileVO(season, profile[0], profile[1], 
-						profile[2], br.readLine());
-				result.add(matchProfileVO);
 				
-				br.close();
+//				BufferedReader br = new BufferedReader(new InputStreamReader
+//						(new FileInputStream(file),"UTF-8"));
+//				String [] profile = br.readLine().split(";");
+//				
+//				//比赛简况包括赛季、日期、两队缩写、总比分、各节比分，不涉及脏数据
+//				MatchProfileVO matchProfileVO = new MatchProfileVO(season, profile[0], profile[1], 
+//						profile[2], br.readLine());
+//				result.add(matchProfileVO);
+//				
+//				br.close();
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		return result;
 	}
 
@@ -65,31 +66,31 @@ public class MatchData implements MatchDataService {
 	 * @see dataservice.MatchDataService#getMatchProfileByTeam(java.lang.String)
 	 */
 	@Override
-	public ArrayList<MatchProfileVO> getMatchProfileByTeam(String team) {
+	public ArrayList<MatchDetailVO> getMatchDetailByTeam(String team) {
 		
 		File[] files = Utility.getSortedMatchFiles();
 		
-		ArrayList<MatchProfileVO> result = new ArrayList<MatchProfileVO>();
+		ArrayList<MatchDetailVO> result = new ArrayList<MatchDetailVO>();
 
-		try {
+//		try {
 			for(File file : files) {
-				
 				if ( ! file.getName().contains(team)) continue;
+				result.add(getMatchDetailByFile(file));
 				
-				String season = file.getName().split("_")[0];
-				
-				BufferedReader br = new BufferedReader(new FileReader(file));
-				String [] profile = br.readLine().split(";");
-				MatchProfileVO matchProfileVO = new MatchProfileVO(season, profile[0], profile[1],
-						profile[2], br.readLine());
-				result.add(matchProfileVO);
-				br.close();
+//				String season = file.getName().split("_")[0];
+//				
+//				BufferedReader br = new BufferedReader(new FileReader(file));
+//				String [] profile = br.readLine().split(";");
+//				MatchProfileVO matchProfileVO = new MatchProfileVO(season, profile[0], profile[1],
+//						profile[2], br.readLine());
+//				result.add(matchProfileVO);
+//				br.close();
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		return result;
 	}
 	
@@ -98,13 +99,12 @@ public class MatchData implements MatchDataService {
 	 */
 	@Override
 	public MatchDetailVO getMatchDetailByFileName(String fileName) {
-		
-		//文件名的开头部分就是赛季
-		String season = fileName.split("_")[0];
 		File file = new File(Constants.dataSourcePath + "matches//" + fileName);
-		
-		
-		
+		return getMatchDetailByFile(file);
+	}
+	
+	private MatchDetailVO getMatchDetailByFile(File file) {
+		String season = file.getName().split("_")[0];
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			
@@ -141,7 +141,6 @@ public class MatchData implements MatchDataService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		return null;
 	}
 	

@@ -24,7 +24,7 @@ import blservice.TeamQueryBLService;
  * @author lsy
  * @version 2015年4月13日  下午8:32:09
  */
-public class TeamGamePanel extends TeamFatherPanel{
+public class TeamGamePanel extends TeamBottomPanel{
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -6721546009416370456L;
