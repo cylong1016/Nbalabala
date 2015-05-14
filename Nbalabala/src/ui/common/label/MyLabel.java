@@ -21,10 +21,10 @@ public class MyLabel extends JLabel {
 		this.setFont(UIConfig.FONT);
 		this.setHorizontalAlignment(CENTER);
 		this.text = text;
-		setText();
+		setlbText(text);
 	}
 	
-	public void setText(){
+	public void setlbText(String text){
 		this.setText(text);
 	}
 	

@@ -14,6 +14,7 @@ import ui.common.button.ImgButton;
 import ui.common.label.ImgLabel;
 import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
+import ui.common.panel.Panel;
 import ui.common.panel.ScorePanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
@@ -31,7 +32,6 @@ import blservice.TeamQueryBLService;
 
 /**
  * 某场比赛数据界面
- * 
  * @author lsy
  * @version 2015年3月21日 下午4:01:02
  */
@@ -43,7 +43,7 @@ public class GamePanel extends BottomPanel {
 	/** 时间地址 */
 	String timeURL;
 	ImgButton timeImg;
-	BottomPanel gameData;
+	Panel gameData;
 	MatchProfileVO matchPro;
 	MatchQueryBLService matchQuery;
 	PlayerQueryBLService playerQuery;
@@ -70,23 +70,23 @@ public class GamePanel extends BottomPanel {
 	ImgButton back;
 	ScorePanel scPanel;
 
-	public GamePanel(String url, MatchProfileVO matchProfile,BottomPanel gameData) {
+	public GamePanel(String url, MatchProfileVO matchProfile,Panel gameData) {
 		super(url);
 		this.gameData = gameData;
 		this.matchPro = matchProfile;
 		teamQuery = new TeamQuery();
 		matchQuery = new MatchQuery();
 		playerQuery = new PlayerQuery();
-		getScore();
-		getTeam();
-		addButton();
-		initSetTabel();
+//		getScore();
+//		getTeam();
+//		addButton();
+//		initSetTabel();
 		addBack();
-		checkMatchValid();
-		scPanel = new ScorePanel(matchPro);
-		this.add(scPanel);
-		scPanel.setLocation(137, 15);
-		this.repaint();
+//		checkMatchValid();
+//		scPanel = new ScorePanel(matchPro);
+//		this.add(scPanel);
+//		scPanel.setLocation(137, 15);
+//		this.repaint();
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class GamePanel extends BottomPanel {
 	 * @version 2015年3月23日 下午6:20:43
 	 */
 	public void addBack() {
-		back = new ImgButton(UIConfig.IMG_PATH + "back.png", 50, 50, UIConfig.IMG_PATH + "backOn.png", UIConfig.IMG_PATH + "back.png");
+		back = new ImgButton(UIConfig.IMG_PATH + "back.png", 70, 150, UIConfig.IMG_PATH + "backOn.png", UIConfig.IMG_PATH + "back.png");
 		this.add(back);
 		back.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {

@@ -135,7 +135,7 @@ public class MatchDetailVO {
 	public String[] gethomeHighestNames() {
 		return new String[] {homeHighestScoreName, homeHighestReboundName, homeHighestAssistName};
 	}
-	/** 得到3元数组，分别是主场球队本场比赛最高得分、篮板、助攻的人名 */
+	/** 得到3元数组，分别是主场球队本场比赛最高得分、篮板、助攻的数值 */
 	public int[] gethomeHighestValues() {
 		return new int[] {homeHighestScoreValue, homeHighestReboundValue, homeHighestAssistValue};
 	}

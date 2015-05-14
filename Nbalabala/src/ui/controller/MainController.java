@@ -174,12 +174,12 @@ public class MainController {
 	}
 
 	/**
-	 * 某场比赛数据图
+	 * 某场比赛数据界面
 	 * @author lsy
 	 * @version 2015年3月21日 下午5:03:21
 	 */
-	public static void toOneGamePanel(MatchProfileVO matchProfile, BottomPanel gameData) {
-		gamePanel = new GamePanel(UIConfig.IMG_PATH + "game/gameBG.png", matchProfile, gameData);
+	public static void toOneGamePanel(MatchProfileVO matchProfile, Panel gameData) {
+		gamePanel = new GamePanel("images2.0/games/gamesBG.png", matchProfile, gameData);
 		frame.setPanel(gamePanel);
 	}
 

@@ -25,6 +25,8 @@ public class Images {
 	
 	public static final Image GAME_DATA_BG = new ImageIcon("images2.0/gameData/GameDataBG.png").getImage();
 	
+	/** 比赛界面的label */
+	public static final Image GAME_LABEL_BG = new ImageIcon("images2.0/gameData/labelBG.png").getImage();
 //	public static final Image FIRST_LEVEL_TAB_MOVE_ON = new ImageIcon(images2.0/players/playersBG.png)
 	
 	public static final Image TEAM_INFO_BG = new ImageIcon("images2.0/teams/TeamsBG-Others.png").getImage();

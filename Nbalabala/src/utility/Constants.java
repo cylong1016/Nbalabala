@@ -95,6 +95,10 @@ public class Constants {
 		"魔术", "奇才", "勇士", "快船", "湖人", "太阳", "国王", "掘金", "森林狼", "雷霆", "开拓者", "爵士", "小牛",
 		"火箭", "灰熊", "鹈鹕", "马刺"};
 	
+	public static final String[] TEAM_PLACES = { "波士顿", "布鲁克林", "纽约", "费城", "多伦多", "芝加哥", "克利夫兰", "底特律", "印第安纳", "密尔沃基", "亚特兰大", "夏洛特",
+			"迈阿密", "奥兰多", "华盛顿", "金洲", "洛杉矶", "洛杉矶", "菲尼克斯", "萨克拉门托", "丹佛", "明尼苏达", "俄克拉荷马", "波特兰", "犹他", "达拉斯",
+			"休斯敦", "孟菲斯", "新奥尔良", "圣安东尼奥" };
+	
 	public static String translateDivision(ScreenDivision division) {
 		return translater.translateTeamDivision(division);
 	}
@@ -380,6 +384,13 @@ public class Constants {
 	public static String scoreAvgText = "场均得分";
 	public static String reboundAvgText = "场均篮板";
 	public static String assistAvgText = "场均助攻";
+	
+	public static String totalScore = "总分";
+	public static String tech = "技术统计";
+	
+	public static String scoreKing = "得分王";
+	public static String reboundKing = "篮板王";
+	public static String assistKing = "助攻王";
 	
 	public static String translateHeight(String height){
 		return translater.translateHeight(height);
