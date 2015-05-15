@@ -3,7 +3,6 @@ package ui.common.panel;
 import java.awt.Color;
 import java.awt.Font;
 
-import blservice.TeamQueryBLService;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.label.ImgLabel;
@@ -11,7 +10,7 @@ import ui.common.label.MyLabel;
 import utility.Constants;
 import vo.MatchDetailVO;
 import vo.MatchProfileVO;
-import data.teamdata.SVGHandler;
+import blservice.TeamQueryBLService;
 
 /**
  * 显示球队比赛分数的panel
@@ -37,14 +36,14 @@ public class ScorePanel extends Panel {
 	String teamShort1, teamShort2;
 	/** 上方显示的球队名称和城市 */
 	MyLabel teamLabel1, teamLabel2, placeLabel1, placeLabel2;
-	int labelX = 103, labelY_1 = 17, labelY_2 = 39, labelY_3 = 99, labelY_4 = 121;
-	Font labelFont = new Font("微软雅黑", 0, 17);
+	private int labelX = 60, labelY_1 = 23, labelY_2 = 50;
+	Font labelFont = new Font("微软雅黑", 0, 14);
 	String signurl = "NBAdata/teams/";
 	/** 球队队标 */
 	ImgLabel sign1, sign2;
 	TeamQueryBLService teamQuery;
 	MatchDetailVO matchVO;
-	MyLabel[] lb_1, lb_2;
+	MyLabel[] lb_1, lb_2,lb_time;
 	String url = UIConfig.IMG_PATH + "game/";
 	/** 时间地址 */
 	String timeURL;
@@ -62,8 +61,8 @@ public class ScorePanel extends Panel {
 		getScore();
 		addLabel();
 		addScore();
-		addTime();
-		this.setSize(680, 157);
+//		addTime();
+		this.setSize(620, 90);
 	}
 
 	public void getTeam() {
@@ -91,27 +90,27 @@ public class ScorePanel extends Panel {
 	}
 
 	public void addLabel() {
-		teamLabel1 = new MyLabel(labelX, labelY_2, width, height, teamStr1);
-		teamLabel2 = new MyLabel(labelX, labelY_4, width, height, teamStr2);
+		teamLabel1 = new MyLabel(labelX, labelY_1, width, height, teamStr1);
+		teamLabel2 = new MyLabel(labelX, labelY_2, width, height, teamStr2);
 		teamLabel1.setFont(labelFont);
 		teamLabel2.setFont(labelFont);
-		placeLabel1 = new MyLabel(labelX, labelY_1, width, height, place1);
-		placeLabel2 = new MyLabel(labelX, labelY_3, width, height, place2);
-		sign1 = new ImgLabel(28, -5, 80, 80, SVGHandler.getTeamLogo(teamShort1));
-		sign2 = new ImgLabel(28, 80, 80, 80, SVGHandler.getTeamLogo(teamShort2));
+//		placeLabel1 = new MyLabel(labelX, labelY_1, width, height, place1);
+//		placeLabel2 = new MyLabel(labelX, labelY_3, width, height, place2);
 		this.add(teamLabel1);
 		this.add(teamLabel2);
-		this.add(placeLabel1);
-		this.add(placeLabel2);
-		this.add(sign1);
-		this.add(sign2);
+//		this.add(placeLabel1);
+//		this.add(placeLabel2);
+//		sign1 = new ImgLabel(28, -5, 80, 80, SVGHandler.getTeamLogo(teamShort1));
+//		sign2 = new ImgLabel(28, 80, 80, 80, SVGHandler.getTeamLogo(teamShort2));
+//		this.add(sign1);
+//		this.add(sign2);
 	}
 
-	public void addTime() {
-		timeURL = url + "time" + (analyzeSection(matchPro) - 4) + ".png";
-		timeImg = new ImgButton(timeURL, 123, 65, timeURL, timeURL);
-		this.add(timeImg);
-	}
+//	public void addTime() {
+//		timeURL = url + "time" + (analyzeSection(matchPro) - 4) + ".png";
+//		timeImg = new ImgButton(timeURL, 123, 65, timeURL, timeURL);
+//		this.add(timeImg);
+//	}
 
 	public int analyzeSection(MatchProfileVO pro) {
 		String gameInfo = pro.getEachSectionScore();
@@ -136,7 +135,7 @@ public class ScorePanel extends Panel {
 	}
 
 	/** 分数 */
-	int scoreX_1 = 218, scoreY = 29, scoreY_2 = 105, inter = 48;
+	int scoreX_1 = 180, inter = 48,labelY_0 = 0;
 	int totalScoreX = 442, totalScoreY_1 = 20, totalScoreY_2 = 101, totalInter = 80;
 	int addX = 428, addInterX = 80;
 	int scoreWidth = 40, scoreHeight = 25;
@@ -145,31 +144,40 @@ public class ScorePanel extends Panel {
 		int lth = score1.length;
 		lb_1 = new MyLabel[lth + 1];
 		lb_2 = new MyLabel[lth + 1];
+		lb_time = new MyLabel[lth + 1];
 		for (int i = 0; i < 4; i++) {
-			lb_1[i] = new MyLabel(scoreX_1 + i * inter, scoreY, scoreWidth, scoreHeight, score1[i]);
-			lb_2[i] = new MyLabel(scoreX_1 + i * inter, scoreY_2, scoreWidth, scoreHeight, score2[i]);
+			lb_1[i] = new MyLabel(scoreX_1 + i * inter, labelY_1, scoreWidth, scoreHeight, score1[i]);
+			lb_2[i] = new MyLabel(scoreX_1 + i * inter, labelY_2, scoreWidth, scoreHeight, score2[i]);
+			lb_time[i] = new MyLabel(scoreX_1 + i * inter, labelY_0, scoreWidth, scoreHeight, (1+i)+"");
+			lb_time[i].setForeground(Color.gray);
 			this.add(lb_1[i]);
 			this.add(lb_2[i]);
+			this.add(lb_time[i]);
 			setRed(lb_1[i], lb_2[i]);
 		}
 		if (lth > 4) {
 			for (int i = 4; i < lth; i++) {
-				lb_1[i] = new MyLabel(addX + (i - 4) * 80, scoreY, scoreWidth, scoreHeight, score1[i]);
-				lb_2[i] = new MyLabel(addX + (i - 4) * 80, scoreY_2, scoreWidth, scoreHeight, score2[i]);
+				lb_1[i] = new MyLabel(addX + (i - 4) * 80, labelY_1, scoreWidth, scoreHeight, score1[i]);
+				lb_2[i] = new MyLabel(addX + (i - 4) * 80, labelY_2, scoreWidth, scoreHeight, score2[i]);
+				lb_time[i] = new MyLabel(scoreX_1 + i * inter, labelY_0, scoreWidth, scoreHeight, (1+i)+"");
+				lb_time[i].setForeground(Color.gray);
 				this.add(lb_1[i]);
 				this.add(lb_2[i]);
+				this.add(lb_time[i]);
 				setRed(lb_1[i], lb_2[i]);
 			}
 		}
-		lb_1[lth] = new MyLabel(totalScoreX + totalInter * (lth - 4), scoreY, scoreWidth, scoreHeight, scoreAll[0]);
-		lb_2[lth] = new MyLabel(totalScoreX + totalInter * (lth - 4), scoreY_2, scoreWidth, scoreHeight,
+		lb_1[lth] = new MyLabel(totalScoreX + totalInter * (lth - 4), labelY_1, scoreWidth, scoreHeight, scoreAll[0]);
+		lb_2[lth] = new MyLabel(totalScoreX + totalInter * (lth - 4), labelY_2, scoreWidth, scoreHeight,
 				scoreAll[1]);
+		lb_time[lth] = new MyLabel(totalScoreX + totalInter * (lth - 4), labelY_0, scoreWidth, scoreHeight,"总分");
 		Font all = new Font("微软雅黑", 1, 20);
 		lb_1[lth].setFont(all);
 		lb_2[lth].setFont(all);
 		setRed(lb_1[lth], lb_2[lth]);
 		this.add(lb_1[lth]);
 		this.add(lb_2[lth]);
+		this.add(lb_time[lth]);
 	}
 
 	public void setRed(MyLabel l1, MyLabel l2) {

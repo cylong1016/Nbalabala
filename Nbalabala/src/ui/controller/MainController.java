@@ -21,6 +21,7 @@ import ui.panel.hot.hotTodayPlayer.HotTodayPlayerPanel;
 import ui.panel.main.MainPanel;
 import ui.panel.playerData.PlayerDataPanel;
 import ui.panel.teamdata.TeamDataPanel;
+import vo.MatchDetailVO;
 import vo.MatchProfileVO;
 
 /**
@@ -178,8 +179,8 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月21日 下午5:03:21
 	 */
-	public static void toOneGamePanel(MatchProfileVO matchProfile, Panel gameData) {
-		gamePanel = new GamePanel("images2.0/games/gamesBG.png", matchProfile, gameData);
+	public static void toOneGamePanel(MatchDetailVO matchDetail, Panel gameData) {
+		gamePanel = new GamePanel("images2.0/games/gamesBG.png", matchDetail, gameData);
 		frame.setPanel(gamePanel);
 	}
 

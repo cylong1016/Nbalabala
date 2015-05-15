@@ -141,6 +141,14 @@ public class Constants {
 		}
 	}
 	
+	public static String getAreaByEnglish(ScreenDivision AREA){
+		if(AREA.equals(ScreenDivision.WEST)){
+			return Constants.west;
+		}else{
+			return Constants.east;
+		}
+	}
+	
 	public static ScreenDivision getDivisionByAbbr(String abbr) {
 		switch (abbr) {
 		case "BOS":
@@ -391,6 +399,10 @@ public class Constants {
 	public static String scoreKing = "得分王";
 	public static String reboundKing = "篮板王";
 	public static String assistKing = "助攻王";
+	public static String record = "战绩";
+	
+	public static String east = "东部联盟";
+	public static String west = "西部联盟";
 	
 	public static String translateHeight(String height){
 		return translater.translateHeight(height);

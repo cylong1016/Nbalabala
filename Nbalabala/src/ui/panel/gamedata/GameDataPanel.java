@@ -9,13 +9,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.comboBox.MyComboBox;
 import ui.common.date.DateChooser;
 import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
-import ui.common.table.BottomScrollPane;
 import ui.common.table.MatchInfoTable;
 import ui.controller.MainController;
 import utility.Constants;
@@ -36,35 +34,17 @@ public class GameDataPanel extends BottomPanel {
 	/** serialVersionUID */
 	private static final long serialVersionUID = -6986506405843542454L;
 
-	private String gameImgPath = UIConfig.IMG_PATH + "gameData/";
-
-	/** 确认按钮 */
-	private ImgButton confirmBtn1, confirmBtn2;
 	private MyLabel number1, number2;
-	/** 确认按钮图片路径 */
-	private String confirmPath = gameImgPath + "confirm.png";
-	/** 移动到确认按钮上的图片路径 */
-	private String confirmOnPath = gameImgPath + "confirmOn.png";
-	/** 点击确认按钮的图片路径 */
-	private String confirmClickPath = gameImgPath + "confirmClick.png";
 	/** 下拉框 */
 	private MyComboBox box1, box2;
-
-	private BottomScrollPane scrollPane;
-
 	private ImgButton up, down;
-	// ProfilePanel[] proPanel;
-	ProfilePanel[] proPanel;
+	private ProfilePanel[] proPanel;
 	/** 下拉框的坐标 宽高 */
 	private int box1X = 722, box2X = 863, box1Y = 9, box2Y = 9, boxWidth = 110, boxHeight = 34;
 
-	MatchQueryBLService matchQuery = new MatchQuery();
-	DateChooser dateChooser;
-	ArrayList<MatchDetailVO> matchDetailfile;
-	/** 画线 */
-	GameDataButton[] detailImg;
-	/** 显示数据的panel */
-	DataPanel dataPanel;
+	private MatchQueryBLService matchQuery = new MatchQuery();
+	private DateChooser dateChooser;
+	private ArrayList<MatchDetailVO> matchDetailfile;
 	private int gameNum, pageNum;
 	private Boolean isInit = true;
 	/**
@@ -73,9 +53,9 @@ public class GameDataPanel extends BottomPanel {
 	 */
 	public GameDataPanel(String url) {
 		super(url);
+		matchDetailfile = matchQuery.getLatestMatches();
 		addComboBox();
 		addDateChooser();
-		matchDetailfile = matchQuery.getLatestMatches();
 		addArray();
 		addLabel();
 		addButton();
@@ -223,42 +203,25 @@ public class GameDataPanel extends BottomPanel {
 	 */
 	int clickTime = 0;
 
-	public void addConfirmBtn() {
-		confirmBtn1 = new ImgButton(confirmPath, 917, 123, confirmClickPath, confirmOnPath);
-		confirmBtn2 = new ImgButton(confirmPath, 550, 123, confirmClickPath, confirmOnPath);
-		this.add(confirmBtn1);
-		this.add(confirmBtn2);
-		confirmBtn1.addMouseListener(new MouseAdapter() {
-
-			public void mousePressed(MouseEvent e) {
-				if (clickTime != 0) {
-					GameDataPanel.this.remove(scrollPane);
-				}
-				clickTime++;
-				int team1 = box1.getSelectedIndex();
-				int team2 = box2.getSelectedIndex();
-				matchDetailfile = matchQuery.screenMatchByTeam(Constants.TEAM_ABBR[team1],
-						Constants.TEAM_ABBR[team2]);
-				gameNum = matchDetailfile.size();
-			}
-		});
-		confirmBtn2.addMouseListener(new MouseAdapter() {
-
-			public void mousePressed(MouseEvent e) {
-				if (clickTime != 0) {
-					GameDataPanel.this.remove(scrollPane);
-				}
-				clickTime++;
-//				Date date = dateChooser.getDate();
-//				 matchProfile = matchQuery.screenMatchByDate(date);
-				remove(scrollPane);
-				// scrollPane = new
-				// MatchInfoTableFactory(matchProfile,GameDataPanel.this)
-				// .getTableScrollPanel();
-				// GameDataPanel.this.add(scrollPane);
-			}
-		});
-	}
+//	public void addConfirmBtn() {
+//		
+//		confirmBtn2.addMouseListener(new MouseAdapter() {
+//
+//			public void mousePressed(MouseEvent e) {
+//				if (clickTime != 0) {
+//					GameDataPanel.this.remove(scrollPane);
+//				}
+//				clickTime++;
+////				Date date = dateChooser.getDate();
+////				 matchProfile = matchQuery.screenMatchByDate(date);
+//				remove(scrollPane);
+//				// scrollPane = new
+//				// MatchInfoTableFactory(matchProfile,GameDataPanel.this)
+//				// .getTableScrollPanel();
+//				// GameDataPanel.this.add(scrollPane);
+//			}
+//		});
+//	}
 
 	public void paint(Graphics g) {
 		super.paint(g);
@@ -289,6 +252,11 @@ public class GameDataPanel extends BottomPanel {
 		dateChooser = new DateChooser();
 		dateChooser.setIsGame();
 		MainController.addDateChooserPanel(this, dateChooser, 565, 10, 153, 30);
+		dateChooser.addMouseListener(new MouseAdapter(){
+			 public void mousePressed(MouseEvent e) {
+				
+			 }
+		});
 //		matchDetailfile = matchQuery.screenMatchByDate(date);
 	}
 	

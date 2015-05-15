@@ -7,8 +7,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import ui.Images;
-import ui.UIConfig;
-import ui.common.button.ImgButton;
 import ui.common.label.ImgLabel;
 import ui.common.label.MyLabel;
 import ui.common.panel.Panel;
@@ -18,7 +16,6 @@ import vo.MatchDetailVO;
 import vo.MatchProfileVO;
 import bl.matchquerybl.MatchQuery;
 import blservice.MatchQueryBLService;
-import blservice.TeamQueryBLService;
 import data.teamdata.SVGHandler;
 
 /**
@@ -52,20 +49,13 @@ public class ProfilePanel extends Panel {
 	private int labelX = 103, labelY_1 = 10, labelY_2 = 32, labelY_3 = 85, labelY_4 = 107, labelX_wl = 90,
 			labelY_above = 54, labelY_below = 129;
 	private int rightX_Team1 = 580,rightX_Team2 = 740,rightX = 490,rightY_1 = 10,rightY_2 = 35; 
-	Font labelFont = new Font("微软雅黑", 0, 17);
-	String signurl = "NBAdata/teams/";
+	private Font labelFont = new Font("微软雅黑", 0, 17);
 	/** 球队队标 */
-	ImgLabel sign1, sign2;
-	TeamQueryBLService teamQuery;
-	MatchQueryBLService matchQuery;
-	MatchDetailVO matchVO;
-	MyLabel[] lb_1, lb_2, lb_3,lb_king,lb_result;
-	String url = UIConfig.IMG_PATH + "game/";
-	/** 时间地址 */
-	String timeURL;
-	ImgButton timeImg;
-	MatchProfileVO matchPro;
-	Panel bottomPanel;
+	private ImgLabel sign1, sign2;
+	private MatchQueryBLService matchQuery;
+	private MyLabel[] lb_1, lb_2, lb_3,lb_king,lb_result;
+	private MatchProfileVO matchPro;
+	private Panel bottomPanel;
 	public boolean isIni;
 
 	public ProfilePanel(MatchDetailVO matchDetail,Panel bottomPanel) {
@@ -235,7 +225,7 @@ public class ProfilePanel extends Panel {
 		tech.addMouseListener(new MouseAdapter(){
 			 public void mousePressed(MouseEvent e) {
 				 tech.setForeground(Color.gray);
-				 MainController.toOneGamePanel(matchPro,bottomPanel);;
+				 MainController.toOneGamePanel(matchDetail,bottomPanel);;
 			 }
 		});
 	}

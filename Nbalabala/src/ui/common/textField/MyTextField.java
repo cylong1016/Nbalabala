@@ -25,7 +25,6 @@ public class MyTextField extends JTextField{
 		this.setForeground(Color.white);
 		this.setBackground(null);
 		this.setBorder(null);
-		
 	}
 }
 
