@@ -1,7 +1,13 @@
 package ui.panel.allplayers;
 
-import ui.common.panel.BottomPanel;
+import java.util.ArrayList;
+
 import ui.common.panel.Panel;
+import ui.common.table.BottomScrollPane;
+import ui.common.table.BottomTable;
+import utility.Constants;
+import vo.MatchPlayerVO;
+import vo.PlayerMatchPerformanceVO;
 
 /**
  * 
@@ -10,8 +16,23 @@ import ui.common.panel.Panel;
  */
 public class PlayerInfoMatchesDataPanel extends Panel{
 	
-	public PlayerInfoMatchesDataPanel(String name, BottomPanel lastPanel) {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3026360195428120633L;
+	private BottomScrollPane scrollPane;
+	
+	public PlayerInfoMatchesDataPanel() {
 		
+	}
+	
+	public void updateContent(ArrayList<PlayerMatchPerformanceVO> playerMatch) {
+		if (scrollPane != null) {
+			remove(scrollPane);
+		}
+		scrollPane = new OnePlayerMatchTableFactory(playerMatch).getTableScrollPane();
+		scrollPane.setBounds(25, 0, 888, 270); // 表格的位置 
+		this.add(scrollPane);
 	}
 
 }

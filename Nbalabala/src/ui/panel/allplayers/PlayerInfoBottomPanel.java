@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
@@ -21,6 +22,7 @@ import ui.common.panel.Panel;
 import ui.controller.MainController;
 import utility.Constants;
 import vo.PlayerDetailVO;
+import vo.PlayerMatchPerformanceVO;
 import vo.PlayerProfileVO;
 import vo.PlayerSeasonVO;
 import bl.playerquerybl.PlayerQuery;
@@ -93,10 +95,16 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		addBackButton();
 		addTabButtons();
 		
+		int matchCount = detailVO.getMatchRecords().size();
+		ArrayList<PlayerMatchPerformanceVO> latestTwoMatches = new ArrayList<PlayerMatchPerformanceVO>();
+		latestTwoMatches.add(detailVO.getMatchRecords().get(matchCount - 2));
+		latestTwoMatches.add(detailVO.getMatchRecords().get(matchCount - 1));
+				
 		// 刚进入的时候显示的是柱状对比图的那个页面
 		briefPanel = new PlayerInfoBriefPanel(detailVO.getSeasonRecord(), 
 				playerQuery.getFiveArgsAvg(seasonInput.getSeason()), 
-				playerQuery.getHighestScoreReboundAssist(seasonInput.getSeason()));
+				playerQuery.getHighestScoreReboundAssist(seasonInput.getSeason()),
+				latestTwoMatches);
 		currentPanel = briefPanel;
 		addCurrentPanel();
 	}
@@ -111,7 +119,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 				
 				currentPanel = briefPanel;
 				addCurrentPanel();
-				briefPanel.update(seasonVO, playerQuery.getFiveArgsAvg(season), 
+				briefPanel.updateContent(seasonVO, playerQuery.getFiveArgsAvg(season), 
 						playerQuery.getHighestScoreReboundAssist(season));
 				
 				briefTab.setOn();
@@ -130,8 +138,8 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 				remove(currentPanel);
 				if (seasonDataPanel == null) {
 					seasonDataPanel = new PlayerInfoSeasonDataPanel();
+					seasonDataPanel.update(seasonInput.getSeason(), detailVO.getSeasonRecord());
 				}
-				seasonDataPanel.update(seasonInput.getSeason(), detailVO.getSeasonRecord());
 				currentPanel = seasonDataPanel;
 				addCurrentPanel();
 				
@@ -148,8 +156,14 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		matchesDataTab.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				remove(currentPanel);
-//				matchesDataPanel = new playerinfoma//TODO
+				remove(currentPanel);
+				if (matchesDataPanel == null) {
+					matchesDataPanel = new PlayerInfoMatchesDataPanel();
+					matchesDataPanel.updateContent(detailVO.getMatchRecords());
+				}
+				currentPanel = matchesDataPanel;
+				addCurrentPanel();
+				
 				briefTab.setOff();
 				seasonDataTab.setOff();
 				matchesDataTab.setOn();
@@ -226,26 +240,26 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		}
 	}
 
-	// 需要刷新的，也就是会随赛季变化的，有title（主要是所属球队）和三大数据以及排名
+	// title（主要是所属球队）和三大数据以及排名 不随赛季变化（只关注现在的）
 	public void refresh() {
 		String season = seasonInput.getSeason();
 		detailVO = playerQuery.getPlayerDetailByName(name, season);
 		PlayerSeasonVO seasonVO = detailVO.getSeasonRecord();
-		int [] ranks = playerQuery.getScoreReboundAssistRank(name, season);
-		scoreLabel.update(seasonVO.scoreAvg, ranks[0]);
-		reboundLabel.update(seasonVO.totalReboundAvg, ranks[1]);
-		assistLabel.update(seasonVO.assistAvg, ranks[2]);
+//		int [] ranks = playerQuery.getScoreReboundAssistRank(name, season);
+//		scoreLabel.update(seasonVO.scoreAvg, ranks[0]);
+//		reboundLabel.update(seasonVO.totalReboundAvg, ranks[1]);
+//		assistLabel.update(seasonVO.assistAvg, ranks[2]);
 		
-		if (currentPanel == briefPanel) {
-			briefPanel.update(seasonVO, playerQuery.getFiveArgsAvg(season), 
-					playerQuery.getHighestScoreReboundAssist(season));
-		}else if (currentPanel == seasonDataPanel) {
+		briefPanel.updateContent(seasonVO, playerQuery.getFiveArgsAvg(season), 
+				playerQuery.getHighestScoreReboundAssist(season));
+		if (seasonDataPanel != null) {
 			seasonDataPanel.update(season, seasonVO);
-		}else {
-			//TODO	赛程数据那边
+		}
+		if (matchesDataPanel != null) {
+			matchesDataPanel.updateContent(detailVO.getMatchRecords());
 		}
 		
-		teamLabel.setText(Constants.translateTeamAbbr(seasonVO.getTeam()));
+//		teamLabel.setText(Constants.translateTeamAbbr(seasonVO.getTeam()));
 		repaint();
 	}
 

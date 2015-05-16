@@ -19,7 +19,7 @@ public class PlayerInfoSeasonDataPanel extends Panel{
 	
 	public PlayerInfoSeasonDataPanel() {
 		BottomScrollPane scrollPane = new BottomScrollPane(seasonDataTable);
-		scrollPane.setBounds(57, 260, 888, 160);
+		scrollPane.setBounds(25, 25, 888, 160);
 		this.add(scrollPane);
 	}
 	

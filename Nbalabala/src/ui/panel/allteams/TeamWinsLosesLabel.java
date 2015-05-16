@@ -24,7 +24,7 @@ public class TeamWinsLosesLabel extends JLabel{
 	public TeamWinsLosesLabel(int wins, int loses) {
 		winsLabel = new JLabel(String.valueOf(wins));
 		winsLabel.setOpaque(false);
-		winsLabel.setForeground(new Color(190,45,45));
+		winsLabel.setForeground(UIConfig.RED_WIN_COLOR);
 		winsLabel.setBounds(0,3, 42,35);
 		winsLabel.setHorizontalAlignment(RIGHT);
 		winsLabel.setFont(BIG_FONT);

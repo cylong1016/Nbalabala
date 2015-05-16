@@ -1,6 +1,10 @@
 package ui.panel.allplayers;
 
+import java.util.ArrayList;
+
 import ui.common.panel.Panel;
+import ui.common.table.BottomScrollPane;
+import vo.PlayerMatchPerformanceVO;
 import vo.PlayerSeasonVO;
 
 /**
@@ -15,11 +19,18 @@ public class PlayerInfoBriefPanel extends Panel{
 	private ContrastDiagram cd;
 	
 	public PlayerInfoBriefPanel(PlayerSeasonVO seasonVO, double[] fiveArgsAvg,
-			double[] highestScoreReboundAssist) {
+			double[] highestScoreReboundAssist, ArrayList<PlayerMatchPerformanceVO> twoMatches) {
 		addContrastDiagram(seasonVO, fiveArgsAvg, highestScoreReboundAssist);
+		addLatestMatchesTable(twoMatches);
 	}
 	
-	public void update(PlayerSeasonVO playerSeason, double[] fiveArgsAvg, 
+	private void addLatestMatchesTable(ArrayList<PlayerMatchPerformanceVO> twoMatches) {
+		BottomScrollPane scrollPane = new OnePlayerMatchTableFactory(twoMatches).getTableScrollPane();
+		scrollPane.setBounds(25, 250, 888, 270); // 表格的位置 
+		this.add(scrollPane);
+	}
+	
+	public void updateContent(PlayerSeasonVO playerSeason, double[] fiveArgsAvg, 
 			double[] highestScoreReboundAssist) {
 		updateContrastDiagram(playerSeason, fiveArgsAvg, highestScoreReboundAssist);
 	}
@@ -37,7 +48,7 @@ public class PlayerInfoBriefPanel extends Panel{
 										playerSeason.getTotalReboundAvg(), playerSeason.getAssistAvg(),playerSeason.getFreeThrowPercent(),
 										playerSeason.getThreePointPercent()};
 		cd = new ContrastDiagram(fivePlayersData, fiveArgsAvg, highestScoreReboundAssist, "球员平均");
-		cd.setBounds(57, 160, 888, 160);
+		cd.setBounds(25, 0, 888, 160);
 		this.add(cd);
 		cd.updateUI();
 		cd.repaint();

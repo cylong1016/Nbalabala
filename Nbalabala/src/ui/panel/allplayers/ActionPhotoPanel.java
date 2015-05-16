@@ -21,11 +21,14 @@ public class ActionPhotoPanel extends JPanel {
 	private Image action;
 
 	public ActionPhotoPanel(Image action) {
+		setOpaque(false);
 		this.action = action;
+
 	}
 	
 	public void setImage(Image image) {
 		this.action = image;
+		repaint();
 	}
 	
 	public void setSize(int width, int height){

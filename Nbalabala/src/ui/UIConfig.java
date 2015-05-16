@@ -102,6 +102,9 @@ public class UIConfig {
 	
 	public static final Color BLUE_TEXT_COLOR = new Color(50, 126, 196);
 	
+	/** 所有代表胜利的红色字体的颜色 */
+	public static final Color RED_WIN_COLOR = new Color(190,45,45);
+	
 	/** 球员和球队界面，简况Label之间的Y的差值 */
 	public static final int PROFILE_LABEL_INTER_Y = 20;
 	
