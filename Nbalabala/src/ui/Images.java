@@ -45,4 +45,5 @@ public class Images {
 	
 	public static final Image KING_BG = 
 			new ImageIcon("images2.0/teams/KingBG.png").getImage();
+	
 }

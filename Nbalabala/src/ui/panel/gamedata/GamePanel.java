@@ -8,9 +8,11 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import ui.Images;
 import ui.UIConfig;
 import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
+import ui.common.button.TabButton;
 import ui.common.label.ImgLabel;
 import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
@@ -24,11 +26,7 @@ import vo.MatchDetailVO;
 import vo.MatchPlayerVO;
 import vo.MatchProfileVO;
 import bl.matchquerybl.MatchQuery;
-import bl.playerquerybl.PlayerQuery;
-import bl.teamquerybl.TeamQuery;
 import blservice.MatchQueryBLService;
-import blservice.PlayerQueryBLService;
-import blservice.TeamQueryBLService;
 import data.teamdata.SVGHandler;
 import enums.ScreenDivision;
 
@@ -45,9 +43,6 @@ public class GamePanel extends BottomPanel {
 	private  MatchDetailVO matchDetail;
 	private  MatchProfileVO matchPro;
 	private MatchQueryBLService matchQuery;
-	private PlayerQueryBLService playerQuery;
-	private GameDetailButton teamName1, teamName2;
-	private int teamX1 = 736, teamX2 = 828, teamY = 190, width = 74, height = 24;
 
 	/** 球队中文全称 */
 	private String teamStr1, teamStr2;
@@ -57,22 +52,19 @@ public class GamePanel extends BottomPanel {
 	private String teamShort1, teamShort2;
 	/** 上方显示的球队名称和城市 */
 	private Font labelFont = new Font("微软雅黑", 0, 23);
-	private TeamQueryBLService teamQuery;
-	private MatchDetailVO matchVO;
 	private ImgButton back;
 	private ScorePanel scPanel;
 	private ImgLabel sign1,sign2;
 	private MyLabel scorelb_1,scorelb_2,ranklb_1,ranklb_2,recordlb_1,recordlb_2,
 	name_1,name_2,area1,area2;
+	private TabButton teambt1,teambt2,contrastbt;
 
 	public GamePanel(String url, MatchDetailVO matchDetail,Panel gameData) {
 		super(url);
 		this.gameData = gameData;
 		this.matchDetail = matchDetail;
 		matchPro = matchDetail.getProfile();
-		teamQuery = new TeamQuery();
 		matchQuery = new MatchQuery();
-		playerQuery = new PlayerQuery();
 		getScore();
 		getTeam();
 		addButton();
@@ -188,30 +180,48 @@ public class GamePanel extends BottomPanel {
 		setTable(homePlayers);
 	}
 
+	private int btx = 24,bty = 253, inter = 315;
 	public void addButton() {
-		teamName1 = new GameDetailButton(teamX1, teamY, width, height, teamStr1);
-		teamName1.setOpaque(true);
-		teamName1.setBackground(UIConfig.BUTTON_COLOR);
-		teamName1.setForeground(Color.white);
-		teamName2 = new GameDetailButton(teamX2, teamY, width, height, teamStr2);
-		this.add(teamName1);
-		this.add(teamName2);
-		teamName1.addMouseListener(new MouseAdapter() {
+		teambt1 = new TabButton(teamStr1,Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
+		teambt2 = new TabButton(teamStr2,Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
+		contrastbt = new TabButton(Constants.contrast,Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
+		teambt1.setLocation(btx, bty);
+		teambt2.setLocation(btx + 2 * inter, bty);
+		contrastbt.setLocation(btx + inter, bty);
+		teambt1.setOn();
+		this.add(teambt1);
+		this.add(teambt2);
+		this.add(contrastbt);
+		teambt1.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				teamName2.back();
+				teambt1.setOn();
+				teambt2.setOff();
+				contrastbt.setOff();
 				GamePanel.this.remove(scroll);
 				ArrayList<MatchPlayerVO> homePlayers = matchDetail.getHomePlayers();
 				setTable(homePlayers);
 			}
 		});
-		teamName2.addMouseListener(new MouseAdapter() {
+		teambt2.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				teamName1.back();
+				teambt1.setOff();
+				teambt2.setOn();
+				contrastbt.setOff();
 				GamePanel.this.remove(scroll);
 				ArrayList<MatchPlayerVO> roadPlayers = matchDetail.getRoadPlayers();
 				setTable(roadPlayers);
 			}
 		});
+		contrastbt.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				teambt1.setOff();
+				teambt2.setOff();
+				contrastbt.setOn();
+				GamePanel.this.remove(scroll);
+				GamePanel.this.repaint();
+			}
+		});
+		
 	}
 
 	String[] columns;

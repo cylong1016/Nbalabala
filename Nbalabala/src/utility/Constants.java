@@ -407,6 +407,8 @@ public class Constants {
 	public static String east = "东部联盟";
 	public static String west = "西部联盟";
 	
+	public static String contrast = "对比";
+	
 	public static String translateHeight(String height){
 		return translater.translateHeight(height);
 	}
