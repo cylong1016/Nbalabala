@@ -37,7 +37,9 @@ public class UIConfig {
 	public static final Font FONT = new Font("微软雅黑", 0, 14);
 
 	/** button选中之后的颜色 */
-	public static final Color BUTTON_COLOR = new Color(15, 24, 44);
+	public static final Color DARK_BUTTON_COLOR = new Color(15, 24, 44);
+	
+	public static final Color BUTTON_COLOR = new Color(63, 83, 188);
 
 	/*----------------------------表格配置--------------------------------*/
 	/** 表格字体 */

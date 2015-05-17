@@ -152,9 +152,9 @@ public class Constants {
 	
 	public static String getAreaByEnglish(ScreenDivision AREA){
 		if(AREA.equals(ScreenDivision.WEST)){
-			return Constants.west;
+			return Constants.westText;
 		}else{
-			return Constants.east;
+			return Constants.eastText;
 		}
 	}
 	
@@ -402,18 +402,18 @@ public class Constants {
 	public static String reboundAvgText = "场均篮板";
 	public static String assistAvgText = "场均助攻";
 	
-	public static String totalScore = "总分";
-	public static String tech = "技术统计";
+	public static String totalScoreText = "总分";
+	public static String techText = "技术统计";
 	
-	public static String scoreKing = "得分王";
-	public static String reboundKing = "篮板王";
-	public static String assistKing = "助攻王";
-	public static String record = "战绩";
+	public static String scoreKingText = "得分王";
+	public static String reboundKingText = "篮板王";
+	public static String assistKingText = "助攻王";
+	public static String recordText = "战绩";
 	
-	public static String east = "东部联盟";
-	public static String west = "西部联盟";
+	public static String eastText = "东部联盟";
+	public static String westText = "西部联盟";
 	
-	public static String contrast = "对比";
+	public static String contrastText = "对比";
 	
 	public static String translateHeight(String height){
 		return translater.translateHeight(height);

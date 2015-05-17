@@ -281,7 +281,7 @@ public class PlayerDataPanel extends BottomPanel {
 	 */
 	public void setEffect(TextButton button) {
 		button.setOpaque(true);
-		button.setBackground(new Color(15, 24, 44));
+		button.setBackground(UIConfig.BUTTON_COLOR);
 		button.setForeground(Color.white);
 	}
 

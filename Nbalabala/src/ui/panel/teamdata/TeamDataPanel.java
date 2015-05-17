@@ -42,7 +42,7 @@ public class TeamDataPanel extends BottomPanel {
 	/** serialVersionUID */
 	private static final long serialVersionUID = -4296014620804951285L;
 
-	private static final Color BUTTON_SELECTED_BG = new Color(15, 24, 44);
+	private static final Color BUTTON_SELECTED_BG = UIConfig.BUTTON_COLOR;
 	private static final Color BUTTON_SELECTED_FORE = Color.white;
 	/** 枚举数组 */
 	private static final ScreenDivision[] DIVISION_ARRAY = ScreenDivision.values();

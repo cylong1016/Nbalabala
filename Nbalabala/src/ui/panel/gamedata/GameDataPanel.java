@@ -273,6 +273,8 @@ public class GameDataPanel extends BottomPanel {
 	public void addComboBox() {
 		box1 = new MyComboBox(Constants.ALL_TEAM_NAMES, box1X, box1Y, boxWidth, boxHeight);
 		box2 = new MyComboBox(Constants.ALL_TEAM_NAMES, box2X, box2Y, boxWidth, boxHeight);
+		box1.setDarkColor();
+		box2.setDarkColor();
 		this.add(box1);
 		this.add(box2);
 		AcListener acLis = new AcListener();
