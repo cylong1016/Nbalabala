@@ -10,7 +10,7 @@ import ui.panel.allplayers.AllPlayersPanel;
 import ui.panel.allplayers.PlayerInfoPanel;
 import ui.panel.allteams.AllTeamsPanel;
 import ui.panel.allteams.TeamGamePanel;
-import ui.panel.allteams.TeamPlayerPanel;
+import ui.panel.allteams.TeamLineupPanel;
 import ui.panel.allteams.TeamSeasonPanel;
 import ui.panel.gamedata.GameDataPanel;
 import ui.panel.gamedata.GamePanel;
@@ -47,7 +47,7 @@ public class MainController {
 	/** 球队赛季数据 */
 	private static TeamSeasonPanel teamSeasonpanel;
 	/** 球队阵容数据 */
-	private static TeamPlayerPanel teamplayerpanel;
+	private static TeamLineupPanel teamplayerpanel;
 	/** 球队比赛数据 */
 	private static TeamGamePanel teamGamePanel;
 	/** 某场比赛数据 */
@@ -147,7 +147,7 @@ public class MainController {
 	}
 	
 	public static void toTeamPlayerPanel(String abbr) {
-		teamplayerpanel = new TeamPlayerPanel((BottomPanel)(Frame.currentPanel),"images/teams/teamSeasonBG.png", abbr);
+		teamplayerpanel = new TeamLineupPanel((BottomPanel)(Frame.currentPanel),"images/teams/teamSeasonBG.png", abbr);
 		frame.setPanel(teamplayerpanel);
 	}
 	

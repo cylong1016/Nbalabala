@@ -90,8 +90,8 @@ public class TeamBottomPanel extends BottomPanel{
 	
 	private Panel currentPanel;	//当前子界面
 	private TeamKingPanel kingPanel;
-	private Panel lineupPanel;
-	private Panel seasonPanel;
+	private TeamLineupPanel lineupPanel;
+	private TeamSeasonPanel seasonPanel;
 	private TeamMatchPanel matchPanel;
 	
 	private TeamProfileVO profileVO;
@@ -233,10 +233,42 @@ public class TeamBottomPanel extends BottomPanel{
 		this.add(kingTab);
 		
 		lineupTab = new TabButton(Constants.lineupText, Images.TEAM_FIRST_LEVEL_TAB_MOVE_ON, Images.TEAM_FIRST_LEVEL_TAB_CHOSEN);
+		lineupTab.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				kingTab.setOff();
+				lineupTab.setOn();
+				seasonTab.setOff();
+				matchTab.setOff();
+				if (lineupPanel == null) {
+					lineupPanel = new TeamLineupPanel(teamDetail.getPlayers());
+				}
+				switchPanel(lineupPanel);
+			}
+		});
 		lineupTab.setLocation(25 + TABS_INTER_X, TABS_Y);
 		this.add(lineupTab);
 		
 		seasonTab = new TabButton(Constants.seasonDataText, Images.TEAM_FIRST_LEVEL_TAB_MOVE_ON, Images.TEAM_FIRST_LEVEL_TAB_CHOSEN);
+		seasonTab.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				kingTab.setOff();
+				lineupTab.setOff();
+				seasonTab.setOn();
+				matchTab.setOff();
+				if (seasonPanel == null) {
+					String season = seasonChooser.getSeason();
+					seasonPanel = new TeamSeasonPanel(seasonChooser);
+					switchPanel(seasonPanel);
+					seasonPanel.updateContent(season, teamDetail.getSeasonRecord(), 
+							service.getFiveArgsAvg(season), service.getHighestScoreReboundAssist(season));
+				}else {
+					switchPanel(seasonPanel);
+				}
+				
+			}
+		});
 		seasonTab.setLocation(25 + 2 * TABS_INTER_X, TABS_Y);
 		this.add(seasonTab);
 		
@@ -264,12 +296,21 @@ public class TeamBottomPanel extends BottomPanel{
 		currentPanel = nextPanel;
 		currentPanel.setBounds(SUBPANEL_BOUNDS);
 		this.add(currentPanel);
+		if (currentPanel == seasonPanel) {
+			seasonPanel.addSeasonChooser();
+		}else if (currentPanel == matchPanel) {
+			matchPanel.addSeasonChooser();
+		}
 		repaint();
 	}
 	
 	//当改变赛季，获得新的detailVO，刷新所有已经存在的子Panel
 	public void refresh() {
-		
+		String season = seasonChooser.getSeason();
+		teamDetail = service.getTeamDetailByAbbr(abbr, season);
+		if (seasonPanel != null) seasonPanel.updateContent(season, teamDetail.getSeasonRecord(), 
+					service.getFiveArgsAvg(season), service.getHighestScoreReboundAssist(season));
+		if (matchPanel != null) matchPanel.updateContent(teamDetail.getMatchRecords());
 	}
 	
 	//TODO 测试代码

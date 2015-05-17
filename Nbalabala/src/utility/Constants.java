@@ -67,11 +67,21 @@ public class Constants {
 	
 	/** 球队界面中的赛程的表头 */
 	public static String []teamMatchHeaders = {"日期", "对手", "胜负", "比分"};
-	
+	/** 球队信息页面中的赛季数据的表头 */
+	public static String [] oneTeamDataHeaders = {
+		"赛季","场数","胜场","胜率","投篮%","三分%","罚球%","进攻","防守","篮板","助攻","抢断","盖帽","失误","犯规","得分"
+	};
 	
 	
 	/** 球员个人信息页面中的赛季数据的空表 */
 	public static Object [][] onePlayerDataTableEmptyContent = 
+		{{"赛季平均","","","","","","","","","","","","","","",""},
+		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{"赛季总计","","","","","","","","","","","","","","",""},
+		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
+	
+	/** 球队信息页面中的赛季数据的空表 */
+	public static Object [][] oneTeamDataTableEmptyContent = 
 		{{"赛季平均","","","","","","","","","","","","","","",""},
 		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 		{"赛季总计","","","","","","","","","","","","","","",""},
@@ -414,6 +424,8 @@ public class Constants {
 	public static String westText = "西部联盟";
 	
 	public static String contrastText = "对比";
+	
+	public static String teamAvgText = "球队平均";
 	
 	public static String translateHeight(String height){
 		return translater.translateHeight(height);
