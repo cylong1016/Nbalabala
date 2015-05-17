@@ -58,6 +58,8 @@ public class GamePanel extends BottomPanel {
 	private MyLabel scorelb_1,scorelb_2,ranklb_1,ranklb_2,recordlb_1,recordlb_2,
 	name_1,name_2,area1,area2;
 	private TabButton teambt1,teambt2,contrastbt;
+	private ConPanel conPanel;
+	private Boolean isScroll = true;
 
 	public GamePanel(String url, MatchDetailVO matchDetail,Panel gameData) {
 		super(url);
@@ -65,6 +67,7 @@ public class GamePanel extends BottomPanel {
 		this.matchDetail = matchDetail;
 		matchPro = matchDetail.getProfile();
 		matchQuery = new MatchQuery();
+		conPanel = new ConPanel(Images.GAME_CON,matchDetail);
 		getScore();
 		getTeam();
 		addButton();
@@ -197,9 +200,15 @@ public class GamePanel extends BottomPanel {
 				teambt1.setOn();
 				teambt2.setOff();
 				contrastbt.setOff();
-				GamePanel.this.remove(scroll);
+				if(isScroll) {
+					GamePanel.this.remove(scroll);
+				}else{
+					GamePanel.this.remove(conPanel);
+				}
+				isScroll = true;
 				ArrayList<MatchPlayerVO> homePlayers = matchDetail.getHomePlayers();
 				setTable(homePlayers);
+				GamePanel.this.repaint();
 			}
 		});
 		teambt2.addMouseListener(new MouseAdapter() {
@@ -207,9 +216,15 @@ public class GamePanel extends BottomPanel {
 				teambt1.setOff();
 				teambt2.setOn();
 				contrastbt.setOff();
-				GamePanel.this.remove(scroll);
+				if(isScroll) {
+					GamePanel.this.remove(scroll);
+				}else{
+					GamePanel.this.remove(conPanel);
+				}
+				isScroll = true;
 				ArrayList<MatchPlayerVO> roadPlayers = matchDetail.getRoadPlayers();
 				setTable(roadPlayers);
+				GamePanel.this.repaint();
 			}
 		});
 		contrastbt.addMouseListener(new MouseAdapter() {
@@ -217,7 +232,13 @@ public class GamePanel extends BottomPanel {
 				teambt1.setOff();
 				teambt2.setOff();
 				contrastbt.setOn();
-				GamePanel.this.remove(scroll);
+				if(isScroll) {
+					GamePanel.this.remove(scroll);
+				}else{
+					GamePanel.this.remove(conPanel);
+				}
+				isScroll = false;
+				GamePanel.this.add(conPanel);
 				GamePanel.this.repaint();
 			}
 		});

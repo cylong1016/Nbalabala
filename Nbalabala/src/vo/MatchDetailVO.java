@@ -43,6 +43,7 @@ public class MatchDetailVO {
 	private int roadHighestReboundValue;
 	
 	private int roadHighestAssistValue;
+
 	
 	/** 标记本场比赛数据是否有效，指的是有无所有球员上场时间加起来是否明显大于总时间，以及所有球员得分相加是否等于总分 */
 	private boolean isValid;
@@ -185,11 +186,11 @@ public class MatchDetailVO {
 			rebound += vo.getTotalRebound();
 		}
 		double [] result = new double[5];
-		if (fieldAttempt != 0) result[0] = fieldGoal / (double)fieldAttempt;
+		if (fieldAttempt != 0) result[0] = fieldGoal / (double)fieldAttempt * 100;
 		else result[0] = 0;
-		if (threeAttempt != 0) result[1] = threeGoal / (double)threeAttempt;
+		if (threeAttempt != 0) result[1] = threeGoal / (double)threeAttempt * 100;
 		else result[1] = 0;
-		if (freethrowAttempt != 0) result[2] = freethrowGoal / (double)freethrowAttempt;
+		if (freethrowAttempt != 0) result[2] = freethrowGoal / (double)freethrowAttempt * 100;
 		else result[2] = 0;
 		result[3] = rebound;
 		result[4] = assist;
@@ -206,7 +207,7 @@ public class MatchDetailVO {
 		int freethrowGoal = 0;
 		int assist = 0;
 		int rebound = 0;
-		for (MatchPlayerVO vo : homePlayers) {
+		for (MatchPlayerVO vo : roadPlayers) {
 			fieldAttempt += vo.getFieldAttempt();
 			fieldGoal += vo.getFieldGoal();
 			threeAttempt += vo.getThreePointAttempt();
@@ -217,11 +218,11 @@ public class MatchDetailVO {
 			rebound += vo.getTotalRebound();
 		}
 		double [] result = new double[5];
-		if (fieldAttempt != 0) result[0] = fieldGoal / (double)fieldAttempt;
+		if (fieldAttempt != 0) result[0] = fieldGoal / (double)fieldAttempt * 100;
 		else result[0] = 0;
-		if (threeAttempt != 0) result[1] = threeGoal / (double)threeAttempt;
+		if (threeAttempt != 0) result[1] = threeGoal / (double)threeAttempt * 100;
 		else result[1] = 0;
-		if (freethrowAttempt != 0) result[2] = freethrowGoal / (double)freethrowAttempt;
+		if (freethrowAttempt != 0) result[2] = freethrowGoal / (double)freethrowAttempt * 100;
 		else result[2] = 0;
 		result[3] = rebound;
 		result[4] = assist;

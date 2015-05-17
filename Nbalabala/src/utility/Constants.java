@@ -102,6 +102,8 @@ public class Constants {
 			"迈阿密", "奥兰多", "华盛顿", "金洲", "洛杉矶", "洛杉矶", "菲尼克斯", "萨克拉门托", "丹佛", "明尼苏达", "俄克拉荷马", "波特兰", "犹他", "达拉斯",
 			"休斯敦", "孟菲斯", "新奥尔良", "圣安东尼奥" };
 	
+	public static final String[] GAME_SORT = {"%","三分%","罚球%","篮板","助攻"};
+	
 	public static String translateDivision(ScreenDivision division) {
 		return translater.translateTeamDivision(division);
 	}

@@ -22,7 +22,6 @@ import ui.panel.main.MainPanel;
 import ui.panel.playerData.PlayerDataPanel;
 import ui.panel.teamdata.TeamDataPanel;
 import vo.MatchDetailVO;
-import vo.MatchProfileVO;
 
 /**
  * 界面跳转控制
@@ -92,7 +91,7 @@ public class MainController {
 	 * @version 2015年3月18日 上午11:11:38
 	 */
 	public static void toTeamPanel() {
-		teamDataPanel = new TeamDataPanel(UIConfig.IMG_PATH + "teamData/teamDataBG.png");
+		teamDataPanel = new TeamDataPanel("images2.0/teamsData/TeamsDataBG.png");
 		frame.setPanel(teamDataPanel);
 	}
 
@@ -102,7 +101,7 @@ public class MainController {
 	 * @version 2015年3月18日 上午11:11:46
 	 */
 	public static void toPlayerPanel() {
-		playerDataPanel = new PlayerDataPanel(UIConfig.IMG_PATH + "playerData/playerDataBG.png");
+		playerDataPanel = new PlayerDataPanel("images2.0/playersData/PlayersDataBG.png");
 		frame.setPanel(playerDataPanel);
 	}
 

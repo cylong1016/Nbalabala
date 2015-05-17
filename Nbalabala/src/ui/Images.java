@@ -46,4 +46,6 @@ public class Images {
 	public static final Image KING_BG = 
 			new ImageIcon("images2.0/teams/KingBG.png").getImage();
 	
+	public static final Image GAME_CON = new ImageIcon("images2.0/games/GamesCompareBG.png").getImage();
+	
 }
