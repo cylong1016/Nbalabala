@@ -163,4 +163,68 @@ public class MatchDetailVO {
 	public Image getRoadLogo() {
 		return roadLogo;
 	}
+	
+	/** 获得主场队的命中率、三分命中、罚球命中、篮板、助攻 */
+	public double[] getHomeFiveArgs() {
+		int fieldAttempt = 0;
+		int fieldGoal = 0;
+		int threeAttempt = 0;
+		int threeGoal = 0;
+		int freethrowAttempt = 0;
+		int freethrowGoal = 0;
+		int assist = 0;
+		int rebound = 0;
+		for (MatchPlayerVO vo : homePlayers) {
+			fieldAttempt += vo.getFieldAttempt();
+			fieldGoal += vo.getFieldGoal();
+			threeAttempt += vo.getThreePointAttempt();
+			threeGoal += vo.getThreePointGoal();
+			freethrowAttempt += vo.getFreethrowAttempt();
+			freethrowGoal += vo.getFreethrowGoal();
+			assist += vo.getAssist();
+			rebound += vo.getTotalRebound();
+		}
+		double [] result = new double[5];
+		if (fieldAttempt != 0) result[0] = fieldGoal / (double)fieldAttempt;
+		else result[0] = 0;
+		if (threeAttempt != 0) result[1] = threeGoal / (double)threeAttempt;
+		else result[1] = 0;
+		if (freethrowAttempt != 0) result[2] = freethrowGoal / (double)freethrowAttempt;
+		else result[2] = 0;
+		result[3] = rebound;
+		result[4] = assist;
+		return result;
+	}
+	
+	/** 获得客场队的命中率、三分命中、罚球命中、篮板、助攻 */
+	public double[] getRoadFiveArgs() {
+		int fieldAttempt = 0;
+		int fieldGoal = 0;
+		int threeAttempt = 0;
+		int threeGoal = 0;
+		int freethrowAttempt = 0;
+		int freethrowGoal = 0;
+		int assist = 0;
+		int rebound = 0;
+		for (MatchPlayerVO vo : homePlayers) {
+			fieldAttempt += vo.getFieldAttempt();
+			fieldGoal += vo.getFieldGoal();
+			threeAttempt += vo.getThreePointAttempt();
+			threeGoal += vo.getThreePointGoal();
+			freethrowAttempt += vo.getFreethrowAttempt();
+			freethrowGoal += vo.getFreethrowGoal();
+			assist += vo.getAssist();
+			rebound += vo.getTotalRebound();
+		}
+		double [] result = new double[5];
+		if (fieldAttempt != 0) result[0] = fieldGoal / (double)fieldAttempt;
+		else result[0] = 0;
+		if (threeAttempt != 0) result[1] = threeGoal / (double)threeAttempt;
+		else result[1] = 0;
+		if (freethrowAttempt != 0) result[2] = freethrowGoal / (double)freethrowAttempt;
+		else result[2] = 0;
+		result[3] = rebound;
+		result[4] = assist;
+		return result;
+	}
 }
