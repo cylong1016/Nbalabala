@@ -34,7 +34,7 @@ public class TeamMatchPanel extends Panel{
 	
 	public TeamMatchPanel(SeasonInputPanel seasonInputPanel) {
 		this.seasonInputPanel = seasonInputPanel;
-		seasonInputPanel.setLocation(15, 28);
+		seasonInputPanel.setLocation(15, 0);
 		this.add(seasonInputPanel);
 		
 		//TODO 表格外观待考究
@@ -60,6 +60,10 @@ public class TeamMatchPanel extends Panel{
 		this.add(scrollPane);
 		repaint();
 		//TODO 也不知道如何单击一场比赛然后跳过去。（比赛应该是有id的吧）
+	}
+	
+	public void addSeasonChooser() {
+		add(seasonInputPanel);
 	}
 
 }

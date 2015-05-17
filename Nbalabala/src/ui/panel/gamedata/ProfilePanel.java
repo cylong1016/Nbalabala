@@ -162,9 +162,9 @@ public class ProfilePanel extends Panel {
 		teamlb2 = new MyLabel(rightX_Team2,rightY_1,width,height,teamStr2);
 		teamlb1.setFont(labelFont);
 		teamlb2.setFont(labelFont);
-		score = new MyLabel(rightX,rightY_2,width,height,Constants.scoreKing);
-		rebound = new MyLabel(rightX,rightY_2+inter,width,height,Constants.reboundKing);
-		assist = new MyLabel(rightX,rightY_2+2*inter,width,height,Constants.assistKing);
+		score = new MyLabel(rightX,rightY_2,width,height,Constants.scoreKingText);
+		rebound = new MyLabel(rightX,rightY_2+inter,width,height,Constants.reboundKingText);
+		assist = new MyLabel(rightX,rightY_2+2*inter,width,height,Constants.assistKingText);
 		season = new MyLabel(0,-5,2*width,height,matchPro.getSeason());
 		season.setLeft();
 		season.setFont(new Font("微软雅黑",0,10));
@@ -219,7 +219,7 @@ public class ProfilePanel extends Panel {
 	}
 
 	public void addButton() {
-		tech = new MyLabel(830, 138, 80, 20, Constants.tech);
+		tech = new MyLabel(830, 138, 80, 20, Constants.techText);
 		tech.setForeground(Color.white);
 		this.add(tech);
 		tech.addMouseListener(new MouseAdapter(){
@@ -252,7 +252,7 @@ public class ProfilePanel extends Panel {
 
 		lb_1[lth] = new MyLabel(totalScoreX, scoreY, scoreWidth, scoreHeight, scoreAll[0]);
 		lb_2[lth] = new MyLabel(totalScoreX, scoreY_2, scoreWidth, scoreHeight, scoreAll[1]);
-		lb_3[lth] = new MyLabel(totalScoreX, scoreY_mid, scoreWidth, scoreHeight, Constants.totalScore);
+		lb_3[lth] = new MyLabel(totalScoreX, scoreY_mid, scoreWidth, scoreHeight, Constants.totalScoreText);
 		Font all = new Font("微软雅黑", 1, 20);
 		lb_1[lth].setFont(all);
 		lb_2[lth].setFont(all);

@@ -10,7 +10,7 @@ import ui.panel.allplayers.AllPlayersPanel;
 import ui.panel.allplayers.PlayerInfoPanel;
 import ui.panel.allteams.AllTeamsPanel;
 import ui.panel.allteams.TeamGamePanel;
-import ui.panel.allteams.TeamPlayerPanel;
+import ui.panel.allteams.TeamLineupPanel;
 import ui.panel.allteams.TeamSeasonPanel;
 import ui.panel.gamedata.GameDataPanel;
 import ui.panel.gamedata.GamePanel;
@@ -22,7 +22,6 @@ import ui.panel.main.MainPanel;
 import ui.panel.playerData.PlayerDataPanel;
 import ui.panel.teamdata.TeamDataPanel;
 import vo.MatchDetailVO;
-import vo.MatchProfileVO;
 
 /**
  * 界面跳转控制
@@ -48,7 +47,7 @@ public class MainController {
 	/** 球队赛季数据 */
 	private static TeamSeasonPanel teamSeasonpanel;
 	/** 球队阵容数据 */
-	private static TeamPlayerPanel teamplayerpanel;
+	private static TeamLineupPanel teamplayerpanel;
 	/** 球队比赛数据 */
 	private static TeamGamePanel teamGamePanel;
 	/** 某场比赛数据 */
@@ -92,7 +91,7 @@ public class MainController {
 	 * @version 2015年3月18日 上午11:11:38
 	 */
 	public static void toTeamPanel() {
-		teamDataPanel = new TeamDataPanel(UIConfig.IMG_PATH + "teamData/teamDataBG.png");
+		teamDataPanel = new TeamDataPanel("images2.0/teamsData/TeamsDataBG.png");
 		frame.setPanel(teamDataPanel);
 	}
 
@@ -102,7 +101,7 @@ public class MainController {
 	 * @version 2015年3月18日 上午11:11:46
 	 */
 	public static void toPlayerPanel() {
-		playerDataPanel = new PlayerDataPanel(UIConfig.IMG_PATH + "playerData/playerDataBG.png");
+		playerDataPanel = new PlayerDataPanel("images2.0/playersData/PlayersDataBG.png");
 		frame.setPanel(playerDataPanel);
 	}
 
@@ -148,7 +147,7 @@ public class MainController {
 	}
 	
 	public static void toTeamPlayerPanel(String abbr) {
-		teamplayerpanel = new TeamPlayerPanel((BottomPanel)(Frame.currentPanel),"images/teams/teamSeasonBG.png", abbr);
+		teamplayerpanel = new TeamLineupPanel((BottomPanel)(Frame.currentPanel),"images/teams/teamSeasonBG.png", abbr);
 		frame.setPanel(teamplayerpanel);
 	}
 	

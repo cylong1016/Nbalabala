@@ -45,14 +45,36 @@ public class MyComboBox extends JComboBox{
 	            }
 	            
 	            protected JButton createArrowButton() {            
-	            	JButton button = new BasicArrowButton(0);   
-	            	button.setOpaque(true);
-	            	button.setBorder(BorderFactory.createEmptyBorder());
+	            	JButton button = new BasicArrowButton(5);   
+	            	button.setOpaque(false);
+//	            	button.setBorder(UIConfig.BUTTON_COLOR);
 	            	button.setFocusable(false);
 	            	button.setBackground(UIConfig.BUTTON_COLOR);
-	            	return button;        }   
-	             
+	            	return button;        
+	            	}   
 	        });
 		this.repaint();
+	}
+	
+	public void setDarkColor(){
+		this.setBackground(UIConfig.DARK_BUTTON_COLOR);
+		this.setUI(new BasicComboBoxUI() {
+            public void installUI(JComponent comboBox) {
+                super.installUI(comboBox);
+                listBox.setOpaque(false);
+                
+                listBox.setSelectionBackground(Color.white);
+                listBox.setSelectionForeground(UIConfig.DARK_BUTTON_COLOR);
+            }
+            
+            protected JButton createArrowButton() {            
+            	JButton button = new BasicArrowButton(5);   
+            	button.setOpaque(false);
+//            	button.setBorder(UIConfig.BUTTON_COLOR);
+            	button.setFocusable(false);
+            	button.setBackground(UIConfig.DARK_BUTTON_COLOR);
+            	return button;        
+            	}   
+        });
 	}
 }

@@ -34,6 +34,10 @@ public class BottomPanel extends Panel {
 	/** 画笔透明度 */
 	protected float hyaline = 1.0f;
 	
+	public BottomPanel() {
+		
+	}
+	
 	public BottomPanel(String url) {
 		bgImage = new ImageIcon(url).getImage();
 		this.setBackground(Color.black);

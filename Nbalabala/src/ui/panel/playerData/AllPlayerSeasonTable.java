@@ -21,6 +21,13 @@ import enums.TotalOrAvg;
 
 /**
  * 球员数据界面的表格分成基本、进攻、防守、高阶四类。
+ * 这个表格的用法示例：如果一开始默认是按名字排序的场均总数据，那么：Panel上获得按名字排序的ArrayList，Category为Basic，
+ * 	AvgOrTotal为Total，service就是Panel上的同一个panel，构造本表格，add上去就完了。表头排序之类的不需要Panel关心。
+ * 在此之后，如果用户点击了场均，则调用setAvgOrTotal(avg)。
+ * 如果用户点击了高阶数据，则调用setCategory(Advanced)
+ * 如果用户进行了某种筛选，则Remove掉本表格，通过Panel上的那个service根据用户选择的筛选条件获取一个新的ArrayList，
+ * 用当前的AvgOrTotal和Category new出一个新的本表格，add上去。
+ * 
  * @author Issac Ding
  * @version 2015年4月24日  下午7:01:50
  */
@@ -37,7 +44,7 @@ public class AllPlayerSeasonTable extends BottomTable{
 	
 	private PlayerSeasonBLService service;
 	
-	/**service就是panel上用来筛选的那个service 
+	/**service就是panel上用来筛选的那个同一个service 
 	 * 当用户进行一次筛选后，筛选出来的vo列表，界面当前的数据类别、总数/场均分别作为参数用来构造本表格
 	 * 	用户不论怎么排序，都是本表格自己解决的事情，直到用户改变筛选条件再次筛选，remove本表格，new出下一表格 */
 	public AllPlayerSeasonTable(PlayerSeasonBLService service, ArrayList<PlayerSeasonVO> vos, 

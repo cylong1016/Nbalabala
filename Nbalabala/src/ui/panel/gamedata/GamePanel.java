@@ -58,6 +58,8 @@ public class GamePanel extends BottomPanel {
 	private MyLabel scorelb_1,scorelb_2,ranklb_1,ranklb_2,recordlb_1,recordlb_2,
 	name_1,name_2,area1,area2;
 	private TabButton teambt1,teambt2,contrastbt;
+	private ConPanel conPanel;
+	private Boolean isScroll = true;
 
 	public GamePanel(String url, MatchDetailVO matchDetail,Panel gameData) {
 		super(url);
@@ -65,6 +67,7 @@ public class GamePanel extends BottomPanel {
 		this.matchDetail = matchDetail;
 		matchPro = matchDetail.getProfile();
 		matchQuery = new MatchQuery();
+		conPanel = new ConPanel(Images.GAME_CON,matchDetail);
 		getScore();
 		getTeam();
 		addButton();
@@ -112,7 +115,7 @@ public class GamePanel extends BottomPanel {
 		setRed(scorelb_1,scorelb_2);
 		scorelb_1.setFont(new Font("微软雅黑",0,28));
 		scorelb_2.setFont(new Font("微软雅黑",0,28));
-		recordlb_1 = new MyLabel(116,record_y,100,50,(Constants.record+" "+win+" - "+lose));
+		recordlb_1 = new MyLabel(116,record_y,100,50,(Constants.recordText+" "+win+" - "+lose));
 		recordlb_1.setForeground(Color.gray);
 		name_1 = new MyLabel(25,10,180,50,place1+" "+teamStr1);
 		name_1.setRight();
@@ -123,7 +126,7 @@ public class GamePanel extends BottomPanel {
 		winLose = matchQuery.getTeamWinsLosesByAbbr(teamShort2);
 		win = winLose[0];
 		lose = winLose[1];
-		recordlb_2 = new MyLabel(area_x,record_y,100,50,(Constants.record+" "+win+" - "+lose));//战绩
+		recordlb_2 = new MyLabel(area_x,record_y,100,50,(Constants.recordText+" "+win+" - "+lose));//战绩
 		recordlb_2.setLeft();
 		recordlb_2.setForeground(Color.gray);
 		int rank1 = matchQuery.getTeamRamkByAbbr(teamShort1);
@@ -184,7 +187,7 @@ public class GamePanel extends BottomPanel {
 	public void addButton() {
 		teambt1 = new TabButton(teamStr1,Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
 		teambt2 = new TabButton(teamStr2,Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
-		contrastbt = new TabButton(Constants.contrast,Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
+		contrastbt = new TabButton(Constants.contrastText,Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
 		teambt1.setLocation(btx, bty);
 		teambt2.setLocation(btx + 2 * inter, bty);
 		contrastbt.setLocation(btx + inter, bty);
@@ -197,9 +200,15 @@ public class GamePanel extends BottomPanel {
 				teambt1.setOn();
 				teambt2.setOff();
 				contrastbt.setOff();
-				GamePanel.this.remove(scroll);
+				if(isScroll) {
+					GamePanel.this.remove(scroll);
+				}else{
+					GamePanel.this.remove(conPanel);
+				}
+				isScroll = true;
 				ArrayList<MatchPlayerVO> homePlayers = matchDetail.getHomePlayers();
 				setTable(homePlayers);
+				GamePanel.this.repaint();
 			}
 		});
 		teambt2.addMouseListener(new MouseAdapter() {
@@ -207,9 +216,15 @@ public class GamePanel extends BottomPanel {
 				teambt1.setOff();
 				teambt2.setOn();
 				contrastbt.setOff();
-				GamePanel.this.remove(scroll);
+				if(isScroll) {
+					GamePanel.this.remove(scroll);
+				}else{
+					GamePanel.this.remove(conPanel);
+				}
+				isScroll = true;
 				ArrayList<MatchPlayerVO> roadPlayers = matchDetail.getRoadPlayers();
 				setTable(roadPlayers);
+				GamePanel.this.repaint();
 			}
 		});
 		contrastbt.addMouseListener(new MouseAdapter() {
@@ -217,7 +232,13 @@ public class GamePanel extends BottomPanel {
 				teambt1.setOff();
 				teambt2.setOff();
 				contrastbt.setOn();
-				GamePanel.this.remove(scroll);
+				if(isScroll) {
+					GamePanel.this.remove(scroll);
+				}else{
+					GamePanel.this.remove(conPanel);
+				}
+				isScroll = false;
+				GamePanel.this.add(conPanel);
 				GamePanel.this.repaint();
 			}
 		});

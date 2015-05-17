@@ -43,6 +43,7 @@ public class MatchDetailVO {
 	private int roadHighestReboundValue;
 	
 	private int roadHighestAssistValue;
+
 	
 	/** 标记本场比赛数据是否有效，指的是有无所有球员上场时间加起来是否明显大于总时间，以及所有球员得分相加是否等于总分 */
 	private boolean isValid;
@@ -162,5 +163,69 @@ public class MatchDetailVO {
 	
 	public Image getRoadLogo() {
 		return roadLogo;
+	}
+	
+	/** 获得主场队的命中率、三分命中、罚球命中、篮板、助攻 */
+	public double[] getHomeFiveArgs() {
+		int fieldAttempt = 0;
+		int fieldGoal = 0;
+		int threeAttempt = 0;
+		int threeGoal = 0;
+		int freethrowAttempt = 0;
+		int freethrowGoal = 0;
+		int assist = 0;
+		int rebound = 0;
+		for (MatchPlayerVO vo : homePlayers) {
+			fieldAttempt += vo.getFieldAttempt();
+			fieldGoal += vo.getFieldGoal();
+			threeAttempt += vo.getThreePointAttempt();
+			threeGoal += vo.getThreePointGoal();
+			freethrowAttempt += vo.getFreethrowAttempt();
+			freethrowGoal += vo.getFreethrowGoal();
+			assist += vo.getAssist();
+			rebound += vo.getTotalRebound();
+		}
+		double [] result = new double[5];
+		if (fieldAttempt != 0) result[0] = fieldGoal / (double)fieldAttempt * 100;
+		else result[0] = 0;
+		if (threeAttempt != 0) result[1] = threeGoal / (double)threeAttempt * 100;
+		else result[1] = 0;
+		if (freethrowAttempt != 0) result[2] = freethrowGoal / (double)freethrowAttempt * 100;
+		else result[2] = 0;
+		result[3] = rebound;
+		result[4] = assist;
+		return result;
+	}
+	
+	/** 获得客场队的命中率、三分命中、罚球命中、篮板、助攻 */
+	public double[] getRoadFiveArgs() {
+		int fieldAttempt = 0;
+		int fieldGoal = 0;
+		int threeAttempt = 0;
+		int threeGoal = 0;
+		int freethrowAttempt = 0;
+		int freethrowGoal = 0;
+		int assist = 0;
+		int rebound = 0;
+		for (MatchPlayerVO vo : roadPlayers) {
+			fieldAttempt += vo.getFieldAttempt();
+			fieldGoal += vo.getFieldGoal();
+			threeAttempt += vo.getThreePointAttempt();
+			threeGoal += vo.getThreePointGoal();
+			freethrowAttempt += vo.getFreethrowAttempt();
+			freethrowGoal += vo.getFreethrowGoal();
+			assist += vo.getAssist();
+			rebound += vo.getTotalRebound();
+		}
+		double [] result = new double[5];
+		if (fieldAttempt != 0) result[0] = fieldGoal / (double)fieldAttempt * 100;
+		else result[0] = 0;
+		if (threeAttempt != 0) result[1] = threeGoal / (double)threeAttempt * 100;
+		else result[1] = 0;
+		if (freethrowAttempt != 0) result[2] = freethrowGoal / (double)freethrowAttempt * 100;
+		else result[2] = 0;
+		result[3] = rebound;
+		result[4] = assist;
+		return result;
 	}
 }

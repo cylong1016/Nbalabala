@@ -67,11 +67,21 @@ public class Constants {
 	
 	/** 球队界面中的赛程的表头 */
 	public static String []teamMatchHeaders = {"日期", "对手", "胜负", "比分"};
-	
+	/** 球队信息页面中的赛季数据的表头 */
+	public static String [] oneTeamDataHeaders = {
+		"赛季","场数","胜场","胜率","投篮%","三分%","罚球%","进攻","防守","篮板","助攻","抢断","盖帽","失误","犯规","得分"
+	};
 	
 	
 	/** 球员个人信息页面中的赛季数据的空表 */
 	public static Object [][] onePlayerDataTableEmptyContent = 
+		{{"赛季平均","","","","","","","","","","","","","","",""},
+		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{"赛季总计","","","","","","","","","","","","","","",""},
+		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
+	
+	/** 球队信息页面中的赛季数据的空表 */
+	public static Object [][] oneTeamDataTableEmptyContent = 
 		{{"赛季平均","","","","","","","","","","","","","","",""},
 		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 		{"赛季总计","","","","","","","","","","","","","","",""},
@@ -101,6 +111,12 @@ public class Constants {
 	public static final String[] TEAM_PLACES = { "波士顿", "布鲁克林", "纽约", "费城", "多伦多", "芝加哥", "克利夫兰", "底特律", "印第安纳", "密尔沃基", "亚特兰大", "夏洛特",
 			"迈阿密", "奥兰多", "华盛顿", "金洲", "洛杉矶", "洛杉矶", "菲尼克斯", "萨克拉门托", "丹佛", "明尼苏达", "俄克拉荷马", "波特兰", "犹他", "达拉斯",
 			"休斯敦", "孟菲斯", "新奥尔良", "圣安东尼奥" };
+	
+	public static final String[] GAME_SORT = {"%","三分%","罚球%","篮板","助攻"};
+	
+	public static final String[] PLAYER_DATA_SORT = {"基本数据","进攻数据","防守数据","高阶数据"};
+	
+	public static final String[] TEAM_DATA_SORT = {"基本数据","进攻数据","防守数据"};
 	
 	public static String translateDivision(ScreenDivision division) {
 		return translater.translateTeamDivision(division);
@@ -146,9 +162,9 @@ public class Constants {
 	
 	public static String getAreaByEnglish(ScreenDivision AREA){
 		if(AREA.equals(ScreenDivision.WEST)){
-			return Constants.west;
+			return Constants.westText;
 		}else{
-			return Constants.east;
+			return Constants.eastText;
 		}
 	}
 	
@@ -396,18 +412,20 @@ public class Constants {
 	public static String reboundAvgText = "场均篮板";
 	public static String assistAvgText = "场均助攻";
 	
-	public static String totalScore = "总分";
-	public static String tech = "技术统计";
+	public static String totalScoreText = "总分";
+	public static String techText = "技术统计";
 	
-	public static String scoreKing = "得分王";
-	public static String reboundKing = "篮板王";
-	public static String assistKing = "助攻王";
-	public static String record = "战绩";
+	public static String scoreKingText = "得分王";
+	public static String reboundKingText = "篮板王";
+	public static String assistKingText = "助攻王";
+	public static String recordText = "战绩";
 	
-	public static String east = "东部联盟";
-	public static String west = "西部联盟";
+	public static String eastText = "东部联盟";
+	public static String westText = "西部联盟";
 	
-	public static String contrast = "对比";
+	public static String contrastText = "对比";
+	
+	public static String teamAvgText = "球队平均";
 	
 	public static String translateHeight(String height){
 		return translater.translateHeight(height);

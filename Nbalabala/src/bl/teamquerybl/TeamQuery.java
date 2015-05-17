@@ -133,7 +133,7 @@ public class TeamQuery implements TeamQueryBLService{
 	 */
 	@Override
 	public int[] getRanks(String abbr) {
-		ArrayList<TeamSeasonVO> vos = new SeasonData().getAllTeamRecentSeasonData();
+		ArrayList<TeamSeasonVO> vos = new SeasonData().getTeamRecentSeasonDataInSameLeague(abbr);
 		int [] result = new int[4];
 		if (vos.size() == 0) {
 			result[0]=0;

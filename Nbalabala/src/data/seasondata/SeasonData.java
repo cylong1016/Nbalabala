@@ -412,4 +412,17 @@ public class SeasonData implements SeasonDataService {
 		return getPlayerNamesByTeamAbbr(abbr, getRecentSeason());
 	}
 	
+	public ArrayList<TeamSeasonVO> getTeamRecentSeasonDataInSameLeague(String abbr) {
+		ArrayList<TeamSeasonVO> result = new ArrayList<TeamSeasonVO>();
+		ScreenDivision league = Constants.getAreaByAbbr(abbr);
+		Iterator<TeamSeasonVO> itr = allTeamRecords.get(getRecentSeason()).values().iterator();
+		while(itr.hasNext()) {
+			TeamSeasonVO vo = itr.next();
+			if (Constants.getAreaByAbbr(vo.teamName) == league) {
+				result.add(vo);
+			}
+		}
+		return result;
+	}
+	
 }

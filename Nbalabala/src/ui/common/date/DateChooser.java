@@ -145,7 +145,7 @@ public class DateChooser extends JPanel {
 		showDate.setFont(DATE_CHOOSER_FONT);
 		showDate.setOpaque(true);
 		showDate.setForeground(Color.white);
-		showDate.setBackground(UIConfig.BUTTON_COLOR);
+		showDate.setBackground(UIConfig.DARK_BUTTON_COLOR);
 		showDate.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
 		showDate.setRequestFocusEnabled(true);
 		showDate.addMouseListener(new MouseAdapter() {
@@ -284,7 +284,7 @@ public class DateChooser extends JPanel {
 
 				public void mousePressed(MouseEvent me) {
 					select.add(Calendar.MONTH, -1);
-					left.setForeground(UIConfig.BUTTON_COLOR);
+					left.setForeground(UIConfig.DARK_BUTTON_COLOR);
 					refresh();
 				}
 
@@ -305,7 +305,7 @@ public class DateChooser extends JPanel {
 
 				public void mousePressed(MouseEvent me) {
 					select.add(Calendar.MONTH, 1);
-					right.setForeground(UIConfig.BUTTON_COLOR);
+					right.setForeground(UIConfig.DARK_BUTTON_COLOR);
 					refresh();
 				}
 
@@ -386,7 +386,7 @@ public class DateChooser extends JPanel {
 				this.setForeground(Color.LIGHT_GRAY);
 			}
 			if (day == select.get(Calendar.DAY_OF_MONTH)) {
-				this.setBackground(UIConfig.BUTTON_COLOR);
+				this.setBackground(UIConfig.DARK_BUTTON_COLOR);
 			} else {
 				this.setBackground(Color.WHITE);
 			}
