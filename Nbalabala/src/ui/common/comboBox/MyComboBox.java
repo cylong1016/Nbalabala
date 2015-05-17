@@ -45,13 +45,13 @@ public class MyComboBox extends JComboBox{
 	            }
 	            
 	            protected JButton createArrowButton() {            
-	            	JButton button = new BasicArrowButton(0);   
-	            	button.setOpaque(true);
-	            	button.setBorder(BorderFactory.createEmptyBorder());
+	            	JButton button = new BasicArrowButton(5);   
+	            	button.setOpaque(false);
+//	            	button.setBorder(UIConfig.BUTTON_COLOR);
 	            	button.setFocusable(false);
 	            	button.setBackground(UIConfig.BUTTON_COLOR);
-	            	return button;        }   
-	             
+	            	return button;        
+	            	}   
 	        });
 		this.repaint();
 	}

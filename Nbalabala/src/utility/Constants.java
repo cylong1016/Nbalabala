@@ -104,6 +104,10 @@ public class Constants {
 	
 	public static final String[] GAME_SORT = {"%","三分%","罚球%","篮板","助攻"};
 	
+	public static final String[] PLAYER_DATA_SORT = {"基本数据","进攻数据","防守数据","高阶数据"};
+	
+	public static final String[] TEAM_DATA_SORT = {"基本数据","进攻数据","防守数据"};
+	
 	public static String translateDivision(ScreenDivision division) {
 		return translater.translateTeamDivision(division);
 	}

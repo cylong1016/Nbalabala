@@ -36,7 +36,7 @@ public class SeasonInputPanel extends JPanel {
 		this.bottomPanel = panel;
 		setLook();
 
-		rightUpButton.addActionListener(new ActionListener() {
+		rightDownButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				leftYearLabel.setText(yearIncrease(leftYearLabel.getText()));
@@ -44,7 +44,7 @@ public class SeasonInputPanel extends JPanel {
 				bottomPanel.refresh();
 			}
 		});
-		rightDownButton.addActionListener(new ActionListener() {
+		rightUpButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				leftYearLabel.setText(yearDecrease(leftYearLabel.getText()));
