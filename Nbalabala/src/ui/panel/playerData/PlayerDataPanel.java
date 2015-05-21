@@ -5,30 +5,24 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
-
 import ui.Images;
 import ui.UIConfig;
 import ui.common.SeasonInputPanel;
-import ui.common.UserMouseAdapter;
 import ui.common.button.TabButton;
 import ui.common.button.TextButton;
 import ui.common.comboBox.MyComboBox;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
-import ui.controller.MainController;
 import utility.Constants;
 import vo.PlayerSeasonVO;
 import bl.playerseasonbl.PlayerSeasonAnalysis;
 import blservice.PlayerSeasonBLService;
-import enums.PlayerAllSortBasis;
-import enums.PlayerAvgSortBasis;
+import enums.AllPlayerSeasonTableCategory;
 import enums.Position;
 import enums.ScreenBasis;
 import enums.ScreenDivision;
-import enums.SortOrder;
+import enums.TotalOrAvg;
 
 /**
  * 球员数据界面
@@ -85,8 +79,6 @@ public class PlayerDataPanel extends BottomPanel {
 	private static final ScreenDivision[] DIVISION_ARRAY = ScreenDivision.values();
 	private static final ScreenBasis[] BASIS_ARRAY = ScreenBasis.values();
 
-	/** 球员数据表格 */
-	private BottomTable playerDataTable;
 	/** 放表格的滚动条 */
 	private BottomScrollPane scroll;
 	/** 代表所有button集合 */
@@ -100,9 +92,14 @@ public class PlayerDataPanel extends BottomPanel {
 	/** 通过接口调用方法 */
 	private PlayerSeasonBLService playerSeason = new PlayerSeasonAnalysis();
 	
+	private AllPlayerSeasonTableCategory current;
 	/** 赛季选择器 */
 	private SeasonInputPanel seasonInput;
-
+	
+	private AllPlayerSeasonTable table;
+	private PlayerSeasonBLService playerblService;
+	private TotalOrAvg totalOrAvg;
+	
 	public PlayerDataPanel(String url) {
 		super(url);
 		setButton();
@@ -112,13 +109,16 @@ public class PlayerDataPanel extends BottomPanel {
 		addCombobox();
 		addTab();
 		addListener();
-		addFindButton();
+		current = AllPlayerSeasonTableCategory.BASIC;
+		totalOrAvg = TotalOrAvg.TOTAL;
 		seasonInput = new SeasonInputPanel(this);
 		seasonInput.setBounds(54, TOTAL_Y,115,ROW_HEIGHT);
 		this.add(seasonInput); 
+		playerblService = new PlayerSeasonAnalysis();
 		// 初始化界面的表格
 		ArrayList<PlayerSeasonVO> iniArray = playerSeason.getAllPlayersSortedByName();
-		createTable(iniArray);
+		table = new AllPlayerSeasonTable(playerblService,iniArray,AllPlayerSeasonTableCategory.BASIC,TotalOrAvg.TOTAL);
+		addScrollPane(table);
 	}
 	
 	private void addTab() {
@@ -127,37 +127,50 @@ public class PlayerDataPanel extends BottomPanel {
 			tab[i] = new TabButton(Constants.PLAYER_DATA_SORT[i],Images.TEAM_FIRST_LEVEL_TAB_MOVE_ON, Images.TEAM_FIRST_LEVEL_TAB_CHOSEN);
 			tab[i].setLocation(24 + i * 237, 198);
 			this.add(tab[i]);
+			tab[0].setOn();
 		}
 		tab[0].addMouseListener(new MouseAdapter(){
 			 public void mousePressed(MouseEvent e) {
+				 current = AllPlayerSeasonTableCategory.BASIC;
 				 tab[0].setOn();
 				 tab[1].setOff();
 				 tab[2].setOff();
 				 tab[3].setOff();
+				 table.changeCategory(AllPlayerSeasonTableCategory.BASIC);
+				 scroll.setHead();
 			 }
 		});
 		tab[1].addMouseListener(new MouseAdapter(){
 			 public void mousePressed(MouseEvent e) {
+				 current = AllPlayerSeasonTableCategory.OFFENSIVE;
 				 tab[1].setOn();
 				 tab[0].setOff();
 				 tab[2].setOff();
 				 tab[3].setOff();
+				 table.changeCategory(AllPlayerSeasonTableCategory.OFFENSIVE);
+				 scroll.setHead();
 			 }
 		});
 		tab[2].addMouseListener(new MouseAdapter(){
 			 public void mousePressed(MouseEvent e) {
+				 current = AllPlayerSeasonTableCategory.DEFENSIVE;
 				 tab[2].setOn();
 				 tab[1].setOff();
 				 tab[0].setOff();
 				 tab[3].setOff();
+				 table.changeCategory(AllPlayerSeasonTableCategory.DEFENSIVE);
+				 scroll.setHead();
 			 }
 		});
 		tab[3].addMouseListener(new MouseAdapter(){
 			 public void mousePressed(MouseEvent e) {
+				 current = AllPlayerSeasonTableCategory.ADVANCED;
 				 tab[3].setOn();
 				 tab[1].setOff();
 				 tab[2].setOff();
 				 tab[0].setOff();
+				 table.changeCategory(AllPlayerSeasonTableCategory.ADVANCED);
+				 scroll.setHead();
 			 }
 		});
 	}
@@ -172,25 +185,8 @@ public class PlayerDataPanel extends BottomPanel {
 		ArrayList<PlayerSeasonVO> iniArray = playerSeason.getScreenedPlayers
 				(PlayerPositionSelectButton.current.position, PlayerDivisionSelectButton.current.division, 
 						PlayerScreenSelectButton.current.basis, seasonInput.getSeason());
-		createTable(iniArray);
-	}
-
-	public void addFindButton() {
-//		findButton = new ImgButton("images/playerData/search.png", 856, 130, "images/playerData/searchOn.png",
-//				"images/playerData/searchClick.png");
-//		this.add(findButton);
-//		findButton.addMouseListener(new MouseAdapter() {
-//
-//			public void mousePressed(MouseEvent e) {
-//				ArrayList<PlayerSeasonVO> playerRecords = playerSeason.getScreenedPlayers(
-//						PlayerPositionSelectButton.current.position, PlayerDivisionSelectButton.current.division, PlayerScreenSelectButton.current.basis, seasonInput.getSeason());
-//				if (PlayerTotalAvgButton.current == totalAvgButtons[0]) {
-//					createTable(playerRecords); // 添加球员总数居
-//				} else if (PlayerTotalAvgButton.current == totalAvgButtons[1]) {
-//					createTable(playerRecords); // 添加球员场均数居
-//				}
-//			}
-//		});
+		table = new AllPlayerSeasonTable(playerblService,iniArray,current,totalOrAvg);
+		addScrollPane(table);
 	}
 
 	/**
@@ -318,6 +314,10 @@ public class PlayerDataPanel extends BottomPanel {
 			}
 			PlayerPositionSelectButton.current.back();
 			PlayerPositionSelectButton.current = (PlayerPositionSelectButton) e.getSource();
+			ArrayList<PlayerSeasonVO> playerRecords = playerSeason.getScreenedPlayers(
+					PlayerPositionSelectButton.current.position, PlayerDivisionSelectButton.current.division, PlayerScreenSelectButton.current.basis, seasonInput.getSeason());
+			table = new AllPlayerSeasonTable(playerblService,playerRecords,current,totalOrAvg);
+			addScrollPane(table);
 		}
 	}
 
@@ -329,6 +329,10 @@ public class PlayerDataPanel extends BottomPanel {
 			}
 			PlayerDivisionSelectButton.current.back();
 			PlayerDivisionSelectButton.current = (PlayerDivisionSelectButton) e.getSource();
+			ArrayList<PlayerSeasonVO> playerRecords = playerSeason.getScreenedPlayers(
+					PlayerPositionSelectButton.current.position, PlayerDivisionSelectButton.current.division, PlayerScreenSelectButton.current.basis, seasonInput.getSeason());
+			table = new AllPlayerSeasonTable(playerblService,playerRecords,current,totalOrAvg);
+			addScrollPane(table);
 		}
 	}
 
@@ -340,6 +344,10 @@ public class PlayerDataPanel extends BottomPanel {
 			}
 			PlayerScreenSelectButton.current.back();
 			PlayerScreenSelectButton.current = (PlayerScreenSelectButton) e.getSource();
+			ArrayList<PlayerSeasonVO> playerRecords = playerSeason.getScreenedPlayers(
+					PlayerPositionSelectButton.current.position, PlayerDivisionSelectButton.current.division, PlayerScreenSelectButton.current.basis, seasonInput.getSeason());
+			table = new AllPlayerSeasonTable(playerblService,playerRecords,current,totalOrAvg);
+			addScrollPane(table);
 		}
 	}
 
@@ -351,208 +359,14 @@ public class PlayerDataPanel extends BottomPanel {
 			}
 			PlayerTotalAvgButton.current.back();
 			PlayerTotalAvgButton.current = (PlayerTotalAvgButton) e.getSource();
-			ArrayList<PlayerSeasonVO> playerRecords = playerSeason.getScreenedPlayers(PlayerPositionSelectButton.current.position,
-					PlayerDivisionSelectButton.current.division, PlayerScreenSelectButton.current.basis, seasonInput.getSeason());
 			if (PlayerTotalAvgButton.current == totalAvgButtons[0]) {
-				updateTotalPlayerDataTable(playerRecords); // 添加球员总数居
+				totalOrAvg = TotalOrAvg.TOTAL;
+				table.changeTotalOrAvg(totalOrAvg);
 			} else if (PlayerTotalAvgButton.current == totalAvgButtons[1]) {
-				updateAvgPlayerDataTable(playerRecords); // 添加球员场均数居
+				totalOrAvg = TotalOrAvg.AVG;
+				table.changeTotalOrAvg(totalOrAvg);
 			}
 		}
-	}
-
-	/**
-	 * 添加全部球员赛季总数据
-	 * 
-	 * @param playerArr
-	 *            逻辑层返回的球员数据
-	 * @author cylong
-	 * @version 2015年3月24日 下午11:43:17
-	 */
-	private void updateTotalPlayerDataTable(ArrayList<PlayerSeasonVO> playerArr) {
-		for (int i = 0; i < playerArr.size(); i++) {
-			PlayerSeasonVO playerSeason = playerArr.get(i);
-			playerDataTable.setValueAt(Integer.toString(i + 1), i, 0);
-			playerDataTable.setValueAt(playerSeason.getName(), i, 1);
-			playerDataTable.setValueAt(Constants.translateTeamAbbr(playerSeason.getTeam()), i, 2);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getMatchCount()), i, 3);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getFirstCount()), i, 4);
-			playerDataTable.setValueAt(playerSeason.getTime(), i, 5);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getFieldGoal()), i, 6);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getFieldAttempt()), i, 7);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getFieldPercent()), i, 8);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getThreePointGoal()), i, 9);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getThreePointAttempt()), i, 10);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getThreePointPercent()), i, 11);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getFreeThrowGoal()), i, 12);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getFreeThrowAttempt()), i, 13);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getFreeThrowPercent()), i, 14);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getOffensiveRebound()), i, 15);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getDefensiveRebound()), i, 16);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getTotalRebound()), i, 17);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getAssist()), i, 18);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getAssistPercent()), i, 19);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getBlock()), i, 20);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getBlockPercent()), i, 21);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getFoul()), i, 22);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getFoulPercent()), i, 23);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getScore()), i, 24);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getDoubleDouble()), i, 25);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getScoreReboundAssist()), i, 26);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getEfficiency()), i, 27);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getGmSc()), i, 28);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getRealFieldPercent()), i, 29);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getFieldEff()), i, 30);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getOffensiveReboundPercent()), i, 31);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getDefensiveReboundPercent()), i, 32);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getTotalReboundPercent()), i, 33);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getSteal()), i, 34);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getStealPercent()), i, 35);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getTurnover()), i, 36);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getTurnOverPercent()), i, 37);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getUsePercent()), i, 38);
-		}
-		
-	}
-
-	public void addListener(final BottomTable table,final ArrayList<PlayerSeasonVO> playerArr) {
-		try {
-			table.addMouseListener(new UserMouseAdapter() {
-
-				public void mouseClicked(MouseEvent e) {
-					if (e.getClickCount() < 2)
-						return;
-					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
-					if (rowI > -1) {
-						MainController.toPlayerInfoPanel(playerArr.get(rowI).getName(), PlayerDataPanel.this);
-					}
-
-				}
-			});
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 添加全部球员赛季平均数据
-	 * 
-	 * @param playerArr
-	 *            逻辑层返回的球员数据
-	 * @author cylong
-	 * @version 2015年3月25日 上午2:02:02
-	 */
-	private void updateAvgPlayerDataTable(ArrayList<PlayerSeasonVO> playerArr) {
-		for (int i = 0; i < playerArr.size(); i++) {
-			PlayerSeasonVO playerSeason = playerArr.get(i);
-			playerDataTable.setValueAt(Integer.toString(i + 1), i, 0);
-			playerDataTable.setValueAt(playerSeason.getName(), i, 1);
-			playerDataTable.setValueAt(Constants.translateTeamAbbr(playerSeason.getTeam()), i, 2);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getMatchCount()), i, 3);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getFirstCountAvg()), i, 4);
-			playerDataTable.setValueAt(playerSeason.getTimeAvg(), i, 5);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getFieldGoalAvg()), i, 6);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getFieldAttemptAvg()), i, 7);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getFieldPercent()), i, 8);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getThreePointGoalAvg()), i, 9);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getThreePointAttemptAvg()), i, 10);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getThreePointPercent()), i, 11);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getFreethrowGoalAvg()), i, 12);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getFreethrowAttemptAvg()), i, 13);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getFreeThrowPercent()), i, 14);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getOffensiveReboundAvg()), i, 15);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getDefensiveReboundAvg()), i, 16);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getTotalReboundAvg()), i, 17);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getAssistAvg()), i, 18);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getAssistPercent()), i, 19);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getBlockAvg()), i, 20);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getBlockPercent()), i, 21);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getFoulAvg()), i, 22);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getFoulPercent()), i, 23);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getScoreAvg()), i, 24);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getDoubleDoubleAvg()), i, 25);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getScoreReboundAssistAvg()), i, 26);
-			playerDataTable.setValueAt(Integer.toString(playerSeason.getEfficiency()), i, 27);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getGmSc()), i, 28);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getRealFieldPercent()), i, 29);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getFieldEff()), i, 30);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getOffensiveReboundPercent()), i, 31);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getDefensiveReboundPercent()), i, 32);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getTotalReboundPercent()), i, 33);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getStealAvg()), i, 34);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getStealPercent()), i, 35);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getTurnoverAvg()), i, 36);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getTurnOverPercent()), i, 37);
-			playerDataTable.setValueAt(UIConfig.FORMAT.format(playerSeason.getUsePercent()), i, 38);
-		}
-	}
-
-	/** 0表示下一次点击降序，1表示下一次点击升序排列 */
-	private int clickedNum = 0;
-	/** 记录上次点击的是哪一列 */
-	private int lastClickColumn = 0;
-
-	/**
-	 * 根据球员数据创建表格
-	 * 
-	 * @param teamArr
-	 * @return 表格数据的二维数组
-	 * @author cylong
-	 * @version 2015年3月29日 下午3:59:35
-	 */
-	public void createTable(ArrayList<PlayerSeasonVO> playerRecords) {
-		String[][] rowData = new String[playerRecords.size()][Constants.PLAYER_SEASON_HEADERS.length];
-		playerDataTable = new BottomTable(rowData, Constants.PLAYER_SEASON_HEADERS);
-		playerDataTable.getColumnModel().getColumn(26).setPreferredWidth(95);
-		addScrollPane(playerDataTable);
-		TableColumn nameColom = playerDataTable.getColumnModel().getColumn(1); // 球员名称那列
-		nameColom.setPreferredWidth(150); // 防止球员名称显示不出来
-
-		if (PlayerTotalAvgButton.current == totalAvgButtons[0]) {
-			updateTotalPlayerDataTable(playerRecords); // 添加球员总数居
-		} else if (PlayerTotalAvgButton.current == totalAvgButtons[1]) {
-			updateAvgPlayerDataTable(playerRecords); // 添加球员场均数居
-		}
-
-		// 给表头添加监听，用来排序
-		final JTableHeader header = playerDataTable.getTableHeader();
-		header.addMouseListener(new MouseAdapter() {
-
-			public void mouseClicked(MouseEvent e) {
-				int index = header.columnAtPoint(e.getPoint());
-				if (index < 1) { // 确定所点击区域在第1列之后，第一列不需要排序
-					return;
-				}
-				// 若跟上次点击同一列，升序变降序，降序变升序
-				if (index == lastClickColumn) {
-					clickedNum = 1 - clickedNum;
-				} else {
-					clickedNum = 0;
-					lastClickColumn = index;
-				}
-
-				SortOrder sort = null; // 升序降序
-				if (clickedNum == 1) {
-					sort = SortOrder.AS;
-				} else {
-					sort = SortOrder.DE;
-				}
-
-				if (PlayerTotalAvgButton.current == totalAvgButtons[0]) {
-					PlayerAllSortBasis[] basis = PlayerAllSortBasis.values();
-					ArrayList<PlayerSeasonVO> seasonArray = playerSeason.getResortedPlayersAllData(
-							basis[index - 1], sort);
-					updateTotalPlayerDataTable(seasonArray); // 重排球员总数居
-				} else if (PlayerTotalAvgButton.current == totalAvgButtons[1]) {
-					PlayerAvgSortBasis[] basis = PlayerAvgSortBasis.values();
-					ArrayList<PlayerSeasonVO> seasonArray = playerSeason.getResortedPlayersAvgData(
-							basis[index - 1], sort);
-					updateAvgPlayerDataTable(seasonArray); // 重排球员平均数据
-				}
-
-			}
-		});
-		addListener(playerDataTable, playerRecords);
 	}
 
 	/**

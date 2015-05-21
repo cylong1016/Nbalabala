@@ -210,25 +210,25 @@ public class MainController {
 	}
 	
 	public static void toHotPanel(){
-		hotTodayPlayerPanel = new HotTodayPlayerPanel(UIConfig.IMG_PATH + "Hot/hotTodayBG.png");
+		hotTodayPlayerPanel = new HotTodayPlayerPanel(UIConfig.IMG_PATH_2 + "hot/hotTodayBG.png");
 		frame.setPanel(hotTodayPlayerPanel);
 		frame.repaint();
 	}
 
 	public static void toHotSeasonPlayerPanel(){
-		hotSeasonPlayerPanel = new HotSeasonPlayerPanel(UIConfig.IMG_PATH + "Hot/hotSeasonPlayerBG.png");
+		hotSeasonPlayerPanel = new HotSeasonPlayerPanel(UIConfig.IMG_PATH_2 + "hot/hotSeasonPlayerBG.png");
 		frame.setPanel(hotSeasonPlayerPanel);
 		frame.repaint();
 	}
 	
 	public static void toHotSeasonTeamPanel(){
-		hotSeasonTeamPanel = new HotSeasonTeamPanel(UIConfig.IMG_PATH + "Hot/hotSeasonTeamBG.png");
+		hotSeasonTeamPanel = new HotSeasonTeamPanel(UIConfig.IMG_PATH_2 + "hot/hotSeasonTeamBG.png");
 		frame.setPanel(hotSeasonTeamPanel);
 		frame.repaint();
 	}
 	
 	public static void toHotFastPanel(){
-		hotFastPanel = new HotFastPanel(UIConfig.IMG_PATH + "Hot/hotFastestBG.png");
+		hotFastPanel = new HotFastPanel(UIConfig.IMG_PATH_2 + "hot/hotFastestBG.png");
 		frame.setPanel(hotFastPanel);
 		frame.repaint();
 	}

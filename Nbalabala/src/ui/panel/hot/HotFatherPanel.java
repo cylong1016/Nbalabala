@@ -19,7 +19,7 @@ public class HotFatherPanel extends BottomPanel {
 	private static final long serialVersionUID = -6969705072142965289L;
 	protected ImgButton[] button = new ImgButton[4];
 	protected int fa_width = 123, fa_height = 31, fa_x = 68, fa_y = 2, fa_inter = 124;
-	protected String allURL = "images/Hot/";
+	protected String allURL = "images2.0/hot/";
 	protected String[] url = new String[] { allURL + "todayOn.png", allURL + "seasonPlayerOn.png",
 			allURL + "seasonTeamOn.png", allURL + "fastestOn.png" };
 

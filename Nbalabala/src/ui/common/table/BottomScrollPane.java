@@ -26,9 +26,11 @@ public class BottomScrollPane extends JScrollPane {
 	
 	/** 背景图片 */
 	private Image bgImage = new ImageIcon("images/tableBG.png").getImage();
-
+	JTable table;
+	
 	public BottomScrollPane(JTable table) {
 		this.initScrollPane(table);
+		this.table = table;
 	}
 
 	/**
@@ -81,6 +83,10 @@ public class BottomScrollPane extends JScrollPane {
 				}
 			}
 		});
+	}
+
+	public void setHead(){
+		this.setColumnHeaderView(table.getTableHeader());	// 设置头部（HeaderView部分）
 	}
 	
 	public void cancelBgImage() {

@@ -40,20 +40,15 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 	private static final long serialVersionUID = 4256548887751307664L;
 
 	private int x = 103, y = 50, width = 55, height = 25, inter = 60, cellWidth = 70;
-	HotTodayButton button[] = new HotTodayButton[5];
-	String[] lbStr = new String[]{"得分", "篮板", "盖帽", "助攻", "抢断"};
-	HotBLService hot = new HotQuery();
-	String[] columns = new String[]{"编号", "头像", "姓名", "球队", "位置", "得分", "赛季", "日期", "对阵", "在场时间", "投篮命中数", "投篮出手数",
-									"三分命中数", "三分出手数", "罚球命中数", "罚球出手数", "进攻篮板数", "防守篮板数", "总篮板数", "助攻数", "抢断数", "盖帽数",
-									"失误数", "犯规数", "个人得分"};
-
-	BottomTable table;
-	BottomScrollPane scroll;
+	private HotTodayButton button[] = new HotTodayButton[5];
+	private HotBLService hot = new HotQuery();
+	private BottomTable table;
+	private BottomScrollPane scroll;
 	private static final int PORTRAIT_WIDTH = 70;
 	private static final HotTodayPlayerProperty[] HOT_TODAY_ARRAY = HotTodayPlayerProperty.values();
-	ArrayList<HotTodayPlayerVO> playerVO;
-	Chart chart;
-	String text = "得分";
+	private ArrayList<HotTodayPlayerVO> playerVO;
+	private Chart chart;
+	private String text = "得分";
 
 	public HotTodayPlayerPanel(String url) {
 		super(url);
@@ -115,12 +110,12 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 	 * @version 2015年4月13日 下午10:39:29
 	 */
 	private ArrayList<Column> getColumns() {
-		ArrayList<Column> columns = new ArrayList<Column>();
+		ArrayList<Column> columnArray = new ArrayList<Column>();
 		for(int i = 0; i < 5; i++) {
 			double property = playerVO.get(i).getProperty();
-			columns.add(new Column(playerVO.get(i).getName(), property, UIConfig.HIST_COLORS[i]));
+			columnArray.add(new Column(playerVO.get(i).getName(), property, UIConfig.HIST_COLORS[i]));
 		}
-		return columns;
+		return columnArray;
 	}
 
 	/**
@@ -142,7 +137,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 
 	public void addButton() {
 		for(int i = 0; i < 5; i++) {
-			button[i] = new HotTodayButton(x + i * inter, y, width, height, lbStr[i]);
+			button[i] = new HotTodayButton(x + i * inter, y, width, height, Constants.LBSTR[i]);
 			button[i].setFont(new Font("微软雅黑", 0, 14));
 			button[i].pro = HOT_TODAY_ARRAY[i];
 			this.add(button[i]);
@@ -161,7 +156,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 					HotTodayButton.current = (HotTodayButton)e.getSource();
 					HotTodayButton currentButton = (HotTodayButton)e.getSource();
 					text = currentButton.text;
-					columns[5] = currentButton.text;
+					Constants.HOT_COLUMNS[5] = currentButton.text;
 					playerVO = hot.getHotTodayPlayers(currentButton.pro);
 					refresh();
 					HotTodayPlayerPanel.this.repaint();
@@ -171,12 +166,12 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 	}
 
 	int size = 5;
-	int lth = columns.length;
+	int lth = Constants.HOT_COLUMNS.length;
 	Object[][] rowData ;
 	
 	public void addTable(){
 		rowData = new String[size][lth];
-		table = new BottomTable(rowData, columns, new Color(215, 72, 72));
+		table = new BottomTable(rowData, Constants.HOT_COLUMNS, new Color(215, 72, 72));
 		
 		table.setRowHeight(57);
 		table.setForeground(UIConfig.TABLE_HEADER_BACK_COLOR);

@@ -27,14 +27,15 @@ public class HotFastPanel extends HotThreeFatherPanel {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 2077718178589844072L;
 
-	ArrayList<HotFastestPlayerVO> fastVO;
+	private ArrayList<HotFastestPlayerVO> fastVO;
 	private static final HotFastestPlayerProperty[] HOT_FAST_ARRAY = HotFastestPlayerProperty.values();
-	HotBLService hot = new HotQuery();
-	HotFastestPlayerLabel label[] = new HotFastestPlayerLabel[5];
-	Chart chart;
-	ImgButton left, right;
+	private HotBLService hot = new HotQuery();
+	private HotFastestPlayerLabel label[] = new HotFastestPlayerLabel[5];
+	private Chart chart;
+	private ImgButton left, right;
+	private String url = "images2.0/hot/";
 	/** 当前的球员 */
-	public static int CURRENTI = 0;
+	private  static int CURRENTI = 0;
 
 	public HotFastPanel(String url) {
 		super(url);
@@ -55,8 +56,8 @@ public class HotFastPanel extends HotThreeFatherPanel {
 	}
 
 	public void addlrButton() {
-		left = new ImgButton("images/Hot/left.png", 110, 194, "images/Hot/leftOn.png", "images/Hot/left.png");
-		right = new ImgButton("images/Hot/right.png", 855, 194, "images/Hot/rightOn.png", "images/Hot/right.png");
+		left = new ImgButton(url+"left.png", 110, 194, url+"leftOn.png", url+"left.png");
+		right = new ImgButton(url+"right.png", 855, 194, url+"rightOn.png", url+"right.png");
 		this.add(left);
 		this.add(right);
 		left.addMouseListener(new MouseAdapter() {
