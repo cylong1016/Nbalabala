@@ -37,6 +37,7 @@ import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
 import ui.UIConfig;
+import ui.common.panel.BottomPanel;
 
 /**
  * 龙哥：这个类原本是这样的：原来是一个显示"2015年3月21日"的panel，点击之后，弹出一个大的panel，在这个大的panel上选择日期
@@ -55,6 +56,14 @@ import ui.UIConfig;
  */
 @SuppressWarnings("serial")
 public class DateChooser extends JPanel {
+	
+	// 换一个日期以后，调用这个BottomPanel的refresh()方法
+	private BottomPanel panelToRefresh;
+	
+	public DateChooser(BottomPanel panelToRefresh) {
+		this();
+		this.panelToRefresh = panelToRefresh;
+	}
 
 	private static final Font DATE_CHOOSER_FONT = new Font("微软雅黑", 0, 15);
 
@@ -76,7 +85,6 @@ public class DateChooser extends JPanel {
 	private SimpleDateFormat sdf = new SimpleDateFormat(" yyyy年MM月dd日 ");
 	private boolean isShow = false;
 	private Popup pop;
-	private boolean isGame = false;
 
 	/**
 	 * Creates a new instance of DateChooser
@@ -95,10 +103,6 @@ public class DateChooser extends JPanel {
 		setBorder(null);
 	}
 	
-	public void setIsGame(){
-		isGame = true;
-	}
-
 	public void setEnabled(boolean b) {
 		super.setEnabled(b);
 		showDate.setEnabled(b);
@@ -212,6 +216,10 @@ public class DateChooser extends JPanel {
 	private void commit() {
 		showDate.setText(sdf.format(select.getTime()));
 		hidePanel();
+		if (panelToRefresh != null) {
+			panelToRefresh.refresh();
+		}
+		
 	}
 
 	protected void hidePanel() {
@@ -464,9 +472,6 @@ public class DateChooser extends JPanel {
 			Point p = SwingUtilities.convertPoint(this, e.getPoint(), jp3);
 			lm.setSelect(p, false);
 			commit();
-			if(isGame) {
-			System.out.println(getDate());
-			}
 		}
 
 		public void mouseEntered(MouseEvent e) {

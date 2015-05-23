@@ -241,6 +241,11 @@ public class GameDataPanel extends BottomPanel {
 		String[] eachSection = gameInfo.split(";");
 		return eachSection.length;
 	}
+	
+	public void refresh() {
+		System.out.println(dateChooser.getDate());
+		//TODO 这里写上相应代码
+	}
 
 	/**
 	 * 日期选择器
@@ -249,8 +254,7 @@ public class GameDataPanel extends BottomPanel {
 	 * @version 2015年3月21日 下午4:29:57
 	 */
 	public void addDateChooser() {
-		dateChooser = new DateChooser();
-		dateChooser.setIsGame();
+		dateChooser = new DateChooser(this);
 		MainController.addDateChooserPanel(this, dateChooser, 565, 10, 153, 30);
 		dateChooser.addMouseListener(new MouseAdapter(){
 			 public void mousePressed(MouseEvent e) {
