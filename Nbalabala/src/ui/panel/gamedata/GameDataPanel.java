@@ -8,13 +8,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
 
 import ui.common.button.ImgButton;
 import ui.common.comboBox.MyComboBox;
 import ui.common.date.DateChooser;
 import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
-import ui.common.table.MatchInfoTable;
 import ui.controller.MainController;
 import utility.Constants;
 import vo.MatchDetailVO;
@@ -47,6 +47,7 @@ public class GameDataPanel extends BottomPanel {
 	private ArrayList<MatchDetailVO> matchDetailfile;
 	private int gameNum, pageNum;
 	private Boolean isInit = true;
+
 	/**
 	 * @param url
 	 *            背景图片的url
@@ -77,31 +78,31 @@ public class GameDataPanel extends BottomPanel {
 		gameNum = matchDetailfile.size();
 		pageNum = (int) Math.ceil((double) gameNum / 3);
 		proPanel = new ProfilePanel[gameNum];
-		if(gameNum % 3 == 1){
+		if (gameNum % 3 == 1) {
 			proPanel = new ProfilePanel[gameNum + 2];
-		}else if(gameNum % 3 == 2){
+		} else if (gameNum % 3 == 2) {
 			proPanel = new ProfilePanel[gameNum + 1];
-		}else if(gameNum == 0){
+		} else if (gameNum == 0) {
 			proPanel = new ProfilePanel[3];
 		}
-		for(int j = 0; j < proPanel.length; j++) {
+		for (int j = 0; j < proPanel.length; j++) {
 			proPanel[j] = new ProfilePanel();
 		}
-		int i = 0; 
-		if(gameNum >= 3){
+		int i = 0;
+		if (gameNum >= 3) {
 			for (i = 0; i < 3; i++) {
 				proPanel[i] = (new ProfilePanel(matchDetailfile.get(i), GameDataPanel.this));
 			}
-		}else if(gameNum == 0){
-			 proPanel[0] = new ProfilePanel();
-			 proPanel[1] = new ProfilePanel();
-			 proPanel[2] = new ProfilePanel();
-		 }
+		} else if (gameNum == 0) {
+			proPanel[0] = new ProfilePanel();
+			proPanel[1] = new ProfilePanel();
+			proPanel[2] = new ProfilePanel();
+		}
 		for (i = 0; i < 3; i++) {
 			proPanel[i].setLocation(20, 70 + i * 180);
 			this.add(proPanel[i]);
 		}
- 	}
+	}
 
 	/**
 	 * 添加一些label
@@ -157,7 +158,7 @@ public class GameDataPanel extends BottomPanel {
 			public void mousePressed(MouseEvent e) {
 				int temp = clickNum;
 				int i = 0;
-				for (i = 3 * clickNum ; i < 3 * clickNum + 3  && i < gameNum; i++) {
+				for (i = 3 * clickNum; i < 3 * clickNum + 3 && i < gameNum; i++) {
 					if (proPanel[i].isIni == true) {
 						proPanel[i] = (new ProfilePanel(matchDetailfile.get(i), GameDataPanel.this));
 					}
@@ -166,7 +167,7 @@ public class GameDataPanel extends BottomPanel {
 				if (clickNum == pageNum + 1) {
 					clickNum = 1;
 				}
-				addPanel(temp , clickNum);
+				addPanel(temp, clickNum);
 				number1.setText(clickNum + "");
 				GameDataPanel.this.repaint();
 
@@ -201,33 +202,10 @@ public class GameDataPanel extends BottomPanel {
 	 * @author lsy
 	 * @version 2015年3月21日 下午4:29:48
 	 */
-	int clickTime = 0;
-
-//	public void addConfirmBtn() {
-//		
-//		confirmBtn2.addMouseListener(new MouseAdapter() {
-//
-//			public void mousePressed(MouseEvent e) {
-//				if (clickTime != 0) {
-//					GameDataPanel.this.remove(scrollPane);
-//				}
-//				clickTime++;
-////				Date date = dateChooser.getDate();
-////				 matchProfile = matchQuery.screenMatchByDate(date);
-//				remove(scrollPane);
-//				// scrollPane = new
-//				// MatchInfoTableFactory(matchProfile,GameDataPanel.this)
-//				// .getTableScrollPanel();
-//				// GameDataPanel.this.add(scrollPane);
-//			}
-//		});
-//	}
 
 	public void paint(Graphics g) {
 		super.paint(g);
 	}
-
-	protected MatchInfoTable table;
 
 	/**
 	 * 分析打了几节
@@ -241,10 +219,19 @@ public class GameDataPanel extends BottomPanel {
 		String[] eachSection = gameInfo.split(";");
 		return eachSection.length;
 	}
-	
+
 	public void refresh() {
-		System.out.println(dateChooser.getDate());
-		//TODO 这里写上相应代码
+		Date date = dateChooser.getDate();
+		matchDetailfile = matchQuery.screenMatchByDate(date);
+		isInit = false;
+		addArray();
+		if (pageNum == 0) {
+			number2.setlbText("1");
+		} else {
+			number2.setlbText(pageNum + "");
+		}
+		number1.setlbText("1");
+		GameDataPanel.this.repaint();
 	}
 
 	/**
@@ -256,16 +243,10 @@ public class GameDataPanel extends BottomPanel {
 	public void addDateChooser() {
 		dateChooser = new DateChooser(this);
 		MainController.addDateChooserPanel(this, dateChooser, 565, 10, 153, 30);
-		dateChooser.addMouseListener(new MouseAdapter(){
-			 public void mousePressed(MouseEvent e) {
-				
-			 }
-		});
-//		matchDetailfile = matchQuery.screenMatchByDate(date);
 	}
-	
-	public void getDate(){
-		
+
+	public void getDate() {
+
 	}
 
 	/**
@@ -296,17 +277,21 @@ public class GameDataPanel extends BottomPanel {
 			if (team1 != 0) {
 				teamAbbr_1 = Constants.TEAM_ABBR[team1 - 1];
 			}
-			if(team2 != 0){
-			teamAbbr_2 = Constants.TEAM_ABBR[team2 - 1];
+			if (team2 != 0) {
+				teamAbbr_2 = Constants.TEAM_ABBR[team2 - 1];
 			}
 			matchDetailfile = matchQuery.screenMatchByTeam(teamAbbr_1, teamAbbr_2);
 			isInit = false;
 			addArray();
-			number2.setlbText(pageNum + "");
+			if (pageNum == 0) {
+				number2.setlbText("1");
+			} else {
+				number2.setlbText(pageNum + "");
+			}
 			number1.setlbText("1");
 			GameDataPanel.this.repaint();
 		}
 
 	}
-	
+
 }
