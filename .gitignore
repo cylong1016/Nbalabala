@@ -25,4 +25,5 @@ pom.xml.next
 release.properties
 /bin
 .metadata
-
+*~
+.settings
