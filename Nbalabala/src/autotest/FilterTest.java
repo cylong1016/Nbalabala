@@ -33,7 +33,7 @@ static Console c = new Console();
 		valueOfAge.add("25< X <=30");
 		valueOfAge.add(">30");
 	}
-	@Test
+	@Pie
 	public void testPosition() {
 			
 		PrintStream p = null;
@@ -50,7 +50,7 @@ static Console c = new Console();
 			c.execute(p, ss);
 		}
 	}
-	@Test
+	@Pie
 	public void testLeague() {
 		
 		PrintStream p = null;
@@ -68,7 +68,7 @@ static Console c = new Console();
 		}
 	}
 	
-	@Test
+	@Pie
 	public void testAge() {
 		
 		PrintStream p = null;
@@ -86,7 +86,7 @@ static Console c = new Console();
 		}
 	}
 	
-	@Test
+	@Pie
 	public void testMultiCon() {
 		
 		PrintStream p = null;

@@ -17,7 +17,7 @@ import org.junit.Test;
  */
 public class TestListFiles {
 
-	@Test
+	@Pie
 	public void test() {
 		File file = new File("NBAdata\\matches");
 		int s;

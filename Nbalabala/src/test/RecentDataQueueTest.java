@@ -17,7 +17,7 @@ public class RecentDataQueueTest {
 	/**
 	 * Test method for {@link vo.RecentDataQueue#enqueue(int)}.
 	 */
-	@Test
+	@Pie
 	public void testEnqueue() {
 		for (int i=1; i< 16; i++){
 			queue.enqueue(i);
@@ -33,14 +33,14 @@ public class RecentDataQueueTest {
 	/**
 	 * Test method for {@link vo.RecentDataQueue#getFormerFiveSum()}.
 	 */
-	@Test
+	@Pie
 	public void testGetFormerFiveSum() {
 	}
 
 	/**
 	 * Test method for {@link vo.RecentDataQueue#getLatterFiveSum()}.
 	 */
-	@Test
+	@Pie
 	public void testGetLatterFiveSum() {
 	}
 

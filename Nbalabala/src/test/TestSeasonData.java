@@ -14,7 +14,7 @@ import data.seasondata.SeasonData;
  */
 public class TestSeasonData {
 
-	@Test
+	@Pie
 	public void test() {
 		
 		for (int i=0;i<1000;i++) {
