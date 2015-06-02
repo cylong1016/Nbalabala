@@ -19,7 +19,7 @@ import enums.HotSeasonTeamProperty;
  */
 public class TestHotQuery {
 
-	@Test
+	@Pie
 	public void testHotFastestPlayers() {
 		HotQuery query = new HotQuery();
 		ArrayList<HotFastestPlayerVO> list = query.getHotFastestPlayers(HotFastestPlayerProperty.ASSIST_AVG);
@@ -29,7 +29,7 @@ public class TestHotQuery {
 		}
 	}
 	
-	@Test
+	@Pie
 	public void testHotSeasonPlayers() {
 		HotQuery query = new HotQuery();
 		ArrayList<HotSeasonPlayerVO> list = query.getHotSeasonPlayers(HotSeasonPlayerProperty.SCORE_AVG);
@@ -39,7 +39,7 @@ public class TestHotQuery {
 		}
 	}
 	
-	@Test
+	@Pie
 	public void testHotSeasonTeams() {
 		HotQuery query = new HotQuery();
 		ArrayList<HotSeasonTeamVO> list = query.getHotSeasonTeams(HotSeasonTeamProperty.REBOUND_AVG);

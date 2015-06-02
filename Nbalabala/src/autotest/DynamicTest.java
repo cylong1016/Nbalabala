@@ -17,7 +17,7 @@ import org.junit.Test;
  */
 public class DynamicTest {
 
-	@Test
+	@Pie
 	public void test() {
 
 	}

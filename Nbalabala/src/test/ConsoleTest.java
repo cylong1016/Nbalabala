@@ -10,7 +10,7 @@ import autotest.Console;
 
 
 public class ConsoleTest {
-	@Test
+	@Pie
 	public void executableTest()
 	{
 		Console c = new Console();
@@ -18,7 +18,7 @@ public class ConsoleTest {
 		c.execute(System.out, ss);
 	}
 	
-	@Test
+	@Pie
 	public void testTeam1()
 	{
 		Console c = new Console();
@@ -33,7 +33,7 @@ public class ConsoleTest {
 		c.execute(p, ss);
 	}
 	
-	@Test
+	@Pie
 	public void testTeam2()
 	{
 		Console c = new Console();
@@ -48,7 +48,7 @@ public class ConsoleTest {
 		c.execute(p, ss);
 	}
 	
-	@Test
+	@Pie
 	public void testTeam3()
 	{
 		Console c = new Console();
@@ -63,7 +63,7 @@ public class ConsoleTest {
 		c.execute(p, ss);
 	}
 	
-	@Test
+	@Pie
 	public void testTeam4()
 	{
 		Console c = new Console();

@@ -24,7 +24,7 @@ static Console c = new Console();
 		sd.add("-daily");
 		sd.add("-season");
 	}
-	@Test
+	@Pie
 	public void testDailyKing() {
 		
 	for(int j=0;j<sd.size();j++)	
@@ -43,7 +43,7 @@ static Console c = new Console();
 		}
 	}
 	
-	@Test
+	@Pie
 	public void testDailyNumberKing() {
 		
 	for(int j=0;j<sd.size();j++)	

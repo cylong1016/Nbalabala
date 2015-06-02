@@ -41,7 +41,7 @@ static Console c = new Console();
 		
 	}
 	
-	@Test
+	@Pie
 	public void testHotPlayer()
 	{
 		for(int i=0; i<playerHot.size();i++)
@@ -59,7 +59,7 @@ static Console c = new Console();
 		}
 	}
 	
-	@Test
+	@Pie
 	public void testHotTeam()
 	{
 		for(int i=0; i<teamHot.size();i++)
@@ -76,7 +76,7 @@ static Console c = new Console();
 			c.execute(p, ss);
 		}
 	}
-	@Test
+	@Pie
 	public void testHotPlayerWithNormalN()
 	{
 		n=35;
@@ -84,14 +84,14 @@ static Console c = new Console();
 	}
 	
 	
-	@Test
+	@Pie
 	public void testHotTeamWithNormalN()
 	{
 		n=25;
 		testHotTeamWithN();
 	}
 	
-	@Test
+	@Pie
 	public void testHotPlayerWithAbnormalN()
 	{
 		n=900;
@@ -99,7 +99,7 @@ static Console c = new Console();
 	}
 	
 	
-	@Test
+	@Pie
 	public void testHotTeamWithAbnormalN()
 	{
 		n=40;

@@ -77,7 +77,7 @@ public class SortPerformanceTest {
 		teamHigh.add("assistEfficient");
 	}
 	
-	@Test
+	@Pie
 	public void testPlayerSort()
 	{
 		//asc
@@ -204,7 +204,7 @@ public class SortPerformanceTest {
 	}
 	
 	
-	@Test
+	@Pie
 	public void testTeamSort()
 	{
 		//asc
@@ -583,7 +583,7 @@ public class SortPerformanceTest {
 					c.execute(p, ss);
 				}	
 	}
-	@Test
+	@Pie
 	public void testPlayerSortWithNormalN()
 	{
 		n=35;
@@ -591,14 +591,14 @@ public class SortPerformanceTest {
 	}
 	
 	
-	@Test
+	@Pie
 	public void testTeamSortWithNormalN()
 	{
 		n=25;
 		testTeamSortWithN();
 	}
 	
-	@Test
+	@Pie
 	public void testPlayerSortWithAbnormalN()
 	{
 		n=900;
@@ -606,7 +606,7 @@ public class SortPerformanceTest {
 	}
 	
 	
-	@Test
+	@Pie
 	public void testTeamSortWithAbnormalN()
 	{
 		n=40;

@@ -42,7 +42,7 @@ public class PerformanceTest {
 	/** 存储球员信息的文件夹 */
 	private static final String INFO_Path = Constants.dataSourcePath + "players/info/";
 	
-	@Test
+	@Pie
 	public void loadPlayers() {
 		PlayerSeasonAnalysis analysis = new PlayerSeasonAnalysis();
 		ArrayList<PlayerSeasonVO> vos = analysis.getResortedPlayersAllData(PlayerAllSortBasis.USE_PERCENT, SortOrder.AS);
