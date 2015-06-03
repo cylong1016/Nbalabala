@@ -23,12 +23,7 @@ import mysql.MySQL;
  * @version 2015年5月12日  下午7:54:54
  */
 public class Match implements NBAData {
-	
-	public static void main(String[] args) {
-		Match s = new Match();
-		s.capture();
-	}
-	
+
 	/** 网站链接 */ 
 	private String root = "http://www.basketball-reference.com";
 	/** 赛季数据的url */
@@ -271,11 +266,15 @@ public class Match implements NBAData {
 						if(Pattern.matches(".*<th.*>" + reserves + "</th>", temp)) { // 读取到后发球员
 							isStarter = 0;
 						}
-						String playerDataReg = "<td.*?>(<a href=.*?>)?(?<playerData>.*?)(</a>)?</td>";
+						String playerDataReg = "<td.*?>(<a href=.*(?<nameID>[0-9]{2})\\.html\">?>)?(?<playerData>.*?)(</a>)?</td>";
 						Pattern patternPlayerData = Pattern.compile(playerDataReg);
 						Matcher matcherPlayerData = patternPlayerData.matcher(temp);
 						if(matcherPlayerData.find()) {
+							String nameID = matcherPlayerData.group("nameID");
 							String playerData = matcherPlayerData.group("playerData");
+							if(nameID != null) { // 名称后面加上编号来区分同名球员
+								playerData += ("$" + nameID);
+							}
 							playerMatch.add(playerData);
 						}
 						if(Pattern.matches("</tr>", temp)) { // 一个球员的数据读取完毕
