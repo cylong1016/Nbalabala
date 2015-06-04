@@ -1,11 +1,8 @@
 package mysql;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * @author cylong
@@ -32,15 +29,6 @@ public class MySQL {
 			conn = DriverManager.getConnection(MySQLConf.URL, MySQLConf.USER, MySQLConf.PASSWORD);
 			if (!conn.isClosed()) {
 				System.out.println("Succeeded connecting to the Database!");
-			}
-			DatabaseMetaData metaData = conn.getMetaData();
-			ResultSet res = metaData.getTables(null, null, null, null);
-			System.out.println("init...");
-			while(res.next()) {
-				String sql = "TRUNCATE " + res.getString("TABLE_NAME");
-				System.out.println(sql);
-				Statement statement = conn.createStatement();
-				statement.execute(sql);
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
