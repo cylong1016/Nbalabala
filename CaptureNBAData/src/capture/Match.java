@@ -265,12 +265,16 @@ public class Match extends NBAData {
 								playerMatch.add(home);
 							}
 							// 球员数据为24个，少于24个数据的就是没有记录
+							// 好吧，事实证明在之前没有 +/-这项，所以之前是23项
 							// 表格最后一行是Team Totals，不记录
-							if(playerMatch.size() == 24) {
+							if(playerMatch.size() >= 23) {
 								// 球员比赛信息表的最后一行，接着读取下一个Basic Box Score Stats表
 								if(playerMatch.get(0).equals("Team Totals")) {
 									homeOrRoad = 'H'; // 下一个表是主场
 									break; // 内层的while循环
+								}
+								if(playerMatch.size() == 23) {
+									playerMatch.add("0"); // 最后的+/-设置为0
 								}
 								insertIntoPlayerMatch(playerMatch);
 							}
