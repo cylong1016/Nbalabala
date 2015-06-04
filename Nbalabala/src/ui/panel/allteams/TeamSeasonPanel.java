@@ -1,16 +1,11 @@
 package ui.panel.allteams;
 
-import java.text.DecimalFormat;
-
-import javax.swing.table.DefaultTableModel;
-
+import po.TeamSeasonPO;
 import ui.common.SeasonInputPanel;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
-import ui.common.table.BottomTable;
 import ui.panel.allplayers.ContrastDiagram;
 import utility.Constants;
-import vo.TeamSeasonVO;
 
 /**
  * 球队赛季数据界面
@@ -39,9 +34,9 @@ public class TeamSeasonPanel extends BottomPanel{
 	}
 	
 	
-	public void updateContent(String season, TeamSeasonVO teamSeason, double [] fiveArgsAvg, double [] highestThree) {
+	public void updateContent(String season, TeamSeasonPO teamSeason, double [] fiveArgsAvg, double [] highestThree) {
 		double[] fivePlayersData = {teamSeason.getScoreAvg(), teamSeason.getTotalReboundAvg(),
-				teamSeason.getTotalReboundAvg(), teamSeason.getFreeThrowPercent(),
+				teamSeason.getTotalReboundAvg(), teamSeason.getFreethrowPercent(),
 				teamSeason.getThreePointPercent()};
 		if (cd == null) {
 			/* 球隊的场均得分、助攻、篮板、 罚球命中率、三分命中率的平均值 */

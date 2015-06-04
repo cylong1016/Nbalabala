@@ -2,8 +2,8 @@ package blservice;
 
 import java.util.ArrayList;
 
+import po.PlayerProfilePO;
 import vo.PlayerDetailVO;
-import vo.PlayerProfileVO;
 
 /**
  * 查询球员信息，可以按首字母得到球员简况列表，按照球员名得到球员详情
@@ -12,12 +12,12 @@ import vo.PlayerProfileVO;
  */
 public interface PlayerQueryBLService {
 	
-	public ArrayList<PlayerProfileVO> getPlayerProfileByInitial(char initial);
+	public ArrayList<PlayerProfilePO> getPlayerProfileByInitial(char initial);
 	
 	public PlayerDetailVO getPlayerDetailByName(String name, String season);
 	
 	/** 在搜索框内输入文字后调用的是这个方法 */
-	public ArrayList<PlayerProfileVO> searchPlayers(String keyword);
+	public ArrayList<PlayerProfilePO> searchPlayers(String keyword);
 	
 	/** 返回一个长度为3数组，分别是所有球员中场均得分篮板助攻的最高值 */
 	public double [] getHighestScoreReboundAssist(String season);
@@ -28,5 +28,4 @@ public interface PlayerQueryBLService {
 	/** 返回一个长度为3的数组，分别是该球员该赛季得分、篮板、助攻的排名 。若某个元素为0，表示没有此人的排名，应不予显示该项排名*/
 	public int[] getScoreReboundAssistRank(String name, String season);
 	
-
 }

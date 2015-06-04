@@ -1,6 +1,7 @@
 package vo;
-import enums.ScreenDivision;
+import po.TeamProfilePO;
 import utility.Constants;
+import enums.ScreenDivision;
 
 /**
  * 球队简况
@@ -37,7 +38,7 @@ public class TeamProfileVO {
 		this.since = Constants.UNKNOWN;
 
 	}
-
+	
 	public TeamProfileVO(String name, String abbr, String location, String division, String home, String since) {
 		this.name = name;
 		this.abbr = abbr;
@@ -114,6 +115,10 @@ public class TeamProfileVO {
 	
 	public String getDivisionString() {
 		return divisionStr;
+	}
+	
+	public TeamProfileVO(TeamProfilePO po) {
+		this(po.name, po.abbr, po.location, po.division, po.home, String.valueOf(po.since));
 	}
 	
 

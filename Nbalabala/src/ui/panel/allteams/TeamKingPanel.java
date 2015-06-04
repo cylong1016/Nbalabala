@@ -3,21 +3,16 @@
  */
 package ui.panel.allteams;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JLabel;
-
-import blservice.TeamQueryBLService;
 import ui.Images;
 import ui.common.button.TabButton;
 import ui.common.label.KingLabel;
 import ui.common.panel.BottomPanel;
-import ui.common.panel.Panel;
 import utility.Constants;
 import vo.KingVO;
+import blservice.TeamQueryBLService;
 
 /**
  * 球队数据王界面

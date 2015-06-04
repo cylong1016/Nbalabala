@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
+import po.PlayerSeasonPO;
 import ui.common.frame.Frame;
 import ui.common.table.BottomScrollPane;
 import ui.panel.playerData.PlayerDataPanel;
 import ui.panel.teamdata.AllTeamSeasonTable;
-import vo.PlayerSeasonVO;
 import bl.teamseasonbl.TeamSeasonAnalysis;
 import enums.AllTeamSeasonTableCategory;
 import enums.TotalOrAvg;
@@ -31,7 +31,7 @@ public class ExpPlayerData extends PlayerDataPanel{
 		frame.start();
 	}
 	
-	public void createTable(ArrayList<PlayerSeasonVO> playerRecords){
+	public void createTable(ArrayList<PlayerSeasonPO> playerRecords){
 		TeamSeasonAnalysis seasonAnalysis = new TeamSeasonAnalysis();
 		AllTeamSeasonTable table = new AllTeamSeasonTable(seasonAnalysis, seasonAnalysis.getTeamDataSortedByName("13-14"),
 				AllTeamSeasonTableCategory.DEFENSIVE,

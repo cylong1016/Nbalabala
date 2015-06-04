@@ -18,7 +18,6 @@ import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
 import utility.Constants;
 import vo.MatchDetailVO;
-import vo.MatchProfileVO;
 import bl.matchquerybl.MatchQuery;
 import blservice.MatchQueryBLService;
 
@@ -207,18 +206,18 @@ public class GameDataPanel extends BottomPanel {
 		super.paint(g);
 	}
 
-	/**
-	 * 分析打了几节
-	 * 
-	 * @author lsy
-	 * @version 2015年3月21日 下午5:15:29
-	 */
-	/** 每节比分 ，格式为“27-25;29-31;13-25;16-31;” */
-	public int analyzeSection(MatchProfileVO pro) {
-		String gameInfo = pro.getEachSectionScore();
-		String[] eachSection = gameInfo.split(";");
-		return eachSection.length;
-	}
+//	/**
+//	 * 分析打了几节
+//	 * 
+//	 * @author lsy
+//	 * @version 2015年3月21日 下午5:15:29
+//	 */
+//	/** 每节比分 ，格式为“27-25;29-31;13-25;16-31;” */
+//	public int analyzeSection(MatchProfileVO pro) {
+//		String gameInfo = pro.getEachSectionScore();
+//		String[] eachSection = gameInfo.split(";");
+//		return eachSection.length;
+//	}
 
 	public void refresh() {
 		Date date = dateChooser.getDate();

@@ -2,10 +2,10 @@ package ui.panel.allplayers;
 
 import java.text.DecimalFormat;
 
+import po.PlayerSeasonPO;
 import ui.UIConfig;
 import ui.common.table.BottomTable;
 import utility.Constants;
-import vo.PlayerSeasonVO;
 
 /**
  * 球员个人页面里面那个展示其赛季基本数据的表格
@@ -22,20 +22,20 @@ public class OnePlayerDataTable extends BottomTable{
 //		cancelVerticalLines();
 	}
 	
-	public OnePlayerDataTable(String season, PlayerSeasonVO seasonVO) {
+	public OnePlayerDataTable(String season, PlayerSeasonPO seasonVO) {
 		this();
 		setVO(season, seasonVO);
 	}
 	
 	/** 切换赛季以后，使用此方法更新该表格 */
-	public void setVO(String season, PlayerSeasonVO vo) {
+	public void setVO(String season, PlayerSeasonPO vo) {
 		
 		DecimalFormat percentDf = UIConfig.PERCENT_FORMAT;
 		
 		setValueAt(season, 1, 0);
 		setValueAt(vo.matchCount, 1, 1);
 		setValueAt(vo.firstCount, 1, 2);
-		setValueAt(vo.getTime(), 1, 3);
+		setValueAt(UIConfig.FORMAT.format(vo.minutes), 1, 3);
 		setValueAt(percentDf.format(vo.fieldPercent), 1, 4);
 		setValueAt(percentDf.format(vo.threePointPercent), 1, 5);
 		setValueAt(percentDf.format(vo.freethrowPercent), 1, 6);
@@ -54,7 +54,7 @@ public class OnePlayerDataTable extends BottomTable{
 		setValueAt(season, 3, 0);
 		setValueAt(vo.matchCount, 3, 1);
 		setValueAt(df.format(vo.firstCountAvg), 3, 2);
-		setValueAt(vo.getTimeAvg(), 3, 3);
+		setValueAt(UIConfig.FORMAT.format(vo.minutesAvg), 3, 3);
 		setValueAt(percentDf.format(vo.fieldPercent), 3, 4);
 		setValueAt(percentDf.format(vo.threePointPercent), 3, 5);
 		setValueAt(percentDf.format(vo.freethrowPercent), 3, 6);

@@ -3,10 +3,10 @@ package bl.playerquerybl;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import po.MatchPlayerPO;
+import po.PlayerProfilePO;
+import po.PlayerSeasonPO;
 import vo.PlayerDetailVO;
-import vo.PlayerMatchPerformanceVO;
-import vo.PlayerProfileVO;
-import vo.PlayerSeasonVO;
 import bl.matchquerybl.MatchQuery;
 import bl.playerseasonbl.PlayerAvgSorter;
 import bl.playerseasonbl.PlayerSeasonAnalysis;
@@ -32,7 +32,7 @@ public class PlayerQuery implements PlayerQueryBLService{
 	 * @see blservice.PlayerQueryBLService#getPlayerProfileByInitial(char)
 	 */
 	@Override
-	public ArrayList<PlayerProfileVO> getPlayerProfileByInitial(char initial) {
+	public ArrayList<PlayerProfilePO> getPlayerProfileByInitial(char initial) {
 		return playerData.getPlayerProfileByInitial(initial);
 	}
 
@@ -41,22 +41,22 @@ public class PlayerQuery implements PlayerQueryBLService{
 	 */
 	@Override
 	public PlayerDetailVO getPlayerDetailByName(String playerName, String season) {
-		PlayerProfileVO profile = playerData.getPlayerProfileByName(playerName);
+		PlayerProfilePO profile = playerData.getPlayerProfileByName(playerName);
 		Image actionImage = PlayerImageCache.getActionImageByName(playerName);
 
 		//从seasonbl获取球员的赛季数据
 		PlayerSeasonAnalysis playerSeasonAnalysis = new PlayerSeasonAnalysis();
-		PlayerSeasonVO seasonRecord = playerSeasonAnalysis.getPlayerSeasonDataByName(playerName, season);
+		PlayerSeasonPO seasonRecord = playerSeasonAnalysis.getPlayerSeasonDataByName(playerName, season);
 		
 		//从matchbl获取球员所有比赛的数据
 		MatchQuery matchQuery = new MatchQuery();
-		ArrayList<PlayerMatchPerformanceVO> matchRecords = matchQuery.getMatchRecordByPlayerName(playerName, season);
+		ArrayList<MatchPlayerPO> matchRecords = matchQuery.getMatchRecordByPlayerName(playerName, season);
 
 		return new PlayerDetailVO(profile, seasonRecord, matchRecords, actionImage);
 	}
 	
 	/** 根据若干球员的名字返回其简况，提供给teambl用 */
-	public ArrayList<PlayerProfileVO> getPlayerProfilesByNames(ArrayList<String> names) {
+	public ArrayList<PlayerProfilePO> getPlayerProfilesByNames(ArrayList<String> names) {
 		return playerData.getPlayerProfileByNames(names);
 	}
 
@@ -64,7 +64,7 @@ public class PlayerQuery implements PlayerQueryBLService{
 	 * @see blservice.PlayerQueryBLService#searchPlayers(java.lang.String)
 	 */
 	@Override
-	public ArrayList<PlayerProfileVO> searchPlayers(String keyword) {
+	public ArrayList<PlayerProfilePO> searchPlayers(String keyword) {
 		return playerData.searchPlayers(keyword);
 	}
 
@@ -73,11 +73,11 @@ public class PlayerQuery implements PlayerQueryBLService{
 	 */
 	@Override
 	public double[] getHighestScoreReboundAssist(String season) {
-		ArrayList<PlayerSeasonVO> list = new SeasonData().getAllPlayerSeasonData(season);
+		ArrayList<PlayerSeasonPO> list = new SeasonData().getAllPlayerSeasonData(season);
 		double highestScore = 0;
 		double highestRebound = 0;
 		double highestAssist = 0;
-		for (PlayerSeasonVO vo : list) {
+		for (PlayerSeasonPO vo : list) {
 			if (vo.scoreAvg > highestScore)
 				highestScore = vo.scoreAvg;
 			if (vo.totalReboundAvg > highestRebound)
@@ -94,28 +94,28 @@ public class PlayerQuery implements PlayerQueryBLService{
 	 */
 	@Override
 	public double[] getFiveArgsAvg(String season) {
-		ArrayList<PlayerSeasonVO> list = new SeasonData().getAllPlayerSeasonData(season);
+		ArrayList<PlayerSeasonPO> list = new SeasonData().getAllPlayerSeasonData(season);
 		int matchCount = 0;
 		int score = 0;
 		int rebound = 0;
 		int assist = 0;
-		int threePointGoal = 0;
+		int threePointMade = 0;
 		int threePointAttempt = 0;
-		int freethrowGoal = 0;
+		int freethrowMade = 0;
 		int freethrowAttempt = 0;
-		for (PlayerSeasonVO vo : list) {
+		for (PlayerSeasonPO vo : list) {
 			matchCount += vo.matchCount;
 			score += vo.score;
 			rebound += vo.totalRebound;
 			assist += vo.assist;
-			threePointGoal += vo.threePointGoal;
+			threePointMade += vo.threePointMade;
 			threePointAttempt += vo.threePointAttempt;
 			freethrowAttempt += vo.freethrowAttempt;
-			freethrowGoal += vo.freethrowGoal;
+			freethrowMade += vo.freethrowMade;
 		}
 		double[]result = {(double)score / matchCount, (double)rebound / matchCount,
-				(double)assist / matchCount, (double)freethrowGoal / freethrowAttempt,
-				(double)threePointGoal / threePointAttempt};
+				(double)assist / matchCount, (double)freethrowMade / freethrowAttempt,
+				(double)threePointMade / threePointAttempt};
 		return result;
 	}
 
@@ -126,7 +126,7 @@ public class PlayerQuery implements PlayerQueryBLService{
 	public int[] getScoreReboundAssistRank(String name, String season) {
 		SeasonDataService dataService = new SeasonData();
 		int [] result = new int[3];
-		ArrayList<PlayerSeasonVO> vos = dataService.getAllPlayerSeasonData(season);
+		ArrayList<PlayerSeasonPO> vos = dataService.getAllPlayerSeasonData(season);
 		if (vos.size() == 0) {
 			result[0]=0;
 			result[1]=0;

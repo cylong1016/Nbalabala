@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.panel.BottomPanel;
-import utility.Utility;
+import utility.Constants;
 
 /**
  * 用于选择赛季的组件，外观待美化
@@ -77,7 +77,7 @@ public class SeasonInputPanel extends JPanel {
 	private void setLook() {
 		this.setLayout(null);
 		this.setBackground(UIConfig.BUTTON_COLOR);
-		String[] defaultSeason = Utility.getDefaultSeason().split("-");
+		String[] defaultSeason = Constants.LATEST_SEASON.split("-");
 		leftYearLabel = new JLabel(defaultSeason[0]);
 		rightYearLabel = new JLabel(defaultSeason[1]);
 		middleLabel = new JLabel("—");

@@ -5,6 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import po.PlayerSeasonPO;
 import ui.Images;
 import ui.UIConfig;
 import ui.common.SeasonInputPanel;
@@ -15,7 +16,6 @@ import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import utility.Constants;
-import vo.PlayerSeasonVO;
 import bl.playerseasonbl.PlayerSeasonAnalysis;
 import blservice.PlayerSeasonBLService;
 import enums.AllPlayerSeasonTableCategory;
@@ -116,7 +116,7 @@ public class PlayerDataPanel extends BottomPanel {
 		this.add(seasonInput); 
 		playerblService = new PlayerSeasonAnalysis();
 		// 初始化界面的表格
-		ArrayList<PlayerSeasonVO> iniArray = playerSeason.getAllPlayersSortedByName();
+		ArrayList<PlayerSeasonPO> iniArray = playerSeason.getAllPlayersSortedByName();
 		table = new AllPlayerSeasonTable(playerblService,iniArray,AllPlayerSeasonTableCategory.BASIC,TotalOrAvg.TOTAL);
 		addScrollPane(table);
 	}
@@ -182,7 +182,7 @@ public class PlayerDataPanel extends BottomPanel {
 	}
 
 	public void refresh(){
-		ArrayList<PlayerSeasonVO> iniArray = playerSeason.getScreenedPlayers
+		ArrayList<PlayerSeasonPO> iniArray = playerSeason.getScreenedPlayers
 				(PlayerPositionSelectButton.current.position, PlayerDivisionSelectButton.current.division, 
 						PlayerScreenSelectButton.current.basis, seasonInput.getSeason());
 		table = new AllPlayerSeasonTable(playerblService,iniArray,current,totalOrAvg);
@@ -314,7 +314,7 @@ public class PlayerDataPanel extends BottomPanel {
 			}
 			PlayerPositionSelectButton.current.back();
 			PlayerPositionSelectButton.current = (PlayerPositionSelectButton) e.getSource();
-			ArrayList<PlayerSeasonVO> playerRecords = playerSeason.getScreenedPlayers(
+			ArrayList<PlayerSeasonPO> playerRecords = playerSeason.getScreenedPlayers(
 					PlayerPositionSelectButton.current.position, PlayerDivisionSelectButton.current.division, PlayerScreenSelectButton.current.basis, seasonInput.getSeason());
 			table = new AllPlayerSeasonTable(playerblService,playerRecords,current,totalOrAvg);
 			addScrollPane(table);
@@ -329,7 +329,7 @@ public class PlayerDataPanel extends BottomPanel {
 			}
 			PlayerDivisionSelectButton.current.back();
 			PlayerDivisionSelectButton.current = (PlayerDivisionSelectButton) e.getSource();
-			ArrayList<PlayerSeasonVO> playerRecords = playerSeason.getScreenedPlayers(
+			ArrayList<PlayerSeasonPO> playerRecords = playerSeason.getScreenedPlayers(
 					PlayerPositionSelectButton.current.position, PlayerDivisionSelectButton.current.division, PlayerScreenSelectButton.current.basis, seasonInput.getSeason());
 			table = new AllPlayerSeasonTable(playerblService,playerRecords,current,totalOrAvg);
 			addScrollPane(table);
@@ -344,7 +344,7 @@ public class PlayerDataPanel extends BottomPanel {
 			}
 			PlayerScreenSelectButton.current.back();
 			PlayerScreenSelectButton.current = (PlayerScreenSelectButton) e.getSource();
-			ArrayList<PlayerSeasonVO> playerRecords = playerSeason.getScreenedPlayers(
+			ArrayList<PlayerSeasonPO> playerRecords = playerSeason.getScreenedPlayers(
 					PlayerPositionSelectButton.current.position, PlayerDivisionSelectButton.current.division, PlayerScreenSelectButton.current.basis, seasonInput.getSeason());
 			table = new AllPlayerSeasonTable(playerblService,playerRecords,current,totalOrAvg);
 			addScrollPane(table);

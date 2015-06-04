@@ -214,11 +214,11 @@ public class SimpleMatchesAccumulator {
 		}
 		
 		playerRecord.time += lineInt[2];
-		playerRecord.fieldGoal += lineInt[3];
+		playerRecord.fieldMade += lineInt[3];
 		playerRecord.fieldAttempt += lineInt[4];
-		playerRecord.threePointGoal += lineInt[5];
+		playerRecord.threePointMade += lineInt[5];
 		playerRecord.threePointAttempt += lineInt[6];
-		playerRecord.freethrowGoal += lineInt[7];
+		playerRecord.freethrowMade += lineInt[7];
 		playerRecord.freethrowAttempt += lineInt[8];
 		playerRecord.offensiveRebound += lineInt[9];
 		playerRecord.defensiveRebound += lineInt[10];
@@ -251,7 +251,7 @@ public class SimpleMatchesAccumulator {
 	private void playerAccumulate(PlayerSimpleSeasonVO playerRecord, int [] teamData, int[] oppoData){
 		playerRecord.oppoDefensiveRebound += oppoData[10];
 		playerRecord.oppoFieldAttempt += oppoData[4];
-		playerRecord.oppoFieldGoal += oppoData[3];
+		playerRecord.oppoFieldMade += oppoData[3];
 		playerRecord.oppoTurnover += oppoData[15];
 		playerRecord.oppoFreethrowAttempt += oppoData[8];
 		playerRecord.oppoOffensiveRebound += oppoData[9];
@@ -261,7 +261,7 @@ public class SimpleMatchesAccumulator {
 		
 		playerRecord.teamDefensiveRebound += teamData[10];
 		playerRecord.teamFieldAttempt += teamData[4];
-		playerRecord.teamFieldGoal += teamData[3];
+		playerRecord.teamFieldMade += teamData[3];
 		playerRecord.teamTurnover += teamData[15];
 		playerRecord.teamFreethrowAttempt += teamData[8];
 		playerRecord.teamOffensiveRebound += teamData[9];
@@ -273,11 +273,11 @@ public class SimpleMatchesAccumulator {
 		
 		teamRecord.matchCount ++;
 		teamRecord.score += teamData[17];
-		teamRecord.fieldGoal += teamData[3];
+		teamRecord.fieldMade += teamData[3];
 		teamRecord.fieldAttempt += teamData[4];
-		teamRecord.threePointGoal += teamData[5];
+		teamRecord.threePointMade += teamData[5];
 		teamRecord.threePointAttempt += teamData[6];
-		teamRecord.freethrowGoal += teamData[7];
+		teamRecord.freethrowMade += teamData[7];
 		teamRecord.freethrowAttempt += teamData[8];
 		teamRecord.offensiveRebound += teamData[9];
 		teamRecord.defensiveRebound += teamData[10];
@@ -290,7 +290,7 @@ public class SimpleMatchesAccumulator {
 		
 		teamRecord.oppoDefensiveRebound += oppoData[10];
 		teamRecord.oppoFieldAttempt += oppoData[4];
-		teamRecord.oppoFieldGoal += oppoData[3];
+		teamRecord.oppoFieldMade += oppoData[3];
 		teamRecord.oppoFreethrowAttempt += oppoData[8];
 		teamRecord.oppoOffensiveRebound += oppoData[9];
 		teamRecord.oppoScore += oppoData[17];

@@ -1,9 +1,8 @@
 package utility;
 
-import data.playerdata.PlayerData;
+import java.sql.Date;
+
 import data.playerdata.PlayerImageCache;
-import data.seasondata.SeasonData;
-import data.teamdata.TeamData;
 import enums.ScreenDivision;
 
 /**
@@ -23,6 +22,10 @@ public class Constants {
 //		
 //	}
 	
+	public static String LATEST_SEASON = "2014-15P";
+	
+	public static String LATEST_SEASON_REGULAR = "2014-15R";
+	
 	/** 无资料的时候显示的提示 */
 	public static final String UNKNOWN = "无资料";
 	
@@ -32,9 +35,6 @@ public class Constants {
 	public static void changeDataSourcePath(String newPath) {
 		dataSourcePath = newPath + "\\";
 		PlayerImageCache.reloadImages();
-		PlayerData.reloadPlayers();
-		SeasonData.reloadMatches();
-		TeamData.reloadTeams();
 	}
 	
 	/** 球员个人信息页面中的赛季数据的表头 */
@@ -436,15 +436,15 @@ public class Constants {
 	public static String translateHeight(String height){
 		return translater.translateHeight(height);
 	}
-	public static String translateWeight(String weight){
+	public static String translateWeight(int weight){
 		return translater.translateWeight(weight);
 	}
-	public static String translateDate(String date){
+	public static String translateDate(Date date){
 		return translater.translateDate(date);
 	}
 	/** veteran即球龄 */
-	public static String translateVeteran(String veteran){	
-		return translater.translateVeteran(veteran);
+	public static String translateVeteran(int fromYear){	
+		return translater.translateVeteran(fromYear);
 	}
 	public static String translatePosition(String position) {
 		return translater.translatePosition(position);

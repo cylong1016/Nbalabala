@@ -25,7 +25,7 @@ import utility.Constants;
  * @author Issac Ding
  * @version 2015年3月20日  下午6:59:33
  */
-public class SVGHandler {
+public class TeamLogoCache {
 	
 	private static HashMap<String, Image> logos = new HashMap<String, Image>();
 	

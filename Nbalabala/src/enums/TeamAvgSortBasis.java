@@ -20,7 +20,7 @@ public enum TeamAvgSortBasis {
 	WINNING,
 
 	/** 平均投篮命中数 */
-	FIELD_GOAL_AVG,
+	FIELD_MADE_AVG,
 
 	/** 平均投篮出手数 */
 	FIELD_ATTEMPT_AVG,
@@ -29,7 +29,7 @@ public enum TeamAvgSortBasis {
 	FIELD_PERCENT,
 
 	/** 三分球平均命中数 */
-	THREE_POINT_GOAL_AVG,
+	THREE_POINT_MADE_AVG,
 	
 	/** 三分球平均出手数 */
 	THREE_POINT_ATTEMPT_AVG,
@@ -38,7 +38,7 @@ public enum TeamAvgSortBasis {
 	THREE_POINT_PERCENT,
 
 	/** 平均罚球命中数 */
-	FREETHROW_GOAL_AVG,
+	FREETHROW_MADE_AVG,
 
 	/** 平均罚球出手数 */
 	FREETHROW_ATTEMPT_AVG,

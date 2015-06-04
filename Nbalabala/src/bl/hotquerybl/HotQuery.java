@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import po.MatchDetailPO;
+import po.MatchPlayerPO;
+import po.PlayerSeasonPO;
+import po.TeamSeasonPO;
 import utility.Constants;
 import vo.HotFastestPlayerVO;
 import vo.HotSeasonPlayerVO;
 import vo.HotSeasonTeamVO;
 import vo.HotTodayPlayerVO;
-import vo.MatchDetailVO;
-import vo.MatchPlayerVO;
-import vo.PlayerMatchPerformanceVO;
-import vo.PlayerSeasonVO;
-import vo.TeamSeasonVO;
 import bl.playerseasonbl.PlayerAvgSorter;
 import bl.teamseasonbl.TeamAvgSorter;
 import blservice.HotBLService;
 import data.matchdata.MatchData;
 import data.playerdata.PlayerData;
 import data.seasondata.SeasonData;
+import dataservice.MatchDataService;
 import dataservice.PlayerDataService;
 import dataservice.SeasonDataService;
 import enums.HotFastestPlayerProperty;
@@ -38,11 +38,23 @@ import enums.TeamAvgSortBasis;
  */
 public class HotQuery implements HotBLService{
 	
+	private static ArrayList<TempVO> players = new ArrayList<TempVO>();
+	
 	private SeasonDataService seasonService = new SeasonData();
 	private PlayerDataService playerService = new PlayerData();
 	
 	// 至少这么多个投篮、三分、罚球，才能参与命中率排名
 	private static final int MIN_DIVISOR = 4;
+	
+	public HotQuery() {
+		load();
+	}
+	
+	private void load() {
+		MatchDataService matchDataService = new MatchData();
+		ArrayList<MatchDetailPO> matches = matchDataService.getMatchDetailBySeason(Constants.LATEST_SEASON); 
+		new TempCalculator().load(players, matches);
+	}
 	
 	/**
 	 * @see blservice.HotBLService#getHotTodayPlayers(enums.HotTodayPlayerProperty)
@@ -50,40 +62,40 @@ public class HotQuery implements HotBLService{
 	@Override
 	public ArrayList<HotTodayPlayerVO> getHotTodayPlayers(
 			HotTodayPlayerProperty property) {
-		Comparator<PlayerSeasonVO> comparator = null;
+		Comparator<TempVO> comparator = null;
 		MatchData matchData = new MatchData();
 		switch (property) {
 		case SCORE:
-			comparator = new Comparator<PlayerSeasonVO>() {
-				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
+			comparator = new Comparator<TempVO>() {
+				public int compare(TempVO vo1, TempVO vo2) {
 					return vo2.latestScore - vo1.latestScore;
 				}
 			};
 			break;
 		case REBOUND:
-			comparator = new Comparator<PlayerSeasonVO>() {
-				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
+			comparator = new Comparator<TempVO>() {
+				public int compare(TempVO vo1, TempVO vo2) {
 					return vo2.latestRebound - vo1.latestRebound;
 				}
 			};
 			break;
 		case ASSIST:
-			comparator = new Comparator<PlayerSeasonVO>() {
-				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
+			comparator = new Comparator<TempVO>() {
+				public int compare(TempVO vo1, TempVO vo2) {
 					return vo2.latestAssist - vo1.latestAssist;
 				}
 			};
 			break;
 		case BLOCK:
-			comparator = new Comparator<PlayerSeasonVO>() {
-				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
+			comparator = new Comparator<TempVO>() {
+				public int compare(TempVO vo1, TempVO vo2) {
 					return vo2.latestBlock - vo1.latestBlock;
 				}
 			};
 			break;
 		case STEAL:
-			comparator = new Comparator<PlayerSeasonVO>() {
-				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
+			comparator = new Comparator<TempVO>() {
+				public int compare(TempVO vo1, TempVO vo2) {
 					return vo2.latestSteal - vo1.latestSteal;
 				}
 			};
@@ -91,14 +103,13 @@ public class HotQuery implements HotBLService{
 		default:
 			break;
 		}
-		ArrayList<PlayerSeasonVO> players = seasonService.getAllPlayerRecentSeasonTodayData();
 		Collections.sort(players, comparator);
 		int size = players.size();
 		if (size > 5) size = 5;
 		int i;
 		ArrayList<HotTodayPlayerVO> result = new ArrayList<HotTodayPlayerVO>();
 		for (i=0; i<size; i++) {
-			PlayerSeasonVO seasonVO = players.get(i);
+			TempVO seasonVO = players.get(i);
 			int value = 0;
 			switch (property) {
 			case SCORE:
@@ -121,29 +132,16 @@ public class HotQuery implements HotBLService{
 			}
 			String name = seasonVO.name;
 			String position = playerService.getPlayerProfileByName(name).getPosition();
-			MatchDetailVO matchDetail =
-					matchData.getMatchDetailByFileName(seasonVO.lastMatchFileName);
-			for (MatchPlayerVO vo : matchDetail.getHomePlayers()) {
-				if (vo.getName().equals(name)) {
-					PlayerMatchPerformanceVO performance = 
-							new PlayerMatchPerformanceVO(vo, matchDetail.getProfile().getSeason(), 
-									matchDetail.getProfile().getTime(), matchDetail.getProfile().getTeam());
-					result.add(new HotTodayPlayerVO(i+1, name, seasonVO.teamName, position,
-							value, performance));
+			MatchDetailPO matchDetail =
+					matchData.getMatchDetailByMatchID(seasonVO.matchID);
+			ArrayList<MatchPlayerPO> matchPlayers = matchDetail.getMatchPlayers();
+			for (MatchPlayerPO vo  : matchPlayers) {
+				if (vo.playerName.equals(name)) {
+					result.add(new HotTodayPlayerVO(i+1, name, seasonVO.team, position,
+							value, vo));
 					break;
 				}
 			}
-			for (MatchPlayerVO vo : matchDetail.getRoadPlayers()) {
-				if (vo.getName().equals(name)) {
-					PlayerMatchPerformanceVO performance = 
-							new PlayerMatchPerformanceVO(vo, matchDetail.getProfile().getSeason(), 
-									matchDetail.getProfile().getTime(), matchDetail.getProfile().getTeam());
-					result.add(new HotTodayPlayerVO(i+1, name, seasonVO.teamName, position,
-							value, performance));
-					break;
-				}
-			}
-			
 		}
 		return result;
 	}
@@ -154,7 +152,7 @@ public class HotQuery implements HotBLService{
 	@Override
 	public ArrayList<HotSeasonPlayerVO> getHotSeasonPlayers(
 			HotSeasonPlayerProperty property) {
-		ArrayList<PlayerSeasonVO> players = seasonService.getAllPlayerRecentSeasonData();
+		ArrayList<PlayerSeasonPO> players = seasonService.getAllPlayerRecentSeasonData();
 		PlayerAvgSorter sorter = new PlayerAvgSorter();
 		if (property == null) return new ArrayList<HotSeasonPlayerVO>();
 		switch (property) {
@@ -192,7 +190,7 @@ public class HotQuery implements HotBLService{
 		
 		int index = 0;
 		for (i=0; i<size; i++) {
-			PlayerSeasonVO seasonVO = players.get(index);
+			PlayerSeasonPO seasonVO = players.get(index);
 			index ++;
 			
 			if (property == HotSeasonPlayerProperty.FIELD_PERCENT && seasonVO.fieldAttempt <MIN_DIVISOR) {
@@ -237,7 +235,7 @@ public class HotQuery implements HotBLService{
 			}
 			String name = seasonVO.name;
 			String position = playerService.getPlayerProfileByName(name).getPosition();
-			result.add(new HotSeasonPlayerVO(i+1, name, seasonVO.teamName, position, value));
+			result.add(new HotSeasonPlayerVO(i+1, name, seasonVO.teamAbbr, position, value));
 		}
 		return result;
 	}
@@ -248,7 +246,7 @@ public class HotQuery implements HotBLService{
 	@Override
 	public ArrayList<HotSeasonTeamVO> getHotSeasonTeams(
 			HotSeasonTeamProperty property) {
-		ArrayList<TeamSeasonVO> teams = seasonService.getAllTeamRecentSeasonData();
+		ArrayList<TeamSeasonPO> teams = seasonService.getAllTeamRecentSeasonData();
 		TeamAvgSorter sorter = new TeamAvgSorter();
 		switch (property) {
 		case SCORE_AVG:
@@ -283,7 +281,7 @@ public class HotQuery implements HotBLService{
 		int i;
 		ArrayList<HotSeasonTeamVO> result = new ArrayList<HotSeasonTeamVO>();
 		for (i=0; i<size; i++) {
-			TeamSeasonVO seasonVO = teams.get(i);
+			TeamSeasonPO seasonVO = teams.get(i);
 			double value = 0;
 			switch (property) {
 			case SCORE_AVG:
@@ -313,7 +311,7 @@ public class HotQuery implements HotBLService{
 			default:
 				break;
 			}
-			String abbr = seasonVO.teamName;
+			String abbr = seasonVO.abbr;
 			String league;
 			ScreenDivision area = Constants.getAreaByAbbr(abbr);
 			if (area == ScreenDivision.EAST) {
@@ -332,61 +330,61 @@ public class HotQuery implements HotBLService{
 	@Override
 	public ArrayList<HotFastestPlayerVO> getHotFastestPlayers(
 			HotFastestPlayerProperty property) {
-		Comparator<PlayerSeasonVO> comparator = null;
+		Comparator<TempVO> comparator = null;
 		if (property == null) return new ArrayList<HotFastestPlayerVO>();
 		switch (property) {
 		case SCORE_AVG:
-			comparator = new Comparator<PlayerSeasonVO>() {
-				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
+			comparator = new Comparator<TempVO>() {
+				public int compare(TempVO vo1, TempVO vo2) {
 					return (int)((vo2.scorePromotion - vo1.scorePromotion)*10000);
 				}
 			};
 			break;
 		case REBOUND_AVG:
-			comparator = new Comparator<PlayerSeasonVO>() {
-				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
+			comparator = new Comparator<TempVO>() {
+				public int compare(TempVO vo1, TempVO vo2) {
 					return (int)((vo2.reboundPromotion - vo1.reboundPromotion)*10000);
 				}
 			};
 			break;
 		case ASSIST_AVG:
-			comparator = new Comparator<PlayerSeasonVO>() {
-				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
+			comparator = new Comparator<TempVO>() {
+				public int compare(TempVO vo1, TempVO vo2) {
 					return (int)((vo2.assistPromotion - vo1.assistPromotion)*10000);
 				}
 			};
 			break;
 		case BLOCK_AVG:
-			comparator = new Comparator<PlayerSeasonVO>() {
-				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
+			comparator = new Comparator<TempVO>() {
+				public int compare(TempVO vo1, TempVO vo2) {
 					return (int)((vo2.blockPromotion - vo1.blockPromotion)*10000);
 				}
 			};
 			break;
 		case STEAL_AVG:
-			comparator = new Comparator<PlayerSeasonVO>() {
-				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
+			comparator = new Comparator<TempVO>() {
+				public int compare(TempVO vo1, TempVO vo2) {
 					return (int)((vo2.stealPromotion - vo1.stealPromotion)*10000000);
 				}
 			};
 			break;
 		case FIELD_PERCENT:
-			comparator = new Comparator<PlayerSeasonVO>() {
-				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
+			comparator = new Comparator<TempVO>() {
+				public int compare(TempVO vo1, TempVO vo2) {
 					return (int)((vo2.fieldPercentPromotion - vo1.fieldPercentPromotion)*100000000);
 				}
 			};
 			break;
 		case THREE_POINT_PERCENT:
-			comparator = new Comparator<PlayerSeasonVO>() {
-				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
+			comparator = new Comparator<TempVO>() {
+				public int compare(TempVO vo1, TempVO vo2) {
 					return (int)((vo2.threePointPercentPromotion - vo1.threePointPercentPromotion)*100000000);
 				}
 			};
 			break;
 		case FREETHROW_PERCENT:
-			comparator = new Comparator<PlayerSeasonVO>() {
-				public int compare(PlayerSeasonVO vo1, PlayerSeasonVO vo2) {
+			comparator = new Comparator<TempVO>() {
+				public int compare(TempVO vo1, TempVO vo2) {
 					return (int)((vo2.freethrowPercentPromotion - vo1.freethrowPercentPromotion)*10000);
 				}
 			};
@@ -394,14 +392,13 @@ public class HotQuery implements HotBLService{
 		default:
 			break;
 		}
-		ArrayList<PlayerSeasonVO> players = seasonService.getAllPlayerRecentSeasonData();
 		Collections.sort(players, comparator);
 		int size = players.size();
 		if (size > 5) size = 5;
 		int i;
 		ArrayList<HotFastestPlayerVO> result = new ArrayList<HotFastestPlayerVO>();
 		for (i=1; i<=size; i++) {
-			PlayerSeasonVO seasonVO = players.get(i - 1);
+			TempVO seasonVO = players.get(i - 1);
 			double promotion = 0;
 			double formerAvg = 0;
 			int [] recentFive = null;
@@ -474,7 +471,7 @@ public class HotQuery implements HotBLService{
 					for (int k=0;k<5;k++) {
 						recentResult[k] = (double)recentFive[k];
 					}
-					result.add(new HotFastestPlayerVO(i, name, seasonVO.teamName, position,
+					result.add(new HotFastestPlayerVO(i, name, seasonVO.team, position,
 							formerAvg, recentResult, promotion));
 				}else {
 					double [] recentPercent = new double[5];
@@ -485,7 +482,7 @@ public class HotQuery implements HotBLService{
 							recentPercent[j] = 0;
 						}
 					}
-					result.add(new HotFastestPlayerVO(i, name, seasonVO.teamName, position,
+					result.add(new HotFastestPlayerVO(i, name, seasonVO.team, position,
 							formerAvg, recentPercent, promotion));
 				}
 			}

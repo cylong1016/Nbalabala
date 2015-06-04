@@ -1,15 +1,12 @@
 package data.teamdata;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 
-import utility.Constants;
-import vo.TeamProfileVO;
+import po.TeamProfilePO;
+import data.Database;
 import dataservice.TeamDataService;
 
 /**
@@ -20,41 +17,35 @@ import dataservice.TeamDataService;
 public class TeamData implements TeamDataService{
 
 	/** 全部球队信息 */
-	private static HashMap<String, TeamProfileVO> teams = new HashMap<String, TeamProfileVO>();
+	private static HashMap<String, TeamProfilePO> teams = new HashMap<String, TeamProfilePO>();
 
 	public TeamData() {
 		if (teams.size() == 0) {
 			loadTeams();
 		}
 	}
-
+	
 	/**
 	 * 加载全部球队信息
 	 * @author cylong
 	 * @version 2015年3月13日 下午9:05:33
 	 */
-	private static void loadTeams() {
-		File file = new File(Constants.dataSourcePath + "teams/teams");
-		if ( !file.exists()){
-			return;
-		}
-		BufferedReader br = null;
+	private void loadTeams() {
 		try {
-			br = new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));
-			String line = null;
-			while((line = br.readLine()) != null) {
-				line = line.replace("║", "");
-				if (!Character.isLetterOrDigit(line.charAt(0))) {
-					continue;
-				}
-				String[] info = line.split("│");
-				TeamProfileVO team = new TeamProfileVO(info[0].trim(), info[1], info[2].trim(),  
-						info[4].trim(), info[5].trim(), info[6]);
-				teams.put(team.getAbbr(), team);
+			Statement statement = Database.conn.createStatement();
+			ResultSet rs = statement.executeQuery("select * from team_profile");
+			while (rs.next()) {
+				TeamProfilePO po = new TeamProfilePO();
+				po.abbr = rs.getString(1);
+				po.name = rs.getString(2);
+				po.location = rs.getString(3);
+				po.league = rs.getString(4).charAt(0);
+				po.division = rs.getString(5);
+				po.home = rs.getString(6);
+				po.since = rs.getInt(7);
+				teams.put(po.abbr, po);
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -63,21 +54,7 @@ public class TeamData implements TeamDataService{
 	 * @see dataservice.TeamDataService#getTeamProfileByAbbr(java.lang.String)
 	 */
 	@Override
-	public TeamProfileVO getTeamProfileByAbbr(String abbr) {
-		TeamProfileVO vo = teams.get(abbr);
-		if (vo == null) {
-			return new TeamProfileVO(Constants.translateTeamAbbr(abbr), abbr);
-		}else{
-			return vo;
-		}
-	}
-	
-	public static void clear() {
-		teams.clear();
-	}
-	
-	public static void reloadTeams() {
-		teams.clear();
-		loadTeams();
+	public TeamProfilePO getTeamProfileByAbbr(String abbr) {
+		return teams.get(abbr);
 	}
 }

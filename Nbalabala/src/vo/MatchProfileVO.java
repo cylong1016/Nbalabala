@@ -1,5 +1,8 @@
 package vo;
 
+import po.MatchProfilePO;
+import utility.Constants;
+
 /**
  * 比赛简况
  * @author lsy
@@ -7,7 +10,7 @@ package vo;
  */
 public class MatchProfileVO {
 	
-	/** 赛季，形式为13-14 */
+	/** 赛季，形式为2013-14R 2012-13P */
 	private String season;
 	
 	/**比赛时间 格式为"01-01"*/
@@ -19,8 +22,12 @@ public class MatchProfileVO {
 	/** 比分,格式为“85-112” */
 	private String score;
 	
-	/** 每节比分 ，格式为“27-25;29-31;13-25;16-31;”*/
-	private String eachSectionScore;
+	public MatchProfileVO(MatchProfilePO po) {
+		this.season = po.season;
+		this.time = Constants.translateDate(po.date);
+		this.team = po.roadAbbr + "-" + po.homeAbbr;
+		this.score = po.roadTotalScore + "-" + po.homeTotalScore;
+	}
 
 	public MatchProfileVO(String season, String time, String team, String score, String eachSectionScore) {
 		super();
@@ -28,7 +35,6 @@ public class MatchProfileVO {
 		this.time = time;
 		this.team = team;
 		this.score = score;
-		this.eachSectionScore = eachSectionScore;
 	}
 	
 	public boolean equals(Object o) {
@@ -50,9 +56,5 @@ public class MatchProfileVO {
 
 	public String getScore() {
 		return score;
-	}
-
-	public String getEachSectionScore() {
-		return eachSectionScore;
 	}
 }

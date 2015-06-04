@@ -1,6 +1,5 @@
 package ui.panel.allteams;
 
-import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JLabel;
@@ -19,7 +18,7 @@ public class TeamWinsLosesLabel extends JLabel{
 	private static final long serialVersionUID = -1833510881213891733L;
 	private JLabel winsLabel;
 	private JLabel losesLabel;
-	private static final Font BIG_FONT = UIConfig.FONT; //TODO几胜几负的大字体
+	private static final Font BIG_FONT = UIConfig.FONT; //TODO 几胜几负的大字体
 	
 	public TeamWinsLosesLabel(int wins, int loses) {
 		winsLabel = new JLabel(String.valueOf(wins));

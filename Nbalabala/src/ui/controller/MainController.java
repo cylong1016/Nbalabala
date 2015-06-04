@@ -7,11 +7,9 @@ import ui.common.frame.Frame;
 import ui.common.panel.BottomPanel;
 import ui.common.panel.Panel;
 import ui.panel.allplayers.AllPlayersPanel;
-import ui.panel.allplayers.PlayerInfoPanel;
+import ui.panel.allplayers.PlayerInfoBottomPanel;
 import ui.panel.allteams.AllTeamsPanel;
-import ui.panel.allteams.TeamGamePanel;
-import ui.panel.allteams.TeamLineupPanel;
-import ui.panel.allteams.TeamSeasonPanel;
+import ui.panel.allteams.TeamBottomPanel;
 import ui.panel.gamedata.GameDataPanel;
 import ui.panel.gamedata.GamePanel;
 import ui.panel.hot.hotFast.HotFastPanel;
@@ -44,16 +42,10 @@ public class MainController {
 	private static AllTeamsPanel allTeamsPanel;
 	/** 比赛数据界面 */
 	private static GameDataPanel gameDataPanel;
-	/** 球队赛季数据 */
-	private static TeamSeasonPanel teamSeasonpanel;
-	/** 球队阵容数据 */
-	private static TeamLineupPanel teamplayerpanel;
-	/** 球队比赛数据 */
-	private static TeamGamePanel teamGamePanel;
 	/** 某场比赛数据 */
 	private static GamePanel gamePanel;
 	/** 球员详细信息 */
-	private static PlayerInfoPanel playerInfoPanel;
+	private static PlayerInfoBottomPanel playerInfoPanel;
 	/** 当天热点球员界面 */
 	private static HotTodayPlayerPanel hotTodayPlayerPanel;
 	/** 赛季热点球员界面 */
@@ -62,6 +54,8 @@ public class MainController {
 	private static HotSeasonTeamPanel hotSeasonTeamPanel;
 	/** 进步最快球员界面 */
 	private static HotFastPanel hotFastPanel;
+	/** 球队信息界面 */
+	private static TeamBottomPanel teamBottomPanel;
 	
 	
 	/**
@@ -135,33 +129,11 @@ public class MainController {
 		frame.setPanel(allTeamsPanel);
 	}
 
-	/**
-	 * 进入球队赛季情况界面
-	 * @param button 选择的球队按钮
-	 * @author lsy
-	 * @version 2015年3月20日 下午11:45:39
-	 */
-	public static void toTeamSeasonPanel(String abbr) {
-		teamSeasonpanel = new TeamSeasonPanel((BottomPanel)(Frame.currentPanel),"images/teams/teamSeasonBG.png", abbr);
-		frame.setPanel(teamSeasonpanel);
+	public static void toTeamBottomPanel(BottomPanel from, String abbr) {
+		teamBottomPanel = new TeamBottomPanel(from, abbr);
+		frame.setPanel(teamBottomPanel);
 	}
 	
-	public static void toTeamPlayerPanel(String abbr) {
-		teamplayerpanel = new TeamLineupPanel((BottomPanel)(Frame.currentPanel),"images/teams/teamSeasonBG.png", abbr);
-		frame.setPanel(teamplayerpanel);
-	}
-	
-
-	/**
-	 * 球队赛季数据界面
-	 * @author lsy
-	 * @version 2015年3月21日 上午12:31:15
-	 */
-	public static void toTeamGamePanel(String abbr) {
-		teamGamePanel = new TeamGamePanel((BottomPanel)(Frame.currentPanel),UIConfig.IMG_PATH + "teams/teamSeasonBG.png", abbr);
-		frame.setPanel(teamGamePanel);
-	}
-
 	/**
 	 * 添加日期选择器
 	 * @author lsy
@@ -200,7 +172,7 @@ public class MainController {
 	 * @version 2015年3月24日 上午11:19:21
 	 */
 	public static void toPlayerInfoPanel(String name, BottomPanel allPanel) {
-		playerInfoPanel = new PlayerInfoPanel(UIConfig.IMG_PATH + "players/playerInfoBG.png", name, allPanel);
+		playerInfoPanel = new PlayerInfoBottomPanel(name, allPanel);
 		frame.setPanel(playerInfoPanel);
 	}
 	

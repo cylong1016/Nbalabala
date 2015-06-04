@@ -16,7 +16,7 @@ import vo.MatchDetailVO;
 import vo.MatchProfileVO;
 import bl.matchquerybl.MatchQuery;
 import blservice.MatchQueryBLService;
-import data.teamdata.SVGHandler;
+import data.teamdata.TeamLogoCache;
 
 /**
  * 比赛简况panel
@@ -136,7 +136,7 @@ public class ProfilePanel extends Panel {
 
 	public void getScore() {
 		scoreAll = matchPro.getScore().split("-");// 两支球队比赛总分
-		eachScore = matchPro.getEachSectionScore().split(";");
+		eachScore = matchDetail.getEachSectionScore().split(";");
 
 		int eachlth = eachScore.length;
 		score1 = new String[eachlth];
@@ -156,8 +156,8 @@ public class ProfilePanel extends Panel {
 		teamLabel2.setFont(labelFont);
 		placeLabel1 = new MyLabel(labelX, labelY_1, width, height, place1);
 		placeLabel2 = new MyLabel(labelX, labelY_3, width, height, place2);
-		sign1 = new ImgLabel(25, 0, 70, 70, SVGHandler.getTeamLogo(teamShort1));
-		sign2 = new ImgLabel(25, 75, 70, 70, SVGHandler.getTeamLogo(teamShort2));
+		sign1 = new ImgLabel(25, 0, 70, 70, TeamLogoCache.getTeamLogo(teamShort1));
+		sign2 = new ImgLabel(25, 75, 70, 70, TeamLogoCache.getTeamLogo(teamShort2));
 		teamlb1 = new MyLabel(rightX_Team1,rightY_1,width,height,teamStr1);
 		teamlb2 = new MyLabel(rightX_Team2,rightY_1,width,height,teamStr2);
 		teamlb1.setFont(labelFont);

@@ -3,12 +3,8 @@
  */
 package ui.panel.allteams;
 
-import java.awt.ScrollPane;
 import java.util.ArrayList;
 
-import javax.swing.table.DefaultTableModel;
-
-import blservice.TeamQueryBLService;
 import ui.common.SeasonInputPanel;
 import ui.common.panel.Panel;
 import ui.common.table.BottomScrollPane;

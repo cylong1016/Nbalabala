@@ -2,7 +2,7 @@ package dataservice;
 
 import java.util.ArrayList;
 
-import vo.PlayerProfileVO;
+import po.PlayerProfilePO;
 
 /**
  * 
@@ -11,20 +11,18 @@ import vo.PlayerProfileVO;
  */
 public interface PlayerDataService {
 
-	/**
-	 * @see dataservice.playerdataservice.PlayerDataService#getPlayerProfileByInitial(char)
-	 */
-	public ArrayList<PlayerProfileVO> getPlayerProfileByInitial(
+	/** 根据姓氏首字母得到球员资料列表 */
+	public ArrayList<PlayerProfilePO> getPlayerProfileByInitial(
 			char initial);
 
-	/**
-	 * @see dataservice.playerdataservice.PlayerDataService#getPlayerProfileByName(java.lang.String)
-	 */
-	public PlayerProfileVO getPlayerProfileByName(String name);
+	/** 根据名字得到球员资料 */
+	public PlayerProfilePO getPlayerProfileByName(String name);
 
-	public ArrayList<PlayerProfileVO> getPlayerProfileByNames(
+	/** 根据名字列表得到资料列表 */
+	public ArrayList<PlayerProfilePO> getPlayerProfileByNames(
 			ArrayList<String> names);
 	
-	public ArrayList<PlayerProfileVO> searchPlayers(String keyword);
+	/** 根据关键字查找名字匹配的球员，如kob将会查找到Kobe Bryant */
+	public ArrayList<PlayerProfilePO> searchPlayers(String keyword);
 
 }

@@ -10,6 +10,8 @@ import vo.RecentDataQueue;
  */
 public class PlayerSimpleSeasonVO {
 	
+	public int latestMatchID;
+	
 	public PlayerSimpleSeasonVO(String name) {
 		this.name = name;
 	}
@@ -26,7 +28,7 @@ public class PlayerSimpleSeasonVO {
 	
 	/**
 	 * attempt是出手
-	 * goal命中
+	 * made命中
 	 * avg场均
 	 */
 
@@ -46,19 +48,19 @@ public class PlayerSimpleSeasonVO {
 	public int time;
 
 	/** 投篮命中 */
-	public int fieldGoal;
+	public int fieldMade;
 
 	/** 投篮出手 */
 	public int fieldAttempt;
 
 	/** 三分命中 */
-	public int threePointGoal;
+	public int threePointMade;
 
 	/** 三分出手 */
 	public int threePointAttempt;
 
 	/** 罚球命中 */
-	public int freethrowGoal;
+	public int freethrowMade;
 
 	/** 罚球出手 */
 	public int freethrowAttempt;
@@ -81,7 +83,7 @@ public class PlayerSimpleSeasonVO {
 	/** 球队总篮板 */
 	public int teamTotalRebound;
 
-	public int teamFieldGoal;
+	public int teamFieldMade;
 
 	public int teamFieldAttempt;
 
@@ -96,7 +98,7 @@ public class PlayerSimpleSeasonVO {
 
 	public int oppoDefensiveRebound;
 
-	public int oppoFieldGoal;
+	public int oppoFieldMade;
 
 	public int oppoFieldAttempt;
 
@@ -128,8 +130,8 @@ public class PlayerSimpleSeasonVO {
 		return minutesAvg;
 	}
 
-	public int getFieldGoal() {
-		return fieldGoal;
+	public int getFieldMade() {
+		return fieldMade;
 	}
 
 	public int getFieldAttempt() {
@@ -140,8 +142,8 @@ public class PlayerSimpleSeasonVO {
 		return fieldPercent;
 	}
 
-	public int getThreePointGoal() {
-		return threePointGoal;
+	public int getThreePointMade() {
+		return threePointMade;
 	}
 
 	public int getThreePointAttempt() {
@@ -152,15 +154,15 @@ public class PlayerSimpleSeasonVO {
 		return threePointPercent;
 	}
 
-	public int getFreeThrowGoal() {
-		return freethrowGoal;
+	public int getFreethrowMade() {
+		return freethrowMade;
 	}
 
-	public int getFreeThrowAttempt() {
+	public int getFreethrowAttempt() {
 		return freethrowAttempt;
 	}
 
-	public double getFreeThrowPercent() {
+	public double getFreethrowPercent() {
 		return freethrowPercent;
 	}
 
@@ -349,7 +351,7 @@ public class PlayerSimpleSeasonVO {
 			
 			usePercent = (fieldAttempt + 0.44 * freethrowAttempt + turnover) * ((double)teamTime / 5)/time
 					/ (teamFieldAttempt + 0.44 * teamFreethrowAttempt + teamTurnover);
-			assistPercent = assist / (timeFactor * teamFieldGoal - fieldGoal);
+			assistPercent = assist / (timeFactor * teamFieldMade - fieldMade);
 			
 			doubleDoubleAvg = (double)doubleDoubleCount / matchCount;
 			
@@ -370,7 +372,7 @@ public class PlayerSimpleSeasonVO {
 				stealPercent = steal * temp / oppoAttack;
 			
 			if (fieldAttempt != 0) {
-				fieldEff = (fieldGoal + 0.5 * threePointGoal) / fieldAttempt;
+				fieldEff = (fieldMade + 0.5 * threePointMade) / fieldAttempt;
 			}
 			
 			if (matchCount > 5) {
@@ -397,11 +399,11 @@ public class PlayerSimpleSeasonVO {
 			if (realDivisor != 0)
 				realFieldPercent = score / realDivisor;
 			
-			if (fieldAttempt != 0) fieldPercent = (double)fieldGoal / fieldAttempt;
+			if (fieldAttempt != 0) fieldPercent = (double)fieldMade / fieldAttempt;
 			
-			if (threePointAttempt != 0) threePointPercent = (double)threePointGoal / threePointAttempt;
+			if (threePointAttempt != 0) threePointPercent = (double)threePointMade / threePointAttempt;
 			
-			if (freethrowAttempt != 0) freethrowPercent = (double)freethrowGoal / freethrowAttempt;
+			if (freethrowAttempt != 0) freethrowPercent = (double)freethrowMade / freethrowAttempt;
 			
 			minutes = (double)time / 60;
 			minutesAvg = minutes / matchCount;
@@ -418,11 +420,11 @@ public class PlayerSimpleSeasonVO {
 			turnoverAvg = (double) turnover / matchCount;
 			scoreAvg = (double) score / matchCount;
 			
-			efficiency =  score + totalRebound + assist + steal + block - fieldAttempt + fieldGoal - freethrowAttempt
-				+ freethrowGoal - turnover;
+			efficiency =  score + totalRebound + assist + steal + block - fieldAttempt + fieldMade - freethrowAttempt
+				+ freethrowMade - turnover;
 			
 			efficiencyAvg = (double) efficiency / matchCount;
-			gmscAvg = (score + 0.4 * fieldGoal - 0.7 * fieldAttempt - 0.4 * (freethrowAttempt - freethrowGoal) + 0.7
+			gmscAvg = (score + 0.4 * fieldMade - 0.7 * fieldAttempt - 0.4 * (freethrowAttempt - freethrowMade) + 0.7
 					* offensiveRebound + 0.3 * defensiveRebound + steal + 0.7 * assist + 0.7 * block - 0.4 * foul
 					- turnover) / matchCount;
 			

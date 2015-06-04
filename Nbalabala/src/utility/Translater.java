@@ -1,5 +1,7 @@
 package utility;
 
+import java.sql.Date;
+
 import enums.ScreenDivision;
 
 /**
@@ -10,9 +12,9 @@ import enums.ScreenDivision;
 public interface Translater {
 	
 	String translateHeight(String height);
-	String translateWeight(String weight);
-	String translateDate(String date);
-	String translateVeteran(String veteran);
+	String translateWeight(int weight);
+	String translateDate(Date date);
+	String translateVeteran(int fromYear);
 	String translatePosition(String position);
 	String translateTeamAbbr(String abbr);
 	String translateTeamAbbrToLocation(String abbr);

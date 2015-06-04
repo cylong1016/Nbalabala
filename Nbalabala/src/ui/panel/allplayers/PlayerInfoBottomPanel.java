@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
+import po.MatchPlayerPO;
+import po.PlayerProfilePO;
+import po.PlayerSeasonPO;
 import ui.Images;
 import ui.UIConfig;
 import ui.common.SeasonInputPanel;
@@ -22,9 +25,6 @@ import ui.common.panel.Panel;
 import ui.controller.MainController;
 import utility.Constants;
 import vo.PlayerDetailVO;
-import vo.PlayerMatchPerformanceVO;
-import vo.PlayerProfileVO;
-import vo.PlayerSeasonVO;
 import bl.playerquerybl.PlayerQuery;
 import blservice.PlayerQueryBLService;
 import data.playerdata.PlayerImageCache;
@@ -43,7 +43,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	private static final String BACK_BUTTON_CLICK = IMG_URL + "back.png";
 
 	private String name;
-	private PlayerProfileVO profileVO;
+	private PlayerProfilePO profileVO;
 	private PlayerQueryBLService playerQuery = new PlayerQuery();
 	private PlayerDetailVO detailVO;
 	
@@ -96,7 +96,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		addTabButtons();
 		
 		int matchCount = detailVO.getMatchRecords().size();
-		ArrayList<PlayerMatchPerformanceVO> latestTwoMatches = new ArrayList<PlayerMatchPerformanceVO>();
+		ArrayList<MatchPlayerPO> latestTwoMatches = new ArrayList<MatchPlayerPO>();
 		latestTwoMatches.add(detailVO.getMatchRecords().get(matchCount - 2));
 		latestTwoMatches.add(detailVO.getMatchRecords().get(matchCount - 1));
 				
@@ -115,7 +115,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 			public void actionPerformed(ActionEvent e) {
 				remove(currentPanel);
 				String season = seasonInput.getSeason();
-				PlayerSeasonVO seasonVO = detailVO.getSeasonRecord();
+				PlayerSeasonPO seasonVO = detailVO.getSeasonRecord();
 				
 				currentPanel = briefPanel;
 				addCurrentPanel();
@@ -176,13 +176,16 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	
 	// 标题信息，包括球衣号码、名字、位置、球队
 	// TODO 这里的字体字号不造都是啥
+	// TODO 没有号码的数据怎么办
 	private void addTitles() {
-		JLabel numLabel = new JLabel(profileVO.getNumber());
-		numLabel.setForeground(UIConfig.ORANGE_TEXT_COLOR);
-		numLabel.setHorizontalAlignment(JLabel.RIGHT);
-		//TODO 球衣号码，那个硕大的橙色的文字的字体和bounds
-		numLabel.setBounds(280, 23, 50, 50);
-		this.add(numLabel);
+		PlayerSeasonPO seasonPO = detailVO.getSeasonRecord();
+		
+//		JLabel numLabel = new JLabel(profileVO.getNumber());
+//		numLabel.setForeground(UIConfig.ORANGE_TEXT_COLOR);
+//		numLabel.setHorizontalAlignment(JLabel.RIGHT);
+//		//TODO 球衣号码，那个硕大的橙色的文字的字体和bounds
+//		numLabel.setBounds(280, 23, 50, 50);
+//		this.add(numLabel);
 		
 		JLabel nameLabel = new JLabel(name);
 		nameLabel.setOpaque(false);
@@ -200,8 +203,8 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		this.add(positionLabel);
 		
 		// 改变赛季以后teamLabel可能会改变
-		teamLabel = new JLabel(Constants.translateTeamAbbrToLocation(profileVO.getTeam()) + 
-				Constants.translateTeamAbbr(profileVO.getTeam()));
+		teamLabel = new JLabel(Constants.translateTeamAbbrToLocation(seasonPO.getTeamAbbr()) + 
+				Constants.translateTeamAbbr(seasonPO.getTeamAbbr()));
 		teamLabel.setFont(UIConfig.LABEL_PLAIN_FONT);
 		teamLabel.setForeground(UIConfig.BLUE_TEXT_COLOR);
 		teamLabel.setBounds((int)preferred.getWidth() + 351, 63, 120, 25);
@@ -210,7 +213,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	
 	private void addScoreReboundAssistLabels() {
 		int[] ranks = playerQuery.getScoreReboundAssistRank(name, seasonInput.getSeason());
-		PlayerSeasonVO seasonVO = detailVO.getSeasonRecord();
+		PlayerSeasonPO seasonVO = detailVO.getSeasonRecord();
 		
 		scoreLabel = new PlayerScoreReboundAssistLabel(Constants.scoreAvgText, seasonVO.scoreAvg, ranks[0]);
 		scoreLabel.setLocation(277, 102);
@@ -228,9 +231,9 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	}
 
 	private void addProfileLabel() {
-		String[] profileLabelStr = new String[]{profileVO.getHeight() + " / " + profileVO.getWeight(),
-				Constants.birthdayText + "：" + profileVO.getBirth(),
-				Constants.veteranText + "：" + profileVO.getExp(),
+		String[] profileLabelStr = new String[]{Constants.translateHeight(profileVO.getHeightFoot() + "-" + profileVO.getHeightInch()) + " / " + Constants.translateWeight(profileVO.getWeight()),
+				Constants.birthdayText + "：" + Constants.translateDate(profileVO.getBirthDate()),
+				Constants.veteranText + "：" + (profileVO.getToYear() - profileVO.getFromYear()),
 				Constants.schoolText + "：" + profileVO.getSchool()};
 		for(int i = 0; i < 4; i++) {
 			profileLabel[i] = new MyLabel(profileLabelStr[i]);
@@ -244,7 +247,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	public void refresh() {
 		String season = seasonInput.getSeason();
 		detailVO = playerQuery.getPlayerDetailByName(name, season);
-		PlayerSeasonVO seasonVO = detailVO.getSeasonRecord();
+		PlayerSeasonPO seasonVO = detailVO.getSeasonRecord();
 //		int [] ranks = playerQuery.getScoreReboundAssistRank(name, season);
 //		scoreLabel.update(seasonVO.scoreAvg, ranks[0]);
 //		reboundLabel.update(seasonVO.totalReboundAvg, ranks[1]);
@@ -284,7 +287,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	 * @version 2015年3月24日 上午11:17:35
 	 */
 	private void addPortrait() {
-		ImgLabel label = new ImgLabel(53, 0, 200, 160, profileVO.getPortrait());
+		ImgLabel label = new ImgLabel(53, 0, 200, 160, PlayerImageCache.getPortraitByName(name));
 		this.add(label);
 	}
 
