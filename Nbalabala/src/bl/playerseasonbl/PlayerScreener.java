@@ -2,7 +2,7 @@ package bl.playerseasonbl;
 
 import java.util.ArrayList;
 
-import vo.PlayerSeasonVO;
+import po.PlayerSeasonPO;
 import enums.PlayerAllSortBasis;
 import enums.ScreenBasis;
 import enums.SortOrder;
@@ -14,7 +14,7 @@ import enums.SortOrder;
  */
 public class PlayerScreener {
 	
-	public ArrayList<PlayerSeasonVO> screen(ArrayList<PlayerSeasonVO> players, 
+	public ArrayList<PlayerSeasonPO> screen(ArrayList<PlayerSeasonPO> players, 
 			ScreenBasis basis) {
 		PlayerAllSorter sorter = new PlayerAllSorter();
 		switch(basis){
@@ -46,13 +46,13 @@ public class PlayerScreener {
 			sorter.sort(players, PlayerAllSortBasis.EFFICIENCY, SortOrder.DE);
 			break;
 		case FIELD:
-			sorter.sort(players, PlayerAllSortBasis.FIELD_GOAL, SortOrder.DE);
+			sorter.sort(players, PlayerAllSortBasis.FIELD_MADE, SortOrder.DE);
 			break;
 		case THREE_POINT:
-			sorter.sort(players, PlayerAllSortBasis.THREE_POINT_GOAL, SortOrder.DE);
+			sorter.sort(players, PlayerAllSortBasis.THREE_POINT_MADE, SortOrder.DE);
 			break;
 		case FREE_THROW:
-			sorter.sort(players, PlayerAllSortBasis.FREETHROW_GOAL, SortOrder.DE);
+			sorter.sort(players, PlayerAllSortBasis.FREETHROW_MADE, SortOrder.DE);
 			break;
 		case SCORE:
 			sorter.sort(players, PlayerAllSortBasis.SCORE, SortOrder.DE);
@@ -64,7 +64,7 @@ public class PlayerScreener {
 			break;
 		}
 		
-		ArrayList<PlayerSeasonVO> result = new ArrayList<PlayerSeasonVO>();
+		ArrayList<PlayerSeasonPO> result = new ArrayList<PlayerSeasonPO>();
 		int maxIndex = players.size() > 50 ? 50 : players.size();
 		for (int i=0; i< maxIndex;i++) {
 			result.add(players.get(i));

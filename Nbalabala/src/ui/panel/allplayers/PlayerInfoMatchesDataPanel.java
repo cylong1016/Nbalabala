@@ -2,12 +2,9 @@ package ui.panel.allplayers;
 
 import java.util.ArrayList;
 
+import po.MatchPlayerPO;
 import ui.common.panel.Panel;
 import ui.common.table.BottomScrollPane;
-import ui.common.table.BottomTable;
-import utility.Constants;
-import vo.MatchPlayerVO;
-import vo.PlayerMatchPerformanceVO;
 
 /**
  * 
@@ -26,7 +23,7 @@ public class PlayerInfoMatchesDataPanel extends Panel{
 		
 	}
 	
-	public void updateContent(ArrayList<PlayerMatchPerformanceVO> playerMatch) {
+	public void updateContent(ArrayList<MatchPlayerPO> playerMatch) {
 		if (scrollPane != null) {
 			remove(scrollPane);
 		}

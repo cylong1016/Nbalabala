@@ -1,6 +1,6 @@
 package dataservice;
 
-import vo.TeamProfileVO;
+import po.TeamProfilePO;
 
 /**
  * 
@@ -9,6 +9,6 @@ import vo.TeamProfileVO;
  */
 public interface TeamDataService {
 
-	public TeamProfileVO getTeamProfileByAbbr(String abbr);
+	public TeamProfilePO getTeamProfileByAbbr(String abbr);
 
 }

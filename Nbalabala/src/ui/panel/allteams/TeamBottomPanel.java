@@ -1,7 +1,6 @@
 package ui.panel.allteams;
 
 import java.awt.Font;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +9,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 
+import po.TeamSeasonPO;
 import ui.Images;
 import ui.UIConfig;
 import ui.common.SeasonInputPanel;
@@ -25,12 +25,11 @@ import utility.Constants;
 import utility.Utility;
 import vo.TeamDetailVO;
 import vo.TeamProfileVO;
-import vo.TeamSeasonVO;
 import bl.matchquerybl.MatchQuery;
 import bl.teamquerybl.TeamQuery;
 import blservice.MatchQueryBLService;
 import blservice.TeamQueryBLService;
-import data.teamdata.SVGHandler;
+import data.teamdata.TeamLogoCache;
 
 /**
  * 球队赛季数据 阵容 赛程界面的父类
@@ -96,19 +95,17 @@ public class TeamBottomPanel extends BottomPanel{
 	
 	private TeamProfileVO profileVO;
 	
-	private TeamQueryBLService service;
 	
 	private SeasonInputPanel seasonChooser = new SeasonInputPanel(this);
 	
 	public TeamBottomPanel(BottomPanel panelFrom, String abbr) {
 		super(Images.TEAM_INFO_BG);
 		this.abbr = abbr;
-		this.service = new TeamQuery();
 		this.setLayout(null);
 		
 		addBack();	//TODO 返回按钮怎么整
 		
-		teamDetail = teamQuery.getTeamDetailByAbbr(abbr,Utility.getDefaultSeason());
+		teamDetail = teamQuery.getTeamDetailByAbbr(abbr, Constants.LATEST_SEASON_REGULAR);
 		profileVO = teamDetail.getProfile();
 		
 		addTitles();	//	标题，包括队名、联盟、几胜几负
@@ -129,7 +126,7 @@ public class TeamBottomPanel extends BottomPanel{
 		seasonTab.setOff();
 		matchTab.setOff();
 		
-		kingPanel = new TeamKingPanel(service, abbr);
+		kingPanel = new TeamKingPanel(teamQuery, abbr);
 		currentPanel = kingPanel;
 		kingPanel.setBounds(SUBPANEL_BOUNDS);
 		this.add(kingPanel);
@@ -166,8 +163,8 @@ public class TeamBottomPanel extends BottomPanel{
 		leagueLabel.setFont(UIConfig.LABEL_PLAIN_FONT);
 		this.add(leagueLabel);
 
-		TeamSeasonVO seasonVO = teamDetail.getSeasonRecord();
-		winsLosesLabel = new TeamWinsLosesLabel(seasonVO.getWins(), seasonVO.getLoses());
+		TeamSeasonPO seasonVO = teamDetail.getSeasonRecord();
+		winsLosesLabel = new TeamWinsLosesLabel(seasonVO.getWins(), (seasonVO.matchCount - seasonVO.wins));
 		winsLosesLabel.setBounds(LEFT_LABEL_COLUMN_X, 78,300,50);	
 		this.add(winsLosesLabel);
 	}
@@ -213,7 +210,7 @@ public class TeamBottomPanel extends BottomPanel{
 	}
 	
 	private void addLogo() {
-		ImgLabel logoLabel = new ImgLabel(53, 0, 280, 160, teamDetail.getLogo());
+		ImgLabel logoLabel = new ImgLabel(53, 0, 280, 160, TeamLogoCache.getTeamLogo(abbr));
 		this.add(logoLabel);
 	}
 	
@@ -262,7 +259,7 @@ public class TeamBottomPanel extends BottomPanel{
 					seasonPanel = new TeamSeasonPanel(seasonChooser);
 					switchPanel(seasonPanel);
 					seasonPanel.updateContent(season, teamDetail.getSeasonRecord(), 
-							service.getFiveArgsAvg(season), service.getHighestScoreReboundAssist(season));
+							teamQuery.getFiveArgsAvg(season), teamQuery.getHighestScoreReboundAssist(season));
 				}else {
 					switchPanel(seasonPanel);
 				}
@@ -307,9 +304,9 @@ public class TeamBottomPanel extends BottomPanel{
 	//当改变赛季，获得新的detailVO，刷新所有已经存在的子Panel
 	public void refresh() {
 		String season = seasonChooser.getSeason();
-		teamDetail = service.getTeamDetailByAbbr(abbr, season);
+		teamDetail = teamQuery.getTeamDetailByAbbr(abbr, season);
 		if (seasonPanel != null) seasonPanel.updateContent(season, teamDetail.getSeasonRecord(), 
-					service.getFiveArgsAvg(season), service.getHighestScoreReboundAssist(season));
+					teamQuery.getFiveArgsAvg(season), teamQuery.getHighestScoreReboundAssist(season));
 		if (matchPanel != null) matchPanel.updateContent(teamDetail.getMatchRecords());
 	}
 	
@@ -317,7 +314,7 @@ public class TeamBottomPanel extends BottomPanel{
 		public static void main(String[]args) {
 			Frame frame = new Frame();
 			MainController.frame = frame;
-			new SVGHandler().loadLogos();
+			new TeamLogoCache().loadLogos();
 			frame.setPanel(new TeamBottomPanel(null, "SAS"));
 			frame.start();
 		}

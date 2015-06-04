@@ -2,7 +2,7 @@ package blservice;
 
 import java.util.ArrayList;
 
-import vo.TeamSeasonVO;
+import po.TeamSeasonPO;
 import enums.ScreenDivision;
 import enums.SortOrder;
 import enums.TeamAllSortBasis;
@@ -16,18 +16,18 @@ import enums.TeamAvgSortBasis;
 public interface TeamSeasonBLService {
 
 	/** 刚进入界面时调用此方法，得到选定赛季按名字排序的球队数据 */
-	public ArrayList<TeamSeasonVO> getTeamDataSortedByName(String season);
+	public ArrayList<TeamSeasonPO> getTeamDataSortedByName(String season);
 
-	/** 返回按地区和赛季筛选的，赛季形如"13-14" */
-	public ArrayList<TeamSeasonVO> getScreenedTeamData(ScreenDivision division,String season);
+	/** 返回按地区和赛季筛选的 */
+	public ArrayList<TeamSeasonPO> getScreenedTeamData(ScreenDivision division,String season);
 
 	/** 总数据排序时调用此方法，order的AS为升序，DE为降序 */
-	public ArrayList<TeamSeasonVO> getResortedTeamAllData(TeamAllSortBasis basis, SortOrder order);
+	public ArrayList<TeamSeasonPO> getResortedTeamAllData(TeamAllSortBasis basis, SortOrder order);
 
 	/**
 	 * 平均排序时调用此方法，order的AS为升序，DE为降序
 	 * @author cylong
 	 * @version 2015年3月30日 上午12:49:58
 	 */
-	public ArrayList<TeamSeasonVO> getResortedTeamAvgData(TeamAvgSortBasis basis, SortOrder order);
+	public ArrayList<TeamSeasonPO> getResortedTeamAvgData(TeamAvgSortBasis basis, SortOrder order);
 }

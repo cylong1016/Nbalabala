@@ -1,8 +1,8 @@
 package ui.panel.allplayers;
 
+import po.PlayerSeasonPO;
 import ui.common.panel.Panel;
 import ui.common.table.BottomScrollPane;
-import vo.PlayerSeasonVO;
 
 /**
  * 
@@ -23,7 +23,7 @@ public class PlayerInfoSeasonDataPanel extends Panel{
 		this.add(scrollPane);
 	}
 	
-	public void update(String season, PlayerSeasonVO seasonVO) {
+	public void update(String season, PlayerSeasonPO seasonVO) {
 		seasonDataTable.setVO(season, seasonVO);
 	}
 }

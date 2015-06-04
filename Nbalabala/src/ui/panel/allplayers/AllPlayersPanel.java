@@ -13,6 +13,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import po.PlayerProfilePO;
 import ui.UIConfig;
 import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
@@ -22,9 +23,9 @@ import ui.common.table.BottomTable;
 import ui.common.textField.MyTextField;
 import ui.controller.MainController;
 import utility.Constants;
-import vo.PlayerProfileVO;
 import bl.playerquerybl.PlayerQuery;
 import blservice.PlayerQueryBLService;
+import data.playerdata.PlayerImageCache;
 
 /**
  * 全部球员信息主界面
@@ -55,12 +56,12 @@ public class AllPlayersPanel extends BottomPanel {
 	
 	private PlayerQueryBLService playerInfo = new PlayerQuery();
 	
-	private static final String[]COLUMN_NAMES = {"球员头像","英文名", "所属球队", "球衣号码", "位置", "生日" };
+	private static final String[]COLUMN_NAMES = {"球员头像","英文名", "加入NBA", "最近比赛年份", "位置", "生日" };
 	public static BottomScrollPane SCROLL;
 	private BottomTable table;
 	/** 头像宽度 */
 	private static final int PORTRAIT_WIDTH = 70;
-	ArrayList<PlayerProfileVO> players;
+	ArrayList<PlayerProfilePO> players;
 	Object [][] rowData;
 	int size,lth;
 	
@@ -131,17 +132,17 @@ public class AllPlayersPanel extends BottomPanel {
 		table.setRealOpaque();
 		
 		for (int i = 0; i < size; i++) {
-			PlayerProfileVO ppVO = players.get(i);
-			Image protrait = ppVO.getPortrait();
+			PlayerProfilePO ppVO = players.get(i);
+			Image protrait = PlayerImageCache.getPortraitByName(ppVO.getName());
 			int height = protrait.getHeight(null) * 70 / protrait.getWidth(null);// 按比例，将高度缩减
 			Image smallImg = protrait.getScaledInstance(PORTRAIT_WIDTH, height, Image.SCALE_SMOOTH);
 			ImageIcon ic = new ImageIcon(smallImg);
 			iconArr.add(ic);
 			table.setValueAt(ppVO.getName(), i, 1);
-			table.setValueAt(Constants.translateTeamAbbr(ppVO.getTeam()), i, 2);
-			table.setValueAt(ppVO.getNumber(), i, 3);
+			table.setValueAt(ppVO.getFromYear(), i, 2);
+			table.setValueAt(ppVO.getToYear(), i, 3);
 			table.setValueAt(ppVO.getPosition(), i, 4);
-			table.setValueAt( ppVO.getBirth(), i, 5);
+			table.setValueAt(Constants.translateDate(ppVO.getBirthDate()), i, 5);
 			
 		}
 		MyTableCellRenderer myRenderer = new MyTableCellRenderer();
@@ -207,8 +208,8 @@ public class AllPlayersPanel extends BottomPanel {
 			}
 			LetterButton.current.back();
 			LetterButton.current = (LetterButton) e.getSource();
-			char goal = LetterButton.current.letter;
-		    players = playerInfo.getPlayerProfileByInitial(goal);
+			char made = LetterButton.current.letter;
+		    players = playerInfo.getPlayerProfileByInitial(made);
 		    setTable();
 		}
 		

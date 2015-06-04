@@ -2,6 +2,13 @@ package vo;
 
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+import po.ExtraTimePO;
+import po.MatchDetailPO;
+import po.MatchPlayerPO;
+import po.MatchProfilePO;
 
 /**
  * 比赛详细信息，包括简报，主场球员表现，客场球员表现，两队LOGO
@@ -12,9 +19,12 @@ public class MatchDetailVO {
 	
 	private MatchProfileVO profile;
 	
-	private ArrayList<MatchPlayerVO> homePlayers;
+	/** 每节比分 ，格式为“27-25;29-31;13-25;16-31;”*/
+	private String eachSectionScore;
 	
-	private ArrayList<MatchPlayerVO> roadPlayers;
+	private ArrayList<MatchPlayerPO> homePlayers;
+	
+	private ArrayList<MatchPlayerPO> roadPlayers;
 	
 	private Image homeLogo;
 	
@@ -43,87 +53,80 @@ public class MatchDetailVO {
 	private int roadHighestReboundValue;
 	
 	private int roadHighestAssistValue;
-
 	
-	/** 标记本场比赛数据是否有效，指的是有无所有球员上场时间加起来是否明显大于总时间，以及所有球员得分相加是否等于总分 */
-	private boolean isValid;
-	
-	public MatchDetailVO(MatchProfileVO profile,
-			ArrayList<MatchPlayerVO> homePlayers,
-			ArrayList<MatchPlayerVO> roadPlayers, Image homeLogo, Image roadLogo) {
-		super();
-		this.profile = profile;
-		this.homePlayers = homePlayers;
-		this.roadPlayers = roadPlayers;
+	public MatchDetailVO(MatchDetailPO po, Image homeLogo, Image roadLogo) {
+		MatchProfilePO profile = po.matchProfile;
+		this.profile = new MatchProfileVO(profile);
+		this.homePlayers = new ArrayList<MatchPlayerPO>();
+		this.roadPlayers = new ArrayList<MatchPlayerPO>();
+		for (MatchPlayerPO player : po.matchPlayers) {
+			if (player.homeOrRoad == 'H') {
+				this.homePlayers.add(player);
+			}else {
+				this.roadPlayers.add(player);
+			}
+		}
 		this.homeLogo = homeLogo;
 		this.roadLogo = roadLogo;
 		
-		// 总的秒数,用double是为了后面的除法
-		double totalSeconds = (((profile.getEachSectionScore().split(";").length - 4) * 5) + 48.0) 
-				* 60.0 * 5;
-		
-		int homeSeconds = 0;
-		for (MatchPlayerVO matchPlayerVO : homePlayers) {
-			homeSeconds += matchPlayerVO.getSeconds();
+		/** 每节比分 ，格式为“27-25;29-31;13-25;16-31;”*/
+		StringBuffer sb = new StringBuffer();
+		sb.append(profile.roadSection1).append("-").append(profile.homeSection1).append(';')
+			.append(profile.roadSection2).append("-").append(profile.homeSection2).append(';')
+			.append(profile.roadSection3).append("-").append(profile.homeSection3).append(';')
+			.append(profile.roadSection4).append("-").append(profile.homeSection4).append(';');
+		if (profile.section == 5 && po.extraTimes != null) {
+			ExtraTimePO extraTimePO = po.extraTimes.get(0);
+			sb.append(extraTimePO.roadScore).append("-").append(extraTimePO.homeScore).append(';');
+		}else if (profile.section > 6 && po.extraTimes != null) {
+			Collections.sort(po.extraTimes, new Comparator<ExtraTimePO>() {
+				public int compare(ExtraTimePO po1, ExtraTimePO po2) {
+					return po1.extraOrder - po2.extraOrder;
+				}
+			});
+			for (int i=0; i<po.extraTimes.size(); i++)  {
+				ExtraTimePO extra = po.extraTimes.get(i);
+				sb.append(extra.roadScore).append("-").append(extra.homeScore).append(';');
+			}
 		}
+		eachSectionScore = sb.toString();
 		
-		int roadSeconds = 0;
-		for (MatchPlayerVO matchPlayerVO : roadPlayers) {
-			roadSeconds += matchPlayerVO.getSeconds();
-		}
-		
-		//认为总的时间和所有球员上场时间之和相差5%以内为合理的
-		boolean homeTimeValid = Math.abs((totalSeconds - homeSeconds)/totalSeconds) < 0.05;
-		boolean roadTimeValid = Math.abs((totalSeconds - roadSeconds)/totalSeconds) < 0.05;
-		
-		//认为所有球员得分相加等于球队得分为合理的
-		String[]strings = profile.getScore().split("-");
-		int homeScore = Integer.parseInt(strings[0]);
-		int roadScore = Integer.parseInt(strings[1]);
-		int homePlayersScore = 0;
-		for (MatchPlayerVO matchPlayerVO : homePlayers) {
-			homePlayersScore += matchPlayerVO.getPersonalGoal();
-		}
-		int roadPlayersScore = 0;
-		for (MatchPlayerVO matchPlayerVO : roadPlayers) {
-			roadPlayersScore += matchPlayerVO.getPersonalGoal();
-		}
-		boolean homeScoreValid = homeScore == homePlayersScore;
-		boolean roadScoreValid = roadScore == roadPlayersScore;
-		
-		isValid = homeTimeValid && roadTimeValid && homeScoreValid && roadScoreValid;
+		findKings();
+	}
+	
+	private void findKings() {
 		
 		//找出得分篮板助攻最多的球员名字和值
-		for (MatchPlayerVO matchPlayerVO : homePlayers) {
-			if (matchPlayerVO.getPersonalGoal() > homeHighestScoreValue) {
-				homeHighestScoreValue = matchPlayerVO.getPersonalGoal();
-				homeHighestScoreName = matchPlayerVO.getName();
+		for (MatchPlayerPO MatchPlayerPO : homePlayers) {
+			if (MatchPlayerPO.getScore() > homeHighestScoreValue) {
+				homeHighestScoreValue = MatchPlayerPO.getScore();
+				homeHighestScoreName = MatchPlayerPO.getPlayerName();
 			}
-			if (matchPlayerVO.getTotalRebound() > homeHighestReboundValue) {
-				homeHighestReboundValue = matchPlayerVO.getTotalRebound();
-				homeHighestReboundName = matchPlayerVO.getName();
+			if (MatchPlayerPO.getTotalRebound() > homeHighestReboundValue) {
+				homeHighestReboundValue = MatchPlayerPO.getTotalRebound();
+				homeHighestReboundName = MatchPlayerPO.getPlayerName();
 			}
-			if (matchPlayerVO.getAssist() > homeHighestAssistValue) {
-				homeHighestAssistValue = matchPlayerVO.getAssist();
-				homeHighestAssistName = matchPlayerVO.getName();
+			if (MatchPlayerPO.getAssist() > homeHighestAssistValue) {
+				homeHighestAssistValue = MatchPlayerPO.getAssist();
+				homeHighestAssistName = MatchPlayerPO.getPlayerName();
 			}
 		} 
-		for (MatchPlayerVO matchPlayerVO : roadPlayers) {
-			if (matchPlayerVO.getPersonalGoal() > roadHighestScoreValue) {
-				roadHighestScoreValue = matchPlayerVO.getPersonalGoal();
-				roadHighestScoreName = matchPlayerVO.getName();
+		for (MatchPlayerPO MatchPlayerPO : roadPlayers) {
+			if (MatchPlayerPO.getScore() > roadHighestScoreValue) {
+				roadHighestScoreValue = MatchPlayerPO.getScore();
+				roadHighestScoreName = MatchPlayerPO.getPlayerName();
 			}
-			if (matchPlayerVO.getTotalRebound() > roadHighestReboundValue) {
-				roadHighestReboundValue = matchPlayerVO.getTotalRebound();
-				roadHighestReboundName = matchPlayerVO.getName();
+			if (MatchPlayerPO.getTotalRebound() > roadHighestReboundValue) {
+				roadHighestReboundValue = MatchPlayerPO.getTotalRebound();
+				roadHighestReboundName = MatchPlayerPO.getPlayerName();
 			}
-			if (matchPlayerVO.getAssist() > roadHighestAssistValue) {
-				roadHighestAssistValue = matchPlayerVO.getAssist();
-				roadHighestAssistName = matchPlayerVO.getName();
+			if (MatchPlayerPO.getAssist() > roadHighestAssistValue) {
+				roadHighestAssistValue = MatchPlayerPO.getAssist();
+				roadHighestAssistName = MatchPlayerPO.getPlayerName();
 			}
 		}
 	}
-	
+
 	/** 得到3元数组，分别是客场球队本场比赛最高得分、篮板、助攻的人名 */
 	public String[] getRoadHighestNames() {
 		return new String[] {roadHighestScoreName, roadHighestReboundName, roadHighestAssistName};
@@ -145,16 +148,12 @@ public class MatchDetailVO {
 		return profile;
 	}
 
-	public ArrayList<MatchPlayerVO> getHomePlayers() {
+	public ArrayList<MatchPlayerPO> getHomePlayers() {
 		return homePlayers;
 	}
 
-	public ArrayList<MatchPlayerVO> getRoadPlayers() {
+	public ArrayList<MatchPlayerPO> getRoadPlayers() {
 		return roadPlayers;
-	}
-	
-	public boolean isMatchValid() {
-		return isValid;
 	}
 	
 	public Image getHomeLogo() {
@@ -165,32 +164,36 @@ public class MatchDetailVO {
 		return roadLogo;
 	}
 	
+	public String getEachSectionScore() {
+		return eachSectionScore;
+	}
+	
 	/** 获得主场队的命中率、三分命中、罚球命中、篮板、助攻 */
 	public double[] getHomeFiveArgs() {
 		int fieldAttempt = 0;
-		int fieldGoal = 0;
+		int fieldMade = 0;
 		int threeAttempt = 0;
-		int threeGoal = 0;
+		int threeMade = 0;
 		int freethrowAttempt = 0;
-		int freethrowGoal = 0;
+		int freethrowMade = 0;
 		int assist = 0;
 		int rebound = 0;
-		for (MatchPlayerVO vo : homePlayers) {
+		for (MatchPlayerPO vo : homePlayers) {
 			fieldAttempt += vo.getFieldAttempt();
-			fieldGoal += vo.getFieldGoal();
-			threeAttempt += vo.getThreePointAttempt();
-			threeGoal += vo.getThreePointGoal();
+			fieldMade += vo.getFieldMade();
+			threeAttempt += vo.getThreepointAttempt();
+			threeMade += vo.getThreepointMade();
 			freethrowAttempt += vo.getFreethrowAttempt();
-			freethrowGoal += vo.getFreethrowGoal();
+			freethrowMade += vo.getFreethrowMade();
 			assist += vo.getAssist();
 			rebound += vo.getTotalRebound();
 		}
 		double [] result = new double[5];
-		if (fieldAttempt != 0) result[0] = fieldGoal / (double)fieldAttempt * 100;
+		if (fieldAttempt != 0) result[0] = fieldMade / (double)fieldAttempt * 100;
 		else result[0] = 0;
-		if (threeAttempt != 0) result[1] = threeGoal / (double)threeAttempt * 100;
+		if (threeAttempt != 0) result[1] = threeMade / (double)threeAttempt * 100;
 		else result[1] = 0;
-		if (freethrowAttempt != 0) result[2] = freethrowGoal / (double)freethrowAttempt * 100;
+		if (freethrowAttempt != 0) result[2] = freethrowMade / (double)freethrowAttempt * 100;
 		else result[2] = 0;
 		result[3] = rebound;
 		result[4] = assist;
@@ -200,29 +203,29 @@ public class MatchDetailVO {
 	/** 获得客场队的命中率、三分命中、罚球命中、篮板、助攻 */
 	public double[] getRoadFiveArgs() {
 		int fieldAttempt = 0;
-		int fieldGoal = 0;
+		int fieldMade = 0;
 		int threeAttempt = 0;
-		int threeGoal = 0;
+		int threeMade = 0;
 		int freethrowAttempt = 0;
-		int freethrowGoal = 0;
+		int freethrowMade = 0;
 		int assist = 0;
 		int rebound = 0;
-		for (MatchPlayerVO vo : roadPlayers) {
+		for (MatchPlayerPO vo : roadPlayers) {
 			fieldAttempt += vo.getFieldAttempt();
-			fieldGoal += vo.getFieldGoal();
-			threeAttempt += vo.getThreePointAttempt();
-			threeGoal += vo.getThreePointGoal();
+			fieldMade += vo.getFieldMade();
+			threeAttempt += vo.getThreepointAttempt();
+			threeMade += vo.getThreepointMade();
 			freethrowAttempt += vo.getFreethrowAttempt();
-			freethrowGoal += vo.getFreethrowGoal();
+			freethrowMade += vo.getFreethrowMade();
 			assist += vo.getAssist();
 			rebound += vo.getTotalRebound();
 		}
 		double [] result = new double[5];
-		if (fieldAttempt != 0) result[0] = fieldGoal / (double)fieldAttempt * 100;
+		if (fieldAttempt != 0) result[0] = fieldMade / (double)fieldAttempt * 100;
 		else result[0] = 0;
-		if (threeAttempt != 0) result[1] = threeGoal / (double)threeAttempt * 100;
+		if (threeAttempt != 0) result[1] = threeMade / (double)threeAttempt * 100;
 		else result[1] = 0;
-		if (freethrowAttempt != 0) result[2] = freethrowGoal / (double)freethrowAttempt * 100;
+		if (freethrowAttempt != 0) result[2] = freethrowMade / (double)freethrowAttempt * 100;
 		else result[2] = 0;
 		result[3] = rebound;
 		result[4] = assist;

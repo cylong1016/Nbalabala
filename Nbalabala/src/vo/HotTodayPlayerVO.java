@@ -1,5 +1,7 @@
 package vo;
 
+import po.MatchPlayerPO;
+
 
 /**
  * 当日热点球员VO
@@ -9,7 +11,7 @@ package vo;
 public class HotTodayPlayerVO {
 	
 	public HotTodayPlayerVO(int top, String name, String teamAbbr,
-			String position, int property, PlayerMatchPerformanceVO matchPerformanceVO) {
+			String position, int property, MatchPlayerPO matchPerformanceVO) {
 		super();
 		this.top = top;
 		this.name = name;
@@ -27,9 +29,9 @@ public class HotTodayPlayerVO {
 	/** 作为依据的那一项属性的数值 */
 	private int property;
 	/** 当天那一场比赛的记录，包括日期、对阵双方、该球员的各种数据 */
-	private PlayerMatchPerformanceVO matchPerformanceVO;
+	private MatchPlayerPO matchPerformanceVO;
 	
-	public PlayerMatchPerformanceVO getMatchPerformance() {
+	public MatchPlayerPO getMatchPerformance() {
 		return matchPerformanceVO;
 	}
 	

@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import utility.Utility;
+import po.MatchDetailPO;
+import po.MatchPlayerPO;
+import po.MatchProfilePO;
+import po.TeamSeasonPO;
+import utility.Constants;
 import vo.MatchDetailVO;
 import vo.MatchProfileVO;
-import vo.PlayerMatchPerformanceVO;
-import vo.TeamSeasonVO;
 import bl.teamquerybl.TeamQuery;
+import bl.teamseasonbl.TeamSeasonAnalysis;
 import blservice.MatchQueryBLService;
 import data.matchdata.MatchData;
+import data.teamdata.TeamLogoCache;
 import dataservice.MatchDataService;
 
 /**
@@ -23,40 +27,24 @@ public class MatchQuery implements MatchQueryBLService{
 	
 	private MatchDataService matchData = new MatchData();
 	
+	private ArrayList<MatchDetailVO> getVOsByPOs(ArrayList<MatchDetailPO> pos) {
+		ArrayList<MatchDetailVO> result = new ArrayList<MatchDetailVO>();
+		if (pos == null) return result;
+		for (MatchDetailPO po : pos) {
+			MatchProfilePO profile = po.getMatchProfile();
+			result.add(new MatchDetailVO(po, TeamLogoCache.getTeamLogo(profile.homeAbbr),
+					TeamLogoCache.getTeamLogo(profile.roadAbbr)));
+		}
+		return result;
+	}
+	
 	/**
 	 * @see blservice.MatchQueryBLService#screenMatchByDate(java.util.Date)
 	 */
 	@Override
 	public ArrayList<MatchDetailVO> screenMatchByDate(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		int year = calendar.get(Calendar.YEAR);
-		int month = calendar.get(Calendar.MONTH) + 1;
-		int day = calendar.get(Calendar.DAY_OF_MONTH);
-		int seasonStart;
-		int seasonEnd;
-		if (month < 8) {
-			seasonStart = year -1;
-			seasonEnd = year;
-		}else {
-			seasonStart = year;
-			seasonEnd = year +1;
-		}
-		String seasonString = String.valueOf(seasonStart).substring(2) + "-" + 
-				String.valueOf(seasonEnd).substring(2);
-		String monthString;
-		String dayString;
-		if (month < 10) {
-			monthString = "0" + String.valueOf(month);
-		}else {
-			monthString = String.valueOf(month);
-		}
-		if (day < 10) {
-			dayString = "0" + String.valueOf(day);
-		}else {
-			dayString = String.valueOf(day);
-		}
-		return matchData.getMatchDetailBySeasonAndDate(seasonString, monthString + "-" + dayString);
+		ArrayList<MatchDetailPO> pos = matchData.getMatchDetailByDate(new java.sql.Date(date.getTime()));
+		return getVOsByPOs(pos);
 	}
 	
 	/**
@@ -65,30 +53,30 @@ public class MatchQuery implements MatchQueryBLService{
 	@Override
 	public ArrayList<MatchDetailVO> screenMatchByTeam(String abbr1,
 			String abbr2) {
-		ArrayList<MatchDetailVO> list1 = matchData.getMatchDetailByTeam(abbr1 + "-" + abbr2);
-		ArrayList<MatchDetailVO> list2 = matchData.getMatchDetailByTeam(abbr2 + "-" + abbr1);
+		ArrayList<MatchDetailPO> list1 = matchData.getMatchDetailByTeam(abbr1 + "-" + abbr2);
+		ArrayList<MatchDetailPO> list2 = matchData.getMatchDetailByTeam(abbr2 + "-" + abbr1);
 		list2.removeAll(list1);
 		list1.addAll(list2);
 		// 考虑到黄蜂、鹈鹕、篮网队改名的问题
 		if (abbr1.equals("NOP")) {
-			ArrayList<MatchDetailVO> list3 = matchData.getMatchDetailByTeam("NOH-" + abbr2);
+			ArrayList<MatchDetailPO> list3 = matchData.getMatchDetailByTeam("NOH-" + abbr2);
 			list3.removeAll(list1);
 			list1.addAll(list3);
 		}else if (abbr1.equals("BKN")) {
-			ArrayList<MatchDetailVO> list4 = matchData.getMatchDetailByTeam("NJN-" + abbr2);
+			ArrayList<MatchDetailPO> list4 = matchData.getMatchDetailByTeam("NJN-" + abbr2);
 			list4.removeAll(list1);
 			list1.addAll(list4);
 		}
 		if (abbr2.equals("NOP")) {
-			ArrayList<MatchDetailVO> list3 = matchData.getMatchDetailByTeam(abbr1 + "-NOH");
+			ArrayList<MatchDetailPO> list3 = matchData.getMatchDetailByTeam(abbr1 + "-NOH");
 			list3.removeAll(list1);
 			list1.addAll(list3);
 		}else if (abbr2.equals("BKN")) {
-			ArrayList<MatchDetailVO> list4 = matchData.getMatchDetailByTeam(abbr1 + "-NJN");
+			ArrayList<MatchDetailPO> list4 = matchData.getMatchDetailByTeam(abbr1 + "-NJN");
 			list4.removeAll(list1);
 			list1.addAll(list4);
 		}
-		return list1;
+		return getVOsByPOs(list1);
 	}
 	
 //	private ArrayList<MatchDetailVO> getMatchDetailByProfile(ArrayList<MatchProfileVO> profileVOs) {
@@ -109,13 +97,18 @@ public class MatchQuery implements MatchQueryBLService{
 //	}
 //	
 	/** 根据球员名字返回其所有比赛记录 */
-	public ArrayList<PlayerMatchPerformanceVO> getMatchRecordByPlayerName(String playerName, String season) {
+	public ArrayList<MatchPlayerPO> getMatchRecordByPlayerName(String playerName, String season) {
 		return matchData.getMatchRecordByPlayerName(playerName, season);
 	}
 	
 	/** 根据球队缩写返回其参加的所有比赛简报 */
-	public ArrayList<MatchProfileVO> getMatchRecordByTeamAbbr(String abbr){
-		return matchData.getMatchProfileByTeam(abbr);
+	public ArrayList<MatchProfileVO> getMatchRecordByTeamAbbrAndSeason(String abbr, String season){
+		ArrayList<MatchProfileVO> result = new ArrayList<MatchProfileVO>();
+		ArrayList<MatchProfilePO> pos = matchData.getMatchProfileByTeamAndSeason(abbr, season);
+		for (MatchProfilePO po : pos) {
+			result.add(new MatchProfileVO(po));
+		}
+		return result;
 	}
 
 	/* (non-Javadoc)
@@ -132,9 +125,12 @@ public class MatchQuery implements MatchQueryBLService{
 	 */
 	@Override
 	public int[] getTeamWinsLosesByAbbr(String abbr) {
-		TeamQuery teamQuery = new TeamQuery();
-		TeamSeasonVO seasonVO = teamQuery.getTeamDetailByAbbr(abbr, Utility.getDefaultSeason()).getSeasonRecord();
-		return new int[] {seasonVO.getWins(), seasonVO.getLoses()};
+		TeamSeasonAnalysis seasonAnalysis = new TeamSeasonAnalysis();
+		TeamSeasonPO seasonVO = seasonAnalysis.getTeamDataByAbbr(abbr, Constants.LATEST_SEASON);
+		if (seasonVO == null) {
+			seasonVO =  seasonAnalysis.getTeamDataByAbbr(abbr, Constants.LATEST_SEASON_REGULAR);
+		}
+		return new int[] {seasonVO.getWins(), seasonVO.getMatchCount() - seasonVO.getWins()};
 	}
 
 	/* (non-Javadoc)
@@ -142,22 +138,11 @@ public class MatchQuery implements MatchQueryBLService{
 	 */
 	@Override
 	public ArrayList<MatchDetailVO> getLatestMatches() {
-		String monthString;
-		String dayString;
-		if (Utility.latestMonth < 10) {
-			monthString = "0" + String.valueOf(Utility.latestMonth);
-		}else if (Utility.latestMonth > 12){
-			monthString = "0" + String.valueOf(Utility.latestMonth - 12);
-		}else {
-			monthString = String.valueOf(Utility.latestMonth);
-		}
-		if (Utility.latestDay < 10) {
-			dayString = "0" + String.valueOf(Utility.latestDay);
-		}else {
-			dayString = String.valueOf(Utility.latestDay);
-		}
-		return matchData.getMatchDetailBySeasonAndDate
-				(Utility.getDefaultSeason(), monthString + "-" + dayString);
+		Calendar calendar = Calendar.getInstance();
+		java.sql.Date end = new java.sql.Date(calendar.getTimeInMillis());
+		calendar.add(Calendar.DATE, -7);
+		java.sql.Date start = new java.sql.Date(calendar.getTimeInMillis());
+		return getVOsByPOs(matchData.getMatchDetailByDates(start, end));
 	}
 	
 }

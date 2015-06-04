@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import po.PlayerSeasonPO;
 import utility.Constants;
-import utility.Utility;
-import vo.PlayerSeasonVO;
 import blservice.PlayerSeasonBLService;
 import data.seasondata.SeasonData;
 import dataservice.SeasonDataService;
@@ -27,33 +26,33 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService {
 	private static SeasonDataService seasonData = new SeasonData();
 
 	/** 记录上一次返回给UI层，即UI层正在显示的球员列表 */
-	private ArrayList<PlayerSeasonVO> currentList 
-		= seasonData.getAllPlayerSeasonData(Utility.getDefaultSeason());
+	private ArrayList<PlayerSeasonPO> currentList 
+		= seasonData.getAllPlayerSeasonData(Constants.LATEST_SEASON);
 
 	/** 刚进入界面时调用此方法，得到的是默认赛季的以名字排序的球员数据 */
-	public ArrayList<PlayerSeasonVO> getAllPlayersSortedByName() {
+	public ArrayList<PlayerSeasonPO> getAllPlayersSortedByName() {
 		sortPlayersByName(currentList);
 		return currentList;
 	}
 
 	/** 得到对当前总数据表重新排序后的表 */
-	public ArrayList<PlayerSeasonVO> getResortedPlayersAllData(PlayerAllSortBasis basis, SortOrder order) {
+	public ArrayList<PlayerSeasonPO> getResortedPlayersAllData(PlayerAllSortBasis basis, SortOrder order) {
 		new PlayerAllSorter().sort(currentList, basis, order);
 		return currentList;
 	}
 
 	/** 得到对当前总数据表重新排序后的表 */
 	@Override
-	public ArrayList<PlayerSeasonVO> getResortedPlayersAvgData(PlayerAvgSortBasis basis, SortOrder order) {
+	public ArrayList<PlayerSeasonPO> getResortedPlayersAvgData(PlayerAvgSortBasis basis, SortOrder order) {
 		new PlayerAvgSorter().sort(currentList, basis, order);
 		return currentList;
 	}
 
 	/** 根据位置、地区、筛选依据，返回含有前50个记录的表 */
-	public ArrayList<PlayerSeasonVO> getScreenedPlayers(Position position, ScreenDivision division, 
+	public ArrayList<PlayerSeasonPO> getScreenedPlayers(Position position, ScreenDivision division, 
 			ScreenBasis basis, String season) {
 
-		ArrayList<PlayerSeasonVO> players = seasonData.getScreenedPlayerSeasonData
+		ArrayList<PlayerSeasonPO> players = seasonData.getScreenedPlayerSeasonData
 				(position, division, season);
 
 		// 如果没有排序指标依据，那么返回所有符合位置和分区的球员，按名字为序
@@ -75,7 +74,7 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService {
 	}
 
 	/** 根据球员名字返回其赛季数据 */
-	public PlayerSeasonVO getPlayerSeasonDataByName(String playerName, String season) {
+	public PlayerSeasonPO getPlayerSeasonDataByName(String playerName, String season) {
 		return seasonData.getPlayerSeasonDataByName(playerName, season);
 	}
 
@@ -86,10 +85,10 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService {
 	}
 
 	/** 根据名字字典顺序为球员排序 */
-	private void sortPlayersByName(ArrayList<PlayerSeasonVO> players) {
-		Comparator<PlayerSeasonVO> comparator = new Comparator<PlayerSeasonVO>() {
+	private void sortPlayersByName(ArrayList<PlayerSeasonPO> players) {
+		Comparator<PlayerSeasonPO> comparator = new Comparator<PlayerSeasonPO>() {
 
-			public int compare(PlayerSeasonVO p1, PlayerSeasonVO p2) {
+			public int compare(PlayerSeasonPO p1, PlayerSeasonPO p2) {
 				return p1.getName().compareTo(p2.getName());
 			}
 		};

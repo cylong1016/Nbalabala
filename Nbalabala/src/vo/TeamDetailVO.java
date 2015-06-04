@@ -1,7 +1,9 @@
 package vo;
 
-import java.awt.Image;
 import java.util.ArrayList;
+
+import po.PlayerProfilePO;
+import po.TeamSeasonPO;
 
 /**
  * 
@@ -13,24 +15,21 @@ public class TeamDetailVO {
 	private TeamProfileVO profile;
 	
 	/** 球员阵容 */
-	private ArrayList<PlayerProfileVO> players;
+	private ArrayList<PlayerProfilePO> players;
 	
 	/** 赛季数据 */
-	private TeamSeasonVO seasonRecord;
-	
-	private Image logo;
+	private TeamSeasonPO seasonRecord;
 	
 	/** 比赛记录 */
 	private ArrayList<MatchProfileVO> matchRecords;
 
 	public TeamDetailVO(TeamProfileVO profile,
-			ArrayList<PlayerProfileVO> players, TeamSeasonVO seasonRecord, Image logo,
+			ArrayList<PlayerProfilePO> players, TeamSeasonPO seasonRecord,
 			ArrayList<MatchProfileVO> matchRecords) {
 		super();
 		this.profile = profile;
 		this.players = players;
 		this.seasonRecord = seasonRecord;
-		this.logo = logo;
 		this.matchRecords = matchRecords;
 	}
 
@@ -38,16 +37,12 @@ public class TeamDetailVO {
 		return profile;
 	}
 
-	public ArrayList<PlayerProfileVO> getPlayers() {
+	public ArrayList<PlayerProfilePO> getPlayers() {
 		return players;
 	}
 
-	public TeamSeasonVO getSeasonRecord() {
+	public TeamSeasonPO getSeasonRecord() {
 		return seasonRecord;
-	}
-	
-	public Image getLogo() {
-		return logo;
 	}
 	
 	public ArrayList<MatchProfileVO> getMatchRecords(){

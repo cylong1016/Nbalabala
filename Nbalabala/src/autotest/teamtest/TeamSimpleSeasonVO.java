@@ -13,19 +13,19 @@ public class TeamSimpleSeasonVO {
 	
 
 	/** 投篮命中 */
-	public int fieldGoal;
+	public int fieldMade;
 
 	/** 投篮出手 */
 	public int fieldAttempt;
 
 	/** 三分命中 */
-	public int threePointGoal;
+	public int threePointMade;
 
 	/** 三分出手 */
 	public int threePointAttempt;
 
 	/** 罚球命中 */
-	public int freethrowGoal;
+	public int freethrowMade;
 
 	/** 罚球出手 */
 	public int freethrowAttempt;
@@ -40,7 +40,7 @@ public class TeamSimpleSeasonVO {
 
 	public int oppoFreethrowAttempt;
 
-	public int oppoFieldGoal;
+	public int oppoFieldMade;
 
 	public int oppoTurnover;
 
@@ -70,8 +70,8 @@ public class TeamSimpleSeasonVO {
 		return winning;
 	}
 
-	public int getFieldGoal() {
-		return fieldGoal;
+	public int getFieldMade() {
+		return fieldMade;
 	}
 
 	public int getFieldAttempt() {
@@ -82,8 +82,8 @@ public class TeamSimpleSeasonVO {
 		return fieldPercent;
 	}
 
-	public int getThreePointGoal() {
-		return threePointGoal;
+	public int getThreePointMade() {
+		return threePointMade;
 	}
 
 	public int getThreePointAttempt() {
@@ -94,15 +94,15 @@ public class TeamSimpleSeasonVO {
 		return threePointPercent;
 	}
 
-	public int getFreethrowGoal() {
-		return freethrowGoal;
+	public int getFreethrowMade() {
+		return freethrowMade;
 	}
 
 	public int getFreethrowAttempt() {
 		return freethrowAttempt;
 	}
 
-	public double getFreeThrowPercent() {
+	public double getFreethrowPercent() {
 		return freethrowPercent;
 	}
 
@@ -271,12 +271,13 @@ public class TeamSimpleSeasonVO {
 				defensiveEff = oppoScore / defensiveRound * 100;
 			}
 			
-			if (fieldAttempt != 0) fieldPercent = (double)fieldGoal / fieldAttempt;
-			if (threePointAttempt != 0) threePointPercent = (double)threePointGoal / threePointAttempt;
-			if (freethrowAttempt != 0) freethrowPercent = (double)freethrowGoal / freethrowAttempt;
+			if (fieldAttempt != 0) fieldPercent = (double)fieldMade / fieldAttempt;
+			if (threePointAttempt != 0) threePointPercent = (double)threePointMade / threePointAttempt;
+			if (freethrowAttempt != 0) freethrowPercent = (double)freethrowMade / freethrowAttempt;
 			
 			offensiveReboundAvg = (double) offensiveRebound / matchCount;
 			defensiveReboundAvg = (double) defensiveRebound / matchCount;
+			
 			totalReboundAvg = (double) totalRebound / matchCount;
 			assistAvg = (double) assist / matchCount;
 			stealAvg = (double) steal / matchCount;

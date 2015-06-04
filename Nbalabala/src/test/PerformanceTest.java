@@ -18,11 +18,11 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import po.PlayerProfileVO;
+import po.PlayerSeasonPO;
 import autotest.playertest.PlayerSimpleVO;
 import bl.playerseasonbl.PlayerSeasonAnalysis;
 import utility.Constants;
-import vo.PlayerProfileVO;
-import vo.PlayerSeasonVO;
 import data.playerdata.PlayerImageCache;
 import data.seasondata.SeasonData;
 import enums.PlayerAllSortBasis;
@@ -45,13 +45,13 @@ public class PerformanceTest {
 	@Pie
 	public void loadPlayers() {
 		PlayerSeasonAnalysis analysis = new PlayerSeasonAnalysis();
-		ArrayList<PlayerSeasonVO> vos = analysis.getResortedPlayersAllData(PlayerAllSortBasis.USE_PERCENT, SortOrder.AS);
+		ArrayList<PlayerSeasonPO> vos = analysis.getResortedPlayersAllData(PlayerAllSortBasis.USE_PERCENT, SortOrder.AS);
 		for (int i=0;i<2;i++) {
 			analysis.getResortedPlayersAllData(PlayerAllSortBasis.USE_PERCENT, SortOrder.AS);
 			analysis.getResortedPlayersAllData(PlayerAllSortBasis.GMSC, SortOrder.DE);
 			analysis.getResortedPlayersAvgData(PlayerAvgSortBasis.ASSIST_PERCENT, SortOrder.AS);
 			analysis.getResortedPlayersAvgData(PlayerAvgSortBasis.OFFENSIVE_REBOUND_PERCENT, SortOrder.DE);
-			for (PlayerSeasonVO vo : vos) {
+			for (PlayerSeasonPO vo : vos) {
 				vo.update();
 			}
 		}

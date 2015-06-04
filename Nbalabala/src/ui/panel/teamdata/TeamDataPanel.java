@@ -5,6 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import po.TeamSeasonPO;
 import ui.Images;
 import ui.UIConfig;
 import ui.common.SeasonInputPanel;
@@ -15,7 +16,6 @@ import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import utility.Constants;
-import vo.TeamSeasonVO;
 import bl.teamseasonbl.TeamSeasonAnalysis;
 import blservice.TeamSeasonBLService;
 import enums.AllTeamSeasonTableCategory;
@@ -73,7 +73,7 @@ public class TeamDataPanel extends BottomPanel {
 
 	private TeamSeasonBLService teamSeason = new TeamSeasonAnalysis();
 
-	private ArrayList<TeamSeasonVO> seasonArray;
+	private ArrayList<TeamSeasonPO> seasonArray;
 	
 	private AllTeamSeasonTable table;
 	private TotalOrAvg totalOrAvg;

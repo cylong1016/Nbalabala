@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 
+import po.PlayerSeasonPO;
 import ui.UIConfig;
 import ui.common.table.BottomTable;
 import utility.Constants;
-import vo.PlayerSeasonVO;
 import blservice.PlayerSeasonBLService;
 import enums.AllPlayerSeasonTableCategory;
 import enums.PlayerAllSortBasis;
@@ -40,14 +40,14 @@ public class AllPlayerSeasonTable extends BottomTable{
 	
 	private TotalOrAvg totalOrAvg = TotalOrAvg.TOTAL;
 	
-	private ArrayList<PlayerSeasonVO> vos;
+	private ArrayList<PlayerSeasonPO> vos;
 	
 	private PlayerSeasonBLService service;
 	
 	/**service就是panel上用来筛选的那个同一个service 
 	 * 当用户进行一次筛选后，筛选出来的vo列表，界面当前的数据类别、总数/场均分别作为参数用来构造本表格
 	 * 	用户不论怎么排序，都是本表格自己解决的事情，直到用户改变筛选条件再次筛选，remove本表格，new出下一表格 */
-	public AllPlayerSeasonTable(PlayerSeasonBLService service, ArrayList<PlayerSeasonVO> vos, 
+	public AllPlayerSeasonTable(PlayerSeasonBLService service, ArrayList<PlayerSeasonPO> vos, 
 			AllPlayerSeasonTableCategory category, TotalOrAvg totalOrAvg) {
 		super(new Object[vos.size()][Constants.basicPlayerHeaders.length], getHeaders(category));
 		this.service = service;
@@ -221,19 +221,19 @@ public class AllPlayerSeasonTable extends BottomTable{
 			case 1:
 				return PlayerAvgSortBasis.NAME;
 			case 2:
-				return PlayerAvgSortBasis.FIELD_GOAL_AVG;
+				return PlayerAvgSortBasis.FIELD_MADE_AVG;
 			case 3:
 				return PlayerAvgSortBasis.FIELD_ATTEMPT_AVG;
 			case 4:
 				return PlayerAvgSortBasis.FIELD_PERCENT;
 			case 5:
-				return PlayerAvgSortBasis.FREETHROW_GOAL_AVG;
+				return PlayerAvgSortBasis.FREETHROW_MADE_AVG;
 			case 6:
 				return PlayerAvgSortBasis.FREETHROW_ATTEMPT_AVG;
 			case 7:
 				return PlayerAvgSortBasis.FREETHROW_PERCENT;
 			case 8:
-				return PlayerAvgSortBasis.THREE_POINT_GOAL_AVG;
+				return PlayerAvgSortBasis.THREE_POINT_MADE_AVG;
 			case 9:
 				return PlayerAvgSortBasis.THREE_POINT_ATTEMPT_AVG;
 			case 10:
@@ -364,19 +364,19 @@ public class AllPlayerSeasonTable extends BottomTable{
 			case 1:
 				return PlayerAllSortBasis.NAME;
 			case 2:
-				return PlayerAllSortBasis.FIELD_GOAL;
+				return PlayerAllSortBasis.FIELD_MADE;
 			case 3:
 				return PlayerAllSortBasis.FIELD_ATTEMPT;
 			case 4:
 				return PlayerAllSortBasis.FIELD_PERCENT;
 			case 5:
-				return PlayerAllSortBasis.FREETHROW_GOAL;
+				return PlayerAllSortBasis.FREETHROW_MADE;
 			case 6:
 				return PlayerAllSortBasis.FREETHROW_ATTEMPT;
 			case 7:
 				return PlayerAllSortBasis.FREETHROW_PERCENT;
 			case 8:
-				return PlayerAllSortBasis.THREE_POINT_GOAL;
+				return PlayerAllSortBasis.THREE_POINT_MADE;
 			case 9:
 				return PlayerAllSortBasis.THREE_POINT_ATTEMPT;
 			case 10:
@@ -472,13 +472,13 @@ public class AllPlayerSeasonTable extends BottomTable{
 		
 		if (totalOrAvg == TotalOrAvg.AVG) {
 			for (int i=0;i<vos.size();i++) {
-				PlayerSeasonVO vo = vos.get(i);
+				PlayerSeasonPO vo = vos.get(i);
 				setValueAt(i + 1, i, 0);
 				setValueAt(vo.name, i, 1);
-				setValueAt(Constants.translateTeamAbbr(vo.teamName), i, 2);
+				setValueAt(Constants.translateTeamAbbr(vo.teamAbbr), i, 2);
 				setValueAt(vo.matchCount, i, 3);
 				setValueAt(df.format(vo.firstCountAvg), i, 4);
-				setValueAt(vo.getTimeAvg(), i, 5);
+				setValueAt(df.format(vo.minutesAvg), i, 5);
 				setValueAt(df.format(vo.scoreAvg), i, 6);
 				setValueAt(df.format(vo.totalReboundAvg), i, 7);
 				setValueAt(df.format(vo.assistAvg), i, 8);
@@ -491,13 +491,13 @@ public class AllPlayerSeasonTable extends BottomTable{
 			}
 		}else {
 			for (int i=0;i<vos.size();i++) {
-				PlayerSeasonVO vo = vos.get(i);
+				PlayerSeasonPO vo = vos.get(i);
 				setValueAt(i + 1, i, 0);
 				setValueAt(vo.name, i, 1);
-				setValueAt(Constants.translateTeamAbbr(vo.teamName), i, 2);
+				setValueAt(Constants.translateTeamAbbr(vo.teamAbbr), i, 2);
 				setValueAt(vo.matchCount, i, 3);
 				setValueAt(vo.firstCount, i, 4);
-				setValueAt(vo.getTime(), i, 5);
+				setValueAt(df.format(vo.minutes), i, 5);
 				setValueAt(vo.score, i, 6);
 				setValueAt(vo.totalRebound, i, 7);
 				setValueAt(vo.assist, i, 8);
@@ -519,7 +519,7 @@ public class AllPlayerSeasonTable extends BottomTable{
 		
 		if (totalOrAvg == TotalOrAvg.AVG) {
 			for (int i=0;i<vos.size();i++) {
-				PlayerSeasonVO vo = vos.get(i);
+				PlayerSeasonPO vo = vos.get(i);
 				setValueAt(i + 1, i, 0);
 				setValueAt(vo.name, i, 1);
 				setValueAt(df.format(vo.efficiencyAvg), i, 2);
@@ -538,7 +538,7 @@ public class AllPlayerSeasonTable extends BottomTable{
 			}
 		}else {
 			for (int i=0;i<vos.size();i++) {
-				PlayerSeasonVO vo = vos.get(i);
+				PlayerSeasonPO vo = vos.get(i);
 				setValueAt(i + 1, i, 0);
 				setValueAt(vo.name, i, 1);
 				setValueAt(df.format(vo.efficiency), i, 2);
@@ -566,16 +566,16 @@ public class AllPlayerSeasonTable extends BottomTable{
 		
 		if (totalOrAvg == TotalOrAvg.AVG) {
 			for (int i=0;i<vos.size();i++) {
-				PlayerSeasonVO vo = vos.get(i);
+				PlayerSeasonPO vo = vos.get(i);
 				setValueAt(i + 1, i, 0);
 				setValueAt(vo.name, i, 1);
-				setValueAt(df.format(vo.fieldGoalAvg), i, 2);
+				setValueAt(df.format(vo.fieldMadeAvg), i, 2);
 				setValueAt(df.format(vo.fieldAttemptAvg), i, 3);
 				setValueAt(percentDf.format(vo.fieldPercent), i, 4);
-				setValueAt(df.format(vo.freethrowGoalAvg), i, 5);
+				setValueAt(df.format(vo.freethrowMadeAvg), i, 5);
 				setValueAt(df.format(vo.freethrowAttemptAvg), i, 6);
 				setValueAt(percentDf.format(vo.freethrowPercent), i, 7);
-				setValueAt(df.format(vo.threePointGoalAvg), i, 8);
+				setValueAt(df.format(vo.threePointMadeAvg), i, 8);
 				setValueAt(df.format(vo.threePointAttemptAvg), i, 9);
 				setValueAt(percentDf.format(vo.threePointPercent), i, 10);
 				setValueAt(df.format(vo.assistAvg), i, 11);
@@ -585,16 +585,16 @@ public class AllPlayerSeasonTable extends BottomTable{
 			}
 		}else {
 			for (int i=0;i<vos.size();i++) {
-				PlayerSeasonVO vo = vos.get(i);
+				PlayerSeasonPO vo = vos.get(i);
 				setValueAt(i + 1, i, 0);
 				setValueAt(vo.name, i, 1);
-				setValueAt(vo.fieldGoal, i, 2);
+				setValueAt(vo.fieldMade, i, 2);
 				setValueAt(vo.fieldAttempt, i, 3);
 				setValueAt(percentDf.format(vo.fieldPercent), i, 4);
-				setValueAt(vo.threePointGoal, i, 5);
+				setValueAt(vo.threePointMade, i, 5);
 				setValueAt(vo.threePointAttempt, i, 6);
 				setValueAt(percentDf.format(vo.threePointPercent), i, 7);
-				setValueAt(vo.freethrowGoal, i, 8);
+				setValueAt(vo.freethrowMade, i, 8);
 				setValueAt(vo.freethrowAttempt, i, 9);
 				setValueAt(percentDf.format(vo.freethrowPercent), i, 10);
 				setValueAt(vo.assist, i, 11);
@@ -613,10 +613,10 @@ public class AllPlayerSeasonTable extends BottomTable{
 		
 		if (totalOrAvg == TotalOrAvg.AVG) {
 			for (int i=0;i<vos.size();i++) {
-				PlayerSeasonVO vo = vos.get(i);
+				PlayerSeasonPO vo = vos.get(i);
 				setValueAt(i + 1, i, 0);
 				setValueAt(vo.name, i, 1);
-				setValueAt(Constants.translateTeamAbbr(vo.teamName), i, 2);
+				setValueAt(Constants.translateTeamAbbr(vo.teamAbbr), i, 2);
 				setValueAt(vo.matchCount, i, 3);
 				setValueAt(df.format(vo.firstCountAvg), i, 4);
 				setValueAt(df.format(vo.offensiveReboundAvg), i, 5);
@@ -632,10 +632,10 @@ public class AllPlayerSeasonTable extends BottomTable{
 			}
 		}else {
 			for (int i=0;i<vos.size();i++) {
-				PlayerSeasonVO vo = vos.get(i);
+				PlayerSeasonPO vo = vos.get(i);
 				setValueAt(i + 1, i, 0);
 				setValueAt(vo.name, i, 1);
-				setValueAt(Constants.translateTeamAbbr(vo.teamName), i, 2);
+				setValueAt(Constants.translateTeamAbbr(vo.teamAbbr), i, 2);
 				setValueAt(vo.matchCount, i, 3);
 				setValueAt(vo.firstCount, i, 4);
 				setValueAt(vo.offensiveRebound, i, 5);

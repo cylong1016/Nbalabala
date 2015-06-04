@@ -25,7 +25,7 @@ public enum TeamAllSortBasis {
 	WINNING,
 
 	/** 投篮命中数 */
-	FIELD_GOAL,
+	FIELD_MADE,
 
 	/** 投篮出手数 */
 	FIELD_ATTEMPT,
@@ -37,13 +37,13 @@ public enum TeamAllSortBasis {
 	THREE_POINT_ATTEMPT,
 
 	/** 三分球命中数 */
-	THREE_POINT_GOAL,
+	THREE_POINT_MADE,
 
 	/** 三分球命中率 */
 	THREE_POINT_PERCENT,
 
 	/** 罚球命中数 */
-	FREETHROW_GOAL,
+	FREETHROW_MADE,
 
 	/** 罚球出手数 */
 	FREETHROW_ATTEMPT,

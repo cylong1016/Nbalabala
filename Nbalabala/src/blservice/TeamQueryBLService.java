@@ -30,6 +30,4 @@ public interface TeamQueryBLService {
 	/** 得到助攻数据王  */
 	public KingVO[] getAssistKings(String abbr);
 	
-//	public ArrayList<PlayerProfileVO>
-
 }

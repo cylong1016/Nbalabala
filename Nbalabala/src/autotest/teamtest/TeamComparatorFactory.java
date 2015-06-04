@@ -116,7 +116,7 @@ public class TeamComparatorFactory {
 			comparator = new Comparator<TeamSimpleSeasonVO>() {
 				private int factor = TeamComparatorFactory.factor;
 				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(factor * (t1.getFreeThrowPercent() - t2.getFreeThrowPercent()) * 1000000);
+					return (int)(factor * (t1.getFreethrowPercent() - t2.getFreethrowPercent()) * 1000000);
 				}
 			};
 			break;
@@ -312,7 +312,7 @@ public class TeamComparatorFactory {
 			comparator = new Comparator<TeamSimpleSeasonVO>() {
 				private int factor = TeamComparatorFactory.factor;
 				public int compare(TeamSimpleSeasonVO t1, TeamSimpleSeasonVO t2) {
-					return (int)(10000000*factor * (t1.getFreeThrowPercent() - t2.getFreeThrowPercent()));
+					return (int)(10000000*factor * (t1.getFreethrowPercent() - t2.getFreethrowPercent()));
 				}
 			};
 			break;

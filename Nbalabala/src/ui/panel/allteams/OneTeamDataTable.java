@@ -2,10 +2,10 @@ package ui.panel.allteams;
 
 import java.text.DecimalFormat;
 
+import po.TeamSeasonPO;
 import ui.UIConfig;
 import ui.common.table.BottomTable;
 import utility.Constants;
-import vo.TeamSeasonVO;
 
 /**
  * 球队页面里面那个展示其赛季基本数据的表格
@@ -22,13 +22,13 @@ public class OneTeamDataTable extends BottomTable{
 //		cancelVerticalLines();
 	}
 	
-	public OneTeamDataTable(String season, TeamSeasonVO seasonVO) {
+	public OneTeamDataTable(String season, TeamSeasonPO seasonVO) {
 		this();
 		setVO(season, seasonVO);
 	}
 	
 	/** 切换赛季以后，使用此方法更新该表格 */
-	public void setVO(String season, TeamSeasonVO vo) {
+	public void setVO(String season, TeamSeasonPO vo) {
 		
 		DecimalFormat percentDf = UIConfig.PERCENT_FORMAT;
 		

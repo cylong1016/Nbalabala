@@ -112,7 +112,7 @@ public class ScorePanel extends Panel {
 //		this.add(timeImg);
 //	}
 
-	public int analyzeSection(MatchProfileVO pro) {
+	public int analyzeSection(MatchDetailVO pro) {
 		String gameInfo = pro.getEachSectionScore();
 		String[] eachSection = gameInfo.split(";");
 		return eachSection.length;
@@ -122,7 +122,7 @@ public class ScorePanel extends Panel {
 
 	public void getScore() {
 		scoreAll = matchPro.getScore().split("-");// 两支球队比赛总分
-		eachScore = matchPro.getEachSectionScore().split(";");
+		eachScore = matchVO.getEachSectionScore().split(";");
 
 		int eachlth = eachScore.length;
 		score1 = new String[eachlth];

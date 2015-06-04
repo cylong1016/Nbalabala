@@ -6,10 +6,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import ui.UIConfig;
+import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
 import utility.Constants;
 import vo.HotSeasonTeamVO;
-import data.teamdata.SVGHandler;
+import data.teamdata.TeamLogoCache;
 import enums.HotSeasonTeamProperty;
 
 /**
@@ -37,7 +38,7 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 	private MyLabel leagueLabel;
 	
 	public void updateContent(HotSeasonTeamVO vo, HotSeasonTeamProperty property) {
-		imgLabel.setImage(SVGHandler.getTeamLogo(teamAbbr));
+		imgLabel.setImage(TeamLogoCache.getTeamLogo(teamAbbr));
 		nameLabel.setText(Constants.translateTeamAbbr(teamAbbr));
 		String propertyName = getPropertyName(property);
 		String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
@@ -49,7 +50,7 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 		super(vo.getTop());
 		teamAbbr = vo.getAbbr();
 		if (vo.getTop() == 1) {
-			Image logo = SVGHandler.getTeamLogo(teamAbbr);
+			Image logo = TeamLogoCache.getTeamLogo(teamAbbr);
 			int width = 210;
 			int height = logo.getHeight(null) * width / logo.getWidth(null);//按比例，将高度缩减
 			imgLabel = new ImgLabel(180,100,width,height,logo);
@@ -75,7 +76,7 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 			this.add(nameLabel);
 			this.add(leagueLabel);
 		}else{
-			Image logo = SVGHandler.getTeamLogo(teamAbbr);
+			Image logo = TeamLogoCache.getTeamLogo(teamAbbr);
 			int width = 75;
 			int height = logo.getHeight(null) * width / logo.getWidth(null);//按比例，将高度缩减
 			imgLabel = new ImgLabel(0, 46,width,height,logo);
@@ -106,7 +107,8 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() < 2) return;
 //				这个跳转方法。。好奇怪哦
-				MainController.toTeamSeasonPanel(teamAbbr);
+				MainController.toTeamBottomPanel(
+						(BottomPanel)(HotSeasonTeamLabel.this.getParent()),teamAbbr);
 			}
 		});
 	}

@@ -23,7 +23,7 @@ public enum PlayerAvgSortBasis {
 	TIME_AVG,
 
 	/** 平均投篮命中数 */
-	FIELD_GOAL_AVG,
+	FIELD_MADE_AVG,
 
 	/** 平均投篮出手数 */
 	FIELD_ATTEMPT_AVG,
@@ -35,13 +35,13 @@ public enum PlayerAvgSortBasis {
 	THREE_POINT_ATTEMPT_AVG,
 
 	/** 三分球平均命中数 */
-	THREE_POINT_GOAL_AVG,
+	THREE_POINT_MADE_AVG,
 
 	/** 三分球命中率 */
 	THREE_POINT_PERCENT,
 
 	/** 场均罚球命中次数 */
-	FREETHROW_GOAL_AVG,
+	FREETHROW_MADE_AVG,
 
 	/** 罚球场均出手次数 */
 	FREETHROW_ATTEMPT_AVG,
