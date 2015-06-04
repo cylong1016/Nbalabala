@@ -4,17 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import mysql.MySQL;
 
 /**
  * 抓取赛季数据
@@ -22,30 +16,15 @@ import mysql.MySQL;
  * @author cylong
  * @version 2015年5月12日  下午7:54:54
  */
-public class Match implements NBAData {
+public class Match extends NBAData {
 
-	/** 网站链接 */ 
-	private String root = "http://www.basketball-reference.com";
-	/** 赛季数据的url */
-    private String matchUrl;
-    private MySQL mysql;
-    private Connection mysqlConn;
     /** 最近多少年的数据 */
     private int maxYear = 40;
     /** 比赛ID */
     private int matchID = 1;
-    /* 将英文转换为数字 */
-    private Hashtable<String, String> month = new Hashtable<String, String>(12);
-    private String[] monthStrArr = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-                                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     
     public Match() {
-    	this.matchUrl = root + "/leagues";
-    	mysql = new MySQL();
-    	mysqlConn = mysql.getConn(); // 获得数据库连接
-    	for(int i = 0; i < monthStrArr.length; i++) {
-    		month.put(monthStrArr[i], String.valueOf(i + 1));
-		}
+    	this.captureUrl = root + "/leagues";
     }
     
     /**
@@ -65,7 +44,7 @@ public class Match implements NBAData {
     private void captureMatchData() {
     	InputStream input = null;
     	BufferedReader reader = null;
-    	HttpURLConnection urlConn = getConn(matchUrl);
+    	HttpURLConnection urlConn = getConn(captureUrl);
     	int i = 1; // 记录最近多少年
     	try {
     		input = urlConn.getInputStream();
@@ -319,7 +298,7 @@ public class Match implements NBAData {
 	 */
 	private void insertIntoPlayerMatch(ArrayList<String> playerMatch) {
 		for(int i = 0; i < playerMatch.size(); i++) {
-			// 有些数据网站上是空的，存到数据库中为null
+			// 有些数据网站上是空的，存到数据库中为0
 			if(playerMatch.get(i).equals("")) {
 				playerMatch.set(i, "0");
 			}
@@ -377,7 +356,7 @@ public class Match implements NBAData {
 					+ playerMatch.get(19) + ", "
 					+ playerMatch.get(20)
 					+ ")";
-		System.out.println(playerMatch);
+		System.out.println(sql);
 		try {
 			Statement statement = mysqlConn.createStatement();
 			statement.execute(sql); // 插入
@@ -396,18 +375,10 @@ public class Match implements NBAData {
 	 */
 	private void insertIntoMatchProfile(ArrayList<String> cellData, String regularOrPlayoff) {
 		ArrayList<String> sectionScore = captureSectionAndPlayerData(cellData.get(1)); // 读取每小节分数和球员数据
-		String date = cellData.get(0); // 将读取下来的date转化成mysql标准格式
-		String splitReg = "[A-Z][a-z]{2}, (?<month>[A-Z][a-z]{2}) (?<day>[0-9]{1,2}), (?<year>[0-9]{4})"; // 拆分抓取下来的时间字符串
-		Pattern patternDate = Pattern.compile(splitReg);
-		Matcher matcherDate = patternDate.matcher(date);
-		String formatDate = null;
-		if(matcherDate.find()) {
-			String year = matcherDate.group("year");
-			String month = this.month.get(matcherDate.group("month"));
-			String day = matcherDate.group("day");
-			formatDate = year + "-" + month + "-" + day;
+		String date = dateFormat(cellData.get(0)); // 将读取下来的date转化成mysql标准格式
+		if(date != null) {
+			date = "'" + date + "'";
 		}
-		
 		String sql = "INSERT INTO match_profile ("
 				+ "match_id, "
 				+ "date, "
@@ -427,7 +398,7 @@ public class Match implements NBAData {
 				+ "season"
 				+ ") VALUES ("
 				+ matchID + ", "
-				+ "'" + formatDate + "', "
+				+ date + ", "
 				+ cellData.get(3) + ", "
 				+ cellData.get(5) + ", "
 				+ sectionScore.get(0) + ", "
@@ -443,6 +414,7 @@ public class Match implements NBAData {
 				+ sectionScore.get(10) + ", "
 				+ "'" + regularOrPlayoff + "'"
 				+ ")";
+		System.out.println(sql);
 		try {
 			// statement用来执行SQL语句   
 			Statement statement = mysqlConn.createStatement();
@@ -472,6 +444,7 @@ public class Match implements NBAData {
 						+ extraTime.get(i) + ", "
 						+ extraTime.get(i + otNum)
 					+ ")";
+			System.out.println(sql);
 			try {
 				Statement statement = mysqlConn.createStatement();
 				statement.execute(sql);
@@ -481,28 +454,6 @@ public class Match implements NBAData {
 			
 		}
 	}
-
-	/**
-     * 得到某个url的连接
-     * @param url
-     * @return HttpURLConnection
-     * @author cylong
-     * @version 2015年5月21日  下午2:33:03
-     */
-    private HttpURLConnection getConn(String url) {
-    	HttpURLConnection urlConn = null;
-    	try {
-			urlConn = (HttpURLConnection)new URL(url).openConnection();
-			urlConn.setRequestMethod("GET");
-			urlConn.setUseCaches(true);
-			urlConn.connect();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-    	return urlConn;
-    }
 
     class Capture extends Thread {
     	@Override
@@ -517,37 +468,6 @@ public class Match implements NBAData {
     		System.out.println("最近" + maxYear + "年数据抓取完毕！");
     		System.out.println("共有" + (matchID--) + "场比赛！");
     		System.out.println("耗时：" + hour + "小时" + minute + "分钟" + second + "秒");
-    	}
-    }
-    
-    class CaptureDetal extends Thread {
-    	String season;
-    	String url;
-    	
-		public CaptureDetal(String season, String url) {
-			this.season = season;
-			this.url = url;
-		}
-
-		@Override
-    	public void run() {
-			captureNameAndScore(season, url);
-    	}
-    }
-    
-    class InsertInto extends Thread {
-    	
-    	ArrayList<String> cellData = new ArrayList<String>();
-    	String regularOrPlayoff;
-    	
-		public InsertInto(ArrayList<String> cellData, String regularOrPlayoff) {
-			this.cellData.addAll(cellData);
-			this.regularOrPlayoff = regularOrPlayoff;
-		}
-
-		@Override
-    	public void run() {
-			insertIntoMatchProfile(cellData, regularOrPlayoff);
     	}
     }
     

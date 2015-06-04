@@ -1,6 +1,7 @@
 package main;
 
 import capture.Match;
+import capture.Player;
 
 /**
  * 程序入口
@@ -10,8 +11,10 @@ import capture.Match;
 public class Launcher {
 
 	public static void main(String[] args) {
-		Match s = new Match();
-		s.capture();
+		Match m = new Match();
+		m.capture();
+		Player p = new Player();
+		p.capture();
 	}
 
 }
