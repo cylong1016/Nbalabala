@@ -315,9 +315,9 @@ public class HotQuery implements HotBLService{
 			String league;
 			ScreenDivision area = Constants.getAreaByAbbr(abbr);
 			if (area == ScreenDivision.EAST) {
-				league = "东部";
+				league = Constants.eastText;
 			}else {
-				league = "西部";
+				league = Constants.westText;
 			}
 			result.add(new HotSeasonTeamVO(i+1, abbr, league, value));
 		}

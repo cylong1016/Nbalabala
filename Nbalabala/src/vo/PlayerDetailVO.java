@@ -20,17 +20,14 @@ public class PlayerDetailVO {
 	
 	private ArrayList<MatchPlayerPO> matchRecords;
 	
-	/** 全身像 */
-	private Image action;
 	
 	public PlayerDetailVO(PlayerProfilePO profile,
 			PlayerSeasonPO seasonRecord,
-			ArrayList<MatchPlayerPO> matchRecords, Image action) {
+			ArrayList<MatchPlayerPO> matchRecords) {
 		super();
 		this.profile = profile;
 		this.seasonRecord = seasonRecord;
 		this.matchRecords = matchRecords;
-		this.action = action;
 	}
 
 	public PlayerProfilePO getProfile() {
@@ -45,10 +42,6 @@ public class PlayerDetailVO {
 	//比赛数据
 	public ArrayList<MatchPlayerPO> getMatchRecords() {
 		return matchRecords;
-	}
-
-	public Image getAction() {
-		return action;
 	}
 	
 }

@@ -53,26 +53,26 @@ public class MatchQuery implements MatchQueryBLService{
 	@Override
 	public ArrayList<MatchDetailVO> screenMatchByTeam(String abbr1,
 			String abbr2) {
-		ArrayList<MatchDetailPO> list1 = matchData.getMatchDetailByTeam(abbr1 + "-" + abbr2);
-		ArrayList<MatchDetailPO> list2 = matchData.getMatchDetailByTeam(abbr2 + "-" + abbr1);
+		ArrayList<MatchDetailPO> list1 = matchData.getMatchDetailByTeam(abbr1,abbr2);
+		ArrayList<MatchDetailPO> list2 = matchData.getMatchDetailByTeam(abbr2,abbr1);
 		list2.removeAll(list1);
 		list1.addAll(list2);
 		// 考虑到黄蜂、鹈鹕、篮网队改名的问题
 		if (abbr1.equals("NOP")) {
-			ArrayList<MatchDetailPO> list3 = matchData.getMatchDetailByTeam("NOH-" + abbr2);
+			ArrayList<MatchDetailPO> list3 = matchData.getMatchDetailByTeam("NOH",abbr2);
 			list3.removeAll(list1);
 			list1.addAll(list3);
 		}else if (abbr1.equals("BKN")) {
-			ArrayList<MatchDetailPO> list4 = matchData.getMatchDetailByTeam("NJN-" + abbr2);
+			ArrayList<MatchDetailPO> list4 = matchData.getMatchDetailByTeam("NJN",abbr2);
 			list4.removeAll(list1);
 			list1.addAll(list4);
 		}
 		if (abbr2.equals("NOP")) {
-			ArrayList<MatchDetailPO> list3 = matchData.getMatchDetailByTeam(abbr1 + "-NOH");
+			ArrayList<MatchDetailPO> list3 = matchData.getMatchDetailByTeam(abbr1,"NOH");
 			list3.removeAll(list1);
 			list1.addAll(list3);
 		}else if (abbr2.equals("BKN")) {
-			ArrayList<MatchDetailPO> list4 = matchData.getMatchDetailByTeam(abbr1 + "-NJN");
+			ArrayList<MatchDetailPO> list4 = matchData.getMatchDetailByTeam(abbr1,"NJN");
 			list4.removeAll(list1);
 			list1.addAll(list4);
 		}
@@ -88,14 +88,7 @@ public class MatchQuery implements MatchQueryBLService{
 //		}
 //		return result;
 //	}
-
-
-//	private MatchDetailVO getMatchDetail(String season, String date,
-//			String homeAbbr, String roadAbbr) {
-//		String fileName = season + "_" + date + "_" + homeAbbr + "-" + roadAbbr;
-//		return matchData.getMatchDetailByFileName(fileName);
-//	}
-//	
+	
 	/** 根据球员名字返回其所有比赛记录 */
 	public ArrayList<MatchPlayerPO> getMatchRecordByPlayerName(String playerName, String season) {
 		return matchData.getMatchRecordByPlayerName(playerName, season);

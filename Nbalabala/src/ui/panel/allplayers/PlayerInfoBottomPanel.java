@@ -91,7 +91,6 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		addScoreReboundAssistLabels();
 		addProfileLabel();
 		addPortrait();
-		addActionImg();
 		addBackButton();
 		addTabButtons();
 		
@@ -291,18 +290,6 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		this.add(label);
 	}
 
-	/**
-	 * 添加全身像
-	 * @author lsy
-	 * @version 2015年3月24日 上午11:17:42
-	 */
-	private void addActionImg() {
-		ActionPhotoPanel actionPhotoPanel = new ActionPhotoPanel(detailVO.getAction());
-		actionPhotoPanel.setOpaque(true);
-		actionPhotoPanel.setBounds(880, 6, 1000, 1000);
-		this.add(actionPhotoPanel);
-	}
-	
 	private void addCurrentPanel() {
 		currentPanel.setBounds(25,236,946,363);
 		this.add(currentPanel);

@@ -1,6 +1,5 @@
 package bl.playerquerybl;
 
-import java.awt.Image;
 import java.util.ArrayList;
 
 import po.MatchPlayerPO;
@@ -12,7 +11,6 @@ import bl.playerseasonbl.PlayerAvgSorter;
 import bl.playerseasonbl.PlayerSeasonAnalysis;
 import blservice.PlayerQueryBLService;
 import data.playerdata.PlayerData;
-import data.playerdata.PlayerImageCache;
 import data.seasondata.SeasonData;
 import dataservice.PlayerDataService;
 import dataservice.SeasonDataService;
@@ -42,7 +40,6 @@ public class PlayerQuery implements PlayerQueryBLService{
 	@Override
 	public PlayerDetailVO getPlayerDetailByName(String playerName, String season) {
 		PlayerProfilePO profile = playerData.getPlayerProfileByName(playerName);
-		Image actionImage = PlayerImageCache.getActionImageByName(playerName);
 
 		//从seasonbl获取球员的赛季数据
 		PlayerSeasonAnalysis playerSeasonAnalysis = new PlayerSeasonAnalysis();
@@ -52,7 +49,7 @@ public class PlayerQuery implements PlayerQueryBLService{
 		MatchQuery matchQuery = new MatchQuery();
 		ArrayList<MatchPlayerPO> matchRecords = matchQuery.getMatchRecordByPlayerName(playerName, season);
 
-		return new PlayerDetailVO(profile, seasonRecord, matchRecords, actionImage);
+		return new PlayerDetailVO(profile, seasonRecord, matchRecords);
 	}
 	
 	/** 根据若干球员的名字返回其简况，提供给teambl用 */

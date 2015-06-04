@@ -52,12 +52,12 @@ public class SeasonData implements SeasonDataService {
 			allPlayerRecords.remove(seasonToAbandon);
 		}
 		if (allPlayerRecords.get(season) != null) {
-			return;
+			return;			// 已经在内存中，不用读了
 		}
 		try {
 			HashMap<String, PlayerSeasonPO> newMap = new HashMap<String, PlayerSeasonPO>();
 			Statement statement = Database.conn.createStatement();
-			ResultSet rs = statement.executeQuery("select * from player_season");
+			ResultSet rs = statement.executeQuery("select * from player_season where season='" + season + "'");
 			while(rs.next()) {
 				PlayerSeasonPO po = new PlayerSeasonPO();
 				po.name = rs.getString(1);
@@ -145,7 +145,7 @@ public class SeasonData implements SeasonDataService {
 		try {
 			HashMap<String, TeamSeasonPO> newMap = new HashMap<String, TeamSeasonPO>();
 			Statement statement = Database.conn.createStatement();
-			ResultSet rs = statement.executeQuery("select * from team_season");
+			ResultSet rs = statement.executeQuery("select * from team_season where season='" + season + "'");
 			while(rs.next()) {
 				TeamSeasonPO po = new TeamSeasonPO();
 				po.abbr = rs.getString(1);
@@ -196,6 +196,7 @@ public class SeasonData implements SeasonDataService {
 				po.stealEff = rs.getFloat(46);
 				po.oppoFieldPercent = rs.getFloat(47);
 				po.oppoScoreAvg = rs.getFloat(48);
+				newMap.put(po.abbr, po);
 			}
 			if (newMap.size() > 0) 	allTeamRecords.put(season, newMap);
 		} catch (SQLException e) {
@@ -387,29 +388,6 @@ public class SeasonData implements SeasonDataService {
 		}
 		return result;
 	}
-	
-	//TODO 这个方法应该不再需要了
-//	/** 向playerdata提供所有参加过比赛的球员的名字 */
-//	public ArrayList<String> getPlayerNames() {
-//		ArrayList<ArrayList<String>> listOfNameLists = new ArrayList<ArrayList<String>>();
-//		Iterator<HashMap<String, PlayerSeasonPO>> itr = allPlayerRecords.values().iterator();
-//		while(itr.hasNext()) {
-//			listOfNameLists.add(new ArrayList<String>(itr.next().keySet()));
-//		}
-//		ArrayList<String> result = new ArrayList<String>();
-//		for (ArrayList<String> list : listOfNameLists) {
-//			list.removeAll(result);
-//			result.addAll(list);
-//		}
-//		return result;
-//	}
-	
-	//TODO 这个方法应该不再需要了
-//	public static void clear() {
-//		allPlayerRecords.clear();
-//		allTeamRecords.clear();
-//	}
-	
 
 	/**
 	 * @see dataservice.SeasonDataService#getAllPlayerRecentSeasonData()
@@ -430,14 +408,7 @@ public class SeasonData implements SeasonDataService {
 	 */
 	@Override
 	public ArrayList<TeamSeasonPO> getAllTeamRecentSeasonData() {
-		checkAndReadTeamSeasonData(Constants.LATEST_SEASON);
-		HashMap<String, TeamSeasonPO> map = allTeamRecords.get(Constants.LATEST_SEASON);
-		if (map == null) {
-			HashMap<String, TeamSeasonPO> regular = allTeamRecords.get(Constants.LATEST_SEASON_REGULAR);
-			return new ArrayList<TeamSeasonPO>(regular.values());
-		}else {
-			return new ArrayList<TeamSeasonPO>(map.values());
-		}
+		return getAllTeamSeasonData(Constants.LATEST_SEASON);
 	}
 	
 	public ArrayList<TeamSeasonPO> getAllTeamSeasonData(String season) {

@@ -14,7 +14,7 @@ import enums.ScreenDivision;
  */
 public interface SeasonDataService {
 
-	/** 根据位置、赛区来返回符合条件的球员 */
+	/** 根据位置、赛区、赛季来返回符合条件的球员 */
 	public ArrayList<PlayerSeasonPO> getScreenedPlayerSeasonData(
 			Position position, ScreenDivision division, String season);
 
@@ -31,12 +31,11 @@ public interface SeasonDataService {
 	public ArrayList<TeamSeasonPO> getScreenedTeamSeasonData(
 			ScreenDivision division, String season);
 
-	/** 根据球员名字和赛季返回其所属球队 */
+	/** 根据球员名字和赛季返回其该赛季所属球队 */
 	public String getTeamAbbrByPlayer(String playerName, String season);
 
 	/** 根据球员名字和赛季返回其赛季数据 */
-	public PlayerSeasonPO getPlayerSeasonDataByName(
-			String playerName, String season);
+	public PlayerSeasonPO getPlayerSeasonDataByName(String playerName, String season);
 
 	/** 根据球队缩写和赛季返回其赛季数据 */
 	public TeamSeasonPO getTeamDataByAbbr(String abbr, String season);

@@ -18,6 +18,7 @@ public class MatchDetailPO {
 	public ArrayList<ExtraTimePO> extraTimes;
 	/** 每个参赛球员表现记录 */	
 	public ArrayList<MatchPlayerPO> matchPlayers;
+	
 	public MatchProfilePO getMatchProfile() {
 		return matchProfile;
 	}

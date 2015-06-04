@@ -39,15 +39,18 @@ public class TeamQuery implements TeamQueryBLService{
 		TeamDataService dataService = new TeamData();
 		SeasonDataService seasonService = new SeasonData();
 		PlayerDataService playerService = new PlayerData();
+		
 		TeamProfileVO profileVO = new TeamProfileVO(dataService.getTeamProfileByAbbr(abbr));
+		
 		ArrayList<String> playerNames = seasonService.getRecentPlayerNamesByTeamAbbr(abbr);
 		ArrayList<PlayerProfilePO> playerProfiles = new ArrayList<PlayerProfilePO>();
 		for (String name : playerNames) {
 			playerProfiles.add(playerService.getPlayerProfileByName(name));
 		}
-		TeamSeasonPO seasonRecord = seasonService.getTeamDataByAbbr(abbr, Constants.LATEST_SEASON);
+		
+		TeamSeasonPO seasonRecord = seasonService.getTeamDataByAbbr(abbr, season);
 		if (seasonRecord == null) {
-			seasonRecord = seasonService.getTeamDataByAbbr(abbr, Constants.LATEST_SEASON_REGULAR);
+			seasonRecord = seasonService.getTeamDataByAbbr(abbr, season);
 		}
 		ArrayList<MatchProfileVO> matches = new MatchQuery().getMatchRecordByTeamAbbrAndSeason(abbr, season); 
 		TeamDetailVO detailVO = new TeamDetailVO(profileVO, playerProfiles, seasonRecord, matches);
