@@ -274,7 +274,7 @@ public class Match extends NBAData {
 									break; // 内层的while循环
 								}
 								if(playerMatch.size() == 23) {
-									playerMatch.add("0"); // 最后的+/-设置为0
+									playerMatch.add(20, "0"); // +/- 设置为0
 								}
 								insertIntoPlayerMatch(playerMatch);
 							}
