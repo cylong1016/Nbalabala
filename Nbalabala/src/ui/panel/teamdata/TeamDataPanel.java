@@ -93,7 +93,7 @@ public class TeamDataPanel extends BottomPanel {
 		current = AllTeamSeasonTableCategory.BASIC;
 		totalOrAvg = TotalOrAvg.TOTAL;
 		seasonInput = new SeasonInputPanel(this);
-		seasonInput.setBounds(56, TOTAL_Y,230,ROW_HEIGHT);
+		seasonInput.setBounds(56, TOTAL_Y,210,ROW_HEIGHT);
 		this.add(seasonInput);
 		// 初始化表格和球队总数据
 		seasonArray = teamSeason.getTeamDataSortedByName(seasonInput.getSeason());

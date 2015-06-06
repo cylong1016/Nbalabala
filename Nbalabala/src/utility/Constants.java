@@ -12,21 +12,21 @@ import enums.ScreenDivision;
  */
 public class Constants {
 	
-//	public static void changeENtoCN(){
-//		onePlayerDataHeaders = ONE_PLAYER_DATA_HEADERS_CN;
-//		
-//	}
-//	
-//	public static void changeCNtoEN(){
-//		onePlayerDataHeaders = ONE_PLAYER_DATA_HEADERS_EN;
-//		
-//	}
-	
 	public static String LATEST_SEASON = "2014-15P";
 	
 	public static String LATEST_SEASON_REGULAR = "2014-15R";
 	
-	public static String LATEST_SEASON_DATE = "2014-15";
+	public static String[] GAME_YEAR = setGameYear();
+	
+	public static String[] setGameYear(){
+		String[] yearArr = new String[29];
+		String year = "2015";
+		for(int i = 0; i < 29; i++){
+			yearArr[i] = (Integer.parseInt(year)-1)+ " - " + year;
+			year = (Integer.parseInt(year)-1)+"";
+		}
+		return yearArr;
+	}
 	
 	public static String[] GAME_SORT_RP = {"常规赛","季后赛"};
 	

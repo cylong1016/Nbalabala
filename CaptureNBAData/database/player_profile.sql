@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015-06-04 11:43:49
+-- 生成日期: 2015-06-06 16:34:04
 -- 服务器版本: 5.5.43-0ubuntu0.14.04.1
 -- PHP 版本: 5.5.9-1ubuntu4.9
 
@@ -2415,7 +2415,7 @@ INSERT INTO `player_profile` (`name`, `from_year`, `to_year`, `position`, `heigh
 ('Jon McGlocklin$01', 1966, 1976, 'G-F', 6, 5, 205, '1943-06-10', 'Indiana University'),
 ('Jon Sundvold$01', 1984, 1992, 'G', 6, 2, 170, '1961-07-02', 'University of Missouri'),
 ('Jonas Jerebko$01', 2010, 2015, 'F', 6, 10, 231, '1987-03-02', NULL),
-('Jonas Valanciunas$01', 2013, 2015, 'C', 6, 11, 231, '1992-05-06', NULL),
+('Jonas Valanciunas$01', 2013, 2015, 'C', 7, 0, 255, '1992-05-06', NULL),
 ('Jonathan Bender$01', 2000, 2010, 'F', 6, 11, 202, '1981-01-30', NULL),
 ('Jonathan Kerner$01', 1999, 1999, 'C', 6, 11, 245, '1974-06-06', 'East Carolina University'),
 ('Jonny Flynn$01', 2010, 2012, 'G', 6, 0, 185, '1989-02-06', 'Syracuse University'),
