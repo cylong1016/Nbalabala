@@ -382,4 +382,8 @@ public class PlayerSeasonPO {
 	public double getAssistPercent() {
 		return assistPercent;
 	}
+	
+	public String getShortName() {
+		return name.substring(0, name.length() - 3);	//去掉最后的编号
+	}
 }

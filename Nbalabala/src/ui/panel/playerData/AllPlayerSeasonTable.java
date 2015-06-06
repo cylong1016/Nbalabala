@@ -10,7 +10,9 @@ import javax.swing.table.TableColumnModel;
 
 import po.PlayerSeasonPO;
 import ui.UIConfig;
+import ui.common.panel.BottomPanel;
 import ui.common.table.BottomTable;
+import ui.controller.MainController;
 import utility.Constants;
 import blservice.PlayerSeasonBLService;
 import enums.AllPlayerSeasonTableCategory;
@@ -55,6 +57,7 @@ public class AllPlayerSeasonTable extends BottomTable{
 		this.category = category;
 		this.totalOrAvg = totalOrAvg;
 		addHeaderListener();
+		addRowListener();
 		refresh();
 	}
 	
@@ -474,7 +477,7 @@ public class AllPlayerSeasonTable extends BottomTable{
 			for (int i=0;i<vos.size();i++) {
 				PlayerSeasonPO vo = vos.get(i);
 				setValueAt(i + 1, i, 0);
-				setValueAt(vo.name, i, 1);
+				setValueAt(vo.getShortName(), i, 1);
 				setValueAt(Constants.translateTeamAbbr(vo.teamAbbr), i, 2);
 				setValueAt(vo.matchCount, i, 3);
 				setValueAt(df.format(vo.firstCountAvg), i, 4);
@@ -493,7 +496,7 @@ public class AllPlayerSeasonTable extends BottomTable{
 			for (int i=0;i<vos.size();i++) {
 				PlayerSeasonPO vo = vos.get(i);
 				setValueAt(i + 1, i, 0);
-				setValueAt(vo.name, i, 1);
+				setValueAt(vo.getShortName(), i, 1);
 				setValueAt(Constants.translateTeamAbbr(vo.teamAbbr), i, 2);
 				setValueAt(vo.matchCount, i, 3);
 				setValueAt(vo.firstCount, i, 4);
@@ -521,7 +524,7 @@ public class AllPlayerSeasonTable extends BottomTable{
 			for (int i=0;i<vos.size();i++) {
 				PlayerSeasonPO vo = vos.get(i);
 				setValueAt(i + 1, i, 0);
-				setValueAt(vo.name, i, 1);
+				setValueAt(vo.getShortName(), i, 1);
 				setValueAt(df.format(vo.efficiencyAvg), i, 2);
 				setValueAt(df.format(vo.gmscAvg), i, 3);
 				setValueAt(percentDf.format(vo.usePercent), i, 4);
@@ -540,7 +543,7 @@ public class AllPlayerSeasonTable extends BottomTable{
 			for (int i=0;i<vos.size();i++) {
 				PlayerSeasonPO vo = vos.get(i);
 				setValueAt(i + 1, i, 0);
-				setValueAt(vo.name, i, 1);
+				setValueAt(vo.getShortName(), i, 1);
 				setValueAt(df.format(vo.efficiency), i, 2);
 				setValueAt(df.format(vo.gmsc), i, 3);
 				setValueAt(percentDf.format(vo.usePercent), i, 4);
@@ -568,7 +571,7 @@ public class AllPlayerSeasonTable extends BottomTable{
 			for (int i=0;i<vos.size();i++) {
 				PlayerSeasonPO vo = vos.get(i);
 				setValueAt(i + 1, i, 0);
-				setValueAt(vo.name, i, 1);
+				setValueAt(vo.getShortName(), i, 1);
 				setValueAt(df.format(vo.fieldMadeAvg), i, 2);
 				setValueAt(df.format(vo.fieldAttemptAvg), i, 3);
 				setValueAt(percentDf.format(vo.fieldPercent), i, 4);
@@ -587,7 +590,7 @@ public class AllPlayerSeasonTable extends BottomTable{
 			for (int i=0;i<vos.size();i++) {
 				PlayerSeasonPO vo = vos.get(i);
 				setValueAt(i + 1, i, 0);
-				setValueAt(vo.name, i, 1);
+				setValueAt(vo.getShortName(), i, 1);
 				setValueAt(vo.fieldMade, i, 2);
 				setValueAt(vo.fieldAttempt, i, 3);
 				setValueAt(percentDf.format(vo.fieldPercent), i, 4);
@@ -615,7 +618,7 @@ public class AllPlayerSeasonTable extends BottomTable{
 			for (int i=0;i<vos.size();i++) {
 				PlayerSeasonPO vo = vos.get(i);
 				setValueAt(i + 1, i, 0);
-				setValueAt(vo.name, i, 1);
+				setValueAt(vo.getShortName(), i, 1);
 				setValueAt(vo.matchCount, i, 3);
 				setValueAt(df.format(vo.firstCountAvg), i, 4);
 				setValueAt(df.format(vo.offensiveReboundAvg), i, 5);
@@ -633,8 +636,7 @@ public class AllPlayerSeasonTable extends BottomTable{
 			for (int i=0;i<vos.size();i++) {
 				PlayerSeasonPO vo = vos.get(i);
 				setValueAt(i + 1, i, 0);
-				setValueAt(vo.name, i, 1);
-				System.out.println(Constants.translateTeamAbbr(vo.teamAbbr));
+				setValueAt(vo.getShortName(), i, 1);
 				setValueAt(Constants.translateTeamAbbr(vo.teamAbbr), i, 2);
 				setValueAt(vo.matchCount, i, 3);
 				setValueAt(vo.firstCount, i, 4);
@@ -650,5 +652,18 @@ public class AllPlayerSeasonTable extends BottomTable{
 				setValueAt(percentDf.format(vo.stealPercent), i, 14);
 			}
 		}
+	}
+	
+	private void addRowListener() {
+		this.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() < 2) return;
+				int rowI  = AllPlayerSeasonTable.this.rowAtPoint(e.getPoint());
+				if (rowI >= 0) {
+					MainController.toPlayerInfoPanel
+					(vos.get(rowI).name, (BottomPanel)(AllPlayerSeasonTable.this.getParent()));
+				}
+			}
+		});
 	}
 }

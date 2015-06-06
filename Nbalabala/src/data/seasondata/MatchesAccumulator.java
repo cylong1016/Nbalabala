@@ -28,12 +28,12 @@ import data.Database;
 public class MatchesAccumulator {
 	
 	public static void main(String[]args) {
-	//writeTeamsToDatabase();
-		MatchesAccumulator accumulator = new MatchesAccumulator();
-		accumulator.accumulate();
-		accumulator.update();
-
-		accumulator.writeToDatabase();
+	writeTeamsToDatabase();
+//		MatchesAccumulator accumulator = new MatchesAccumulator();
+//		accumulator.accumulate();
+//		accumulator.update();
+//
+//		accumulator.writeToDatabase();
 	}
 	
 	private static Connection conn = Database.conn;

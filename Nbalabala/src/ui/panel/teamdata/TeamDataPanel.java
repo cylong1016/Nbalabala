@@ -14,6 +14,7 @@ import ui.common.button.TextButton;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
+import ui.controller.MainController;
 import utility.Constants;
 import bl.teamseasonbl.TeamSeasonAnalysis;
 import blservice.TeamSeasonBLService;
@@ -97,7 +98,9 @@ public class TeamDataPanel extends BottomPanel {
 		// 初始化表格和球队总数据
 		seasonArray = teamSeason.getTeamDataSortedByName(seasonInput.getSeason());
 		table = new AllTeamSeasonTable(teamSeason,seasonArray,AllTeamSeasonTableCategory.BASIC,TotalOrAvg.TOTAL);
+		addRowListener();
 		addScrollPane(table);
+		
 	}
 	
 	private void addTab() {
@@ -246,6 +249,18 @@ public class TeamDataPanel extends BottomPanel {
 		scroll = new BottomScrollPane(table);
 		scroll.setLocation(50, 290); // 表格的位置
 		this.add(scroll);
+	}
+	
+	private void addRowListener() {
+		table.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() < 2) return;
+				int rowI  = table.rowAtPoint(e.getPoint());
+				if (rowI >= 0) {
+					MainController.toTeamBottomPanel(TeamDataPanel.this, seasonArray.get(rowI).abbr);
+				}
+			}
+		});
 	}
 
 }

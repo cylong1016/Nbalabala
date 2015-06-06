@@ -173,7 +173,6 @@ public class PlayerDataPanel extends BottomPanel {
 	}
 
 	public void refresh(){
-//		System.out.println(seasonInput.getSeason());
 		ArrayList<PlayerSeasonPO> iniArray = playerSeason.getScreenedPlayers
 				(PlayerPositionSelectButton.current.position, PlayerDivisionSelectButton.current.division, 
 						PlayerScreenSelectButton.current.basis, seasonInput.getSeason());

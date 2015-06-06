@@ -107,6 +107,7 @@ public class TranslaterCN implements Translater{
 			return "凯尔特人";
 		case "BKN":
 		case "NJN":
+		case "BRK":
 			return "篮网";
 		case "NYK":
 			return "尼克斯";

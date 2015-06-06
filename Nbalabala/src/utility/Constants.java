@@ -101,7 +101,7 @@ public class Constants {
 		"盖帽率", "犯规", "犯规率", "得分", "两双", "得分/篮板/助攻", "效率", "GmSc", "真实命中率", "投篮效率", "进攻篮板率",
 		"防守篮板率", "总篮板率", "抢断", "抢断率", "失误", "失误率", "使用率"};
 	
-	public static final String [] TEAM_ABBR = {"BOS","BKN","NYK","PHI","TOR","CHI","CLE","DET","IND","MIL","ATL","CHA","MIA","ORL","WAS",
+	public static final String [] TEAM_ABBR = {"BOS","BRK","NYK","PHI","TOR","CHI","CLE","DET","IND","MIL","ATL","CHA","MIA","ORL","WAS",
 		"GSW","LAC","LAL","PHX","SAC","DEN","MIN","OKC","POR","UTA","DAL","HOU","MEM","NOP","SAS"};
 	
 	public static final String [] TEAM_NAMES = {"凯尔特人", "篮网", "尼克斯", "76人", "猛龙", "公牛", "骑士", "活塞", "步行者", "雄鹿", "老鹰", "黄蜂", "热火",
@@ -137,7 +137,7 @@ public class Constants {
 	}
 	
 	public static String correctOldAbbr(String old) {
-		if (old.equals("NJN")) return "BKN";
+		if (old.equals("NJN")) return "BRK";
 		else if (old.equals("NOH")) return "NOP";
 		else return old;
 	}
@@ -150,6 +150,7 @@ public class Constants {
 		switch (abbr) {
 		case "BOS":
 		case "BKN":
+		case "BRK":
 		case "NJN":	//篮网队以前 新泽西篮网队，缩写NJN
 		case "NYK":
 		case "PHI":
@@ -182,6 +183,7 @@ public class Constants {
 		switch (abbr) {
 		case "BOS":
 		case "BKN":
+		case "BRK":
 		case "NJN":
 		case "NYK":
 		case "PHI":
@@ -225,7 +227,7 @@ public class Constants {
 		case "凯尔特人":
 			return "BOS";
 		case "篮网":
-			return "BKN";
+			return "BRK";
 		case "尼克斯":
 			return "NYK";
 		case "76人":
@@ -291,6 +293,7 @@ public class Constants {
 		switch (abbr) {
 		case "BOS":
 			return "凯尔特人";
+		case "BRK":
 		case "BKN":
 			return "篮网";
 		case "NYK":
