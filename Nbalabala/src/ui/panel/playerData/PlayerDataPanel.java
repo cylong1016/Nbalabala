@@ -11,7 +11,6 @@ import ui.UIConfig;
 import ui.common.SeasonInputPanel;
 import ui.common.button.TabButton;
 import ui.common.button.TextButton;
-import ui.common.comboBox.MyComboBox;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
@@ -87,7 +86,6 @@ public class PlayerDataPanel extends BottomPanel {
 	private PlayerScreenSelectButton[] screenSelectButtons;
 	private PlayerTotalAvgButton[] totalAvgButtons;
 
-	private MyComboBox box;
 	private TabButton tab[];
 	/** 通过接口调用方法 */
 	private PlayerSeasonBLService playerSeason = new PlayerSeasonAnalysis();
@@ -106,13 +104,12 @@ public class PlayerDataPanel extends BottomPanel {
 		addButton();
 
 		iniSet();
-		addCombobox();
 		addTab();
 		addListener();
 		current = AllPlayerSeasonTableCategory.BASIC;
 		totalOrAvg = TotalOrAvg.TOTAL;
 		seasonInput = new SeasonInputPanel(this);
-		seasonInput.setBounds(54, TOTAL_Y,115,ROW_HEIGHT);
+		seasonInput.setBounds(54, TOTAL_Y,230,ROW_HEIGHT);
 		this.add(seasonInput); 
 		playerblService = new PlayerSeasonAnalysis();
 		// 初始化界面的表格
@@ -175,13 +172,8 @@ public class PlayerDataPanel extends BottomPanel {
 		});
 	}
 
-	private void addCombobox() {
-		String[] list = {"常规赛","季后赛"};
-		box = new MyComboBox(list,174,TOTAL_Y,115,ROW_HEIGHT);
-		this.add(box);
-	}
-
 	public void refresh(){
+//		System.out.println(seasonInput.getSeason());
 		ArrayList<PlayerSeasonPO> iniArray = playerSeason.getScreenedPlayers
 				(PlayerPositionSelectButton.current.position, PlayerDivisionSelectButton.current.division, 
 						PlayerScreenSelectButton.current.basis, seasonInput.getSeason());
@@ -247,7 +239,7 @@ public class PlayerDataPanel extends BottomPanel {
 					TOTAL_AVG_TEXT[i]);
 		}
 	}
-
+	
 	/**
 	 * 添加条件按钮
 	 * 

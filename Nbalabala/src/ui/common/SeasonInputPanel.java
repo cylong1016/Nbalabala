@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import ui.UIConfig;
 import ui.common.button.ImgButton;
+import ui.common.comboBox.MyComboBox;
 import ui.common.panel.BottomPanel;
 import utility.Constants;
 
@@ -28,6 +29,7 @@ public class SeasonInputPanel extends JPanel {
 	private JLabel rightYearLabel;
 	private JLabel middleLabel;
 	private JLabel textLabel;
+	private MyComboBox box;
 
 	/** 有些界面需要改变赛季的同时刷新，则调用该方法 */
 	private BottomPanel bottomPanel = null;
@@ -35,6 +37,7 @@ public class SeasonInputPanel extends JPanel {
 	public SeasonInputPanel(BottomPanel panel) {
 		this.bottomPanel = panel;
 		setLook();
+		addCombobox();
 
 		rightDownButton.addActionListener(new ActionListener() {
 			@Override
@@ -52,8 +55,14 @@ public class SeasonInputPanel extends JPanel {
 				bottomPanel.refresh();
 			}
 		});
+		box.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				bottomPanel.refresh();
+			}
+		});
 	}
-
+	
 	public SeasonInputPanel() {
 		
 		setLook();
@@ -77,7 +86,7 @@ public class SeasonInputPanel extends JPanel {
 	private void setLook() {
 		this.setLayout(null);
 		this.setBackground(UIConfig.BUTTON_COLOR);
-		String[] defaultSeason = Constants.LATEST_SEASON.split("-");
+		String[] defaultSeason = Constants.LATEST_SEASON_DATE.split("-");
 		leftYearLabel = new JLabel(defaultSeason[0]);
 		rightYearLabel = new JLabel(defaultSeason[1]);
 		middleLabel = new JLabel("—");
@@ -90,29 +99,41 @@ public class SeasonInputPanel extends JPanel {
 				"images/SeasonInputUpOn.png");
 		rightDownButton = new ImgButton("images/SeasonInputDownOff.png",
 				"images/SeasonInputDownOn.png");
-		this.setSize(115, 26);
+		this.setSize(120, 26);
 
-		leftYearLabel.setBounds(5, 0, 20, 26);
+		leftYearLabel.setBounds(5, 0, 25, 26);
 		this.add(leftYearLabel);
 
-		middleLabel.setBounds(25, 0, 20, 26);
+		middleLabel.setBounds(30, 0, 20, 26);
 		this.add(middleLabel);
 
-		rightYearLabel.setBounds(44, 0, 20, 26);
+		rightYearLabel.setBounds(49, 0, 25, 26);
 		this.add(rightYearLabel);
 
-		textLabel.setBounds(68, 0, 31, 26);
+		textLabel.setBounds(73, 0, 31, 26);
 		this.add(textLabel);
 
-		rightUpButton.setBounds(95, 0, 22, 13);
+		rightUpButton.setBounds(100, 0, 22, 13);
 		this.add(rightUpButton);
 
-		rightDownButton.setBounds(95, 14, 22, 13);
+		rightDownButton.setBounds(100, 14, 22, 13);
 		this.add(rightDownButton);
 	}
 
 	public String getSeason() {
-		return leftYearLabel.getText() + "-" + rightYearLabel.getText();
+		return leftYearLabel.getText() + "-" + rightYearLabel.getText()+changeToRP(box.getSelectedIndex());
+	}
+	
+	/**
+	 * 将常规赛转换成r，季后赛转换成p
+	 * @author lsy
+	 * @version 2015年6月6日  上午11:54:24
+	 */
+	public String changeToRP(int i){
+		if(i == 0){
+			return "R";
+		}
+		return "P";
 	}
 
 	private String yearIncrease(String oldYear) {
@@ -127,6 +148,12 @@ public class SeasonInputPanel extends JPanel {
 		}
 	}
 
+
+	private void addCombobox() {
+		box = new MyComboBox(Constants.GAME_SORT_RP,130,0,100,26);
+		this.add(box);
+	}
+	
 	private String yearDecrease(String oldYear) {
 		int old = Integer.parseInt(oldYear);
 		int newYear = old - 1;

@@ -26,6 +26,10 @@ public class Constants {
 	
 	public static String LATEST_SEASON_REGULAR = "2014-15R";
 	
+	public static String LATEST_SEASON_DATE = "2014-15";
+	
+	public static String[] GAME_SORT_RP = {"常规赛","季后赛"};
+	
 	/** 无资料的时候显示的提示 */
 	public static final String UNKNOWN = "无资料";
 	

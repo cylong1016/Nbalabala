@@ -11,7 +11,6 @@ import ui.UIConfig;
 import ui.common.SeasonInputPanel;
 import ui.common.button.TabButton;
 import ui.common.button.TextButton;
-import ui.common.comboBox.MyComboBox;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
@@ -61,7 +60,6 @@ public class TeamDataPanel extends BottomPanel {
 			"太平洋", "西北", "西南" };
 	private static final String[] TOTAL_AVG_SELECT_TEXT = new String[] { "总计", "平均" };
 	private static final int DIVISON_COUNT = 9, TOTAL_AVG_COUNT = 2;
-	private MyComboBox box;
 	private TabButton tab[];
 
 	/** 放表格的scrollpane */
@@ -85,7 +83,6 @@ public class TeamDataPanel extends BottomPanel {
 	public TeamDataPanel(String url) {
 		super(url);
 		addButton();
-		addCombobox();
 		addTab();
 		TeamDivisionSelectButton.current = divisionSelectButtons[0];
 		TeamTotalAvgSelectButton.current = totalAvgSelectButtons[0];
@@ -95,18 +92,12 @@ public class TeamDataPanel extends BottomPanel {
 		current = AllTeamSeasonTableCategory.BASIC;
 		totalOrAvg = TotalOrAvg.TOTAL;
 		seasonInput = new SeasonInputPanel(this);
-		seasonInput.setBounds(56, TOTAL_Y,115,ROW_HEIGHT);
+		seasonInput.setBounds(56, TOTAL_Y,230,ROW_HEIGHT);
 		this.add(seasonInput);
 		// 初始化表格和球队总数据
 		seasonArray = teamSeason.getTeamDataSortedByName(seasonInput.getSeason());
 		table = new AllTeamSeasonTable(teamSeason,seasonArray,AllTeamSeasonTableCategory.BASIC,TotalOrAvg.TOTAL);
 		addScrollPane(table);
-	}
-
-	private void addCombobox() {
-		String[] list = {"常规赛","季后赛"};
-		box = new MyComboBox(list,174,TOTAL_Y,115,ROW_HEIGHT);
-		this.add(box);
 	}
 	
 	private void addTab() {
@@ -234,6 +225,7 @@ public class TeamDataPanel extends BottomPanel {
 	}
 
 	public void refresh(){
+//		System.out.println(seasonInput.getSeason());
 		seasonArray = teamSeason.getScreenedTeamData(TeamDivisionSelectButton.current.division, seasonInput.getSeason());
 		table = new AllTeamSeasonTable(teamSeason,seasonArray,AllTeamSeasonTableCategory.BASIC,TotalOrAvg.TOTAL);
 		addScrollPane(table);
