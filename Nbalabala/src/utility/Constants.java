@@ -440,6 +440,9 @@ public class Constants {
 	
 	public static String teamAvgText = "球队平均";
 	
+	public static String regularText = "常规赛";
+	public static String playoffText = "季后赛";
+	
 	public static String translateHeight(String height){
 		return translater.translateHeight(height);
 	}

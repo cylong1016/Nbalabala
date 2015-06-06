@@ -101,8 +101,19 @@ public class SeasonInputPanel extends JPanel {
 	}
 
 	public String getSeason() {
-		return box.getSelectedItem() + rpLabel.getText();
+		String start = box.getSelectedItem().toString().substring(0, 4);
+		int endInt = Integer.parseInt(start) + 1;
+		String end = String.valueOf(endInt).substring(2, 4);
+		String category = null;
+		if (rpLabel.getText().equals(Constants.regularText)) {
+			category = "R";
+		}else {
+			category = "P";
+		}
+		return start + "-" + end + category;
 	}
+	
+	
 
 	private void addCombobox() {
 		box = new MyComboBox(Constants.GAME_YEAR, 0, 0, 120, 26);
