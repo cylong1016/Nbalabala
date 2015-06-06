@@ -12,21 +12,17 @@ import enums.ScreenDivision;
  */
 public class Constants {
 	
-//	public static void changeENtoCN(){
-//		onePlayerDataHeaders = ONE_PLAYER_DATA_HEADERS_CN;
-//		
-//	}
-//	
-//	public static void changeCNtoEN(){
-//		onePlayerDataHeaders = ONE_PLAYER_DATA_HEADERS_EN;
-//		
-//	}
-	
 	public static String LATEST_SEASON = "2014-15P";
 	
 	public static String LATEST_SEASON_REGULAR = "2014-15R";
 	
 	public static String LATEST_SEASON_DATE = "2014-15";
+	
+	public static String[] GAME_YEAR = {"2014-15","2013-14","2012-13","2011-12","2010-11","2009-10","2008-09",
+		"2007-08","2006-07","2005-06","2004-05","2003-04","2002-03","2001-02","2000-01","1999-00","1998-99",
+		"1997-98","1996-97","1995-96","1994-95","1993-94","1992-93","1991-92","1990-91","1989-90","1988-89",
+		"1987-88","1986-87"
+		};
 	
 	public static String[] GAME_SORT_RP = {"常规赛","季后赛"};
 	

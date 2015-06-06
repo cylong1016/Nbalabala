@@ -109,7 +109,7 @@ public class PlayerDataPanel extends BottomPanel {
 		current = AllPlayerSeasonTableCategory.BASIC;
 		totalOrAvg = TotalOrAvg.TOTAL;
 		seasonInput = new SeasonInputPanel(this);
-		seasonInput.setBounds(54, TOTAL_Y,230,ROW_HEIGHT);
+		seasonInput.setBounds(54, TOTAL_Y,205,ROW_HEIGHT);
 		this.add(seasonInput); 
 		playerblService = new PlayerSeasonAnalysis();
 		// 初始化界面的表格
