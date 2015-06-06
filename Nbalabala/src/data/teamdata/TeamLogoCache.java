@@ -12,11 +12,11 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
-import org.apache.batik.transcoder.Transcoder;
-import org.apache.batik.transcoder.TranscoderException;
-import org.apache.batik.transcoder.TranscoderInput;
-import org.apache.batik.transcoder.TranscoderOutput;
-import org.apache.batik.transcoder.image.PNGTranscoder;
+//import org.apache.batik.transcoder.Transcoder;
+//import org.apache.batik.transcoder.TranscoderException;
+//import org.apache.batik.transcoder.TranscoderInput;
+//import org.apache.batik.transcoder.TranscoderOutput;
+//import org.apache.batik.transcoder.image.PNGTranscoder;
 
 import utility.Constants;
 
