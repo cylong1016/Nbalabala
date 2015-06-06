@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 public class Match extends NBAData {
 
     /** 最近多少年的数据 */
-    private int maxYear = 40;
+    private int maxYear = 30;
     /** 比赛ID */
     private int matchID = 1;
     
