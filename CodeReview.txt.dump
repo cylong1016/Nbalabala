@@ -1,5 +1,0 @@
-避免使用不必要的全局变量
-变量名字不能达意
-避免正文中出现过多常量
-注意public private 去除无用变量和方法
-英语 如sumSelectButton
