@@ -24,7 +24,7 @@ public class Database {
     private static String user = "root"; 
 
     // MySQL配置时的密码
-    private static String password = "cyl941016";
+    private static String password = "root";
     
     public static Connection conn;
     
