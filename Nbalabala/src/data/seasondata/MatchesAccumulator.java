@@ -16,8 +16,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import po.PlayerProfilePO;
 import utility.Constants;
 import data.Database;
+import data.playerdata.PlayerData;
 
 
 /**
@@ -26,6 +28,8 @@ import data.Database;
  * @version 2015年4月1日  下午10:14:21
  */
 public class MatchesAccumulator {
+	
+	PlayerData playerData = new PlayerData();
 	
 	public static void main(String[]args) {
 		// writeTeamsToDatabase();
@@ -175,7 +179,13 @@ public class MatchesAccumulator {
 				    ps.setFloat(60, vo.foulPercent);
 				    ps.setFloat(61, vo.usePercent);
 				    ps.setFloat(62, vo.assistPercent);
-				    ps.setString(63, "C-F");	//TODO 因为位置还没爬下来，先这么写着
+				    PlayerProfilePO playerProfilePO = playerData.getPlayerProfileByName(vo.name);
+				    if (playerProfilePO == null) {
+				    	 ps.setString(63, " ");
+				    }else {
+				    	ps.setString(63, playerProfilePO.position);
+				    }
+				   	//TODO 因为位置还没爬下来，先这么写着
 				    
 				    ps.executeUpdate();
 				} catch (SQLException e) {
@@ -240,8 +250,10 @@ public class MatchesAccumulator {
 				    ps.setFloat(44, vo.defensiveEff);
 				    ps.setFloat(45, vo.assistEff);
 				    ps.setFloat(46, vo.stealEff);
-				    ps.setFloat(47, vo.oppoFieldPercent);
-				    ps.setFloat(48, vo.oppoScoreAvg);
+				    ps.setFloat(47, vo.offensiveReboundEff);
+				    ps.setFloat(48, vo.defensiveReboundEff);
+				    ps.setFloat(49, vo.oppoFieldPercent);
+				    ps.setFloat(50, vo.oppoScoreAvg);
 				    ps.executeUpdate();
 				} catch (SQLException e) {
 					e.printStackTrace();

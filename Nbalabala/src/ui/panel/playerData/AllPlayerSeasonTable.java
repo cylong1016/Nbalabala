@@ -534,8 +534,8 @@ public class AllPlayerSeasonTable extends BottomTable{
 				setValueAt(percentDf.format(vo.assistPercent), i, 8);
 				setValueAt(percentDf.format(vo.realFieldPercent), i, 9);
 				setValueAt(percentDf.format(vo.fieldEff), i, 10);
-				setValueAt(percentDf.format(vo.blockPercent), i, 11);
-				setValueAt(percentDf.format(vo.stealPercent), i, 12);
+				setValueAt(df.format(vo.blockPercent), i, 11);
+				setValueAt(df.format(vo.stealPercent), i, 12);
 				setValueAt(percentDf.format(vo.foulPercent), i, 13);
 				setValueAt(percentDf.format(vo.turnOverPercent), i, 14);
 			}
@@ -553,8 +553,8 @@ public class AllPlayerSeasonTable extends BottomTable{
 				setValueAt(percentDf.format(vo.assistPercent), i, 8);
 				setValueAt(percentDf.format(vo.realFieldPercent), i, 9);
 				setValueAt(percentDf.format(vo.fieldEff), i, 10);
-				setValueAt(percentDf.format(vo.blockPercent), i, 11);
-				setValueAt(percentDf.format(vo.stealPercent), i, 12);
+				setValueAt(df.format(vo.blockPercent), i, 11);
+				setValueAt(df.format(vo.stealPercent), i, 12);
 				setValueAt(percentDf.format(vo.foulPercent), i, 13);
 				setValueAt(percentDf.format(vo.turnOverPercent), i, 14);
 			}
@@ -629,8 +629,8 @@ public class AllPlayerSeasonTable extends BottomTable{
 				setValueAt(percentDf.format(vo.offensiveReboundPercent), i, 10);
 				setValueAt(percentDf.format(vo.defensiveReboundPercent), i, 11);
 				setValueAt(percentDf.format(vo.totalReboundPercent), i, 12);
-				setValueAt(percentDf.format(vo.blockPercent), i, 13);
-				setValueAt(percentDf.format(vo.stealPercent), i, 14);
+				setValueAt(df.format(vo.blockPercent), i, 13);
+				setValueAt(df.format(vo.stealPercent), i, 14);
 			}
 		}else {
 			for (int i=0;i<vos.size();i++) {
@@ -648,8 +648,8 @@ public class AllPlayerSeasonTable extends BottomTable{
 				setValueAt(percentDf.format(vo.offensiveReboundPercent), i, 10);
 				setValueAt(percentDf.format(vo.defensiveReboundPercent), i, 11);
 				setValueAt(percentDf.format(vo.totalReboundPercent), i, 12);
-				setValueAt(percentDf.format(vo.blockPercent), i, 13);
-				setValueAt(percentDf.format(vo.stealPercent), i, 14);
+				setValueAt(df.format(vo.blockPercent), i, 13);
+				setValueAt(df.format(vo.stealPercent), i, 14);
 			}
 		}
 	}

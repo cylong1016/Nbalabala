@@ -55,8 +55,9 @@ public class ScorePanel extends Panel {
 	 * @author lsy
 	 * @version 2015年4月22日 上午10:49:01
 	 */
-	public ScorePanel(MatchProfileVO matchPro) {
-		this.matchPro = matchPro;
+	public ScorePanel(MatchDetailVO matchDetailVO) {
+		this.matchVO = matchDetailVO;
+		this.matchPro = matchVO.getProfile();
 		getTeam();
 		getScore();
 		addLabel();

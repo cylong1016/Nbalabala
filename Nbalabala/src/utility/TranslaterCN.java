@@ -52,6 +52,7 @@ public class TranslaterCN implements Translater{
 	 */
 	@Override
 	public String translateDate(Date date) {
+		if (date == null) return Constants.UNKNOWN;
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(date.getTime());
 		return calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH)+1) 
@@ -102,6 +103,7 @@ public class TranslaterCN implements Translater{
 	 */
 	@Override
 	public String translateTeamAbbr(String abbr) {
+		if (abbr == null) return Constants.UNKNOWN;
 		switch (abbr) {
 		case "BOS":
 			return "凯尔特人";
@@ -167,7 +169,7 @@ public class TranslaterCN implements Translater{
 		case "UTA":
 			return "爵士";
 		default:
-			return "无资料";
+			return Constants.UNKNOWN;
 		}
 	}
 
@@ -176,6 +178,7 @@ public class TranslaterCN implements Translater{
 	 */
 	@Override
 	public String translateTeamAbbrToLocation(String abbr) {
+		if (abbr == null) return Constants.UNKNOWN;
 		switch (abbr) {
 		case "BOS":
 			return "波士顿";

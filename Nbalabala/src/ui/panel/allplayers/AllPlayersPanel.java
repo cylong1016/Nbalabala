@@ -138,7 +138,7 @@ public class AllPlayersPanel extends BottomPanel {
 			Image smallImg = protrait.getScaledInstance(PORTRAIT_WIDTH, height, Image.SCALE_SMOOTH);
 			ImageIcon ic = new ImageIcon(smallImg);
 			iconArr.add(ic);
-			table.setValueAt(ppVO.getName(), i, 1);
+			table.setValueAt(ppVO.getShortName(), i, 1);
 			table.setValueAt(ppVO.getFromYear(), i, 2);
 			table.setValueAt(ppVO.getToYear(), i, 3);
 			table.setValueAt(ppVO.getPosition(), i, 4);

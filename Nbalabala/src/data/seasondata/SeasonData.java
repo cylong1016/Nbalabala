@@ -194,8 +194,10 @@ public class SeasonData implements SeasonDataService {
 				po.defensiveEff = rs.getFloat(44);
 				po.assistEff = rs.getFloat(45);
 				po.stealEff = rs.getFloat(46);
-				po.oppoFieldPercent = rs.getFloat(47);
-				po.oppoScoreAvg = rs.getFloat(48);
+				po.offensiveReboundEff = rs.getFloat(47);
+				po.defensiveReboundEff = rs.getFloat(48);
+				po.oppoFieldPercent = rs.getFloat(49);
+				po.oppoScoreAvg = rs.getFloat(50);
 				newMap.put(po.abbr, po);
 			}
 			if (newMap.size() > 0) 	allTeamRecords.put(season, newMap);
@@ -254,7 +256,7 @@ public class SeasonData implements SeasonDataService {
 		}else if (position != Position.ALL && division == ScreenDivision.ALL) {
 			while (itr.hasNext()) {
 				PlayerSeasonPO record = itr.next().getValue();
-				if (record.position.lastIndexOf(posChar) > 0) {
+				if (record.position.lastIndexOf(posChar) >= 0) {
 					result.add(record);
 				}
 			}
@@ -262,7 +264,7 @@ public class SeasonData implements SeasonDataService {
 				(division == ScreenDivision.WEST || division == ScreenDivision.EAST)){
 			while (itr.hasNext()) {
 				PlayerSeasonPO record = itr.next().getValue();
-				if (record.position.lastIndexOf(posChar) > 0 && 
+				if (record.position.lastIndexOf(posChar) >= 0 && 
 						Constants.getAreaByAbbr(record.teamAbbr) == division) {
 					result.add(record);
 				}
@@ -270,7 +272,7 @@ public class SeasonData implements SeasonDataService {
 		}else{
 			while (itr.hasNext()) {
 				PlayerSeasonPO record = itr.next().getValue();
-				if (record.position.lastIndexOf(posChar) > 0 &&
+				if (record.position.lastIndexOf(posChar) >= 0 &&
 						Constants.getDivisionByAbbr(record.teamAbbr) == division) {
 					result.add(record);
 				}

@@ -93,7 +93,6 @@ public class BottomTable extends JTable {
 		TableCellRenderer headerRenderer = header.getDefaultRenderer();
 		if (headerRenderer instanceof JLabel) {
 			((JLabel)headerRenderer).setHorizontalAlignment(JLabel.CENTER);
-			((JLabel)headerRenderer).setOpaque(false);
 		}
 	}
 	
@@ -179,6 +178,7 @@ public class BottomTable extends JTable {
 			((JLabel)headerRenderer).setOpaque(false);
 		}
 
+		cancelVerticalLines(); //TODO 所有表格都不显示 
 	}
 
 	/**
@@ -241,7 +241,8 @@ public class BottomTable extends JTable {
 			label.setText(value != null ? value.toString() : "unknown");
 			label.setHorizontalAlignment(JLabel.CENTER);
 			label.setFont(UIConfig.TABLE_FONT);
-			label.setForeground(headerF);	// 表头前景色
+			label.setForeground(Color.black);	// TODO 表头前景色
+			label.setBackground(UIConfig.TABLE_HEADER_BACK_COLOR);
 			return label;
 		}
 

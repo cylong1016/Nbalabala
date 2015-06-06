@@ -72,7 +72,7 @@ public class GamePanel extends BottomPanel {
 		initSetTabel();
 		addBack();
 		addLabel();
-		scPanel = new ScorePanel(matchPro);
+		scPanel = new ScorePanel(matchDetail);
 		this.add(scPanel);
 		scPanel.setLocation(188, 140);
 		this.repaint();

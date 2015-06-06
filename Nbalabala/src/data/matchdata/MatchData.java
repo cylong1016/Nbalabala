@@ -223,28 +223,31 @@ public class MatchData implements MatchDataService {
 			String playerName, String season) {
 		ArrayList<MatchPlayerPO> result = new ArrayList<MatchPlayerPO>();
 		// 先找到这个赛季的比赛ID区间
-		String idSql = "select match_id from match_profile where season='" + season + "' order by match_id asc";
+		String idSql = "select match_id,date,road_abbr,home_abbr from match_profile where season='" + season + "' order by match_id asc";
 		int startID = 0;
 		int endID = 0;
-		HashMap<Integer, String> oppoAbbrs = new HashMap<Integer, String>();	// 记录对手的缩写
+		HashMap<Integer, String> roadAbbrs = new HashMap<Integer, String>();	// 记录客场的缩写
+		HashMap<Integer, String> homeAbbrs = new HashMap<Integer, String>();	// 记录主场的缩写
 		HashMap<Integer, Date> dates = new HashMap<Integer, Date>();	// 记录日期
 		try {
 			ResultSet idResultSet = conn.createStatement().executeQuery(idSql);
 			if (idResultSet.next()) {
 				startID = idResultSet.getInt(1);	// 本赛季的第一场比赛的ID
-				oppoAbbrs.put(startID, idResultSet.getString(4));
-				dates.put(startID, idResultSet.getDate(3));
+				roadAbbrs.put(startID, idResultSet.getString(3));
+				homeAbbrs.put(startID, idResultSet.getString(4));
+				dates.put(startID, idResultSet.getDate(2));
 			} else {
 				return result;						// 本赛季无比赛，返回空表
 			}
 			while(idResultSet.next()) {
 				endID = idResultSet.getInt(1);
-				oppoAbbrs.put(endID, idResultSet.getString(4));
-				dates.put(endID, idResultSet.getDate(3));
+				roadAbbrs.put(endID, idResultSet.getString(3));
+				homeAbbrs.put(endID, idResultSet.getString(4));
+				dates.put(endID, idResultSet.getDate(2));
 			}										// 循环结束后找到了最后一场比赛的ID
 			if (endID == 0) endID = startID;		// 极端情况：本赛季只有一场比赛的记录
 			PreparedStatement ps = conn.prepareStatement("select * from match_player "
-					+ "where season>=? and season<=? and player_name=?");
+					+ "where match_id>=? and match_id<=? and player_name=?");
 			ps.setInt(1, startID);
 			ps.setInt(2, endID);
 			ps.setString(3, playerName);
@@ -254,12 +257,18 @@ public class MatchData implements MatchDataService {
 			for (int i = 0; i < size; i++) {
 				MatchPlayerPO po = result.get(i);
 				po.date = dates.get(po.matchID);
-				po.oppoAbbr = oppoAbbrs.get(po.matchID);
+				if (po.homeOrRoad == 'H') {
+					po.teamAbbr = homeAbbrs.get(po.matchID);
+					po.oppoAbbr = roadAbbrs.get(po.matchID);
+				}else {
+					po.teamAbbr = roadAbbrs.get(po.matchID);
+					po.oppoAbbr = homeAbbrs.get(po.matchID);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return result;
 	}
 
 	/* (non-Javadoc)

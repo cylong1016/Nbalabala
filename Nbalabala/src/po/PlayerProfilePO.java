@@ -60,4 +60,7 @@ public class PlayerProfilePO {
 		return school;
 	}
 
+	public String getShortName() {
+		return this.name.substring(0, name.length() - 3); //去掉形如$01的编号
+	}
 }

@@ -96,8 +96,10 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		
 		int matchCount = detailVO.getMatchRecords().size();
 		ArrayList<MatchPlayerPO> latestTwoMatches = new ArrayList<MatchPlayerPO>();
-		latestTwoMatches.add(detailVO.getMatchRecords().get(matchCount - 2));
-		latestTwoMatches.add(detailVO.getMatchRecords().get(matchCount - 1));
+		if (detailVO.getMatchRecords().size() > 1) {
+			latestTwoMatches.add(detailVO.getMatchRecords().get(matchCount - 2));
+			latestTwoMatches.add(detailVO.getMatchRecords().get(matchCount - 1));
+		}
 				
 		// 刚进入的时候显示的是柱状对比图的那个页面
 		briefPanel = new PlayerInfoBriefPanel(detailVO.getSeasonRecord(), 

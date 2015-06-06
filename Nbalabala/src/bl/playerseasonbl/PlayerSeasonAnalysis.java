@@ -27,11 +27,12 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService {
 
 	/** 记录上一次返回给UI层，即UI层正在显示的球员列表 */
 	private ArrayList<PlayerSeasonPO> currentList 
-		= seasonData.getAllPlayerSeasonData(Constants.LATEST_SEASON);
+		= seasonData.getAllPlayerSeasonData(Constants.LATEST_SEASON_REGULAR);
 
 	/** 刚进入界面时调用此方法，得到的是默认赛季的以名字排序的球员数据 */
 	public ArrayList<PlayerSeasonPO> getAllPlayersSortedByName() {
 		sortPlayersByName(currentList);
+		
 		return currentList;
 	}
 
@@ -65,6 +66,7 @@ public class PlayerSeasonAnalysis implements PlayerSeasonBLService {
 		// 否则，就按指标选出前50个人
 		PlayerScreener screener = new PlayerScreener();
 		currentList = screener.screen(players, basis);
+		
 		return currentList;
 	}
 

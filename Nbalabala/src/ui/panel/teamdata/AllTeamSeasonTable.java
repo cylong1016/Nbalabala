@@ -371,8 +371,8 @@ public class AllTeamSeasonTable extends BottomTable{
 				setValueAt(df.format(vo.stealAvg), i, 9);
 				setValueAt(df.format(vo.turnoverAvg), i, 10);
 				setValueAt(df.format(vo.foulAvg), i, 11);
-				setValueAt(UIConfig.PERCENT_FORMAT.format(vo.offensiveEff), i, 12);
-				setValueAt(UIConfig.PERCENT_FORMAT.format(vo.defensiveEff), i, 13);
+				setValueAt(df.format(vo.offensiveEff), i, 12);
+				setValueAt(df.format(vo.defensiveEff), i, 13);
 			}
 		}else {
 			for (int i=0;i<vos.size();i++) {
@@ -415,7 +415,7 @@ public class AllTeamSeasonTable extends BottomTable{
 				setValueAt(df.format(vo.freethrowMadeAvg), i, 8);
 				setValueAt(df.format(vo.freethrowAttemptAvg), i, 9);
 				setValueAt(percentDf.format(vo.freethrowPercent), i, 10);
-				setValueAt(percentDf.format(vo.assistEff), i, 11);
+				setValueAt(df.format(vo.assistEff), i, 11);
 				setValueAt(df.format(vo.offensiveRoundAvg), i, 12);
 				setValueAt(df.format(vo.offensiveEff), i, 13);
 			}
@@ -433,7 +433,7 @@ public class AllTeamSeasonTable extends BottomTable{
 				setValueAt(vo.freethrowMade, i, 8);
 				setValueAt(vo.freethrowAttempt, i, 9);
 				setValueAt(percentDf.format(vo.freethrowPercent), i, 10);
-				setValueAt(percentDf.format(vo.assistEff), i, 11);
+				setValueAt(df.format(vo.assistEff), i, 11);
 				setValueAt(vo.offensiveRound, i, 12);
 				setValueAt(df.format(vo.offensiveEff), i, 13);
 			}
