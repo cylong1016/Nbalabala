@@ -90,13 +90,13 @@ public class SeasonInputPanel extends JPanel {
 		rightDownButton = new ImgButton("images/SeasonInputDownOff.png", "images/SeasonInputDownOn.png");
 		this.setSize(120, 26);
 
-		rpLabel.setBounds(120, 0, 80, 26);
+		rpLabel.setBounds(130, 0, 80, 26);
 		this.add(rpLabel);
 
-		rightUpButton.setBounds(175, 0, 22, 13);
+		rightUpButton.setBounds(190, 0, 22, 13);
 		this.add(rightUpButton);
 
-		rightDownButton.setBounds(175, 14, 22, 13);
+		rightDownButton.setBounds(190, 14, 22, 13);
 		this.add(rightDownButton);
 	}
 
@@ -105,7 +105,7 @@ public class SeasonInputPanel extends JPanel {
 	}
 
 	private void addCombobox() {
-		box = new MyComboBox(Constants.GAME_YEAR, 0, 0, 100, 26);
+		box = new MyComboBox(Constants.GAME_YEAR, 0, 0, 120, 26);
 		this.add(box);
 	}
 
