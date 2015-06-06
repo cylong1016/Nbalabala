@@ -130,8 +130,8 @@ public class TeamQuery implements TeamQueryBLService{
 	 * @see blservice.TeamQueryBLService#getRanks(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public int[] getRanks(String abbr) {
-		ArrayList<TeamSeasonPO> vos = new SeasonData().getTeamRecentSeasonDataInSameLeague(abbr);
+	public int[] getRanks(String abbr, String season) {
+		ArrayList<TeamSeasonPO> vos = new SeasonData().getTeamSeasonDataInSameLeague(abbr, season);
 		int [] result = new int[4];
 		if (vos.size() == 0) {
 			result[0]=0;
@@ -180,13 +180,13 @@ public class TeamQuery implements TeamQueryBLService{
 	 * @see blservice.TeamQueryBLService#getScoreKings()
 	 */
 	@Override
-	public KingVO[] getScoreKings(String abbr) {
+	public KingVO[] getScoreKings(String abbr, String season) {
 		KingVO[] result = new KingVO[5];
 		int index = 0;
 		SeasonData seasonData = new SeasonData();
 		PlayerData playerData = new PlayerData();
-		ArrayList<PlayerSeasonPO> allPlayers = seasonData.getAllPlayerRecentSeasonData();
-		ArrayList<String> teamPlayers = seasonData.getRecentPlayerNamesByTeamAbbr(abbr);
+		ArrayList<PlayerSeasonPO> allPlayers = seasonData.getAllPlayerSeasonData(season);
+		ArrayList<String> teamPlayers = seasonData.getPlayerNamesByTeamAbbr(abbr, season);
 		new PlayerAvgSorter().sort(allPlayers, PlayerAvgSortBasis.SCORE_AVG, SortOrder.DE);
 		for (int i=0;i<allPlayers.size();i++) {
 			PlayerSeasonPO vo = allPlayers.get(i);
@@ -205,13 +205,13 @@ public class TeamQuery implements TeamQueryBLService{
 	 * @see blservice.TeamQueryBLService#getReboundKings()
 	 */
 	@Override
-	public KingVO[] getReboundKings(String abbr) {
+	public KingVO[] getReboundKings(String abbr, String season) {
 		KingVO[] result = new KingVO[5];
 		int index = 0;
 		SeasonData seasonData = new SeasonData();
 		PlayerData playerData = new PlayerData();
-		ArrayList<PlayerSeasonPO> allPlayers = seasonData.getAllPlayerRecentSeasonData();
-		ArrayList<String> teamPlayers = seasonData.getRecentPlayerNamesByTeamAbbr(abbr);
+		ArrayList<PlayerSeasonPO> allPlayers = seasonData.getAllPlayerSeasonData(season);
+		ArrayList<String> teamPlayers = seasonData.getPlayerNamesByTeamAbbr(abbr, season);
 		new PlayerAvgSorter().sort(allPlayers, PlayerAvgSortBasis.TOTAL_REBOUND_AVG, SortOrder.DE);
 		for (int i=0;i<allPlayers.size();i++) {
 			PlayerSeasonPO vo = allPlayers.get(i);
@@ -230,13 +230,13 @@ public class TeamQuery implements TeamQueryBLService{
 	 * @see blservice.TeamQueryBLService#getAssistKings()
 	 */
 	@Override
-	public KingVO[] getAssistKings(String abbr) {
+	public KingVO[] getAssistKings(String abbr, String season) {
 		KingVO[] result = new KingVO[5];
 		int index = 0;
 		SeasonData seasonData = new SeasonData();
 		PlayerData playerData = new PlayerData();
-		ArrayList<PlayerSeasonPO> allPlayers = seasonData.getAllPlayerRecentSeasonData();
-		ArrayList<String> teamPlayers = seasonData.getRecentPlayerNamesByTeamAbbr(abbr);
+		ArrayList<PlayerSeasonPO> allPlayers = seasonData.getAllPlayerSeasonData(season);
+		ArrayList<String> teamPlayers = seasonData.getPlayerNamesByTeamAbbr(abbr, season);
 		new PlayerAvgSorter().sort(allPlayers, PlayerAvgSortBasis.ASSIST_AVG, SortOrder.DE);
 		for (int i=0;i<allPlayers.size();i++) {
 			PlayerSeasonPO vo = allPlayers.get(i);

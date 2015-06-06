@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import ui.panel.playerData.AllPlayerSeasonTable;
 import utility.Constants;
 import data.Database;
 
@@ -33,12 +32,8 @@ public class MatchesAccumulator {
 		MatchesAccumulator accumulator = new MatchesAccumulator();
 		accumulator.accumulate();
 		accumulator.update();
-		System.out.println(accumulator.allPlayerRecords.size());
-		Iterator<HashMap<String, PlayerSeasonVOForCompute>> itr = accumulator.allPlayerRecords.values().iterator();
-		while(itr.hasNext()) {
-			System.out.println(itr.next().size());
-		}
-//		accumulator.writeToDatabase();
+
+		accumulator.writeToDatabase();
 	}
 	
 	private static Connection conn = Database.conn;
@@ -347,7 +342,7 @@ public class MatchesAccumulator {
 				roadTeamData[17] = roadPoints;
 				
 				while (players.next()) {
-					String name = players.getString(4);
+					String name = players.getString(2);
 					if (!playerRecords.containsKey(name))
 						playerRecords.put(name, new PlayerSeasonVOForCompute(name));
 			
@@ -357,7 +352,7 @@ public class MatchesAccumulator {
 					
 					if ((playerRecord.latestMatchDate == null) || (matchDate.after(playerRecord.latestMatchDate))) {
 						playerRecord.latestMatchDate = matchDate;
-						playerRecord.teamName = players.getString(3);
+						playerRecord.teamName = players.getString(4);
 					}
 					
 					if (players.getString(2).charAt(0) == 'H') {		//客场0 主场1

@@ -186,7 +186,7 @@ public class TeamBottomPanel extends BottomPanel{
 	
 	/** 添加联盟内胜率、得分、篮板、助攻排名的label */
 	private void addRanks() {
-		int [] ranks = teamQuery.getRanks(abbr);
+		int [] ranks = teamQuery.getRanks(abbr, Constants.LATEST_SEASON_REGULAR);
 		int interX = 80;
 		
 		rankLabel = new JLabel(Utility.getRankStr(ranks[0]));
@@ -305,9 +305,18 @@ public class TeamBottomPanel extends BottomPanel{
 	public void refresh() {
 		String season = seasonChooser.getSeason();
 		teamDetail = teamQuery.getTeamDetailByAbbr(abbr, season);
+		
+		kingPanel.updateContent(season);
+		lineupPanel.updateContent(teamDetail.getPlayers());
 		if (seasonPanel != null) seasonPanel.updateContent(season, teamDetail.getSeasonRecord(), 
 					teamQuery.getFiveArgsAvg(season), teamQuery.getHighestScoreReboundAssist(season));
 		if (matchPanel != null) matchPanel.updateContent(teamDetail.getMatchRecords());
+		
+		int[] ranks = teamQuery.getRanks(season, season);
+		rankLabel.setText(Utility.getRankStr(ranks[0]));
+		scoreLabel.update(ranks[1]);
+		reboundLabel.update(ranks[2]);
+		assistLabel.update(ranks[3]);
 	}
 	
 	//TODO 测试代码
@@ -318,7 +327,4 @@ public class TeamBottomPanel extends BottomPanel{
 			frame.setPanel(new TeamBottomPanel(null, "SAS"));
 			frame.start();
 		}
-	
-
-	
 }

@@ -11,6 +11,10 @@ import java.util.Calendar;
  */
 public class Utility {
 	
+	public String trimName(String name) {
+		return name.substring(0, name.length() - 3);
+	}
+	
 	
 	public static String getRankStr(int rank) {
 		if (rank ==0) return "";

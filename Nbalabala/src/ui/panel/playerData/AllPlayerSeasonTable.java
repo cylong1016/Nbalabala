@@ -616,7 +616,6 @@ public class AllPlayerSeasonTable extends BottomTable{
 				PlayerSeasonPO vo = vos.get(i);
 				setValueAt(i + 1, i, 0);
 				setValueAt(vo.name, i, 1);
-				setValueAt(Constants.translateTeamAbbr(vo.teamAbbr), i, 2);
 				setValueAt(vo.matchCount, i, 3);
 				setValueAt(df.format(vo.firstCountAvg), i, 4);
 				setValueAt(df.format(vo.offensiveReboundAvg), i, 5);
@@ -635,6 +634,7 @@ public class AllPlayerSeasonTable extends BottomTable{
 				PlayerSeasonPO vo = vos.get(i);
 				setValueAt(i + 1, i, 0);
 				setValueAt(vo.name, i, 1);
+				System.out.println(Constants.translateTeamAbbr(vo.teamAbbr));
 				setValueAt(Constants.translateTeamAbbr(vo.teamAbbr), i, 2);
 				setValueAt(vo.matchCount, i, 3);
 				setValueAt(vo.firstCount, i, 4);

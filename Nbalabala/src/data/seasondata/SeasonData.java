@@ -427,11 +427,11 @@ public class SeasonData implements SeasonDataService {
 	}
 	
 	/** 返回与某缩写的球队在同一联盟内的球队的最近赛季数据 */
-	public ArrayList<TeamSeasonPO> getTeamRecentSeasonDataInSameLeague(String abbr) {
-		checkAndReadTeamSeasonData(Constants.LATEST_SEASON);
+	public ArrayList<TeamSeasonPO> getTeamSeasonDataInSameLeague(String abbr, String season) {
+		checkAndReadTeamSeasonData(season);
 		ArrayList<TeamSeasonPO> result = new ArrayList<TeamSeasonPO>();
 		ScreenDivision league = Constants.getAreaByAbbr(abbr);
-		Iterator<TeamSeasonPO> itr = allTeamRecords.get(Constants.LATEST_SEASON).values().iterator();
+		Iterator<TeamSeasonPO> itr = allTeamRecords.get(season).values().iterator();
 		while(itr.hasNext()) {
 			TeamSeasonPO vo = itr.next();
 			if (Constants.getAreaByAbbr(vo.abbr) == league) {

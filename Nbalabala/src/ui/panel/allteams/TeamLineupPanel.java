@@ -66,5 +66,20 @@ public class TeamLineupPanel extends BottomPanel{
 		}
 	}
 	
+	public void updateContent(ArrayList<PlayerProfilePO> players) {
+		this.players = players;
+		for (int i = 0; i < players.size(); i++) {
+			PlayerProfilePO ppVO = players.get(i);
+			playerTable.setValueAt(ppVO.getName(), i, 0);
+			playerTable.setValueAt(ppVO.getPosition(), i, 1);
+			playerTable.setValueAt(Utility.getAgeByBirthday(ppVO.getBirthDate()), i, 2);
+			playerTable.setValueAt(Constants.translateVeteran(ppVO.fromYear), i, 4);
+			playerTable.setValueAt(Constants.translateHeight(ppVO.heightFoot + "-" + ppVO.heightInch), i, 5);
+			playerTable.setValueAt(Constants.translateWeight(ppVO.getWeight()), i, 6);
+			playerTable.setValueAt(Constants.translateDate(ppVO.birthDate), i, 7);
+			playerTable.setValueAt(ppVO.getSchool(), i, 8);
+		}
+	}
+	
 }
 

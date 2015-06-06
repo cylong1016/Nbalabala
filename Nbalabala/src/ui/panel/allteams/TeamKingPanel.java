@@ -5,6 +5,7 @@ package ui.panel.allteams;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.Thread.State;
 
 import ui.Images;
 import ui.common.button.TabButton;
@@ -29,21 +30,36 @@ public class TeamKingPanel extends BottomPanel{
 	private TabButton assistTab;
 	private String abbr;
 	private KingLabel[] kingLabels = new KingLabel[5];
+	private String season;
+	private int state = 0;	//0 1 2分别为得分篮板助攻
+	
 	
 	public TeamKingPanel(TeamQueryBLService service, String abbr) {
 		super(Images.KING_BG);
 		this.service = service;
 		this.abbr = abbr;
 		this.setLayout(null);
+		this.season = Constants.LATEST_SEASON_REGULAR;
 		
 		addSecondLevelTabs();
-		KingVO [] kings = service.getScoreKings(abbr);
+		KingVO [] kings = service.getScoreKings(abbr, season);
 		for (int i=0;i<5;i++) {
 			if (kings[i] == null) return;
 			kingLabels[i] = new KingLabel(kings[i]);
 			this.add(kingLabels[i]);
 		}
 		repaint();
+	}
+	
+	public void updateContent(String season) {
+		this.season = season;
+		if (state == 0) {
+			changeKingLabel(service.getScoreKings(abbr, season));
+		}else if (state == 1) {
+			changeKingLabel(service.getReboundKings(abbr, season));
+		}else {
+			changeKingLabel(service.getAssistKings(abbr, season));
+		}
 	}
 	
 	private void changeKingLabel(KingVO[] kings) {
@@ -65,7 +81,8 @@ public class TeamKingPanel extends BottomPanel{
 				scoreTab.setOn();
 				reboundTab.setOff();
 				assistTab.setOff();
-				KingVO [] kings = service.getScoreKings(abbr);
+				state = 1;
+				KingVO [] kings = service.getScoreKings(abbr, season);
 				changeKingLabel(kings);
 			}
 		});
@@ -79,7 +96,8 @@ public class TeamKingPanel extends BottomPanel{
 				scoreTab.setOff();
 				reboundTab.setOn();
 				assistTab.setOff();
-				KingVO [] kings = service.getReboundKings(abbr);
+				state = 2;
+				KingVO [] kings = service.getReboundKings(abbr, season);
 				changeKingLabel(kings);
 			}
 		});
@@ -93,7 +111,8 @@ public class TeamKingPanel extends BottomPanel{
 				scoreTab.setOff();
 				reboundTab.setOff();
 				assistTab.setOn();
-				KingVO [] kings = service.getAssistKings(abbr);
+				state = 3;
+				KingVO [] kings = service.getAssistKings(abbr, season);
 				changeKingLabel(kings);
 			}
 		});

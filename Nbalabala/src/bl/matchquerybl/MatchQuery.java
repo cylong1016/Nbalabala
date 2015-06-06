@@ -110,7 +110,7 @@ public class MatchQuery implements MatchQueryBLService{
 	@Override
 	public int getTeamRamkByAbbr(String abbr) {
 		TeamQuery teamQuery = new TeamQuery();
-		return teamQuery.getRanks(abbr)[0];
+		return teamQuery.getRanks(abbr, Constants.LATEST_SEASON_REGULAR)[0];
 	}
 
 	/* (non-Javadoc)
