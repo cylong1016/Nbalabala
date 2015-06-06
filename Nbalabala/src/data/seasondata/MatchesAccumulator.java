@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import ui.panel.playerData.AllPlayerSeasonTable;
 import utility.Constants;
 import data.Database;
 
@@ -28,7 +29,16 @@ import data.Database;
 public class MatchesAccumulator {
 	
 	public static void main(String[]args) {
-writeTeamsToDatabase();
+	//writeTeamsToDatabase();
+		MatchesAccumulator accumulator = new MatchesAccumulator();
+		accumulator.accumulate();
+		accumulator.update();
+		System.out.println(accumulator.allPlayerRecords.size());
+		Iterator<HashMap<String, PlayerSeasonVOForCompute>> itr = accumulator.allPlayerRecords.values().iterator();
+		while(itr.hasNext()) {
+			System.out.println(itr.next().size());
+		}
+//		accumulator.writeToDatabase();
 	}
 	
 	private static Connection conn = Database.conn;
@@ -299,7 +309,7 @@ writeTeamsToDatabase();
 				int roadPoints = rs.getInt(7);
 				
 				PreparedStatement ps = null;
-				String subSql = "select * from match_player where gameID=?";
+				String subSql = "select * from match_player where match_id=?";
 				ps = conn.prepareStatement(subSql);
 				ps.setInt(1, matchID);
 			    ResultSet players = ps.executeQuery();	//players里是这场比赛所有球员数据了
@@ -350,7 +360,7 @@ writeTeamsToDatabase();
 						playerRecord.teamName = players.getString(3);
 					}
 					
-					if (players.getInt(2) == 1) {		//客场0 主场1
+					if (players.getString(2).charAt(0) == 'H') {		//客场0 主场1
 						homePlayers.add(playerRecord);
 						lineAccumulate(homeTeamData, playerRecord, players);
 					}else {
