@@ -39,7 +39,6 @@ public class TeamQuery implements TeamQueryBLService{
 		TeamDataService dataService = new TeamData();
 		SeasonDataService seasonService = new SeasonData();
 		PlayerDataService playerService = new PlayerData();
-		
 		TeamProfileVO profileVO = new TeamProfileVO(dataService.getTeamProfileByAbbr(abbr));
 		
 		ArrayList<String> playerNames = seasonService.getPlayerNamesByTeamAbbr(abbr, season);
@@ -54,6 +53,7 @@ public class TeamQuery implements TeamQueryBLService{
 		}
 		ArrayList<MatchProfileVO> matches = new MatchQuery().getMatchRecordByTeamAbbrAndSeason(abbr, season); 
 		TeamDetailVO detailVO = new TeamDetailVO(profileVO, playerProfiles, seasonRecord, matches);
+		System.out.println(playerProfiles.size());
 		return detailVO;
 	}
 

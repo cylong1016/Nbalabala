@@ -15,6 +15,36 @@ public class Utility {
 		return name.substring(0, name.length() - 3);
 	}
 	
+	/** 考虑球队改名的情况，根据赛季追溯球队的缩写 */
+	public static String getOldAbbr(String season, String abbr) {
+		int startYear = Integer.parseInt(season.substring(0, 4));
+		switch (abbr) {
+		case "BRK":
+			if (startYear < 2012) return "NJN";
+			break;
+		case "OKC":
+			if (startYear < 2008) return "SEA";
+			break;
+		case "MEM":
+			if (startYear < 2001) return "VAN";
+			break;
+		case "WAS":
+			if (startYear < 1997) return "WSB";
+			break;
+		case "CHO":
+			if (startYear < 2014) return "CHA";
+			break;
+		case "NOP":
+			if (startYear == 2005 || startYear == 2006) return "NOK";
+			else if (startYear < 2001) return "CHH";
+			else if (startYear >= 2013) return "NOP";
+			else return "NOH";
+		default:
+			break;
+		}
+		return abbr;
+	}
+	
 	
 	public static String getRankStr(int rank) {
 		if (rank ==0) return "";
@@ -41,6 +71,7 @@ public class Utility {
 	}
 	
 	public static int getAgeByBirthday(Date birthDate) {
+		if (birthDate == null) return 0;
 		Calendar calendar = Calendar.getInstance();
 		int thisYear = calendar.get(Calendar.YEAR);
 		calendar.setTimeInMillis(birthDate.getTime());

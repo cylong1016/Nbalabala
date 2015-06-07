@@ -37,8 +37,7 @@ public class PlayerData implements PlayerDataService{
 		try {
 			ResultSet rs = Database.conn.createStatement().executeQuery(sql);
 			while(rs.next()) {
-				PlayerProfilePO po = new PlayerProfilePO();
-				po.name = rs.getString(1);
+				PlayerProfilePO po = new PlayerProfilePO(rs.getString(1));
 				po.fromYear = rs.getInt(2);
 				po.toYear = rs.getInt(3);
 				po.position = rs.getString(4);
@@ -81,7 +80,12 @@ public class PlayerData implements PlayerDataService{
 	 */
 	@Override
 	public PlayerProfilePO getPlayerProfileByName(String name) {
-		return players.get(name);
+		PlayerProfilePO po = players.get(name);
+		if (po == null) {
+			return new PlayerProfilePO(name);
+		}else {
+			return po;
+		}
 	}
 	
 	/**

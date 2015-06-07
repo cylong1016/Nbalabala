@@ -40,7 +40,7 @@ public class TeamBottomPanel extends BottomPanel{
 	
 	private ImgButton back;
 	private String url = UIConfig.IMG_PATH + "players/";
-	private static BottomPanel FROM_PANEL;
+	private BottomPanel fromPanel;
 
 	/** 球队详细信息 */
 	private TeamDetailVO teamDetail;
@@ -100,7 +100,7 @@ public class TeamBottomPanel extends BottomPanel{
 		super(Images.TEAM_INFO_BG);
 		this.abbr = abbr;
 		this.setLayout(null);
-		
+		this.fromPanel = panelFrom;
 		seasonChooser.setLocation(500, FIRST_LABEL_ROW_Y);//TODO 日期选择器坐标
 		this.add(seasonChooser);
 		
@@ -142,7 +142,7 @@ public class TeamBottomPanel extends BottomPanel{
 		this.add(back);
 		back.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				MainController.backToOnePanel(FROM_PANEL);
+				MainController.backToOnePanel(fromPanel);
 			}
 		});
 	}
@@ -300,9 +300,12 @@ public class TeamBottomPanel extends BottomPanel{
 	public void refresh() {
 		String season = seasonChooser.getSeason();
 		teamDetail = teamQuery.getTeamDetailByAbbr(abbr, season);
+		if (teamDetail == null) return;
 		
-		kingPanel.updateContent(season);
-		lineupPanel.updateContent(teamDetail.getPlayers());
+		if (kingPanel != null)
+			kingPanel.updateContent(season);
+		if (lineupPanel != null)
+			lineupPanel.updateContent(teamDetail.getPlayers());
 		if (seasonPanel != null) seasonPanel.updateContent(season, teamDetail.getSeasonRecord(), 
 					teamQuery.getFiveArgsAvg(season), teamQuery.getHighestScoreReboundAssist(season));
 		if (matchPanel != null) matchPanel.updateContent(teamDetail.getMatchRecords());

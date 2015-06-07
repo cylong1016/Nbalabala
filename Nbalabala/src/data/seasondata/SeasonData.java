@@ -13,6 +13,7 @@ import java.util.Map.Entry;
 import po.PlayerSeasonPO;
 import po.TeamSeasonPO;
 import utility.Constants;
+import utility.Utility;
 import data.Database;
 import dataservice.SeasonDataService;
 import enums.Position;
@@ -365,6 +366,7 @@ public class SeasonData implements SeasonDataService {
 	 */
 	@Override
 	public TeamSeasonPO getTeamDataByAbbr(String abbr, String season) {
+		abbr = Utility.getOldAbbr(season, abbr);
 		checkAndReadTeamSeasonData(season);
 		HashMap<String, TeamSeasonPO> teamRecords = allTeamRecords.get(season);
 		if (teamRecords == null) {
@@ -378,6 +380,7 @@ public class SeasonData implements SeasonDataService {
 	 */
 	@Override
 	public ArrayList<String> getPlayerNamesByTeamAbbr(String abbr, String season) {
+		abbr = Utility.getOldAbbr(season, abbr);
 		checkAndReadPlayerSeasonData(season);
 		ArrayList<String> result = new ArrayList<String>();
 		HashMap<String, PlayerSeasonPO> seasonPlayers = allPlayerRecords.get(season);
@@ -430,6 +433,7 @@ public class SeasonData implements SeasonDataService {
 	
 	/** 返回与某缩写的球队在同一联盟内的球队的最近赛季数据 */
 	public ArrayList<TeamSeasonPO> getTeamSeasonDataInSameLeague(String abbr, String season) {
+		abbr = Utility.getOldAbbr(season, abbr);
 		checkAndReadTeamSeasonData(season);
 		ArrayList<TeamSeasonPO> result = new ArrayList<TeamSeasonPO>();
 		ScreenDivision league = Constants.getAreaByAbbr(abbr);

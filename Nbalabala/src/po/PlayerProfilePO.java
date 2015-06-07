@@ -5,6 +5,8 @@ package po;
 
 import java.sql.Date;
 
+import utility.Constants;
+
 /**
  * 球员资料持久化对象
  * @author Issac Ding
@@ -31,6 +33,12 @@ public class PlayerProfilePO {
 	public Date birthDate;
 	/** 毕业学校 */
 	public String school;
+	
+	public PlayerProfilePO(String name) {
+		this.name = name;
+		this.position = Constants.UNKNOWN;
+		this.school = Constants.UNKNOWN;
+	}
 	
 	public String getName() {
 		return name;

@@ -103,8 +103,8 @@ public class Constants {
 		"盖帽率", "犯规", "犯规率", "得分", "两双", "得分/篮板/助攻", "效率", "GmSc", "真实命中率", "投篮效率", "进攻篮板率",
 		"防守篮板率", "总篮板率", "抢断", "抢断率", "失误", "失误率", "使用率"};
 	
-	public static final String [] TEAM_ABBR = {"BOS","BRK","NYK","PHI","TOR","CHI","CLE","DET","IND","MIL","ATL","CHA","MIA","ORL","WAS",
-		"GSW","LAC","LAL","PHX","SAC","DEN","MIN","OKC","POR","UTA","DAL","HOU","MEM","NOP","SAS"};
+	public static final String [] TEAM_ABBR = {"BOS","BRK","NYK","PHI","TOR","CHI","CLE","DET","IND","MIL","ATL","CHO","MIA","ORL","WAS",
+		"GSW","LAC","LAL","PHO","SAC","DEN","MIN","OKC","POR","UTA","DAL","HOU","MEM","NOP","SAS"};
 	
 	public static final String [] TEAM_NAMES = {"凯尔特人", "篮网", "尼克斯", "76人", "猛龙", "公牛", "骑士", "活塞", "步行者", "雄鹿", "老鹰", "黄蜂", "热火",
 		"魔术", "奇才", "勇士", "快船", "湖人", "太阳", "国王", "掘金", "森林狼", "雷霆", "开拓者", "爵士", "小牛",
@@ -163,9 +163,11 @@ public class Constants {
 		case "MIL":
 		case "ATL":
 		case "CHA":
+		case "CHO":
 		case "MIA":
 		case "ORL":
 		case "WAS":
+		case "WSB":
 			return ScreenDivision.EAST;
 		default:
 			return ScreenDivision.WEST;
@@ -198,19 +200,23 @@ public class Constants {
 			return ScreenDivision.CENTRAL;
 		case "ATL":
 		case "CHA":
+		case "CHO":
 		case "MIA":
 		case "ORL":
 		case "WAS":
+		case "WSB":
 			return ScreenDivision.SOUTH_EAST;
 		case "GSW":
 		case "LAC":
 		case "LAL":
 		case "PHX":
+		case "PHO":
 		case "SAC":
 			return ScreenDivision.PACIFIC;
 		case "DEN":
 		case "MIN":
 		case "OKC":
+		case "SEA":
 		case "POR":
 		case "UTA":
 			return ScreenDivision.NORTH_WEST;
@@ -223,140 +229,73 @@ public class Constants {
 		return translater.translateTeamAbbr(abbr);
 	}
 	
-	public static String getAbbrByName(String name) {
-		switch (name) {
-		case "凯尔特人":
-			return "BOS";
-		case "篮网":
-			return "BRK";
-		case "尼克斯":
-			return "NYK";
-		case "76人":
-			return "PHI";
-		case "猛龙":
-			return "TOR";
-		case "小牛":
-			return "DAL";
-		case "火箭":
-			return "HOU";
-		case "灰熊":
-			return "MEM";
-		case "鹈鹕":
-			return "NOP";
-		case "马刺":
-			return "SAS"; 
-		case "老鹰":
-			return "ATL";
-		case "黄蜂":
-			return "CHA";
-		case "热火":
-			return "MIA";
-		case "魔术":
-			return "ORL";
-		case "奇才":
-			return "WAS"; 
-		case "勇士":
-			return "GSW";
-		case "快船":
-			return "LAC";
-		case "湖人":
-			return "LAL";
-		case "太阳":
-			return "PHX";
-		case "国王":
-			return "SAC";
-		case "公牛":
-			return "CHI";
-		case "骑士":
-			return "CLE";
-		case "活塞":
-			return "DET";
-		case "步行者":
-			return "IND";
-		case "雄鹿":
-			return "MIL";
-		case "掘金":
-			return "DEN";
-		case "森林狼":
-			return "MIN";
-		case "雷霆":
-			return "OKC";
-		case "开拓者":
-			return "POR";
-		case "爵士":
-			return "UTA";
-		default:
-			return "未知";
-		}
-	}
+//	public static String getAbbrByName(String name) {
+//		switch (name) {
+//		case "凯尔特人":
+//			return "BOS";
+//		case "篮网":
+//			return "BRK";
+//		case "尼克斯":
+//			return "NYK";
+//		case "76人":
+//			return "PHI";
+//		case "猛龙":
+//			return "TOR";
+//		case "小牛":
+//			return "DAL";
+//		case "火箭":
+//			return "HOU";
+//		case "灰熊":
+//			return "MEM";
+//		case "鹈鹕":
+//			return "NOP";
+//		case "马刺":
+//			return "SAS"; 
+//		case "老鹰":
+//			return "ATL";
+//		case "黄蜂":
+//			return "CHA";
+//		case "热火":
+//			return "MIA";
+//		case "魔术":
+//			return "ORL";
+//		case "奇才":
+//			return "WAS"; 
+//		case "勇士":
+//			return "GSW";
+//		case "快船":
+//			return "LAC";
+//		case "湖人":
+//			return "LAL";
+//		case "太阳":
+//			return "PHX";
+//		case "国王":
+//			return "SAC";
+//		case "公牛":
+//			return "CHI";
+//		case "骑士":
+//			return "CLE";
+//		case "活塞":
+//			return "DET";
+//		case "步行者":
+//			return "IND";
+//		case "雄鹿":
+//			return "MIL";
+//		case "掘金":
+//			return "DEN";
+//		case "森林狼":
+//			return "MIN";
+//		case "雷霆":
+//			return "OKC";
+//		case "开拓者":
+//			return "POR";
+//		case "爵士":
+//			return "UTA";
+//		default:
+//			return "未知";
+//		}
+//	}
 	
-	public static String getNameByAbbr(String abbr) {
-		switch (abbr) {
-		case "BOS":
-			return "凯尔特人";
-		case "BRK":
-		case "BKN":
-			return "篮网";
-		case "NYK":
-			return "尼克斯";
-		case "PHI":
-			return "76人";
-		case "TOR":
-			return "猛龙";
-		case "DAL":
-			return "小牛";
-		case "HOU":
-			return "火箭";
-		case "MEM":
-			return "灰熊";
-		case "NOP":
-			return "鹈鹕";
-		case "SAS":
-			return "马刺"; 
-		case "ATL":
-			return "老鹰";
-		case "CHA":
-			return "黄蜂";
-		case "MIA":
-			return "热火";
-		case "ORL":
-			return "魔术";
-		case "WAS":
-			return "奇才"; 
-		case "GSW":
-			return "勇士";
-		case "LAC":
-			return "快船";
-		case "LAL":
-			return "湖人";
-		case "PHX":
-			return "太阳";
-		case "SAC":
-			return "国王";
-		case "CHI":
-			return "公牛";
-		case "CLE":
-			return "骑士";
-		case "DET":
-			return "活塞";
-		case "IND":
-			return "步行者";
-		case "MIL":
-			return "雄鹿";
-		case "DEN":
-			return "掘金";
-		case "MIN":
-			return "森林狼";
-		case "OKC":
-			return "雷霆";
-		case "POR":
-			return "开拓者";
-		case "UTA":
-			return "爵士";
-		default:
-			return "未知";
-		}
-	}
 	
 //	static {
 //		abbrToEngMandarin = new HashMap<String, String>();

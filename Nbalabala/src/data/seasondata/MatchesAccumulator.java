@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import po.PlayerProfilePO;
 import utility.Constants;
 import data.Database;
 import data.playerdata.PlayerData;
@@ -32,12 +31,12 @@ public class MatchesAccumulator {
 	PlayerData playerData = new PlayerData();
 	
 	public static void main(String[]args) {
-		// writeTeamsToDatabase();
-		MatchesAccumulator accumulator = new MatchesAccumulator();
-		accumulator.accumulate();
-		accumulator.update();
-
-		accumulator.writeToDatabase();
+		 writeTeamsToDatabase();
+//		MatchesAccumulator accumulator = new MatchesAccumulator();
+//		accumulator.accumulate();
+//		accumulator.update();
+//
+//		accumulator.writeToDatabase();
 	}
 	
 	private static Connection conn = Database.conn;

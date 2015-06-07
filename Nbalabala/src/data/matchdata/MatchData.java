@@ -12,6 +12,7 @@ import po.ExtraTimePO;
 import po.MatchDetailPO;
 import po.MatchPlayerPO;
 import po.MatchProfilePO;
+import utility.Utility;
 import data.Database;
 import dataservice.MatchDataService;
 
@@ -167,6 +168,8 @@ public class MatchData implements MatchDataService {
 	 */
 	@Override
 	public ArrayList<MatchDetailPO> getMatchDetailByTeam(String roadAbbr, String homeAbbr, String season) {
+		roadAbbr = Utility.getOldAbbr(season, roadAbbr);
+		homeAbbr = Utility.getOldAbbr(season, homeAbbr);
 		ArrayList<MatchDetailPO> result = new ArrayList<MatchDetailPO>();
 		try {
 			PreparedStatement ps = conn.prepareStatement
@@ -189,6 +192,7 @@ public class MatchData implements MatchDataService {
 	 */
 	@Override
 	public ArrayList<MatchProfilePO> getMatchProfileByTeamAndSeason(String abbr,String season) {
+		abbr = Utility.getOldAbbr(season, abbr);
 		ArrayList<MatchProfilePO> result = new ArrayList<MatchProfilePO>();
 		try {
 			PreparedStatement ps = conn.prepareStatement

@@ -122,15 +122,19 @@ public class TranslaterCN implements Translater{
 		case "HOU":
 			return "火箭";
 		case "MEM":
+		case "VAN":
 			return "灰熊";
 		case "NOP":
+		case "NOK":
 		case "NOH":
+		case "CHH":
 			return "鹈鹕";
 		case "SAS":
 			return "马刺"; 
 		case "ATL":
 			return "老鹰";
 		case "CHA":
+		case "CHO":
 			return "黄蜂";
 		case "MIA":
 			return "热火";
@@ -138,6 +142,8 @@ public class TranslaterCN implements Translater{
 			return "魔术";
 		case "WAS":
 			return "奇才"; 
+		case "WSB":
+			return "子弹";
 		case "GSW":
 			return "勇士";
 		case "LAC":
@@ -145,6 +151,7 @@ public class TranslaterCN implements Translater{
 		case "LAL":
 			return "湖人";
 		case "PHX":
+		case "PHO":
 			return "太阳";
 		case "SAC":
 			return "国王";
@@ -168,6 +175,8 @@ public class TranslaterCN implements Translater{
 			return "开拓者";
 		case "UTA":
 			return "爵士";
+		case "SEA":
+			return "超音速";
 		default:
 			return Constants.UNKNOWN;
 		}
@@ -182,8 +191,10 @@ public class TranslaterCN implements Translater{
 		switch (abbr) {
 		case "BOS":
 			return "波士顿";
-		case "BKN":
 		case "NJN":
+			return "新泽西";
+		case "BKN":
+		case "BRK":
 			return "布鲁克林";
 		case "NYK":
 			return "纽约";
@@ -205,12 +216,14 @@ public class TranslaterCN implements Translater{
 		case "ATL":
 			return "亚特兰大";
 		case "CHA":
+		case "CHO":
 			return "夏洛特";
 		case "MIA":
 			return "迈阿密";
 		case "ORL":
 			return "奥兰多";
 		case "WAS":
+		case "WSB":
 			return "华盛顿"; 
 		case "GSW":
 			return "金洲";
@@ -218,6 +231,7 @@ public class TranslaterCN implements Translater{
 		case "LAL":
 			return "洛杉矶";
 		case "PHX":
+		case "PHO":
 			return "菲尼克斯";
 		case "SAC":
 			return "萨克拉门托";
@@ -241,6 +255,10 @@ public class TranslaterCN implements Translater{
 			return "波特兰";
 		case "UTA":
 			return "犹他";
+		case "VAN":
+			return "温哥华";
+		case "SEA":
+			return "西雅图";
 		default:
 			return "无资料";
 		}
