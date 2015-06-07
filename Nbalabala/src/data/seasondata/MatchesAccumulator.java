@@ -100,99 +100,99 @@ public class MatchesAccumulator {
 	
 	public void writeToDatabase() {
 		
-		Iterator<HashMap<String, PlayerSeasonVOForCompute>> itr = allPlayerRecords.values().iterator();
-		while(itr.hasNext()) {
-			Iterator<PlayerSeasonVOForCompute> subItr = itr.next().values().iterator();
-			while(subItr.hasNext()) {
-				PlayerSeasonVOForCompute vo = subItr.next();
-				PreparedStatement ps = null;  
-				String insertSql = "INSERT INTO player_season " +
-			             "VALUES (?, ?, ?,?,?,?, ?, ?,?,?,?, ?, ?,?,?,?, ?, ?,?,?,"
-			             + "?, ?, ?,?,?,?, ?, ?,?,?,?, ?, ?,?,?,?, ?, ?,?,?,"
-			             + "?, ?, ?,?,?,?, ?, ?,?,?,?, ?, ?,?,?,?, ?, ?,?,?,?,?,?)";
-				try {
-					ps = conn.prepareStatement(insertSql);
-					ps.setString(1, vo.name);
-				    ps.setString(2, vo.season);
-				    ps.setInt(3, vo.latestMatchID);
-				    ps.setDate(4, vo.latestMatchDate);
-				    ps.setString(5, vo.teamName);
-				    ps.setInt(6, vo.matchCount);
-				    ps.setInt(7, vo.firstCount);
-				    ps.setFloat(8, vo.firstCountAvg);
-				    ps.setFloat(9, vo.minutes);
-				    ps.setFloat(10, vo.minutesAvg);
-				    ps.setInt(11, vo.fieldMade);
-				    ps.setFloat(12, vo.fieldMadeAvg);
-				    ps.setInt(13, vo.fieldAttempt);
-				    ps.setFloat(14, vo.fieldAttemptAvg);
-				    ps.setFloat(15, vo.fieldPercent);//15OK
-				    
-				    ps.setInt(16, vo.threePointMade);
-				    ps.setFloat(17, vo.threePointMadeAvg);
-				    ps.setInt(18, vo.threePointAttempt);
-				    ps.setFloat(19, vo.threePointAttemptAvg);
-				    ps.setFloat(20, vo.threePointPercent);
-				    
-				    ps.setInt(21, vo.freethrowMade);
-				    ps.setFloat(22, vo.freethrowMadeAvg);
-				    ps.setInt(23, vo.freethrowAttempt);
-				    ps.setFloat(24, vo.freethrowAttemptAvg);
-				    ps.setFloat(25, vo.freethrowPercent);
-				    
-				    ps.setInt(26, vo.offensiveRebound);
-				    ps.setFloat(27, vo.offensiveReboundAvg);
-				    ps.setInt(28, vo.defensiveRebound);
-				    ps.setFloat(29, vo.defensiveReboundAvg);
-				    ps.setInt(30, vo.totalRebound);
-				    ps.setFloat(31, vo.totalReboundAvg); //31OK
-				    
-				    ps.setInt(32, vo.assist);
-				    ps.setFloat(33, vo.assistAvg);
-				    ps.setInt(34, vo.steal);
-				    ps.setFloat(35, vo.stealAvg);
-				    ps.setInt(36, vo.block);
-				    ps.setFloat(37, vo.blockAvg);
-				    ps.setInt(38, vo.turnover);
-				    ps.setFloat(39, vo.turnoverAvg);
-				    ps.setInt(40, vo.foul);
-				    ps.setFloat(41, vo.foulAvg);
-				    ps.setInt(42, vo.score);
-				    ps.setFloat(43, vo.scoreAvg);
-				    ps.setInt(44, vo.doubleDoubleCount);
-				    ps.setFloat(45, vo.doubleDoubleAvg);
-				    
-				    ps.setInt(46, vo.efficiency);
-				    ps.setFloat(47, vo.efficiencyAvg);
-				    ps.setInt(48, vo.scoreReboundAssist);
-				    ps.setFloat(49, vo.scoreReboundAssistAvg);
-				    ps.setFloat(50, vo.gmsc);
-				    ps.setFloat(51, vo.gmscAvg);
-				    ps.setFloat(52, vo.realFieldPercent);
-				    ps.setFloat(53, vo.fieldEff);
-				    ps.setFloat(54, vo.offensiveReboundPercent);
-				    ps.setFloat(55, vo.defensiveReboundPercent);
-				    ps.setFloat(56, vo.totalReboundPercent);
-				    ps.setFloat(57, vo.stealPercent);
-				    ps.setFloat(58, vo.blockPercent);
-				    ps.setFloat(59, vo.turnOverPercent);
-				    ps.setFloat(60, vo.foulPercent);
-				    ps.setFloat(61, vo.usePercent);
-				    ps.setFloat(62, vo.assistPercent);
-				    PlayerProfilePO playerProfilePO = playerData.getPlayerProfileByName(vo.name);
-				    if (playerProfilePO == null) {
-				    	 ps.setString(63, " ");
-				    }else {
-				    	ps.setString(63, playerProfilePO.position);
-				    }
-				   	//TODO 因为位置还没爬下来，先这么写着
-				    
-				    ps.executeUpdate();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				} 
-			}
-		}
+//		Iterator<HashMap<String, PlayerSeasonVOForCompute>> itr = allPlayerRecords.values().iterator();
+//		while(itr.hasNext()) {
+//			Iterator<PlayerSeasonVOForCompute> subItr = itr.next().values().iterator();
+//			while(subItr.hasNext()) {
+//				PlayerSeasonVOForCompute vo = subItr.next();
+//				PreparedStatement ps = null;  
+//				String insertSql = "INSERT INTO player_season " +
+//			             "VALUES (?, ?, ?,?,?,?, ?, ?,?,?,?, ?, ?,?,?,?, ?, ?,?,?,"
+//			             + "?, ?, ?,?,?,?, ?, ?,?,?,?, ?, ?,?,?,?, ?, ?,?,?,"
+//			             + "?, ?, ?,?,?,?, ?, ?,?,?,?, ?, ?,?,?,?, ?, ?,?,?,?,?,?)";
+//				try {
+//					ps = conn.prepareStatement(insertSql);
+//					ps.setString(1, vo.name);
+//				    ps.setString(2, vo.season);
+//				    ps.setInt(3, vo.latestMatchID);
+//				    ps.setDate(4, vo.latestMatchDate);
+//				    ps.setString(5, vo.teamName);
+//				    ps.setInt(6, vo.matchCount);
+//				    ps.setInt(7, vo.firstCount);
+//				    ps.setFloat(8, vo.firstCountAvg);
+//				    ps.setFloat(9, vo.minutes);
+//				    ps.setFloat(10, vo.minutesAvg);
+//				    ps.setInt(11, vo.fieldMade);
+//				    ps.setFloat(12, vo.fieldMadeAvg);
+//				    ps.setInt(13, vo.fieldAttempt);
+//				    ps.setFloat(14, vo.fieldAttemptAvg);
+//				    ps.setFloat(15, vo.fieldPercent);//15OK
+//				    
+//				    ps.setInt(16, vo.threePointMade);
+//				    ps.setFloat(17, vo.threePointMadeAvg);
+//				    ps.setInt(18, vo.threePointAttempt);
+//				    ps.setFloat(19, vo.threePointAttemptAvg);
+//				    ps.setFloat(20, vo.threePointPercent);
+//				    
+//				    ps.setInt(21, vo.freethrowMade);
+//				    ps.setFloat(22, vo.freethrowMadeAvg);
+//				    ps.setInt(23, vo.freethrowAttempt);
+//				    ps.setFloat(24, vo.freethrowAttemptAvg);
+//				    ps.setFloat(25, vo.freethrowPercent);
+//				    
+//				    ps.setInt(26, vo.offensiveRebound);
+//				    ps.setFloat(27, vo.offensiveReboundAvg);
+//				    ps.setInt(28, vo.defensiveRebound);
+//				    ps.setFloat(29, vo.defensiveReboundAvg);
+//				    ps.setInt(30, vo.totalRebound);
+//				    ps.setFloat(31, vo.totalReboundAvg); //31OK
+//				    
+//				    ps.setInt(32, vo.assist);
+//				    ps.setFloat(33, vo.assistAvg);
+//				    ps.setInt(34, vo.steal);
+//				    ps.setFloat(35, vo.stealAvg);
+//				    ps.setInt(36, vo.block);
+//				    ps.setFloat(37, vo.blockAvg);
+//				    ps.setInt(38, vo.turnover);
+//				    ps.setFloat(39, vo.turnoverAvg);
+//				    ps.setInt(40, vo.foul);
+//				    ps.setFloat(41, vo.foulAvg);
+//				    ps.setInt(42, vo.score);
+//				    ps.setFloat(43, vo.scoreAvg);
+//				    ps.setInt(44, vo.doubleDoubleCount);
+//				    ps.setFloat(45, vo.doubleDoubleAvg);
+//				    
+//				    ps.setInt(46, vo.efficiency);
+//				    ps.setFloat(47, vo.efficiencyAvg);
+//				    ps.setInt(48, vo.scoreReboundAssist);
+//				    ps.setFloat(49, vo.scoreReboundAssistAvg);
+//				    ps.setFloat(50, vo.gmsc);
+//				    ps.setFloat(51, vo.gmscAvg);
+//				    ps.setFloat(52, vo.realFieldPercent);
+//				    ps.setFloat(53, vo.fieldEff);
+//				    ps.setFloat(54, vo.offensiveReboundPercent);
+//				    ps.setFloat(55, vo.defensiveReboundPercent);
+//				    ps.setFloat(56, vo.totalReboundPercent);
+//				    ps.setFloat(57, vo.stealPercent);
+//				    ps.setFloat(58, vo.blockPercent);
+//				    ps.setFloat(59, vo.turnOverPercent);
+//				    ps.setFloat(60, vo.foulPercent);
+//				    ps.setFloat(61, vo.usePercent);
+//				    ps.setFloat(62, vo.assistPercent);
+//				    PlayerProfilePO playerProfilePO = playerData.getPlayerProfileByName(vo.name);
+//				    if (playerProfilePO == null) {
+//				    	 ps.setString(63, " ");
+//				    }else {
+//				    	ps.setString(63, playerProfilePO.position);
+//				    }
+//				   	//TODO 因为位置还没爬下来，先这么写着
+//				    
+//				    ps.executeUpdate();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				} 
+//			}
+//		}
 		
 		Iterator<HashMap<String, TeamSeasonVOForCompute>> itr2 = allTeamRecords.values().iterator();
 		while(itr2.hasNext()) {
@@ -201,7 +201,7 @@ public class MatchesAccumulator {
 				TeamSeasonVOForCompute vo = subItr2.next();
 				PreparedStatement ps = null;  
 				String insertSql = "INSERT INTO team_season " +
-			             "VALUES (?, ?, ?,?,?,?, ?, ?, ?,?,?,?,?, ?, ?,?,?,?,?, ?, ?,?,?,?,?, ?, ?,?,?,?,?, ?, ?,?,?,?,?, ?, ?,?,?,?,?, ?, ?,?,?,?)";
+			             "VALUES (?, ?, ?,?,?,?, ?, ?, ?,?,?,?,?, ?, ?,?,?,?,?, ?, ?,?,?,?,?, ?, ?,?,?,?,?, ?, ?,?,?,?,?, ?, ?,?,?,?,?, ?, ?,?,?,?,?,?)";
 				try {
 					ps = conn.prepareStatement(insertSql);
 					ps.setString(1, vo.teamName);
