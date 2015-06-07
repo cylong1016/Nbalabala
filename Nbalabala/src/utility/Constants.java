@@ -427,9 +427,9 @@ public class Constants {
 	public static String totalScoreText = "总分";
 	public static String techText = "技术统计";
 	
-	public static String scoreKingText = "得分王";
-	public static String reboundKingText = "篮板王";
-	public static String assistKingText = "助攻王";
+	public static String scoreKingText = "得分";
+	public static String reboundKingText = "篮板";
+	public static String assistKingText = "助攻";
 	public static String recordText = "战绩";
 	
 	public static String eastText = "东部联盟";
