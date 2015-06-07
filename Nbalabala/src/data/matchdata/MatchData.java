@@ -166,13 +166,14 @@ public class MatchData implements MatchDataService {
 	 * @see dataservice.MatchDataService#getMatchDetailByTeam(java.lang.String)
 	 */
 	@Override
-	public ArrayList<MatchDetailPO> getMatchDetailByTeam(String roadAbbr, String homeAbbr) {
+	public ArrayList<MatchDetailPO> getMatchDetailByTeam(String roadAbbr, String homeAbbr, String season) {
 		ArrayList<MatchDetailPO> result = new ArrayList<MatchDetailPO>();
 		try {
 			PreparedStatement ps = conn.prepareStatement
-					("select * from match_profile where road_abbr=? and home_abbr=?");
+					("select * from match_profile where road_abbr=? and home_abbr=? and season=?");
 			ps.setString(1, roadAbbr);
 			ps.setString(2, homeAbbr);
+			ps.setString(3, season);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				result.add(getMatchDetail(rs));

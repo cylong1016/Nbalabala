@@ -50,32 +50,36 @@ public class MatchQuery implements MatchQueryBLService{
 	/**
 	 * @see blservice.MatchQueryBLService#screenMatchByTeam(java.lang.String, java.lang.String)
 	 */
-	@Override
-	public ArrayList<MatchDetailVO> screenMatchByTeam(String abbr1,
-			String abbr2) {
-		ArrayList<MatchDetailPO> list1 = matchData.getMatchDetailByTeam(abbr1,abbr2);
-		ArrayList<MatchDetailPO> list2 = matchData.getMatchDetailByTeam(abbr2,abbr1);
+	@Override 
+	public ArrayList<MatchDetailVO> screenMatchByTeam(String abbr1, String abbr2) {
+		ArrayList<MatchDetailPO> list1 = matchData.getMatchDetailByTeam(abbr1,abbr2,Constants.LATEST_SEASON);
+		ArrayList<MatchDetailPO> list2 = matchData.getMatchDetailByTeam(abbr2,abbr1,Constants.LATEST_SEASON);
 		list2.removeAll(list1);
-		list1.addAll(list2);
+		list1.addAll(list2);	//先取出两队的季后赛交锋(如果有的话)
+		ArrayList<MatchDetailPO> list3 = matchData.getMatchDetailByTeam(abbr1,abbr2,Constants.LATEST_SEASON_REGULAR);
+		ArrayList<MatchDetailPO> list4 = matchData.getMatchDetailByTeam(abbr2,abbr1,Constants.LATEST_SEASON_REGULAR);
+		list4.removeAll(list3);
+		list3.addAll(list4);	//再取出两队的常规赛交锋(如果有的话)
+		list1.addAll(list3);
 		// 考虑到黄蜂、鹈鹕、篮网队改名的问题
-		if (abbr1.equals("NOP")) {
-			ArrayList<MatchDetailPO> list3 = matchData.getMatchDetailByTeam("NOH",abbr2);
-			list3.removeAll(list1);
-			list1.addAll(list3);
-		}else if (abbr1.equals("BKN")) {
-			ArrayList<MatchDetailPO> list4 = matchData.getMatchDetailByTeam("NJN",abbr2);
-			list4.removeAll(list1);
-			list1.addAll(list4);
-		}
-		if (abbr2.equals("NOP")) {
-			ArrayList<MatchDetailPO> list3 = matchData.getMatchDetailByTeam(abbr1,"NOH");
-			list3.removeAll(list1);
-			list1.addAll(list3);
-		}else if (abbr2.equals("BKN")) {
-			ArrayList<MatchDetailPO> list4 = matchData.getMatchDetailByTeam(abbr1,"NJN");
-			list4.removeAll(list1);
-			list1.addAll(list4);
-		}
+//		if (abbr1.equals("NOP")) {
+//			ArrayList<MatchDetailPO> list3 = matchData.getMatchDetailByTeam("NOH",abbr2);
+//			list3.removeAll(list1);
+//			list1.addAll(list3);
+//		}else if (abbr1.equals("BKN")) {
+//			ArrayList<MatchDetailPO> list4 = matchData.getMatchDetailByTeam("NJN",abbr2);
+//			list4.removeAll(list1);
+//			list1.addAll(list4);
+//		}
+//		if (abbr2.equals("NOP")) {
+//			ArrayList<MatchDetailPO> list3 = matchData.getMatchDetailByTeam(abbr1,"NOH");
+//			list3.removeAll(list1);
+//			list1.addAll(list3);
+//		}else if (abbr2.equals("BKN")) {
+//			ArrayList<MatchDetailPO> list4 = matchData.getMatchDetailByTeam(abbr1,"NJN");
+//			list4.removeAll(list1);
+//			list1.addAll(list4);
+//		}
 		return getVOsByPOs(list1);
 	}
 	
@@ -133,7 +137,7 @@ public class MatchQuery implements MatchQueryBLService{
 	public ArrayList<MatchDetailVO> getLatestMatches() {
 		Calendar calendar = Calendar.getInstance();
 		java.sql.Date end = new java.sql.Date(calendar.getTimeInMillis());
-		calendar.add(Calendar.DATE, -7);
+		calendar.add(Calendar.DATE, -14);	//显示两周内的比赛
 		java.sql.Date start = new java.sql.Date(calendar.getTimeInMillis());
 		return getVOsByPOs(matchData.getMatchDetailByDates(start, end));
 	}

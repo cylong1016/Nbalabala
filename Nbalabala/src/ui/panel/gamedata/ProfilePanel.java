@@ -12,6 +12,7 @@ import ui.common.label.MyLabel;
 import ui.common.panel.Panel;
 import ui.controller.MainController;
 import utility.Constants;
+import utility.Utility;
 import vo.MatchDetailVO;
 import vo.MatchProfileVO;
 import bl.matchquerybl.MatchQuery;
@@ -200,8 +201,8 @@ public class ProfilePanel extends Panel {
 		String[] homeKing = matchDetail.gethomeHighestNames();
 		String[] roadKing = matchDetail.getRoadHighestNames();
 		for(int i = 0;i<3;i++){
-			lb_king[i] = new MyLabel(kingX_1,rightY_2+i*inter,3*width,height,homeKing[i]);
-			lb_king[i+3] = new MyLabel(kingX_2,rightY_2+i*inter,3*width,height,roadKing[i]);
+			lb_king[i] = new MyLabel(kingX_1,rightY_2+i*inter,3*width,height,Utility.trimName(homeKing[i]));
+			lb_king[i+3] = new MyLabel(kingX_2,rightY_2+i*inter,3*width,height,Utility.trimName(roadKing[i]));
 			lb_result[i] =  new MyLabel(resultX_1,rightY_2+i*inter,width,height,homeValue[i]+"");
 			lb_result[i+3] = new MyLabel(resultX_2,rightY_2+i*inter,width,height,roadValue[i]+"");
 			if(homeKing[i].length() > 20){

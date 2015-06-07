@@ -91,7 +91,7 @@ public class HotFastPanel extends HotThreeFatherPanel {
 		}
 		if (fastVO.size() < 5)
 			return;
-		chart = new Chart((CURRENTI + 1) + " " + fastVO.get(CURRENTI).getName() + " " + text, getColumns(), getMax());
+		chart = new Chart((CURRENTI + 1) + " " + Utility.trimName(fastVO.get(CURRENTI).getName()) + " " + text, getColumns(), getMax());
 		chart.setBounds(95, 103, 809, 200);
 		this.add(chart);
 		chart.updateUI();

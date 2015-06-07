@@ -24,7 +24,7 @@ public interface MatchDataService {
 	public ArrayList<MatchDetailPO> getMatchDetailBySeason(String season);
 	
 	/** 根据参赛队伍返回比赛详情 */
-	public ArrayList<MatchDetailPO> getMatchDetailByTeam(String roadAbbr, String homeAbbr);
+	public ArrayList<MatchDetailPO> getMatchDetailByTeam(String roadAbbr, String homeAbbr, String season);
 	
 	/** 根据队伍缩写返回和赛季比赛简报，abbr形如SAS */
 	public ArrayList<MatchProfilePO> getMatchProfileByTeamAndSeason(String abbr,String season);

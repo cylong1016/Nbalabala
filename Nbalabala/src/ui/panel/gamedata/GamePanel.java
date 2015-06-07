@@ -21,6 +21,7 @@ import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
 import utility.Constants;
+import utility.Utility;
 import vo.MatchDetailVO;
 import vo.MatchProfileVO;
 import bl.matchquerybl.MatchQuery;
@@ -247,7 +248,7 @@ public class GamePanel extends BottomPanel {
 		rowData = new String[size][lth];
 		for (int i = 0; i < size; i++) {
 			MatchPlayerPO mpVO = players.get(i);
-			rowData[i][0] = mpVO.getPlayerName();
+			rowData[i][0] = Utility.trimName(mpVO.getPlayerName());
 			if (mpVO.isStarter()) {
 				rowData[i][1] = "Y";
 			}else {
