@@ -54,7 +54,7 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 		positionLabel.setText("位置：" + vo.getPosition());
 	}
 	
-	public HotSeasonPlayerLabel(HotSeasonPlayerVO vo, HotSeasonPlayerProperty property) {
+	public HotSeasonPlayerLabel(HotSeasonPlayerVO vo, HotSeasonPlayerProperty property,int index) {
 		super(vo.getTop());
 		playerName = Utility.trimName(vo.getName());
 		if (vo.getTop() == 1) {
@@ -71,8 +71,11 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 			this.add(nameLabel);
 			
 			String propertyName = getPropertyName(property);
-			String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
-			propertyLabel = new MyLabel(labelX, 80, 146, 26, propertyName+"："+propertyStr);
+			String propertyStr = UIConfig.PERCENT_FORMAT.format(vo.getProperty());
+			if(index < 5){
+				propertyStr = UIConfig.FORMAT.format(vo.getProperty());
+			}
+			propertyLabel = new MyLabel(labelX, 80, 200, 26, propertyName+"："+propertyStr);
 			propertyLabel.setFont(new Font("微软雅黑", Font.BOLD, 20));
 			propertyLabel.setForeground(UIConfig.HIST_FIRST_COLOR);
 			propertyLabel.setLeft();

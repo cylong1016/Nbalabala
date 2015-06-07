@@ -46,7 +46,7 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 		leagueLabel.setText( "联盟：" + vo.getLeague());
 	}
 	
-	public HotSeasonTeamLabel(HotSeasonTeamVO vo, HotSeasonTeamProperty property) {
+	public HotSeasonTeamLabel(HotSeasonTeamVO vo, HotSeasonTeamProperty property,int index) {
 		super(vo.getTop());
 		teamAbbr = vo.getAbbr();
 		if (vo.getTop() == 1) {
@@ -63,7 +63,10 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 			nameLabel.setLeft();
 			
 			String propertyName = getPropertyName(property);
-			String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
+			String propertyStr = UIConfig.PERCENT_FORMAT.format(vo.getProperty());
+			if(index < 5){
+				propertyStr = UIConfig.FORMAT.format(vo.getProperty());
+			}
 			propertyLabel = new MyLabel(labelX, 85, 146, 26, propertyName+"："+propertyStr);
 			propertyLabel.setFont(new Font("微软雅黑", Font.BOLD, 20));
 			propertyLabel.setForeground(UIConfig.HIST_FIRST_COLOR);

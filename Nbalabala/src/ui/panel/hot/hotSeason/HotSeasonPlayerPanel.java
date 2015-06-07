@@ -33,7 +33,7 @@ public class HotSeasonPlayerPanel extends HotThreeFatherPanel {
 	public HotSeasonPlayerPanel(String url) {
 		super(url);
 		add_bt_Listener();
-		addLabel();
+		addLabel(0);
 		addChart();
 	}
 
@@ -116,7 +116,7 @@ public class HotSeasonPlayerPanel extends HotThreeFatherPanel {
 						if (label[i] != null)
 							HotSeasonPlayerPanel.this.remove(label[i]);
 					}
-					addLabel();
+					addLabel(ThreeButton.current.index);
 					addChart();
 				}
 
@@ -129,12 +129,12 @@ public class HotSeasonPlayerPanel extends HotThreeFatherPanel {
 	 * @author lsy
 	 * @version 2015年4月11日 下午6:09:44
 	 */
-	public void addLabel() {
+	public void addLabel(int index) {
 		playerVO = hot.getHotSeasonPlayers(ThreeButton.current.player);
 		if (playerVO.size() < 5)
 			return;
 		for(int j = 0; j < 5; j++) {
-			label[j] = new HotSeasonPlayerLabel(playerVO.get(j), ThreeButton.current.player);
+			label[j] = new HotSeasonPlayerLabel(playerVO.get(j), ThreeButton.current.player,index);
 			this.add(label[j]);
 		}
 		this.repaint();

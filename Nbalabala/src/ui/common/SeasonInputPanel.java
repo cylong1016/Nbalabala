@@ -112,6 +112,7 @@ public class SeasonInputPanel extends JPanel {
 		}else {
 			category = "P";
 		}
+		System.out.println(start + "-" + end + category);
 		return start + "-" + end + category;
 	}
 	

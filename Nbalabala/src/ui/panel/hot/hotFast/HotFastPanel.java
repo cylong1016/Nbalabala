@@ -44,7 +44,7 @@ public class HotFastPanel extends HotThreeFatherPanel {
 		add_bt_Listener();
 		fastVO = hot.getHotFastestPlayers(ThreeButton.current.fast);
 		addLabel();
-		addChart();
+		addChart(ThreeButton.current.index);
 		repaint();
 	}
 
@@ -65,7 +65,7 @@ public class HotFastPanel extends HotThreeFatherPanel {
 
 			public void mouseClicked(MouseEvent e) {
 				CURRENTI--;
-				addChart();
+				addChart(ThreeButton.current.index);
 				HotFastPanel.this.repaint();
 			}
 		});
@@ -73,13 +73,13 @@ public class HotFastPanel extends HotThreeFatherPanel {
 
 			public void mouseClicked(MouseEvent e) {
 				CURRENTI++;
-				addChart();
+				addChart(ThreeButton.current.index);
 				HotFastPanel.this.repaint();
 			}
 		});
 	}
 
-	private void addChart() {
+	private void addChart(int index) {
 		if (chart != null) {
 			this.remove(chart);
 		}
@@ -91,7 +91,7 @@ public class HotFastPanel extends HotThreeFatherPanel {
 		}
 		if (fastVO.size() < 5)
 			return;
-		chart = new Chart((CURRENTI + 1) + " " + Utility.trimName(fastVO.get(CURRENTI).getName()) + " " + text, getColumns(), getMax());
+		chart = new Chart((CURRENTI + 1) + " " + Utility.trimName(fastVO.get(CURRENTI).getName()) + " " + text, getColumns(index), getMax());
 		chart.setBounds(95, 103, 809, 200);
 		this.add(chart);
 		chart.updateUI();
@@ -107,10 +107,10 @@ public class HotFastPanel extends HotThreeFatherPanel {
 		if (fastVO.size() < 5)
 			return;
 		if (chart != null) {
-			chart.setData(getColumns(), getMax());
+			chart.setData(getColumns(ThreeButton.current.index), getMax());
 			chart.setTitle((CURRENTI + 1) + " " +Utility.trimName(fastVO.get(CURRENTI).getName()) + " " + text);
 		}else {
-			addChart();
+			addChart(ThreeButton.current.index);
 		}
 	}
 
@@ -119,13 +119,23 @@ public class HotFastPanel extends HotThreeFatherPanel {
 	 * @author cylong
 	 * @version 2015年4月13日 下午8:48:00
 	 */
-	private ArrayList<Column> getColumns() {
+	private ArrayList<Column> getColumns(int index) {
 		ArrayList<Column> columns = new ArrayList<Column>();
 		double formerFiveAvg = fastVO.get(CURRENTI).getFormerFiveAvg();
-		columns.add(new Column("五场前平均", formerFiveAvg, Color.GRAY));
+		if(index > 4){
+			columns.add(new Column("五场前平均", formerFiveAvg, Color.GRAY,UIConfig.PERCENT_FORMAT));
+		} else{
+			columns.add(new Column("五场前平均", formerFiveAvg, Color.GRAY,UIConfig.FORMAT));
+		}
 		for(int i = 0; i < 5; i++) {
 			double[] recentFive = fastVO.get(CURRENTI).getRecentFive();
-			columns.add(new Column("第" + (i + 1) + "场", recentFive[i], UIConfig.HIST_COLORS[CURRENTI]));
+			if(index > 4){
+				columns.add(new Column("第" + (i + 1) + "场", recentFive[i], UIConfig.HIST_COLORS[CURRENTI]
+						,UIConfig.PERCENT_FORMAT));
+			}else{
+				columns.add(new Column("第" + (i + 1) + "场", recentFive[i], UIConfig.HIST_COLORS[CURRENTI]
+						,UIConfig.FORMAT));
+			}
 		}
 		return columns;
 	}
@@ -164,7 +174,7 @@ public class HotFastPanel extends HotThreeFatherPanel {
 							HotFastPanel.this.remove(label[i]);
 					}
 					addLabel();
-					addChart();
+					addChart(ThreeButton.current.index);
 					refresh();
 				}
 

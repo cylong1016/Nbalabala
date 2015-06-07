@@ -34,7 +34,7 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel {
 	public HotSeasonTeamPanel(String url) {
 		super(url);
 		add_bt_Listener();
-		addLabel();
+		addLabel(0);
 		addChart();
 	}
 
@@ -114,19 +114,19 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel {
 						if (label[i] != null)
 							HotSeasonTeamPanel.this.remove(label[i]);
 					}
-					addLabel();
+					addLabel(ThreeButton.current.index);
 					addChart();
 				}
 			});
 		}
 	}
 
-	public void addLabel() {
+	public void addLabel(int index) {
 		teamVO = hot.getHotSeasonTeams(ThreeButton.current.team);
 		if (teamVO.size() < 5)
 			return;
 		for(int j = 0; j < 5; j++) {
-			label[j] = new HotSeasonTeamLabel(teamVO.get(j), ThreeButton.current.team);
+			label[j] = new HotSeasonTeamLabel(teamVO.get(j), ThreeButton.current.team,index);
 			this.add(label[j]);
 		}
 		this.repaint();

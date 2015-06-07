@@ -71,7 +71,7 @@ public class Column extends JPanel {
 		this.nameLabel.setText(name);
 		valLabel.setText(format.format(value));
 	}
-
+	
 	/**
 	 * @see java.awt.Component#setBounds(int, int, int, int)
 	 */

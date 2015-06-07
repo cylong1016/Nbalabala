@@ -60,7 +60,7 @@ public class HotFastestPlayerLabel extends JLabel{
 			portraitLabel.setImage(PlayerImageCache.getPortraitByName(vo.getName()));
 		}
 		nameLabel.setText(playerName);
-		String propertyStr = UIConfig.FORMAT.format(vo.getPromotion());
+		String propertyStr = UIConfig.PERCENT_FORMAT.format(vo.getPromotion());
 		propertyLabel.setText("五场提升："+propertyStr);
 		teamLabel.setText("球队：" + Constants.translateTeamAbbr(vo.getTeamAbbr()));
 		positionLabel.setText("位置：" + vo.getPosition());
@@ -88,7 +88,7 @@ public class HotFastestPlayerLabel extends JLabel{
 			nameLabel.setLeft();
 			this.add(nameLabel);
 			
-			String propertyStr = UIConfig.FORMAT.format(vo.getPromotion());
+			String propertyStr = UIConfig.PERCENT_FORMAT.format(vo.getPromotion());
 			propertyLabel = new MyLabel(labelX, 70, 200, 26, "五场提升："+propertyStr);
 			propertyLabel.setFont(new Font("微软雅黑", Font.BOLD, 20));
 			propertyLabel.setForeground(UIConfig.HIST_FIRST_COLOR);

@@ -25,6 +25,7 @@ public class ThreeButton extends TextButton{
 	public static ThreeButton current;
 	/** 按钮上的字 */
 	String text;
+	public int index;
 	
 	public ThreeButton(int x, int y, int width, int height, String text) {
 		super(x, y, width, height, text);
