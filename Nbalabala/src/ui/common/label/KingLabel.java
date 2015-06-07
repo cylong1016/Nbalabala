@@ -32,7 +32,7 @@ public class KingLabel extends JLabel{
 	private static final int TOP_ONE_LABEL_X = 211;
 	private static final int ELSE_LABEL_X = 85;
 	private static final int ELSE_LAST_LINE_Y = 46;
-	private static final Font DATA_FONT = new Font("微软雅黑", Font.BOLD, 27);
+	private static final Font DATA_FONT = new Font("微软雅黑", Font.BOLD, 27);	
 	private static final Font NAME_FONT = new Font("微软雅黑", Font.BOLD, 27);
 	private static final Font SMALL_FONT = new Font("微软雅黑", Font.BOLD, 15);
 	
@@ -85,7 +85,7 @@ public class KingLabel extends JLabel{
 			actionPhotoPanel.setImage(PlayerImageCache.getActionImageByName(vo.getName()));
 			
 			propertyLabel.setText(UIConfig.FORMAT.format(vo.getData()));
-			nameLabel.setText(vo.getName());
+			nameLabel.setText(Utility.trimName(vo.getName()));
 			positionLabel.setText(vo.getPosition() + " / ");
 			rankLabel.setText(String.valueOf(vo.getOverallRank()));
 			
@@ -100,7 +100,7 @@ public class KingLabel extends JLabel{
 		}else {	// 2 3 4 5 名的情况
 			portraitLabel.setImage(PlayerImageCache.getPortraitByName(playerName));
 			propertyLabel.setText(UIConfig.FORMAT.format(vo.getData()));
-			nameLabel.setText(playerName);
+			nameLabel.setText(Utility.trimName(playerName));
 			positionLabel.setText(vo.getPosition());
 			rankLabel.setText(String.valueOf(vo.getOverallRank()));
 			
@@ -125,7 +125,7 @@ public class KingLabel extends JLabel{
 			propertyLabel.setForeground(new Color(235,148,24));
 			this.add(propertyLabel);
 			
-			nameLabel = new MyLabel(TOP_ONE_LABEL_X, 82, 300, 50, vo.getName());
+			nameLabel = new MyLabel(TOP_ONE_LABEL_X, 82, 300, 50, Utility.trimName(vo.getName()));
 			nameLabel.setFont(NAME_FONT);
 			this.add(nameLabel);
 			
@@ -149,8 +149,6 @@ public class KingLabel extends JLabel{
 			rankLabel.setFont(SMALL_FONT);
 			rankLabel.setForeground(RANK_Color);
 			this.add(rankLabel);
-			
-			
 		}else{
 			Image portrait = PlayerImageCache.getPortraitByName(playerName);
 			portraitLabel = new ImgLabel(6, 8, 74, 60, portrait);	
@@ -161,7 +159,7 @@ public class KingLabel extends JLabel{
 			propertyLabel.setForeground(new Color(115, 72, 12));
 			this.add(propertyLabel);
 			
-			nameLabel = new MyLabel(ELSE_LABEL_X,20,300,30,playerName);
+			nameLabel = new MyLabel(ELSE_LABEL_X,20,300,30,Utility.trimName(playerName));
 			nameLabel.setFont(NAME_FONT);
 			this.add(nameLabel);
 			

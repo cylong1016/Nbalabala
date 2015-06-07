@@ -5,7 +5,6 @@ package ui.panel.allteams;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.Thread.State;
 
 import ui.Images;
 import ui.common.button.TabButton;

@@ -78,13 +78,16 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	
 	public PlayerInfoBottomPanel(String name, BottomPanel lastPanel) {
 		super(Images.PLAYER_INFO_BG);
+		this.playerQuery = new PlayerQuery();
+		this.profileVO = playerQuery.getPlayerProfileByName(name);
+		this.name = name;
+		
 		seasonInput = new SeasonInputPanel(this);
+		seasonInput.setSeason(profileVO.toYear);
 		seasonInput.setLocation(515, 255);	//TODO 赛季选择器还没定位置，这里是随便写的
 		this.add(seasonInput);
 		
-		this.name = name;
 		this.detailVO = playerQuery.getPlayerDetailByName(name, seasonInput.getSeason());
-		this.profileVO = detailVO.getProfile();
 		this.lastPanel = lastPanel;
 		
 		addTitles();
@@ -254,8 +257,10 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 //		reboundLabel.update(seasonVO.totalReboundAvg, ranks[1]);
 //		assistLabel.update(seasonVO.assistAvg, ranks[2]);
 		
-		briefPanel.updateContent(seasonVO, playerQuery.getFiveArgsAvg(season), 
-				playerQuery.getHighestScoreReboundAssist(season));
+		if (briefPanel != null) {
+			briefPanel.updateContent(seasonVO, playerQuery.getFiveArgsAvg(season), 
+					playerQuery.getHighestScoreReboundAssist(season));
+		}
 		if (seasonDataPanel != null) {
 			seasonDataPanel.update(season, seasonVO);
 		}
@@ -297,12 +302,12 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		this.add(currentPanel);
 	}
 	
-	//TODO 测试代码
-	public static void main(String[]args) {
-		Frame frame = new Frame();
-		MainController.frame = frame;
-		new PlayerImageCache().loadPortrait();;
-		frame.setPanel(new PlayerInfoBottomPanel("Kobe Bryant", null));
-		frame.start();
-	}
+//	//TODO 测试代码
+//	public static void main(String[]args) {
+//		Frame frame = new Frame();
+//		MainController.frame = frame;
+//		new PlayerImageCache().loadPortrait();;
+//		frame.setPanel(new PlayerInfoBottomPanel("Kobe Bryant", null));
+//		frame.start();
+//	}
 }

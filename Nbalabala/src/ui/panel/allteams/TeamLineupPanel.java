@@ -28,6 +28,7 @@ public class TeamLineupPanel extends BottomPanel{
 	//TODO 坐等云龙的数据
 	public TeamLineupPanel(ArrayList<PlayerProfilePO> players) {
 		super();
+		System.out.println(players.size());
 		this.players = players;
 		String[]columns = new String[] {"姓名", "位置", "年龄","球龄","身高","体重","生日","毕业学校"};
 		String[][]rowData = new String[players.size()][columns.length];
@@ -57,12 +58,12 @@ public class TeamLineupPanel extends BottomPanel{
 			PlayerProfilePO ppVO = players.get(i);
 			playerTable.setValueAt(ppVO.getName(), i, 0);
 			playerTable.setValueAt(ppVO.getPosition(), i, 1);
-			playerTable.setValueAt(Utility.getAgeByBirthday(ppVO.getBirthDate()), i, 2);
-			playerTable.setValueAt(Constants.translateVeteran(ppVO.fromYear), i, 4);
-			playerTable.setValueAt(Constants.translateHeight(ppVO.heightFoot + "-" + ppVO.heightInch), i, 5);
-			playerTable.setValueAt(Constants.translateWeight(ppVO.getWeight()), i, 6);
-			playerTable.setValueAt(Constants.translateDate(ppVO.birthDate), i, 7);
-			playerTable.setValueAt(ppVO.getSchool(), i, 8);
+			playerTable.setValueAt(String.valueOf(Utility.getAgeByBirthday(ppVO.getBirthDate())), i, 2);
+			playerTable.setValueAt(Constants.translateVeteran(ppVO.fromYear), i, 3);
+			playerTable.setValueAt(Constants.translateHeight(ppVO.heightFoot + "-" + ppVO.heightInch), i, 4);
+			playerTable.setValueAt(Constants.translateWeight(ppVO.getWeight()), i, 5);
+			playerTable.setValueAt(Constants.translateDate(ppVO.birthDate), i, 6);
+			playerTable.setValueAt(ppVO.getSchool(), i, 7);
 		}
 	}
 	

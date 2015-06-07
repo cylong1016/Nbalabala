@@ -1,7 +1,6 @@
 package ui.panel.allteams;
 
 import po.TeamSeasonPO;
-import ui.common.SeasonInputPanel;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.panel.allplayers.ContrastDiagram;
@@ -17,16 +16,10 @@ public class TeamSeasonPanel extends BottomPanel{
 	/** serialVersionUID */
 	private static final long serialVersionUID = -5523253635537412179L;
 	private ContrastDiagram cd;
-	/** 赛季选择器 */
-	private SeasonInputPanel seasonInput;
 	private OneTeamDataTable table;
 	
-	public TeamSeasonPanel(SeasonInputPanel seasonInput) {
+	public TeamSeasonPanel() {
 		super();
-		this.seasonInput = seasonInput;
-		seasonInput.setLocation(25, 0);	//TODO y是随便写的
-		this.add(seasonInput);
-		
 		table = new OneTeamDataTable();
 		BottomScrollPane scrollPane = new BottomScrollPane(table);
 		scrollPane.setBounds(25, 200, 888, 140);
@@ -52,8 +45,4 @@ public class TeamSeasonPanel extends BottomPanel{
 		table.setVO(season, teamSeason);
 	}
 	
-	public void addSeasonChooser() {
-		add(seasonInput);
-	}
-
 }

@@ -157,4 +157,12 @@ public class PlayerQuery implements PlayerQueryBLService{
 		}
 		return result;
 	}
+
+	/* (non-Javadoc)
+	 * @see blservice.PlayerQueryBLService#getPlayerProfileByName(java.lang.String)
+	 */
+	@Override
+	public PlayerProfilePO getPlayerProfileByName(String name) {
+		return playerData.getPlayerProfileByName(name);
+	}
 }

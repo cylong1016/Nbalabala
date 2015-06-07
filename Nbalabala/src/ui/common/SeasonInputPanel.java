@@ -34,9 +34,10 @@ public class SeasonInputPanel extends JPanel {
 
 	public SeasonInputPanel(BottomPanel panel) {
 		this.bottomPanel = panel;
+
 		setLook();
 		addCombobox();
-
+		setSize(210,30);
 		rightDownButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -64,7 +65,8 @@ public class SeasonInputPanel extends JPanel {
 	public SeasonInputPanel() {
 
 		setLook();
-
+		addCombobox();
+		setSize(210,30);
 		rightUpButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -112,6 +114,17 @@ public class SeasonInputPanel extends JPanel {
 		}
 		return start + "-" + end + category;
 	}
+	
+	public void setSeason(int lastYear) {
+		if (lastYear < Constants.EARLIEST_YEAR) return;
+		int latestYear = Integer.parseInt(Constants.LATEST_SEASON.substring(0, 4));
+		int select = latestYear + 1 - lastYear;
+		this.index = 0;
+		rpLabel.setText(Constants.regularText);
+		box.setSelectedIndex(select);
+	}
+	
+	
 	
 	
 

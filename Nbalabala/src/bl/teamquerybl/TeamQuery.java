@@ -42,7 +42,7 @@ public class TeamQuery implements TeamQueryBLService{
 		
 		TeamProfileVO profileVO = new TeamProfileVO(dataService.getTeamProfileByAbbr(abbr));
 		
-		ArrayList<String> playerNames = seasonService.getRecentPlayerNamesByTeamAbbr(abbr);
+		ArrayList<String> playerNames = seasonService.getPlayerNamesByTeamAbbr(abbr, season);
 		ArrayList<PlayerProfilePO> playerProfiles = new ArrayList<PlayerProfilePO>();
 		for (String name : playerNames) {
 			playerProfiles.add(playerService.getPlayerProfileByName(name));
