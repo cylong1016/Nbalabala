@@ -33,6 +33,11 @@ public class Column extends JPanel {
 	private JPanel center;
 	
 	private DecimalFormat format = new DecimalFormat("0.00");
+	
+	public Column(String name, double value, Color bgColor, DecimalFormat format) {
+		this(name, value, bgColor);
+		this.format = format;
+	}
 
 	public Column(String name, double value, Color bgColor) {
 		this.value = value;

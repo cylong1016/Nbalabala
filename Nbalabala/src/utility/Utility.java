@@ -11,7 +11,7 @@ import java.util.Calendar;
  */
 public class Utility {
 	
-	public String trimName(String name) {
+	public static String trimName(String name) {
 		return name.substring(0, name.length() - 3);
 	}
 	

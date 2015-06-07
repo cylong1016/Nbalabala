@@ -12,6 +12,7 @@ import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
 import ui.panel.allplayers.ActionPhotoPanel;
 import utility.Constants;
+import utility.Utility;
 import vo.HotFastestPlayerVO;
 import data.playerdata.PlayerImageCache;
 
@@ -51,9 +52,9 @@ public class HotFastestPlayerLabel extends JLabel{
 	}
 	
 	public void updateContent(HotFastestPlayerVO vo) {
-		playerName = vo.getName();
+		playerName = Utility.trimName(vo.getName());
 		if (actionPhotoPanel != null) {
-			actionPhotoPanel.setImage(PlayerImageCache.getActionImageByName(playerName));
+			actionPhotoPanel.setImage(PlayerImageCache.getActionImageByName(vo.getName()));
 		}
 		if (portraitLabel != null) {
 			portraitLabel.setImage(PlayerImageCache.getPortraitByName(vo.getName()));
@@ -73,9 +74,9 @@ public class HotFastestPlayerLabel extends JLabel{
 	MyLabel positionLabel;
 	
 	private void setContent(HotFastestPlayerVO vo) {
-		playerName = vo.getName();
+		playerName = Utility.trimName(vo.getName());
 		if (vo.getTop() == 1) {
-			Image actionImage = PlayerImageCache.getActionImageByName(playerName);
+			Image actionImage = PlayerImageCache.getActionImageByName(vo.getName());
 			actionPhotoPanel = new ActionPhotoPanel(actionImage);
 			actionPhotoPanel.setBounds(262,0,157,295);
 			this.add(actionPhotoPanel);

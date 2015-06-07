@@ -31,6 +31,9 @@ public interface MatchDataService {
 
 	/** 通过比赛ID返回详情 */
 	public MatchDetailPO getMatchDetailByMatchID(int matchID);
+	
+	/** 通过比赛ID和球员名字返回这场比赛他的表现情况 */
+	public MatchPlayerPO getPlayerMatchRecordByNameAndID(String matchID, String playerName);
 
 	/** 通过运动员名字和赛季返回其该赛季全部比赛记录 */
 	public ArrayList<MatchPlayerPO> getMatchRecordByPlayerName(

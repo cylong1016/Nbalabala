@@ -10,6 +10,7 @@ import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
 import ui.panel.allplayers.ActionPhotoPanel;
 import utility.Constants;
+import utility.Utility;
 import vo.HotSeasonPlayerVO;
 import data.playerdata.PlayerImageCache;
 import enums.HotSeasonPlayerProperty;
@@ -42,10 +43,10 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 	
 	public void updateContent(HotSeasonPlayerVO vo, HotSeasonPlayerProperty property) {
 		if (actionPhotoPanel != null)
-			actionPhotoPanel.setImage(PlayerImageCache.getActionImageByName(playerName));
+			actionPhotoPanel.setImage(PlayerImageCache.getActionImageByName(vo.getName()));
 		if (portraitLabel != null)
 			portraitLabel.setImage(PlayerImageCache.getPortraitByName(vo.getName()));
-		nameLabel.setText(vo.getName());
+		nameLabel.setText(Utility.trimName(vo.getName()));
 		String propertyName = getPropertyName(property);
 		String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
 		propertyLabel.setText(propertyName+"："+propertyStr);
@@ -55,9 +56,9 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 	
 	public HotSeasonPlayerLabel(HotSeasonPlayerVO vo, HotSeasonPlayerProperty property) {
 		super(vo.getTop());
-		playerName = vo.getName();
+		playerName = Utility.trimName(vo.getName());
 		if (vo.getTop() == 1) {
-			Image actionImage = PlayerImageCache.getActionImageByName(playerName);
+			Image actionImage = PlayerImageCache.getActionImageByName(vo.getName());
 			actionPhotoPanel = new ActionPhotoPanel(actionImage);
 			actionPhotoPanel.setSize(176, 280);
 			actionPhotoPanel.setBounds(242,10,176,280);
@@ -92,7 +93,7 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 			
 			int labelWid = 175;
 			
-			nameLabel = new MyLabel(0,7,labelWid,20,vo.getName());
+			nameLabel = new MyLabel(0,7,labelWid,20,Utility.trimName(vo.getName()));
 			
 			String propertyName = getPropertyName(property);
 			String propertyStr = UIConfig.FORMAT.format(vo.getProperty());

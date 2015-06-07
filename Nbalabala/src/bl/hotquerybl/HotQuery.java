@@ -1,5 +1,6 @@
 package bl.hotquerybl;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -47,7 +48,8 @@ public class HotQuery implements HotBLService{
 	private static final int MIN_DIVISOR = 4;
 	
 	public HotQuery() {
-		load();
+		if (players.size() == 0)
+			load();
 	}
 	
 	private void load() {
@@ -64,6 +66,19 @@ public class HotQuery implements HotBLService{
 			HotTodayPlayerProperty property) {
 		Comparator<TempVO> comparator = null;
 		MatchData matchData = new MatchData();
+		
+		Date latestDate = null;
+		for (TempVO vo : players) {
+			if (latestDate == null || vo.date.after(latestDate)) latestDate = vo.date;
+		}
+		
+		ArrayList<TempVO> latest = new ArrayList<TempVO>();
+		for (TempVO vo : players) {
+			if (latestDate.equals(vo.date)) {
+				latest.add(vo);
+			}
+		}
+		
 		switch (property) {
 		case SCORE:
 			comparator = new Comparator<TempVO>() {
@@ -103,13 +118,14 @@ public class HotQuery implements HotBLService{
 		default:
 			break;
 		}
-		Collections.sort(players, comparator);
-		int size = players.size();
+		Collections.sort(latest, comparator);
+		
+		int size = latest.size();
 		if (size > 5) size = 5;
 		int i;
 		ArrayList<HotTodayPlayerVO> result = new ArrayList<HotTodayPlayerVO>();
 		for (i=0; i<size; i++) {
-			TempVO seasonVO = players.get(i);
+			TempVO seasonVO = latest.get(i);
 			int value = 0;
 			switch (property) {
 			case SCORE:
@@ -137,7 +153,8 @@ public class HotQuery implements HotBLService{
 			ArrayList<MatchPlayerPO> matchPlayers = matchDetail.getMatchPlayers();
 			for (MatchPlayerPO vo  : matchPlayers) {
 				if (vo.playerName.equals(name)) {
-					result.add(new HotTodayPlayerVO(i+1, name, seasonVO.team, position,
+					result.add(new HotTodayPlayerVO(i+1, name, seasonVO.team,
+							seasonVO.oppo, position,
 							value, vo));
 					break;
 				}

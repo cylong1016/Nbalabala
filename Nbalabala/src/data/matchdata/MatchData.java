@@ -87,38 +87,46 @@ public class MatchData implements MatchDataService {
 		ArrayList<MatchPlayerPO> result = new ArrayList<MatchPlayerPO>();
 		try {
 			while(rs.next()) {
-				MatchPlayerPO po = new MatchPlayerPO();
-				po.matchID = rs.getInt(1);
-				po.playerName = rs.getString(2);
-				po.homeOrRoad = rs.getString(3).charAt(0);
-				po.teamAbbr = rs.getString(4);
-				po.isStarter = (rs.getInt(5) == 1);
-				po.timePlayed = rs.getString(6);
-				po.fieldMade = rs.getInt(7);
-				po.fieldAttempt = rs.getInt(8);
-				po.fieldPercent = rs.getFloat(9);
-				po.threepointMade = rs.getInt(10);
-				po.threepointAttempt = rs.getInt(11);
-				po.threepointPercent = rs.getFloat(12);
-				po.freethrowMade = rs.getInt(13);
-				po.freethrowAttempt = rs.getInt(14);
-				po.freethrowPercent = rs.getFloat(15);
-				po.offensiveRebound = rs.getInt(16);
-				po.defensiveRebound = rs.getInt(17);
-				po.totalRebound = rs.getInt(18);
-				po.assist = rs.getInt(19);
-				po.steal = rs.getInt(20);
-				po.block  = rs.getInt(21);
-				po.turnover = rs.getInt(22);
-				po.foul = rs.getInt(23);
-				po.score = rs.getInt(24);
-				po.plusMinus = rs.getInt(25);
-				result.add(po);
+				result.add(getMatchPlayer(rs));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	private MatchPlayerPO getMatchPlayer(ResultSet rs) {
+		MatchPlayerPO po = new MatchPlayerPO();
+		try {
+			po.matchID = rs.getInt(1);
+			po.playerName = rs.getString(2);
+			po.homeOrRoad = rs.getString(3).charAt(0);
+			po.teamAbbr = rs.getString(4);
+			po.isStarter = (rs.getInt(5) == 1);
+			po.timePlayed = rs.getString(6);
+			po.fieldMade = rs.getInt(7);
+			po.fieldAttempt = rs.getInt(8);
+			po.fieldPercent = rs.getFloat(9);
+			po.threepointMade = rs.getInt(10);
+			po.threepointAttempt = rs.getInt(11);
+			po.threepointPercent = rs.getFloat(12);
+			po.freethrowMade = rs.getInt(13);
+			po.freethrowAttempt = rs.getInt(14);
+			po.freethrowPercent = rs.getFloat(15);
+			po.offensiveRebound = rs.getInt(16);
+			po.defensiveRebound = rs.getInt(17);
+			po.totalRebound = rs.getInt(18);
+			po.assist = rs.getInt(19);
+			po.steal = rs.getInt(20);
+			po.block  = rs.getInt(21);
+			po.turnover = rs.getInt(22);
+			po.foul = rs.getInt(23);
+			po.score = rs.getInt(24);
+			po.plusMinus = rs.getInt(25);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return po;
 	}
 	
 	/** 通过match_profile表的ResultSet得到MatchDetailPO */
@@ -310,5 +318,29 @@ public class MatchData implements MatchDataService {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see dataservice.MatchDataService#getPlayerMatchRecordByNameAndID(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public MatchPlayerPO getPlayerMatchRecordByNameAndID(String matchID,
+			String playerName) {
+		PreparedStatement ps;
+		try {
+			ps = conn.prepareStatement("select * from match_player where match_id=? and player_name=?");
+			ps.setString(1, matchID);
+			ps.setString(2, playerName);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				return getMatchPlayer(rs);
+			}else {
+				return null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }

@@ -12,6 +12,7 @@ import ui.common.chart.Column;
 import ui.common.label.HotFastestPlayerLabel;
 import ui.panel.hot.HotThreeFatherPanel;
 import ui.panel.hot.ThreeButton;
+import utility.Utility;
 import vo.HotFastestPlayerVO;
 import bl.hotquerybl.HotQuery;
 import blservice.HotBLService;
@@ -107,7 +108,7 @@ public class HotFastPanel extends HotThreeFatherPanel {
 			return;
 		if (chart != null) {
 			chart.setData(getColumns(), getMax());
-			chart.setTitle((CURRENTI + 1) + " " +fastVO.get(CURRENTI).getName() + " " + text);
+			chart.setTitle((CURRENTI + 1) + " " +Utility.trimName(fastVO.get(CURRENTI).getName()) + " " + text);
 		}else {
 			addChart();
 		}

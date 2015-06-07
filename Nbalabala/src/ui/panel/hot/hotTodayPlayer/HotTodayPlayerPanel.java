@@ -22,6 +22,7 @@ import ui.controller.MainController;
 import ui.panel.allplayers.MyTableCellRenderer;
 import ui.panel.hot.HotFatherPanel;
 import utility.Constants;
+import utility.Utility;
 import vo.HotTodayPlayerVO;
 import bl.hotquerybl.HotQuery;
 import blservice.HotBLService;
@@ -112,7 +113,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 		ArrayList<Column> columnArray = new ArrayList<Column>();
 		for(int i = 0; i < 5; i++) {
 			double property = playerVO.get(i).getProperty();
-			columnArray.add(new Column(playerVO.get(i).getName(), property, UIConfig.HIST_COLORS[i]));
+			columnArray.add(new Column(Utility.trimName(playerVO.get(i).getName()), property, UIConfig.HIST_COLORS[i]));
 		}
 		return columnArray;
 	}
@@ -176,7 +177,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 		table.setForeground(UIConfig.TABLE_HEADER_BACK_COLOR);
 		table.cancelVerticalLines();
 		table.setRealOpaque();
-		int[] cells = new int[25];
+		int[] cells = new int[12];
 		for(int j = 0; j < cells.length; j++) {
 			cells[j] = cellWidth;
 		}
@@ -221,32 +222,17 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 			Image smallImg = protrait.getScaledInstance(PORTRAIT_WIDTH, height, Image.SCALE_SMOOTH);
 			ImageIcon ic = new ImageIcon(smallImg);
 			iconArr.add(ic);
-			
 			table.setValueAt( (i + 1) + "", i, 0);
-			table.setValueAt(ppVO.getName(), i, 2);
+			table.setValueAt(Utility.trimName(ppVO.getName()), i, 2); //不显示名字后面的编号
 			table.setValueAt(Constants.translateTeamAbbr(ppVO.getTeamAbbr()), i, 3);
-			table.setValueAt(ppVO.getPosition(), i, 4);
-			table.setValueAt(ppVO.getProperty()+"", i, 5);
-			//TODO 怎么解决
-//			table.setValueAt(matchVO.getSeason(), i, 6);
-//			table.setValueAt(matchVO.getDate(), i, 7);
-//			table.setValueAt(matchVO.getTwoTeams(), i, 8);
-			table.setValueAt(matchPlayer.getTimePlayed(), i, 9);
-			table.setValueAt(matchPlayer.getFieldMade() + "", i, 10);
-			table.setValueAt(matchPlayer.getFieldAttempt() + "", i, 11);
-			table.setValueAt(matchPlayer.getThreepointMade() + "", i, 12);
-			table.setValueAt(matchPlayer.getThreepointAttempt() + "", i, 13);
-			table.setValueAt(matchPlayer.getFreethrowMade() + "", i, 14);
-			table.setValueAt(matchPlayer.getFieldAttempt() + "", i, 15);
-			table.setValueAt(matchPlayer.getOffensiveRebound() + "", i, 16);
-			table.setValueAt(matchPlayer.getDefensiveRebound() + "", i, 17);
-			table.setValueAt(matchPlayer.getTotalRebound() + "", i, 18);
-			table.setValueAt(matchPlayer.getAssist() + "", i, 19);
-			table.setValueAt(matchPlayer.getSteal() + "", i, 20);
-			table.setValueAt(matchPlayer.getBlock() + "", i, 21);
-			table.setValueAt(matchPlayer.getTurnover() + "", i, 22);
-			table.setValueAt(matchPlayer.getFoul() + "", i, 23);
-			table.setValueAt(matchPlayer.getScore() + "", i, 24);
+			table.setValueAt(Constants.translateTeamAbbr(ppVO.getOppoAbbr()), i, 4);
+			table.setValueAt(ppVO.getPosition(), i, 5);
+			table.setValueAt(matchPlayer.getTimePlayed(), i, 6);
+			table.setValueAt(matchPlayer.getScore() + "", i, 7);
+			table.setValueAt(matchPlayer.getTotalRebound() + "", i, 8);
+			table.setValueAt(matchPlayer.getAssist() + "", i, 9);
+			table.setValueAt(matchPlayer.getBlock() + "", i, 10);
+			table.setValueAt(matchPlayer.getSteal() + "", i, 11);
 		}
 		MyTableCellRenderer myRenderer = new MyTableCellRenderer();
 		myRenderer.icon = iconArr;

@@ -10,12 +10,13 @@ import po.MatchPlayerPO;
  */
 public class HotTodayPlayerVO {
 	
-	public HotTodayPlayerVO(int top, String name, String teamAbbr,
+	public HotTodayPlayerVO(int top, String name, String teamAbbr, String oppoAbbr,
 			String position, int property, MatchPlayerPO matchPerformanceVO) {
 		super();
 		this.top = top;
 		this.name = name;
 		this.teamAbbr = teamAbbr;
+		this.oppoAbbr = oppoAbbr;
 		this.position = position;
 		this.property = property;
 		this.matchPerformanceVO = matchPerformanceVO;
@@ -25,6 +26,7 @@ public class HotTodayPlayerVO {
 	private int top;
 	private String name;
 	private String teamAbbr;
+	private String oppoAbbr;	//对手缩写
 	private String position;
 	/** 作为依据的那一项属性的数值 */
 	private int property;
@@ -44,6 +46,9 @@ public class HotTodayPlayerVO {
 	}
 	public String getTeamAbbr() {
 		return teamAbbr;
+	}
+	public String getOppoAbbr() {
+		return oppoAbbr;
 	}
 	public String getPosition() {
 		return position;

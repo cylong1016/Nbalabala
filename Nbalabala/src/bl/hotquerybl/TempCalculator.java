@@ -5,6 +5,8 @@ package bl.hotquerybl;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -23,6 +25,13 @@ public class TempCalculator {
 		
 		HashMap<String, TempVO> players  = new HashMap<String, TempVO>();
 		
+		Comparator<MatchDetailPO> comparator = new Comparator<MatchDetailPO>() {
+			public int compare(MatchDetailPO p1, MatchDetailPO p2) {
+				return p1.matchProfile.date.compareTo(p2.matchProfile.date);
+			}
+		};
+		Collections.sort(matches, comparator);
+		
 		for (MatchDetailPO match : matches) {
 			String homeTeam = match.matchProfile.homeAbbr;
 			String roadTeam = match.matchProfile.roadAbbr;
@@ -32,6 +41,7 @@ public class TempCalculator {
 				TempVO temp = players.get(name);
 				if (temp == null) {
 					temp = new TempVO();
+					temp.name = player.playerName;
 					players.put(name, temp);
 				}
 				if (player.getHomeOrRoad() == 'H') {
@@ -61,7 +71,7 @@ public class TempCalculator {
 				temp.assist += player.assist;
 				temp.assistQueue.enqueue(player.assist);
 				temp.steal += player.steal;
-				temp.assistQueue.enqueue(player.steal);
+				temp.stealQueue.enqueue(player.steal);
 				temp.block += player.block;
 				temp.blockQueue.enqueue(player.block);
 				temp.score += player.score;

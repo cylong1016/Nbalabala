@@ -122,11 +122,10 @@ public class Constants {
 	
 	public static final String[] TEAM_DATA_SORT = {"基本数据","进攻数据","防守数据"};
 	
-	public static final String[] LBSTR = {"得分", "篮板", "盖帽", "助攻", "抢断"};
+	public static final String[] LBSTR = {"得分", "篮板",  "助攻", "盖帽","抢断"};
 	
-	public static final String[] HOT_COLUMNS = {"编号", "头像", "姓名", "球队", "位置", "得分", "赛季", "日期", "对阵", "在场时间", "投篮命中数", "投篮出手数",
-			"三分命中数", "三分出手数", "罚球命中数", "罚球出手数", "进攻篮板数", "防守篮板数", "总篮板数", "助攻数", "抢断数", "盖帽数",
-			"失误数", "犯规数", "个人得分"};
+	public static final String[] HOT_COLUMNS = {"名次", "头像", "姓名", "球队", "对手", "位置", "在场时间", "得分", "篮板", "助攻", "盖帽",
+			"抢断"};
 	
 	public static String translateDivision(ScreenDivision division) {
 		return translater.translateTeamDivision(division);
