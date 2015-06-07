@@ -35,6 +35,11 @@ public class ActionPhotoPanel extends JPanel {
 		this.width = width;
 		this.height = height;
 	}
+	
+	public void setSize(double d){
+		this.width = (int) (d * this.width);
+		this.height = (int) (d * this.height);
+	}
 
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;

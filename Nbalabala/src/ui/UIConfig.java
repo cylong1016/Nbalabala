@@ -90,15 +90,15 @@ public class UIConfig {
 	
 	
 	/** 第一级选项卡按钮的字体 */
-	public static final Font FIRST_LEVEL_TAB_FONT = new Font("黑体", Font.PLAIN, 15);
+	public static final Font FIRST_LEVEL_TAB_FONT = MyFont.Arial_B;
 	/** 第二级选项卡按钮的字体 */
-	public static final Font SECOND_LEVEL_TAB_FONT = new Font("黑体", Font.PLAIN, 13);
+	public static final Font SECOND_LEVEL_TAB_FONT = new Font("微软雅黑", Font.PLAIN, 12);
 	
 	/** 显示 中锋 等文字的字体 */
-	public static final Font LABEL_PLAIN_FONT = new Font("黑体", Font.PLAIN, 13);
+	public static final Font LABEL_PLAIN_FONT = new Font("微软雅黑", Font.PLAIN, 12);
 	
 	/** 显示 毕业学校  等文字的字体 */
-	public static final Font LABEL_SMALL_FONT = new Font("黑体", Font.PLAIN, 12);
+	public static final Font LABEL_SMALL_FONT =  MyFont.YH_XS;
 	
 	public static final Color ORANGE_TEXT_COLOR = new Color(235,148,24);
 	

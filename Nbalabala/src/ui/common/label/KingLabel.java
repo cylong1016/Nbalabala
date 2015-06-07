@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 
 import ui.Images;
+import ui.MyFont;
 import ui.UIConfig;
 import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
@@ -27,14 +28,16 @@ public class KingLabel extends JLabel{
 	
 	/** serialVersionUID */
 	private static final long serialVersionUID = -5477070050894403050L;
-	private static final Color RANK_Color = new Color(92, 147, 201);
-	private static final int TOP_ONE_LAST_LINE_Y = 118;
-	private static final int TOP_ONE_LABEL_X = 211;
+	private static final Color RANK_Color = new Color(50, 126, 192);
+	private static final int TOP_ONE_LAST_LINE_Y = 100;
+	private static final int TOP_ONE_LABEL_X = 215;
 	private static final int ELSE_LABEL_X = 85;
 	private static final int ELSE_LAST_LINE_Y = 46;
-	private static final Font DATA_FONT = new Font("微软雅黑", Font.BOLD, 27);	
-	private static final Font NAME_FONT = new Font("微软雅黑", Font.BOLD, 27);
-	private static final Font SMALL_FONT = new Font("微软雅黑", Font.BOLD, 15);
+	/** 2345名的 */
+	private static final Font DATA_FONT = MyFont.YT_L;
+	/** 2345名的 */
+	private static final Font NAME_FONT = MyFont.YT_M;
+	private static final Font SMALL_FONT = MyFont.YH_S;
 	
 	private String playerName;
 	private ImgLabel arrowImgLabel = new ImgLabel(Images.ARROW_ICON);
@@ -116,31 +119,35 @@ public class KingLabel extends JLabel{
 		if (vo.getTop() == 1) {
 			Image actionImage = PlayerImageCache.getActionImageByName(vo.getName());
 			actionPhotoPanel = new ActionPhotoPanel(actionImage);
-			actionPhotoPanel.setBounds(33,5,200,300);
+			actionPhotoPanel.setBounds(33,5,250,500);
+			actionPhotoPanel.setSize(1.3);
 			this.add(actionPhotoPanel);
 			
 			String propertyStr = UIConfig.FORMAT.format(vo.getData());
-			propertyLabel = new MyLabel(TOP_ONE_LABEL_X, 32, 100, 50, propertyStr);
-			propertyLabel.setFont(DATA_FONT);
+			propertyLabel = new MyLabel(TOP_ONE_LABEL_X, 30, 100, 50, propertyStr);
+			propertyLabel.setFont(MyFont.YT_XL);
 			propertyLabel.setForeground(new Color(235,148,24));
+			propertyLabel.setLeft();
 			this.add(propertyLabel);
 			
-			nameLabel = new MyLabel(TOP_ONE_LABEL_X, 82, 300, 50, Utility.trimName(vo.getName()));
-			nameLabel.setFont(NAME_FONT);
+			nameLabel = new MyLabel(TOP_ONE_LABEL_X, 68, 300, 50, Utility.trimName(vo.getName()));
+			nameLabel.setFont(MyFont.YT_L);
+			nameLabel.setLeft();
 			this.add(nameLabel);
 			
-			positionLabel = new MyLabel(TOP_ONE_LABEL_X, TOP_ONE_LAST_LINE_Y, 80, 50, vo.getPosition() + " / ");
+			positionLabel = new MyLabel(TOP_ONE_LABEL_X, TOP_ONE_LAST_LINE_Y, 60, 50, vo.getPosition() + " / ");
 			positionLabel.setLeft();
 			this.add(positionLabel);
 			
+			//  总排名这个text
 			int textX = (int)(TOP_ONE_LABEL_X + positionLabel.getPreferredSize().getWidth());
-			textLabel = new MyLabel(textX, TOP_ONE_LAST_LINE_Y, 80, 50, Constants.overallRankText);
+			textLabel = new MyLabel(textX-10, TOP_ONE_LAST_LINE_Y, 80, 50, Constants.overallRankText);
 			textLabel.setFont(SMALL_FONT);
 			textLabel.setForeground(RANK_Color);
 			this.add(textLabel);
 			
 			int arrowX = (int)(textX + textLabel.getPreferredSize().getWidth());
-			arrowImgLabel.setBounds(arrowX, TOP_ONE_LAST_LINE_Y, 20, 20);
+			arrowImgLabel.setBounds(arrowX+8, TOP_ONE_LAST_LINE_Y + 15, 20, 20);
 			this.add(arrowImgLabel);
 			
 			int rankX = arrowX + Images.ARROW_ICON.getIconWidth();
@@ -161,11 +168,13 @@ public class KingLabel extends JLabel{
 			
 			nameLabel = new MyLabel(ELSE_LABEL_X,20,300,30,Utility.trimName(playerName));
 			nameLabel.setFont(NAME_FONT);
+			nameLabel.setLeft();
 			this.add(nameLabel);
 			
 			positionLabel = new MyLabel(ELSE_LABEL_X, ELSE_LAST_LINE_Y, 100, 30, 
 					vo.getPosition() + " / ");
-			positionLabel.setFont(SMALL_FONT);
+			positionLabel.setFont(MyFont.YH_S);
+			positionLabel.setLeft();
 			this.add(positionLabel);
 			
 			int arrowX = ELSE_LABEL_X + (int)(positionLabel.getPreferredSize().getWidth());
@@ -176,6 +185,8 @@ public class KingLabel extends JLabel{
 			rankLabel = new MyLabel(rankX, ELSE_LAST_LINE_Y, 80, 30, 
 					vo.getOverallRank() + Utility.getRankEnd(vo.getOverallRank()));
 			rankLabel.setForeground(RANK_Color);
+			rankLabel.setFont(MyFont.Arial_S);
+			rankLabel.setLeft();
 			this.add(rankLabel);
 		}
 		

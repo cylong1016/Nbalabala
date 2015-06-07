@@ -24,7 +24,7 @@ public class Constants {
 		String[] yearArr = new String[29];
 		String year = "2015";
 		for(int i = 0; i < 29; i++){
-			yearArr[i] = (Integer.parseInt(year)-1)+ " - " + year;
+			yearArr[i] = ((Integer.parseInt(year)-1)+"").substring(2,4)+ " - " + year.substring(2,4);
 			year = (Integer.parseInt(year)-1)+"";
 		}
 		return yearArr;

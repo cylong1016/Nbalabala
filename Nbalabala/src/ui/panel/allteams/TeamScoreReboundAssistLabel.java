@@ -2,7 +2,7 @@ package ui.panel.allteams;
 
 import javax.swing.JLabel;
 
-import ui.UIConfig;
+import ui.MyFont;
 import utility.Utility;
 
 /**
@@ -24,23 +24,26 @@ public class TeamScoreReboundAssistLabel extends JLabel{
 		
 		promptLabel = new JLabel(prompt);
 		promptLabel.setOpaque(false);
-		promptLabel.setFont(UIConfig.HiraginoFont);
+		promptLabel.setFont(MyFont.YH_XS);
+		promptLabel.setForeground(MyFont.LIGHT_GRAY);
 		promptLabel.setHorizontalAlignment(LEFT);
 		promptLabel.setBounds(0,0,58,20);
 		this.add(promptLabel);
 		
 		rankLabel = new JLabel(String.valueOf(rank));
 		rankLabel.setOpaque(false);
-		rankLabel.setFont(UIConfig.FONT);
+		rankLabel.setFont(MyFont.YT_S);
+		rankLabel.setForeground(MyFont.BLACK_GRAY);
 		rankLabel.setHorizontalAlignment(LEFT);
-		rankLabel.setBounds(15, 26, 35, 25);
+		rankLabel.setBounds(15, 24, 35, 25);
 		this.add(rankLabel);
 		
 		endLabel = new JLabel(Utility.getRankEnd(rank));
 		endLabel.setOpaque(false);
-		endLabel.setFont(UIConfig.FONT);
+		endLabel.setFont(MyFont.YT_XS);
+		endLabel.setForeground(MyFont.BLACK_GRAY);
 		endLabel.setHorizontalAlignment(LEFT);
-		endLabel.setBounds(15 + (int)rankLabel.getPreferredSize().getWidth(), 22, 20, 20);
+		endLabel.setBounds(15 + (int)rankLabel.getPreferredSize().getWidth(), 20, 20, 20);
 		this.add(endLabel);
 	}
 	

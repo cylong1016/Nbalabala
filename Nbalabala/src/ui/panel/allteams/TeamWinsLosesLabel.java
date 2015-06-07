@@ -4,6 +4,7 @@ import java.awt.Font;
 
 import javax.swing.JLabel;
 
+import ui.MyFont;
 import ui.UIConfig;
 import utility.Constants;
 
@@ -18,13 +19,13 @@ public class TeamWinsLosesLabel extends JLabel{
 	private static final long serialVersionUID = -1833510881213891733L;
 	private JLabel winsLabel;
 	private JLabel losesLabel;
-	private static final Font BIG_FONT = UIConfig.FONT; //TODO 几胜几负的大字体
+	private static final Font BIG_FONT = MyFont.YT_L;
 	
 	public TeamWinsLosesLabel(int wins, int loses) {
 		winsLabel = new JLabel(String.valueOf(wins));
 		winsLabel.setOpaque(false);
 		winsLabel.setForeground(UIConfig.RED_WIN_COLOR);
-		winsLabel.setBounds(0,3, 42,35);
+		winsLabel.setBounds(-5,3, 42,35);
 		winsLabel.setHorizontalAlignment(RIGHT);
 		winsLabel.setFont(BIG_FONT);
 		this.add(winsLabel);
@@ -33,11 +34,12 @@ public class TeamWinsLosesLabel extends JLabel{
 		winTextLabel.setBounds(43,19,25,25);
 		winTextLabel.setOpaque(false);
 		winTextLabel.setFont(UIConfig.LABEL_SMALL_FONT);
+		winTextLabel.setForeground(MyFont.LIGHT_GRAY);
 		this.add(winTextLabel);
 		
 		losesLabel = new JLabel(String.valueOf(loses));
 		losesLabel.setOpaque(false);
-		losesLabel.setBounds(82, 3, 42, 35);
+		losesLabel.setBounds(75, 3, 42, 35);
 		losesLabel.setHorizontalAlignment(RIGHT);
 		losesLabel.setFont(BIG_FONT);
 		this.add(losesLabel);
@@ -46,6 +48,7 @@ public class TeamWinsLosesLabel extends JLabel{
 		losesTextLabel.setBounds(115, 19, 25, 25);
 		losesTextLabel.setOpaque(false);
 		losesTextLabel.setFont(UIConfig.LABEL_SMALL_FONT);
+		losesTextLabel.setForeground(MyFont.LIGHT_GRAY);
 		this.add(losesTextLabel);
 	}
 	

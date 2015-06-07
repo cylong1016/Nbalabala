@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Date;
 
+import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.comboBox.MyComboBox;
 import ui.common.date.DateChooser;
@@ -257,8 +258,8 @@ public class GameDataPanel extends BottomPanel {
 	public void addComboBox() {
 		box1 = new MyComboBox(Constants.ALL_TEAM_NAMES, box1X, box1Y, boxWidth, boxHeight);
 		box2 = new MyComboBox(Constants.ALL_TEAM_NAMES, box2X, box2Y, boxWidth, boxHeight);
-		box1.setDarkColor();
-		box2.setDarkColor();
+		box1.setBGColor(UIConfig.DARK_BUTTON_COLOR);
+		box2.setBGColor(UIConfig.DARK_BUTTON_COLOR);
 		this.add(box1);
 		this.add(box2);
 		AcListener acLis = new AcListener();

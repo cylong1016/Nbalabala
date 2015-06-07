@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 
 import po.TeamSeasonPO;
 import ui.Images;
+import ui.MyFont;
 import ui.UIConfig;
 import ui.common.SeasonInputPanel;
 import ui.common.button.ImgButton;
@@ -51,27 +52,29 @@ public class TeamBottomPanel extends BottomPanel{
 	 * 
 	 * */
 	
-	/** 左边一列三行开始的横坐标 */
-	private static final int LEFT_LABEL_COLUMN_X = 350;
+	/** 中间部分开始的横坐标 */
+	private static final int MID_LABEL_COLUMN_X = 476;
 	/** 右边一列三行开始的横坐标 */
-	private static final int RIGHT_LABEL_COLUMN_X = 655;
+	private static final int RIGHT_LABEL_COLUMN_X = 785;
 	/** 两列label最上面一行的纵坐标 */
 	private static final int FIRST_LABEL_ROW_Y = 10;
-	/** 左边一列“东部联盟1st这一行的Y坐标” */
-	private static final int LEFT_LABEL_SECOND_ROW_Y = 46;
+	/** 联盟排名纵坐标*/
+	private static final int LEAGUE_LABEL_ROW_Y = 28;
+	/** 中间label的纵坐标 */
+	private static final int MID_LABEL_ROW_Y = 53;
 	/** 得分篮板助攻三个排名label的纵坐标 */
-	private static final int SCORE_REBOUND_ASSIST_Y = 102;
+	private static final int SCORE_REBOUND_ASSIST_Y = 97;
 	/** 选项卡按钮的纵坐标 */
 	private static final int TABS_Y = 197;
 	/** 选项卡按钮的横坐标之差*/
 	private static final int TABS_INTER_X = 236;
 	/** 标题中球队名字的大字体 */
-	private static final Font TITLE_NAME_FONT = UIConfig.FONT;	//TODO 标题中球队名字的大字体
+	private static final Font TITLE_NAME_FONT = new Font("微软雅黑",Font.PLAIN,30);	//TODO 标题中球队名字的大字体
 	/** 
 	 * ！！！！！
 	 * ！！！！！
 	 * 四个子界面添加到坐标26,237即为最左边选项卡下沿和左边框的交点 */
-	private static final Rectangle SUBPANEL_BOUNDS = new Rectangle(26,237,946,363);
+	private static final Rectangle SUBPANEL_BOUNDS = new Rectangle(25,237,947,363);
 	
 	private String abbr;
 	private JLabel rankLabel;
@@ -101,7 +104,7 @@ public class TeamBottomPanel extends BottomPanel{
 		this.abbr = abbr;
 		this.setLayout(null);
 		this.fromPanel = panelFrom;
-		seasonChooser.setLocation(500, FIRST_LABEL_ROW_Y);//TODO 日期选择器坐标
+		seasonChooser.setLocation(793,122);//TODO 日期选择器坐标
 		this.add(seasonChooser);
 		
 		addBack();	//返回按钮
@@ -153,18 +156,20 @@ public class TeamBottomPanel extends BottomPanel{
 		JLabel nameLabel = new JLabel(Constants.translateTeamAbbrToLocation(abbr) + " " +
 				Constants.translateTeamAbbr(abbr));
 		nameLabel.setFont(TITLE_NAME_FONT);
-		nameLabel.setBounds(LEFT_LABEL_COLUMN_X, FIRST_LABEL_ROW_Y, 300, 50);	
+		nameLabel.setBounds(MID_LABEL_COLUMN_X, FIRST_LABEL_ROW_Y, 300, 50);	
 								//TODO 300 50这样的size是为了留出足够大的空间，好像没什么负面影响
 		this.add(nameLabel);
 		
 		JLabel leagueLabel = new JLabel(Constants.translateLeague(profileVO.getArea()));
-		leagueLabel.setBounds(LEFT_LABEL_COLUMN_X, LEFT_LABEL_SECOND_ROW_Y, 60, 20);	//TODO "东部联盟"这四个字
-		leagueLabel.setFont(UIConfig.LABEL_PLAIN_FONT);	//TODO 这个字体用在这种地方，放在UIConfig里面是为了和其他界面上类似的内容保持一致
+		leagueLabel.setBounds(372, LEAGUE_LABEL_ROW_Y, 60, 20);	//TODO "东部联盟"这四个字
+		leagueLabel.setFont(MyFont.YH_S);	//TODO 这个字体用在这种地方，放在UIConfig里面是为了和其他界面上类似的内容保持一致
+		leagueLabel.setForeground(MyFont.DARK_GRAY);
 		this.add(leagueLabel);
 
 		TeamSeasonPO seasonVO = teamDetail.getSeasonRecord();
 		winsLosesLabel = new TeamWinsLosesLabel(seasonVO.getWins(), (seasonVO.matchCount - seasonVO.wins));
-		winsLosesLabel.setBounds(LEFT_LABEL_COLUMN_X, 78,300,50);	
+		winsLosesLabel.setBounds(330, MID_LABEL_ROW_Y,300,50);
+//		winsLosesLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		this.add(winsLosesLabel);	
 	}
 	
@@ -172,13 +177,20 @@ public class TeamBottomPanel extends BottomPanel{
 	private void addProfileLabels() {
 		profileLabels = new JLabel[3];
 		TeamProfileVO profileVO = teamDetail.getProfile();
-		String [] profileStr = new String[] {Constants.divisionText + profileVO.getDivisionString(),
-				Constants.homeText + profileVO.getHome(), Constants.sinceText + profileVO.getSince()};
+		String [] profileStr = new String[] {Constants.homeText + profileVO.getHome(),
+				Constants.divisionText + profileVO.getDivisionString(),
+				Constants.sinceText + profileVO.getSince()};
 		for (int i=0;i<3;i++) {
 			profileLabels[i] = new JLabel(profileStr[i]);
 			profileLabels[i].setFont(UIConfig.LABEL_SMALL_FONT);	//TODO 这个字体用在这种地方，放在UIConfig里面是为了和其他界面上类似的内容保持一致
-			profileLabels[i].setBounds(RIGHT_LABEL_COLUMN_X, UIConfig.PROFILE_LABEL_INTER_Y * i,
+			profileLabels[i].setForeground(MyFont.LIGHT_GRAY);
+			if (i == 0) {
+				profileLabels[i].setBounds(MID_LABEL_COLUMN_X, MID_LABEL_ROW_Y, 300, 30);
+			}
+			else{
+				profileLabels[i].setBounds(RIGHT_LABEL_COLUMN_X, MID_LABEL_ROW_Y + UIConfig.PROFILE_LABEL_INTER_Y * (i-1),
 					300, 30);
+			}
 			this.add(profileLabels[i]);
 		}
 	}
@@ -191,26 +203,26 @@ public class TeamBottomPanel extends BottomPanel{
 		rankLabel = new JLabel(Utility.getRankStr(ranks[0]));
 		rankLabel.setFont(UIConfig.LABEL_PLAIN_FONT);	//TODO 这个字体跟总排名的字体是一样的吧
 		rankLabel.setForeground(UIConfig.BLUE_TEXT_COLOR);	//TODO这个颜色我把它命名为“排名蓝”
-		rankLabel.setBounds(419, LEFT_LABEL_SECOND_ROW_Y, 40, 40);
+		rankLabel.setBounds(442, LEAGUE_LABEL_ROW_Y-3, 40, 30);
 		this.add(rankLabel);
 		
 		//TODO 三个Label的位置。至于每个Label内部的“场均得分”，得分数值，和"nd"三个字符串的位置，见TeamScoreReboundAssistLabel.java
 
 		scoreLabel = new TeamScoreReboundAssistLabel(Constants.scoreAvgText, ranks[1]);
-		scoreLabel.setLocation(660, SCORE_REBOUND_ASSIST_Y);
+		scoreLabel.setLocation(MID_LABEL_COLUMN_X, SCORE_REBOUND_ASSIST_Y);
 		this.add(scoreLabel);
 		
 		reboundLabel = new TeamScoreReboundAssistLabel(Constants.reboundAvgText, ranks[2]);
-		reboundLabel.setLocation(660 + interX, SCORE_REBOUND_ASSIST_Y);
+		reboundLabel.setLocation(MID_LABEL_COLUMN_X + interX, SCORE_REBOUND_ASSIST_Y);
 		this.add(reboundLabel);
 		
 		assistLabel = new TeamScoreReboundAssistLabel(Constants.assistAvgText, ranks[3]);
-		assistLabel.setLocation(660 + interX * 2, SCORE_REBOUND_ASSIST_Y);
+		assistLabel.setLocation(MID_LABEL_COLUMN_X + interX * 2, SCORE_REBOUND_ASSIST_Y);
 		this.add(assistLabel);
 	}
 	
 	private void addLogo() {	//TODO logo的位置
-		ImgLabel logoLabel = new ImgLabel(130,6,150,150, TeamLogoCache.getTeamLogo(abbr));
+		ImgLabel logoLabel = new ImgLabel(100,-5,180,180, TeamLogoCache.getTeamLogo(abbr));
 		this.add(logoLabel);
 	}
 	

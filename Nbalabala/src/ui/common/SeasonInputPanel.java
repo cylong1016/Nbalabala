@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.comboBox.MyComboBox;
 import ui.common.panel.BottomPanel;
@@ -23,11 +22,13 @@ public class SeasonInputPanel extends JPanel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 8335944304725379626L;
+	private static final Color BG_COLOR = new Color(36, 135,221);
 	private ImgButton rightUpButton;
 	private ImgButton rightDownButton;
 	private JLabel rpLabel;
 	private MyComboBox box;
 	private int index;// 季后赛还是常规赛
+
 
 	/** 有些界面需要改变赛季的同时刷新，则调用该方法 */
 	private BottomPanel bottomPanel = null;
@@ -37,7 +38,7 @@ public class SeasonInputPanel extends JPanel {
 
 		setLook();
 		addCombobox();
-		setSize(210,30);
+		setSize(150,30);
 		rightDownButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -66,7 +67,7 @@ public class SeasonInputPanel extends JPanel {
 
 		setLook();
 		addCombobox();
-		setSize(210,30);
+		setSize(150,30);
 		rightUpButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -85,25 +86,34 @@ public class SeasonInputPanel extends JPanel {
 
 	private void setLook() {
 		this.setLayout(null);
-		this.setBackground(UIConfig.BUTTON_COLOR);
+		this.setBackground(BG_COLOR);
 		rpLabel = new JLabel(Constants.GAME_SORT_RP[0]);
 		rpLabel.setForeground(Color.white);
 		rightUpButton = new ImgButton("images/SeasonInputUpOff.png", "images/SeasonInputUpOn.png");
 		rightDownButton = new ImgButton("images/SeasonInputDownOff.png", "images/SeasonInputDownOn.png");
-		this.setSize(120, 26);
+		this.setSize(100, 26);
 
-		rpLabel.setBounds(130, 0, 80, 26);
+		rpLabel.setBounds(90, 0, 40, 26);
 		this.add(rpLabel);
 
-		rightUpButton.setBounds(190, 0, 22, 13);
+		rightUpButton.setBounds(125, 0, 22, 13);
 		this.add(rightUpButton);
 
-		rightDownButton.setBounds(190, 14, 22, 13);
+		rightDownButton.setBounds(125, 14, 22, 13);
 		this.add(rightDownButton);
 	}
 
 	public String getSeason() {
-		String start = box.getSelectedItem().toString().substring(0, 4);
+		String start = box.getSelectedItem().toString().substring(0, 2);
+		switch (start.charAt(0)) {
+		case '1':
+		case '0':
+			start = "20" + start;
+			break;
+		default:
+			start = "19" + start;
+			break;
+		}
 		int endInt = Integer.parseInt(start) + 1;
 		String end = String.valueOf(endInt).substring(2, 4);
 		String category = null;
@@ -112,7 +122,6 @@ public class SeasonInputPanel extends JPanel {
 		}else {
 			category = "P";
 		}
-		System.out.println(start + "-" + end + category);
 		return start + "-" + end + category;
 	}
 	
@@ -126,11 +135,9 @@ public class SeasonInputPanel extends JPanel {
 	}
 	
 	
-	
-	
-
 	private void addCombobox() {
-		box = new MyComboBox(Constants.GAME_YEAR, 0, 0, 120, 26);
+		box = new MyComboBox(Constants.GAME_YEAR, 0, 0, 80, 26);
+		box.setBGColor(BG_COLOR);
 		this.add(box);
 	}
 

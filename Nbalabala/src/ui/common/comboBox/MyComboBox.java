@@ -47,6 +47,7 @@ public class MyComboBox extends JComboBox{
 	            protected JButton createArrowButton() {            
 	            	JButton button = new BasicArrowButton(5);   
 	            	button.setOpaque(false);
+	            	button.setBorderPainted(false);
 //	            	button.setBorder(UIConfig.BUTTON_COLOR);
 	            	button.setFocusable(false);
 	            	button.setBackground(UIConfig.BUTTON_COLOR);
@@ -56,25 +57,27 @@ public class MyComboBox extends JComboBox{
 		this.repaint();
 	}
 	
-	public void setDarkColor(){
-		this.setBackground(UIConfig.DARK_BUTTON_COLOR);
+	public void setBGColor(final Color color){
+		this.setBackground(color);
 		this.setUI(new BasicComboBoxUI() {
             public void installUI(JComponent comboBox) {
                 super.installUI(comboBox);
                 listBox.setOpaque(false);
                 
                 listBox.setSelectionBackground(Color.white);
-                listBox.setSelectionForeground(UIConfig.DARK_BUTTON_COLOR);
+                listBox.setSelectionForeground(color);
             }
             
             protected JButton createArrowButton() {            
             	JButton button = new BasicArrowButton(5);   
             	button.setOpaque(false);
+            	button.setBorder(BorderFactory.createEmptyBorder()); // 去掉按钮的边框
 //            	button.setBorder(UIConfig.BUTTON_COLOR);
             	button.setFocusable(false);
-            	button.setBackground(UIConfig.DARK_BUTTON_COLOR);
+            	button.setBackground(color);
             	return button;        
             	}   
         });
 	}
+	
 }
