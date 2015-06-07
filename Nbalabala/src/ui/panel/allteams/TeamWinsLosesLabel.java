@@ -45,7 +45,7 @@ public class TeamWinsLosesLabel extends JLabel{
 		JLabel losesTextLabel = new JLabel(Constants.losesText);
 		losesTextLabel.setBounds(115, 19, 25, 25);
 		losesTextLabel.setOpaque(false);
-		losesLabel.setFont(UIConfig.LABEL_SMALL_FONT);
+		losesTextLabel.setFont(UIConfig.LABEL_SMALL_FONT);
 		this.add(losesTextLabel);
 	}
 	
