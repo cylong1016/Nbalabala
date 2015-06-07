@@ -76,7 +76,7 @@ public class TeamBottomPanel extends BottomPanel{
 	private String abbr;
 	private JLabel rankLabel;
 	private JLabel[] profileLabels;
-	private TeamWinsLosesLabel winsLosesLabel;	//TODO 为什么胜场数和负场数字体不一样！我不知道！
+	private TeamWinsLosesLabel winsLosesLabel;	
 	private TeamScoreReboundAssistLabel scoreLabel;
 	private TeamScoreReboundAssistLabel reboundLabel;
 	private TeamScoreReboundAssistLabel assistLabel;
@@ -164,7 +164,7 @@ public class TeamBottomPanel extends BottomPanel{
 
 		TeamSeasonPO seasonVO = teamDetail.getSeasonRecord();
 		winsLosesLabel = new TeamWinsLosesLabel(seasonVO.getWins(), (seasonVO.matchCount - seasonVO.wins));
-		winsLosesLabel.setBounds(LEFT_LABEL_COLUMN_X, 78,300,50);	//TODO 几胜几负 不知道为什么两个数字字体居然会不一样
+		winsLosesLabel.setBounds(LEFT_LABEL_COLUMN_X, 78,300,50);	
 		this.add(winsLosesLabel);	
 	}
 	
