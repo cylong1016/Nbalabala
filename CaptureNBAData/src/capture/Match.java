@@ -225,11 +225,11 @@ public class Match extends NBAData {
 	/**
 	 * 读取每个球员的比赛信息
 	 * @param reader 
-	 * @param visitor 客场球队名缩写
+	 * @param road 客场球队名缩写
 	 * @param home 主场球队名缩写
      * @version 2015年5月28日  下午3:45:12
      */
-	private void capturePlayerMatch(BufferedReader reader, String visitor, String home) {
+	private void capturePlayerMatch(BufferedReader reader, String road, String home) {
     	String BASIC_BOX_SCORE_STATS = "Basic Box Score Stats"; // 球员比赛数据表格的表头
     	char homeOrRoad = 'R'; // R:客场、H:主场
     	String reserves = "Reserves"; // 候补球员的表头
@@ -259,8 +259,8 @@ public class Match extends NBAData {
 						if(Pattern.matches("</tr>", temp)) { // 一个球员的数据读取完毕
 							playerMatch.add(String.valueOf(homeOrRoad)); // 主场或者客场
 							playerMatch.add(String.valueOf(isStarter)); // 是否先发
-							if(homeOrRoad == 0) {
-								playerMatch.add(visitor);
+							if(homeOrRoad == 'R') {
+								playerMatch.add(road);
 							} else {
 								playerMatch.add(home);
 							}
