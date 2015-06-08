@@ -31,6 +31,15 @@ public interface LiveBLService {
 	/** 检查页面从上一次检查更新到现在有无更新 */
 	public boolean isAnythingNew();
 	
+	/** 得到客场球队名 */
+	public String getRoadName();
+	/** 得到客场球缩写 */
+	public String getRoadAbbr();
+	/** 得到主场球队名 */
+	public String getHomeName();
+	/** 得到主场球缩写 */
+	public String getHomeAbbr();
+	
 	/** 获取客场球员的记录，PO里面要有所有页面上能爬到的属性 */
 	public ArrayList<MatchPlayerPO> getRoadPlayerRecords();
 	
