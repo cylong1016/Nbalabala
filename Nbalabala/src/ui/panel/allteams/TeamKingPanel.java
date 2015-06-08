@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ui.Images;
+import ui.UIConfig;
 import ui.common.button.TabButton;
 import ui.common.label.KingLabel;
 import ui.common.panel.BottomPanel;
@@ -87,6 +88,7 @@ public class TeamKingPanel extends BottomPanel{
 				changeKingLabel(kings);
 			}
 		});
+		scoreTab.setFont(UIConfig.SECOND_LEVEL_TAB_FONT);
 		scoreTab.setLocation(29, 3);
 		this.add(scoreTab);
 		
@@ -103,6 +105,7 @@ public class TeamKingPanel extends BottomPanel{
 			}
 		});
 		reboundTab.setLocation(325, 3);
+		reboundTab.setFont(UIConfig.SECOND_LEVEL_TAB_FONT);
 		this.add(reboundTab);
 		
 		assistTab = new TabButton(Constants.assistAvgText, Images.TEAM_SECOND_LEVEL_TAB_MOVE_ON, Images.TEAM_SECOND_LEVEL_TAB_CHOSEN);
@@ -118,6 +121,7 @@ public class TeamKingPanel extends BottomPanel{
 			}
 		});
 		assistTab.setLocation(622, 3);
+		assistTab.setFont(UIConfig.SECOND_LEVEL_TAB_FONT);
 		this.add(assistTab);
 	}
 }

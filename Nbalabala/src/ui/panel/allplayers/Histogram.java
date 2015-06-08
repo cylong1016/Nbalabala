@@ -10,6 +10,7 @@ import java.text.DecimalFormat;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ui.MyFont;
 import ui.UIConfig;
 
 /**
@@ -25,9 +26,9 @@ public class Histogram extends JPanel {
 	/** 整个panel的大小 */
 	private Dimension size = new Dimension(150, 150);
 	/** 面板下面的名称的大小，就是nameLabel */
-	private Dimension nameLabelSize = new Dimension(size.width, 25);
+	private Dimension nameLabelSize = new Dimension(size.width, 30);
 	/** nameLabel的字体 */
-	private Font nameFont = new Font("黑体", Font.PLAIN, 15);
+	private Font nameFont = MyFont.YH_S;
 	/** 每一条柱最大高度 */
 	private int maxHeight = size.height - nameLabelSize.height - 20;
 	/** 每条柱的间距还有和边框的间距 */
@@ -102,7 +103,8 @@ public class Histogram extends JPanel {
 		nameLabel.setOpaque(true);
 		nameLabel.setFont(nameFont);
 		nameLabel.setPreferredSize(nameLabelSize);
-		nameLabel.setBackground(new Color(230, 230, 230, 90));
+		nameLabel.setBackground(new Color(246, 246, 246));
+		nameLabel.setForeground(MyFont.BLACK_GRAY);
 		this.add(nameLabel, BorderLayout.SOUTH);
 	}
 
@@ -119,7 +121,7 @@ public class Histogram extends JPanel {
 		g.fillRect(interval * 2 + width, avgY, width, avgH);
 
 		// 画数字
-		g.setColor(Color.BLACK);
+		g.setColor(MyFont.DARK_GRAY);
 		DecimalFormat df;
 		if (maxData == 1) {
 			df = UIConfig.PERCENT_FORMAT;
@@ -147,6 +149,7 @@ public class Histogram extends JPanel {
 			DecimalFormat df = UIConfig.FORMAT;
 			JLabel numLabel = new JLabel(df.format(num), JLabel.CENTER);
 			numLabel.setPreferredSize(new Dimension(width, 15));
+			numLabel.setHorizontalAlignment(JLabel.CENTER);
 			this.add(numLabel, BorderLayout.NORTH);
 		}
 		

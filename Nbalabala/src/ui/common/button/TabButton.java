@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -81,6 +83,10 @@ public class TabButton extends JButton{
 		}
 		g.setFont(font);
 		g.setColor(Color.WHITE);
+		// 去除文字的锯齿
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		
 		g.drawString(text, textX, textY);
 	}
 	
@@ -95,7 +101,7 @@ public class TabButton extends JButton{
 		label.setFont(font);
 		Dimension textSize = label.getPreferredSize();
 		textX = (int)(width - textSize.getWidth()) / 2;
-		textY = (int)(height - textSize.getHeight() / 2) - 3;
+		textY = (int)(height - textSize.getHeight() / 2);
 	}
 	
 	class MouseHandler extends MouseAdapter{

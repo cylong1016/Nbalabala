@@ -1,6 +1,7 @@
 package ui.panel.allteams;
 
 import po.TeamSeasonPO;
+import ui.UIConfig;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.panel.allplayers.ContrastDiagram;
@@ -22,7 +23,7 @@ public class TeamSeasonPanel extends BottomPanel{
 		super();
 		table = new OneTeamDataTable();
 		BottomScrollPane scrollPane = new BottomScrollPane(table);
-		scrollPane.setBounds(25, 200, 888, 140);
+		scrollPane.setBounds(UIConfig.RELA_X, 200, 888, 140);
 		this.add(scrollPane);
 	}
 	
@@ -46,7 +47,7 @@ public class TeamSeasonPanel extends BottomPanel{
 		if (cd == null) {
 			/* 球隊的场均得分、助攻、篮板、 罚球命中率、三分命中率的平均值 */
 			cd = new ContrastDiagram(fivePlayersData, fiveArgsAvg, highestThree, Constants.teamAvgText);
-			cd.setBounds(25, 80, 888, 160);		//TODO y坐标
+			cd.setBounds(UIConfig.RELA_X, 16, UIConfig.TABLE_WID, 160);		//TODO y坐标
 			this.add(cd);
 			cd.updateUI();
 			cd.repaint();

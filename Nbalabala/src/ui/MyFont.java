@@ -16,14 +16,18 @@ import java.io.File;
 
 public class MyFont{
 	
-	public static Font Hiragino;
+	public static Font HiraginoXS;
+	public static Font HiraginoS;
+	public static Font HiraginoM;
 	public static Font HiraginoB;
 	static{
 		try {
 	        java.io.FileInputStream fi = new java.io.FileInputStream(new File("Hiragino.ttf"));
 	        java.io.BufferedInputStream fb = new java.io.BufferedInputStream(fi);
 	        Font nf = Font.createFont(Font.TRUETYPE_FONT, fb);
-	        Hiragino = nf.deriveFont(Font.PLAIN, 12);
+	        HiraginoXS = nf.deriveFont(Font.PLAIN, 12);
+	        HiraginoS = nf.deriveFont(Font.PLAIN, 14);
+	        HiraginoM = nf.deriveFont(Font.PLAIN, 16);
 	        HiraginoB = nf.deriveFont(Font.PLAIN, 22);
 	      }
 	      catch (Exception e) {
@@ -43,7 +47,7 @@ public class MyFont{
 	public static final Font YT_XL = new Font("方正姚体", Font.PLAIN, 36);
 	 
 	public static final Font Arial_S = new Font("ArialMT", Font.PLAIN, 12);
-	public static final Font Arial_B = new Font("ArialMT", Font.PLAIN, 13);
+	public static final Font Arial_B = new Font("ArialMT", Font.PLAIN, 14);
 	public static final Font Arial_XL = new Font("ArialMT", Font.PLAIN, 22);
 	
 	public static final Font YH_XS = new Font("微软雅黑", Font.PLAIN, 12);

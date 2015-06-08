@@ -90,13 +90,13 @@ public class KingLabel extends JLabel{
 			propertyLabel.setText(UIConfig.FORMAT.format(vo.getData()));
 			nameLabel.setText(Utility.shortenName(vo.getName()));
 			positionLabel.setText(vo.getPosition() + " / ");
-			rankLabel.setText(String.valueOf(vo.getOverallRank()));
+			rankLabel.setText(String.valueOf(vo.getOverallRank() + Utility.getRankEnd(vo.getOverallRank())));
 			
 			int textX = (int)(TOP_ONE_LABEL_X + positionLabel.getPreferredSize().getWidth());
-			textLabel.setLocation(textX, TOP_ONE_LAST_LINE_Y);
+			textLabel.setLocation(textX-10, TOP_ONE_LAST_LINE_Y);
 			
 			int arrowX = (int)(textX + textLabel.getPreferredSize().getWidth());
-			arrowImgLabel.setLocation(arrowX, TOP_ONE_LAST_LINE_Y);
+			arrowImgLabel.setLocation(arrowX+8, TOP_ONE_LAST_LINE_Y+15);
 			
 			int rankX = arrowX + Images.ARROW_ICON.getIconWidth();
 			rankLabel.setLocation(rankX, TOP_ONE_LAST_LINE_Y);
@@ -104,11 +104,11 @@ public class KingLabel extends JLabel{
 			portraitLabel.setImage(PlayerImageCache.getPortraitByName(playerName));
 			propertyLabel.setText(UIConfig.FORMAT.format(vo.getData()));
 			nameLabel.setText(Utility.trimName(playerName));
-			positionLabel.setText(vo.getPosition());
-			rankLabel.setText(String.valueOf(vo.getOverallRank()));
+			positionLabel.setText(vo.getPosition() + " / ");
+			rankLabel.setText(String.valueOf(vo.getOverallRank() + Utility.getRankEnd(vo.getOverallRank())));
 			
 			int arrowX = ELSE_LABEL_X + (int)(positionLabel.getPreferredSize().getWidth());
-			arrowImgLabel.setLocation(arrowX, ELSE_LAST_LINE_Y);
+			arrowImgLabel.setLocation(arrowX - 3, ELSE_LAST_LINE_Y + 5);
 			
 			int rankX = arrowX + Images.ARROW_ICON.getIconWidth();
 			rankLabel.setLocation(rankX, ELSE_LAST_LINE_Y);
@@ -178,7 +178,7 @@ public class KingLabel extends JLabel{
 			this.add(positionLabel);
 			
 			int arrowX = ELSE_LABEL_X + (int)(positionLabel.getPreferredSize().getWidth());
-			arrowImgLabel.setBounds(arrowX, ELSE_LAST_LINE_Y, 20, 20);
+			arrowImgLabel.setBounds(arrowX - 3, ELSE_LAST_LINE_Y + 5, 20, 20);
 			this.add(arrowImgLabel);
 			
 			int rankX = arrowX + Images.ARROW_ICON.getIconWidth();

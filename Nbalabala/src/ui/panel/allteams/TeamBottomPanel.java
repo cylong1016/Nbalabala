@@ -65,15 +65,15 @@ public class TeamBottomPanel extends BottomPanel{
 	/** 得分篮板助攻三个排名label的纵坐标 */
 	private static final int SCORE_REBOUND_ASSIST_Y = 97;
 	/** 选项卡按钮的纵坐标 */
-	private static final int TABS_Y = 197;
+	private static final int TABS_Y = 198;
 	/** 选项卡按钮的横坐标之差*/
-	private static final int TABS_INTER_X = 236;
+	private static final int TABS_INTER_X = 238;
 	/** 标题中球队名字的大字体 */
 	private static final Font TITLE_NAME_FONT = new Font("微软雅黑",Font.PLAIN,30);	//TODO 标题中球队名字的大字体
 	/** 
 	 * ！！！！！
 	 * ！！！！！
-	 * 四个子界面添加到坐标26,237即为最左边选项卡下沿和左边框的交点 */
+	 * 四个子界面添加到坐标25,237即为最左边选项卡下沿和左边框的交点 */
 	private static final Rectangle SUBPANEL_BOUNDS = new Rectangle(25,237,947,363);
 	
 	private String abbr;

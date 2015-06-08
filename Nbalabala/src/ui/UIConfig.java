@@ -75,9 +75,9 @@ public class UIConfig {
 	/*----------------------------表格配置--------------------------------*/
 	/*----------------------------柱状图配置--------------------------------*/
 	/** 平均的柱状图颜色 */
-	public static final Color HIST_AVG_COLOR = new Color(41, 80, 160);
+	public static final Color HIST_AVG_COLOR = new Color(206, 206, 206);
 	/** 球员的柱状图颜色 */
-	public static final Color HIST_PLAYER_COLOR = new Color(243, 196, 72);
+	public static final Color HIST_PLAYER_COLOR = new Color(56, 167, 229);
 	/** 第一名的柱子颜色 */
 	public static final Color HIST_FIRST_COLOR = new Color(236, 31, 34);
 	/** 第二名 */
@@ -94,9 +94,9 @@ public class UIConfig {
 	
 	
 	/** 第一级选项卡按钮的字体 */
-	public static final Font FIRST_LEVEL_TAB_FONT = MyFont.Arial_B;
+	public static final Font FIRST_LEVEL_TAB_FONT = MyFont.HiraginoM;
 	/** 第二级选项卡按钮的字体 */
-	public static final Font SECOND_LEVEL_TAB_FONT = new Font("微软雅黑", Font.PLAIN, 12);
+	public static final Font SECOND_LEVEL_TAB_FONT = MyFont.HiraginoS;
 	
 	/** 显示 中锋 等文字的字体 */
 	public static final Font LABEL_PLAIN_FONT = new Font("微软雅黑", Font.PLAIN, 12);
