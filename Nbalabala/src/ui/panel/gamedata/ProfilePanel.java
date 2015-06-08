@@ -76,7 +76,7 @@ public class ProfilePanel extends Panel {
 	
 	public ProfilePanel(){
 		isIni = true;
-		this.setSize(916, 161);
+//		this.setSize(916, 161);
 	}
 	
 	/**
