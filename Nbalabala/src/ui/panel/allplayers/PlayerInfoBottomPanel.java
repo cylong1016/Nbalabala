@@ -17,7 +17,6 @@ import ui.UIConfig;
 import ui.common.SeasonInputPanel;
 import ui.common.button.ImgButton;
 import ui.common.button.TabButton;
-import ui.common.frame.Frame;
 import ui.common.label.ImgLabel;
 import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
