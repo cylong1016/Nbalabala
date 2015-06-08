@@ -1,4 +1,4 @@
-package ui.panel.gamedata;
+package ui.panel.gamedata.live;
 
 import java.awt.Image;
 

@@ -13,7 +13,7 @@ import ui.panel.allteams.TeamBottomPanel;
 import ui.panel.analyse.AnalysePanel;
 import ui.panel.gamedata.GameDataPanel;
 import ui.panel.gamedata.GamePanel;
-import ui.panel.gamedata.LivePanel;
+import ui.panel.gamedata.live.LivePanel;
 import ui.panel.hot.hotFast.HotFastPanel;
 import ui.panel.hot.hotSeason.HotSeasonPlayerPanel;
 import ui.panel.hot.hotSeason.HotSeasonTeamPanel;

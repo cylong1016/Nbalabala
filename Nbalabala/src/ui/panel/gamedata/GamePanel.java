@@ -7,14 +7,10 @@ import java.util.ArrayList;
 import po.MatchPlayerPO;
 import ui.Images;
 import ui.UIConfig;
-import ui.common.UserMouseAdapter;
 import ui.common.button.TabButton;
 import ui.common.panel.Panel;
 import ui.common.table.BottomScrollPane;
-import ui.common.table.BottomTable;
-import ui.controller.MainController;
 import utility.Constants;
-import utility.Utility;
 import vo.MatchDetailVO;
 
 /**
@@ -49,7 +45,7 @@ public class GamePanel extends GameFatherPanel {
 	
 	private void initiate() {
 		matchPro = matchDetail.getProfile();
-		conPanel = new ConPanel(Images.GAME_CON,matchDetail);
+		conPanel = new ConPanel(matchDetail);
 		addButton();
 		initSetTabel();
 	}
@@ -121,67 +117,14 @@ public class GamePanel extends GameFatherPanel {
 		
 	}
 
-	String[] columns;
-	String[][] rowData;
-	BottomScrollPane scroll;
+	private BottomScrollPane scroll;
 
-	// BottomTable table=new BottomTable(rowData,columns);
 	public void setTable(ArrayList<MatchPlayerPO> players) {
-		columns = Constants.matchPlayerHeaders;
-		int size = players.size();
-		int lth = columns.length;
-		rowData = new String[size][lth];
-		for (int i = 0; i < size; i++) {
-			MatchPlayerPO mpVO = players.get(i);
-			rowData[i][0] = Utility.trimName(mpVO.getPlayerName());
-			if (mpVO.isStarter()) {
-				rowData[i][1] = "Y";
-			}else {
-				rowData[i][1] = "N";
-			}
-			rowData[i][2] = mpVO.getTimePlayed();
-			rowData[i][3] = mpVO.getFieldMade() + "";
-			rowData[i][4] = mpVO.getFieldAttempt() + "";
-			rowData[i][5] = mpVO.getThreepointMade() + "";
-			rowData[i][6] = mpVO.getThreepointAttempt() + "";
-			rowData[i][7] = mpVO.getFreethrowMade() + "";
-			rowData[i][8] = mpVO.getFieldAttempt() + "";
-			rowData[i][9] = mpVO.getOffensiveRebound() + "";
-			rowData[i][10] = mpVO.getDefensiveRebound() + "";
-			rowData[i][11] = mpVO.getTotalRebound() + "";
-			rowData[i][12] = mpVO.getAssist() + "";
-			rowData[i][13] = mpVO.getSteal() + "";
-			rowData[i][14] = mpVO.getBlock() + "";
-			rowData[i][15] = mpVO.getTurnover() + "";
-			rowData[i][16] = mpVO.getFoul() + "";
-			rowData[i][17] = mpVO.getScore() + "";
-			rowData[i][18] = mpVO.getPlusMinus() + "";
-		}
-		BottomTable table = new BottomTable(rowData, columns);
-		table.getColumnModel().getColumn(0).setPreferredWidth(170);
-		addListener(table,players);
+		TechTable table = new TechTable(players,GamePanel.this);
+		table.getColumnModel().getColumn(1).setPreferredWidth(170);
 		scroll = new BottomScrollPane(table);
 		scroll.setBounds(25,300,940, 300);
 		this.add(scroll);
 
-	}
-
-	public void addListener(final BottomTable table,final ArrayList<MatchPlayerPO> players) {
-		try {
-			table.addMouseListener(new UserMouseAdapter() {
-
-				public void mouseClicked(MouseEvent e) {
-					if (e.getClickCount() < 2)
-						return;
-					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
-					if (rowI > -1) {
-						MainController.toPlayerInfoPanel(players.get(rowI).getPlayerName(), GamePanel.this);
-					}
-
-				}
-			});
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 }

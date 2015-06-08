@@ -1,9 +1,9 @@
 package ui.panel.gamedata;
 
 import java.awt.Color;
-import java.awt.Image;
 import java.text.DecimalFormat;
 
+import ui.Images;
 import ui.common.label.MyLabel;
 import ui.common.label.Rec;
 import ui.common.panel.BottomPanel;
@@ -26,8 +26,8 @@ public class ConPanel extends BottomPanel {
 	
 	private DecimalFormat df = new DecimalFormat(".0");
 	
-	public ConPanel(Image bg,MatchDetailVO vo) {
-		super(bg);
+	public ConPanel(MatchDetailVO vo) {
+		super(Images.GAME_CON);
 		this.vo = vo;
 		this.setBounds(22, 292, 952, 309);
 		addLabel();
