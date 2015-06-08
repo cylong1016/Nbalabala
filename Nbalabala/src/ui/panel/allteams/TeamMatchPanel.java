@@ -7,6 +7,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import ui.UIConfig;
+import ui.common.label.NavLabel;
 import ui.common.panel.Panel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
@@ -34,6 +36,10 @@ public class TeamMatchPanel extends Panel{
 	
 	public TeamMatchPanel(String teamAbbr) {
 		this.teamAbbr = teamAbbr;
+		
+		NavLabel navLabel = new NavLabel(Constants.gameDate);
+		navLabel.setLocation(UIConfig.RELA_X, 16);
+		this.add(navLabel);
 		
 		//TODO 这里放设置表格外观的代码，表格外观待考究
 		
@@ -69,7 +75,7 @@ public class TeamMatchPanel extends Panel{
 		}
 		matchTable = new BottomTable(content,Constants.teamMatchHeaders);
 		scrollPane = new BottomScrollPane(matchTable);
-		scrollPane.setBounds(28,37,888,278);	//表格在这个子页面中的坐标
+		scrollPane.setBounds(UIConfig.RELA_X,16+40,UIConfig.TABLE_WID,278);	//表格在这个子页面中的坐标
 		this.add(scrollPane);
 		repaint();
 		

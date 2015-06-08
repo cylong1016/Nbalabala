@@ -390,6 +390,9 @@ public class Constants {
 	public static String titleAvgData = " 总数据／平均数据";
 	public static String gameLog = " 比赛日志";
 	
+	public static String lineUp = " 阵容";
+	public static String gameDate = " 比赛日程";
+	
 	public static String translateHeight(String height){
 		return translater.translateHeight(height);
 	}

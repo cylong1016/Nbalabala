@@ -2,6 +2,7 @@ package ui.panel.allteams;
 
 import po.TeamSeasonPO;
 import ui.UIConfig;
+import ui.common.label.NavLabel;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.panel.allplayers.ContrastDiagram;
@@ -23,7 +24,11 @@ public class TeamSeasonPanel extends BottomPanel{
 		super();
 		table = new OneTeamDataTable();
 		BottomScrollPane scrollPane = new BottomScrollPane(table);
-		scrollPane.setBounds(UIConfig.RELA_X, 200, 888, 140);
+		scrollPane.setBounds(UIConfig.RELA_X, 230, UIConfig.TABLE_WID, 140);
+		
+		NavLabel navLabel = new NavLabel(Constants.titleAvgData);
+		navLabel.setLocation(UIConfig.RELA_X, 190);
+		this.add(navLabel);
 		this.add(scrollPane);
 	}
 	

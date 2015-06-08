@@ -5,7 +5,9 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import po.PlayerProfilePO;
+import ui.UIConfig;
 import ui.common.UserMouseAdapter;
+import ui.common.label.NavLabel;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
@@ -26,12 +28,15 @@ public class TeamLineupPanel extends BottomPanel{
 	private BottomTable playerTable;
 	private BottomScrollPane scroll;
 	private ArrayList<PlayerProfilePO> players;
-	private static final Rectangle SCROLL_BOUNDS = new Rectangle(25, 50, 888, 270);//TODO Y坐标随便写的
+	private static final Rectangle SCROLL_BOUNDS = new Rectangle(UIConfig.RELA_X, 16+40, UIConfig.TABLE_WID, 270);//TODO Y坐标随便写的
 	
 	public TeamLineupPanel(ArrayList<PlayerProfilePO> players) {
 		super();
 		this.players = players;
 		
+		NavLabel navLabel = new NavLabel(Constants.lineUp);
+		navLabel.setLocation(UIConfig.RELA_X, 16);
+		this.add(navLabel);
 		setTable();
 	}
 	

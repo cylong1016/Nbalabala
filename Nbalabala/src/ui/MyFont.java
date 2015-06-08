@@ -27,7 +27,7 @@ public class MyFont{
 	        Font nf = Font.createFont(Font.TRUETYPE_FONT, fb);
 	        HiraginoXS = nf.deriveFont(Font.PLAIN, 12);
 	        HiraginoS = nf.deriveFont(Font.PLAIN, 14);
-	        HiraginoM = nf.deriveFont(Font.PLAIN, 16);
+	        HiraginoM = nf.deriveFont(Font.BOLD, 16);
 	        HiraginoB = nf.deriveFont(Font.PLAIN, 22);
 	      }
 	      catch (Exception e) {
