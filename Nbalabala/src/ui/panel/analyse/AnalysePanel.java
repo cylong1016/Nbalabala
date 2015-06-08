@@ -59,7 +59,6 @@ public class AnalysePanel extends BottomPanel{
 			select[i].setLocation(19+116*i, 60);
 			this.add(select[i]);
 			this.add(lastFive);
-//			lastFive.setLocation(41, 146);
 			select[0].setOn();
 		}
 		
