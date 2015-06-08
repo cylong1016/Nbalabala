@@ -28,7 +28,7 @@ public class ImgButton extends JButton {
 		this.setPressedIcon(imageIconPressOn);
 		
 	}
-
+	
 	public ImgButton(String imgPath, String pressOnImgPath) {
 		this(imgPath, 0, 0, pressOnImgPath, pressOnImgPath);
 	}

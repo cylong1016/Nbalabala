@@ -10,8 +10,10 @@ import ui.panel.allplayers.AllPlayersPanel;
 import ui.panel.allplayers.PlayerInfoBottomPanel;
 import ui.panel.allteams.AllTeamsPanel;
 import ui.panel.allteams.TeamBottomPanel;
+import ui.panel.analyse.AnalysePanel;
 import ui.panel.gamedata.GameDataPanel;
 import ui.panel.gamedata.GamePanel;
+import ui.panel.gamedata.LivePanel;
 import ui.panel.hot.hotFast.HotFastPanel;
 import ui.panel.hot.hotSeason.HotSeasonPlayerPanel;
 import ui.panel.hot.hotSeason.HotSeasonTeamPanel;
@@ -55,8 +57,7 @@ public class MainController {
 	/** 进步最快球员界面 */
 	private static HotFastPanel hotFastPanel;
 	/** 球队信息界面 */
-	private static TeamBottomPanel teamBottomPanel;
-	
+	private static TeamBottomPanel teamBottomPanel;	
 	
 	/**
 	 * 初始化主界面
@@ -66,7 +67,8 @@ public class MainController {
 	public static void launch() {
 		frame = new Frame();
 		mainPanel = new MainPanel();
-		frame.setPanel(mainPanel);
+//		frame.setPanel(mainPanel);
+		frame.setPanel(new AnalysePanel("images2.0/analysis/analysisBG.png","LAK","Kobe Byrant"));
 		frame.start();
 	}
 	
@@ -151,7 +153,8 @@ public class MainController {
 	 * @version 2015年3月21日 下午5:03:21
 	 */
 	public static void toOneGamePanel(MatchDetailVO matchDetail, Panel gameData) {
-		gamePanel = new GamePanel("images2.0/games/gamesBG.png", matchDetail, gameData);
+//		gamePanel = new GamePanel("images2.0/games/gamesBG.png", matchDetail, gameData);
+		LivePanel gamePanel = new LivePanel("images2.0/games/gamesBG.png", matchDetail, gameData);
 		frame.setPanel(gamePanel);
 	}
 
@@ -204,6 +207,5 @@ public class MainController {
 		frame.setPanel(hotFastPanel);
 		frame.repaint();
 	}
-	
 }
 

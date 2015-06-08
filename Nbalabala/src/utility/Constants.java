@@ -32,6 +32,8 @@ public class Constants {
 	
 	public static String[] GAME_SORT_RP = {"常规赛","季后赛"};
 	
+	public static String[] LIVE = {"技术统计","文字直播","对比"};
+	
 	/** 无资料的时候显示的提示 */
 	public static final String UNKNOWN = "无资料";
 	
@@ -128,6 +130,8 @@ public class Constants {
 	
 	public static final String[] HOT_COLUMNS = {"名次", "头像", "姓名", "球队", "对手", "位置", "在场时间", "得分", "篮板", "助攻", "盖帽",
 			"抢断"};
+	
+	public static final String[] ANALYSE = {"最后五分钟","生涯数据","球员贡献","球员走向","转会变化"};
 	
 	public static String translateDivision(ScreenDivision division) {
 		return translater.translateTeamDivision(division);

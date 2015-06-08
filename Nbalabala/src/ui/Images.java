@@ -48,4 +48,9 @@ public class Images {
 	
 	public static final Image GAME_CON = new ImageIcon("images2.0/games/GamesCompareBG.png").getImage();
 	
+	public static final Image ANA_ON = new ImageIcon("images2.0/analysis/optionOn.png").getImage();
+	
+	public static final Image ANA_CLICK = new ImageIcon("images2.0/analysis/optionClick.png").getImage();
+
+	public static final Image LIVE_BELOW = new ImageIcon("images2.0/games/liveBG.png").getImage();
 }
