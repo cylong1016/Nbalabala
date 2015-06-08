@@ -110,12 +110,10 @@ public class AllPlayersPanel extends BottomPanel {
 		table.setRowHeight(57);
 		table.setWidth(new int[] { 123, 200, 150, 104, 89, 116 });
 		table.setForeground(Color.WHITE);
-		table.cancelVerticalLines();
-		table.setRealOpaque();
+		table.setContentOpaque();
 		
 		SCROLL = new BottomScrollPane(table);
 		SCROLL.setBounds(101, 160, 802, 365);
-		SCROLL.cancelBgImage();
 		this.add(SCROLL);
 	}
 	
@@ -128,8 +126,7 @@ public class AllPlayersPanel extends BottomPanel {
 		table.setRowHeight(57);
 		table.setWidth(new int[] { 123, 200, 150, 104, 89, 116 });
 		table.setForeground(Color.WHITE);
-		table.cancelVerticalLines();
-		table.setRealOpaque();
+		table.setContentOpaque();
 		
 		for (int i = 0; i < size; i++) {
 			PlayerProfilePO ppVO = players.get(i);

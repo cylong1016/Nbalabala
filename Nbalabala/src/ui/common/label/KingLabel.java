@@ -88,7 +88,7 @@ public class KingLabel extends JLabel{
 			actionPhotoPanel.setImage(PlayerImageCache.getActionImageByName(vo.getName()));
 			
 			propertyLabel.setText(UIConfig.FORMAT.format(vo.getData()));
-			nameLabel.setText(Utility.trimName(vo.getName()));
+			nameLabel.setText(Utility.shortenName(vo.getName()));
 			positionLabel.setText(vo.getPosition() + " / ");
 			rankLabel.setText(String.valueOf(vo.getOverallRank()));
 			
@@ -130,7 +130,7 @@ public class KingLabel extends JLabel{
 			propertyLabel.setLeft();
 			this.add(propertyLabel);
 			
-			nameLabel = new MyLabel(TOP_ONE_LABEL_X, 68, 300, 50, Utility.trimName(vo.getName()));
+			nameLabel = new MyLabel(TOP_ONE_LABEL_X, 68, 300, 50, Utility.shortenName(vo.getName()));
 			nameLabel.setFont(MyFont.YT_L);
 			nameLabel.setLeft();
 			this.add(nameLabel);

@@ -175,8 +175,6 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 		
 		table.setRowHeight(57);
 		table.setForeground(UIConfig.TABLE_HEADER_BACK_COLOR);
-		table.cancelVerticalLines();
-		table.setRealOpaque();
 		int[] cells = new int[12];
 		for(int j = 0; j < cells.length; j++) {
 			cells[j] = cellWidth;
@@ -188,7 +186,6 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 		
 		scroll = new BottomScrollPane(table);
 		scroll.setBounds(90, 260, 810, 320);
-		scroll.cancelBgImage();
 		this.add(scroll);
 		setTable(playerVO);
 		
