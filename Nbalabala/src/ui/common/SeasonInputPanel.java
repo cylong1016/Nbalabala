@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ui.Images;
 import ui.common.button.ImgButton;
 import ui.common.comboBox.MyComboBox;
 import ui.common.panel.BottomPanel;
@@ -89,11 +90,11 @@ public class SeasonInputPanel extends JPanel {
 		this.setBackground(BG_COLOR);
 		rpLabel = new JLabel(Constants.GAME_SORT_RP[0]);
 		rpLabel.setForeground(Color.white);
-		rightUpButton = new ImgButton("images/SeasonInputUpOff.png", "images/SeasonInputUpOn.png");
-		rightDownButton = new ImgButton("images/SeasonInputDownOff.png", "images/SeasonInputDownOn.png");
+		rightUpButton = new ImgButton(Images.SEASON_INPUT_UP_OFF, Images.SEASON_INPUT_UP_ON);
+		rightDownButton = new ImgButton(Images.SEASON_INPUT_DOWN_OFF, Images.SEASON_INPUT_DOWN_ON);
 		this.setSize(100, 26);
 
-		rpLabel.setBounds(90, 0, 40, 26);
+		rpLabel.setBounds(85, 0, 40, 26);
 		this.add(rpLabel);
 
 		rightUpButton.setBounds(125, 0, 22, 13);
