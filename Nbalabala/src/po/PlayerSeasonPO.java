@@ -5,6 +5,8 @@ package po;
 
 import java.sql.Date;
 
+import utility.Constants;
+
 /**
  *
  * @author Issac Ding
@@ -124,8 +126,11 @@ public class PlayerSeasonPO {
 	public double usePercent;
 	public double assistPercent;
 	
-	public PlayerSeasonPO(String name) {
+	public PlayerSeasonPO(String name, String season) {
 		this.name = name;
+		this.season = season;
+		this.teamAbbr = Constants.UNKNOWN;
+		this.position = Constants.UNKNOWN;
 	}
 	
 	public PlayerSeasonPO() {

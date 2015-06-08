@@ -48,12 +48,8 @@ public class TeamQuery implements TeamQueryBLService{
 		}
 		
 		TeamSeasonPO seasonRecord = seasonService.getTeamDataByAbbr(abbr, season);
-		if (seasonRecord == null) {
-			seasonRecord = seasonService.getTeamDataByAbbr(abbr, season);
-		}
-		ArrayList<MatchProfileVO> matches = new MatchQuery().getMatchRecordByTeamAbbrAndSeason(abbr, season); 
+		ArrayList<MatchProfileVO> matches = new MatchQuery().getMatchRecordByTeamAbbrAndSeason(abbr, season);
 		TeamDetailVO detailVO = new TeamDetailVO(profileVO, playerProfiles, seasonRecord, matches);
-		System.out.println(playerProfiles.size());
 		return detailVO;
 	}
 

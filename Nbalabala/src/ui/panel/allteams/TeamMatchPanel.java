@@ -9,6 +9,7 @@ import ui.common.panel.Panel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
 import utility.Constants;
+import utility.Utility;
 import vo.MatchProfileVO;
 
 /**
@@ -48,7 +49,9 @@ public class TeamMatchPanel extends Panel{
 			int firstScore = Integer.parseInt(scoresStr[0]);
 			int secondScore = Integer.parseInt(scoresStr[0]);
 			
-			if (teams[0].equals(teamAbbr)) {
+			String oldAbbr = Utility.getOldAbbr(vo.getSeason(), teamAbbr);
+			
+			if (teams[0].equals(oldAbbr)) {
 				content[i][1] = Constants.translateTeamAbbr(teams[1]);	
 				if (firstScore > secondScore) content[i][2] = Constants.winsText;
 				else content[i][2] = Constants.losesText;

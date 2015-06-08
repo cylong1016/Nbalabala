@@ -354,10 +354,10 @@ public class SeasonData implements SeasonDataService {
 		checkAndReadTeamSeasonData(season);
 		HashMap<String, PlayerSeasonPO> playerRecords = allPlayerRecords.get(season);
 		if (playerRecords == null) {
-			return new PlayerSeasonPO(playerName);
+			return new PlayerSeasonPO(playerName, season);
 		}
 		PlayerSeasonPO record = playerRecords.get(playerName);
-		if (record == null) return new PlayerSeasonPO(playerName); 
+		if (record == null) return new PlayerSeasonPO(playerName, season); 
 		else return record;
 	}
 	
@@ -369,8 +369,8 @@ public class SeasonData implements SeasonDataService {
 		abbr = Utility.getOldAbbr(season, abbr);
 		checkAndReadTeamSeasonData(season);
 		HashMap<String, TeamSeasonPO> teamRecords = allTeamRecords.get(season);
-		if (teamRecords == null) {
-			return null;
+		if (teamRecords == null || teamRecords.get(abbr) == null) {
+			return new TeamSeasonPO(abbr, season);
 		}
 		return teamRecords.get(abbr);
 	}
@@ -437,6 +437,7 @@ public class SeasonData implements SeasonDataService {
 		checkAndReadTeamSeasonData(season);
 		ArrayList<TeamSeasonPO> result = new ArrayList<TeamSeasonPO>();
 		ScreenDivision league = Constants.getAreaByAbbr(abbr);
+		if (allTeamRecords.get(season) == null) return result;
 		Iterator<TeamSeasonPO> itr = allTeamRecords.get(season).values().iterator();
 		while(itr.hasNext()) {
 			TeamSeasonPO vo = itr.next();
