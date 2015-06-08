@@ -1,11 +1,18 @@
 package ui.panel.allplayers;
 
+import java.awt.Color;
 import java.util.ArrayList;
+
+import javax.swing.JLabel;
 
 import po.MatchPlayerPO;
 import po.PlayerSeasonPO;
+import ui.MyFont;
+import ui.UIConfig;
+import ui.common.label.NavLabel;
 import ui.common.panel.Panel;
 import ui.common.table.BottomScrollPane;
+import utility.Constants;
 
 /**
  * 
@@ -24,9 +31,24 @@ public class PlayerInfoBriefPanel extends Panel{
 		addLatestMatchesTable(twoMatches);
 	}
 	
+	/**
+	 * 最近两场比赛
+	 * @param twoMatches
+	 */
 	private void addLatestMatchesTable(ArrayList<MatchPlayerPO> twoMatches) {
+		// 表头
+		JLabel two = new JLabel("2");
+		two.setFont(MyFont.YT_L);
+		two.setForeground(Color.white);
+		two.setBounds(UIConfig.RELA_X + 58, 205, 150, 50);
+		this.add(two);
+		
+		NavLabel navLabel = new NavLabel(Constants.lastestTwo);
+		navLabel.setLocation(UIConfig.RELA_X, 214);
+		this.add(navLabel);
+		
 		BottomScrollPane scrollPane = new OnePlayerMatchTableFactory(twoMatches).getTableScrollPane();
-		scrollPane.setBounds(25, 250, 888, 270); // 表格的位置 
+		scrollPane.setBounds(UIConfig.RELA_X, 254, UIConfig.TABLE_WID, 270); // 表格的位置 
 		this.add(scrollPane);
 	}
 	
@@ -48,7 +70,7 @@ public class PlayerInfoBriefPanel extends Panel{
 										playerSeason.getTotalReboundAvg(), playerSeason.getAssistAvg(),playerSeason.getFreethrowPercent(),
 										playerSeason.getThreePointPercent()};
 		cd = new ContrastDiagram(fivePlayersData, fiveArgsAvg, highestScoreReboundAssist, "球员平均");
-		cd.setBounds(25, 0, 888, 160);
+		cd.setBounds(UIConfig.RELA_X, 16, UIConfig.TABLE_WID, 160);
 		this.add(cd);
 		cd.updateUI();
 		cd.repaint();

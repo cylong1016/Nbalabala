@@ -21,6 +21,7 @@ import ui.panel.hot.hotTodayPlayer.HotTodayPlayerPanel;
 import ui.panel.main.MainPanel;
 import ui.panel.playerData.PlayerDataPanel;
 import ui.panel.teamdata.TeamDataPanel;
+import utility.Utility;
 import vo.MatchDetailVO;
 
 /**
@@ -132,7 +133,7 @@ public class MainController {
 	}
 
 	public static void toTeamBottomPanel(BottomPanel from, String abbr) {
-		teamBottomPanel = new TeamBottomPanel(from, abbr);
+		teamBottomPanel = new TeamBottomPanel(from, Utility.getCurrentAbbr(abbr));
 		frame.setPanel(teamBottomPanel);
 	}
 	
@@ -207,5 +208,12 @@ public class MainController {
 		frame.setPanel(hotFastPanel);
 		frame.repaint();
 	}
+	
+	public static void toGameDetailPanel(int matchID, Panel fromPanel) {
+		gamePanel = new GamePanel(matchID, fromPanel);
+		frame.setPanel(gamePanel);
+		frame.repaint();
+	}
+
 }
 

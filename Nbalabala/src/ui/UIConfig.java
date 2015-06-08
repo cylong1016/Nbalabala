@@ -68,6 +68,10 @@ public class UIConfig {
 	public static final DecimalFormat PERCENT_FORMAT = new DecimalFormat("0.0%");
 	/** 表格每一行的高 */
 	public static final int ROW_HEIGHT = 23;
+	/** 表格的宽度 */
+	public static final int TABLE_WID = 888;
+	/** 表格的相对坐标X */
+	public static final int RELA_X = 29;
 	/*----------------------------表格配置--------------------------------*/
 	/*----------------------------柱状图配置--------------------------------*/
 	/** 平均的柱状图颜色 */
@@ -103,6 +107,8 @@ public class UIConfig {
 	public static final Color ORANGE_TEXT_COLOR = new Color(235,148,24);
 	
 	public static final Color BLUE_TEXT_COLOR = new Color(50, 126, 196);
+	public static final Color DARK_BLUE_TEXT_COLOR = new Color(42, 107, 162);
+	public static final Color NAV_BAR_BLUE_COLOR = new Color(14, 74, 155);
 	
 	/** 所有代表胜利的红色字体的颜色 */
 	public static final Color RED_WIN_COLOR = new Color(190,45,45);

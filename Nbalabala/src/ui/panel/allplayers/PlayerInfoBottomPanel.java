@@ -1,6 +1,7 @@
 package ui.panel.allplayers;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -13,10 +14,12 @@ import po.MatchPlayerPO;
 import po.PlayerProfilePO;
 import po.PlayerSeasonPO;
 import ui.Images;
+import ui.MyFont;
 import ui.UIConfig;
 import ui.common.SeasonInputPanel;
 import ui.common.button.ImgButton;
 import ui.common.button.TabButton;
+import ui.common.frame.Frame;
 import ui.common.label.ImgLabel;
 import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
@@ -40,6 +43,20 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	private static final String BACK_BUTTON_OFF = IMG_URL + "back.png";
 	private static final String BACK_BUTTON_ON = IMG_URL + "backOn.png";
 	private static final String BACK_BUTTON_CLICK = IMG_URL + "back.png";
+	
+	/** 最左边的横坐标 */
+	private static final int LEFT_LABEL_COLUMN_X = 280;
+	/** 中间的横坐标 */
+	private static final int MID_LABEL_COLUMN_X = 351;
+	/** 右边一列三行开始的横坐标 */
+	private static final int RIGHT_LABEL_COLUMN_X = 600;
+	/** 最上面一行的纵坐标 */
+	private static final int FIRST_LABEL_ROW_Y = 23;
+	/** 中间label的纵坐标 */
+	private static final int MID_LABEL_ROW_Y = 63;
+	/** 最下面场均得分篮板助攻的纵坐标*/
+	private static final int BUTTON_LABEL_ROW_Y = 96;
+
 
 	private String name;
 	private PlayerProfilePO profileVO;
@@ -83,7 +100,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		
 		seasonInput = new SeasonInputPanel(this);
 		seasonInput.setSeason(profileVO.toYear);
-		seasonInput.setLocation(515, 255);	//TODO 赛季选择器还没定位置，这里是随便写的
+		seasonInput.setLocation(793,122);	
 		this.add(seasonInput);
 		
 		this.detailVO = playerQuery.getPlayerDetailByName(name, seasonInput.getSeason());
@@ -183,18 +200,19 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	private void addTitles() {
 		PlayerSeasonPO seasonPO = detailVO.getSeasonRecord();
 		
-//		JLabel numLabel = new JLabel(profileVO.getNumber());
-//		numLabel.setForeground(UIConfig.ORANGE_TEXT_COLOR);
-//		numLabel.setHorizontalAlignment(JLabel.RIGHT);
-//		//TODO 球衣号码，那个硕大的橙色的文字的字体和bounds
-//		numLabel.setBounds(280, 23, 50, 50);
-//		this.add(numLabel);
+		JLabel numLabel = new JLabel("12");
+		numLabel.setForeground(UIConfig.ORANGE_TEXT_COLOR);
+		//TODO 球衣号码，那个硕大的橙色的文字的字体和bounds
+		numLabel.setBounds(LEFT_LABEL_COLUMN_X, FIRST_LABEL_ROW_Y, 50, 42);
+		numLabel.setFont(new Font("方正姚体", Font.PLAIN, 50));
+		this.add(numLabel);
 		
 		JLabel nameLabel = new JLabel(name);
 		nameLabel.setOpaque(false);
-		nameLabel.setHorizontalAlignment(JLabel.LEFT);
 		//TODO 球员名字的字体和bounds
-		nameLabel.setBounds(352, 22, 350, 50);
+		nameLabel.setBounds(MID_LABEL_COLUMN_X, FIRST_LABEL_ROW_Y, 350, 30);
+		nameLabel.setFont(MyFont.YT_XL);
+		nameLabel.setForeground(MyFont.BLACK_GRAY);
 		this.add(nameLabel);
 		
 		// 位置有可能是 前锋-中锋 所以宽度不一定，所以队名的位置也不一定
@@ -202,46 +220,60 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 				+ " / ");
 		Dimension preferred = positionLabel.getPreferredSize();
 		positionLabel.setFont(UIConfig.LABEL_PLAIN_FONT);
-		positionLabel.setBounds(351, 63, (int)preferred.getWidth(), (int)preferred.getHeight());
+		positionLabel.setBounds(MID_LABEL_COLUMN_X, MID_LABEL_ROW_Y, (int)preferred.getWidth(), (int)preferred.getHeight());
+		positionLabel.setFont(MyFont.YH_S);
+		positionLabel.setForeground(MyFont.BLACK_GRAY);
 		this.add(positionLabel);
 		
 		// 改变赛季以后teamLabel可能会改变
-		teamLabel = new JLabel(Constants.translateTeamAbbrToLocation(seasonPO.getTeamAbbr()) + 
+		teamLabel = new JLabel(Constants.translateTeamAbbrToLocation(seasonPO.getTeamAbbr()) + " " +
 				Constants.translateTeamAbbr(seasonPO.getTeamAbbr()));
 		teamLabel.setFont(UIConfig.LABEL_PLAIN_FONT);
+		teamLabel.setFont(MyFont.YH_S);
 		teamLabel.setForeground(UIConfig.BLUE_TEXT_COLOR);
-		teamLabel.setBounds((int)preferred.getWidth() + 351, 63, 120, 25);
+		teamLabel.setBounds((int)preferred.getWidth() + 351, 63, 120, 16);
 		this.add(teamLabel);
 	}
 	
+	/**
+	 * 场均得分、篮板、助攻排名
+	 */
 	private void addScoreReboundAssistLabels() {
 		int[] ranks = playerQuery.getScoreReboundAssistRank(name, seasonInput.getSeason());
 		PlayerSeasonPO seasonVO = detailVO.getSeasonRecord();
 		
 		scoreLabel = new PlayerScoreReboundAssistLabel(Constants.scoreAvgText, seasonVO.scoreAvg, ranks[0]);
-		scoreLabel.setLocation(277, 102);
+		scoreLabel.setLocation(LEFT_LABEL_COLUMN_X, BUTTON_LABEL_ROW_Y);
 		this.add(scoreLabel);
 		
 		reboundLabel = new PlayerScoreReboundAssistLabel(Constants.reboundAvgText, 
 				seasonVO.totalReboundAvg, ranks[1]);
-		reboundLabel.setLocation(385, 102);
+		reboundLabel.setLocation(385, BUTTON_LABEL_ROW_Y);
 		this.add(reboundLabel);
 		
 		assistLabel = new PlayerScoreReboundAssistLabel(Constants.assistAvgText, 
 				seasonVO.assistAvg, ranks[2]);
-		assistLabel.setLocation(493, 102);
+		assistLabel.setLocation(493, BUTTON_LABEL_ROW_Y);
 		this.add(assistLabel);
 	}
 
+	/**
+	 * 个人身高体重生日等资料
+	 */
 	private void addProfileLabel() {
+		String birthday = Constants.translateDate(profileVO.getBirthDate());
+		if (birthday != null) {
+			birthday = birthday.replace('/', '-');
+		}
 		String[] profileLabelStr = new String[]{Constants.translateHeight(profileVO.getHeightFoot() + "-" + profileVO.getHeightInch()) + " / " + Constants.translateWeight(profileVO.getWeight()),
-				Constants.birthdayText + "：" + Constants.translateDate(profileVO.getBirthDate()),
+				Constants.birthdayText + "：" + birthday,
 				Constants.veteranText + "：" + (profileVO.getToYear() - profileVO.getFromYear()),
 				Constants.schoolText + "：" + profileVO.getSchool()};
 		for(int i = 0; i < 4; i++) {
 			profileLabel[i] = new MyLabel(profileLabelStr[i]);
-			profileLabel[i].setBounds(588, 20 + i * UIConfig.PROFILE_LABEL_INTER_Y, 250, 16);
+			profileLabel[i].setBounds(RIGHT_LABEL_COLUMN_X, 20 + i * UIConfig.PROFILE_LABEL_INTER_Y, 250, 16);
 			profileLabel[i].setFont(UIConfig.LABEL_SMALL_FONT);
+			profileLabel[i].setForeground(MyFont.LIGHT_GRAY);
 			this.add(profileLabel[i]);
 		}
 	}
@@ -292,7 +324,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	 * @version 2015年3月24日 上午11:17:35
 	 */
 	private void addPortrait() {
-		ImgLabel label = new ImgLabel(53, 0, 200, 160, PlayerImageCache.getPortraitByName(name));
+		ImgLabel label = new ImgLabel(53, -15, 200, 160, PlayerImageCache.getPortraitByName(name));
 		this.add(label);
 	}
 
@@ -301,12 +333,12 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		this.add(currentPanel);
 	}
 	
-//	//TODO 测试代码
-//	public static void main(String[]args) {
-//		Frame frame = new Frame();
-//		MainController.frame = frame;
-//		new PlayerImageCache().loadPortrait();;
-//		frame.setPanel(new PlayerInfoBottomPanel("Kobe Bryant", null));
-//		frame.start();
-//	}
+	//TODO 测试代码
+	public static void main(String[]args) {
+		Frame frame = new Frame();
+		MainController.frame = frame;
+		new PlayerImageCache().loadPortrait();;
+		frame.setPanel(new PlayerInfoBottomPanel("Kobe Bryant$01", null));
+		frame.start();
+	}
 }

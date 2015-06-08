@@ -55,6 +55,9 @@ public class Constants {
 			"进攻篮板","防守篮板","篮板","助攻","抢断","盖帽","失误","犯规","得分"
 	};
 	
+	public static String [] matchPlayerHeaders = new String[] { "球员名", "首发", "在场时间", "投篮命中数", "投篮出手数", "三分命中数", "三分出手数", "罚球命中数", "罚球出手数",
+		"进攻篮板数", "防守篮板数", "总篮板数", "助攻数", "抢断数", "盖帽数", "失误数", "犯规数", "个人得分", "+/-" };
+	
 	/** 所有球员赛季数据中的表格分成四部分，为基本、进攻、防守、高阶 */
 	public static String []basicPlayerHeaders = {"序号","球员名称","所属球队","参赛","先发","在场时间","得分","篮板",
 		"助攻","盖帽","抢断","两双","得分篮板助攻","失误","犯规"};
@@ -94,6 +97,8 @@ public class Constants {
 		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 		{"赛季总计","","","","","","","","","","","","","","",""},
 		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
+	
+	public static String[] teamLineupHeaders = new String[] {"姓名", "位置", "年龄","球龄","身高","体重","生日","毕业学校"};
 	
 	public static final String [] TEAM_SEASON_HEADERS = {"序号", "球队名称", "胜场数", "负场数", "总场数", "胜率", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手",
 		"三分命中率", "罚球命中", "罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "进攻篮板效率", "防守篮板效率",
@@ -139,12 +144,6 @@ public class Constants {
 	
 	public static String translateLeague(ScreenDivision league) {
 		return translater.translateTeamLeague(league);
-	}
-	
-	public static String correctOldAbbr(String old) {
-		if (old.equals("NJN")) return "BRK";
-		else if (old.equals("NOH")) return "NOP";
-		else return old;
 	}
 	
 	public static String getLeagueStringByAbbr(String abbr) {
@@ -386,6 +385,10 @@ public class Constants {
 	
 	public static String regularText = "常规赛";
 	public static String playoffText = "季后赛";
+	
+	public static String lastestTwo = " 最近    场比赛";
+	public static String titleAvgData = " 总数据／平均数据";
+	public static String gameLog = " 比赛日志";
 	
 	public static String translateHeight(String height){
 		return translater.translateHeight(height);

@@ -35,6 +35,15 @@ public class SeasonData implements SeasonDataService {
 	private static HashMap<String, HashMap<String, TeamSeasonPO>> allTeamRecords = 
 			new HashMap<String, HashMap<String, TeamSeasonPO>>();
 	
+//	public SeasonData() {
+//		checkAndReadPlayerSeasonData("2008-09R");
+//		Iterator<PlayerSeasonPO> itr = allPlayerRecords.get("2008-09R").values().iterator();
+//		while(itr.hasNext()) {
+//			PlayerSeasonPO playerSeasonPO = itr.next();
+//			if (playerSeasonPO.teamAbbr.equals("OKC")) System.out.println(playerSeasonPO.name);
+//		}
+//	}
+	
 	/** 保留在内存中的赛季数据的数量，增加这个数值会减少访问数据库，但是会增加内存占用量 */
 	private static int seasonCacheSize = 5;
 	
@@ -354,10 +363,10 @@ public class SeasonData implements SeasonDataService {
 		checkAndReadTeamSeasonData(season);
 		HashMap<String, PlayerSeasonPO> playerRecords = allPlayerRecords.get(season);
 		if (playerRecords == null) {
-			return new PlayerSeasonPO(playerName);
+			return new PlayerSeasonPO(playerName, season);
 		}
 		PlayerSeasonPO record = playerRecords.get(playerName);
-		if (record == null) return new PlayerSeasonPO(playerName); 
+		if (record == null) return new PlayerSeasonPO(playerName, season); 
 		else return record;
 	}
 	
@@ -369,8 +378,8 @@ public class SeasonData implements SeasonDataService {
 		abbr = Utility.getOldAbbr(season, abbr);
 		checkAndReadTeamSeasonData(season);
 		HashMap<String, TeamSeasonPO> teamRecords = allTeamRecords.get(season);
-		if (teamRecords == null) {
-			return null;
+		if (teamRecords == null || teamRecords.get(abbr) == null) {
+			return new TeamSeasonPO(abbr, season);
 		}
 		return teamRecords.get(abbr);
 	}
@@ -388,8 +397,9 @@ public class SeasonData implements SeasonDataService {
 		Iterator<Entry<String, PlayerSeasonPO>> itr = seasonPlayers.entrySet().iterator();
 		while(itr.hasNext()) {
 			PlayerSeasonPO vo = itr.next().getValue();
-			if (vo.teamAbbr.equals(abbr))
+			if (vo.teamAbbr.equals(abbr)) {
 				result.add(vo.name);
+			}
 		}
 		return result;
 	}
@@ -437,6 +447,7 @@ public class SeasonData implements SeasonDataService {
 		checkAndReadTeamSeasonData(season);
 		ArrayList<TeamSeasonPO> result = new ArrayList<TeamSeasonPO>();
 		ScreenDivision league = Constants.getAreaByAbbr(abbr);
+		if (allTeamRecords.get(season) == null) return result;
 		Iterator<TeamSeasonPO> itr = allTeamRecords.get(season).values().iterator();
 		while(itr.hasNext()) {
 			TeamSeasonPO vo = itr.next();

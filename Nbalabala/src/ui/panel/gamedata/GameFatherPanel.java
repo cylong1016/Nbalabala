@@ -66,6 +66,10 @@ public class GameFatherPanel extends BottomPanel {
 		this.repaint();
 	}
 	
+	public GameFatherPanel(String url){
+		super(url);
+	}
+	
 	public String getRank(int i){
 		if(i == 1){
 			return "1st";

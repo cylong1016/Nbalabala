@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import po.TeamSeasonPO;
-import utility.Constants;
+import utility.Utility;
 import blservice.TeamSeasonBLService;
 import data.seasondata.SeasonData;
 import dataservice.SeasonDataService;
@@ -58,8 +58,7 @@ public class TeamSeasonAnalysis implements TeamSeasonBLService {
 
 	/** 根据球队缩写返回其赛季数据 */
 	public TeamSeasonPO getTeamDataByAbbr(String abbr, String season) {
-		abbr = Constants.correctOldAbbr(abbr);
-		return seasonData.getTeamDataByAbbr(abbr, season);
+		return seasonData.getTeamDataByAbbr(Utility.getOldAbbr(season, abbr), season);
 	}
 
 	/** 按球队名排序 */

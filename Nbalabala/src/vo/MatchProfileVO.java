@@ -22,11 +22,14 @@ public class MatchProfileVO {
 	/** 比分,格式为“85-112” */
 	private String score;
 	
+	private int matchID;
+	
 	public MatchProfileVO(MatchProfilePO po) {
 		this.season = po.season;
 		this.time = Constants.translateDate(po.date);
 		this.team = po.roadAbbr + "-" + po.homeAbbr;
 		this.score = po.roadTotalScore + "-" + po.homeTotalScore;
+		this.matchID = po.matchID;
 	}
 
 	public MatchProfileVO(String season, String time, String team, String score, String eachSectionScore) {
@@ -56,5 +59,9 @@ public class MatchProfileVO {
 
 	public String getScore() {
 		return score;
+	}
+	
+	public int getMatchID() {
+		return matchID;
 	}
 }

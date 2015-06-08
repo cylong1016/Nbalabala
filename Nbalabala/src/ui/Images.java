@@ -48,9 +48,19 @@ public class Images {
 	
 	public static final Image GAME_CON = new ImageIcon("images2.0/games/GamesCompareBG.png").getImage();
 	
+<<<<<<< HEAD
 	public static final Image ANA_ON = new ImageIcon("images2.0/analysis/optionOn.png").getImage();
 	
 	public static final Image ANA_CLICK = new ImageIcon("images2.0/analysis/optionClick.png").getImage();
 
 	public static final Image LIVE_BELOW = new ImageIcon("images2.0/games/liveBG.png").getImage();
+=======
+	public static final String SEASON_INPUT_UP_OFF = "images2.0/SeasonInputUpOff.png";
+	
+	public static final String SEASON_INPUT_UP_ON = "images2.0/SeasonInputUpOn.png";
+	
+	public static final String SEASON_INPUT_DOWN_OFF = "images2.0/SeasonInputDownOff.png";
+	
+	public static final String SEASON_INPUT_DOWN_ON = "images2.0/SeasonInputDownOn.png";
+>>>>>>> origin/master
 }

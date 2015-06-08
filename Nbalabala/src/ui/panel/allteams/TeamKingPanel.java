@@ -11,6 +11,7 @@ import ui.common.button.TabButton;
 import ui.common.label.KingLabel;
 import ui.common.panel.BottomPanel;
 import utility.Constants;
+import utility.Utility;
 import vo.KingVO;
 import blservice.TeamQueryBLService;
 
@@ -52,12 +53,13 @@ public class TeamKingPanel extends BottomPanel{
 	
 	public void updateContent(String season) {
 		this.season = season;
+		String oldAbbr = Utility.getOldAbbr(season, abbr);
 		if (state == 0) {
-			changeKingLabel(service.getScoreKings(abbr, season));
+			changeKingLabel(service.getScoreKings(oldAbbr, season));
 		}else if (state == 1) {
-			changeKingLabel(service.getReboundKings(abbr, season));
+			changeKingLabel(service.getReboundKings(oldAbbr, season));
 		}else {
-			changeKingLabel(service.getAssistKings(abbr, season));
+			changeKingLabel(service.getAssistKings(oldAbbr, season));
 		}
 	}
 	
@@ -80,7 +82,7 @@ public class TeamKingPanel extends BottomPanel{
 				scoreTab.setOn();
 				reboundTab.setOff();
 				assistTab.setOff();
-				state = 1;
+				state = 0;
 				KingVO [] kings = service.getScoreKings(abbr, season);
 				changeKingLabel(kings);
 			}
@@ -95,7 +97,7 @@ public class TeamKingPanel extends BottomPanel{
 				scoreTab.setOff();
 				reboundTab.setOn();
 				assistTab.setOff();
-				state = 2;
+				state = 1;
 				KingVO [] kings = service.getReboundKings(abbr, season);
 				changeKingLabel(kings);
 			}
@@ -110,7 +112,7 @@ public class TeamKingPanel extends BottomPanel{
 				scoreTab.setOff();
 				reboundTab.setOff();
 				assistTab.setOn();
-				state = 3;
+				state = 2;
 				KingVO [] kings = service.getAssistKings(abbr, season);
 				changeKingLabel(kings);
 			}

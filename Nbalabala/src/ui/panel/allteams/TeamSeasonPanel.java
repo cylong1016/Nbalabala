@@ -28,9 +28,21 @@ public class TeamSeasonPanel extends BottomPanel{
 	
 	
 	public void updateContent(String season, TeamSeasonPO teamSeason, double [] fiveArgsAvg, double [] highestThree) {
-		double[] fivePlayersData = {teamSeason.getScoreAvg(), teamSeason.getTotalReboundAvg(),
-				teamSeason.getTotalReboundAvg(), teamSeason.getFreethrowPercent(),
-				teamSeason.getThreePointPercent()};
+		double[] fivePlayersData = new double[5];
+		if (teamSeason == null) {
+			fivePlayersData[0] = 0;
+			fivePlayersData[1] = 0;
+			fivePlayersData[2] = 0;
+			fivePlayersData[3] = 0;
+			fivePlayersData[4] = 0;
+		}else {
+			fivePlayersData[0] = teamSeason.getScoreAvg();
+			fivePlayersData[1] = teamSeason.getTotalReboundAvg();
+			fivePlayersData[2] = teamSeason.getTotalReboundAvg();
+			fivePlayersData[3] = teamSeason.getFreethrowPercent();
+			fivePlayersData[4] = teamSeason.getThreePointPercent();
+		}
+		
 		if (cd == null) {
 			/* 球隊的场均得分、助攻、篮板、 罚球命中率、三分命中率的平均值 */
 			cd = new ContrastDiagram(fivePlayersData, fiveArgsAvg, highestThree, Constants.teamAvgText);

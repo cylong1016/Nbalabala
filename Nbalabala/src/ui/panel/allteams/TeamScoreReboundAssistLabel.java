@@ -48,7 +48,7 @@ public class TeamScoreReboundAssistLabel extends JLabel{
 	}
 	
 	public void update(int rank) {
-		rankLabel.setText(Utility.getRankStr(rank));
+		rankLabel.setText(String.valueOf(rank));
 		endLabel.setText(Utility.getRankEnd(rank));
 		endLabel.setBounds(15 + (int)rankLabel.getPreferredSize().getWidth(), 22, 20, 20);
 	}

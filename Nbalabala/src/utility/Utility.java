@@ -15,6 +15,40 @@ public class Utility {
 		return name.substring(0, name.length() - 3);
 	}
 	
+	public static String shortenName(String name) {
+		String trimed = trimName(name);
+		if (trimed.length() <= 13) return trimed;
+		String [] names = trimed.split(" ");
+		if (names.length > 2) {
+			return names[0].charAt(0) + ". " + names[1].charAt(0) + ". " +names[2];
+		}else if (names.length > 1) {
+			return names[0].charAt(0) + ". " + names[1];
+		}else {
+			return trimed;
+		}
+	}
+	
+	public static String getCurrentAbbr(String oldAbbr) {
+		switch (oldAbbr) {
+		case "CHA":
+			return "CHO";
+		case "CHH":
+		case "NOH":
+		case "NOK":
+			return "NOP";
+		case "WSB":
+			return "WAS";
+		case "VAN":
+			return "MEM";
+		case "SEA":
+			return "OKC";
+		case "NJN":
+			return "BRK";
+		default:
+			return oldAbbr;
+		}
+	}
+	
 	/** 考虑球队改名的情况，根据赛季追溯球队的缩写 */
 	public static String getOldAbbr(String season, String abbr) {
 		int startYear = Integer.parseInt(season.substring(0, 4));

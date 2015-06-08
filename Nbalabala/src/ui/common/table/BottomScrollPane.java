@@ -24,8 +24,8 @@ public class BottomScrollPane extends JScrollPane {
 	/** serialVersionUID */
 	private static final long serialVersionUID = -6211694438630784736L;
 	
-	/** 背景图片 */
-	private Image bgImage = new ImageIcon("images/tableBG.png").getImage();
+//	/** 背景图片 */
+//	private Image bgImage = new ImageIcon("images/tableBG.png").getImage();
 	JTable table;
 	
 	public BottomScrollPane(JTable table) {
@@ -45,17 +45,17 @@ public class BottomScrollPane extends JScrollPane {
 	 */
 	protected void initScrollPane(JTable table) {
 		
-		//设置背景图片
-		JViewport view = new JViewport(){
-			/** serialVersionUID */
-			private static final long serialVersionUID = 6019924568637393827L;
-
-			public void paintComponent(Graphics g){
-				super.paintComponent(g);
-				g.drawImage(bgImage, 0, 0, null);
-			}
-		};
-		this.setViewport(view);
+//		//设置背景图片
+//		JViewport view = new JViewport(){
+//			/** serialVersionUID */
+//			private static final long serialVersionUID = 6019924568637393827L;
+//
+//			public void paintComponent(Graphics g){
+//				super.paintComponent(g);
+//				g.drawImage(bgImage, 0, 0, null);
+//			}
+//		};
+//		this.setViewport(view);
 		
 		this.setSize(UIConfig.TABLE_DIMEN); // ScrollPane的大小，和表格大小无关
 		this.setViewportView(table);	// 装载表格
@@ -88,8 +88,8 @@ public class BottomScrollPane extends JScrollPane {
 	public void setHead(){
 		this.setColumnHeaderView(table.getTableHeader());	// 设置头部（HeaderView部分）
 	}
-	
-	public void cancelBgImage() {
-		bgImage = null;
-	}
+//	
+//	public void cancelBgImage() {
+//		bgImage = null;
+//	}
 }

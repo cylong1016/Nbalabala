@@ -32,7 +32,7 @@ public class PlayerProfilePO {
 	/** 出生日期 */
 	public Date birthDate;
 	/** 毕业学校 */
-	public String school;
+	public String school = " ";
 	
 	public PlayerProfilePO(String name) {
 		this.name = name;

@@ -111,6 +111,11 @@ public class TeamSeasonPO {
 	
 	public TeamSeasonPO() {
 	}
+	
+	public TeamSeasonPO(String abbr, String season) {
+		this.abbr = abbr;
+		this.season = season;
+	}
 
 	public String getAbbr() {
 		return abbr;
@@ -311,5 +316,6 @@ public class TeamSeasonPO {
 	public double getOppoScoreAvg() {
 		return oppoScoreAvg;
 	}
+	
 
 }

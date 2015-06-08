@@ -141,5 +141,17 @@ public class MatchQuery implements MatchQueryBLService{
 		java.sql.Date start = new java.sql.Date(calendar.getTimeInMillis());
 		return getVOsByPOs(matchData.getMatchDetailByDates(start, end));
 	}
+
+	/* (non-Javadoc)
+	 * @see blservice.MatchQueryBLService#getMatchDetailByID()
+	 */
+	@Override
+	public MatchDetailVO getMatchDetailByID(int matchID) {
+		MatchDetailPO po = matchData.getMatchDetailByMatchID(matchID);
+		MatchProfilePO profilePO = po.getMatchProfile();
+		MatchDetailVO vo = new MatchDetailVO(po, 
+				TeamLogoCache.getTeamLogo(profilePO.roadAbbr), TeamLogoCache.getTeamLogo(profilePO.homeAbbr));
+		return vo;
+	}
 	
 }
