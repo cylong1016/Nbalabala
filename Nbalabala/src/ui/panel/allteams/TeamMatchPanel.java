@@ -79,7 +79,7 @@ public class TeamMatchPanel extends Panel{
 				int row = matchTable.rowAtPoint(e.getPoint());
 				if (row >= 0) {
 					int matchID = matches.get(row).getMatchID();
-					MainController.toGameDetailPanel(matchID, TeamMatchPanel.this);
+					MainController.toGameDetailPanel(matchID, (Panel)(getParent()));
 				}
 			}
 		});

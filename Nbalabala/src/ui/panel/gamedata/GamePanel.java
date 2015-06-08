@@ -251,8 +251,7 @@ public class GamePanel extends BottomPanel {
 
 	// BottomTable table=new BottomTable(rowData,columns);
 	public void setTable(ArrayList<MatchPlayerPO> players) {
-		columns = new String[] { "球员名", "首发", "在场时间", "投篮命中数", "投篮出手数", "三分命中数", "三分出手数", "罚球命中数", "罚球出手数",
-				"进攻篮板数", "防守篮板数", "总篮板数", "助攻数", "抢断数", "盖帽数", "失误数", "犯规数", "个人得分" };
+		columns = Constants.matchPlayerHeaders;
 		int size = players.size();
 		int lth = columns.length;
 		rowData = new String[size][lth];
@@ -280,6 +279,7 @@ public class GamePanel extends BottomPanel {
 			rowData[i][15] = mpVO.getTurnover() + "";
 			rowData[i][16] = mpVO.getFoul() + "";
 			rowData[i][17] = mpVO.getScore() + "";
+			rowData[i][18] = mpVO.getPlusMinus() + "";
 		}
 		BottomTable table = new BottomTable(rowData, columns);
 		table.getColumnModel().getColumn(0).setPreferredWidth(170);
