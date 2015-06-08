@@ -313,6 +313,7 @@ public class TeamBottomPanel extends BottomPanel{
 		String season = seasonChooser.getSeason();
 		teamDetail = teamQuery.getTeamDetailByAbbr(abbr, season);
 		if (teamDetail == null) return;
+		TeamSeasonPO seasonPO = teamDetail.getSeasonRecord();
 		
 		if (kingPanel != null)
 			kingPanel.updateContent(season);
@@ -322,11 +323,12 @@ public class TeamBottomPanel extends BottomPanel{
 					teamQuery.getFiveArgsAvg(season), teamQuery.getHighestScoreReboundAssist(season));
 		if (matchPanel != null) matchPanel.updateContent(teamDetail.getMatchRecords());
 		
-		int[] ranks = teamQuery.getRanks(season, season);
+		int[] ranks = teamQuery.getRanks(abbr, season);
 		rankLabel.setText(Utility.getRankStr(ranks[0]));
 		scoreLabel.update(ranks[1]);
 		reboundLabel.update(ranks[2]);
 		assistLabel.update(ranks[3]);
+		winsLosesLabel.update(seasonPO.getWins(), seasonPO.getMatchCount() - seasonPO.getWins());
 	}
 	
 	//TODO 测试代码

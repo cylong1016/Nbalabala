@@ -28,6 +28,27 @@ public class Utility {
 		}
 	}
 	
+	public static String getCurrentAbbr(String oldAbbr) {
+		switch (oldAbbr) {
+		case "CHA":
+			return "CHO";
+		case "CHH":
+		case "NOH":
+		case "NOK":
+			return "NOP";
+		case "WSB":
+			return "WAS";
+		case "VAN":
+			return "MEM";
+		case "SEA":
+			return "OKC";
+		case "NJN":
+			return "BRK";
+		default:
+			return oldAbbr;
+		}
+	}
+	
 	/** 考虑球队改名的情况，根据赛季追溯球队的缩写 */
 	public static String getOldAbbr(String season, String abbr) {
 		int startYear = Integer.parseInt(season.substring(0, 4));

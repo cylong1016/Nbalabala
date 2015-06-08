@@ -139,12 +139,6 @@ public class Constants {
 		return translater.translateTeamLeague(league);
 	}
 	
-	public static String correctOldAbbr(String old) {
-		if (old.equals("NJN")) return "BRK";
-		else if (old.equals("NOH")) return "NOP";
-		else return old;
-	}
-	
 	public static String getLeagueStringByAbbr(String abbr) {
 		return translater.translateTeamLeague(getAreaByAbbr(abbr));
 	}

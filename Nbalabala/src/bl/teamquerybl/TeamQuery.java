@@ -6,6 +6,7 @@ import po.PlayerProfilePO;
 import po.PlayerSeasonPO;
 import po.TeamSeasonPO;
 import utility.Constants;
+import utility.Utility;
 import vo.KingVO;
 import vo.MatchProfileVO;
 import vo.TeamDetailVO;
@@ -40,6 +41,8 @@ public class TeamQuery implements TeamQueryBLService{
 		SeasonDataService seasonService = new SeasonData();
 		PlayerDataService playerService = new PlayerData();
 		TeamProfileVO profileVO = new TeamProfileVO(dataService.getTeamProfileByAbbr(abbr));
+		
+		abbr = Utility.getOldAbbr(season, abbr);
 		
 		ArrayList<String> playerNames = seasonService.getPlayerNamesByTeamAbbr(abbr, season);
 		ArrayList<PlayerProfilePO> playerProfiles = new ArrayList<PlayerProfilePO>();
@@ -127,6 +130,7 @@ public class TeamQuery implements TeamQueryBLService{
 	 */
 	@Override
 	public int[] getRanks(String abbr, String season) {
+		abbr = Utility.getOldAbbr(season, abbr);
 		ArrayList<TeamSeasonPO> vos = new SeasonData().getTeamSeasonDataInSameLeague(abbr, season);
 		int [] result = new int[4];
 		if (vos.size() == 0) {
@@ -177,6 +181,7 @@ public class TeamQuery implements TeamQueryBLService{
 	 */
 	@Override
 	public KingVO[] getScoreKings(String abbr, String season) {
+		abbr = Utility.getOldAbbr(season, abbr);
 		KingVO[] result = new KingVO[5];
 		int index = 0;
 		SeasonData seasonData = new SeasonData();
@@ -202,6 +207,7 @@ public class TeamQuery implements TeamQueryBLService{
 	 */
 	@Override
 	public KingVO[] getReboundKings(String abbr, String season) {
+		abbr = Utility.getOldAbbr(season, abbr);
 		KingVO[] result = new KingVO[5];
 		int index = 0;
 		SeasonData seasonData = new SeasonData();
@@ -227,6 +233,7 @@ public class TeamQuery implements TeamQueryBLService{
 	 */
 	@Override
 	public KingVO[] getAssistKings(String abbr, String season) {
+		abbr = Utility.getOldAbbr(season, abbr);
 		KingVO[] result = new KingVO[5];
 		int index = 0;
 		SeasonData seasonData = new SeasonData();

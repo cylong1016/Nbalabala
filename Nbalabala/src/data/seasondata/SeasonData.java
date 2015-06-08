@@ -35,6 +35,15 @@ public class SeasonData implements SeasonDataService {
 	private static HashMap<String, HashMap<String, TeamSeasonPO>> allTeamRecords = 
 			new HashMap<String, HashMap<String, TeamSeasonPO>>();
 	
+//	public SeasonData() {
+//		checkAndReadPlayerSeasonData("2008-09R");
+//		Iterator<PlayerSeasonPO> itr = allPlayerRecords.get("2008-09R").values().iterator();
+//		while(itr.hasNext()) {
+//			PlayerSeasonPO playerSeasonPO = itr.next();
+//			if (playerSeasonPO.teamAbbr.equals("OKC")) System.out.println(playerSeasonPO.name);
+//		}
+//	}
+	
 	/** 保留在内存中的赛季数据的数量，增加这个数值会减少访问数据库，但是会增加内存占用量 */
 	private static int seasonCacheSize = 5;
 	
@@ -388,8 +397,9 @@ public class SeasonData implements SeasonDataService {
 		Iterator<Entry<String, PlayerSeasonPO>> itr = seasonPlayers.entrySet().iterator();
 		while(itr.hasNext()) {
 			PlayerSeasonPO vo = itr.next().getValue();
-			if (vo.teamAbbr.equals(abbr))
+			if (vo.teamAbbr.equals(abbr)) {
 				result.add(vo.name);
+			}
 		}
 		return result;
 	}

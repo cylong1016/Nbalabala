@@ -3,11 +3,14 @@
  */
 package ui.panel.allteams;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import ui.common.panel.Panel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
+import ui.controller.MainController;
 import utility.Constants;
 import utility.Utility;
 import vo.MatchProfileVO;
@@ -27,6 +30,7 @@ public class TeamMatchPanel extends Panel{
 	private BottomTable matchTable;
 	private BottomScrollPane scrollPane;
 	private String teamAbbr;	//己方球队缩写
+	private ArrayList<MatchProfileVO> matches;
 	
 	public TeamMatchPanel(String teamAbbr) {
 		this.teamAbbr = teamAbbr;
@@ -39,6 +43,7 @@ public class TeamMatchPanel extends Panel{
 		if (scrollPane != null) {
 			remove(scrollPane);
 		}
+		matches = matchProfiles;
 		Object[][] content = new Object[matchProfiles.size()][4];
 		for (int i=0;i<matchProfiles.size();i++) {
 			MatchProfileVO vo = matchProfiles.get(i);
@@ -47,7 +52,7 @@ public class TeamMatchPanel extends Panel{
 			String [] teams = vo.getTeam().split("-");
 			String [] scoresStr = vo.getScore().split("-");
 			int firstScore = Integer.parseInt(scoresStr[0]);
-			int secondScore = Integer.parseInt(scoresStr[0]);
+			int secondScore = Integer.parseInt(scoresStr[1]);
 			
 			String oldAbbr = Utility.getOldAbbr(vo.getSeason(), teamAbbr);
 			
@@ -68,7 +73,16 @@ public class TeamMatchPanel extends Panel{
 		this.add(scrollPane);
 		repaint();
 		
-		//TODO 如何单击一场比赛然后跳过去。根据比赛id。逻辑后面再做。
+		matchTable.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() < 2) return;
+				int row = matchTable.rowAtPoint(e.getPoint());
+				if (row >= 0) {
+					int matchID = matches.get(row).getMatchID();
+					MainController.toGameDetailPanel(matchID, TeamMatchPanel.this);
+				}
+			}
+		});
 	}
 
 }

@@ -32,4 +32,7 @@ public interface MatchQueryBLService {
 
 	/** 返回最近一个比赛日的比赛 */
 	public ArrayList<MatchDetailVO> getLatestMatches(); 
+	
+	/** 通过比赛ID查找比赛详情 */
+	public MatchDetailVO getMatchDetailByID(int matchID);
 }

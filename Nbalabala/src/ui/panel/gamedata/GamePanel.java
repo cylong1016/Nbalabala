@@ -41,7 +41,7 @@ public class GamePanel extends BottomPanel {
 	private Panel gameData;
 	private  MatchDetailVO matchDetail;
 	private  MatchProfileVO matchPro;
-	private MatchQueryBLService matchQuery;
+	private MatchQueryBLService matchQuery = new MatchQuery();
 
 	/** 球队中文全称 */
 	private String teamStr1, teamStr2;
@@ -59,13 +59,23 @@ public class GamePanel extends BottomPanel {
 	private TabButton teambt1,teambt2,contrastbt;
 	private ConPanel conPanel;
 	private Boolean isScroll = true;
+	
+	public GamePanel(int matchID, Panel gameData) {
+		super(UIConfig.IMG_PATH_2 + "games/gamesBG.png");
+		this.gameData = gameData;
+		this.matchDetail = matchQuery.getMatchDetailByID(matchID);
+		initiate();
+	}
 
 	public GamePanel(String url, MatchDetailVO matchDetail,Panel gameData) {
 		super(url);
 		this.gameData = gameData;
 		this.matchDetail = matchDetail;
+		initiate();
+	}
+	
+	private void initiate() {
 		matchPro = matchDetail.getProfile();
-		matchQuery = new MatchQuery();
 		conPanel = new ConPanel(Images.GAME_CON,matchDetail);
 		getScore();
 		getTeam();
