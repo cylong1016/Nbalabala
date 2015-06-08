@@ -53,6 +53,7 @@ public class MyFont{
 	public static final Font YH_XS = new Font("微软雅黑", Font.PLAIN, 12);
 	public static final Font YH_S = new Font("微软雅黑", Font.PLAIN, 14);
 	public static final Font YH_B = new Font("微软雅黑", Font.PLAIN, 16);
+	public static final Font YH_L = new Font("微软雅黑", Font.PLAIN, 20);
 	
 	public static final Color BLACK_GRAY = new Color(65, 65, 65);
 	public static final Color DARK_GRAY = new Color(91, 91, 91);

@@ -16,6 +16,7 @@ import ui.UIConfig;
 import ui.common.frame.title.TitlePanel;
 import ui.common.panel.LeftPanel;
 import ui.common.panel.Panel;
+import ui.panel.main.MainPanel;
 
 /**
  * 自定义Frame
@@ -46,8 +47,7 @@ public class Frame extends JFrame {
 		this.add(title, BorderLayout.NORTH); // 添加标题
 		
 		// 左侧边栏
-		leftPanel = new LeftPanel();
-		this.add(leftPanel, BorderLayout.WEST);
+//		leftPanel = new LeftPanel();
 		
 		this.setSize(UIConfig.WIDTH, UIConfig.HEIGHT);
 		this.setLocationRelativeTo(null); // 居中，要在设置大小之后 
@@ -73,7 +73,14 @@ public class Frame extends JFrame {
 		if(currentPanel != null) {
 			this.remove(currentPanel);	// 移出当前界面
 		}
+		if (leftPanel != null) {
+			this.remove(leftPanel);
+		}
 		currentPanel = panel;
+		if (panel.getClass() != MainPanel.class) {
+			leftPanel = new LeftPanel();
+			this.add(leftPanel, BorderLayout.WEST);
+		}
 		this.add(panel);
 		this.setVisible(true);
 	}

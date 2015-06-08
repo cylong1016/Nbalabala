@@ -4,14 +4,19 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Polygon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 
+import ui.Images;
+import ui.MyFont;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
+import ui.common.button.TabButton;
 import ui.common.panel.Panel;
 import ui.controller.MainController;
 import utility.Constants;
@@ -30,7 +35,7 @@ public class MainPanel extends Panel {
 	private static String imgUrl = UIConfig.IMG_PATH + "main/";
 
 	/** 背景图片 */
-	private static Image bgImg = new ImageIcon(imgUrl + "main.png").getImage();
+	private static Image bgImg = Images.HOME_BG;
 	/** 主界面6个按钮的图片 */
 	private Image teamDataImg = new ImageIcon(imgUrl + "teamData.png").getImage();
 	private Image playerDataImg = new ImageIcon(imgUrl + "playerData.png").getImage();
@@ -57,9 +62,20 @@ public class MainPanel extends Panel {
 	private int npoints = 6;
 	/** 鼠标坐标,开始为(0, 0) */
 	private Point mousePoint = new Point();
+	
+	private TabButton allPlayersBtn;
+	private TabButton allTeamsBtn;
+	private TabButton gamesDataBtn;
+	private TabButton playersDataBtn;
+	private TabButton teamsDadaBtn;
+	private TabButton hotBtn;
+	private TabButton analysisBtn;
+	
+	private static final int LEFT_BTN_X = 40;
+	private static final int RIGHT_BTN_X = 284;
 
 	public MainPanel() {
-		MyMouseListener listener = new MyMouseListener();
+//		MyMouseListener listener = new MyMouseListener();
 
 		// 球队数据按钮
 		int[] tdxpoints = {488, 568, 568, 488, 407, 407};
@@ -91,10 +107,87 @@ public class MainPanel extends Panel {
 		int[] hotypoints = {540, 446, 401, 446, 540, 586};
 		hotPolygon = new Polygon(hotxpoints, hotypoints, npoints);
 
-		this.addMouseListener(listener);
-		this.addMouseMotionListener(listener);
+//		this.addMouseListener(listener);
+//		this.addMouseMotionListener(listener);
+		
+		addBtn();
 
 		addFileSelect();
+	}
+
+	/**
+	 * 添加页面按钮
+	 */
+	private void addBtn() {
+		allPlayersBtn = new TabButton(Constants.allPlayers, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		allPlayersBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainController.toAllPlayersPanel();			
+			}
+		});	
+		allPlayersBtn.setLocation(LEFT_BTN_X, 239);
+		allPlayersBtn.setFont(MyFont.YH_L);
+		this.add(allPlayersBtn);
+		
+		allTeamsBtn = new TabButton(Constants.allTeams, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		allTeamsBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainController.toAllTeamsPanel();				
+			}
+		});
+		allTeamsBtn.setLocation(LEFT_BTN_X, 298);
+		allTeamsBtn.setFont(MyFont.YH_L);
+		this.add(allTeamsBtn);
+		
+		gamesDataBtn = new TabButton(Constants.gamesData, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		gamesDataBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainController.toGamePanel();
+			}
+		});
+		gamesDataBtn.setLocation(LEFT_BTN_X, 357);
+		gamesDataBtn.setFont(MyFont.YH_L);
+		this.add(gamesDataBtn);
+		
+		playersDataBtn = new TabButton(Constants.playersData, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		playersDataBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainController.toPlayerPanel();
+			}
+		});
+		playersDataBtn.setLocation(LEFT_BTN_X, 416);
+		playersDataBtn.setFont(MyFont.YH_L);
+		this.add(playersDataBtn);
+		
+		teamsDadaBtn = new TabButton(Constants.teamsData, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		teamsDadaBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainController.toTeamPanel();
+			}
+		});
+		teamsDadaBtn.setLocation(LEFT_BTN_X, 475);
+		teamsDadaBtn.setFont(MyFont.YH_L);
+		this.add(teamsDadaBtn);
+		
+		hotBtn = new TabButton(Constants.hot, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		hotBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainController.toHotPanel();
+			}
+		});
+		hotBtn.setLocation(RIGHT_BTN_X, 416);
+		hotBtn.setFont(MyFont.YH_L);
+		this.add(hotBtn);
+		
+		analysisBtn = new TabButton(Constants.analysis, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		analysisBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO
+			}
+		});
+		analysisBtn.setLocation(RIGHT_BTN_X, 475);
+		analysisBtn.setFont(MyFont.YH_L);
+		this.add(analysisBtn);
 	}
 
 	/**

@@ -53,6 +53,7 @@ public class Images {
 	public static final Image ANA_CLICK = new ImageIcon("images2.0/analysis/optionClick.png").getImage();
 
 	public static final Image LIVE_BELOW = new ImageIcon("images2.0/games/liveBG.png").getImage();
+	
 	public static final String SEASON_INPUT_UP_OFF = "images2.0/SeasonInputUpOff.png";
 	
 	public static final String SEASON_INPUT_UP_ON = "images2.0/SeasonInputUpOn.png";
@@ -60,4 +61,9 @@ public class Images {
 	public static final String SEASON_INPUT_DOWN_OFF = "images2.0/SeasonInputDownOff.png";
 	
 	public static final String SEASON_INPUT_DOWN_ON = "images2.0/SeasonInputDownOn.png";
+	
+	/** 首页的图片  */
+	public static final Image HOME_BG = new ImageIcon("images2.0/main/homeBG.png").getImage();
+	public static final Image HOME_BTN_ON = new ImageIcon("images2.0/main/buttonOn.png").getImage();
+	public static final Image HOME_BTN_CLICK = new ImageIcon("images2.0/main/buttonClick.png").getImage(); 
 }

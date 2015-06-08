@@ -113,6 +113,10 @@ public class TabButton extends JButton{
 			isMouseOn = false;
 			repaint();
 		}
+		public void mousePressed(MouseEvent e){
+			isActive = false;
+			repaint();
+		}
 	}
 	
 	
