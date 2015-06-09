@@ -1,4 +1,4 @@
-package chart;
+package ui.common.jfreechart;
 
 import java.awt.Color;
 import java.awt.Font;

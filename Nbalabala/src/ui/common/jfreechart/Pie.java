@@ -1,4 +1,4 @@
-package chart;
+package ui.common.jfreechart;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
