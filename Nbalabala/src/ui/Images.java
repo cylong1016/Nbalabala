@@ -66,4 +66,6 @@ public class Images {
 	public static final Image HOME_BG = new ImageIcon("images2.0/main/homeBG.png").getImage();
 	public static final Image HOME_BTN_ON = new ImageIcon("images2.0/main/buttonOn.png").getImage();
 	public static final Image HOME_BTN_CLICK = new ImageIcon("images2.0/main/buttonClick.png").getImage(); 
+	public static final Image HOME_BTN_R_ON = new ImageIcon("images2.0/main/rButtonOn.png").getImage();
+	public static final Image HOME_BTN_R_CLICK = new ImageIcon("images2.0/main/rButtonClick.png").getImage();
 }

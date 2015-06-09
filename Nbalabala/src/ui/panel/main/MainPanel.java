@@ -169,7 +169,7 @@ public class MainPanel extends Panel {
 		teamsDadaBtn.setFont(MyFont.YH_L);
 		this.add(teamsDadaBtn);
 		
-		hotBtn = new TabButton(Constants.hot, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		hotBtn = new TabButton(Constants.hot, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK);
 		hotBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainController.toHotPanel();
@@ -179,7 +179,7 @@ public class MainPanel extends Panel {
 		hotBtn.setFont(MyFont.YH_L);
 		this.add(hotBtn);
 		
-		analysisBtn = new TabButton(Constants.analysis, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		analysisBtn = new TabButton(Constants.analysis, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK);
 		analysisBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO
