@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import ui.Images;
 import ui.common.button.TabButton;
 import ui.common.panel.Panel;
+import ui.panel.gamedata.ConPanel;
 import ui.panel.gamedata.GameFatherPanel;
 import utility.Constants;
 import vo.MatchDetailVO;
@@ -27,15 +28,15 @@ public class LivePanel extends GameFatherPanel {
 	private LiveBLService liveService;
 	private ConPanel conPanel;
 	private TechPanel techPanel;
+	private Panel currentPanel;
 
 	public LivePanel(String url, Panel gameData) {
 		super(url);
 		addButton();
 //		liveService = new Live();
-		liveBelow = new LiveBelowPanel(Images.LIVE_BELOW, matchDetail);
-		conPanel = new ConPanel();
-		techPanel = new TechPanel(liveService.getHomePlayerRecords(),liveService.getRoadPlayerRecords(),
-				LivePanel.this);
+		refresh();
+		this.add(techPanel);
+		this.currentPanel = techPanel;
 	}
 
 	public void addButton() {
@@ -54,6 +55,7 @@ public class LivePanel extends GameFatherPanel {
 				tech.setOn();
 				live.setOff();
 				contrastbt.setOff();
+				currentPanel = techPanel;
 				LivePanel.this.remove(liveBelow);
 				LivePanel.this.remove(conPanel);
 				LivePanel.this.add(techPanel);
@@ -65,6 +67,7 @@ public class LivePanel extends GameFatherPanel {
 				tech.setOff();
 				live.setOn();
 				contrastbt.setOff();
+				currentPanel = liveBelow;
 				LivePanel.this.remove(conPanel);
 				LivePanel.this.remove(techPanel);
 				LivePanel.this.add(liveBelow);
@@ -77,6 +80,7 @@ public class LivePanel extends GameFatherPanel {
 				tech.setOff();
 				live.setOff();
 				contrastbt.setOn();
+				currentPanel = conPanel;
 				LivePanel.this.remove(liveBelow);
 				LivePanel.this.remove(techPanel);
 				LivePanel.this.add(conPanel);
@@ -86,7 +90,20 @@ public class LivePanel extends GameFatherPanel {
 	}
 	
 	public void refresh(){
-		
+		if(currentPanel != null) {
+			this.remove(currentPanel);
+		}
+		liveBelow = new LiveBelowPanel(Images.LIVE_BELOW, matchDetail);
+		conPanel = new ConPanel(liveService.getHomeFiveArgs(),liveService.getroadFiveArgs());
+		techPanel = new TechPanel(liveService.getHomePlayerRecords(),liveService.getRoadPlayerRecords(),
+				LivePanel.this);
+		if(currentPanel == conPanel) {
+			this.add(conPanel);
+		} else if(currentPanel == techPanel) {
+			this.add(techPanel);
+		} else{
+			this.add(conPanel);
+		}
 	}
 
 	class ThreadDis extends Thread {

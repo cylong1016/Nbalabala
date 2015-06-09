@@ -57,6 +57,9 @@ public interface LiveBLService {
 	/** 获取当前小节数，如当前第三小节正在进行，返回3 */
 	public int getCurrentSectionCount();
 	
-	/** 长度为5数组，分别是 投篮命中率、三分命中率、罚球命中率、篮板、助攻 */
-	public double [] getFiveArgs();
+	/** 长度为5数组，分别是主队 投篮命中率、三分命中率、罚球命中率、篮板、助攻 */
+	public double [] getHomeFiveArgs();
+	
+	/** 长度为5数组，分别是客队 投篮命中率、三分命中率、罚球命中率、篮板、助攻 */
+	public double [] getroadFiveArgs();
 }

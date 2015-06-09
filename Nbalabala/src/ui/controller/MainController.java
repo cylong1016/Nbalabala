@@ -14,7 +14,6 @@ import ui.panel.analyse.AnalysePanel;
 import ui.panel.gamedata.GameDataPanel;
 import ui.panel.gamedata.GamePanel;
 import ui.panel.gamedata.live.LivePanel;
-
 import ui.panel.hot.hotFast.HotFastPanel;
 import ui.panel.hot.hotSeason.HotSeasonPlayerPanel;
 import ui.panel.hot.hotSeason.HotSeasonTeamPanel;
@@ -155,8 +154,8 @@ public class MainController {
 	 * @version 2015年3月21日 下午5:03:21
 	 */
 	public static void toOneGamePanel(MatchDetailVO matchDetail, Panel gameData) {
-		gamePanel = new GamePanel("images2.0/games/gamesBG.png", matchDetail, gameData);
-//		LivePanel gamePanel = new LivePanel("images2.0/games/gamesBG.png", matchDetail, gameData);
+//		gamePanel = new GamePanel("images2.0/games/gamesBG.png", matchDetail, gameData);
+		LivePanel gamePanel = new LivePanel("images2.0/games/gamesBG.png",gameData);
 		frame.setPanel(gamePanel);
 	}
 
