@@ -18,7 +18,9 @@ public class Test extends JFrame{
 	public static void main(String[] args){
 		String[] name = {"Allen Iverson","James Peter","Kobe Byrant","CYL"};
 		double[] num = {35.4,18.3,26,30.4};
-		BarChart chart = new BarChart(name,num);
+//		BarChart chart = new BarChart(name,num);
+//		LineChart chart = new LineChart(name,name,num);
+		ScatterChart chart = new ScatterChart(num,num);
 		Test frame = new Test();
 		frame.add(chart);
 		frame.setVisible(true);

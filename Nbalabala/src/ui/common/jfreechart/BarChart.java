@@ -19,8 +19,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import ui.common.panel.Panel;
 
 /**
- * 条形图
- * 
+ * 柱状图
  * @author lsy
  * @version 2015年6月2日 下午11:56:19
  */
