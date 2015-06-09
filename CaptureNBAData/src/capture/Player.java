@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,7 +23,7 @@ import java.util.regex.Pattern;
 public class Player extends NBAData {
 	
 	/** 保存球员头像的目录 */
-	private String savePath = "/portrait/";
+	private String savePath = "portrait/";
 	
 	public Player() {
 		this.captureUrl = root + "/players/";
@@ -49,10 +50,10 @@ public class Player extends NBAData {
 			try {
 				input = urlConn.getInputStream();
 				reader = new BufferedReader(new InputStreamReader(input, urlConn.getContentType().equals("text-html; charset=gb2312")?"UTF-8":"gb2312"));
+				String playerDataReg = "<td.*?>(<strong>)?(<a href=\"(?<portrait>/players/.*?(?<nameID>[0-9]{2})\\.html)\">)?(<a href=\"/friv/.*?>)?(?<data>.*?)(</a>)?(\\*)?(</strong>)?</td>";
+				Pattern patternPlayer = Pattern.compile(playerDataReg);
 				String temp = null;
 				while((temp = reader.readLine()) != null) {
-					String playerDataReg = "<td.*?>(<strong>)?(<a href=\"(?<portrait>/players/.*?(?<nameID>[0-9]{2})\\.html)\">)?(<a href=\"/friv/.*?>)?(?<data>.*?)(</a>)?(\\*)?(</strong>)?</td>";
-					Pattern patternPlayer = Pattern.compile(playerDataReg);
 					Matcher matcherPlayer = patternPlayer.matcher(temp);
 					if(matcherPlayer.find()) {
 						String nameID = matcherPlayer.group("nameID");
@@ -63,7 +64,7 @@ public class Player extends NBAData {
 						}
 						if(portraitUrl != null) {
 							// 抓取球员头像
-							capturePlayerPortrait(root + portraitUrl, data);
+							capturePlayerPortrait(getPortrait(root + portraitUrl, data), data);
 						}
 						playerData.add(data);
 					}
@@ -81,6 +82,41 @@ public class Player extends NBAData {
 	}
 
 	/**
+	 * 获取球员头像的URL
+	 * @param playerDitalURL 球员详细信息的url
+	 * @param name 球员名
+	 * @author cylong
+	 * @return 球员头像的完整URL
+	 * @version 2015年6月9日  下午10:34:48
+	 */
+	private String getPortrait(String playerDitalURL, String name) {
+		InputStream input = null;
+		BufferedReader reader = null;
+		HttpURLConnection urlConn = getConn(playerDitalURL);
+		String portraitUrl = null;
+		try {
+			input = urlConn.getInputStream();
+			reader = new BufferedReader(new InputStreamReader(input, urlConn.getContentType().equals("text-html; charset=gb2312")?"UTF-8":"gb2312"));
+			String temp = null;
+			name = name.split("\\$")[0];
+			String portraitReg = "<img.*?src=\"(?<portraitUrl>.*?)\" alt=\"" + name + "\".*?>";
+			Pattern portraitPattern = Pattern.compile(portraitReg);
+			while((temp = reader.readLine()) != null) {
+				Matcher portraitMatcher = portraitPattern.matcher(temp);
+				if(portraitMatcher.find()) {
+					portraitUrl = portraitMatcher.group("portraitUrl");
+					return portraitUrl;
+				}
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return portraitUrl;
+	}
+
+	/**
 	 * 抓取球员的头像
 	 * @param portraitUrl 球员头像的url
 	 * @param name 球员名
@@ -88,29 +124,35 @@ public class Player extends NBAData {
 	 * @version 2015年6月9日  下午8:12:23
 	 */
 	private void capturePlayerPortrait(String portraitUrl, String name) {
-		HttpURLConnection conn = getConn(portraitUrl);
-		InputStream is;
+		System.out.println(portraitUrl);
+		if(portraitUrl == null) {
+			return;
+		}
+		String[] strArr = portraitUrl.split("\\.");
+		String postfix = strArr[strArr.length - 1]; // 最后一个就是图片后缀名
+		HttpURLConnection urlConn = getConn(portraitUrl);
+		InputStream istream;
 		try {
-			is = conn.getInputStream();
-			byte[] bs = new byte[1024];  
-			// 读取到的数据长度  
-			int len;  
-			// 输出的文件流  
-			File sf=new File(savePath);  
-			if(!sf.exists()){  
-				sf.mkdirs();  
-			}  
-			OutputStream os = new FileOutputStream(sf.getPath() + "/" + name);  
-			// 开始读取  
-			while ((len = is.read(bs)) != -1) {  
-				os.write(bs, 0, len);  
-			}  
-			// 完毕，关闭所有链接  
-			os.close();  
-			is.close();  
+			istream = urlConn.getInputStream();
+			byte[] buff = new byte[1024];
+			// 读取到的数据长度
+			int len;
+			// 输出的文件流
+			File saveFile = new File(savePath);
+			if(!saveFile.exists()){
+				saveFile.mkdirs();
+			}
+			OutputStream os = new FileOutputStream(saveFile.getPath() + "/" + name + "." + postfix);
+			// 开始读取
+			while ((len = istream.read(buff)) != -1) {
+				os.write(buff, 0, len);
+			}
+			// 完毕，关闭所有链接
+			os.close();
+			istream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	/**

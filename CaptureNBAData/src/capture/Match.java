@@ -49,11 +49,11 @@ public class Match extends NBAData {
     	try {
     		input = urlConn.getInputStream();
     		reader = new BufferedReader(new InputStreamReader(input, urlConn.getContentType().equals("text-html; charset=gb2312")?"UTF-8":"gb2312"));
+    		// 匹配赛季日期和数据的链接
+    		String reg = "(<td.*?>(<a href=\"(?<href>.*)\">))(?<season>\\d{4}-\\d{2})(</a></td>)";
+    		Pattern pattern = Pattern.compile(reg);
     		String temp = null;
     		while((temp = reader.readLine()) != null) {
-    			// 匹配赛季日期和数据的链接
-    			String reg = "(<td.*?>(<a href=\"(?<href>.*)\">))(?<season>\\d{4}-\\d{2})(</a></td>)";
-    			Pattern pattern = Pattern.compile(reg);
     			Matcher matcher = pattern.matcher(temp);
     			if(matcher.find()) {
     				String href = root + matcher.group("href").replaceAll(".html", "_games.html");
@@ -97,13 +97,13 @@ public class Match extends NBAData {
 		try {
 			input = urlConn.getInputStream();
 			reader = new BufferedReader(new InputStreamReader(input, urlConn.getContentType().equals("text-html; charset=gb2312")?"UTF-8":"gb2312"));
+			String cellReg = "<td.*?>(<a href=\"(?<href>.*)\">)*(?<info>[^<]*)(</a>)*</td>";
+			Pattern patternCell = Pattern.compile(cellReg);
 			String temp = null;
 			while((temp = reader.readLine()) != null) {
 				if(Pattern.matches("<h2.*[^>]>Playoffs</h2>", temp)) { // 检测到季后赛的表
 					regularOrPlayoff = season + "P";
 				}
-				String cellReg = "<td.*?>(<a href=\"(?<href>.*)\">)*(?<info>[^<]*)(</a>)*</td>";
-				Pattern patternCell = Pattern.compile(cellReg);
 				Matcher matcherCell = patternCell.matcher(temp);
 				if(matcherCell.find()) {
 					String info = matcherCell.group("info");
@@ -163,19 +163,19 @@ public class Match extends NBAData {
 		try {
 			input = urlConn.getInputStream();
 			reader = new BufferedReader(new InputStreamReader(input, urlConn.getContentType().equals("text-html; charset=gb2312")?"UTF-8":"gb2312"));
+			String teamNameReg = "<td><a.*[^>]>(?<teamName>[A-Z]*)</a></td>";
+			Pattern patternTeamName = Pattern.compile(teamNameReg);
 			String temp = null;
 			while((temp = reader.readLine()) != null) {
 				if(Pattern.matches("<th.*[^>]>Scoring</th>", temp)) { // 找到Scoring表
 					while((temp = reader.readLine()) != null) {
-						String teamNameReg = "<td><a.*[^>]>(?<teamName>[A-Z]*)</a></td>";
-						Pattern patternTeamName = Pattern.compile(teamNameReg);
 						Matcher matcherTeamName = patternTeamName.matcher(temp);
 						if(matcherTeamName.find()) {
 							String teamName = matcherTeamName.group("teamName");
 							sectionList.add(teamName); // 球队缩写
+							String sectionScoreReg = "<td.*[^>]>(?<score>[0-9]*)</td>";
+							Pattern patternSectionScore = Pattern.compile(sectionScoreReg);
 							while((temp = reader.readLine()) != null) {
-								String sectionScoreReg = "<td.*[^>]>(?<score>[0-9]*)</td>";
-								Pattern patternSectionScore = Pattern.compile(sectionScoreReg);
 								Matcher matcherSectionScore = patternSectionScore.matcher(temp);
 								if(matcherSectionScore.find()) {
 									String score = matcherSectionScore.group("score");
@@ -234,6 +234,8 @@ public class Match extends NBAData {
     	char homeOrRoad = 'R'; // R:客场、H:主场
     	String reserves = "Reserves"; // 候补球员的表头
     	try {
+    		String playerDataReg = "<td.*?>(<a href=.*(?<nameID>[0-9]{2})\\.html\">?>)?(?<playerData>.*?)(</a>)?</td>";
+    		Pattern patternPlayerData = Pattern.compile(playerDataReg);
 			String temp = null;
 			while((temp = reader.readLine()) != null) {
 				// 球员的比赛数据
@@ -245,8 +247,6 @@ public class Match extends NBAData {
 						if(Pattern.matches(".*<th.*>" + reserves + "</th>", temp)) { // 读取到后发球员
 							isStarter = 0;
 						}
-						String playerDataReg = "<td.*?>(<a href=.*(?<nameID>[0-9]{2})\\.html\">?>)?(?<playerData>.*?)(</a>)?</td>";
-						Pattern patternPlayerData = Pattern.compile(playerDataReg);
 						Matcher matcherPlayerData = patternPlayerData.matcher(temp);
 						if(matcherPlayerData.find()) {
 							String nameID = matcherPlayerData.group("nameID");
