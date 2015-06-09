@@ -1,9 +1,12 @@
 package capture;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,6 +20,9 @@ import java.util.regex.Pattern;
  * @version 2015年5月25日 下午1:36:47
  */
 public class Player extends NBAData {
+	
+	/** 保存球员头像的目录 */
+	private String savePath = "/portrait/";
 	
 	public Player() {
 		this.captureUrl = root + "/players/";
@@ -82,9 +88,29 @@ public class Player extends NBAData {
 	 * @version 2015年6月9日  下午8:12:23
 	 */
 	private void capturePlayerPortrait(String portraitUrl, String name) {
-		System.out.println(portraitUrl);
-		System.out.println(name);
-		System.exit(0);
+		HttpURLConnection conn = getConn(portraitUrl);
+		InputStream is;
+		try {
+			is = conn.getInputStream();
+			byte[] bs = new byte[1024];  
+			// 读取到的数据长度  
+			int len;  
+			// 输出的文件流  
+			File sf=new File(savePath);  
+			if(!sf.exists()){  
+				sf.mkdirs();  
+			}  
+			OutputStream os = new FileOutputStream(sf.getPath() + "/" + name);  
+			// 开始读取  
+			while ((len = is.read(bs)) != -1) {  
+				os.write(bs, 0, len);  
+			}  
+			// 完毕，关闭所有链接  
+			os.close();  
+			is.close();  
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
 	}
 
 	/**

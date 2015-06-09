@@ -31,11 +31,15 @@ public class MySQL {
 			if (!conn.isClosed()) {
 				System.out.println("Succeeded connecting to the Database!");
 			}
-			String sql = "TRUNCATE 'extra_time';"
-					+ "TRUNCATE 'match_player';"
-					+ "TRUNCATE 'match_profile';"
-					+ "TRUNCATE 'player_profile';";
-			Statement statement = conn.createStatement(); // 删除需要爬的数据【以前存在的】
+			Statement statement = conn.createStatement();
+			// 删除需要爬的数据【以前存在的】
+			String sql = "TRUNCATE extra_time";
+			statement.execute(sql);
+			sql = "TRUNCATE match_player";
+			statement.execute(sql);
+			sql = "TRUNCATE match_profile";
+			statement.execute(sql);
+			sql = "TRUNCATE player_profile";
 			statement.execute(sql);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
