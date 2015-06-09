@@ -79,7 +79,7 @@ public class TranslaterCN implements Translater{
 	public String translatePosition(String position) {
 		if (position.contains("-")) {
 			String[]s = position.split("-");
-			return getPositionName(s[0] + "-" + s[1]);
+			return getPositionName(s[0]) + "-" + getPositionName(s[1]);
 		}else{
 			return getPositionName(position);
 		}

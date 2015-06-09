@@ -135,7 +135,7 @@ public class KingLabel extends JLabel{
 			nameLabel.setLeft();
 			this.add(nameLabel);
 			
-			positionLabel = new MyLabel(TOP_ONE_LABEL_X, TOP_ONE_LAST_LINE_Y, 60, 50, vo.getPosition() + " / ");
+			positionLabel = new MyLabel(TOP_ONE_LABEL_X, TOP_ONE_LAST_LINE_Y, 100, 50, vo.getPosition() + " / ");
 			positionLabel.setLeft();
 			this.add(positionLabel);
 			
