@@ -3,6 +3,7 @@ package ui.common.panel;
 import java.awt.Color;
 import java.awt.Font;
 
+import ui.MyFont;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.label.ImgLabel;
@@ -150,7 +151,7 @@ public class ScorePanel extends Panel {
 			lb_1[i] = new MyLabel(scoreX_1 + i * inter, labelY_1, scoreWidth, scoreHeight, score1[i]);
 			lb_2[i] = new MyLabel(scoreX_1 + i * inter, labelY_2, scoreWidth, scoreHeight, score2[i]);
 			lb_time[i] = new MyLabel(scoreX_1 + i * inter, labelY_0, scoreWidth, scoreHeight, (1+i)+"");
-			lb_time[i].setForeground(Color.gray);
+			lb_time[i].setForeground(MyFont.LIGHT_GRAY);
 			this.add(lb_1[i]);
 			this.add(lb_2[i]);
 			this.add(lb_time[i]);
@@ -172,7 +173,7 @@ public class ScorePanel extends Panel {
 		lb_2[lth] = new MyLabel(totalScoreX + totalInter * (lth - 4), labelY_2, scoreWidth, scoreHeight,
 				scoreAll[1]);
 		lb_time[lth] = new MyLabel(totalScoreX + totalInter * (lth - 4), labelY_0, scoreWidth, scoreHeight,"总分");
-		Font all = new Font("微软雅黑", 1, 20);
+		Font all =MyFont.YT_S;
 		lb_1[lth].setFont(all);
 		lb_2[lth].setFont(all);
 		setRed(lb_1[lth], lb_2[lth]);
@@ -183,9 +184,9 @@ public class ScorePanel extends Panel {
 
 	public void setRed(MyLabel l1, MyLabel l2) {
 		if (Integer.parseInt(l1.text) > Integer.parseInt(l2.text)) {
-			l1.setForeground(Color.red);
+			l1.setForeground(UIConfig.RED_WIN_COLOR);
 		} else if (Integer.parseInt(l1.text) < Integer.parseInt(l2.text)) {
-			l2.setForeground(Color.red);
+			l2.setForeground(UIConfig.RED_WIN_COLOR);
 		} else {
 		}
 	}

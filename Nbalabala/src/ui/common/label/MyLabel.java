@@ -2,6 +2,7 @@ package ui.common.label;
 
 import javax.swing.JLabel;
 
+import ui.MyFont;
 import ui.UIConfig;
 
 /**
@@ -20,6 +21,7 @@ public class MyLabel extends JLabel {
 		this.setOpaque(false);
 		this.setFont(UIConfig.FONT);
 		this.setHorizontalAlignment(CENTER);
+		this.setForeground(MyFont.BLACK_GRAY);
 		this.text = text;
 		setlbText(text);
 	}

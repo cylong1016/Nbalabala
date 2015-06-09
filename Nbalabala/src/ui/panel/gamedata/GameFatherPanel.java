@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import ui.MyFont;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.label.ImgLabel;
@@ -34,7 +35,7 @@ public class GameFatherPanel extends BottomPanel {
 	protected  MatchDetailVO matchDetail;
 	protected  MatchProfileVO matchPro;
 	protected MatchQueryBLService matchQuery;
-	protected int btx = 24,bty = 253, inter = 315;
+	protected int btx = 26,bty = 211, inter = 317;
 
 	/** 球队中文全称 */
 	protected String teamStr1, teamStr2;
@@ -49,6 +50,16 @@ public class GameFatherPanel extends BottomPanel {
 	protected ImgLabel sign1,sign2;
 	protected MyLabel scorelb_1,scorelb_2,ranklb_1,ranklb_2,recordlb_1,recordlb_2,
 	name_1,name_2,area1,area2;
+	/** 左边队伍三列右对齐的x坐标 */
+	private static final int LEFT_THREE_X = 192;
+	/** 右边队伍三列左对齐的x坐标 */
+	private static final int RIGHT_THREE_X = 804;
+	/** 第一行的y坐标 */
+	private static final int FIRST_Y = 7;
+	/** 第二行的y坐标 */
+	private static final int SECOND_Y = 32;
+	/** 第三行的y坐标 */
+	private static final int THIRD_Y = 52;
 
 	public GameFatherPanel(String url, MatchDetailVO matchDetail,Panel gameData) {
 		super(url);
@@ -62,7 +73,7 @@ public class GameFatherPanel extends BottomPanel {
 		addLabel();
 		scPanel = new ScorePanel(matchDetail);
 		this.add(scPanel);
-		scPanel.setLocation(188, 140);
+		scPanel.setLocation(188, 110);
 		this.repaint();
 	}
 	
@@ -86,61 +97,82 @@ public class GameFatherPanel extends BottomPanel {
 		String score1 = lb1.getText();
 		String score2 = lb2.getText();
 		if(Integer.parseInt(score1)>Integer.parseInt(score2)){
-			lb1.setForeground(Color.red);
+			lb1.setForeground(UIConfig.RED_WIN_COLOR);
+			lb2.setForeground(MyFont.BLACK_GRAY);
 		}else{
-			lb2.setForeground(Color.red);
+			lb2.setForeground(UIConfig.RED_WIN_COLOR);
+			lb1.setForeground(MyFont.BLACK_GRAY);
 		}
 	}
 	
-	private int area_x = 800,rank_y = 18,record_y = 65,score_y = 50; 
 	public void addLabel(){
 		int[] winLose = matchQuery.getTeamWinsLosesByAbbr(teamShort1);
 		int win = winLose[0];
 		int lose = winLose[1];
-		sign1 = new ImgLabel(280, -5, 130, 130, TeamLogoCache.getTeamLogo(teamShort1));
-		sign2 = new ImgLabel(550, -5, 130, 130, TeamLogoCache.getTeamLogo(teamShort2));
-		scorelb_1 = new MyLabel(210,score_y,100,50,scoreAll[0]);
-		scorelb_2 = new MyLabel(680,score_y,100,50,scoreAll[1]);
+		sign1 = new ImgLabel(310, -5, 100, 100, TeamLogoCache.getTeamLogo(teamShort1));
+		this.add(sign1);
+		
+		sign2 = new ImgLabel(560, -5, 100, 100, TeamLogoCache.getTeamLogo(teamShort2));
+		this.add(sign2);
+		
+		scorelb_1 = new MyLabel(215,SECOND_Y,100,30,scoreAll[0]);
+		scorelb_1.setFont(MyFont.YT_XL);
+		this.add(scorelb_1);
+		
+		scorelb_2 = new MyLabel(680,SECOND_Y,100,30,scoreAll[1]);
+		scorelb_2.setFont(MyFont.YT_XL);
+		this.add(scorelb_2);
+		
 		setRed(scorelb_1,scorelb_2);
-		scorelb_1.setFont(new Font("微软雅黑",0,28));
-		scorelb_2.setFont(new Font("微软雅黑",0,28));
-		recordlb_1 = new MyLabel(116,record_y,100,50,(Constants.recordText+" "+win+" - "+lose));
+		
+		// 左边的战绩
+		recordlb_1 = new MyLabel(0,THIRD_Y,LEFT_THREE_X,30,(Constants.recordText+" "+win+" - "+lose));
 		recordlb_1.setForeground(Color.gray);
-		name_1 = new MyLabel(25,10,180,50,place1+" "+teamStr1);
+		recordlb_1.setRight();
+		this.add(recordlb_1);
+		
+		name_1 = new MyLabel(0,FIRST_Y,LEFT_THREE_X,30,place1+" "+teamStr1);
 		name_1.setRight();
-		name_2 = new MyLabel(area_x,10,180,50,place2+" "+teamStr2);
+		name_1.setFont(MyFont.YH_XL);
+		this.add(name_1);
+		
+		name_2 = new MyLabel(RIGHT_THREE_X,FIRST_Y,180,30,place2+" "+teamStr2);
 		name_2.setLeft();
-		name_1.setFont(labelFont);
-		name_2.setFont(labelFont);
+		name_2.setFont(MyFont.YH_XL);
+		this.add(name_2);
+		
 		winLose = matchQuery.getTeamWinsLosesByAbbr(teamShort2);
 		win = winLose[0];
 		lose = winLose[1];
-		recordlb_2 = new MyLabel(area_x,record_y,100,50,(Constants.recordText+" "+win+" - "+lose));//战绩
+		
+		// 右边的战绩
+		recordlb_2 = new MyLabel(RIGHT_THREE_X,THIRD_Y,100,30,(Constants.recordText+" "+win+" - "+lose));//战绩
 		recordlb_2.setLeft();
 		recordlb_2.setForeground(Color.gray);
+		this.add(recordlb_2);
+		
 		int rank1 = matchQuery.getTeamRamkByAbbr(teamShort1);
 		int rank2 = matchQuery.getTeamRamkByAbbr(teamShort2);
-		ranklb_1 = new MyLabel(140,rank_y,100,100,getRank(rank1));//排名
-		ranklb_2 = new MyLabel(840,rank_y,100,100,getRank(rank2));
-		ranklb_1.setForeground(Color.blue);
-		ranklb_2.setForeground(Color.blue);
+		ranklb_1 = new MyLabel(LEFT_THREE_X-21, SECOND_Y, 100, 30, getRank(rank1));//排名
+		ranklb_1.setForeground(UIConfig.BLUE_TEXT_COLOR);
+		ranklb_1.setFont(MyFont.YH_XS);
+		ranklb_1.setLeft();
+		this.add(ranklb_1);
+		
+		ranklb_2 = new MyLabel(RIGHT_THREE_X+70, SECOND_Y, 100, 30, getRank(rank2));
+		ranklb_2.setForeground(UIConfig.BLUE_TEXT_COLOR);
+		ranklb_2.setFont(MyFont.YH_XS);
+		ranklb_2.setLeft();
+		this.add(ranklb_2);
+		
 		ScreenDivision area_1 = Constants.getAreaByAbbr(teamShort1);
 		ScreenDivision area_2 = Constants.getAreaByAbbr(teamShort2);
 
-		area1 = new MyLabel(80,rank_y,100,100,Constants.getAreaByEnglish(area_1));//东西部
-		area2 = new MyLabel(area_x,rank_y,100,100,Constants.getAreaByEnglish(area_2));
-		area2.setLeft();
-		this.add(sign1);
-		this.add(sign2);
-		this.add(ranklb_1);
-		this.add(ranklb_2);
-		this.add(recordlb_1);
-		this.add(recordlb_2);
-		this.add(scorelb_1);
-		this.add(scorelb_2);
-		this.add(name_1);
-		this.add(name_2);
+		area1 = new MyLabel(0,SECOND_Y,LEFT_THREE_X-38,30,Constants.getAreaByEnglish(area_1));//东西部
+		area1.setRight();
 		this.add(area1);
+		area2 = new MyLabel(RIGHT_THREE_X,SECOND_Y,100,30,Constants.getAreaByEnglish(area_2));
+		area2.setLeft();
 		this.add(area2);
 	}
 	/**
