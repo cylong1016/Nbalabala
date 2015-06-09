@@ -3,3 +3,4 @@
 .classpath
 .project
 *.class
+/src/mysql/MySQLConfig.java
