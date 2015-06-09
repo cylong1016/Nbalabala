@@ -15,6 +15,8 @@ public class LivePlayerVO {
 	
 	public String nameEng;
 	
+	public String position;
+	
 	/** 是否为首发 */
 	public boolean isStarter;
 	/** 在场时间，形如25:59 */
@@ -49,6 +51,5 @@ public class LivePlayerVO {
 	public int score;
 	/** 该球员在场时球队净得分 */
 	public int plusMinus;
-	/** 对手缩写 */
 
 }
