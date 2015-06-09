@@ -6,6 +6,7 @@ package blservice;
 import java.util.ArrayList;
 
 import po.MatchPlayerPO;
+import vo.LivePlayerVO;
 
 /**
  * 直播界面需要的接口
@@ -41,10 +42,10 @@ public interface LiveBLService {
 	public String getHomeAbbr();
 	
 	/** 获取客场球员的记录，PO里面要有所有页面上能爬到的属性 */
-	public ArrayList<MatchPlayerPO> getRoadPlayerRecords();
+	public ArrayList<LivePlayerVO> getRoadPlayerRecords();
 	
 	/** 获取主场球员的记录，PO里面要有所有页面上能爬到的属性 ，这个网页上没有的属性不用管。注意“篮板”是totalRebounds*/
-	public ArrayList<MatchPlayerPO> getHomePlayerRecords();
+	public ArrayList<LivePlayerVO> getHomePlayerRecords();
 	
 	/** 获取客场各节比分。
 	 * 比如当前进行到第二节，第一节是20，第二节目前15，那么List就是size为2，两个元素是20和15 */
@@ -57,6 +58,9 @@ public interface LiveBLService {
 	/** 获取当前小节数，如当前第三小节正在进行，返回3 */
 	public int getCurrentSectionCount();
 	
-	/** 长度为5数组，分别是 投篮命中率、三分命中率、罚球命中率、篮板、助攻 */
-	public double [] getFiveArgs();
+	/** 长度为5数组，分别是主队 投篮命中率、三分命中率、罚球命中率、篮板、助攻 */
+	public double [] getHomeFiveArgs();
+	
+	/** 长度为5数组，分别是客队 投篮命中率、三分命中率、罚球命中率、篮板、助攻 */
+	public double [] getroadFiveArgs();
 }

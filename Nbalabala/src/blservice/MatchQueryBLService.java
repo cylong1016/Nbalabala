@@ -3,6 +3,7 @@ package blservice;
 import java.util.ArrayList;
 import java.util.Date;
 
+import vo.LiveRowVO;
 import vo.MatchDetailVO;
 
 /**
@@ -35,4 +36,7 @@ public interface MatchQueryBLService {
 	
 	/** 通过比赛ID查找比赛详情 */
 	public MatchDetailVO getMatchDetailByID(int matchID);
+	
+	/** 返回一场比赛的实录 */
+	public ArrayList<LiveRowVO> getLives(Date date, String homeAbbr);
 }

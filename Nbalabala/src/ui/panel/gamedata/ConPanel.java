@@ -23,17 +23,27 @@ public class ConPanel extends BottomPanel {
 	private MyLabel[] sort,result1,result2;
 	private Rec[] rec1, rec2;
 	private MatchDetailVO vo;
-	
+	private double[] lth1,lth2;
 	private DecimalFormat df = new DecimalFormat(".0");
 	
 	public ConPanel(MatchDetailVO vo) {
 		super(Images.GAME_CON);
 		this.vo = vo;
 		this.setBounds(22, 292, 952, 309);
+		lth1 = vo.getHomeFiveArgs();
+		lth2 = vo.getRoadFiveArgs();
 		addLabel();
 		addRec();
 	}
 
+	public ConPanel(double[] lth1,double[] lth2){
+		this.lth1 = lth1;
+		this.lth2 = lth2;
+		this.setBounds(22, 292, 952, 309);
+		addLabel();
+		addRec();
+	}
+	
 	private int lb_x = 416, lb_y = 20, lb_x2 = 536, lb_inter = 50, lb_width = 105, lb_height = 40;
 
 	public void addLabel() {
@@ -50,8 +60,6 @@ public class ConPanel extends BottomPanel {
 		rec2 = new Rec[5];
 		result1 = new MyLabel[5];
 		result2 = new MyLabel[5];
-		double[] lth1 = vo.getHomeFiveArgs();
-		double[] lth2 = vo.getRoadFiveArgs();
 		for (int i = 0; i < 3; i++) {
 			lth1[i] = Double.parseDouble(df.format(lth1[i]));
 			rec1[i] = new Rec((int) (lb_x - 4 * lth1[i]), lb_y + i * lb_inter, lth1[i]);
