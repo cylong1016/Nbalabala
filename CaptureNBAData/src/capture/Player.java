@@ -45,14 +45,19 @@ public class Player extends NBAData {
 				reader = new BufferedReader(new InputStreamReader(input, urlConn.getContentType().equals("text-html; charset=gb2312")?"UTF-8":"gb2312"));
 				String temp = null;
 				while((temp = reader.readLine()) != null) {
-					String playerDataReg = "<td.*?>(<strong>)?(<a href=\"/players/.*?(?<nameID>[0-9]{2})\\.html\">)?(<a href=\"/friv/.*?>)?(?<data>.*?)(</a>)?(\\*)?(</strong>)?</td>";
+					String playerDataReg = "<td.*?>(<strong>)?(<a href=\"(?<portrait>/players/.*?(?<nameID>[0-9]{2})\\.html)\">)?(<a href=\"/friv/.*?>)?(?<data>.*?)(</a>)?(\\*)?(</strong>)?</td>";
 					Pattern patternPlayer = Pattern.compile(playerDataReg);
 					Matcher matcherPlayer = patternPlayer.matcher(temp);
 					if(matcherPlayer.find()) {
 						String nameID = matcherPlayer.group("nameID");
 						String data = matcherPlayer.group("data");
+						String portraitUrl = matcherPlayer.group("portrait");
 						if(nameID != null) {
 							data += ("$" + nameID);
+						}
+						if(portraitUrl != null) {
+							// 抓取球员头像
+							capturePlayerPortrait(root + portraitUrl, data);
 						}
 						playerData.add(data);
 					}
@@ -67,6 +72,19 @@ public class Player extends NBAData {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	/**
+	 * 抓取球员的头像
+	 * @param portraitUrl 球员头像的url
+	 * @param name 球员名
+	 * @author cylong
+	 * @version 2015年6月9日  下午8:12:23
+	 */
+	private void capturePlayerPortrait(String portraitUrl, String name) {
+		System.out.println(portraitUrl);
+		System.out.println(name);
+		System.exit(0);
 	}
 
 	/**

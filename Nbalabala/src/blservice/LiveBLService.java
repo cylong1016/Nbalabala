@@ -23,7 +23,7 @@ public interface LiveBLService {
 	 *  4 如果今天的比赛已经结束，返回“XX对XX的比赛已经结束”这样的字符串*/
 	public String getLiveInfo();
 	
-	/** 对于上面这个方法的3 4 两种情况返回true 1 2 返回false 
+	/** 对于上面这个方法的1 3 4 三种情况返回true; 2 返回false 
 	 *  因为只有在这两种情况下，才能点某个按钮进入下一级界面，显示直播界面
 	 *  （当然了，对于情况4，界面将不会再动了）*/
 	public boolean hasMatchStarted();
