@@ -11,7 +11,6 @@ package blservice;
  */
 public class AnalysisBLService {
 	
-	/
-	public Arra
+
 
 }

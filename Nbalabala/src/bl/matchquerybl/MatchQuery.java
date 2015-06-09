@@ -9,6 +9,7 @@ import po.MatchPlayerPO;
 import po.MatchProfilePO;
 import po.TeamSeasonPO;
 import utility.Constants;
+import vo.LiveRowVO;
 import vo.MatchDetailVO;
 import vo.MatchProfileVO;
 import bl.teamquerybl.TeamQuery;
@@ -153,5 +154,33 @@ public class MatchQuery implements MatchQueryBLService{
 				TeamLogoCache.getTeamLogo(profilePO.roadAbbr), TeamLogoCache.getTeamLogo(profilePO.homeAbbr));
 		return vo;
 	}
-	
+
+	/* (non-Javadoc)
+	 * @see blservice.MatchQueryBLService#getLives(java.util.Date, java.lang.String)
+	 */
+	@Override
+	public ArrayList<LiveRowVO> getLives(Date date, String homeAbbr) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(date.getTime());
+		int year = calendar.get(Calendar.YEAR);
+		System.out.println(year);
+		int month = calendar.get(Calendar.MONTH) + 1;
+		System.out.println(month);
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
+		String monthStr;
+		if(month < 10) {
+			monthStr = "0" + month;
+		}else {
+			monthStr = "" + month;
+		}
+		String dayStr;
+		if(day < 10) {
+			dayStr = "0" + day;
+		}else {
+			dayStr = "" + day;
+		}
+		String url = "http://www.basketball-reference.com/boxscores/pbp/"
+				+ String.valueOf(year) + monthStr + dayStr + "0" + homeAbbr + ".html";
+		return new MatchRecordCrawler().getLives(url);
+	}
 }
