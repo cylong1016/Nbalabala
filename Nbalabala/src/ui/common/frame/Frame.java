@@ -47,7 +47,7 @@ public class Frame extends JFrame {
 		this.add(title, BorderLayout.NORTH); // 添加标题
 		
 		// 左侧边栏
-//		leftPanel = new LeftPanel();
+		leftPanel = new LeftPanel();
 		
 		this.setSize(UIConfig.WIDTH, UIConfig.HEIGHT);
 		this.setLocationRelativeTo(null); // 居中，要在设置大小之后 
@@ -72,15 +72,21 @@ public class Frame extends JFrame {
 	public void setPanel(Panel panel) {
 		if(currentPanel != null) {
 			this.remove(currentPanel);	// 移出当前界面
-		}
-		if (leftPanel != null) {
-			this.remove(leftPanel);
-		}
+			
+			if (currentPanel.getClass() == MainPanel.class) {
+				leftPanel = new LeftPanel();
+			}
+		}	
+
+
 		currentPanel = panel;
-		if (panel.getClass() != MainPanel.class) {
-			leftPanel = new LeftPanel();
-			this.add(leftPanel, BorderLayout.WEST);
+		this.add(leftPanel, BorderLayout.WEST);
+		if (panel.getClass() == MainPanel.class) {
+			if (leftPanel != null) {
+				this.remove(leftPanel);
+			}
 		}
+		
 		this.add(panel);
 		this.setVisible(true);
 	}

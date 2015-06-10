@@ -1,16 +1,18 @@
 package ui.common.panel;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
-
+import ui.Images;
+import ui.MyFont;
 import ui.UIConfig;
-import ui.common.button.ImgButton;
+import ui.common.button.TabButton;
 import ui.controller.MainController;
+import utility.Constants;
 
 /**
  * 左边边框
@@ -31,24 +33,23 @@ public class LeftPanel extends Panel {
 	/** 背景图片 */
 	private Image bgImage;
 	
-	/** 横纵坐标 间距 宽高 */
-	private int x = 6, y = 314, inter = 41;
-	/** 图片地址 */
-	private static final String URL = UIConfig.IMG_PATH + "sidebar/";
-	private static final String trans = URL + "trans.png";
-	private static final String on = URL + "mouseOn.png";
 	/** button */
-	private ImgButton allPlayers, allTeams, game, playerData, returnButton, teamData, hot;
-	/** button数组 */
-	private ImgButton[] buttonArr;
-	private MouListener mou = new MouListener();
+	private TabButton allPlayersBtn, allTeamsBtn, playerDataBtn, teamDataBtn;
+	private TabButton gameBtn, hotBtn, analysisBtn, returnBtn;
 	
+	private static final int FIRST_ZONE_Y = 100;
+	private static final int SECOND_ZONE_Y = 296;
+	private static final int THIRD_ZONE_Y = 408;
+	private static final int RET_Y = 524;
+	
+	private TabButton currentBtn;
+		
 	public LeftPanel() {
-		bgImage = new ImageIcon(URL + "BG.png").getImage();
+		bgImage = Images.SIDEBAR_BG;
 		// this.setBounds(0, 0, UIConfig.RIGHT_WIDTH, bgImage.getHeight(null));
 		this.setPreferredSize(new Dimension(bgImage.getWidth(null), bgImage.getHeight(null)));
 		setButton();
-		addButton();
+
 	}
 
 	/**
@@ -58,44 +59,119 @@ public class LeftPanel extends Panel {
 	 * @version 2015年3月20日 上午12:02:28
 	 */
 	public void setButton() {
-		returnButton = new ImgButton(URL + "return.png", 20, 557, URL + "returnOn.png", URL
-				+ "returnClick.png");
-
-		allPlayers = new ImgButton(trans, x, y, on, on);
-		allTeams = new ImgButton(trans, x, y + inter, on, on);
-		game = new ImgButton(trans, x, y + 2 * inter, on, on);
-		playerData = new ImgButton(trans, x, y + 3 * inter, on, on);
-		teamData = new ImgButton(trans, x, y + 4 * inter, on, on);
-		hot = new ImgButton(trans, x, y + 5 * inter, on, on);
-	}
-	
-	public void addButton(){
-		buttonArr = new ImgButton[]{allPlayers,allTeams,game,playerData,teamData,hot,returnButton};
-		for(int i =0;i<buttonArr.length;i++){
-			this.add(buttonArr[i]);
-			buttonArr[i].addMouseListener(mou);
-		}
-	}
-	
-	class MouListener extends MouseAdapter{
-		 public void mousePressed(MouseEvent e) {
-			 if(e.getSource() == allPlayers){
-				 MainController.toAllPlayersPanel();
-			 }else if(e.getSource() == allTeams){
-				 MainController.toAllTeamsPanel();
-			 }else if(e.getSource() == game){
-				 MainController.toGamePanel();
-			 }else if(e.getSource() == playerData){
-				 MainController.toPlayerPanel();
-			 }else if(e.getSource() == teamData){
-				 MainController.toTeamPanel();
-			 }else if (e.getSource() == hot) {
+		
+		Image btnOnImg = Images.SIDEBAR_BTN_ON;
+		Image btnClickImg = Images.SIDEBAR_BTN_CLICK;
+		int inter = 42;
+		String smallBlank = "        ";
+		String bigBlank = "              ";
+		String arrow = "  >";
+		
+		allPlayersBtn = new TabButton(smallBlank + Constants.allPlayers + arrow, btnOnImg, btnClickImg);
+		allPlayersBtn.setLocation(0, FIRST_ZONE_Y);
+		allPlayersBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setCurrentOn(allPlayersBtn);
+				MainController.toAllPlayersPanel();
+			}
+		});
+		this.add(allPlayersBtn);
+		
+		allTeamsBtn = new TabButton(smallBlank + Constants.allTeams + arrow, btnOnImg, btnClickImg);
+		allTeamsBtn.setLocation(0, FIRST_ZONE_Y + inter*1);
+		allTeamsBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setCurrentOn(allTeamsBtn);
+				MainController.toAllTeamsPanel();
+			}
+		});
+		this.add(allTeamsBtn);
+		
+		playerDataBtn = new TabButton(smallBlank + Constants.playersData + arrow, btnOnImg, btnClickImg);
+		playerDataBtn.setLocation(0, FIRST_ZONE_Y + inter * 2);
+		playerDataBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setCurrentOn(playerDataBtn);
+				MainController.toPlayerPanel();
+			}
+		});
+		this.add(playerDataBtn);
+		
+		teamDataBtn = new TabButton(smallBlank + Constants.teamsData + arrow, btnOnImg, btnClickImg);
+		teamDataBtn.setLocation(0, FIRST_ZONE_Y + inter * 3);
+		teamDataBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setCurrentOn(teamDataBtn);
+				MainController.toTeamPanel();
+			}
+		});
+		this.add(teamDataBtn);
+		
+		
+		gameBtn = new TabButton(bigBlank + Constants.game + arrow, btnOnImg, btnClickImg);
+		gameBtn.setLocation(0, SECOND_ZONE_Y);
+		gameBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setCurrentOn(gameBtn);
+				MainController.toGamePanel();
+			}
+		});
+		this.add(gameBtn);
+		
+		hotBtn = new TabButton(bigBlank + Constants.hotShort + arrow, btnOnImg, btnClickImg);
+		hotBtn.setLocation(0, SECOND_ZONE_Y + inter * 1);
+		hotBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setCurrentOn(hotBtn);
 				MainController.toHotPanel();
-			}else if(e.getSource() == returnButton){
-				 MainController.toMainPanel();
-			 }
-		 }
+			}
+		});
+		this.add(hotBtn);
+		
+		analysisBtn = new TabButton(smallBlank + Constants.analysis + arrow, btnOnImg, btnClickImg);
+		analysisBtn.setLocation(0, THIRD_ZONE_Y);
+		analysisBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setCurrentOn(analysisBtn);
+				// TODO 到分析界面 
+			}
+		});
+		this.add(analysisBtn);
+		
+		returnBtn = new TabButton("<  " + Constants.ret + bigBlank, Images.SIDEBAR_RET_ON, Images.SIDEBAR_RET_CLICK);
+		returnBtn.setLocation(0, RET_Y);
+		currentBtn = returnBtn;
+		returnBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {		
+				MainController.toMainPanel();
+			}
+		});
+		this.add(returnBtn);
+		
+		setInit();
+		
 	}
+	
+	protected void setCurrentOn(TabButton btn) {
+		currentBtn.setOff();
+		currentBtn.setForeground(MyFont.DARK_GRAY);
+		btn.setOn();
+		btn.setForeground(Color.white);
+		currentBtn = btn;
+	}
+	
+	protected void setInit(){
+		TabButton button[] = {allPlayersBtn, allTeamsBtn, playerDataBtn, teamDataBtn, 
+				gameBtn, hotBtn, analysisBtn, returnBtn};
+		for (int i = 0; i < button.length; i++) {
+			button[i].setFont(MyFont.YH_B);
+			button[i].setForeground(MyFont.BLACK_GRAY);
+		}
+		returnBtn.setForeground(Color.white);
+	}
+
 
 	public void paint(Graphics g) {
 		g.drawImage(bgImage, 0, 0, this);

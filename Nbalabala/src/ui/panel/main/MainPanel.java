@@ -119,7 +119,8 @@ public class MainPanel extends Panel {
 	 * 添加页面按钮
 	 */
 	private void addBtn() {
-		allPlayersBtn = new TabButton(Constants.allPlayers, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		String blank = Constants.blank;
+		allPlayersBtn = new TabButton(blank + Constants.allPlayers, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
 		allPlayersBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainController.toAllPlayersPanel();			
@@ -129,7 +130,7 @@ public class MainPanel extends Panel {
 		allPlayersBtn.setFont(MyFont.YH_L);
 		this.add(allPlayersBtn);
 		
-		allTeamsBtn = new TabButton(Constants.allTeams, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		allTeamsBtn = new TabButton(blank + Constants.allTeams, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
 		allTeamsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainController.toAllTeamsPanel();				
@@ -139,7 +140,7 @@ public class MainPanel extends Panel {
 		allTeamsBtn.setFont(MyFont.YH_L);
 		this.add(allTeamsBtn);
 		
-		gamesDataBtn = new TabButton(Constants.gamesData, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		gamesDataBtn = new TabButton(blank + Constants.gamesData, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
 		gamesDataBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainController.toGamePanel();
@@ -149,7 +150,7 @@ public class MainPanel extends Panel {
 		gamesDataBtn.setFont(MyFont.YH_L);
 		this.add(gamesDataBtn);
 		
-		playersDataBtn = new TabButton(Constants.playersData, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		playersDataBtn = new TabButton(blank + Constants.playersData, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
 		playersDataBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainController.toPlayerPanel();
@@ -159,7 +160,7 @@ public class MainPanel extends Panel {
 		playersDataBtn.setFont(MyFont.YH_L);
 		this.add(playersDataBtn);
 		
-		teamsDadaBtn = new TabButton(Constants.teamsData, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		teamsDadaBtn = new TabButton(blank + Constants.teamsData, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
 		teamsDadaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainController.toTeamPanel();
@@ -169,7 +170,7 @@ public class MainPanel extends Panel {
 		teamsDadaBtn.setFont(MyFont.YH_L);
 		this.add(teamsDadaBtn);
 		
-		hotBtn = new TabButton(Constants.hot, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK);
+		hotBtn = new TabButton(Constants.hot + blank, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK);
 		hotBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainController.toHotPanel();
@@ -179,7 +180,7 @@ public class MainPanel extends Panel {
 		hotBtn.setFont(MyFont.YH_L);
 		this.add(hotBtn);
 		
-		analysisBtn = new TabButton(Constants.analysis, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK);
+		analysisBtn = new TabButton(Constants.analysis + blank, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK);
 		analysisBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO

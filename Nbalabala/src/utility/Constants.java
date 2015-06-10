@@ -393,14 +393,18 @@ public class Constants {
 	public static String lineUp = " 阵容";
 	public static String gameDate = " 比赛日程";
 	
-	private static String blank = "               ";
-	public static String allPlayers = blank + "所有球员";
-	public static String allTeams = blank + "所有球队";
-	public static String gamesData = blank + "比赛数据";
-	public static String playersData = blank + "球员数据";
-	public static String teamsData = blank + "球队数据";
-	public static String hot =  "查看热点" + blank;
-	public static String analysis = "价值分析" + blank;
+	public static String blank = "               ";
+	public static String allPlayers ="所有球员";
+	public static String allTeams ="所有球队";
+	public static String gamesData = "比赛数据";
+	public static String playersData = "球员数据";
+	public static String teamsData = "球队数据";
+	public static String hot =  "查看热点";
+	public static String analysis = "价值分析";
+	
+	public static String hotShort = "热点";
+	public static String game = "赛程";
+	public static String ret = "返回";
 	
 	public static String translateHeight(String height){
 		return translater.translateHeight(height);

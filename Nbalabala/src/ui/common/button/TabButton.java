@@ -37,6 +37,8 @@ public class TabButton extends JButton{
 	private int textY;
 	private Font font = UIConfig.FIRST_LEVEL_TAB_FONT;
 	
+	private Color color = Color.WHITE;
+	
 	
 	/**
 	 * @param text 标签名
@@ -82,7 +84,7 @@ public class TabButton extends JButton{
 			g.drawImage(moveOn,0,0,width,height,null);
 		}
 		g.setFont(font);
-		g.setColor(Color.WHITE);
+		g.setColor(color);
 		// 去除文字的锯齿
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
@@ -94,6 +96,10 @@ public class TabButton extends JButton{
 	public void setFont(Font font) {
 		this.font = font;
 		calculateTextLocation();
+	}
+	
+	public void setForeground(Color color){
+		this.color = color;
 	}
 	
 	private void calculateTextLocation() {

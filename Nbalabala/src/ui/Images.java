@@ -68,4 +68,11 @@ public class Images {
 	public static final Image HOME_BTN_CLICK = new ImageIcon("images2.0/main/buttonClick.png").getImage(); 
 	public static final Image HOME_BTN_R_ON = new ImageIcon("images2.0/main/rButtonOn.png").getImage();
 	public static final Image HOME_BTN_R_CLICK = new ImageIcon("images2.0/main/rButtonClick.png").getImage();
+	
+	/** 边栏的图片  */
+	public static final Image SIDEBAR_BG = new ImageIcon("images2.0/sidebar/sidebarBG.png").getImage();
+	public static final Image SIDEBAR_BTN_ON = new ImageIcon("images2.0/sidebar/buttonON.png").getImage();
+	public static final Image SIDEBAR_BTN_CLICK = new ImageIcon("images2.0/sidebar/buttonClick.png").getImage();
+	public static final Image SIDEBAR_RET_ON = new ImageIcon("images2.0/sidebar/returnOn.png").getImage();
+	public static final Image SIDEBAR_RET_CLICK = new ImageIcon("images2.0/sidebar/returnClick.png").getImage();
 }
