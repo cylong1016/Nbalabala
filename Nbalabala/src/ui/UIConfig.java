@@ -43,23 +43,23 @@ public class UIConfig {
 
 	/*----------------------------表格配置--------------------------------*/
 	/** 表格字体 */
-	public static final Font TABLE_FONT = new Font("黑体", Font.PLAIN, 13);
-	public static final Font TABLE_HEADER_FONT = new Font("黑体", Font.PLAIN, 13);
+	public static final Font TABLE_FONT = MyFont.YH_S;
+	public static final Font TABLE_HEADER_FONT = MyFont.YH_XS;
 	
 	/** 表格字体颜色 */
-	public static final Color TABLE_FORE_COLOR = Color.BLACK;
+	public static final Color TABLE_FORE_COLOR = MyFont.DARK_GRAY;
 	/** 表格背景颜色 */
 	public static final Color TABLE_BACK_COLOR = Color.WHITE;
 	/** 表格边框颜色 */
 	public static final Color TABLE_BORDER_COLOR = Color.LIGHT_GRAY;
 	/** 表头前景颜色 */
-	public static final Color TABLE_HEADER_FORE_COLOR = new Color(255, 221, 31);
+	public static final Color TABLE_HEADER_FORE_COLOR = Color.WHITE;
 	/** 表头背景颜色 */
-	public static final Color TABLE_HEADER_BACK_COLOR = new Color(25, 43, 102);
+	public static final Color TABLE_HEADER_BACK_COLOR = MyFont.DARK_GRAY;
 	/** 选择后的前景色 */
-	public static final Color TABLE_SELECTIONFORE = new Color(255, 150, 0);
+	public static final Color TABLE_SELECTIONFORE = Color.WHITE;
 	/** 选择后的背景色 */
-	public static final Color TABLE_SELECTIONBACK = Color.BLACK;
+	public static final Color TABLE_SELECTIONBACK = MyFont.BLACK_GRAY;
 	/** 表格预设大小 */
 	public static final Dimension TABLE_DIMEN = new Dimension(888, 290);
 	/** 表格中数据显示的小数点位数 */
@@ -67,7 +67,9 @@ public class UIConfig {
 	/** 表格中百分数的数据格式*/
 	public static final DecimalFormat PERCENT_FORMAT = new DecimalFormat("0.0%");
 	/** 表格每一行的高 */
-	public static final int ROW_HEIGHT = 23;
+	public static final int ROW_HEIGHT = 40;
+	/** 表格的表头高度*/
+	public static final int TABLE_HEADER_HEIGHT = 30;
 	/** 表格的宽度 */
 	public static final int TABLE_WID = 888;
 	/** 表格的相对坐标X */

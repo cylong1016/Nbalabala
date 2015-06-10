@@ -1,6 +1,5 @@
 package ui.panel.allteams;
 
-import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -53,11 +52,11 @@ public class TeamLineupPanel extends BottomPanel {
 	private void setTable() {
 		String[][] rowData = new String[players.size()][Constants.teamLineupHeaders.length];
 		playerTable = new BottomTable(rowData, Constants.teamLineupHeaders);
-		playerTable.setRowHeight(40);
-		playerTable.setWidth(new int[] { 140, 44, 44, 44, 151, 118, 77, 209 }); // TODO列宽
-		playerTable.setHeaderColorAndFont(Color.red, Color.orange,
-				UIConfig.FIRST_LEVEL_TAB_FONT);
-		playerTable.setHeaderHeight(80);
+		playerTable.setRowHeight(UIConfig.ROW_HEIGHT);
+		playerTable.setWidth(new int[] { 140, 44, 44, 44, 118, 118, 77, 287 }); // TODO列宽
+		playerTable.setHeaderColorAndFont(UIConfig.TABLE_HEADER_FORE_COLOR, UIConfig.TABLE_HEADER_BACK_COLOR,
+				UIConfig.TABLE_HEADER_FONT);
+		playerTable.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
 		scroll = new BottomScrollPane(playerTable);
 		scroll.setBounds(SCROLL_BOUNDS);
 		this.add(scroll);

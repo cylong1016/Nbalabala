@@ -2,7 +2,6 @@ package ui.panel.allteams;
 
 import po.TeamSeasonPO;
 import ui.UIConfig;
-import ui.common.label.NavLabel;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.panel.allplayers.ContrastDiagram;
@@ -22,17 +21,28 @@ public class TeamSeasonPanel extends BottomPanel{
 	
 	public TeamSeasonPanel() {
 		super();
-		table = new OneTeamDataTable();
-		BottomScrollPane scrollPane = new BottomScrollPane(table);
-		scrollPane.setBounds(UIConfig.RELA_X, 230, UIConfig.TABLE_WID, 140);
+		setTable();
+//		NavLabel navLabel = new NavLabel(Constants.titleAvgData);
+//		navLabel.setLocation(UIConfig.RELA_X, 190);
+//		this.add(navLabel);
 		
-		NavLabel navLabel = new NavLabel(Constants.titleAvgData);
-		navLabel.setLocation(UIConfig.RELA_X, 190);
-		this.add(navLabel);
-		this.add(scrollPane);
 	}
 	
 	
+	private void setTable() {
+		table = new OneTeamDataTable();
+		BottomScrollPane scrollPane = new BottomScrollPane(table);
+		
+		table.setHeaderColorAndFont();
+		table.setWidth(new int[] {73, 50, 50, 50, 50, 55, 55, 55, 50, 50, 50, 50, 50, 50, 50, 50, 50});
+		table.setRowHeight(35);
+		table.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
+		
+		scrollPane.setBounds(UIConfig.RELA_X, 180, UIConfig.TABLE_WID, 190);
+		this.add(scrollPane);
+	}
+
+
 	public void updateContent(String season, TeamSeasonPO teamSeason, double [] fiveArgsAvg, double [] highestThree) {
 		double[] fivePlayersData = new double[5];
 		if (teamSeason == null) {

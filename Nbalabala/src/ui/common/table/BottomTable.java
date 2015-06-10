@@ -72,6 +72,19 @@ public class BottomTable extends JTable {
 			((JLabel)headerRenderer).setHorizontalAlignment(JLabel.CENTER);
 		}
 	}
+	
+	public void setHeaderColorAndFont() {		
+		JTableHeader header = this.getTableHeader();// 获取头部
+		header.setOpaque(true);
+		header.getTable().setOpaque(true);
+		header.setBackground(UIConfig.TABLE_HEADER_BACK_COLOR);
+		header.setDefaultRenderer(new HeaderCellNoVerticalLinesRenderer(
+				UIConfig.TABLE_HEADER_FORE_COLOR, UIConfig.TABLE_HEADER_BACK_COLOR, UIConfig.TABLE_HEADER_FONT));
+		TableCellRenderer headerRenderer = header.getDefaultRenderer();
+		if (headerRenderer instanceof JLabel) {
+			((JLabel)headerRenderer).setHorizontalAlignment(JLabel.CENTER);
+		}
+	}
 
 	public BottomTable() {
 		super();

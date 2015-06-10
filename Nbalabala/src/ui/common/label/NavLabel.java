@@ -16,7 +16,7 @@ public class NavLabel extends JLabel{
 	
 	public NavLabel(String text) {
 		super(text);
-		this.setBackground(UIConfig.NAV_BAR_BLUE_COLOR);
+		this.setBackground(UIConfig.HIST_PLAYER_COLOR);
 		this.setForeground(Color.WHITE);
 		this.setSize(UIConfig.TABLE_WID, 40);
 		this.setFont(MyFont.HiraginoB);
