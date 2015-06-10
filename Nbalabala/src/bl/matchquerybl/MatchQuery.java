@@ -185,9 +185,17 @@ public class MatchQuery implements MatchQueryBLService{
 	}
 	
 	public static void main(String[]args) {
-		ArrayList<MatchPlayerPO> list = new MatchQuery().getMatchRecordByPlayerName("Aaron Brooks$01", "2009-10R");
+		MatchData matchQuery = new MatchData();
+		ArrayList<MatchPlayerPO> list = new MatchQuery().getMatchRecordByPlayerName("LeBron James$01", "2009-10R");
 		for (MatchPlayerPO po : list) {
-			System.out.println(po.score);
+			MatchProfilePO pr = matchQuery.getMatchDetailByMatchID(po.matchID).getMatchProfile();
+			if (po.homeOrRoad == 'H') {
+				System.out.println(po.timePlayed + "  "+(pr.homeTotalScore - pr.roadTotalScore));
+				
+			}else {
+				System.out.println(po.timePlayed + "  "+(pr.roadTotalScore - pr.homeTotalScore));
+			}
+
 		}
 	}
 }
