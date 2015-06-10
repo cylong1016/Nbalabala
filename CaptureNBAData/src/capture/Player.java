@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 public class Player extends NBAData {
 	
 	/** 保存球员头像的目录 */
-	private String savePath = "portrait/";
+	private String savePath = "images/portrait/";
 	
 	public Player() {
 		this.captureUrl = root + "/players/";
