@@ -183,4 +183,11 @@ public class MatchQuery implements MatchQueryBLService{
 				+ String.valueOf(year) + monthStr + dayStr + "0" + homeAbbr + ".html";
 		return new MatchRecordCrawler().getLives(url);
 	}
+	
+	public static void main(String[]args) {
+		ArrayList<MatchPlayerPO> list = new MatchQuery().getMatchRecordByPlayerName("Aaron Brooks$01", "2009-10R");
+		for (MatchPlayerPO po : list) {
+			System.out.println(po.score);
+		}
+	}
 }
