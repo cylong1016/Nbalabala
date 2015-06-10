@@ -20,7 +20,9 @@ public class Test extends JFrame{
 		double[] num = {35.4,18.3,26,30.4};
 //		BarChart chart = new BarChart(name,num);
 //		LineChart chart = new LineChart(name,name,num);
-		ScatterChart chart = new ScatterChart(num,num);
+//		ScatterChart chart = new ScatterChart(num,num);
+//		MixChart chart = new MixChart();
+		BoxChart chart = new BoxChart();
 		Test frame = new Test();
 		frame.add(chart);
 		frame.setVisible(true);
