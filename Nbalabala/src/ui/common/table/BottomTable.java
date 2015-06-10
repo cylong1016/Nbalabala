@@ -3,6 +3,7 @@ package ui.common.table;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -25,10 +26,10 @@ public class BottomTable extends JTable {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 3966419405700478023L;
 
-	/** 默认的表格前景色 */
-	private Color headerF = new Color(255, 221, 31);
+//	/** 默认的表格前景色 */
+//	private Color headerF = new Color(255, 221, 31);
 	 
-	private static final Color BG_BLUE = new Color(246, 246, 246);//TODO 交错底色
+	private static final Color BG_INTERLACE_COLOR = new Color(246, 246, 246);//TODO 交错底色
 	
 	public BottomTable(Object[][] rowData, String[] columnNames) {
 		super(rowData, columnNames);
@@ -37,16 +38,39 @@ public class BottomTable extends JTable {
 	
 	public BottomTable(Object[][] rowData, String[] columnNames,Color color) {
 		super(rowData, columnNames);
-		this.headerF = color;
+//		this.headerF = color;
 		this.decorateTable();
 	}
 	
-	/** 将表格内容设置为透明的 */
+	/** 将表格内容设置为透明的 
+	 * 	如果不调用此方法，表格内容是底色交错的*/
 	public void setContentOpaque() {
 		DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 		renderer.setOpaque(false);
 		renderer.setHorizontalAlignment(JLabel.CENTER);
 		this.setDefaultRenderer(Object.class, renderer);
+	}
+	
+	/** 设置表头高度 */
+	public void setHeaderHeight(int height) {
+		JTableHeader header = getTableHeader();
+		Dimension dimension = header.getPreferredSize();
+		dimension.height = height;
+		header.setPreferredSize(dimension);
+	}
+	
+	/** 设置表头前景色背景色字体。如果不设置，就是透明的，字体是默认表头字体。 */
+	public void setHeaderColorAndFont(Color fore, Color back, Font font) {		
+		JTableHeader header = this.getTableHeader();// 获取头部
+		header.setOpaque(true);
+		header.getTable().setOpaque(true);
+		header.setBackground(back);
+		header.setDefaultRenderer(new HeaderCellNoVerticalLinesRenderer(
+				fore, back, font));
+		TableCellRenderer headerRenderer = header.getDefaultRenderer();
+		if (headerRenderer instanceof JLabel) {
+			((JLabel)headerRenderer).setHorizontalAlignment(JLabel.CENTER);
+		}
 	}
 
 	public BottomTable() {
@@ -157,14 +181,13 @@ public class BottomTable extends JTable {
 		JTableHeader header = this.getTableHeader();// 获取头部
 		header.setOpaque(false); // 设置头部为透明
 		header.getTable().setOpaque(false);// 设置头部里面的表格透明
-		header.setForeground(headerF);	
 		// header.setPreferredSize(new Dimension(30, rowHeight));
 		header.setBackground(UIConfig.TABLE_HEADER_BACK_COLOR);	// 设置头部背景色
-		header.setForeground(headerF);	// 设置头部前景色
 
 		// 头部的表格也像前面的表格设置一样，还需要将里面的单元项设置为透明 因此同样需要对头部单元项进行透明度设置，这里还是用渲染器。
 		// 但这里有个问题就是，若将头部渲染器直接像上文一样设置，则它的下面没有横线 因此，我们需要一个专用的头部渲染器来手动画横线
-		header.setDefaultRenderer(new HeaderCellNoVerticalLinesRenderer());
+		header.setDefaultRenderer(new HeaderCellNoVerticalLinesRenderer(
+				UIConfig.TABLE_HEADER_FORE_COLOR, UIConfig.TABLE_HEADER_BACK_COLOR, UIConfig.TABLE_HEADER_FONT));
 		TableCellRenderer headerRenderer = header.getDefaultRenderer();
 		if (headerRenderer instanceof JLabel) {
 			((JLabel)headerRenderer).setHorizontalAlignment(JLabel.CENTER);
@@ -213,6 +236,16 @@ public class BottomTable extends JTable {
 	class HeaderCellNoVerticalLinesRenderer extends DefaultTableCellRenderer {
 
 		protected static final long serialVersionUID = 1L;
+		
+		private Color fore;
+		private Color back;
+		private Font font;
+		
+		public HeaderCellNoVerticalLinesRenderer(Color fore, Color back, Font font) {
+			this.fore = fore;
+			this.back = back;
+			this.font = font;
+		}
 
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 			JLabel label = new JLabel() {
@@ -231,9 +264,9 @@ public class BottomTable extends JTable {
 			};
 			label.setText(value != null ? value.toString() : "unknown");
 			label.setHorizontalAlignment(JLabel.CENTER);
-			label.setFont(UIConfig.TABLE_FONT);
-			label.setForeground(Color.black);	// TODO 表头前景色
-			label.setBackground(UIConfig.TABLE_HEADER_BACK_COLOR);
+			label.setFont(font);
+			label.setForeground(fore);
+			label.setBackground(back);
 			return label;
 		}
 	}
@@ -255,7 +288,7 @@ public class BottomTable extends JTable {
 					g2d.setColor(UIConfig.TABLE_BORDER_COLOR);
 					g2d.drawLine(0, this.getHeight() - 1, this.getWidth(), this.getHeight() - 1);
 					if (InterlacedRenderer.this.row % 2 != 0) {
-						g2d.setColor(BG_BLUE);
+						g2d.setColor(BG_INTERLACE_COLOR);
 						g2d.fillRect(0, 0, this.getWidth() - 1, this.getHeight() - 1);
 					}
 					// 一定要记得调用父类的paintComponent方法，不然它只会划线，不会显示文字
@@ -267,7 +300,7 @@ public class BottomTable extends JTable {
 			label.setFont(UIConfig.TABLE_FONT);
 			label.setForeground(Color.black);	
 			if (row % 2 == 1)
-				label.setBackground(BG_BLUE);
+				label.setBackground(BG_INTERLACE_COLOR);
 			return label;
 		}
 		
