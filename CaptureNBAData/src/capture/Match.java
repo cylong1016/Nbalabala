@@ -360,7 +360,7 @@ public class Match extends NBAData {
 					+ playerMatch.get(19) + ", "
 					+ playerMatch.get(20)
 					+ ")";
-//		System.out.println(sql);
+		System.out.println(sql);
 		try {
 			Statement statement = mysqlConn.createStatement();
 			statement.execute(sql); // 插入
