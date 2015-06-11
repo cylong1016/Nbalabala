@@ -32,27 +32,80 @@ public class LivePanel extends GameFatherPanel {
 	private LiveBLService liveService;
 	private ConPanel conPanel;
 	private TechPanel techPanel;
-	private Panel currentPanel;
+	private ArrayList<LivePlayerVO> vo1,vo2;
+	private int currentI;
 
 //	String url,String teamAbbr1,String teamAbbr2,String total,String each
 	
 	public LivePanel(String url) {
 		super(url);
+		liveService = new Live();
 		testData();
+		init();
+//		vo1 = liveService.getHomePlayerRecords();
+//		vo2 = liveService.getRoadPlayerRecords();
+		techPanel = new TechPanel(vo1,vo2,LivePanel.this);
+		liveBelow = new LiveBelowPanel(Images.LIVE_BELOW);
+		conPanel = new ConPanel(homePlayersArgs,roadPlayersArgs);
+		this.add(techPanel);
+		currentI = 0;
+		ThreadDis thread = new ThreadDis();
+		thread.start();
+	}
+	
+	public void init(){
+//		ArrayList<Integer> roadScores = liveService.getRoadScores();
+//		ArrayList<Integer> homeScores = liveService.getHomeScores();
+		int size = homeScores.size();
+		while(size < 4) {
+			roadScores.add(0);
+			homeScores.add(0);
+			size++;
+		}
+//		String homeName = liveService.getHomeAbbr();
+//		String roadName = liveService.getRoadAbbr();
+		String total = roadScores.get(size-1).toString() +"-"+homeScores.get(size-1).toString();
+		String each = "";
+		for(int i = 0; i < size-1;i++){
+			each = each + homeScores.get(i)+"-"+roadScores.get(i)+";";
+		}
 		
-		
-		String[] totalScore = total.split("-");
-		addLabel(teamAbbr1,teamAbbr2,totalScore);
-		scPanel = new ScorePanel(teamAbbr1,teamAbbr2,total,each);
+		String[] totalScore = new String[]{roadScores.get(size-1).toString(),homeScores.get(size-1).toString()};
+		addLabel(homeName,roadName,totalScore);
+		scPanel = new ScorePanel(homeName,roadName,total,each);
 		this.add(scPanel);
 		scPanel.setLocation(188, 110);
 		this.repaint();
 		addButton();
-		liveService = new Live();
-		refresh();
-		this.add(techPanel);
-		this.currentPanel = techPanel;
+		
 	}
+	double[] homePlayersArgs = {1,2,3,4,5};
+	double[] roadPlayersArgs = {5,4,3,2,1};
+	String[] time = {"HELLO","WORLD","CYL","LSY","ALLEN"};
+	int[] made ={10,13,15,16,18};
+	ArrayList<Integer> roadScores = new ArrayList<Integer>();
+	ArrayList<Integer> homeScores = new ArrayList<Integer>();
+	String homeName = "PHI",roadName = "LAL";
+	
+//	String timePlayed,int fieldMade,int fieldAttempt,int threepointMade,int threepointAttempt
+//	,int freethrowMade,int freethrowAttempt,int totalRebound,int assist,int steal,int block,int turnover,
+//	int foul,int score,int plusMinus
+	
+	public void testData(){
+		vo1 = new ArrayList<LivePlayerVO>();
+		vo2 = new ArrayList<LivePlayerVO>();
+		for(int i = 0;i<5;i++){
+			vo1.add(new LivePlayerVO(Constants.TEAM_ABBR[0],Constants.TEAM_ABBR[0],"P",
+					true,time[i],made[i],0,0,0,0,0,0,0,0,0,0,0,0,0)) ;
+			vo2.add(new LivePlayerVO(Constants.TEAM_ABBR[1],Constants.TEAM_ABBR[1],"R",
+					true,time[i],made[i],1,1,1,1,1,1,1,1,1,1,1,1,1));
+			roadScores.add(i);
+			homeScores.add(4-i);
+		}
+		roadScores.add(20);
+		homeScores.add(30);
+	}
+	
 
 	public void addButton() {
 		tech = new TabButton(Constants.LIVE[0], Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
@@ -70,7 +123,7 @@ public class LivePanel extends GameFatherPanel {
 				tech.setOn();
 				live.setOff();
 				contrastbt.setOff();
-				currentPanel = techPanel;
+				currentI = 0;
 				LivePanel.this.remove(liveBelow);
 				LivePanel.this.remove(conPanel);
 				LivePanel.this.add(techPanel);
@@ -82,7 +135,7 @@ public class LivePanel extends GameFatherPanel {
 				tech.setOff();
 				live.setOn();
 				contrastbt.setOff();
-				currentPanel = liveBelow;
+				currentI = 1;
 				LivePanel.this.remove(conPanel);
 				LivePanel.this.remove(techPanel);
 				LivePanel.this.add(liveBelow);
@@ -95,7 +148,7 @@ public class LivePanel extends GameFatherPanel {
 				tech.setOff();
 				live.setOff();
 				contrastbt.setOn();
-				currentPanel = conPanel;
+				currentI = 2;
 				LivePanel.this.remove(liveBelow);
 				LivePanel.this.remove(techPanel);
 				LivePanel.this.add(conPanel);
@@ -104,37 +157,32 @@ public class LivePanel extends GameFatherPanel {
 		});
 	}
 	
-//	public LivePlayerVO(String nameChn,boolean isStarter,String timePlayed,int fieldMade){
-	double[] homePlayersArgs = {1,2,3,4,5};
-	double[] roadPlayersArgs = {5,4,3,2,1};
-//	LivePlayerVO[] vo = new LivePlayerVO[5];
-	String[] time = {"HELLO","WORLD","CYL","LSY","ALLEN"};
-	int[] made ={10,13,15,16,18};
-	ArrayList<LivePlayerVO> vo1 = new ArrayList<LivePlayerVO>();
-	ArrayList<LivePlayerVO> vo2 = new ArrayList<LivePlayerVO>();
-	
-	public void testData(){
-		for(int i = 0;i<5;i++){
-			vo1.add(new LivePlayerVO(Constants.TEAM_ABBR[i],true,time[i],made[i])) ;
-			vo2.add(new LivePlayerVO(Constants.TEAM_ABBR[i+5],true,time[4-i],made[4-i]));
-		}
-	}
-	
+	int index = 0;
 	public void refresh(){
-		if(currentPanel != null) {
-			this.remove(currentPanel);
-		}
-		liveBelow = new LiveBelowPanel(Images.LIVE_BELOW);
+			if(currentI == 0) {
+				this.remove(techPanel);
+			} else if(currentI == 1) {
+				this.remove(liveBelow);
+			} else{
+				this.remove(conPanel);
+			}
+		index ++;
+//		liveBelow = new LiveBelowPanel(Images.LIVE_BELOW);
 //		conPanel = new ConPanel(liveService.getHomeFiveArgs(),liveService.getroadFiveArgs());
 //		techPanel = new TechPanel(liveService.getHomePlayerRecords(),liveService.getRoadPlayerRecords(),
 //				LivePanel.this);
+		if(index % 2 == 0){
+			techPanel = new TechPanel(vo1,vo2,LivePanel.this);
+		}else{
+			techPanel = new TechPanel(vo2,vo1,LivePanel.this);
+		}
+		liveBelow = new LiveBelowPanel(Images.LIVE_BELOW);
 		conPanel = new ConPanel(homePlayersArgs,roadPlayersArgs);
-		techPanel = new TechPanel(vo1,vo2,
-				LivePanel.this);
-		if(currentPanel == conPanel) {
-			this.add(conPanel);
-		} else if(currentPanel == techPanel) {
+	
+		if(currentI == 0) {
 			this.add(techPanel);
+		} else if(currentI == 1) {
+			this.add(liveBelow);
 		} else{
 			this.add(conPanel);
 		}
@@ -145,13 +193,13 @@ public class LivePanel extends GameFatherPanel {
 		public void run() {
 			while (true) {
 				try {
-					Thread.sleep(5000);
+					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				if(liveService.isAnythingNew()){
+//				if(liveService.isAnythingNew()){
 					refresh();
-				}
+//				}
 			}
 		}
 	}

@@ -27,17 +27,17 @@ public class TechPanel extends Panel{
 		this.players = homeplayers;
 		this.panel = panel;
 		players.addAll(roadplayers);
-//		setTable(players);
+		setTable(homeplayers);
 	}
 
 	private BottomScrollPane scroll;
 
-//	public void setTable(ArrayList<LivePlayerVO> players) {
-//		TechTable table = new TechTable(players,panel);
+	public void setTable(ArrayList<LivePlayerVO> players) {
+		LiveTechTable table = new LiveTechTable(players,panel);
 //		table.getColumnModel().getColumn(1).setPreferredWidth(170);
-//		scroll = new BottomScrollPane(table);
-//		scroll.setBounds(25,300,940, 300);
-//		this.add(scroll);
-//	}
+		scroll = new BottomScrollPane(table);
+		scroll.setBounds(5,5,940,280);
+		this.add(scroll);
+	}
 	
 }

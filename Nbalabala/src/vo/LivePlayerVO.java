@@ -49,11 +49,29 @@ public class LivePlayerVO {
 	/** 该球员在场时球队净得分 */
 	public int plusMinus;
 	
-	public LivePlayerVO(String nameChn,boolean isStarter,String timePlayed,int fieldMade){
+	public LivePlayerVO(String nameChn,String nameEng,String position,
+			boolean isStarter,String timePlayed,int fieldMade,int fieldAttempt,int threepointMade,int threepointAttempt
+			,int freethrowMade,int freethrowAttempt,int totalRebound,int assist,int steal,int block,int turnover,
+			int foul,int score,int plusMinus){
 		this.nameChn = nameChn;
+		this.nameEng = nameEng;
+		this.position = position;
 		this.isStarter = isStarter;
 		this.timePlayed = timePlayed;
 		this.fieldMade = fieldMade;
+		this.fieldAttempt = fieldAttempt;
+		this.threepointMade = threepointMade;
+		this.threepointAttempt = threepointAttempt;
+		this.freethrowMade = freethrowMade;
+		this.freethrowAttempt = freethrowAttempt;
+		this.totalRebound = totalRebound;
+		this.assist = assist;
+		this.steal = steal;
+		this.block = block;
+		this.turnover = turnover;
+		this.foul = foul;
+		this.score =score;
+		this.plusMinus = plusMinus;
 	}
 
 }

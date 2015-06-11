@@ -300,6 +300,8 @@ public class Constants {
 	
 	public static String [] matchPlayerHeaders = TextCHN.matchPlayerHeaders;
 	
+	public static String[] livePlayerHeaders = TextCHN.livePlayerHeaders;
+	
 	/** 所有球员赛季数据中的表格分成四部分，为基本、进攻、防守、高阶 */
 	public static String []basicPlayerHeaders = TextCHN.basicPlayerHeaders;
 	

@@ -10,7 +10,6 @@ import ui.common.table.BottomTable;
 import ui.controller.MainController;
 import utility.Constants;
 import utility.Utility;
-import vo.LivePlayerVO;
 
 /**
  * 技术统计表格
@@ -31,14 +30,6 @@ public class TechTable extends BottomTable{
 		setTable();
 	}
 	
-//	public TechTable(ArrayList<LivePlayerVO> players,BottomPanel panel,int i){
-//		super(new String[players.size()][Constants.matchPlayerHeaders.length+1],Constants.matchPlayerHeaders);
-//		this.players = players;
-//		this.panel = panel;
-//		setTable();
-//	}
-	
-	
 	public void setTable(){
 		
 		for (int i = 0; i < players.size(); i++) {
@@ -56,7 +47,7 @@ public class TechTable extends BottomTable{
 			setValueAt(mpVO.getThreepointMade() + "",i,6);
 			setValueAt(mpVO.getThreepointAttempt() + "",i,7);
 			setValueAt(mpVO.getFreethrowMade() + "",i,8);
-			setValueAt(mpVO.getFieldAttempt() + "",i,9);
+			setValueAt(mpVO.getFreethrowAttempt() + "",i,9);
 			setValueAt(mpVO.getOffensiveRebound() + "",i,10);
 			setValueAt(mpVO.getDefensiveRebound() + "",i,11);
 			setValueAt(mpVO.getTotalRebound() + "",i,12);
