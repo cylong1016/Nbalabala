@@ -86,6 +86,7 @@ public class Live implements LiveBLService {
 	 */
 	@Override
 	public boolean hasMatchStarted() {
+		getLiveList(); // 怕不调用这个方法
 		return hasMatchStarted;
 	}
 
