@@ -28,13 +28,12 @@ public interface LiveBLService {
 	 */
 	public HashMap<String, String> getLiveList();
 	
-	/** 对于上面这个方法的1 3 4 三种情况返回true; 2 返回false 
-	 *  因为只有在这两种情况下，才能点某个按钮进入下一级界面，显示直播界面
-	 *  （当然了，对于情况4，界面将不会再动了）*/
+	/**
+	 * 正在直播比赛，返回true，否则返回false
+	 * @author cylong
+	 * @version 2015年6月12日  上午1:16:05
+	 */
 	public boolean hasMatchStarted();
-	
-	/** 检查页面从上一次检查更新到现在有无更新 */
-	public boolean isAnythingNew();
 	
 	/** 得到客场球队名 */
 	public String getRoadName();
@@ -45,10 +44,18 @@ public interface LiveBLService {
 	/** 得到主场球缩写 */
 	public String getHomeAbbr();
 	
-	/** 获取客场球员的记录，PO里面要有所有页面上能爬到的属性 */
+	/**
+	 * 获得文字直播，ArrayList每一项保存一个时刻的记录
+	 * 格式： "10:36;"骑士";"詹姆斯罚球不中";"0-2"" 或者 "第一小节结束"
+	 * @author cylong
+	 * @version 2015年6月12日  上午2:17:54
+	 */
+	public ArrayList<String> getTextLive();
+	
+	/** 获取客场球员的记录，VO里面要有所有页面上能爬到的属性 */
 	public ArrayList<LivePlayerVO> getRoadPlayerRecords();
 	
-	/** 获取主场球员的记录，PO里面要有所有页面上能爬到的属性 ，这个网页上没有的属性不用管。注意“篮板”是totalRebounds*/
+	/** 获取主场球员的记录，VO里面要有所有页面上能爬到的属性 ，这个网页上没有的属性不用管。注意“篮板”是totalRebounds*/
 	public ArrayList<LivePlayerVO> getHomePlayerRecords();
 	
 	/** 获取客场各节比分。
