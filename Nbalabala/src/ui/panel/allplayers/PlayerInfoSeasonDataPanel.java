@@ -26,6 +26,10 @@ public class PlayerInfoSeasonDataPanel extends Panel{
 		this.add(navLabel);
 		
 		BottomScrollPane scrollPane = new BottomScrollPane(seasonDataTable);
+		seasonDataTable.setHeaderColorAndFont();
+		seasonDataTable.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
+		seasonDataTable.setRowHeight(0, 20);
+		seasonDataTable.setRowHeight(2, 20);
 		scrollPane.setBounds(UIConfig.RELA_X, navLabel.getHeight()+16, UIConfig.TABLE_WID, 160);
 		this.add(scrollPane);
 	}
