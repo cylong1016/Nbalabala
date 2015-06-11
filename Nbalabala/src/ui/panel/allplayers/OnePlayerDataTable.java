@@ -3,6 +3,7 @@ package ui.panel.allplayers;
 import java.text.DecimalFormat;
 
 import po.PlayerSeasonPO;
+import po.TeamSeasonPO;
 import ui.UIConfig;
 import ui.common.table.BottomTable;
 import utility.Constants;
@@ -22,13 +23,13 @@ public class OnePlayerDataTable extends BottomTable{
 //		cancelVerticalLines();
 	}
 	
-	public OnePlayerDataTable(String season, PlayerSeasonPO seasonVO) {
+	public OnePlayerDataTable(String season, PlayerSeasonPO seasonPO, TeamSeasonPO teamPO) {
 		this();
-		setVO(season, seasonVO);
+		setVO(season, seasonPO, teamPO);
 	}
 	
 	/** 切换赛季以后，使用此方法更新该表格 */
-	public void setVO(String season, PlayerSeasonPO vo) {
+	public void setVO(String season, PlayerSeasonPO vo, TeamSeasonPO team) {
 		
 		DecimalFormat percentDf = UIConfig.PERCENT_FORMAT;
 		
@@ -67,5 +68,22 @@ public class OnePlayerDataTable extends BottomTable{
 		setValueAt(df.format(vo.turnoverAvg), 3, 13);
 		setValueAt(df.format(vo.foulAvg), 3, 14);
 		setValueAt(df.format(vo.scoreAvg), 3, 15);
+		
+		setValueAt(season, 5, 0);
+		setValueAt(team.matchCount, 5, 1);
+		setValueAt(" ", 5, 2);
+		setValueAt(" ", 5, 3);
+		setValueAt(percentDf.format(team.fieldPercent), 5, 4);
+		setValueAt(percentDf.format(team.threePointPercent), 5, 5);
+		setValueAt(percentDf.format(team.freethrowPercent), 5, 6);
+		setValueAt(df.format(team.offensiveReboundAvg), 5, 7);
+		setValueAt(df.format(team.defensiveReboundAvg), 5, 8);
+		setValueAt(df.format(team.totalReboundAvg), 5, 9);
+		setValueAt(df.format(team.assistAvg), 5, 10);
+		setValueAt(df.format(team.stealAvg), 5, 11);
+		setValueAt(df.format(team.blockAvg), 5, 12);
+		setValueAt(df.format(team.turnoverAvg), 5, 13);
+		setValueAt(df.format(team.foulAvg), 5, 14);
+		setValueAt(df.format(team.scoreAvg), 5, 15);
 	}
 }

@@ -1,6 +1,7 @@
 package ui.panel.allplayers;
 
 import po.PlayerSeasonPO;
+import po.TeamSeasonPO;
 import ui.UIConfig;
 import ui.common.label.NavLabel;
 import ui.common.panel.Panel;
@@ -26,11 +27,16 @@ public class PlayerInfoSeasonDataPanel extends Panel{
 		this.add(navLabel);
 		
 		BottomScrollPane scrollPane = new BottomScrollPane(seasonDataTable);
-		scrollPane.setBounds(UIConfig.RELA_X, navLabel.getHeight()+16, UIConfig.TABLE_WID, 160);
+		seasonDataTable.setHeaderColorAndFont();
+		seasonDataTable.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
+		seasonDataTable.setRowHeight(0, 20);
+		seasonDataTable.setRowHeight(2, 20);
+		seasonDataTable.setRowHeight(4, 20);
+		scrollPane.setBounds(UIConfig.RELA_X, navLabel.getHeight()+16, UIConfig.TABLE_WID, 300);
 		this.add(scrollPane);
 	}
 	
-	public void update(String season, PlayerSeasonPO seasonVO) {
-		seasonDataTable.setVO(season, seasonVO);
+	public void update(String season, PlayerSeasonPO seasonVO, TeamSeasonPO teamPO) {
+		seasonDataTable.setVO(season, seasonVO, teamPO);
 	}
 }

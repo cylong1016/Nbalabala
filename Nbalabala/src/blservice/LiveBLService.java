@@ -17,7 +17,7 @@ import vo.LivePlayerVO;
 public interface LiveBLService {
 	
 	/**
-	 * 返回将要或者正在直播的比赛列表
+	 * 返回将要或者正在直播的比赛列	表
 	 * @return 时间=>比赛球队
 	 * @author cylong
 	 * @version 2015年6月11日  下午7:57:16

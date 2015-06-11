@@ -26,5 +26,7 @@ public interface AnalysisBLService {
 	
 	/** 返回某一球员及其所属球队所有人的团队贡献值 */
 	public ArrayList<AnalysisDevotionVO> getDevotionData(String name);
+	
+	/** 返回某一球员 */
 
 }

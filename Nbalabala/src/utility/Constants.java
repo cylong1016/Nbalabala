@@ -22,14 +22,14 @@ public class Constants {
 		promotionText = TextCHN.promotionText;
 		positionShortText = TextCHN.positionShortText;
 		
-		 leagueAvg = TextCHN.leagueAvg;
-		 hotType	= TextCHN.hotType;
-		 scoreText = TextCHN.scoreText;
-		 formerFiveAvgText = TextCHN.formerFiveAvgText;
-		 POSITION_SELECT_TEXT = TextCHN.POSITION_SELECT_TEXT;
-		 DIVISION_SELECT_TEXT = TextCHN.DIVISION_SELECT_TEXT;
-		 BASIS_SELECT_TEXT = TextCHN.BASIS_SELECT_TEXT;
-		 TOTAL_AVG_TEXT = TextCHN.TOTAL_AVG_TEXT;
+		leagueAvg = TextCHN.leagueAvg;
+		hotType	= TextCHN.hotType;
+		scoreText = TextCHN.scoreText;
+		formerFiveAvgText = TextCHN.formerFiveAvgText;
+		POSITION_SELECT_TEXT = TextCHN.POSITION_SELECT_TEXT;
+		DIVISION_SELECT_TEXT = TextCHN.DIVISION_SELECT_TEXT;
+		BASIS_SELECT_TEXT = TextCHN.BASIS_SELECT_TEXT;
+		TOTAL_AVG_TEXT = TextCHN.TOTAL_AVG_TEXT;
 		 
 		GAME_SORT_RP = TextCHN.GAME_SORT_RP;
 		LIVE = TextCHN.LIVE;
@@ -132,14 +132,14 @@ public class Constants {
 		promotionText = TextENG.promotionText;
 		positionShortText = TextENG.positionShortText;
 		
-		 leagueAvg = TextENG.leagueAvg;
-		 hotType	= TextENG.hotType;
-		 scoreText = TextENG.scoreText;
-		 formerFiveAvgText = TextENG.formerFiveAvgText;
-		 POSITION_SELECT_TEXT = TextENG.POSITION_SELECT_TEXT;
-		 DIVISION_SELECT_TEXT = TextENG.DIVISION_SELECT_TEXT;
-		 BASIS_SELECT_TEXT = TextENG.BASIS_SELECT_TEXT;
-		 TOTAL_AVG_TEXT = TextENG.TOTAL_AVG_TEXT;
+		leagueAvg = TextENG.leagueAvg;
+		hotType	= TextENG.hotType;
+		scoreText = TextENG.scoreText;
+		formerFiveAvgText = TextENG.formerFiveAvgText;
+		POSITION_SELECT_TEXT = TextENG.POSITION_SELECT_TEXT;
+		DIVISION_SELECT_TEXT = TextENG.DIVISION_SELECT_TEXT;
+		BASIS_SELECT_TEXT = TextENG.BASIS_SELECT_TEXT;
+		TOTAL_AVG_TEXT = TextENG.TOTAL_AVG_TEXT;
 		
 		GAME_SORT_RP = TextENG.GAME_SORT_RP;
 		LIVE = TextENG.LIVE;

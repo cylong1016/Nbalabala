@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import po.MatchPlayerPO;
 import po.PlayerProfilePO;
 import po.PlayerSeasonPO;
+import po.TeamSeasonPO;
 import ui.Images;
 import ui.MyFont;
 import ui.UIConfig;
@@ -31,6 +32,8 @@ import vo.PlayerDetailVO;
 import bl.playerquerybl.PlayerQuery;
 import blservice.PlayerQueryBLService;
 import data.playerdata.PlayerImageCache;
+import data.seasondata.SeasonData;
+import dataservice.SeasonDataService;
 
 /**
  * 具体球员信息界面
@@ -62,6 +65,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	private String name;
 	private PlayerProfilePO profileVO;
 	private PlayerQueryBLService playerQuery = new PlayerQuery();
+	private SeasonDataService teamSeason = new SeasonData();
 	private PlayerDetailVO detailVO;
 	
 	private ImgButton backButton;
@@ -159,7 +163,9 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 				remove(currentPanel);
 				if (seasonDataPanel == null) {
 					seasonDataPanel = new PlayerInfoSeasonDataPanel();
-					seasonDataPanel.update(seasonInput.getSeason(), detailVO.getSeasonRecord());
+					TeamSeasonPO teamSeasonPO = teamSeason.getTeamDataByAbbr
+							(detailVO.getSeasonRecord().getTeamAbbr(), seasonInput.getSeason());
+					seasonDataPanel.update(seasonInput.getSeason(), detailVO.getSeasonRecord(), teamSeasonPO);
 				}
 				currentPanel = seasonDataPanel;
 				addCurrentPanel();
@@ -294,7 +300,8 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 					playerQuery.getHighestScoreReboundAssist(season));
 		}
 		if (seasonDataPanel != null) {
-			seasonDataPanel.update(season, seasonVO);
+			TeamSeasonPO teamSeasonPO = teamSeason.getTeamDataByAbbr(seasonVO.getTeamAbbr(), season);
+			seasonDataPanel.update(season, seasonVO, teamSeasonPO);
 		}
 		if (matchesDataPanel != null) {
 			matchesDataPanel.updateContent(detailVO.getMatchRecords());
