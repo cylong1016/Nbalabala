@@ -4,12 +4,15 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import ui.Images;
 import ui.common.button.TabButton;
 import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
+import ui.common.table.BottomScrollPane;
 import utility.Constants;
+import vo.LivePlayerVO;
 import vo.MatchDetailVO;
 
 /**
@@ -25,12 +28,17 @@ public class LiveBelowPanel extends BottomPanel {
 	private MatchDetailVO vo;
 	private TabButton[] tab;
 	private MyLabel playerlb_1,playerlb_2;
-
-	public LiveBelowPanel(Image bg) {
+	private BottomPanel panel;
+	private ArrayList<String> text;
+	
+	public LiveBelowPanel(ArrayList<String> text,Image bg,BottomPanel panel) {
 		super(bg);
+		this.panel = panel;
 		this.setBounds(22, 292, 952, 309);
 		addButton();
 //		addLabel();
+		this.text = text;
+		setTable(text);
 	}
 	
 	public void addLabel(){
@@ -40,6 +48,16 @@ public class LiveBelowPanel extends BottomPanel {
 		playerlb_2.setForeground(Color.white);
 		this.add(playerlb_1);
 		this.add(playerlb_2);
+	}
+	
+	private BottomScrollPane scroll;
+
+	public void setTable(ArrayList<String> text) {
+		LiveDetailTable table = new LiveDetailTable(text,panel);
+		table.getColumnModel().getColumn(2).setPreferredWidth(170);
+		scroll = new BottomScrollPane(table);
+		scroll.setBounds(240,10,580,330);
+		this.add(scroll);
 	}
 
 	public void addButton() {
