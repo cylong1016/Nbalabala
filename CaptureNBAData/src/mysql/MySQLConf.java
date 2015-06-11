@@ -7,11 +7,11 @@ package mysql;
  */
 public class MySQLConf {
 	// 驱动程序名
-	public static String DRIVER = "com.mysql.jdbc.Driver";
+	public static final String DRIVER = "com.mysql.jdbc.Driver";
 	// URL指向要访问的数据库名nbalabala
-	public static String URL = "jdbc:mysql://localhost/nbalabala";
+	public static final String URL = "jdbc:mysql://localhost/nbalabala";
 	// 用户名
-	public static String USER = "root";
+	public static final String USER = "root";
 	// 密码
-	public static String PASSWORD = "root";
+	public static final String PASSWORD = "root";
 }

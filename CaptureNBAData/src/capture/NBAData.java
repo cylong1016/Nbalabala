@@ -19,7 +19,7 @@ import mysql.MySQL;
 public abstract class NBAData {
 
 	/** 网站链接 */
-	protected String root = "http://www.basketball-reference.com";
+	protected static final String ROOT = "http://www.basketball-reference.com";
 	/** 将要抓取数据的url */
 	protected String captureUrl;
 	/** 数据库连接 */
@@ -27,10 +27,10 @@ public abstract class NBAData {
 	/** 英文月份=>数字月份 */
     private Hashtable<String, String> month = new Hashtable<String, String>(24);
     /** 英文月份缩写 */
-    private String[] monthAbbrStrArr = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+    private static final String[] MONTH_ABBR_STR_ARR = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", 
                                  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     /** 英文月份全称 */
-    private String[] monthStrArr = {"January", "February", "March", "April", "May", "June", 
+    private static final String[] MONTH_STR_ARR = {"January", "February", "March", "April", "May", "June", 
                                  "July", "August", "September", "October", "November", "December"};
 	
 	static {
@@ -39,9 +39,9 @@ public abstract class NBAData {
 	}
 	
 	public NBAData() {
-		for(int i = 0; i < monthAbbrStrArr.length; i++) {
-    		month.put(monthAbbrStrArr[i], String.valueOf(i + 1));
-    		month.put(monthStrArr[i], String.valueOf(i + 1));
+		for(int i = 0; i < MONTH_ABBR_STR_ARR.length; i++) {
+    		month.put(MONTH_ABBR_STR_ARR[i], String.valueOf(i + 1));
+    		month.put(MONTH_STR_ARR[i], String.valueOf(i + 1));
 		}
 	}
 

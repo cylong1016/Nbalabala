@@ -26,7 +26,7 @@ public class Player extends NBAData {
 	private String savePath = "images/portrait/";
 	
 	public Player() {
-		this.captureUrl = root + "/players/";
+		this.captureUrl = ROOT + "/players/";
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class Player extends NBAData {
 						}
 						if(portraitUrl != null) {
 							// 抓取球员头像
-							capturePlayerPortrait(getPortrait(root + portraitUrl, data), data);
+							capturePlayerPortrait(getPortrait(ROOT + portraitUrl, data), data);
 						}
 						playerData.add(data);
 					}

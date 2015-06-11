@@ -4,6 +4,7 @@
 package blservice;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import vo.LivePlayerVO;
 
@@ -15,13 +16,13 @@ import vo.LivePlayerVO;
  */
 public interface LiveBLService {
 	
-	
-	/** 通过检查网页:
-	 *  1 如果今天有比赛，返回一个字符串，比如XX对XX的比赛将在18:00开始 
-	 *  2 如果没有比赛，返回“今天没有比赛”之类的提示信息
-	 *  3 如果有比赛正在进行，返回“XX对XX的比赛正在进行”这样的字符串
-	 *  4 如果今天的比赛已经结束，返回“XX对XX的比赛已经结束”这样的字符串*/
-	public String getLiveInfo();
+	/**
+	 * 返回将要或者正在直播的比赛列表
+	 * @return 时间=>比赛球队
+	 * @author cylong
+	 * @version 2015年6月11日  下午7:57:16
+	 */
+	public HashMap<String, String> getLiveList();
 	
 	/** 对于上面这个方法的1 3 4 三种情况返回true; 2 返回false 
 	 *  因为只有在这两种情况下，才能点某个按钮进入下一级界面，显示直播界面

@@ -24,7 +24,7 @@ public class Match extends NBAData {
     private int matchID = 1;
     
     public Match() {
-    	this.captureUrl = root + "/leagues";
+    	this.captureUrl = ROOT + "/leagues";
     }
     
     /**
@@ -56,7 +56,7 @@ public class Match extends NBAData {
     		while((temp = reader.readLine()) != null) {
     			Matcher matcher = pattern.matcher(temp);
     			if(matcher.find()) {
-    				String href = root + matcher.group("href").replaceAll(".html", "_games.html");
+    				String href = ROOT + matcher.group("href").replaceAll(".html", "_games.html");
     				String season = matcher.group("season");
     				captureNameAndScore(season, href);
     				i++;
@@ -107,7 +107,7 @@ public class Match extends NBAData {
 				Matcher matcherCell = patternCell.matcher(temp);
 				if(matcherCell.find()) {
 					String info = matcherCell.group("info");
-					String href = root + matcherCell.group("href");
+					String href = ROOT + matcherCell.group("href");
 					if(i == 7) { // Box Score所在的那一行
 						if(!info.equals("Box Score")) { // 这一行没有球队的比赛信息
 							hasDetalData = false;
