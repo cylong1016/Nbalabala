@@ -10,6 +10,7 @@ import ui.common.table.BottomTable;
 import ui.controller.MainController;
 import utility.Constants;
 import utility.Utility;
+import vo.LivePlayerVO;
 
 /**
  * 技术统计表格
@@ -29,6 +30,14 @@ public class TechTable extends BottomTable{
 		this.panel = panel;
 		setTable();
 	}
+	
+//	public TechTable(ArrayList<LivePlayerVO> players,BottomPanel panel,int i){
+//		super(new String[players.size()][Constants.matchPlayerHeaders.length+1],Constants.matchPlayerHeaders);
+//		this.players = players;
+//		this.panel = panel;
+//		setTable();
+//	}
+	
 	
 	public void setTable(){
 		

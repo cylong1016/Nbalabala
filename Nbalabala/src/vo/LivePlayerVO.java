@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vo;
 
 /**
@@ -51,5 +48,12 @@ public class LivePlayerVO {
 	public int score;
 	/** 该球员在场时球队净得分 */
 	public int plusMinus;
+	
+	public LivePlayerVO(String nameChn,boolean isStarter,String timePlayed,int fieldMade){
+		this.nameChn = nameChn;
+		this.isStarter = isStarter;
+		this.timePlayed = timePlayed;
+		this.fieldMade = fieldMade;
+	}
 
 }

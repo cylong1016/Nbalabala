@@ -2,14 +2,18 @@ package ui.panel.gamedata.live;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import ui.Images;
 import ui.common.button.TabButton;
 import ui.common.panel.Panel;
+import ui.common.panel.ScorePanel;
 import ui.panel.gamedata.ConPanel;
 import ui.panel.gamedata.GameFatherPanel;
 import utility.Constants;
+import vo.LivePlayerVO;
 import vo.MatchDetailVO;
+import bl.livebl.Live;
 import blservice.LiveBLService;
 
 /**
@@ -30,10 +34,21 @@ public class LivePanel extends GameFatherPanel {
 	private TechPanel techPanel;
 	private Panel currentPanel;
 
-	public LivePanel(String url, Panel gameData) {
+//	String url,String teamAbbr1,String teamAbbr2,String total,String each
+	
+	public LivePanel(String url) {
 		super(url);
+		testData();
+		
+		
+		String[] totalScore = total.split("-");
+		addLabel(teamAbbr1,teamAbbr2,totalScore);
+		scPanel = new ScorePanel(teamAbbr1,teamAbbr2,total,each);
+		this.add(scPanel);
+		scPanel.setLocation(188, 110);
+		this.repaint();
 		addButton();
-//		liveService = new Live();
+		liveService = new Live();
 		refresh();
 		this.add(techPanel);
 		this.currentPanel = techPanel;
@@ -89,13 +104,32 @@ public class LivePanel extends GameFatherPanel {
 		});
 	}
 	
+//	public LivePlayerVO(String nameChn,boolean isStarter,String timePlayed,int fieldMade){
+	double[] homePlayersArgs = {1,2,3,4,5};
+	double[] roadPlayersArgs = {5,4,3,2,1};
+//	LivePlayerVO[] vo = new LivePlayerVO[5];
+	String[] time = {"HELLO","WORLD","CYL","LSY","ALLEN"};
+	int[] made ={10,13,15,16,18};
+	ArrayList<LivePlayerVO> vo1 = new ArrayList<LivePlayerVO>();
+	ArrayList<LivePlayerVO> vo2 = new ArrayList<LivePlayerVO>();
+	
+	public void testData(){
+		for(int i = 0;i<5;i++){
+			vo1.add(new LivePlayerVO(Constants.TEAM_ABBR[i],true,time[i],made[i])) ;
+			vo2.add(new LivePlayerVO(Constants.TEAM_ABBR[i+5],true,time[4-i],made[4-i]));
+		}
+	}
+	
 	public void refresh(){
 		if(currentPanel != null) {
 			this.remove(currentPanel);
 		}
-		liveBelow = new LiveBelowPanel(Images.LIVE_BELOW, matchDetail);
-		conPanel = new ConPanel(liveService.getHomeFiveArgs(),liveService.getroadFiveArgs());
-		techPanel = new TechPanel(liveService.getHomePlayerRecords(),liveService.getRoadPlayerRecords(),
+		liveBelow = new LiveBelowPanel(Images.LIVE_BELOW);
+//		conPanel = new ConPanel(liveService.getHomeFiveArgs(),liveService.getroadFiveArgs());
+//		techPanel = new TechPanel(liveService.getHomePlayerRecords(),liveService.getRoadPlayerRecords(),
+//				LivePanel.this);
+		conPanel = new ConPanel(homePlayersArgs,roadPlayersArgs);
+		techPanel = new TechPanel(vo1,vo2,
 				LivePanel.this);
 		if(currentPanel == conPanel) {
 			this.add(conPanel);

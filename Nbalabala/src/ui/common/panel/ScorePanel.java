@@ -5,13 +5,10 @@ import java.awt.Font;
 
 import ui.MyFont;
 import ui.UIConfig;
-import ui.common.button.ImgButton;
-import ui.common.label.ImgLabel;
 import ui.common.label.MyLabel;
 import utility.Constants;
 import vo.MatchDetailVO;
 import vo.MatchProfileVO;
-import blservice.TeamQueryBLService;
 
 /**
  * 显示球队比赛分数的panel
@@ -24,32 +21,20 @@ public class ScorePanel extends Panel {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 1683422262550183367L;
 
-	String[] teamPlace = { "波士顿", "布鲁克林", "纽约", "费城", "多伦多", "芝加哥", "克利夫兰", "底特律", "印第安纳", "密尔沃基", "亚特兰大", "夏洛特",
-			"迈阿密", "奥兰多", "华盛顿", "金洲", "洛杉矶", "洛杉矶", "菲尼克斯", "萨克拉门托", "丹佛", "明尼苏达", "俄克拉荷马", "波特兰", "犹他", "达拉斯",
-			"休斯敦", "孟菲斯", "新奥尔良", "圣安东尼奥" };
-
-	int teamX1 = 736, teamX2 = 828, teamY = 190, width = 74, height = 24;
+	private int  width = 74, height = 24;
 	/** 球队中文全称 */
-	String teamStr1, teamStr2;
-	/** 球队所处位置 */
-	String place1, place2;
+	private String teamStr1, teamStr2;
 	/** 球队英文缩写 */
-	String teamShort1, teamShort2;
+	private String teamShort1, teamShort2;
 	/** 上方显示的球队名称和城市 */
-	MyLabel teamLabel1, teamLabel2, placeLabel1, placeLabel2;
+	private MyLabel teamLabel1, teamLabel2;
 	private int labelX = 60, labelY_1 = 23, labelY_2 = 50;
-	Font labelFont = new Font("微软雅黑", 0, 14);
-	String signurl = "NBAdata/teams/";
-	/** 球队队标 */
-	ImgLabel sign1, sign2;
-	TeamQueryBLService teamQuery;
-	MatchDetailVO matchVO;
-	MyLabel[] lb_1, lb_2,lb_time;
-	String url = UIConfig.IMG_PATH + "game/";
-	/** 时间地址 */
-	String timeURL;
-	ImgButton timeImg;
-	MatchProfileVO matchPro;
+	private Font labelFont = new Font("微软雅黑", 0, 14);
+	private MatchDetailVO matchVO;
+	private MyLabel[] lb_1, lb_2,lb_time;
+	private MatchProfileVO matchPro;
+	private String[] teamTemp;
+	private String[] scoreAll, eachScore, score1, score2;
 
 	/**
 	 * @param url
@@ -59,25 +44,32 @@ public class ScorePanel extends Panel {
 	public ScorePanel(MatchDetailVO matchDetailVO) {
 		this.matchVO = matchDetailVO;
 		this.matchPro = matchVO.getProfile();
-		getTeam();
-		getScore();
+		teamTemp = matchPro.getTeam().split("-");
+		teamShort1 = teamTemp[0];
+		teamShort2 = teamTemp[1];
+		scoreAll = matchPro.getScore().split("-");// 两支球队比赛总分
+		eachScore = matchVO.getEachSectionScore().split(";");
+		getTeam(teamShort1,teamShort2);
+		getScore(scoreAll,eachScore);
 		addLabel();
 		addScore();
-//		addTime();
+		this.setSize(620, 90);
+	}
+	
+	/**eachScore 每节比分 ，格式为“27-25;29-31;13-25;16-31;”*/
+	public ScorePanel(String teamShort1,String teamShort2,String score,String eachSecScore){
+		scoreAll = score.split("-");// 两支球队比赛总分
+		eachScore = eachSecScore.split(";");
+		getTeam(teamShort1,teamShort2);
+		getScore(scoreAll,eachScore);
+		addLabel();
+		addScore();
 		this.setSize(620, 90);
 	}
 
-	public void getTeam() {
-		String[] teamTemp = matchPro.getTeam().split("-");
-		teamShort1 = teamTemp[0];
-		teamShort2 = teamTemp[1];
-		int team_1_Order = match(teamShort1);
-		int team_2_Order = match(teamShort2);
-		teamStr1 = Constants.TEAM_NAMES[team_1_Order];
-		teamStr2 = Constants.TEAM_NAMES[team_2_Order];
-		place1 = teamPlace[team_1_Order];
-		place2 = teamPlace[team_2_Order];
-
+	public void getTeam(String teamShort1,String teamShort2) {
+		teamStr1 = Constants.translateTeamAbbr(teamShort1);
+		teamStr2 = Constants.translateTeamAbbr(teamShort2);
 	}
 
 	int order;// 球队在数组中的位置
@@ -96,35 +88,12 @@ public class ScorePanel extends Panel {
 		teamLabel2 = new MyLabel(labelX, labelY_2, width, height, teamStr2);
 		teamLabel1.setFont(labelFont);
 		teamLabel2.setFont(labelFont);
-//		placeLabel1 = new MyLabel(labelX, labelY_1, width, height, place1);
-//		placeLabel2 = new MyLabel(labelX, labelY_3, width, height, place2);
 		this.add(teamLabel1);
 		this.add(teamLabel2);
-//		this.add(placeLabel1);
-//		this.add(placeLabel2);
-//		sign1 = new ImgLabel(28, -5, 80, 80, SVGHandler.getTeamLogo(teamShort1));
-//		sign2 = new ImgLabel(28, 80, 80, 80, SVGHandler.getTeamLogo(teamShort2));
-//		this.add(sign1);
-//		this.add(sign2);
 	}
 
-//	public void addTime() {
-//		timeURL = url + "time" + (analyzeSection(matchPro) - 4) + ".png";
-//		timeImg = new ImgButton(timeURL, 123, 65, timeURL, timeURL);
-//		this.add(timeImg);
-//	}
 
-	public int analyzeSection(MatchDetailVO pro) {
-		String gameInfo = pro.getEachSectionScore();
-		String[] eachSection = gameInfo.split(";");
-		return eachSection.length;
-	}
-
-	String[] scoreAll, eachScore, score1, score2;
-
-	public void getScore() {
-		scoreAll = matchPro.getScore().split("-");// 两支球队比赛总分
-		eachScore = matchVO.getEachSectionScore().split(";");
+	public void getScore(String[] scoreAll,String[] eachScore) {
 
 		int eachlth = eachScore.length;
 		score1 = new String[eachlth];
