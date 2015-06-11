@@ -48,7 +48,7 @@ public class PlayerInfoBriefPanel extends Panel{
 		this.add(navLabel);
 		
 		BottomScrollPane scrollPane = new OnePlayerMatchTableFactory(twoMatches).getTableScrollPane();
-		scrollPane.setBounds(UIConfig.RELA_X, 254, UIConfig.TABLE_WID, 270); // 表格的位置 
+		scrollPane.setBounds(UIConfig.RELA_X, 254, UIConfig.TABLE_WID, UIConfig.TABLE_H); // 表格的位置 
 		
 		this.add(scrollPane);
 	}

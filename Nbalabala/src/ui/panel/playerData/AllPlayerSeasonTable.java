@@ -84,19 +84,22 @@ public class AllPlayerSeasonTable extends BottomTable{
 		this.category = category;
 		
 		TableColumnModel model = getColumnModel();
+//		this.setHeaderColorAndFont();
 		
 		switch (category) {
 		case BASIC:
 			for (int i=0;i<Constants.basicPlayerHeaders.length;i++) {
 				model.getColumn(i).setHeaderValue(Constants.basicPlayerHeaders[i]);
 			}
-			// setWidth(....)//TODO
+			// TODO
+			this.setWidth(new int[] {33, 165, 98, 49, 49, 49, 49, 49, 49, 49, 49, 49, 53, 49, 49});
 			break;
 		case OFFENSIVE:
 			for (int i=0;i<Constants.offensivePlayerHeaders.length;i++) {
 				model.getColumn(i).setHeaderValue(Constants.offensivePlayerHeaders[i]);
 			}
-			// setWidth(....)//TODO
+			// TODO
+			this.setWidth(new int[] {33, 165, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 53, 49, 49});
 			break;
 		case DEFENSIVE:
 			for (int i=0;i<Constants.defensivePlayerHeaders.length;i++) {

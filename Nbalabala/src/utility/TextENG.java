@@ -72,7 +72,7 @@ public class TextENG {
 	public static String regularText = "Regular";
 	public static String playoffText = "Playoff";
 	
-	public static String lastestTwo = 	"Last  Matches";
+	public static String lastestTwo = 	"Last     Matches";
 	public static String titleAvgData = " Total／Average";
 	public static String gameLog = " Matches";
 	
@@ -110,7 +110,7 @@ public class TextENG {
 	};
 	/** 球员个人信息页面中的赛程数据的表头 */
 	public static String [] onePlayerMatchHeaders = {
-		"Date","VS","ST","MP","FG","FGA","3P","3PA","FT","FTA",
+		"Date","VS","ST","MP","FG","3P","FT",
 			"ORB","DRB","TRB","AST","STL","BLK","TOV","PF","PTS"
 	};
 	

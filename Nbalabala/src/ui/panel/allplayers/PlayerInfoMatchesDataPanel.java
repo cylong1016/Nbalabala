@@ -36,8 +36,9 @@ public class PlayerInfoMatchesDataPanel extends Panel{
 		navLabel.setLocation(UIConfig.RELA_X, 16);
 		this.add(navLabel);
 		
-		scrollPane = new OnePlayerMatchTableFactory(playerMatch).getTableScrollPane();
-		scrollPane.setBounds(UIConfig.RELA_X, 16+navLabel.getHeight(), UIConfig.TABLE_WID, 286); // 表格的位置 
+		OnePlayerMatchTableFactory one = new OnePlayerMatchTableFactory(playerMatch);
+		scrollPane = one.getTableScrollPane();		
+		scrollPane.setBounds(UIConfig.RELA_X, 16+navLabel.getHeight(),one.setTableWidth(UIConfig.TABLE_H), UIConfig.TABLE_H); // 表格的位置
 		this.add(scrollPane);
 	}
 

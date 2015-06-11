@@ -72,8 +72,12 @@ public class UIConfig {
 	public static final int TABLE_HEADER_HEIGHT = 30;
 	/** 表格的宽度 */
 	public static final int TABLE_WID = 888;
+	/** 表格的 高度 */
+	public static final int TABLE_H = 290;
 	/** 表格的相对坐标X */
 	public static final int RELA_X = 29;
+	/** 表格纵向滚动条的宽度 */
+	public static final int SCROLLBAR_WIDTH = 16;
 	/*----------------------------表格配置--------------------------------*/
 	/*----------------------------柱状图配置--------------------------------*/
 	/** 平均的柱状图颜色 */

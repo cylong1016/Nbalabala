@@ -78,8 +78,10 @@ public class TeamMatchPanel extends Panel{
 		matchTable.setHeaderColorAndFont();
 		matchTable.setRowHeight(UIConfig.ROW_HEIGHT);
 		matchTable.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
-		matchTable.setWidth(new int[] {218, 218, 218, 216});
-		scrollPane.setBounds(UIConfig.RELA_X,16+40,UIConfig.TABLE_WID,278);	//表格在这个子页面中的坐标
+		matchTable.setWidth(new int[] {222, 222, 222, 222});
+		
+		int width = matchTable.setTableWidth(UIConfig.TABLE_H, matchTable.getRowCount());
+		scrollPane.setBounds(UIConfig.RELA_X, 16+40, width, UIConfig.TABLE_H);	//表格在这个子页面中的坐标
 		this.add(scrollPane);
 		repaint();
 		

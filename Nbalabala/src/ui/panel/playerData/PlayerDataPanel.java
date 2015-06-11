@@ -106,7 +106,11 @@ public class PlayerDataPanel extends BottomPanel {
 		playerblService = new PlayerSeasonAnalysis();
 		// 初始化界面的表格
 		ArrayList<PlayerSeasonPO> iniArray = playerSeason.getAllPlayersSortedByName();
+		// set表格 
 		table = new AllPlayerSeasonTable(playerblService,iniArray,AllPlayerSeasonTableCategory.BASIC,TotalOrAvg.TOTAL);
+		table.setHeaderColorAndFont();
+		table.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
+		table.setWidth(new int[] {33, 165, 98, 49, 49, 49, 49, 49, 49, 49, 49, 49, 53, 49, 49});
 		addScrollPane(table);
 	}
 	
@@ -364,7 +368,7 @@ public class PlayerDataPanel extends BottomPanel {
 			this.remove(scroll);
 		}
 		scroll = new BottomScrollPane(table);
-		scroll.setLocation(50, 290); // 表格的位置
+		scroll.setBounds(54, 290, table.setTableWidth(UIConfig.TABLE_H, table.getRowCount()), UIConfig.TABLE_H);
 		this.add(scroll);
 	}
 

@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JLabel;
+import javax.swing.JScrollBar;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
@@ -317,5 +318,18 @@ public class BottomTable extends JTable {
 			return label;
 		}
 		
+	}
+	
+	/**
+	 * 判断是否有滚动条来设置宽度
+	 * @param height
+	 * @return
+	 */
+	public int setTableWidth(int height, int rowCount){
+		JTable table = new JTable();
+		BottomScrollPane scrollPane = new BottomScrollPane(table);
+		JScrollBar scrollBar = scrollPane.getVerticalScrollBar();
+		int width = (int) scrollBar.getPreferredSize().getWidth();
+		return height < (rowCount*UIConfig.ROW_HEIGHT)? UIConfig.TABLE_WID + width : UIConfig.TABLE_WID;
 	}
 }

@@ -28,8 +28,6 @@ public class TeamLineupPanel extends BottomPanel {
 	private BottomTable playerTable;
 	private BottomScrollPane scroll;
 	private ArrayList<PlayerProfilePO> players;
-	private static final Rectangle SCROLL_BOUNDS = new Rectangle(
-			UIConfig.RELA_X, 16 + 40, UIConfig.TABLE_WID, 270);// TODO Y坐标随便写的
 
 	public TeamLineupPanel(ArrayList<PlayerProfilePO> players) {
 		super();
@@ -53,12 +51,14 @@ public class TeamLineupPanel extends BottomPanel {
 		String[][] rowData = new String[players.size()][Constants.teamLineupHeaders.length];
 		playerTable = new BottomTable(rowData, Constants.teamLineupHeaders);
 		playerTable.setRowHeight(UIConfig.ROW_HEIGHT);
-		playerTable.setWidth(new int[] { 140, 44, 44, 44, 118, 118, 77, 287 }); // TODO列宽
-		playerTable.setHeaderColorAndFont(UIConfig.TABLE_HEADER_FORE_COLOR, UIConfig.TABLE_HEADER_BACK_COLOR,
-				UIConfig.TABLE_HEADER_FONT);
+		playerTable.setWidth(new int[] { 156, 44, 44, 44, 118, 118, 77, 287 }); 
+		playerTable.setHeaderColorAndFont();
 		playerTable.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
+		
+		Rectangle bounds = new Rectangle(
+				UIConfig.RELA_X, 16 + 40, playerTable.setTableWidth(UIConfig.TABLE_H, playerTable.getRowCount()), UIConfig.TABLE_H);
 		scroll = new BottomScrollPane(playerTable);
-		scroll.setBounds(SCROLL_BOUNDS);
+		scroll.setBounds(bounds);
 		this.add(scroll);
 
 		// 将头像放入表格的第一列 监听已加好 双击球员某一信息进入下一界面

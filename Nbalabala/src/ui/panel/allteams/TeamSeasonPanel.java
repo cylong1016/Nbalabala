@@ -35,10 +35,14 @@ public class TeamSeasonPanel extends BottomPanel{
 		
 		table.setHeaderColorAndFont();
 		table.setWidth(new int[] {73, 50, 50, 50, 50, 55, 55, 55, 50, 50, 50, 50, 50, 50, 50, 50, 50});
-		table.setRowHeight(35);
+		table.setRowHeight(UIConfig.ROW_HEIGHT);
+		table.setRowHeight(0, 25);
+		table.setRowHeight(2, 25);
+		table.setRowHeight(4, 25);
 		table.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
+		int width = table.setTableWidth(190, table.getRowCount());
 		
-		scrollPane.setBounds(UIConfig.RELA_X, 180, UIConfig.TABLE_WID, 190);
+		scrollPane.setBounds(UIConfig.RELA_X, 180, width, 190);
 		this.add(scrollPane);
 	}
 

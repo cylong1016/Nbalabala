@@ -29,10 +29,13 @@ public class PlayerInfoSeasonDataPanel extends Panel{
 		BottomScrollPane scrollPane = new BottomScrollPane(seasonDataTable);
 		seasonDataTable.setHeaderColorAndFont();
 		seasonDataTable.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
-		seasonDataTable.setRowHeight(0, 20);
-		seasonDataTable.setRowHeight(2, 20);
-		seasonDataTable.setRowHeight(4, 20);
-		scrollPane.setBounds(UIConfig.RELA_X, navLabel.getHeight()+16, UIConfig.TABLE_WID, 300);
+		seasonDataTable.setRowHeight(0, 25);
+		seasonDataTable.setRowHeight(2, 25);
+		seasonDataTable.setRowHeight(4, 25);
+		
+		seasonDataTable.setWidth(new int[] {78, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54});
+		
+		scrollPane.setBounds(UIConfig.RELA_X, navLabel.getHeight()+16, UIConfig.TABLE_WID, UIConfig.TABLE_H);
 		this.add(scrollPane);
 	}
 	
