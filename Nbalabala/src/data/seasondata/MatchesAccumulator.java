@@ -38,6 +38,28 @@ public class MatchesAccumulator {
 		accumulator.update();
 
 		accumulator.writeToDatabase();
+//		correctMatch();
+	}
+	
+	public static void correctMatch() {
+		Statement statement;
+		try {
+			statement = conn.createStatement();
+			ResultSet rs = statement.executeQuery("select match_id,road_abbr from match_profile");
+			while(rs.next()) {
+				int matchID = rs.getInt(1);
+				String roadAbbr = rs.getString(2);
+				PreparedStatement ps = conn.prepareStatement("update match_player set team_abbr=? where match_id=? and home_or_road='R'");
+				ps.setString(1, roadAbbr);
+				ps.setInt(2, matchID);
+				ps.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	private static Connection conn = Database.conn;

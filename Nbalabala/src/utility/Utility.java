@@ -112,5 +112,10 @@ public class Utility {
 		int birthYear = calendar.get(Calendar.YEAR);
 		return thisYear - birthYear;
 	}
+	
+	public static String getRegularStringByStartYear(int start) {
+		String endYear = String.valueOf(start + 1);
+		return start + "-" + endYear.substring(2,4) + "R";
+	}
 
 }

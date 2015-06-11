@@ -13,8 +13,8 @@ public class Launcher {
 	public static void main(String[] args) {
 		Match m = new Match();
 		m.capture();
-		Player p = new Player();
-		p.capture();
+//		Player p = new Player();
+//		p.capture();
 	}
 
 }

@@ -125,6 +125,7 @@ public class PlayerSeasonPO {
 	public double foulPercent;
 	public double usePercent;
 	public double assistPercent;
+	public double PER;	
 	
 	public PlayerSeasonPO(String name, String season) {
 		this.name = name;
@@ -386,6 +387,10 @@ public class PlayerSeasonPO {
 
 	public double getAssistPercent() {
 		return assistPercent;
+	}
+	
+	public double getPER() {
+		return PER;
 	}
 	
 	public String getShortName() {

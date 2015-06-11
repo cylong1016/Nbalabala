@@ -386,7 +386,7 @@ public class Constants {
 	public static String regularText = "常规赛";
 	public static String playoffText = "季后赛";
 	
-	public static String lastestTwo = " 最近    场比赛";
+	public static String lastestTwo = 	" 最近    场比赛";
 	public static String titleAvgData = " 总数据／平均数据";
 	public static String gameLog = " 比赛日志";
 	
