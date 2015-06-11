@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import ui.Images;
 import ui.common.button.TabButton;
-import ui.common.panel.Panel;
 import ui.common.panel.ScorePanel;
 import ui.panel.gamedata.ConPanel;
 import ui.panel.gamedata.GameFatherPanel;
@@ -173,11 +172,12 @@ public class LivePanel extends GameFatherPanel {
 //				LivePanel.this);
 		if(index % 2 == 0){
 			techPanel = new TechPanel(vo1,vo2,LivePanel.this);
+			conPanel = new ConPanel(homePlayersArgs,roadPlayersArgs);
 		}else{
 			techPanel = new TechPanel(vo2,vo1,LivePanel.this);
+			conPanel = new ConPanel(roadPlayersArgs,homePlayersArgs);
 		}
 		liveBelow = new LiveBelowPanel(Images.LIVE_BELOW);
-		conPanel = new ConPanel(homePlayersArgs,roadPlayersArgs);
 	
 		if(currentI == 0) {
 			this.add(techPanel);
@@ -186,6 +186,7 @@ public class LivePanel extends GameFatherPanel {
 		} else{
 			this.add(conPanel);
 		}
+		this.repaint();
 	}
 
 	class ThreadDis extends Thread {
@@ -198,7 +199,8 @@ public class LivePanel extends GameFatherPanel {
 					e.printStackTrace();
 				}
 //				if(liveService.isAnythingNew()){
-					refresh();
+//					liveService.refresh();
+//					refresh();
 //				}
 			}
 		}

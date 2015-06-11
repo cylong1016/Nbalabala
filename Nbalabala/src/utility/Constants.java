@@ -323,7 +323,6 @@ public class Constants {
 	/** 球队信息页面中的赛季数据的表头 */
 	public static String [] oneTeamDataHeaders = TextCHN.oneTeamDataHeaders;
 	
-	
 	/** 球员个人信息页面中的赛季数据的空表 */
 	public static Object [][] onePlayerDataTableEmptyContent = TextCHN.onePlayerDataTableEmptyContent;
 	
@@ -333,6 +332,8 @@ public class Constants {
 	public static String[] teamLineupHeaders = TextCHN.teamLineupHeaders;
 	
 	public static String [] TEAM_NAMES = TextCHN.TEAM_NAMES;
+	
+	public static String[] LIVE_TEXT = TextCHN.LIVE_tEXT;
 	
 	public static String [] ALL_TEAM_NAMES = TextCHN.ALL_TEAM_NAMES;
 	
@@ -613,6 +614,7 @@ public class Constants {
 	public static String teamsData = TextCHN.teamsData;
 	public static String hot =  TextCHN.hot;
 	public static String analysis = TextCHN.analysis;
+	public static String playerOnCourt = TextCHN.playerOnCourt;
 	
 	public static String hotShort = TextCHN.hotShort;
 	public static String game = TextCHN.game;

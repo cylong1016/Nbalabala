@@ -75,4 +75,7 @@ public class Images {
 	public static final Image SIDEBAR_BTN_CLICK = new ImageIcon("images2.0/sidebar/buttonClick.png").getImage();
 	public static final Image SIDEBAR_RET_ON = new ImageIcon("images2.0/sidebar/returnOn.png").getImage();
 	public static final Image SIDEBAR_RET_CLICK = new ImageIcon("images2.0/sidebar/returnClick.png").getImage();
+	
+	public static final Image SECTION_ON = new ImageIcon("images2.0/games/sectionOn.png").getImage();
+	public static final Image SECTION_CLICK = new ImageIcon("images2.0/games/sectionClick.png").getImage();
 }

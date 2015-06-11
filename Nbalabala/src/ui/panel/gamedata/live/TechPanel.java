@@ -14,7 +14,7 @@ import vo.LivePlayerVO;
  * @author lsy
  * @version 2015年6月9日  上午12:04:04
  */
-public class TechPanel extends Panel{
+public class TechPanel extends BottomPanel{
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -5091667442846836452L;
@@ -23,6 +23,7 @@ public class TechPanel extends Panel{
 	private BottomPanel panel;
 	
 	public TechPanel(ArrayList<LivePlayerVO> homeplayers,ArrayList<LivePlayerVO> roadplayers,BottomPanel panel){
+		super("images2.0/games/techBG.png");
 		this.setBounds(22, 292, 952, 309);
 		this.players = homeplayers;
 		this.panel = panel;

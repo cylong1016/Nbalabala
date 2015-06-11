@@ -92,7 +92,7 @@ public class TextCHN {
 	public static String game = "赛程";
 	public static String ret = "返回";
 	
-	
+	public static String playerOnCourt = "在场球员";
 	
 	public static String[] playerContrastColumns = {"场均得分", "场均篮板", "场均助攻", "罚球%", "三分%"};
 	
@@ -194,5 +194,6 @@ public class TextCHN {
 			"抢断"};
 	
 	public static final String[] ANALYSE = {"最后五分钟","生涯数据","球员贡献","球员走向","转会变化"};
+	public static final String[] LIVE_tEXT = {"全场","第一节","第二节","第三节","第四节"};
 
 }

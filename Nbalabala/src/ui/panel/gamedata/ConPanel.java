@@ -34,6 +34,7 @@ public class ConPanel extends BottomPanel {
 		lth2 = vo.getRoadFiveArgs();
 		addLabel();
 		addRec();
+		this.updateUI();
 	}
 
 	public ConPanel(double[] lth1,double[] lth2){
@@ -42,6 +43,8 @@ public class ConPanel extends BottomPanel {
 		this.setBounds(22, 292, 952, 309);
 		addLabel();
 		addRec();
+		this.updateUI();
+		this.repaint();
 	}
 	
 	private int lb_x = 416, lb_y = 20, lb_x2 = 536, lb_inter = 50, lb_width = 105, lb_height = 40;
