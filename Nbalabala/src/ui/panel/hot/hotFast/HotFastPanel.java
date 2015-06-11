@@ -12,6 +12,7 @@ import ui.common.chart.Column;
 import ui.common.label.HotFastestPlayerLabel;
 import ui.panel.hot.HotThreeFatherPanel;
 import ui.panel.hot.ThreeButton;
+import utility.Constants;
 import utility.Utility;
 import vo.HotFastestPlayerVO;
 import bl.hotquerybl.HotQuery;
@@ -123,17 +124,17 @@ public class HotFastPanel extends HotThreeFatherPanel {
 		ArrayList<Column> columns = new ArrayList<Column>();
 		double formerFiveAvg = fastVO.get(CURRENTI).getFormerFiveAvg();
 		if(index > 4){
-			columns.add(new Column("五场前平均", formerFiveAvg, Color.GRAY,UIConfig.PERCENT_FORMAT));
+			columns.add(new Column(Constants.formerFiveAvgText, formerFiveAvg, Color.GRAY,UIConfig.PERCENT_FORMAT));
 		} else{
-			columns.add(new Column("五场前平均", formerFiveAvg, Color.GRAY,UIConfig.FORMAT));
+			columns.add(new Column(Constants.formerFiveAvgText, formerFiveAvg, Color.GRAY,UIConfig.FORMAT));
 		}
 		for(int i = 0; i < 5; i++) {
 			double[] recentFive = fastVO.get(CURRENTI).getRecentFive();
 			if(index > 4){
-				columns.add(new Column("第" + (i + 1) + "场", recentFive[i], UIConfig.HIST_COLORS[CURRENTI]
+				columns.add(new Column(String.valueOf(i + 1), recentFive[i], UIConfig.HIST_COLORS[CURRENTI]
 						,UIConfig.PERCENT_FORMAT));
 			}else{
-				columns.add(new Column("第" + (i + 1) + "场", recentFive[i], UIConfig.HIST_COLORS[CURRENTI]
+				columns.add(new Column(String.valueOf(i + 1), recentFive[i], UIConfig.HIST_COLORS[CURRENTI]
 						,UIConfig.FORMAT));
 			}
 		}

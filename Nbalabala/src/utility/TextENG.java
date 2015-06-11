@@ -11,6 +11,23 @@ package utility;
  */
 public class TextENG {
 	
+	public static String leagueText = "League：";
+	public static String teamShortText = "TM:";
+	public static String promotionText = "Promotion:";
+	public static String positionShortText = "POS:";
+	
+	public static String leagueAvg = "League";
+	public static String[] hotType	=new String[] { "Points", "Rebound", "Assist", 
+		"Block", "Steal", "3P%", "FG%", "FT%"};
+	public static String scoreText = "Points";
+	public static String formerFiveAvgText = "Former";
+	public static String[] POSITION_SELECT_TEXT = new String[] { "All", "F", "C", "G" };
+	public static String[] DIVISION_SELECT_TEXT = new String[] { "All", "Southeast", "Central", 
+		"Atlantic", "East", "West", "Pacific", "Northwest", "Southwest" };
+	public static String[] BASIS_SELECT_TEXT = new String[] { "All", "PTS", "RB", "AST", 
+		"PTS/RB/AST", "BLK", "STL", "PF", "TOV", "MP","EFF", "FG", "3P", "FT", "DD"};
+	public static String[] TOTAL_AVG_TEXT = new String[] { "Total", "Avg" };
+	
 	public static String briefText = "Profile";
 	public static String seasonDataText = "Season Stats";
 	public static String matchesDataText = "Match Stats";
@@ -33,14 +50,14 @@ public class TextENG {
 	public static String overallRankText = "Rank";
 	public static String lineupText = "Lineup";
 	
-	public static String scoreAvgText = "Score";
+	public static String scoreAvgText = "Points";
 	public static String reboundAvgText = "Rebound";
 	public static String assistAvgText = "Assist";
 	
 	public static String totalScoreText = "Total";
 	public static String techText = "Stats";
 	
-	public static String scoreKingText = "Score";
+	public static String scoreKingText = "Points";
 	public static String reboundKingText = "Rebound";
 	public static String assistKingText = "Assist";
 	public static String recordText = " ";	//TODO ...怎么翻译
@@ -76,7 +93,7 @@ public class TextENG {
 	public static String ret = "Back";
 	
 	
-	
+	public static String [] playerContrastColumns = {"Points", "Rebound", "Assist", "FT%", "3P%"};
 	
 	public static String[] GAME_SORT_RP = {"Regular","Playoff"};
 	
@@ -166,7 +183,7 @@ public class TextENG {
 	
 	public static final String[] TEAM_DATA_SORT = {"Basic","Offensive","Defensive"};
 	
-	public static final String[] LBSTR = {"Score", "Rebound",  "Assist", "Block","Steal"};
+	public static final String[] LBSTR = {"Points", "Rebound",  "Assist", "Block","Steal"};
 	
 	public static final String[] HOT_COLUMNS = {"RK", "Portrait", "Name", "Team", "Oppo", "Start", "MP", "PTS", "RB", "AST", "BLK",
 			"STL"};

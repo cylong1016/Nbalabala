@@ -142,6 +142,7 @@ public class PlayerSeasonPO {
 	}
 
 	public Date getLatestMatchDate() {
+		
 		return latestMatchDate;
 	}
 

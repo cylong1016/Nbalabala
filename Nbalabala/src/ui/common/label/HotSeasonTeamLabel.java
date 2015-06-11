@@ -40,10 +40,10 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 	public void updateContent(HotSeasonTeamVO vo, HotSeasonTeamProperty property) {
 		imgLabel.setImage(TeamLogoCache.getTeamLogo(teamAbbr));
 		nameLabel.setText(Constants.translateTeamAbbr(teamAbbr));
-		String propertyName = getPropertyName(property);
+		String propertyName = Constants.getPropertyName(property);
 		String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
 		propertyLabel.setText(propertyName+"："+propertyStr);
-		leagueLabel.setText( "联盟：" + vo.getLeague());
+		leagueLabel.setText( Constants.leagueText + vo.getLeague());
 	}
 	
 	public HotSeasonTeamLabel(HotSeasonTeamVO vo, HotSeasonTeamProperty property,int index) {
@@ -62,7 +62,7 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 			nameLabel.setFont(new Font("微软雅黑", Font.BOLD, 30));
 			nameLabel.setLeft();
 			
-			String propertyName = getPropertyName(property);
+			String propertyName = Constants.getPropertyName(property);
 			String propertyStr = UIConfig.PERCENT_FORMAT.format(vo.getProperty());
 			if(index < 5){
 				propertyStr = UIConfig.FORMAT.format(vo.getProperty());
@@ -72,7 +72,7 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 			propertyLabel.setForeground(UIConfig.HIST_FIRST_COLOR);
 			propertyLabel.setLeft();
 			
-			leagueLabel = new MyLabel(labelX, 130, 146, 26, "联盟：" + vo.getLeague());
+			leagueLabel = new MyLabel(labelX, 130, 146, 26, Constants.leagueText + vo.getLeague());
 			leagueLabel.setLeft();
 			
 			this.add(propertyLabel);
@@ -90,11 +90,11 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 			
 			nameLabel = new MyLabel(0,7,labelWid,20, Constants.translateTeamAbbr(teamAbbr));
 			
-			String propertyName = getPropertyName(property);
+			String propertyName = Constants.getPropertyName(property);
 			String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
 			propertyLabel = new MyLabel(0, 37, labelWid, 20, propertyName+"："+propertyStr);
 			
-			leagueLabel = new MyLabel(0, 67, labelWid, 20, "联盟：" + vo.getLeague());
+			leagueLabel = new MyLabel(0, 67, labelWid, 20, Constants.leagueText + vo.getLeague());
 			
 			MyLabel labels[] = {nameLabel, propertyLabel, leagueLabel};
 			for (int i = 0; i < labels.length; i++) {
@@ -115,26 +115,4 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 			}
 		});
 	}
-	
-	private String getPropertyName(HotSeasonTeamProperty property) {
-		switch (property) {
-		case SCORE_AVG:
-			return "得分";
-		case REBOUND_AVG:
-			return "篮板";
-		case ASSIST_AVG:
-			return "助攻";
-		case BLOCK_AVG:
-			return "盖帽";
-		case STEAL_AVG:
-			return "抢断";
-		case FIELD_PERCENT:
-			return "投篮";
-		case THREE_POINT_PERCENT:
-			return "三分";
-		default:
-			return "罚球";
-		}
-	}
-
 }

@@ -65,14 +65,6 @@ public class PlayerDataPanel extends BottomPanel {
 	private static final int[] DIVISION_SELECT_Y = new int[]{ALL_Y,Y1,Y2,Y3,Y2,Y2,Y1,Y2,Y3};
 	private static final int[] BASIS_SELECT_Y = new int[]{ALL_Y,Y1,Y2,Y3,Y3,Y1,Y2,Y3,Y1,Y2,Y3,Y1,Y2,Y1,Y2};
 	
-	
-	/** 所有button上文字部分横坐标集合 */
-	private static final String[] POSITION_SELECT_TEXT = new String[] { "所有", "前锋", "中锋", "后卫" };
-	private static final String[] DIVISION_SELECT_TEXT = new String[] { "所有", "东南", "中央", 
-		"大西洋", "东部", "西部", "太平洋", "西北", "西南" };
-	private static final String[] BASIS_SELECT_TEXT = new String[] { "所有", "得分", "篮板", "助攻", 
-		"得分/篮板/助攻", "盖帽", "抢断", "犯规", "失误", "分钟","效率", "投篮", "三分", "罚球", "两双", "总计" };
-	private static final String[] TOTAL_AVG_TEXT = new String[] { "总计", "平均" };
 	/** 将枚举类型赋值为数组 */
 	private static final Position[] POSITION_ARRAY = Position.values();
 	private static final ScreenDivision[] DIVISION_ARRAY = ScreenDivision.values();
@@ -210,32 +202,32 @@ public class PlayerDataPanel extends BottomPanel {
 		totalAvgButtons = new PlayerTotalAvgButton[TOTAL_AVG_COUNT];
 		for (int i = 0; i < POSITION_COUNT; i++) {
 			positionSelectButtons[i] = new PlayerPositionSelectButton(POSITION_SELECT_X[i], 
-					POSITION_SELECT_Y[i], WIDTH, HEIGHT, POSITION_SELECT_TEXT[i]);
+					POSITION_SELECT_Y[i], WIDTH, HEIGHT, Constants.POSITION_SELECT_TEXT[i]);
 			positionSelectButtons[i].position = POSITION_ARRAY[i];
 		}
 		for (int i = 0; i < DIVISION_COUNT; i++) {
 			if (i == 3 || i == 6) {
 				divisionSelectButtons[i] = new PlayerDivisionSelectButton(DIVISION_SELECT_X[i],
-						DIVISION_SELECT_Y[i], WIDTH_THREE, HEIGHT, DIVISION_SELECT_TEXT[i]);
+						DIVISION_SELECT_Y[i], WIDTH_THREE, HEIGHT, Constants.DIVISION_SELECT_TEXT[i]);
 			} else {
 				divisionSelectButtons[i] = new PlayerDivisionSelectButton(DIVISION_SELECT_X[i],
-						DIVISION_SELECT_Y[i], WIDTH, HEIGHT, DIVISION_SELECT_TEXT[i]);
+						DIVISION_SELECT_Y[i], WIDTH, HEIGHT, Constants.DIVISION_SELECT_TEXT[i]);
 			}
 			divisionSelectButtons[i].division = DIVISION_ARRAY[i];
 		}
 		for (int i = 0; i < BASIS_COUNT; i++) {
 			if (i == 4) {
 				screenSelectButtons[i] = new PlayerScreenSelectButton(BASIS_SELECT_X[i], BASIS_SELECT_Y[i], 
-						WIDTH_LONG, HEIGHT, BASIS_SELECT_TEXT[i]);
+						WIDTH_LONG, HEIGHT, Constants.BASIS_SELECT_TEXT[i]);
 			} else {
 				screenSelectButtons[i] = new PlayerScreenSelectButton(BASIS_SELECT_X[i], BASIS_SELECT_Y[i], 
-						WIDTH, HEIGHT, BASIS_SELECT_TEXT[i]);
+						WIDTH, HEIGHT, Constants.BASIS_SELECT_TEXT[i]);
 			}
 			screenSelectButtons[i].basis = BASIS_ARRAY[i];
 		}
 		for (int i = 0; i < TOTAL_AVG_COUNT; i++) {
 			totalAvgButtons[i] = new PlayerTotalAvgButton(TOTAL_AVG_X[i], TOTAL_Y, 72, ROW_HEIGHT, 
-					TOTAL_AVG_TEXT[i]);
+					Constants.TOTAL_AVG_TEXT[i]);
 		}
 	}
 	

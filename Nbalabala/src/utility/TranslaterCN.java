@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 
+import enums.HotSeasonPlayerProperty;
+import enums.HotSeasonTeamProperty;
 import enums.ScreenDivision;
 
 /**
@@ -300,6 +302,56 @@ public class TranslaterCN implements Translater{
 			return "东部联盟";
 		}else {
 			return "西部联盟";
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see utility.Translater#translateProperty(enums.HotSeasonPlayerProperty)
+	 */
+	@Override
+	public String translateProperty(HotSeasonPlayerProperty property) {
+		switch (property) {
+		case SCORE_AVG:
+			return "得分";
+		case REBOUND_AVG:
+			return "篮板";
+		case ASSIST_AVG:
+			return "助攻";
+		case BLOCK_AVG:
+			return "盖帽";
+		case STEAL_AVG:
+			return "抢断";
+		case FIELD_PERCENT:
+			return "投篮%";
+		case THREE_POINT_PERCENT:
+			return "三分%";
+		default:
+			return "罚球%";
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see utility.Translater#translateProperty(enums.HotSeasonTeamProperty)
+	 */
+	@Override
+	public String translateProperty(HotSeasonTeamProperty property) {
+		switch (property) {
+		case SCORE_AVG:
+			return "得分";
+		case REBOUND_AVG:
+			return "篮板";
+		case ASSIST_AVG:
+			return "助攻";
+		case BLOCK_AVG:
+			return "盖帽";
+		case STEAL_AVG:
+			return "抢断";
+		case FIELD_PERCENT:
+			return "投篮%";
+		case THREE_POINT_PERCENT:
+			return "三分%";
+		default:
+			return "罚球%";
 		}
 	}
 	

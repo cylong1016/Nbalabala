@@ -56,10 +56,7 @@ public class TeamDataPanel extends BottomPanel {
 	private static final int[] SELECT_BUTTON_Y = new int[] {ALL_Y,Y1,Y2,Y3,Y2,Y2,Y1,Y2,Y3};
 	/** 总计 平均横坐标 */
 	private static final int[] TOTAL_AVG_BUTTONS_X = new int[] { TOTAL_X, AVG_X };
-	/** button上的文字 */
-	private static final String[] DIVISION_SELECT_TEXT = new String[] { "所有", "东南", "中央", "大西洋", "东部", "西部",
-			"太平洋", "西北", "西南" };
-	private static final String[] TOTAL_AVG_SELECT_TEXT = new String[] { "总计", "平均" };
+	
 	private static final int DIVISON_COUNT = 9, TOTAL_AVG_COUNT = 2;
 	private TabButton tab[];
 
@@ -152,16 +149,16 @@ public class TeamDataPanel extends BottomPanel {
 		for (int i = 0; i < DIVISON_COUNT; i++) {
 			if (i == 3 || i == 6) {
 				divisionSelectButtons[i] = new TeamDivisionSelectButton(SELECT_BUTTON_X[i], SELECT_BUTTON_Y[i], WIDTH_THREE,
-						HEIGHT, DIVISION_SELECT_TEXT[i]);
+						HEIGHT, Constants.DIVISION_SELECT_TEXT[i]);
 			} else {
 				divisionSelectButtons[i] = new TeamDivisionSelectButton(SELECT_BUTTON_X[i], SELECT_BUTTON_Y[i], WIDTH_X, HEIGHT,
-						DIVISION_SELECT_TEXT[i]);
+						Constants.DIVISION_SELECT_TEXT[i]);
 			}
 			divisionSelectButtons[i].division = DIVISION_ARRAY[i];
 		}
 		for (int i = 0; i < TOTAL_AVG_COUNT; i++) {
 			totalAvgSelectButtons[i] = new TeamTotalAvgSelectButton(TOTAL_AVG_BUTTONS_X[i], TOTAL_Y, 72,ROW_HEIGHT,
-					TOTAL_AVG_SELECT_TEXT[i]);
+					Constants.TOTAL_AVG_TEXT[i]);
 		}
 		for (int i = 0; i < DIVISON_COUNT; i++) {
 			this.add(divisionSelectButtons[i]);

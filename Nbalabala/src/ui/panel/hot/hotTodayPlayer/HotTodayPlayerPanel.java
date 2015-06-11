@@ -48,7 +48,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 	private static final HotTodayPlayerProperty[] HOT_TODAY_ARRAY = HotTodayPlayerProperty.values();
 	private ArrayList<HotTodayPlayerVO> playerVO;
 	private Chart chart;
-	private String text = "得分";
+	private String text = Constants.scoreText;
 
 	public HotTodayPlayerPanel(String url) {
 		super(url);

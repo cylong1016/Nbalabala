@@ -5,6 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import ui.UIConfig;
+import utility.Constants;
 
 /**
  * 赛季热点球队和赛季热点球员和进步最快球员的父类panel,包括筛选按钮
@@ -16,10 +17,10 @@ public class HotThreeFatherPanel extends HotFatherPanel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 9165825538486207274L;
-	protected String[] select = new String[] { "场均得分", "场均篮板", "场均助攻", "场均盖帽", "场均抢断", "三分命中率", "投篮命中率", "罚球命中率", };
+	protected String[] select = Constants.hotType;
 	protected ThreeButton[] hotButton = new ThreeButton[8];
 	int bt_x = 90, bt_y = 52, bt_width = 80, bt_height = 25, inter = 90;
-	protected String text = "场均得分";
+	protected String text = Constants.scoreAvgText;
 
 	public HotThreeFatherPanel(String url) {
 		super(url);

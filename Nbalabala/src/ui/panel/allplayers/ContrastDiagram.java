@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 import ui.UIConfig;
+import utility.Constants;
 
 /**
  * 球员数据与联盟平均的对比图
@@ -17,8 +18,6 @@ public class ContrastDiagram extends JPanel {
 	/** serialVersionUID */
 	private static final long serialVersionUID = -3557856466615071597L;
 
-	private String[] names = {"场均得分", "场均篮板", "场均助攻", "罚球%", "三分%"};
-	
 	private String type;
 
 	private Histogram[] histogram = new Histogram[5];
@@ -36,9 +35,9 @@ public class ContrastDiagram extends JPanel {
 		this.type = type;
 		for(int i = 0; i < histogram.length; i++) {
 			if (i < 3) {
-				histogram[i] = new Histogram(fivePlayersData[i], fiveArgsAvg[i], highestScoreReboundAssist[i], names[i]);
+				histogram[i] = new Histogram(fivePlayersData[i], fiveArgsAvg[i], highestScoreReboundAssist[i], Constants.playerContrastColumns[i]);
 			} else {
-				histogram[i] = new Histogram(fivePlayersData[i], fiveArgsAvg[i], temp[i - 3], names[i]);
+				histogram[i] = new Histogram(fivePlayersData[i], fiveArgsAvg[i], temp[i - 3], Constants.playerContrastColumns[i]);
 			}
 			this.add(histogram[i]);
 		}
@@ -73,7 +72,7 @@ public class ContrastDiagram extends JPanel {
 
 		g.setColor(Color.BLACK);
 		g.drawString(type, interval * 2 + size, interval + size);
-		g.drawString("联盟平均", interval * 2 + size, (interval + size) * 2);
+		g.drawString(Constants.leagueAvg, interval * 2 + size, (interval + size) * 2);
 	}
 
 }

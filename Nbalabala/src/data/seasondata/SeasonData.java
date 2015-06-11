@@ -133,6 +133,7 @@ public class SeasonData implements SeasonDataService {
 				po.usePercent = rs.getFloat(61);
 				po.assistPercent = rs.getFloat(62);
 				po.position = rs.getString(63);
+				if (po.position == null) po.position = Constants.UNKNOWN;
 				newMap.put(po.name, po);
 			}
 			if (newMap.size() > 0) 	allPlayerRecords.put(season, newMap);

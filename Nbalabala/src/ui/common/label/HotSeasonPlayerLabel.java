@@ -47,11 +47,11 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 		if (portraitLabel != null)
 			portraitLabel.setImage(PlayerImageCache.getPortraitByName(vo.getName()));
 		nameLabel.setText(Utility.trimName(vo.getName()));
-		String propertyName = getPropertyName(property);
+		String propertyName = Constants.getPropertyName(property);
 		String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
 		propertyLabel.setText(propertyName+"："+propertyStr);
-		teamLabel.setText("球队：" + Constants.translateTeamAbbr(vo.getTeamAbbr()));
-		positionLabel.setText("位置：" + vo.getPosition());
+		teamLabel.setText(Constants.teamShortText + Constants.translateTeamAbbr(vo.getTeamAbbr()));
+		positionLabel.setText(Constants.positionShortText + vo.getPosition());
 	}
 	
 	public HotSeasonPlayerLabel(HotSeasonPlayerVO vo, HotSeasonPlayerProperty property,int index) {
@@ -70,7 +70,7 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 			nameLabel.setLeft();
 			this.add(nameLabel);
 			
-			String propertyName = getPropertyName(property);
+			String propertyName = Constants.getPropertyName(property);
 			String propertyStr = UIConfig.PERCENT_FORMAT.format(vo.getProperty());
 			if(index < 5){
 				propertyStr = UIConfig.FORMAT.format(vo.getProperty());
@@ -82,11 +82,11 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 			this.add(propertyLabel);
 			
 			String team = Constants.translateTeamAbbr(vo.getTeamAbbr());
-			teamLabel = new MyLabel(labelX, 130, 180, 26, "球队：" + team);
+			teamLabel = new MyLabel(labelX, 130, 180, 26, Constants.teamShortText + team);
 			teamLabel.setLeft();
 			this.add(teamLabel);
 			
-			positionLabel = new MyLabel(labelX, 160, 146, 26, "位置：" + vo.getPosition());
+			positionLabel = new MyLabel(labelX, 160, 146, 26, Constants.positionShortText + vo.getPosition());
 			positionLabel.setLeft();
 			this.add(positionLabel);
 		}else{
@@ -98,14 +98,14 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 			
 			nameLabel = new MyLabel(0,7,labelWid,20,Utility.trimName(vo.getName()));
 			
-			String propertyName = getPropertyName(property);
+			String propertyName = Constants.getPropertyName(property);
 			String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
 			propertyLabel = new MyLabel(0, 37, labelWid, 20, propertyName+"："+propertyStr);
 			
 			String team = Constants.translateTeamAbbr(vo.getTeamAbbr());
-			teamLabel = new MyLabel(0, 67, labelWid, 20, "球队：" + team);
+			teamLabel = new MyLabel(0, 67, labelWid, 20, Constants.teamShortText + team);
 			
-			positionLabel = new MyLabel(0, 97, labelWid, 20, "位置：" + vo.getPosition());
+			positionLabel = new MyLabel(0, 97, labelWid, 20, Constants.positionShortText + vo.getPosition());
 			
 			MyLabel labels[] = {propertyLabel, teamLabel, nameLabel, positionLabel};
 			for (int i = 0; i < labels.length; i++) {
@@ -124,26 +124,5 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 				MainController.toPlayerInfoPanel(playerName, (BottomPanel)HotSeasonPlayerLabel.this.getParent());
 			}
 		});
-	}
-	
-	private String getPropertyName(HotSeasonPlayerProperty property) {
-		switch (property) {
-		case SCORE_AVG:
-			return "得分";
-		case REBOUND_AVG:
-			return "篮板";
-		case ASSIST_AVG:
-			return "助攻";
-		case BLOCK_AVG:
-			return "盖帽";
-		case STEAL_AVG:
-			return "抢断";
-		case FIELD_PERCENT:
-			return "投篮%";
-		case THREE_POINT_PERCENT:
-			return "三分%";
-		default:
-			return "罚球%";
-		}
 	}
 }

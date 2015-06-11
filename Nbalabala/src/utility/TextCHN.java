@@ -11,6 +11,23 @@ package utility;
  */
 public class TextCHN {
 	
+	public static String leagueText = "联盟：";
+	public static String teamShortText = "球队：";
+	public static String promotionText = "五场提升：";
+	public static String positionShortText = "位置：";
+	
+	public static String leagueAvg = "联盟平均";
+	public static String[] hotType	=new String[] { "场均得分", "场均篮板", "场均助攻", 
+		"场均盖帽", "场均抢断", "三分命中率", "投篮命中率", "罚球命中率"};
+	public static String scoreText = "得分";
+	public static String formerFiveAvgText = "五场前平均";
+	public static String[] POSITION_SELECT_TEXT = new String[] { "所有", "前锋", "中锋", "后卫" };
+	public static String[] DIVISION_SELECT_TEXT = new String[] { "所有", "东南", "中央", 
+		"大西洋", "东部", "西部", "太平洋", "西北", "西南" };
+	public static String[] BASIS_SELECT_TEXT = new String[] { "所有", "得分", "篮板", "助攻", 
+		"得分/篮板/助攻", "盖帽", "抢断", "犯规", "失误", "分钟","效率", "投篮", "三分", "罚球", "两双"};
+	public static String[] TOTAL_AVG_TEXT = new String[] { "总计", "平均" };
+	
 	public static String briefText = "简况";
 	public static String seasonDataText = "赛季数据";
 	public static String matchesDataText = "比赛数据";
@@ -77,7 +94,7 @@ public class TextCHN {
 	
 	
 	
-	
+	public static String[] playerContrastColumns = {"场均得分", "场均篮板", "场均助攻", "罚球%", "三分%"};
 	
 	public static String[] GAME_SORT_RP = {"常规赛","季后赛"};
 	

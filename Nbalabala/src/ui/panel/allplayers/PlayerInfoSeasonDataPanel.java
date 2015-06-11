@@ -16,7 +16,6 @@ public class PlayerInfoSeasonDataPanel extends Panel{
 	
 	/** serialVersionUID */
 	private static final long serialVersionUID = -131390925768195246L;
-	//TODO 贡献图还没做出来
 	
 	private OnePlayerDataTable seasonDataTable = new OnePlayerDataTable();
 	

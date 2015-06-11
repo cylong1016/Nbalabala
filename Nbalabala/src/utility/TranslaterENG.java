@@ -5,6 +5,8 @@ package utility;
 
 import java.sql.Date;
 
+import enums.HotSeasonPlayerProperty;
+import enums.HotSeasonTeamProperty;
 import enums.ScreenDivision;
 
 /**
@@ -260,6 +262,56 @@ public class TranslaterENG implements Translater{
 			return "EAST";
 		}else {
 			return "WEST";
+		}
+	}
+	
+	/* (non-Javadoc)
+	 * @see utility.Translater#translateProperty(enums.HotSeasonPlayerProperty)
+	 */
+	@Override
+	public String translateProperty(HotSeasonPlayerProperty property) {
+		switch (property) {
+		case SCORE_AVG:
+			return "PTS";
+		case REBOUND_AVG:
+			return "RB";
+		case ASSIST_AVG:
+			return "AST";
+		case BLOCK_AVG:
+			return "BLK";
+		case STEAL_AVG:
+			return "STL";
+		case FIELD_PERCENT:
+			return "FG%";
+		case THREE_POINT_PERCENT:
+			return "3P%";
+		default:
+			return "FT%";
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see utility.Translater#translateProperty(enums.HotSeasonTeamProperty)
+	 */
+	@Override
+	public String translateProperty(HotSeasonTeamProperty property) {
+		switch (property) {
+		case SCORE_AVG:
+			return "PTS";
+		case REBOUND_AVG:
+			return "RB";
+		case ASSIST_AVG:
+			return "AST";
+		case BLOCK_AVG:
+			return "BLK";
+		case STEAL_AVG:
+			return "STL";
+		case FIELD_PERCENT:
+			return "FG%";
+		case THREE_POINT_PERCENT:
+			return "3P%";
+		default:
+			return "FT%";
 		}
 	}
 

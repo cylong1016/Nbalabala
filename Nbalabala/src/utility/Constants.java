@@ -3,6 +3,8 @@ package utility;
 import java.sql.Date;
 
 import data.playerdata.PlayerImageCache;
+import enums.HotSeasonPlayerProperty;
+import enums.HotSeasonTeamProperty;
 import enums.ScreenDivision;
 
 /**
@@ -14,6 +16,21 @@ public class Constants {
 	
 	public void setChinese() {
 		Constants.translater = new TranslaterCN();
+		
+		leagueText = TextCHN.leagueText;
+		teamShortText = TextCHN.teamShortText;
+		promotionText = TextCHN.promotionText;
+		positionShortText = TextCHN.positionShortText;
+		
+		 leagueAvg = TextCHN.leagueAvg;
+		 hotType	= TextCHN.hotType;
+		 scoreText = TextCHN.scoreText;
+		 formerFiveAvgText = TextCHN.formerFiveAvgText;
+		 POSITION_SELECT_TEXT = TextCHN.POSITION_SELECT_TEXT;
+		 DIVISION_SELECT_TEXT = TextCHN.DIVISION_SELECT_TEXT;
+		 BASIS_SELECT_TEXT = TextCHN.BASIS_SELECT_TEXT;
+		 TOTAL_AVG_TEXT = TextCHN.TOTAL_AVG_TEXT;
+		 
 		GAME_SORT_RP = TextCHN.GAME_SORT_RP;
 		LIVE = TextCHN.LIVE;
 		UNKNOWN = TextCHN.UNKNOWN;
@@ -110,6 +127,20 @@ public class Constants {
 	public static void setEnglish() {
 		Constants.translater = new TranslaterENG();
 		
+		leagueText = TextENG.leagueText;
+		teamShortText = TextENG.teamShortText;
+		promotionText = TextENG.promotionText;
+		positionShortText = TextENG.positionShortText;
+		
+		 leagueAvg = TextENG.leagueAvg;
+		 hotType	= TextENG.hotType;
+		 scoreText = TextENG.scoreText;
+		 formerFiveAvgText = TextENG.formerFiveAvgText;
+		 POSITION_SELECT_TEXT = TextENG.POSITION_SELECT_TEXT;
+		 DIVISION_SELECT_TEXT = TextENG.DIVISION_SELECT_TEXT;
+		 BASIS_SELECT_TEXT = TextENG.BASIS_SELECT_TEXT;
+		 TOTAL_AVG_TEXT = TextENG.TOTAL_AVG_TEXT;
+		
 		GAME_SORT_RP = TextENG.GAME_SORT_RP;
 		LIVE = TextENG.LIVE;
 		UNKNOWN = TextENG.UNKNOWN;
@@ -202,103 +233,11 @@ public class Constants {
 		hotShort = TextENG.hotShort;
 		game = TextENG.game;
 		ret = TextENG.ret;
+		
+		playerContrastColumns = TextENG.playerContrastColumns;
 	}
 	
-	public static void setCTR() {
-		Constants.translater = new TranslaterCTR();
-		
-		GAME_SORT_RP = TextCTR.GAME_SORT_RP;
-		LIVE = TextCTR.LIVE;
-		UNKNOWN = TextCTR.UNKNOWN;
-		onePlayerDataHeaders = TextCTR.onePlayerDataHeaders;
-		onePlayerMatchHeaders = TextCTR.onePlayerMatchHeaders;
-		matchPlayerHeaders = TextCTR.matchPlayerHeaders;
-		basicPlayerHeaders = TextCTR.basicPlayerHeaders;
-		advancedPlayerHeaders = TextCTR.advancedPlayerHeaders;
-		offensivePlayerHeaders = TextCTR.offensivePlayerHeaders;
-		defensivePlayerHeaders = TextCTR.defensivePlayerHeaders;
-		basicTeamHeaders = TextCTR.basicTeamHeaders;
-		offensiveTeamHeaders = TextCTR.offensiveTeamHeaders;
-		defensiveTeamHeaders = TextCTR.defensiveTeamHeaders;
-		teamMatchHeaders = TextCTR.teamMatchHeaders;
-		oneTeamDataHeaders = TextCTR.oneTeamDataHeaders;
-		onePlayerDataTableEmptyContent = TextCTR.onePlayerDataTableEmptyContent;
-		oneTeamDataTableEmptyContent = TextCTR.oneTeamDataTableEmptyContent;
-		teamLineupHeaders = TextCTR.teamLineupHeaders;
-		TEAM_NAMES = TextCTR.TEAM_NAMES;
-		ALL_TEAM_NAMES = TextCTR.ALL_TEAM_NAMES;
-		TEAM_PLACES = TextCTR.TEAM_PLACES;
-		GAME_SORT = TextCTR.GAME_SORT;
-		PLAYER_DATA_SORT = TextCTR.PLAYER_DATA_SORT;
-		TEAM_DATA_SORT = TextCTR.TEAM_DATA_SORT;
-		LBSTR = TextCTR.LBSTR;
-		HOT_COLUMNS = TextCTR.HOT_COLUMNS;
-		ANALYSE = TextCTR.ANALYSE;
-		
-		briefText = TextCTR.briefText;
-		seasonDataText = TextCTR.seasonDataText;
-		matchesDataText = TextCTR.matchesDataText;
-		
-		portraitText = TextCTR.portraitText;
-		nameText = TextCTR.nameText;
-		teamText = TextCTR.teamText;
-		numberText = TextCTR.numberText;
-		positionText = TextCTR.positionText;
-		birthdayText = TextCTR.birthdayText;
-		schoolText = TextCTR.schoolText;
-		veteranText = TextCTR.veteranText;
-		
-		winsText = TextCTR.winsText;
-		losesText = TextCTR.losesText;
-		divisionText = TextCTR.divisionText;
-		homeText = TextCTR.homeText;
-		sinceText = TextCTR.sinceText;
-		kingText = TextCTR.kingText;
-		overallRankText = TextCTR.overallRankText;
-		lineupText = TextCTR.lineupText;
-		
-		scoreAvgText = TextCTR.scoreAvgText;
-		reboundAvgText = TextCTR.reboundAvgText;
-		assistAvgText = TextCTR.assistAvgText;
-		
-		totalScoreText = TextCTR.totalScoreText;
-		techText = TextCTR.techText;
-		
-		scoreKingText = TextCTR.scoreKingText;
-		reboundKingText = TextCTR.reboundKingText;
-		assistKingText = TextCTR.assistKingText;
-		recordText = TextCTR.recordText;
-		
-		eastText = TextCTR.eastText;
-		westText = TextCTR.westText;
-		
-		contrastText = TextCTR.contrastText;
-		
-		teamAvgText = TextCTR.teamAvgText;
-		
-		regularText = TextCTR.regularText;
-		playoffText = TextCTR.playoffText;
-		
-		lastestTwo = 	TextCTR.lastestTwo;
-		titleAvgData = TextCTR.titleAvgData;
-		gameLog = TextCTR.gameLog;
-		
-		lineUp = TextCTR.lineUp;
-		gameDate = TextCTR.gameDate;
-		
-		blank = TextCTR.blank;
-		allPlayers =TextCTR.allPlayers;
-		allTeams =TextCTR.allTeams;
-		gamesData = TextCTR.gamesData;
-		playersData = TextCTR.playersData;
-		teamsData = TextCTR.teamsData;
-		hot =  TextCTR.hot;
-		analysis = TextCTR.analysis;
-		
-		hotShort = TextCTR.hotShort;
-		game = TextCTR.game;
-		ret = TextCTR.ret;
-	}
+
 	
 	public static final String [] TEAM_ABBR = {"BOS","BRK","NYK","PHI","TOR","CHI","CLE","DET","IND","MIL","ATL","CHO","MIA","ORL","WAS",
 		"GSW","LAC","LAL","PHO","SAC","DEN","MIN","OKC","POR","UTA","DAL","HOU","MEM","NOP","SAS"};
@@ -328,6 +267,22 @@ public class Constants {
 		dataSourcePath = newPath + "\\";
 		PlayerImageCache.reloadImages();
 	}
+	
+	public static String leagueText = TextCHN.leagueText;
+	public static String teamShortText = TextCHN.teamShortText;
+	public static String promotionText = TextCHN.promotionText;
+	public static String positionShortText = TextCHN.positionShortText;
+	
+	public static String leagueAvg = TextCHN.leagueAvg;
+	public static String[] hotType	= TextCHN.hotType;
+	public static String scoreText = TextCHN.scoreText;
+	public static String formerFiveAvgText = TextCHN.formerFiveAvgText;
+	public static String[] POSITION_SELECT_TEXT = TextCHN.POSITION_SELECT_TEXT;
+	public static String[] DIVISION_SELECT_TEXT = TextCHN.DIVISION_SELECT_TEXT;
+	public static String[] BASIS_SELECT_TEXT = TextCHN.BASIS_SELECT_TEXT;
+	public static String[] TOTAL_AVG_TEXT = TextCHN.TOTAL_AVG_TEXT;
+	
+	public static String [] playerContrastColumns = TextCHN.playerContrastColumns;
 	
 	public static String[] GAME_SORT_RP = TextCHN.GAME_SORT_RP;
 	
@@ -681,6 +636,13 @@ public class Constants {
 	/** 球队的所在地，显示在球队信息标题上 如   休斯顿 火箭 */
 	public static String translateTeamAbbrToLocation(String abbr) {
 		return translater.translateTeamAbbrToLocation(abbr);
+	}
+	
+	public static String getPropertyName(HotSeasonPlayerProperty property) {
+		return translater.translateProperty(property);
+	}
+	public static String getPropertyName(HotSeasonTeamProperty property) {
+		return translater.translateProperty(property);
 	}
 
 }

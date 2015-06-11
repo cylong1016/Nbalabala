@@ -2,6 +2,8 @@ package utility;
 
 import java.sql.Date;
 
+import enums.HotSeasonPlayerProperty;
+import enums.HotSeasonTeamProperty;
 import enums.ScreenDivision;
 
 /**
@@ -20,5 +22,7 @@ public interface Translater {
 	String translateTeamAbbrToLocation(String abbr);
 	String translateTeamDivision(ScreenDivision division);
 	String translateTeamLeague(ScreenDivision league);
+	String translateProperty(HotSeasonPlayerProperty property);
+	String translateProperty(HotSeasonTeamProperty property);
 
 }

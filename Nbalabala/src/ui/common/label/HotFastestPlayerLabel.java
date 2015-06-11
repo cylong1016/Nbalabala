@@ -61,9 +61,9 @@ public class HotFastestPlayerLabel extends JLabel{
 		}
 		nameLabel.setText(playerName);
 		String propertyStr = UIConfig.PERCENT_FORMAT.format(vo.getPromotion());
-		propertyLabel.setText("五场提升："+propertyStr);
-		teamLabel.setText("球队：" + Constants.translateTeamAbbr(vo.getTeamAbbr()));
-		positionLabel.setText("位置：" + vo.getPosition());
+		propertyLabel.setText(Constants.promotionText + propertyStr);
+		teamLabel.setText(Constants.teamShortText + Constants.translateTeamAbbr(vo.getTeamAbbr()));
+		positionLabel.setText(Constants.positionShortText + vo.getPosition());
 	}
 	
 	ActionPhotoPanel actionPhotoPanel;
@@ -89,18 +89,18 @@ public class HotFastestPlayerLabel extends JLabel{
 			this.add(nameLabel);
 			
 			String propertyStr = UIConfig.PERCENT_FORMAT.format(vo.getPromotion());
-			propertyLabel = new MyLabel(labelX, 70, 200, 26, "五场提升："+propertyStr);
+			propertyLabel = new MyLabel(labelX, 70, 200, 26, Constants.promotionText +propertyStr);
 			propertyLabel.setFont(new Font("微软雅黑", Font.BOLD, 20));
 			propertyLabel.setForeground(UIConfig.HIST_FIRST_COLOR);
 			propertyLabel.setLeft();
 			this.add(propertyLabel);
 			
 			String team = Constants.translateTeamAbbr(vo.getTeamAbbr());
-			teamLabel = new MyLabel(labelX, 120, 146, 26, "球队：" + team);
+			teamLabel = new MyLabel(labelX, 120, 146, 26, Constants.teamShortText + team);
 			teamLabel.setLeft();
 			this.add(teamLabel);
 			
-			positionLabel = new MyLabel(labelX, 150, 146, 26, "位置：" + vo.getPosition());
+			positionLabel = new MyLabel(labelX, 150, 146, 26, Constants.positionShortText + vo.getPosition());
 			positionLabel.setLeft();
 			this.add(positionLabel);
 		}else{
@@ -113,12 +113,12 @@ public class HotFastestPlayerLabel extends JLabel{
 			nameLabel = new MyLabel(0,7,labelWid,20,vo.getName());
 			
 			String propertyStr = UIConfig.FORMAT.format(vo.getPromotion());
-			propertyLabel = new MyLabel(0, 37, labelWid, 20, "五场提升："+propertyStr);
+			propertyLabel = new MyLabel(0, 37, labelWid, 20, Constants.promotionText +propertyStr);
 			
 			String team = Constants.translateTeamAbbr(vo.getTeamAbbr());
-			teamLabel = new MyLabel(0, 67, labelWid, 20, "球队：" + team);
+			teamLabel = new MyLabel(0, 67, labelWid, 20, Constants.teamShortText + team);
 			
-			positionLabel = new MyLabel(0, 97, labelWid, 20, "位置：" + vo.getPosition());
+			positionLabel = new MyLabel(0, 97, labelWid, 20, Constants.positionShortText + vo.getPosition());
 			
 			MyLabel labels[] = {nameLabel, propertyLabel, teamLabel, positionLabel};
 			for (int i = 0; i < labels.length; i++) {
