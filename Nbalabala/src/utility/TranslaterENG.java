@@ -20,7 +20,9 @@ public class TranslaterENG implements Translater{
 	 */
 	@Override
 	public String translateHeight(String height) {
-		return height;
+		String [] heights = height.split("-");
+		if (heights.length < 2 || heights[0].equals("0")) return Constants.UNKNOWN;
+		return heights[0]+" feet "+heights[0] + " inches";
 	}
 
 	/* (non-Javadoc)
@@ -28,7 +30,7 @@ public class TranslaterENG implements Translater{
 	 */
 	@Override
 	public String translateWeight(int weight) {
-		return String.valueOf(weight);
+		return String.valueOf(weight) + "pounds";
 	}
 
 	/* (non-Javadoc)

@@ -285,9 +285,9 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		detailVO = playerQuery.getPlayerDetailByName(name, season);
 		PlayerSeasonPO seasonVO = detailVO.getSeasonRecord();
 		int [] ranks = playerQuery.getScoreReboundAssistRank(name, season);
-		scoreLabel.update(seasonVO.scoreAvg, ranks[0]);
-		reboundLabel.update(seasonVO.totalReboundAvg, ranks[1]);
-		assistLabel.update(seasonVO.assistAvg, ranks[2]);
+		if (scoreLabel != null) scoreLabel.update(seasonVO.scoreAvg, ranks[0]);
+		if (reboundLabel != null) reboundLabel.update(seasonVO.totalReboundAvg, ranks[1]);
+		if (assistLabel != null) assistLabel.update(seasonVO.assistAvg, ranks[2]);
 		
 		if (briefPanel != null) {
 			briefPanel.updateContent(seasonVO, playerQuery.getFiveArgsAvg(season), 

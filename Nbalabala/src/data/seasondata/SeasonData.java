@@ -360,7 +360,7 @@ public class SeasonData implements SeasonDataService {
 	 */
 	@Override
 	public PlayerSeasonPO getPlayerSeasonDataByName(String playerName, String season) {
-		checkAndReadTeamSeasonData(season);
+		checkAndReadPlayerSeasonData(season);
 		HashMap<String, PlayerSeasonPO> playerRecords = allPlayerRecords.get(season);
 		if (playerRecords == null) {
 			return new PlayerSeasonPO(playerName, season);
