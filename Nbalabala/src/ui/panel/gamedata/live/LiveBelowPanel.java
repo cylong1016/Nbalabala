@@ -16,9 +16,8 @@ public class LiveBelowPanel extends BottomPanel{
 	private static final long serialVersionUID = 3575553054783466861L;
 	private MatchDetailVO vo;
 	
-	public LiveBelowPanel(Image bg,MatchDetailVO vo){
+	public LiveBelowPanel(Image bg){
 		super(bg);
-		this.vo = vo;
 		this.setBounds(22, 292, 952, 309);
 	}
 }

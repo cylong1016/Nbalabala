@@ -34,7 +34,7 @@ public class GameFatherPanel extends BottomPanel {
 	protected Panel gameData;
 	protected  MatchDetailVO matchDetail;
 	protected  MatchProfileVO matchPro;
-	protected MatchQueryBLService matchQuery;
+	protected MatchQueryBLService matchQuery = new MatchQuery();
 	protected int btx = 26,bty = 211, inter = 317;
 
 	/** 球队中文全称 */
@@ -66,11 +66,11 @@ public class GameFatherPanel extends BottomPanel {
 		this.gameData = gameData;
 		this.matchDetail = matchDetail;
 		matchPro = matchDetail.getProfile();
-		matchQuery = new MatchQuery();
+//		matchQuery = new MatchQuery();
 		getScore();
 		getTeam();
 		addBack();
-		addLabel();
+		addLabel(teamShort1,teamShort2,scoreAll);
 		scPanel = new ScorePanel(matchDetail);
 		this.add(scPanel);
 		scPanel.setLocation(188, 110);
@@ -79,6 +79,7 @@ public class GameFatherPanel extends BottomPanel {
 	
 	public GameFatherPanel(String url){
 		super(url);
+		addBack();
 	}
 	
 	public String getRank(int i){
@@ -105,7 +106,7 @@ public class GameFatherPanel extends BottomPanel {
 		}
 	}
 	
-	public void addLabel(){
+	public void addLabel(String teamShort1,String teamShort2,String[] scoreAll){
 		int[] winLose = matchQuery.getTeamWinsLosesByAbbr(teamShort1);
 		int win = winLose[0];
 		int lose = winLose[1];
@@ -131,12 +132,12 @@ public class GameFatherPanel extends BottomPanel {
 		recordlb_1.setRight();
 		this.add(recordlb_1);
 		
-		name_1 = new MyLabel(0,FIRST_Y,LEFT_THREE_X,30,place1+" "+teamStr1);
+		name_1 = new MyLabel(0,FIRST_Y,LEFT_THREE_X,30,Constants.translateTeamAbbrToLocation(teamShort1)+" "+Constants.translateTeamAbbr(teamShort1));
 		name_1.setRight();
 		name_1.setFont(MyFont.YH_XL);
 		this.add(name_1);
 		
-		name_2 = new MyLabel(RIGHT_THREE_X,FIRST_Y,180,30,place2+" "+teamStr2);
+		name_2 = new MyLabel(RIGHT_THREE_X,FIRST_Y,180,30,Constants.translateTeamAbbrToLocation(teamShort2)+" "+Constants.translateTeamAbbr(teamShort2));
 		name_2.setLeft();
 		name_2.setFont(MyFont.YH_XL);
 		this.add(name_2);
