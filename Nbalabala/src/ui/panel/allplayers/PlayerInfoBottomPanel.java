@@ -26,6 +26,7 @@ import ui.common.panel.BottomPanel;
 import ui.common.panel.Panel;
 import ui.controller.MainController;
 import utility.Constants;
+import utility.Utility;
 import vo.PlayerDetailVO;
 import bl.playerquerybl.PlayerQuery;
 import blservice.PlayerQueryBLService;
@@ -207,7 +208,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		numLabel.setFont(new Font("方正姚体", Font.PLAIN, 50));
 		this.add(numLabel);
 		
-		JLabel nameLabel = new JLabel(name);
+		JLabel nameLabel = new JLabel(Utility.trimName(name));
 		nameLabel.setOpaque(false);
 		//TODO 球员名字的字体和bounds
 		nameLabel.setBounds(MID_LABEL_COLUMN_X, FIRST_LABEL_ROW_Y, 350, 30);
@@ -283,10 +284,10 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		String season = seasonInput.getSeason();
 		detailVO = playerQuery.getPlayerDetailByName(name, season);
 		PlayerSeasonPO seasonVO = detailVO.getSeasonRecord();
-//		int [] ranks = playerQuery.getScoreReboundAssistRank(name, season);
-//		scoreLabel.update(seasonVO.scoreAvg, ranks[0]);
-//		reboundLabel.update(seasonVO.totalReboundAvg, ranks[1]);
-//		assistLabel.update(seasonVO.assistAvg, ranks[2]);
+		int [] ranks = playerQuery.getScoreReboundAssistRank(name, season);
+		scoreLabel.update(seasonVO.scoreAvg, ranks[0]);
+		reboundLabel.update(seasonVO.totalReboundAvg, ranks[1]);
+		assistLabel.update(seasonVO.assistAvg, ranks[2]);
 		
 		if (briefPanel != null) {
 			briefPanel.updateContent(seasonVO, playerQuery.getFiveArgsAvg(season), 

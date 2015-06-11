@@ -56,7 +56,7 @@ public class AllPlayersPanel extends BottomPanel {
 	
 	private PlayerQueryBLService playerInfo = new PlayerQuery();
 	
-	private static final String[]COLUMN_NAMES = {"球员头像","英文名", "加入NBA", "最近比赛年份", "位置", "生日" };
+
 	public static BottomScrollPane SCROLL;
 	private BottomTable table;
 	/** 头像宽度 */
@@ -88,9 +88,9 @@ public class AllPlayersPanel extends BottomPanel {
 	
 	public void addTable() {
 		size = players.size();
-		lth = COLUMN_NAMES.length;
+		lth = Constants.allPlayerHeaders.length;
 		rowData = new String[size][lth];
-		table = new BottomTable(rowData, COLUMN_NAMES);
+		table = new BottomTable(rowData, Constants.allPlayerHeaders);
 		try {
 			table.addMouseListener(new UserMouseAdapter() {
 				
@@ -119,10 +119,10 @@ public class AllPlayersPanel extends BottomPanel {
 	
 	public void setTable() {
 		size = players.size();
-		lth = COLUMN_NAMES.length;
+		lth = Constants.allPlayerHeaders.length;
 		rowData = new String[size][lth];
 		ArrayList<ImageIcon> iconArr = new ArrayList<ImageIcon>();
-		table.setModel(new DefaultTableModel(rowData,COLUMN_NAMES));
+		table.setModel(new DefaultTableModel(rowData,Constants.allPlayerHeaders));
 		table.setRowHeight(57);
 		table.setWidth(new int[] { 123, 200, 150, 104, 89, 116 });
 		table.setForeground(Color.WHITE);

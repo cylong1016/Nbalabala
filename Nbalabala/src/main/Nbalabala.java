@@ -1,6 +1,7 @@
 package main;
 
 import ui.controller.MainController;
+import utility.Constants;
 import data.playerdata.PlayerImageCache;
 import data.teamdata.TeamLogoCache;
 
@@ -19,5 +20,8 @@ public class Nbalabala {
 		new PlayerImageCache().loadPortrait();
 		new TeamLogoCache().loadLogos();
 		MainController.launch();
+		Constants.setEnglish();
+		
+
 	}
 }

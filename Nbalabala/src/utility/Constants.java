@@ -12,6 +12,297 @@ import enums.ScreenDivision;
  */
 public class Constants {
 	
+	public void setChinese() {
+		Constants.translater = new TranslaterCN();
+		GAME_SORT_RP = TextCHN.GAME_SORT_RP;
+		LIVE = TextCHN.LIVE;
+		UNKNOWN = TextCHN.UNKNOWN;
+		onePlayerDataHeaders = TextCHN.onePlayerDataHeaders;
+		onePlayerMatchHeaders = TextCHN.onePlayerMatchHeaders;
+		matchPlayerHeaders = TextCHN.matchPlayerHeaders;
+		basicPlayerHeaders = TextCHN.basicPlayerHeaders;
+		advancedPlayerHeaders = TextCHN.advancedPlayerHeaders;
+		offensivePlayerHeaders = TextCHN.offensivePlayerHeaders;
+		defensivePlayerHeaders = TextCHN.defensivePlayerHeaders;
+		basicTeamHeaders = TextCHN.basicTeamHeaders;
+		offensiveTeamHeaders = TextCHN.offensiveTeamHeaders;
+		defensiveTeamHeaders = TextCHN.defensiveTeamHeaders;
+		teamMatchHeaders = TextCHN.teamMatchHeaders;
+		oneTeamDataHeaders = TextCHN.oneTeamDataHeaders;
+		onePlayerDataTableEmptyContent = TextCHN.onePlayerDataTableEmptyContent;
+		oneTeamDataTableEmptyContent = TextCHN.oneTeamDataTableEmptyContent;
+		teamLineupHeaders = TextCHN.teamLineupHeaders;
+		TEAM_NAMES = TextCHN.TEAM_NAMES;
+		ALL_TEAM_NAMES = TextCHN.ALL_TEAM_NAMES;
+		TEAM_PLACES = TextCHN.TEAM_PLACES;
+		GAME_SORT = TextCHN.GAME_SORT;
+		PLAYER_DATA_SORT = TextCHN.PLAYER_DATA_SORT;
+		TEAM_DATA_SORT = TextCHN.TEAM_DATA_SORT;
+		LBSTR = TextCHN.LBSTR;
+		HOT_COLUMNS = TextCHN.HOT_COLUMNS;
+		ANALYSE = TextCHN.ANALYSE;
+		
+		briefText = TextCHN.briefText;
+		seasonDataText = TextCHN.seasonDataText;
+		matchesDataText = TextCHN.matchesDataText;
+		
+		portraitText = TextCHN.portraitText;
+		nameText = TextCHN.nameText;
+		teamText = TextCHN.teamText;
+		numberText = TextCHN.numberText;
+		positionText = TextCHN.positionText;
+		birthdayText = TextCHN.birthdayText;
+		schoolText = TextCHN.schoolText;
+		veteranText = TextCHN.veteranText;
+		
+		winsText = TextCHN.winsText;
+		losesText = TextCHN.losesText;
+		divisionText = TextCHN.divisionText;
+		homeText = TextCHN.homeText;
+		sinceText = TextCHN.sinceText;
+		kingText = TextCHN.kingText;
+		overallRankText = TextCHN.overallRankText;
+		lineupText = TextCHN.lineupText;
+		
+		scoreAvgText = TextCHN.scoreAvgText;
+		reboundAvgText = TextCHN.reboundAvgText;
+		assistAvgText = TextCHN.assistAvgText;
+		
+		totalScoreText = TextCHN.totalScoreText;
+		techText = TextCHN.techText;
+		
+		scoreKingText = TextCHN.scoreKingText;
+		reboundKingText = TextCHN.reboundKingText;
+		assistKingText = TextCHN.assistKingText;
+		recordText = TextCHN.recordText;
+		
+		eastText = TextCHN.eastText;
+		westText = TextCHN.westText;
+		
+		contrastText = TextCHN.contrastText;
+		
+		teamAvgText = TextCHN.teamAvgText;
+		
+		regularText = TextCHN.regularText;
+		playoffText = TextCHN.playoffText;
+		
+		lastestTwo = 	TextCHN.lastestTwo;
+		titleAvgData = TextCHN.titleAvgData;
+		gameLog = TextCHN.gameLog;
+		
+		lineUp = TextCHN.lineUp;
+		gameDate = TextCHN.gameDate;
+		
+		blank = TextCHN.blank;
+		allPlayers =TextCHN.allPlayers;
+		allTeams =TextCHN.allTeams;
+		gamesData = TextCHN.gamesData;
+		playersData = TextCHN.playersData;
+		teamsData = TextCHN.teamsData;
+		hot =  TextCHN.hot;
+		analysis = TextCHN.analysis;
+		
+		hotShort = TextCHN.hotShort;
+		game = TextCHN.game;
+		ret = TextCHN.ret;
+	}
+	
+	public static void setEnglish() {
+		Constants.translater = new TranslaterENG();
+		
+		GAME_SORT_RP = TextENG.GAME_SORT_RP;
+		LIVE = TextENG.LIVE;
+		UNKNOWN = TextENG.UNKNOWN;
+		allPlayerHeaders = TextENG.allPlayerHeaders;
+		onePlayerDataHeaders = TextENG.onePlayerDataHeaders;
+		onePlayerMatchHeaders = TextENG.onePlayerMatchHeaders;
+		matchPlayerHeaders = TextENG.matchPlayerHeaders;
+		basicPlayerHeaders = TextENG.basicPlayerHeaders;
+		advancedPlayerHeaders = TextENG.advancedPlayerHeaders;
+		offensivePlayerHeaders = TextENG.offensivePlayerHeaders;
+		defensivePlayerHeaders = TextENG.defensivePlayerHeaders;
+		basicTeamHeaders = TextENG.basicTeamHeaders;
+		offensiveTeamHeaders = TextENG.offensiveTeamHeaders;
+		defensiveTeamHeaders = TextENG.defensiveTeamHeaders;
+		teamMatchHeaders = TextENG.teamMatchHeaders;
+		oneTeamDataHeaders = TextENG.oneTeamDataHeaders;
+		onePlayerDataTableEmptyContent = TextENG.onePlayerDataTableEmptyContent;
+		oneTeamDataTableEmptyContent = TextENG.oneTeamDataTableEmptyContent;
+		teamLineupHeaders = TextENG.teamLineupHeaders;
+		TEAM_NAMES = TextENG.TEAM_NAMES;
+		ALL_TEAM_NAMES = TextENG.ALL_TEAM_NAMES;
+		TEAM_PLACES = TextENG.TEAM_PLACES;
+		GAME_SORT = TextENG.GAME_SORT;
+		PLAYER_DATA_SORT = TextENG.PLAYER_DATA_SORT;
+		TEAM_DATA_SORT = TextENG.TEAM_DATA_SORT;
+		LBSTR = TextENG.LBSTR;
+		HOT_COLUMNS = TextENG.HOT_COLUMNS;
+		ANALYSE = TextENG.ANALYSE;
+		
+		briefText = TextENG.briefText;
+		seasonDataText = TextENG.seasonDataText;
+		matchesDataText = TextENG.matchesDataText;
+		
+		portraitText = TextENG.portraitText;
+		nameText = TextENG.nameText;
+		teamText = TextENG.teamText;
+		numberText = TextENG.numberText;
+		positionText = TextENG.positionText;
+		birthdayText = TextENG.birthdayText;
+		schoolText = TextENG.schoolText;
+		veteranText = TextENG.veteranText;
+		
+		winsText = TextENG.winsText;
+		losesText = TextENG.losesText;
+		divisionText = TextENG.divisionText;
+		homeText = TextENG.homeText;
+		sinceText = TextENG.sinceText;
+		kingText = TextENG.kingText;
+		overallRankText = TextENG.overallRankText;
+		lineupText = TextENG.lineupText;
+		
+		scoreAvgText = TextENG.scoreAvgText;
+		reboundAvgText = TextENG.reboundAvgText;
+		assistAvgText = TextENG.assistAvgText;
+		
+		totalScoreText = TextENG.totalScoreText;
+		techText = TextENG.techText;
+		
+		scoreKingText = TextENG.scoreKingText;
+		reboundKingText = TextENG.reboundKingText;
+		assistKingText = TextENG.assistKingText;
+		recordText = TextENG.recordText;
+		
+		eastText = TextENG.eastText;
+		westText = TextENG.westText;
+		
+		contrastText = TextENG.contrastText;
+		
+		teamAvgText = TextENG.teamAvgText;
+		
+		regularText = TextENG.regularText;
+		playoffText = TextENG.playoffText;
+		
+		lastestTwo = 	TextENG.lastestTwo;
+		titleAvgData = TextENG.titleAvgData;
+		gameLog = TextENG.gameLog;
+		
+		lineUp = TextENG.lineUp;
+		gameDate = TextENG.gameDate;
+		
+		blank = TextENG.blank;
+		allPlayers =TextENG.allPlayers;
+		allTeams =TextENG.allTeams;
+		gamesData = TextENG.gamesData;
+		playersData = TextENG.playersData;
+		teamsData = TextENG.teamsData;
+		hot =  TextENG.hot;
+		analysis = TextENG.analysis;
+		
+		hotShort = TextENG.hotShort;
+		game = TextENG.game;
+		ret = TextENG.ret;
+	}
+	
+	public static void setCTR() {
+		Constants.translater = new TranslaterCTR();
+		
+		GAME_SORT_RP = TextCTR.GAME_SORT_RP;
+		LIVE = TextCTR.LIVE;
+		UNKNOWN = TextCTR.UNKNOWN;
+		onePlayerDataHeaders = TextCTR.onePlayerDataHeaders;
+		onePlayerMatchHeaders = TextCTR.onePlayerMatchHeaders;
+		matchPlayerHeaders = TextCTR.matchPlayerHeaders;
+		basicPlayerHeaders = TextCTR.basicPlayerHeaders;
+		advancedPlayerHeaders = TextCTR.advancedPlayerHeaders;
+		offensivePlayerHeaders = TextCTR.offensivePlayerHeaders;
+		defensivePlayerHeaders = TextCTR.defensivePlayerHeaders;
+		basicTeamHeaders = TextCTR.basicTeamHeaders;
+		offensiveTeamHeaders = TextCTR.offensiveTeamHeaders;
+		defensiveTeamHeaders = TextCTR.defensiveTeamHeaders;
+		teamMatchHeaders = TextCTR.teamMatchHeaders;
+		oneTeamDataHeaders = TextCTR.oneTeamDataHeaders;
+		onePlayerDataTableEmptyContent = TextCTR.onePlayerDataTableEmptyContent;
+		oneTeamDataTableEmptyContent = TextCTR.oneTeamDataTableEmptyContent;
+		teamLineupHeaders = TextCTR.teamLineupHeaders;
+		TEAM_NAMES = TextCTR.TEAM_NAMES;
+		ALL_TEAM_NAMES = TextCTR.ALL_TEAM_NAMES;
+		TEAM_PLACES = TextCTR.TEAM_PLACES;
+		GAME_SORT = TextCTR.GAME_SORT;
+		PLAYER_DATA_SORT = TextCTR.PLAYER_DATA_SORT;
+		TEAM_DATA_SORT = TextCTR.TEAM_DATA_SORT;
+		LBSTR = TextCTR.LBSTR;
+		HOT_COLUMNS = TextCTR.HOT_COLUMNS;
+		ANALYSE = TextCTR.ANALYSE;
+		
+		briefText = TextCTR.briefText;
+		seasonDataText = TextCTR.seasonDataText;
+		matchesDataText = TextCTR.matchesDataText;
+		
+		portraitText = TextCTR.portraitText;
+		nameText = TextCTR.nameText;
+		teamText = TextCTR.teamText;
+		numberText = TextCTR.numberText;
+		positionText = TextCTR.positionText;
+		birthdayText = TextCTR.birthdayText;
+		schoolText = TextCTR.schoolText;
+		veteranText = TextCTR.veteranText;
+		
+		winsText = TextCTR.winsText;
+		losesText = TextCTR.losesText;
+		divisionText = TextCTR.divisionText;
+		homeText = TextCTR.homeText;
+		sinceText = TextCTR.sinceText;
+		kingText = TextCTR.kingText;
+		overallRankText = TextCTR.overallRankText;
+		lineupText = TextCTR.lineupText;
+		
+		scoreAvgText = TextCTR.scoreAvgText;
+		reboundAvgText = TextCTR.reboundAvgText;
+		assistAvgText = TextCTR.assistAvgText;
+		
+		totalScoreText = TextCTR.totalScoreText;
+		techText = TextCTR.techText;
+		
+		scoreKingText = TextCTR.scoreKingText;
+		reboundKingText = TextCTR.reboundKingText;
+		assistKingText = TextCTR.assistKingText;
+		recordText = TextCTR.recordText;
+		
+		eastText = TextCTR.eastText;
+		westText = TextCTR.westText;
+		
+		contrastText = TextCTR.contrastText;
+		
+		teamAvgText = TextCTR.teamAvgText;
+		
+		regularText = TextCTR.regularText;
+		playoffText = TextCTR.playoffText;
+		
+		lastestTwo = 	TextCTR.lastestTwo;
+		titleAvgData = TextCTR.titleAvgData;
+		gameLog = TextCTR.gameLog;
+		
+		lineUp = TextCTR.lineUp;
+		gameDate = TextCTR.gameDate;
+		
+		blank = TextCTR.blank;
+		allPlayers =TextCTR.allPlayers;
+		allTeams =TextCTR.allTeams;
+		gamesData = TextCTR.gamesData;
+		playersData = TextCTR.playersData;
+		teamsData = TextCTR.teamsData;
+		hot =  TextCTR.hot;
+		analysis = TextCTR.analysis;
+		
+		hotShort = TextCTR.hotShort;
+		game = TextCTR.game;
+		ret = TextCTR.ret;
+	}
+	
+	public static final String [] TEAM_ABBR = {"BOS","BRK","NYK","PHI","TOR","CHI","CLE","DET","IND","MIL","ATL","CHO","MIA","ORL","WAS",
+		"GSW","LAC","LAL","PHO","SAC","DEN","MIN","OKC","POR","UTA","DAL","HOU","MEM","NOP","SAS"};
+	
 	public static String LATEST_SEASON = "2014-15P";
 	
 	public static String LATEST_SEASON_REGULAR = "2014-15R";
@@ -30,13 +321,6 @@ public class Constants {
 		return yearArr;
 	}
 	
-	public static String[] GAME_SORT_RP = {"常规赛","季后赛"};
-	
-	public static String[] LIVE = {"技术统计","文字直播","对比"};
-	
-	/** 无资料的时候显示的提示 */
-	public static final String UNKNOWN = "无资料";
-	
 	public static String dataSourcePath = "NBAdata\\";
 	
 	/** 如果在程序运行中改变数据目录，需要清空已经读取的数据，同时由Controller控制返回首页 */
@@ -45,98 +329,69 @@ public class Constants {
 		PlayerImageCache.reloadImages();
 	}
 	
-	/** 球员个人信息页面中的赛季数据的表头 */
-	public static String [] onePlayerDataHeaders = {
-		"赛季","场数","先发","在场时间","投篮%","三分%","罚球%","进攻","防守","篮板","助攻","抢断","盖帽","失误","犯规","得分"
-	};
-	/** 球员个人信息页面中的赛程数据的表头 */
-	public static String [] onePlayerMatchHeaders = {
-		"日期","对手","首发","上场时间","投篮命中","投篮出手","三分命中","三分出手","罚球命中","罚球出手",
-			"进攻篮板","防守篮板","篮板","助攻","抢断","盖帽","失误","犯规","得分"
-	};
+	public static String[] GAME_SORT_RP = TextCHN.GAME_SORT_RP;
 	
-	public static String [] matchPlayerHeaders = new String[] { "","球员名", "首发", "在场时间", "投篮命中数", "投篮出手数", "三分命中数", "三分出手数", "罚球命中数", "罚球出手数",
-		"进攻篮板数", "防守篮板数", "总篮板数", "助攻数", "抢断数", "盖帽数", "失误数", "犯规数", "个人得分", "+/-" };
+	public static String[] LIVE = TextCHN.LIVE;
+	
+	/** 无资料的时候显示的提示 */
+	public static String UNKNOWN = TextCHN.UNKNOWN;
+	
+	public static String[] allPlayerHeaders = TextCHN.allPlayerHeaders;
+	
+	/** 球员个人信息页面中的赛季数据的表头 */
+	public static String [] onePlayerDataHeaders = TextCHN.onePlayerDataHeaders;
+	/** 球员个人信息页面中的赛程数据的表头 */
+	public static String [] onePlayerMatchHeaders = TextCHN.onePlayerMatchHeaders;
+	
+	public static String [] matchPlayerHeaders = TextCHN.matchPlayerHeaders;
 	
 	/** 所有球员赛季数据中的表格分成四部分，为基本、进攻、防守、高阶 */
-	public static String []basicPlayerHeaders = {"序号","球员名称","所属球队","参赛","先发","在场时间","得分","篮板",
-		"助攻","盖帽","抢断","两双","得分篮板助攻","失误","犯规"};
-	public static String []advancedPlayerHeaders = {"序号","球员名称","效率","GmSc","使用率","进攻篮板率","防守篮板率",
-		"总篮板率","助攻率","真实命中率","投篮效率","盖帽率","抢断率","失误率","犯规率"};
-	public static String []offensivePlayerHeaders = {"序号","球员名称","投篮命中","投篮出手","投篮%","三分命中","三分出手","三分%",
-		"罚球命中","罚球出手", "罚球%","助攻","助攻率","真实命中率","投篮效率"};
-	public static String []defensivePlayerHeaders = {"序号","球员名称","所属球队","参赛","先发","进攻篮板","防守篮板",
-		"总篮板","盖帽","抢断","进攻篮板率","防守篮板率","总篮板率","盖帽率","抢断率"};
+	public static String []basicPlayerHeaders = TextCHN.basicPlayerHeaders;
+	
+	public static String []advancedPlayerHeaders = TextCHN.advancedPlayerHeaders;
+	
+	public static String []offensivePlayerHeaders = TextCHN.offensivePlayerHeaders;
+	
+	public static String []defensivePlayerHeaders = TextCHN.defensivePlayerHeaders;
 	
 	/** 所有球员赛季数据中的表格分成三部分，为基本、进攻、防守 */
-	public static String []basicTeamHeaders = {"序号","球队名称","胜场数","总场数","胜率","得分","篮板","助攻","盖帽",
-		"抢断","失误","犯规","进攻效率","防守效率"}; //14
-	public static String []offensiveTeamHeaders = {"序号","球队名称","投篮命中","投篮出手","投篮%","三分命中","三分出手","三分%",
-		"罚球命中","罚球出手","罚球%","助攻率","进攻回合","进攻效率"};
-	public static String []defensiveTeamHeaders = {"序号","球队名称","进攻篮板","防守篮板","总篮板","进攻篮板效率",
-		"防守篮板效率","盖帽","抢断","抢断效率","防守回合","防守效率","对手得分","对手投篮%"};
+	public static String []basicTeamHeaders = TextCHN.basicTeamHeaders;
+	
+	public static String []offensiveTeamHeaders = TextCHN.offensiveTeamHeaders;
+	
+	public static String []defensiveTeamHeaders = TextCHN.defensiveTeamHeaders;
 	
 	/** 球队界面中的赛程的表头 */
-	public static String []teamMatchHeaders = {"日期", "对手", "胜负", "比分"};
+	public static String []teamMatchHeaders = TextCHN.teamMatchHeaders;
 	/** 球队信息页面中的赛季数据的表头 */
-	public static String [] oneTeamDataHeaders = {
-		"赛季","场数","胜场","负场","胜率","投篮%","三分%","罚球%","进攻","防守","篮板","助攻","抢断","盖帽","失误","犯规","得分"
-	};
+	public static String [] oneTeamDataHeaders = TextCHN.oneTeamDataHeaders;
 	
 	
 	/** 球员个人信息页面中的赛季数据的空表 */
-	public static Object [][] onePlayerDataTableEmptyContent = 
-		{{"赛季平均","","","","","","","","","","","","","","",""},
-		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{"赛季总计","","","","","","","","","","","","","","",""},
-		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
+	public static Object [][] onePlayerDataTableEmptyContent = TextCHN.onePlayerDataTableEmptyContent;
 	
 	/** 球队信息页面中的赛季数据的空表 */
-	public static Object [][] oneTeamDataTableEmptyContent = 
-		{{"赛季平均","","","","","","","","","","","","","","","",""},
-		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{"赛季总计","","","","","","","","","","","","","","","",""},
-		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
+	public static Object [][] oneTeamDataTableEmptyContent = TextCHN.oneTeamDataTableEmptyContent;
 	
-	public static String[] teamLineupHeaders = new String[] {"姓名", "位置", "年龄","球龄","身高","体重","生日","毕业学校"};
+	public static String[] teamLineupHeaders = TextCHN.teamLineupHeaders;
 	
-	public static final String [] TEAM_SEASON_HEADERS = {"序号", "球队名称", "胜场数", "负场数", "总场数", "胜率", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手",
-		"三分命中率", "罚球命中", "罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "进攻篮板效率", "防守篮板效率",
-		"进攻回合", "进攻效率", "防守回合", "防守效率", "抢断", "抢断效率", "助攻", "助攻率", "盖帽", "失误", "犯规", "得分"};
+	public static String [] TEAM_NAMES = TextCHN.TEAM_NAMES;
 	
+	public static String [] ALL_TEAM_NAMES = TextCHN.ALL_TEAM_NAMES;
 	
-	public static final String [] PLAYER_SEASON_HEADERS = {"序号", "球员名称", "所属球队", "参赛场数", "先发场数", "在场时间", "投篮命中", "投篮出手", "投篮命中率", "三分命中", "三分出手",
-		"三分命中率", "罚球命中", "罚球出手", "罚球命中率", "进攻篮板数", "防守篮板数", "篮板总数", "助攻", "助攻率", "盖帽",
-		"盖帽率", "犯规", "犯规率", "得分", "两双", "得分/篮板/助攻", "效率", "GmSc", "真实命中率", "投篮效率", "进攻篮板率",
-		"防守篮板率", "总篮板率", "抢断", "抢断率", "失误", "失误率", "使用率"};
+	public static String[] TEAM_PLACES = TextCHN.TEAM_PLACES;
 	
-	public static final String [] TEAM_ABBR = {"BOS","BRK","NYK","PHI","TOR","CHI","CLE","DET","IND","MIL","ATL","CHO","MIA","ORL","WAS",
-		"GSW","LAC","LAL","PHO","SAC","DEN","MIN","OKC","POR","UTA","DAL","HOU","MEM","NOP","SAS"};
+	public static String[] GAME_SORT = TextCHN.GAME_SORT;
 	
-	public static final String [] TEAM_NAMES = {"凯尔特人", "篮网", "尼克斯", "76人", "猛龙", "公牛", "骑士", "活塞", "步行者", "雄鹿", "老鹰", "黄蜂", "热火",
-		"魔术", "奇才", "勇士", "快船", "湖人", "太阳", "国王", "掘金", "森林狼", "雷霆", "开拓者", "爵士", "小牛",
-		"火箭", "灰熊", "鹈鹕", "马刺"};
+	public static String[] PLAYER_DATA_SORT = TextCHN.PLAYER_DATA_SORT;
 	
-	public static final String [] ALL_TEAM_NAMES = {"所有球队","凯尔特人", "篮网", "尼克斯", "76人", "猛龙", "公牛", "骑士", "活塞", "步行者", "雄鹿", "老鹰", "黄蜂", "热火",
-		"魔术", "奇才", "勇士", "快船", "湖人", "太阳", "国王", "掘金", "森林狼", "雷霆", "开拓者", "爵士", "小牛",
-		"火箭", "灰熊", "鹈鹕", "马刺"};
+	public static String[] TEAM_DATA_SORT = TextCHN.TEAM_DATA_SORT;
 	
-	public static final String[] TEAM_PLACES = { "波士顿", "布鲁克林", "纽约", "费城", "多伦多", "芝加哥", "克利夫兰", "底特律", "印第安纳", "密尔沃基", "亚特兰大", "夏洛特",
-			"迈阿密", "奥兰多", "华盛顿", "金洲", "洛杉矶", "洛杉矶", "菲尼克斯", "萨克拉门托", "丹佛", "明尼苏达", "俄克拉荷马", "波特兰", "犹他", "达拉斯",
-			"休斯敦", "孟菲斯", "新奥尔良", "圣安东尼奥" };
+	public static  String[] LBSTR = TextCHN.LBSTR;
 	
-	public static final String[] GAME_SORT = {"%","三分%","罚球%","篮板","助攻"};
+	public static  String[] HOT_COLUMNS = TextCHN.HOT_COLUMNS;
 	
-	public static final String[] PLAYER_DATA_SORT = {"基本数据","进攻数据","防守数据","高阶数据"};
-	
-	public static final String[] TEAM_DATA_SORT = {"基本数据","进攻数据","防守数据"};
-	
-	public static final String[] LBSTR = {"得分", "篮板",  "助攻", "盖帽","抢断"};
-	
-	public static final String[] HOT_COLUMNS = {"名次", "头像", "姓名", "球队", "对手", "位置", "在场时间", "得分", "篮板", "助攻", "盖帽",
-			"抢断"};
-	
-	public static final String[] ANALYSE = {"最后五分钟","生涯数据","球员贡献","球员走向","转会变化"};
+	public static  String[] ANALYSE = TextCHN.ANALYSE;
 	
 	public static String translateDivision(ScreenDivision division) {
 		return translater.translateTeamDivision(division);
@@ -342,69 +597,69 @@ public class Constants {
 	
 	private static Translater translater = new TranslaterCN();
 	
-	public static String briefText = "资料";
-	public static String seasonDataText = "赛季数据";
-	public static String matchesDataText = "比赛数据";
+	public static String briefText = TextCHN.briefText;
+	public static String seasonDataText = TextCHN.seasonDataText;
+	public static String matchesDataText = TextCHN.matchesDataText;
 	
-	public static String portraitText = "球员头像";
-	public static String nameText = "球员名称";
-	public static String teamText = "球队名称";
-	public static String numberText = "球衣号码";
-	public static String positionText = "位置";
-	public static String birthdayText = "生日";
-	public static String schoolText = "毕业学校";
-	public static String veteranText = "球龄";
+	public static String portraitText = TextCHN.portraitText;
+	public static String nameText = TextCHN.nameText;
+	public static String teamText = TextCHN.teamText;
+	public static String numberText = TextCHN.numberText;
+	public static String positionText = TextCHN.positionText;
+	public static String birthdayText = TextCHN.birthdayText;
+	public static String schoolText = TextCHN.schoolText;
+	public static String veteranText = TextCHN.veteranText;
 	
-	public static String winsText = "胜";
-	public static String losesText = "负";
-	public static String divisionText = "所属赛区:";
-	public static String homeText = "主场:";
-	public static String sinceText = "建队时间:";
-	public static String kingText = "数据王";
-	public static String overallRankText = "总排名";
-	public static String lineupText = "阵容";
+	public static String winsText = TextCHN.winsText;
+	public static String losesText = TextCHN.losesText;
+	public static String divisionText = TextCHN.divisionText;
+	public static String homeText = TextCHN.homeText;
+	public static String sinceText = TextCHN.sinceText;
+	public static String kingText = TextCHN.kingText;
+	public static String overallRankText = TextCHN.overallRankText;
+	public static String lineupText = TextCHN.lineupText;
 	
-	public static String scoreAvgText = "场均得分";
-	public static String reboundAvgText = "场均篮板";
-	public static String assistAvgText = "场均助攻";
+	public static String scoreAvgText = TextCHN.scoreAvgText;
+	public static String reboundAvgText = TextCHN.reboundAvgText;
+	public static String assistAvgText = TextCHN.assistAvgText;
 	
-	public static String totalScoreText = "总分";
-	public static String techText = "技术统计";
+	public static String totalScoreText = TextCHN.totalScoreText;
+	public static String techText = TextCHN.techText;
 	
-	public static String scoreKingText = "得分";
-	public static String reboundKingText = "篮板";
-	public static String assistKingText = "助攻";
-	public static String recordText = "战绩";
+	public static String scoreKingText = TextCHN.scoreKingText;
+	public static String reboundKingText = TextCHN.reboundKingText;
+	public static String assistKingText = TextCHN.assistKingText;
+	public static String recordText = TextCHN.recordText;
 	
-	public static String eastText = "东部联盟";
-	public static String westText = "西部联盟";
+	public static String eastText = TextCHN.eastText;
+	public static String westText = TextCHN.westText;
 	
-	public static String contrastText = "对比";
+	public static String contrastText = TextCHN.contrastText;
 	
-	public static String teamAvgText = "球队平均";
+	public static String teamAvgText = TextCHN.teamAvgText;
 	
-	public static String regularText = "常规赛";
-	public static String playoffText = "季后赛";
+	public static String regularText = TextCHN.regularText;
+	public static String playoffText = TextCHN.playoffText;
 	
-	public static String lastestTwo = 	" 最近    场比赛";
-	public static String titleAvgData = " 总数据／平均数据";
-	public static String gameLog = " 比赛日志";
+	public static String lastestTwo = 	TextCHN.lastestTwo;
+	public static String titleAvgData = TextCHN.titleAvgData;
+	public static String gameLog = TextCHN.gameLog;
 	
-	public static String lineUp = " 阵容";
-	public static String gameDate = " 比赛日程";
+	public static String lineUp = TextCHN.lineUp;
+	public static String gameDate = TextCHN.gameDate;
 	
-	public static String blank = "               ";
-	public static String allPlayers ="所有球员";
-	public static String allTeams ="所有球队";
-	public static String gamesData = "比赛数据";
-	public static String playersData = "球员数据";
-	public static String teamsData = "球队数据";
-	public static String hot =  "查看热点";
-	public static String analysis = "价值分析";
+	public static String blank = TextCHN.blank;
+	public static String allPlayers =TextCHN.allPlayers;
+	public static String allTeams =TextCHN.allTeams;
+	public static String gamesData = TextCHN.gamesData;
+	public static String playersData = TextCHN.playersData;
+	public static String teamsData = TextCHN.teamsData;
+	public static String hot =  TextCHN.hot;
+	public static String analysis = TextCHN.analysis;
 	
-	public static String hotShort = "热点";
-	public static String game = "赛程";
-	public static String ret = "返回";
+	public static String hotShort = TextCHN.hotShort;
+	public static String game = TextCHN.game;
+	public static String ret = TextCHN.ret;
 	
 	public static String translateHeight(String height){
 		return translater.translateHeight(height);

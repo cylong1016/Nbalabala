@@ -41,8 +41,7 @@ public class PlayerProfilePO {
 	}
 	
 	public String getName() {
-		String[] nameArr = name.split("\\$");
-		return nameArr[0];
+		return name;
 	}
 	public int getFromYear() {
 		return fromYear;
