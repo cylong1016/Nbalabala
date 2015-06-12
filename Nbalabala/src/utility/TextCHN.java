@@ -16,6 +16,7 @@ public class TextCHN {
 	public static String promotionText = "五场提升：";
 	public static String positionShortText = "位置：";
 	
+	public static String ot = "加时";
 	public static String leagueAvg = "联盟平均";
 	public static String[] hotType	=new String[] { "场均得分", "场均篮板", "场均助攻", 
 		"场均盖帽", "场均抢断", "三分命中率", "投篮命中率", "罚球命中率"};
@@ -122,7 +123,7 @@ public class TextCHN {
 	public static String[] livePlayerHeaders = new String[] {"序号","中文名","英文名","位置", "是否首发", "在场时间", "投篮命中", "投篮出手", "三分命中", "三分出手", " 罚球命中", 
 		 "罚球出手", "总篮板", "助攻", "抢断", "盖帽", "失误", "犯规", "得分", "+/-"};
 	
-	public static String[] liveDetailHeaders = new String[]{"时间","球队","事件","比分"};
+	public static String[] liveDetailHeaders = new String[]{"时间","比分"};
 	
 	/** 所有球员赛季数据中的表格分成四部分，为基本、进攻、防守、高阶 */
 	public static String []basicPlayerHeaders = {"序号","球员名称","所属球队","参赛","先发","在场时间","得分","篮板",

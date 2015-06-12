@@ -31,7 +31,6 @@ public class GameFatherPanel extends BottomPanel {
 
 	/** serialVersionUID */
 	protected static final long serialVersionUID = -5789708998830911573L;
-	protected Panel gameData;
 	protected  MatchDetailVO matchDetail;
 	protected  MatchProfileVO matchPro;
 	protected MatchQueryBLService matchQuery = new MatchQuery();
@@ -61,15 +60,13 @@ public class GameFatherPanel extends BottomPanel {
 	/** 第三行的y坐标 */
 	private static final int THIRD_Y = 52;
 
-	public GameFatherPanel(String url, MatchDetailVO matchDetail,Panel gameData) {
+	public GameFatherPanel(String url, MatchDetailVO matchDetail) {
 		super(url);
-		this.gameData = gameData;
 		this.matchDetail = matchDetail;
 		matchPro = matchDetail.getProfile();
 //		matchQuery = new MatchQuery();
 		getScore();
 		getTeam();
-		addBack();
 		addLabel(teamShort1,teamShort2,scoreAll);
 		scPanel = new ScorePanel(matchDetail);
 		this.add(scPanel);
@@ -79,7 +76,6 @@ public class GameFatherPanel extends BottomPanel {
 	
 	public GameFatherPanel(String url){
 		super(url);
-		addBack();
 	}
 	
 	public String getRank(int i){
@@ -104,6 +100,16 @@ public class GameFatherPanel extends BottomPanel {
 			lb2.setForeground(UIConfig.RED_WIN_COLOR);
 			lb1.setForeground(MyFont.BLACK_GRAY);
 		}
+	}
+	
+	public void setScorelb(String score,String eachSecScore){
+		scPanel.setlbText(score, eachSecScore);
+	}
+	
+	public void setLabel(String[] scoreAll){
+		scorelb_1.setText(scoreAll[0]);
+		scorelb_2.setlbText(scoreAll[1]);
+		setRed(scorelb_1,scorelb_2);
 	}
 	
 	public void addLabel(String teamShort1,String teamShort2,String[] scoreAll){
@@ -176,21 +182,7 @@ public class GameFatherPanel extends BottomPanel {
 		area2.setLeft();
 		this.add(area2);
 	}
-	/**
-	 * 添加返回按钮
-	 * @author lsy
-	 * @version 2015年3月23日 下午6:20:43
-	 */
-	public void addBack() {
-		back = new ImgButton(UIConfig.IMG_PATH + "back.png", 70, 150, UIConfig.IMG_PATH + "backOn.png", UIConfig.IMG_PATH + "back.png");
-		this.add(back);
-		back.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				MainController.backToOnePanel(gameData);
-			}
 
-		});
-	}
 	
 	String[] scoreAll, eachScore, score1, score2;
 

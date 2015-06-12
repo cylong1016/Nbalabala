@@ -21,6 +21,7 @@ public class TechPanel extends BottomPanel{
 	private TechTable techTable;
 	private ArrayList<LivePlayerVO> players;
 	private BottomPanel panel;
+	private LiveTechTable table;
 	
 	public TechPanel(ArrayList<LivePlayerVO> homeplayers,ArrayList<LivePlayerVO> roadplayers,BottomPanel panel){
 		super("images2.0/games/techBG.png");
@@ -28,17 +29,20 @@ public class TechPanel extends BottomPanel{
 		this.players = homeplayers;
 		this.panel = panel;
 		players.addAll(roadplayers);
+		table = new LiveTechTable(players,panel);
 		setTable(homeplayers);
 	}
 
 	private BottomScrollPane scroll;
 
 	public void setTable(ArrayList<LivePlayerVO> players) {
-		LiveTechTable table = new LiveTechTable(players,panel);
-//		table.getColumnModel().getColumn(1).setPreferredWidth(170);
 		scroll = new BottomScrollPane(table);
 		scroll.setBounds(5,5,940,280);
 		this.add(scroll);
+	}
+	
+	public void updateTable(ArrayList<LivePlayerVO> players){
+		table.setTable(players);
 	}
 	
 }

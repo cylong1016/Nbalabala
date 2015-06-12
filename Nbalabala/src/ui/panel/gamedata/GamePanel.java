@@ -1,5 +1,6 @@
 package ui.panel.gamedata;
 
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -7,9 +8,12 @@ import java.util.ArrayList;
 import po.MatchPlayerPO;
 import ui.Images;
 import ui.UIConfig;
+import ui.common.button.ImgButton;
 import ui.common.button.TabButton;
+import ui.common.label.MyLabel;
 import ui.common.panel.Panel;
 import ui.common.table.BottomScrollPane;
+import ui.controller.MainController;
 import utility.Constants;
 import vo.MatchDetailVO;
 
@@ -28,19 +32,22 @@ public class GamePanel extends GameFatherPanel {
 	private TabButton teambt1,teambt2,contrastbt;
 	private ConPanel conPanel;
 	private Boolean isScroll = true;
+	private Panel gameData;
 	
 	public GamePanel(int matchID, Panel gameData) {
 		super(UIConfig.IMG_PATH_2 + "games/gamesBG.png");
 		this.gameData = gameData;
 		this.matchDetail = matchQuery.getMatchDetailByID(matchID);
 		initiate();
+//		addBack();
 	}
 
-	public GamePanel(String url, MatchDetailVO matchDetail,Panel gameData) {
-		super(url,matchDetail,gameData);
+	public GamePanel(String url, MatchDetailVO matchDetail, Panel gameData) {
+		super(url,matchDetail);
 		this.gameData = gameData;
 		this.matchDetail = matchDetail;
 		initiate();
+//		addBack();
 	}
 	
 	private void initiate() {
@@ -48,6 +55,18 @@ public class GamePanel extends GameFatherPanel {
 		conPanel = new ConPanel(matchDetail);
 		addButton();
 		initSetTabel();
+	}
+	
+
+	public void addBack() {
+		back = new ImgButton(UIConfig.IMG_PATH + "back.png", 70, 150, UIConfig.IMG_PATH + "backOn.png", UIConfig.IMG_PATH + "back.png");
+		this.add(back);
+		back.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				MainController.backToOnePanel(gameData);
+			}
+
+		});
 	}
 	
 

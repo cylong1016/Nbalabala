@@ -3,6 +3,8 @@ package ui.panel.gamedata.live;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.table.DefaultTableModel;
+
 import ui.common.UserMouseAdapter;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomTable;
@@ -20,23 +22,19 @@ public class LiveTechTable extends BottomTable{
 	/** serialVersionUID */
 	private static final long serialVersionUID = -2414449802167589112L;
 
-	private ArrayList<LivePlayerVO> players;
 	private BottomPanel panel;
 	
 	public LiveTechTable(ArrayList<LivePlayerVO> players,BottomPanel panel){
 		super(new String[players.size()][Constants.livePlayerHeaders.length+1],Constants.livePlayerHeaders);
-		this.players = players;
 		this.panel = panel;
-		setTable();
+		setTable(players);
 	}
 	
-	public void setTable(){
-		
+	public void setTable(ArrayList<LivePlayerVO> players){
+		this.setModel(new DefaultTableModel(players.size(),Constants.livePlayerHeaders.length+1));
 		for (int i = 0; i < players.size(); i++) {
 			LivePlayerVO mpVO = players.get(i);
 			setValueAt((i+1)+"",i,0);
-//			setValueAt(Utility.trimName(mpVO.nameChn),i,1);
-//			setValueAt(Utility.trimName(mpVO.nameEng),i,2);
 			setValueAt(mpVO.nameChn,i,1);
 			setValueAt(mpVO.nameEng,i,2);
 			setValueAt(mpVO.position,i,3);

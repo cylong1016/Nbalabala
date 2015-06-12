@@ -11,7 +11,6 @@ import ui.panel.gamedata.ConPanel;
 import ui.panel.gamedata.GameFatherPanel;
 import utility.Constants;
 import vo.LivePlayerVO;
-import bl.livebl.Live;
 import blservice.LiveBLService;
 
 /**
@@ -33,12 +32,13 @@ public class LivePanel extends GameFatherPanel {
 	private int currentI;
 	private ArrayList<String> text;
 	private double[] homePlayersArgs,roadPlayersArgs;
+	private String teamAbbr1,teamAbbr2;
 
 	
 	public LivePanel(String url) {
 		super(url);
-
-		liveService = new Live();
+		liveService = new LiveMock();
+//		liveService = new Live();
 		liveService.refresh();
 		System.out.println(liveService.getHomeAbbr());
 //		testData();
@@ -48,11 +48,14 @@ public class LivePanel extends GameFatherPanel {
 		vo2 = liveService.getRoadPlayerRecords();
 		homePlayersArgs = liveService.getHomeFiveArgs();
 		roadPlayersArgs = liveService.getroadFiveArgs();
+		teamAbbr1 = liveService.getHomeAbbr();
+		teamAbbr2 = liveService.getRoadAbbr();
 		techPanel = new TechPanel(vo1,vo2,LivePanel.this);
-		liveBelow = new LiveBelowPanel(text,Images.LIVE_BELOW,LivePanel.this);
+		liveBelow = new LiveBelowPanel(teamAbbr1,teamAbbr2,text,Images.LIVE_BELOW);
 		conPanel = new ConPanel(homePlayersArgs,roadPlayersArgs);
 		this.add(techPanel);
 		currentI = 0;
+		addButton();
 		ThreadDis thread = new ThreadDis();
 		thread.start();
 	}
@@ -80,41 +83,25 @@ public class LivePanel extends GameFatherPanel {
 		this.add(scPanel);
 		scPanel.setLocation(188, 110);
 		this.repaint();
-		addButton();
 		
 	}
-//	double[] homePlayersArgs = {1,2,3,4,5};
-//	double[] roadPlayersArgs = {5,4,3,2,1};
-//	String[] time = {"HELLO","WORLD","CYL","LSY","ALLEN"};
-//	int[] made ={10,13,15,16,18};
-//	ArrayList<Integer> roadScores = new ArrayList<Integer>();
-//	ArrayList<Integer> homeScores = new ArrayList<Integer>();
-//	String homeName = "PHI",roadName = "LAL";
 	
-//	String timePlayed,int fieldMade,int fieldAttempt,int threepointMade,int threepointAttempt
-//	,int freethrowMade,int freethrowAttempt,int totalRebound,int assist,int steal,int block,int turnover,
-//	int foul,int score,int plusMinus
-//	ArrayList<String> text;
-//	public void testData(){
-//		vo1 = new ArrayList<LivePlayerVO>();
-//		vo2 = new ArrayList<LivePlayerVO>();
-//		text = new ArrayList<String>();
-//		text.add("10:36;骑士;詹姆斯罚球不中;0-2");
-//		text.add("第一小节结束");
-//		text.add("11:00;骑士;詹姆斯扣篮球进;0-4");
-//		text.add("骑士换人");
-//		for(int i = 0;i<5;i++){
-//			vo1.add(new LivePlayerVO(Constants.TEAM_ABBR[0],Constants.TEAM_ABBR[0],"P",
-//					true,time[i],made[i],0,0,0,0,0,0,0,0,0,0,0,0,0)) ;
-//			vo2.add(new LivePlayerVO(Constants.TEAM_ABBR[1],Constants.TEAM_ABBR[1],"R",
-//					true,time[i],made[i],1,1,1,1,1,1,1,1,1,1,1,1,1));
-//			roadScores.add(i);
-//			homeScores.add(4-i);
+	public void changelbText(){
+//		ArrayList<Integer> roadScores = liveService.getRoadScores();
+//		ArrayList<Integer> homeScores = liveService.getHomeScores();
+//		int size = homeScores.size();
+//		String[] totalScore = new String[]{roadScores.get(size-1).toString(),homeScores.get(size-1).toString()};
+//		String total = roadScores.get(size-1).toString() +"-"+homeScores.get(size-1).toString();
+//		String each = "";
+//		for(int i = 0; i < size-1;i++){
+//			each = each + homeScores.get(i)+"-"+roadScores.get(i)+";";
 //		}
-//		roadScores.add(20);
-//		homeScores.add(30);
-//	}
-//	
+//		setLabel(totalScore);
+//		setScorelb(total,each);
+		
+//		setLabel(new String[]{"200","100"});
+		setScorelb("120-103","24-35;34-43;32-43;43-23");
+	}
 
 	public void addButton() {
 		tech = new TabButton(Constants.LIVE[0], Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
@@ -166,8 +153,10 @@ public class LivePanel extends GameFatherPanel {
 		});
 	}
 	
+	
 	int index = 0;
 	public void refresh(){
+			changelbText();
 			if(currentI == 0) {
 				this.remove(techPanel);
 			} else if(currentI == 1) {
@@ -177,17 +166,10 @@ public class LivePanel extends GameFatherPanel {
 			}
 		index ++;
 		conPanel = new ConPanel(liveService.getHomeFiveArgs(),liveService.getroadFiveArgs());
-		techPanel = new TechPanel(liveService.getHomePlayerRecords(),liveService.getRoadPlayerRecords(),
-				LivePanel.this);
-//		if(index % 2 == 0){
-//			techPanel = new TechPanel(vo1,vo2,LivePanel.this);
-//			conPanel = new ConPanel(homePlayersArgs,roadPlayersArgs);
-//		}else{
-//			techPanel = new TechPanel(vo2,vo1,LivePanel.this);
-//			conPanel = new ConPanel(roadPlayersArgs,homePlayersArgs);
-//		}
-//		text.add("10:36;骑士;詹姆斯罚球不中;0-2");
-		liveBelow = new LiveBelowPanel(liveService.getTextLive(),Images.LIVE_BELOW,LivePanel.this);
+		ArrayList<LivePlayerVO> players = liveService.getHomePlayerRecords();
+		techPanel.updateTable(players);
+		ArrayList<String> text = liveService.getTextLive();
+		liveBelow.updateTable(text);
 		if(currentI == 0) {
 			this.add(techPanel);
 		} else if(currentI == 1) {

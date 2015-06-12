@@ -55,12 +55,14 @@ public class GameDataPanel extends BottomPanel {
 	public GameDataPanel(String url) {
 		super(url);
 		matchDetailfile = matchQuery.getLatestMatches();
+		System.out.println(matchDetailfile.size());
 		addComboBox();
 		addDateChooser();
 		addArray();
 		addLabel();
 		addButton();
 	}
+	
 
 	/**
 	 * 设置pageNum和gameNum,添加panel到arrayList中
@@ -91,17 +93,25 @@ public class GameDataPanel extends BottomPanel {
 		int i = 0;
 		if (gameNum >= 3) {
 			for (i = 0; i < 3; i++) {
-				proPanel[i] = (new ProfilePanel(matchDetailfile.get(i), GameDataPanel.this));
+				proPanel[i] = (new ProfilePanel(matchDetailfile.get(i),GameDataPanel.this));
 			}
 		} else if (gameNum == 0) {
 			proPanel[0] = new ProfilePanel();
 			proPanel[1] = new ProfilePanel();
 			proPanel[2] = new ProfilePanel();
+		} else{
+			for (i = 0; i < gameNum; i++) {
+				proPanel[i] = (new ProfilePanel(matchDetailfile.get(i),GameDataPanel.this));
+			}
 		}
 		for (i = 0; i < 3; i++) {
 			proPanel[i].setLocation(20, 70 + i * 180);
 			this.add(proPanel[i]);
 		}
+		for(i = 0; i < 3;i++) {
+			proPanel[i].setBottomPanel(GameDataPanel.this);
+		}
+		
 	}
 
 	/**
@@ -160,7 +170,7 @@ public class GameDataPanel extends BottomPanel {
 				int i = 0;
 				for (i = 3 * clickNum; i < 3 * clickNum + 3 && i < gameNum; i++) {
 					if (proPanel[i].isIni == true) {
-						proPanel[i] = (new ProfilePanel(matchDetailfile.get(i), GameDataPanel.this));
+						proPanel[i] = (new ProfilePanel(matchDetailfile.get(i),GameDataPanel.this));
 					}
 				}
 				clickNum++;
@@ -185,7 +195,7 @@ public class GameDataPanel extends BottomPanel {
 				}
 				for (i = 3 * (clickNum - 1); i < 3 * clickNum && i < gameNum; i++) {
 					if (proPanel[i].isIni == true) {
-						proPanel[i] = (new ProfilePanel(matchDetailfile.get(i), GameDataPanel.this));
+						proPanel[i] = (new ProfilePanel(matchDetailfile.get(i),GameDataPanel.this));
 					}
 				}
 				addPanel(temp, clickNum);
@@ -243,10 +253,6 @@ public class GameDataPanel extends BottomPanel {
 	public void addDateChooser() {
 		dateChooser = new DateChooser(this);
 		MainController.addDateChooserPanel(this, dateChooser, 565, 10, 153, 30);
-	}
-
-	public void getDate() {
-
 	}
 
 	/**

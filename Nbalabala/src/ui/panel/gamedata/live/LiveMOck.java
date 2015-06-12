@@ -17,7 +17,7 @@ import blservice.LiveBLService;
  * @since 2015年6月12日 上午7:40:11
  * @version 1.0
  */
-public class LiveMOck implements LiveBLService{
+public class LiveMock implements LiveBLService{
 
 	/* (non-Javadoc)
 	 * @see blservice.LiveBLService#refresh()
@@ -86,7 +86,7 @@ public class LiveMOck implements LiveBLService{
 		ArrayList<String>text = new ArrayList<String>();
 		text.add("10:36;骑士;詹姆斯罚球不中;0-2");
 		text.add("第一小节结束");
-		text.add("11:00;骑士;詹姆斯扣篮球进;0-4");
+		text.add("11:00;勇士;詹姆斯扣篮球进;0-4");
 		text.add("骑士换人");
 		return text;
 	}

@@ -74,6 +74,10 @@ public class ProfilePanel extends Panel {
 		this.setSize(916, 161);
 	}
 	
+	public void setBottomPanel(Panel currentPanel){
+		bottomPanel = currentPanel;
+	}
+	
 	public ProfilePanel(){
 		isIni = true;
 //		this.setSize(916, 161);

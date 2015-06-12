@@ -154,8 +154,8 @@ public class MainController {
 	 * @author lsy
 	 * @version 2015年3月21日 下午5:03:21
 	 */
-	public static void toOneGamePanel(MatchDetailVO matchDetail, Panel gameData) {
-		gamePanel = new GamePanel("images2.0/games/gamesBG.png", matchDetail, gameData);
+	public static void toOneGamePanel(MatchDetailVO matchDetail,Panel panel) {
+		gamePanel = new GamePanel("images2.0/games/gamesBG.png", matchDetail,panel);
 //		LivePanel gamePanel = new LivePanel("images2.0/games/gamesBG.png",gameData);
 		frame.setPanel(gamePanel);
 	}

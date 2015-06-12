@@ -122,6 +122,8 @@ public class Constants {
 		hotShort = TextCHN.hotShort;
 		game = TextCHN.game;
 		ret = TextCHN.ret;
+		
+		ot = TextCHN.ot;
 	}
 	
 	public static void setEnglish() {
@@ -283,6 +285,8 @@ public class Constants {
 	public static String[] DIVISION_SELECT_TEXT = TextCHN.DIVISION_SELECT_TEXT;
 	public static String[] BASIS_SELECT_TEXT = TextCHN.BASIS_SELECT_TEXT;
 	public static String[] TOTAL_AVG_TEXT = TextCHN.TOTAL_AVG_TEXT;
+	
+	public static String ot = TextCHN.ot;
 	
 	public static String [] playerContrastColumns = TextCHN.playerContrastColumns;
 	

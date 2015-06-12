@@ -12,8 +12,6 @@ import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import utility.Constants;
-import vo.LivePlayerVO;
-import vo.MatchDetailVO;
 
 /**
  * 文字直播下半部分的panel
@@ -25,19 +23,18 @@ public class LiveBelowPanel extends BottomPanel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 3575553054783466861L;
-	private MatchDetailVO vo;
 	private TabButton[] tab;
 	private MyLabel playerlb_1,playerlb_2;
-	private BottomPanel panel;
-	private ArrayList<String> text;
+	private String teamAbbr1,teamAbbr2;
+	private LiveDetailTable table ;
 	
-	public LiveBelowPanel(ArrayList<String> text,Image bg,BottomPanel panel) {
+	public LiveBelowPanel(String teamAbbr1,String teamAbbr2,ArrayList<String> text,Image bg) {
 		super(bg);
-		this.panel = panel;
 		this.setBounds(22, 292, 952, 309);
+		this.teamAbbr1 = teamAbbr1;
+		this.teamAbbr2 = teamAbbr2;
+	    table = new LiveDetailTable(teamAbbr1,teamAbbr2,text);
 		addButton();
-//		addLabel();
-		this.text = text;
 		setTable(text);
 	}
 	
@@ -53,11 +50,13 @@ public class LiveBelowPanel extends BottomPanel {
 	private BottomScrollPane scroll;
 
 	public void setTable(ArrayList<String> text) {
-		LiveDetailTable table = new LiveDetailTable(text,panel);
-		table.getColumnModel().getColumn(2).setPreferredWidth(170);
 		scroll = new BottomScrollPane(table);
-		scroll.setBounds(240,10,580,330);
+		scroll.setBounds(160,10,770,300);
 		this.add(scroll);
+	}
+	
+	public void updateTable(ArrayList<String> text) {
+		table.setTable(text);
 	}
 
 	public void addButton() {
