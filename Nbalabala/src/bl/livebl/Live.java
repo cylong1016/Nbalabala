@@ -203,6 +203,7 @@ public class Live implements LiveBLService {
 	 * @version 2015年6月12日  上午9:27:14
 	 */
 	private void getTextLive(String source) {
+		textLive.clear();
 		String eventReg = "<tr sid=\"(?<sid>\\d+)\">.*?<td width=\"70\">(?<time>.*?)</td>.*?<td width=\"70\">(?<team>.*?)</td>.*?<td>(?<event>.*?(<b>)?.*?(</b>)?.*?)</td>.*?<td width=\"139\" class=\"center\">(?<score>\\d+.\\d+)</td>.*?</tr>";
 		String pauseReg = "<tr sid=\"(?<sid>\\d+)\" class=\"pause\">.*?<td colspan=\"4\" style=\"text-align:center\"><b>(?<pause>.*?)</b></td>.*?</tr>";
 		Pattern eventPattern = Pattern.compile(eventReg);
@@ -222,13 +223,19 @@ public class Live implements LiveBLService {
 			String str = time + ";" + team + ";" + event + ";" + score;
 			textLive.add(str);
 		}
+		boolean isOver = false;
 		while(pauseMatcher.find()) {
 			int sid = Integer.parseInt(pauseMatcher.group("sid"));
 			if(sid > maxSID) {
 				maxSID = sid;
 			}
 			String pause = pauseMatcher.group("pause");
-			textLive.add(maxSID - sid, pause);
+			isOver = Pattern.matches(".+?(比赛结束)+.+?", source);
+			if(isOver) {
+				textLive.add(sid - 2, pause);
+			} else {
+				textLive.add(maxSID - sid, pause);
+			}
 		}
 	}
 	
