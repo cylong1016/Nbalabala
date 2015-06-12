@@ -78,19 +78,17 @@ public class AllTeamSeasonTable extends BottomTable{
 			for (int i=0;i<Constants.basicTeamHeaders.length;i++) {
 				model.getColumn(i).setHeaderValue(Constants.basicTeamHeaders[i]);
 			}
-			// setWidth(....)//TODO
 			break;
 		case OFFENSIVE:
 			for (int i=0;i<Constants.offensiveTeamHeaders.length;i++) {
 				model.getColumn(i).setHeaderValue(Constants.offensiveTeamHeaders[i]);
 			}
-			// setWidth(....)//TODO
 			break;
 		default:
 			for (int i=0;i<Constants.defensiveTeamHeaders.length;i++) {
 				model.getColumn(i).setHeaderValue(Constants.defensiveTeamHeaders[i]);
 			}
-			// setWidth(....)//TODO
+			this.setWidth(new int[] {33, 101, 62, 62, 62, 82, 82, 42, 42, 62, 62, 62, 67, 67});
 			break;
 		}
 		

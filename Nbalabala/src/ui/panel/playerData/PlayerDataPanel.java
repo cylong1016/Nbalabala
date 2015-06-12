@@ -108,9 +108,6 @@ public class PlayerDataPanel extends BottomPanel {
 		ArrayList<PlayerSeasonPO> iniArray = playerSeason.getAllPlayersSortedByName();
 		// set表格 
 		table = new AllPlayerSeasonTable(playerblService,iniArray,AllPlayerSeasonTableCategory.BASIC,TotalOrAvg.TOTAL);
-		table.setHeaderColorAndFont();
-		table.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
-		table.setWidth(new int[] {33, 165, 98, 46, 46, 52, 46, 46, 46, 46, 46, 46, 80, 46, 46});
 		addScrollPane(table);
 	}
 	

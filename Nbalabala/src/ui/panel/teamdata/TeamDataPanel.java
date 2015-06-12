@@ -244,7 +244,10 @@ public class TeamDataPanel extends BottomPanel {
 			this.remove(scroll);
 		}
 		scroll = new BottomScrollPane(table);
-		scroll.setLocation(50, 290); // 表格的位置
+		table.setHeaderColorAndFont();
+		table.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
+		table.setWidth(new int[] {33, 101, 62, 62, 62, 62, 62, 62, 62, 62, 62, 62, 67, 67});
+		scroll.setBounds(54, 290, table.setTableWidth(UIConfig.TABLE_H, table.getRowCount()), UIConfig.TABLE_H);
 		this.add(scroll);
 	}
 	
