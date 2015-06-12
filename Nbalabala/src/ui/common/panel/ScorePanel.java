@@ -116,7 +116,7 @@ public class ScorePanel extends Panel {
 		lb_1 = new MyLabel[lth + 1];
 		lb_2 = new MyLabel[lth + 1];
 		lb_time = new MyLabel[lth + 1];
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < lth; i++) {
 			lb_1[i] = new MyLabel(scoreX_1 + i * inter, labelY_1, scoreWidth, scoreHeight, score1[i]);
 			lb_2[i] = new MyLabel(scoreX_1 + i * inter, labelY_2, scoreWidth, scoreHeight, score2[i]);
 			lb_time[i] = new MyLabel(scoreX_1 + i * inter, labelY_0, scoreWidth, scoreHeight, (1+i)+"");

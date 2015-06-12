@@ -4,3 +4,4 @@
 .project
 *.class
 /src/mysql/MySQLConfig.java
+/bin/
