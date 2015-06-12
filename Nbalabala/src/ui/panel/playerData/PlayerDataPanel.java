@@ -110,7 +110,7 @@ public class PlayerDataPanel extends BottomPanel {
 		table = new AllPlayerSeasonTable(playerblService,iniArray,AllPlayerSeasonTableCategory.BASIC,TotalOrAvg.TOTAL);
 		table.setHeaderColorAndFont();
 		table.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
-		table.setWidth(new int[] {33, 165, 98, 49, 49, 49, 49, 49, 49, 49, 49, 49, 53, 49, 49});
+		table.setWidth(new int[] {33, 165, 98, 46, 46, 52, 46, 46, 46, 46, 46, 46, 80, 46, 46});
 		addScrollPane(table);
 	}
 	
@@ -304,6 +304,7 @@ public class PlayerDataPanel extends BottomPanel {
 			ArrayList<PlayerSeasonPO> playerRecords = playerSeason.getScreenedPlayers(
 					PlayerPositionSelectButton.current.position, PlayerDivisionSelectButton.current.division, PlayerScreenSelectButton.current.basis, seasonInput.getSeason());
 			table = new AllPlayerSeasonTable(playerblService,playerRecords,current,totalOrAvg);
+			
 			addScrollPane(table);
 		}
 	}
@@ -368,8 +369,13 @@ public class PlayerDataPanel extends BottomPanel {
 			this.remove(scroll);
 		}
 		scroll = new BottomScrollPane(table);
+		table.setHeaderColorAndFont();
+		table.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
+		table.setWidth(new int[] {33, 165, 98, 46, 46, 52, 46, 46, 46, 46, 46, 46, 80, 46, 46});
 		scroll.setBounds(54, 290, table.setTableWidth(UIConfig.TABLE_H, table.getRowCount()), UIConfig.TABLE_H);
 		this.add(scroll);
 	}
+	
+	
 
 }

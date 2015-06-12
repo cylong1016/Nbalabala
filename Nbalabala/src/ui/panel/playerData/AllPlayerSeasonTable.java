@@ -91,27 +91,25 @@ public class AllPlayerSeasonTable extends BottomTable{
 			for (int i=0;i<Constants.basicPlayerHeaders.length;i++) {
 				model.getColumn(i).setHeaderValue(Constants.basicPlayerHeaders[i]);
 			}
-			// TODO
-			this.setWidth(new int[] {33, 165, 98, 49, 49, 49, 49, 49, 49, 49, 49, 49, 53, 49, 49});
+			this.setWidth(new int[] {33, 165, 98, 46, 46, 52, 46, 46, 46, 46, 46, 46, 80, 46, 46});
 			break;
 		case OFFENSIVE:
 			for (int i=0;i<Constants.offensivePlayerHeaders.length;i++) {
 				model.getColumn(i).setHeaderValue(Constants.offensivePlayerHeaders[i]);
 			}
-			// TODO
-			this.setWidth(new int[] {33, 165, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 53, 49, 49});
+			this.setWidth(new int[] {33, 165, 54, 54, 50, 54, 54, 50, 54, 54, 50, 39, 49, 70, 58});
 			break;
 		case DEFENSIVE:
 			for (int i=0;i<Constants.defensivePlayerHeaders.length;i++) {
 				model.getColumn(i).setHeaderValue(Constants.defensivePlayerHeaders[i]);
 			}
-			// setWidth(....)//TODO
+			this.setWidth(new int[] {33, 165, 98, 41, 41, 52, 52, 41, 41, 41, 70, 70, 55, 44, 44});
 			break;
 		default:
 			for (int i=0;i<Constants.advancedPlayerHeaders.length;i++) {
 				model.getColumn(i).setHeaderValue(Constants.advancedPlayerHeaders[i]);
 			}
-			// setWidth(....)//TODO
+			this.setWidth(new int[] {33, 165, 46, 46, 46, 70, 70, 55, 46, 70, 57, 46, 46, 46, 46});
 			break;
 		}
 		
