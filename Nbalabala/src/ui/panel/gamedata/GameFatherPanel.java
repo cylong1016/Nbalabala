@@ -2,8 +2,6 @@ package ui.panel.gamedata;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import ui.MyFont;
 import ui.UIConfig;
@@ -11,9 +9,7 @@ import ui.common.button.ImgButton;
 import ui.common.label.ImgLabel;
 import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
-import ui.common.panel.Panel;
 import ui.common.panel.ScorePanel;
-import ui.controller.MainController;
 import utility.Constants;
 import vo.MatchDetailVO;
 import vo.MatchProfileVO;

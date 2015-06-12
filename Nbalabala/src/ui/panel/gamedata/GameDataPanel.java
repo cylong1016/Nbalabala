@@ -55,6 +55,7 @@ public class GameDataPanel extends BottomPanel {
 	public GameDataPanel(String url) {
 		super(url);
 		matchDetailfile = matchQuery.getLatestMatches();
+//		matchDetailfile = matchQuery.screenMatchByTeam("PHI", "BOS");
 		System.out.println(matchDetailfile.size());
 		addComboBox();
 		addDateChooser();
@@ -108,10 +109,6 @@ public class GameDataPanel extends BottomPanel {
 			proPanel[i].setLocation(20, 70 + i * 180);
 			this.add(proPanel[i]);
 		}
-		for(i = 0; i < 3;i++) {
-			proPanel[i].setBottomPanel(GameDataPanel.this);
-		}
-		
 	}
 
 	/**
@@ -231,17 +228,17 @@ public class GameDataPanel extends BottomPanel {
 //	}
 
 	public void refresh() {
-		Date date = dateChooser.getDate();
-		matchDetailfile = matchQuery.screenMatchByDate(date);
-		isInit = false;
-		addArray();
-		if (pageNum == 0) {
-			number2.setlbText("1");
-		} else {
-			number2.setlbText(pageNum + "");
-		}
-		number1.setlbText("1");
-		GameDataPanel.this.repaint();
+//		Date date = dateChooser.getDate();
+//		matchDetailfile = matchQuery.screenMatchByDate(date);
+//		isInit = false;
+//		addArray();
+//		if (pageNum == 0) {
+//			number2.setlbText("1");
+//		} else {
+//			number2.setlbText(pageNum + "");
+//		}
+//		number1.setlbText("1");
+//		GameDataPanel.this.repaint();
 	}
 
 	/**

@@ -110,18 +110,40 @@ public class ScorePanel extends Panel {
 	public void setlbText(String score,String eachSecScore) {
 		scoreAll = score.split("-");// 两支球队比赛总分
 		eachScore = eachSecScore.split(";");
+		int lth = eachScore.length;
 		getScore(scoreAll,eachScore);
-		for (int i = 0; i < score1.length; i++) {
-			lb_1[i].setlbText(score1[i]);
-			lb_2[i].setlbText(score2[i]);
+		if(lth == 4) {
+			for (int i = 0; i < lth; i++) {
+				lb_1[i].setlbText(score1[i]);
+				lb_2[i].setlbText(score2[i]);
+				setRed(lb_1[i],lb_2[i]);
+			}
+			lb_1[lth].setlbText(scoreAll[0]);
+			lb_2[lth].setlbText(scoreAll[1]);
+			setRed(lb_1[lth],lb_2[lth]);
+		} else{
+			int i = 0;
+			for (i = 0; i < 4; i++) {
+				lb_1[i].setlbText(score1[i]);
+				lb_2[i].setlbText(score2[i]);
+				setRed(lb_1[i],lb_2[i]);
+			}
+//			while(lth > 4){
+//				lb_1[i] = new 
+//			}
+//			lb_1[lth+1].setlbText(scoreAll[0]);
+//			lb_2[lth+1].setlbText(scoreAll[1]);
+			addExtraTime(lth);
 		}
-		addExtraTime(eachScore.length);
 	}
 	
 	public void addExtraTime(int lth){
+		this.remove(lb_1[4]);
+		this.remove(lb_2[4]);
 		if (lth > 4) {
-			for (int i = 4; i < lth; i++) {
-				lb_time[i] = new MyLabel(scoreX_1 + i * inter, labelY_0, scoreWidth, scoreHeight, (1+i)+"");
+			int i = 4;
+			for (i = 4; i < lth; i++) {
+				lb_time[i] = new MyLabel(scoreX_1 + i * inter, labelY_0, scoreWidth, scoreHeight, ("OT"+(i-3))+"");
 				lb_time[i].setForeground(Color.gray);
 				this.add(lb_time[i]);
 				lb_1[i] = new MyLabel(scoreX_1 + i * inter, labelY_1, scoreWidth, scoreHeight, score1[i]);
@@ -130,11 +152,17 @@ public class ScorePanel extends Panel {
 				this.add(lb_2[i]);
 				setRed(lb_1[i], lb_2[i]);
 			}
+			lb_1[i] = new MyLabel(totalScoreX + totalInter * (lth - 5), labelY_1, scoreWidth, scoreHeight, scoreAll[0]);
+			lb_2[i] = new MyLabel(totalScoreX + totalInter * (lth - 5), labelY_2, scoreWidth, scoreHeight, scoreAll[1]);
+			setRed(lb_1[i], lb_2[i]);
+			this.add(lb_1[i]);
+			this.add(lb_2[i]);
+			this.repaint();
 		}
 	}
 	
 	public void addTime(int lth) {
-		lb_time = new MyLabel[lth + 1];
+		lb_time = new MyLabel[10];
 		for (int i = 0; i < 4; i++) {
 			lb_time[i] = new MyLabel(scoreX_1 + i * inter, labelY_0, scoreWidth, scoreHeight, (1+i)+"");
 			lb_time[i].setForeground(MyFont.LIGHT_GRAY);
@@ -159,8 +187,8 @@ public class ScorePanel extends Panel {
 
 	public void addScore() {
 		int lth = score1.length;
-		lb_1 = new MyLabel[lth + 1];
-		lb_2 = new MyLabel[lth + 1];
+		lb_1 = new MyLabel[10];
+		lb_2 = new MyLabel[10];
 		for (int i = 0; i < lth; i++) {
 			lb_1[i] = new MyLabel(scoreX_1 + i * inter, labelY_1, scoreWidth, scoreHeight, score1[i]);
 			lb_2[i] = new MyLabel(scoreX_1 + i * inter, labelY_2, scoreWidth, scoreHeight, score2[i]);

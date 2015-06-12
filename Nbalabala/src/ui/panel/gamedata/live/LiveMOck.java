@@ -6,8 +6,6 @@ package ui.panel.gamedata.live;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
-
 import vo.LivePlayerVO;
 import blservice.LiveBLService;
 
@@ -120,7 +118,8 @@ public class LiveMock implements LiveBLService{
 		integers.add(20);
 		integers.add(11);
 		integers.add(23);
-		integers.add(54);
+//		integers.add(54);
+//		integers.add(107);
 		return integers;
 	}
 
@@ -133,7 +132,8 @@ public class LiveMock implements LiveBLService{
 		integers.add(15);
 		integers.add(22);
 		integers.add(21);
-		integers.add(58);
+//		integers.add(58);
+//		integers.add(116);
 		return integers;
 	}
 

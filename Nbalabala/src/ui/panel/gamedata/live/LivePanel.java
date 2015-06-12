@@ -64,9 +64,9 @@ public class LivePanel extends GameFatherPanel {
 		ArrayList<Integer> roadScores = liveService.getRoadScores();
 		ArrayList<Integer> homeScores = liveService.getHomeScores();
 		int size = homeScores.size();
-		while(size < 4) {
-			roadScores.add(0);
-			homeScores.add(0);
+		while(size < 5) {
+			roadScores.add(size-1, 0);;
+			homeScores.add(size-1, 0);
 			size++;
 		}
 		String homeName = liveService.getHomeAbbr();
@@ -87,20 +87,20 @@ public class LivePanel extends GameFatherPanel {
 	}
 	
 	public void changelbText(){
-//		ArrayList<Integer> roadScores = liveService.getRoadScores();
-//		ArrayList<Integer> homeScores = liveService.getHomeScores();
-//		int size = homeScores.size();
-//		String[] totalScore = new String[]{roadScores.get(size-1).toString(),homeScores.get(size-1).toString()};
-//		String total = roadScores.get(size-1).toString() +"-"+homeScores.get(size-1).toString();
-//		String each = "";
-//		for(int i = 0; i < size-1;i++){
-//			each = each + homeScores.get(i)+"-"+roadScores.get(i)+";";
-//		}
-//		setLabel(totalScore);
-//		setScorelb(total,each);
+		ArrayList<Integer> roadScores = liveService.getRoadScores();
+		ArrayList<Integer> homeScores = liveService.getHomeScores();
+		int size = homeScores.size();
+		String[] totalScore = new String[]{roadScores.get(size-1).toString(),homeScores.get(size-1).toString()};
+		String total = roadScores.get(size-1).toString() +"-"+homeScores.get(size-1).toString();
+		String each = "";
+		for(int i = 0; i < size-1;i++){
+			each = each + homeScores.get(i)+"-"+roadScores.get(i)+";";
+		}
+		setLabel(totalScore);
+		setScorelb(total,each);
 		
 //		setLabel(new String[]{"200","100"});
-		setScorelb("120-103","24-35;34-43;32-43;43-23");
+//		setScorelb("170-153","24-35;3-13;12-25;43-30;45-46");
 	}
 
 	public void addButton() {

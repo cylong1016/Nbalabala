@@ -1,6 +1,5 @@
 package ui.panel.gamedata;
 
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -10,7 +9,6 @@ import ui.Images;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.button.TabButton;
-import ui.common.label.MyLabel;
 import ui.common.panel.Panel;
 import ui.common.table.BottomScrollPane;
 import ui.controller.MainController;
@@ -39,7 +37,7 @@ public class GamePanel extends GameFatherPanel {
 		this.gameData = gameData;
 		this.matchDetail = matchQuery.getMatchDetailByID(matchID);
 		initiate();
-//		addBack();
+		addBack();
 	}
 
 	public GamePanel(String url, MatchDetailVO matchDetail, Panel gameData) {
@@ -47,7 +45,7 @@ public class GamePanel extends GameFatherPanel {
 		this.gameData = gameData;
 		this.matchDetail = matchDetail;
 		initiate();
-//		addBack();
+		addBack();
 	}
 	
 	private void initiate() {
