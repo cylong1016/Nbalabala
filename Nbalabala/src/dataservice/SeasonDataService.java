@@ -48,5 +48,5 @@ public interface SeasonDataService {
 	
 	/** 返回最近赛季某球队的球员名单 */
 	public ArrayList<String> getRecentPlayerNamesByTeamAbbr(String abbr);
-
+	
 }

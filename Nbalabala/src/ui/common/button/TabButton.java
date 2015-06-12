@@ -63,6 +63,7 @@ public class TabButton extends JButton{
 		
 		calculateTextLocation();
 		this.addMouseListener(new MouseHandler());
+
 	}
 	
 	public void setOff() {
@@ -88,8 +89,8 @@ public class TabButton extends JButton{
 		// 去除文字的锯齿
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		
 		g.drawString(text, textX, textY);
+		
 	}
 	
 	/** 改变字体，调用此方法 */

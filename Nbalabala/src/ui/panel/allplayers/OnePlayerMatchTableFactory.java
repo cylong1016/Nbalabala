@@ -23,6 +23,7 @@ public class OnePlayerMatchTableFactory {
 	
 	private BottomScrollPane scrollPane;
 	private int rowCount;
+	private BottomTable table;
 	
 	public OnePlayerMatchTableFactory(ArrayList<MatchPlayerPO> playerMatch) {
 		int lth = playerMatch.size();
@@ -56,7 +57,7 @@ public class OnePlayerMatchTableFactory {
 			rowData[i][14] = player.getFoul() + "";
 			rowData[i][15] = player.getScore() + "";
 		}
-		BottomTable table = new BottomTable(rowData, Constants.onePlayerMatchHeaders);
+		table = new BottomTable(rowData, Constants.onePlayerMatchHeaders);
 		//TODO 还需要设置列宽
 		table.setHeaderColorAndFont();
 		table.setRowHeight(UIConfig.ROW_HEIGHT);
@@ -68,6 +69,10 @@ public class OnePlayerMatchTableFactory {
 	
 	public BottomScrollPane getTableScrollPane() {
 		return scrollPane;
+	}
+	
+	public BottomTable getTable() {
+		return table;
 	}
 	
 	/**

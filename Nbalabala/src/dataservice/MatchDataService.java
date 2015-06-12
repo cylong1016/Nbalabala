@@ -38,5 +38,8 @@ public interface MatchDataService {
 	/** 通过运动员名字和赛季返回其该赛季全部比赛记录 */
 	public ArrayList<MatchPlayerPO> getMatchRecordByPlayerName(
 			String playerName, String season);
+	
+	/** 返回球员参加过的全部比赛，从最近赛季开始 */
+	public ArrayList<MatchPlayerPO> getPlayerCareerMatches(String name);
 
 }

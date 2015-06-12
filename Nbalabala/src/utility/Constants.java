@@ -246,7 +246,9 @@ public class Constants {
 	
 	public static String LATEST_SEASON_REGULAR = "2014-15R";
 	
-	public static int EARLIEST_YEAR = 1987;
+	public static int EARLIEST_YEAR = 1986;
+	
+	public static String EARLIEST_SEASON_REGULAR = "1986-87R";
 	
 	public static String[] GAME_YEAR = setGameYear();
 	

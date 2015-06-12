@@ -1,0 +1,1498 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>06月12日骑士vs勇士数据统计－虎扑NBA原创报道</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="title" content="06月12日骑士vs勇士数据统计－虎扑NBA原创报道" />
+
+    <!-- dace js var -->
+    <script type="text/javascript">
+        var __daceDataNameOfChannel = 'nba';
+    </script>
+<meta name="apple-itunes-app" content="app-id=906632439" />
+<link rel="shortcut icon" href="http://b3.hoopchina.com.cn/common/favicon.ico" />
+<link type="text/css" rel="stylesheet" href="http://b3.hoopchina.com.cn/common/common-v1.css" />
+<script src="http://b3.hoopchina.com.cn/web/module/dace/1.0.0/dace.js"></script> 
+<script src="http://b3.hoopchina.com.cn/common/common-v1.js"></script>
+<link type="text/css" rel="stylesheet" href="http://w3.hoopchina.com.cn/newThreeNav/css/threeNav.css" />
+<link rel="alternate" type="" media="" href="android-app://com.hupu.games/kanqiu/nba/nba/live/150122?r=hupucom&v=20150401" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/gamespace/gamecenterScore.css?v=20150401" />
+<meta name="apple-itunes-app" content="app-id=579224144" />
+<script type='text/javascript' src='http://b3.hoopchina.com.cn/common/jquery-1.8.js'></script>
+
+
+    <script type='text/javascript'>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+        (function() {
+            var gads = document.createElement('script');
+            gads.async = true;
+            gads.type = 'text/javascript';
+            var useSSL = 'https:' == document.location.protocol;
+            gads.src = (useSSL ? 'https:' : 'http:') +
+                '//www.googletagservices.com/tag/js/gpt.js';
+            var node = document.getElementsByTagName('script')[0];
+            node.parentNode.insertBefore(gads, node);
+        })();
+    </script>
+
+    <script type='text/javascript'>
+        googletag.cmd.push(function() {
+                        googletag.defineSlot('/1016953/hc_gamespace_topright_250x250', [250, 250], 'div-gpt-ad-1387359684902-0').addService(googletag.pubads());
+                        googletag.defineSlot('/1016953/hoopchina-gamespace-top-banner-980-60', [980, 60], 'div-gpt-ad-1387359684902-1').addService(googletag.pubads());
+            googletag.defineSlot('/1016953/g_index_1x1', [1, 1], 'div-gpt-ad-g_index_1x1').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+
+    <script type="text/javascript">
+        var hmtArray=[];
+    </script>
+</head>
+<body>
+<!--topbarNav star-->
+                        <div id="hp-topbarNav">
+                            <div class="hp-topbarNav-bd">
+                                <ul class="hp-quickNav">
+                                    <li class="mobileWeb"><a href="http://m.hupu.com/" target="_blank"><i class="ico-mobile"></i>手机虎扑</a></li>
+                                    <li class="line">|</li>
+                                    <li class="mobileclientDown"><a class="red" href="http://mobile.hupu.com/?_r=globalNav" target="_blank">虎扑体育客户端</a></li>
+                                    <li class="line">|</li>
+                                    <li class="hp-dropDownMenu topFollowBlog">
+                                        <a href="javascript:void(0)" class="hp-set">关注虎扑<s class="setArrow"></s></a>
+                                        <div class="hp-drapDown followLayer">
+                                            <a class="weibo" target="_blank" rel="nofollow" href="http://e.weibo.com/liangle4u"><i class="hp-ico-weibo"></i>新浪微博</a>
+											<a class="weixin" target="_blank" href="http://voice.hupu.com/other/1581560.html"><i class="hp-ico-weixin"></i>官方微信</a>
+                                            <a class="instagram" target="_blank" rel="nofollow" href="http://voice.hupu.com/other/1634334.html"><i class="hp-ico-instagram"></i>Instagram</a>
+                                            <a class="qq" target="_blank" rel="nofollow" href="http://e.t.qq.com/the_real_hoopchina"><i class="hp-ico-qq"></i>腾讯微博</a>
+                                            <a class="renren" target="_blank" rel="nofollow" href="http://page.renren.com/699131720"><i class="hp-ico-renren"></i>人人网</a>
+                                            <a class="qzone" target="_blank" rel="nofollow" href="http://user.qzone.qq.com/1624355655"><i class="hp-ico-qzone"></i>QQ空间</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="hp-topLogin-info"></div>
+                            </div>
+                        </div>
+                        <!--topbarNav ent--><!--header star--><div class="hp-header hp-header-A"><div class="hp-logo"><a title="虎扑篮球" href="http://nba.hupu.com/"><img src="http://b3.hoopchina.com.cn/images/logo2013/v1/hp_logo_nba.png" alt="NBA" /></a>
+                            </div>
+                            <div class="hp-mainNav hp-mainNav-B">
+                                <div class="hp-nav">
+                                    <div class="hp-nav-bd">
+                                        <ul class="hp-nav-item"><li><a href="http://www.hupu.com/" >虎扑体育</a></li><li class="line">|</li><li class="on"><a href="http://nba.hupu.com/" >NBA</a></li><li class="line">|</li><li><a href="http://cba.hupu.com/" >CBA</a></li><li class="line">|</li><li><a href="http://soccer.hupu.com/" >国际足球</a></li><li class="line">|</li><li><a href="http://soccer.hupu.com/china/" >中国足球</a></li><li class="line">|</li><li><a href="http://racing.hupu.com/" >赛车</a></li><li class="line">|</li><li><a href="http://tennis.hupu.com/" >网球</a></li><li class="line">|</li><li><a href="http://zb.hupu.com/" target="_blank">装备</a></li><li class="line">|</li><li><a href="http://www.shihuo.cn/" target="_blank">识货</a></li><li class="line">|</li><li><a href="http://lecai.hupu.com/" target="_blank">彩票</a></li><li class="line">|</li><li><a href="http://v.opahnet.com/" >视频</a></li><li class="line">|</li><li><a href="http://photo.hupu.com/" >图片</a></li><li class="line">|</li><li><a href="http://bbs.hupu.com/" >论坛</a></li><li class="line">|</li><li><a href="http://youxi.hupu.com/" >游戏</a></li><li class="line">|</li><li><a href="http://edu.hupu.com/" target="_blank">教育</a></li><li class="line">|</li><li class="hp-dropDownMenu hp-moreNav">
+                                                <a href="javascript:void(0)" class="hp-set">更多<s class="setArrow"></s></a>
+                                                <div class="hp-drapDown hp-moreNav-drapDown"><a href="http://voice.hupu.com/" >新声</a><a href="http://bbs.hupu.com/all-gambia" >娱乐</a><a href="http://outdoor.hupu.com/" >户外</a><a href="http://run.hupu.com/" >跑步</a><a href="http://ymq.hupu.com/" >羽毛球</a><a href="http://xgame.hupu.com/" target="_blank">xgames</a><a href="http://www.nflchina.com/" >NFL</a><a href="http://golf.hupu.com/" target="_blank">高尔夫</a><s class="arrow-top"><s class="arrowbd"></s></s>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="hp-subNav">
+			<ul class="hp-subNav-item">
+				<li><a target="_blank" href="http://nba.hupu.com">首页</a></li>
+				<li class="line">|</li>
+				<li class="hp-dropDownMenu">
+					<a target="_blank"  href="http://voice.hupu.com/nba/newslist" class="hp-set">新闻</a>
+					<div class="hp-drapDown">
+						<a target="_blank" href="http://voice.hupu.com/nba/newslist">NBA新闻</a>
+						<a target="_blank" href="http://voice.hupu.com/cba">中国篮球</a>
+                        <a target="_blank" href="http://voice.hupu.com/nba/team/rockets">火箭新闻</a>
+						<a target="_blank" href="http://voice.hupu.com/nba/team/cavaliers">骑士新闻</a>
+                        <a target="_blank" href="http://voice.hupu.com/nba/team/lakers">湖人新闻</a>
+						<a target="_blank" href="http://voice.hupu.com/nba/team/warriors">勇士新闻</a>
+						<a target="_blank" href="http://voice.hupu.com/nba/team/heat">热火新闻</a>
+                        <a target="_blank" href="http://voice.hupu.com/nba/tag/2987.html">雷霆新闻</a>
+                        <a target="_blank" href="http://voice.hupu.com/zb">装备新闻</a>
+                        <s class="arrow-top"><s class="arrowbd"></s></s>
+					</div>
+				</li>
+				<li class="line">|</li>
+				<li><a target="_blank" href="http://voice.hupu.com/nba">新声</a></li>
+				<li class="line">|</li>
+				<li class="hp-dropDownMenu">
+                                    <a target="_blank" href="http://v.opahnet.com/nba" class="hp-set">视频</a>
+                                    <div class="hp-drapDown">
+                                        <a target="_blank" href="http://v.opahnet.com/nba/game">比赛视频</a>
+                                        <a target="_blank" href="http://v.opahnet.com/nba/hot">热门视频</a>                                      
+                                        <a target="_blank" href="http://v.opahnet.com/nba/new/Cavaliers">骑士视频</a>
+                                        <a target="_blank" href="http://v.opahnet.com/nba/new/rockets">火箭视频</a>
+										<a target="_blank" href="http://v.opahnet.com/nba/new/lakers">湖人视频</a>
+                                        <a target="_blank" href="http://v.opahnet.com/nba/new/teams">诸强视频</a>
+                                        <a href="http://v.opahnet.com/nba/new/history" target="_blank">传奇球星</a>
+                                        <a target="_blank" href="http://v.opahnet.com/nba/new/streetball">街球视频</a>
+                                        <a href="http://v.opahnet.com/nba" target="_blank">更多</a>
+                                        <s class="arrow-top"><s class="arrowbd"></s></s>
+                                    </div>
+                                </li>
+				<li class="line">|</li>
+				<li class="hp-dropDownMenu">
+                                    <a target="_blank" href="http://photo.hupu.com/nba" class="hp-set">图片</a>
+                                    <div class="hp-drapDown">
+                                        <a target="_blank" href="http://photo.hupu.com/nba/tag/%E7%BE%A4%E6%98%9F">球星</a>
+                                        <a target="_blank" href="http://photo.hupu.com/nba/tag/%E6%90%9E%E7%AC%91">搞笑</a>
+                                        <a target="_blank" href="http://photo.hupu.com/nba/tag/%E6%BC%AB%E7%94%BB">漫画</a>
+                                        <a target="_blank" href="http://photo.hupu.com/nba/tag/cba">中国篮球</a>
+                                        <a target="_blank" href="http://photo.hupu.com/soccer">足球</a>
+                                        <a target="_blank" href="http://photo.hupu.com/ent/tag/%E7%BE%8E%E5%A5%B3">美女</a>
+                                        <a target="_blank" href="http://photo.hupu.com/ent/tag/%E5%A8%B1%E4%B9%90">娱乐</a>
+                                        <a target="_blank" href="http://photo.hupu.com/nba/new">新鲜</a>
+                                        <s class="arrow-top"><s class="arrowbd"></s></s>
+                                    </div>
+                                </li>
+				<li class="line">|</li>
+				<li class="hp-dropDownMenu">
+                                    <a href="http://g.hupu.com/nba/" class="hp-set" target="_blank">比赛中心</a>
+                                    <div class="hp-drapDown">
+                                        <a href="http://g.hupu.com/nba/standings" target="_blank">战绩排行</a>
+                                        <s class="arrow-top"><s class="arrowbd"></s></s>
+                                    </div>
+                                </li>
+				<li class="line">|</li>
+				<li class="hp-dropDownMenu">
+                                    <a href="http://g.hupu.com/nba/schedule" class="hp-set" target="_blank">赛程</a>
+                                    <div class="hp-drapDown">
+                                        <a href="http://g.hupu.com/nba/schedule" target="_blank">NBA赛程</a>
+                                        <a href="http://g.hupu.com/nba/schedule/rockets" target="_blank">火箭赛程</a>                        
+                                        <a href="http://g.hupu.com/nba/schedule/cavaliers" target="_blank">骑士赛程</a>
+										<a href="http://g.hupu.com/nba/schedule/lakers" target="_blank">湖人赛程</a>
+                                        <s class="arrow-top"><s class="arrowbd"></s></s>
+                                    </div>
+                                </li>
+				<li class="line">|</li>
+				<li><a href="http://v.opahnet.com/nba/tv/" target="_blank">直播</a></li>
+				<li class="line">|</li>
+				<li class="hp-dropDownMenu">
+                                    <a target="_blank" href="http://g.hupu.com/nba/teams" class="hp-set">球队</a>
+                                    <div class="hp-drapDown">
+                                        <a href="http://g.hupu.com/nba/teams/rockets" target="_blank">火箭</a>
+										<a href="http://g.hupu.com/nba/teams/cavaliers" target="_blank">骑士</a>
+                                        <a href="http://g.hupu.com/nba/teams/lakers" target="_blank">湖人</a>
+										<a href="http://g.hupu.com/nba/teams/warriors" target="_blank">勇士</a>                   
+                                        <a target="_blank" href="http://voice.hupu.com/nba/newslist">球队新闻</a>
+                                        <a target="_blank" href="http://v.opahnet.com/nba">球队视频</a>
+                                        <a target="_blank" href="http://g.hupu.com/nba/players/">球队球员</a>
+                                        <a target="_blank" href="http://g.hupu.com/nba/stats/players/pts">球员数据</a>
+                                        <a target="_blank" href="http://g.hupu.com/nba/standings">球队排行</a>
+                                        <s class="arrow-top"><s class="arrowbd"></s></s>
+                                    </div>
+                                </li>
+				<li class="line">|</li>
+				<li><a href="http://cba.hupu.com" target="_blank">CBA</a></li>
+				<li class="line">|</li>
+				<li class="hp-dropDownMenu">
+                                    <a href="http://zb.hupu.com" class="hp-set" target="_blank">装备</a>
+                                    <div class="hp-drapDown">
+                                        <a target="_blank" href="http://voice.hupu.com/zb">新闻</a>
+                                        <a target="_blank" href="http://zb.hupu.com/list">装备列表</a>
+                                        <a target="_blank" href="http://zb.hupu.com/rank">榜单</a>
+                                        <a target="_blank" href="http://zb.hupu.com">鞋柜</a>
+                                        <a target="_blank" href="http://bbs.hupu.com/all-gear">装备论坛</a>
+                                        <s class="arrow-top"><s class="arrowbd"></s></s>
+                                    </div>
+                                </li>
+				<li class="line">|</li>
+				<li class="hp-dropDownMenu">
+                                    <a href="http://www.shihuo.cn/"  target="_blank" class="hp-set">识货</a>
+                                    <div class="hp-drapDown">
+                                        <a target="_blank" title="发现好货" href="http://www.shihuo.cn/find">发现好货</a>
+										<a target="_blank" title="运动鞋" href="http://www.shihuo.cn/shoe">运动鞋</a>
+										<a target="_blank" title="团购" href="http://www.shihuo.cn/tuangou">团购</a>
+										<a target="_blank" title="推荐店铺" href="http://www.shihuo.cn/shop">推荐店铺</a>
+                                        <a target="_blank" title="卡路里" href="http://www.kaluli.com">卡路里</a>
+										<a target="_blank" title="亚马逊专区" href="http://www.shihuo.cn/amazon">亚马逊专区</a>
+                                        <s class="arrow-top"><s class="arrowbd"></s></s>
+                                    </div>
+                                </li>
+				<li class="line">|</li>
+				<li><a href="http://bbs.hupu.com/streetball"  target="_blank">街球</a></li>
+				<li class="line">|</li>
+				<li class="hp-dropDownMenu">
+                                    <a href="http://lecai.hupu.com/lottery/jclq/sf/"  target="_blank" class="hp-set">篮彩</a>
+                                    <div class="hp-drapDown">
+                                        <a target="_blank" href="http://lecai.hupu.com/lottery/jclq/rfsf/">篮球让分胜负</a>
+                                        <a target="_blank" href="http://lecai.hupu.com/lottery/jclq/dxf/">篮球大小分</a>
+                                        <a target="_blank" href="http://lecai.hupu.com/lottery/jclq/sfc/">篮球胜分差</a>
+                                        <a target="_blank" href="http://bbs.hupu.com/lancai">篮彩论坛</a>
+                                        <a target="_blank" href="http://goucai.hupu.com/guide">篮彩新手指南</a>
+                                        <a target="_blank" href="http://lecai.hupu.com/lottery/jczq/spf/">竞彩足球</a>
+                                         <s class="arrow-top"><s class="arrowbd"></s></s>
+                                    </div>
+                                </li>
+				<li class="line">|</li>
+				<li class="hp-dropDownMenu">
+                                    <a target="_blank" href="http://bbs.hupu.com/nba" class="hp-set">NBA论坛</a>
+                                    <div class="hp-drapDown">
+                                        <a target="_blank" href="http://bbs.hupu.com/all-nba">NBA版首页</a>
+                                        <a target="_blank" href="http://bbs.hupu.com/rockets">火箭</a>
+										<a target="_blank" href="http://bbs.hupu.com/cavaliers">骑士</a>
+										<a target="_blank" href="http://bbs.hupu.com/spurs">马刺</a>
+                                        <a target="_blank" href="http://bbs.hupu.com/lakers">湖人</a>
+										<a target="_blank" href="http://bbs.hupu.com/warriors">勇士</a>
+										<a target="_blank" href="http://bbs.hupu.com/thunder">雷霆</a>
+										<a target="_blank" href="http://bbs.hupu.com/mavericks">小牛</a>
+										<a target="_blank" href="http://bbs.hupu.com/heat">热火</a>
+                                        <a target="_blank" href="http://bbs.hupu.com/clippers">快船</a>										
+                                        <a target="_blank" href="http://bbs.hupu.com/nba">篮球场</a>
+                                        <a target="_blank" href="http://bbs.hupu.com/vote">湿乎乎的话题</a> 
+                                        <a target="_blank" href="http://bbs.hupu.com/shenlan">深篮讨论</a>
+                                        <s class="arrow-top"><s class="arrowbd"></s></s>
+                                    </div>
+                                </li>
+				<li class="line">|</li>
+				<li><a target="_blank" href="http://my.hupu.com/public/nba">热榜</a></li>
+			</ul> 
+		</div>
+
+                                <i class="hp-roundPoint-br-tl roundPoint-br-tl"></i>
+                                <i class="hp-roundPoint-br-tr roundPoint-br-tr"></i>
+                                <i class="hp-roundPoint-br-bl roundPoint-br-bl"></i>
+                                <i class="hp-roundPoint-br-br roundPoint-br-br"></i>
+                            </div>
+                        </div>
+<script type="text/javascript">
+    document.domain = "hupu.com";
+    var is_boxscore=true;
+    var is_live=true;</script>
+
+
+<div class="gamecenter_score">
+    <div style="display: none;" class="bgs_png"></div>
+ <div class="bd1">
+        <iframe width="980px" height="60px" scrolling="no" frameborder="0" allowtransparency="true" hspace="0" vspace="0" marginheight="0" marginwidth="0" src="http://t1.hoopchina.com.cn/topn-v2.html#!zone-4431993"></iframe>
+ </div>
+
+<!--3级导航开始-->
+<div class="hp-threeNav">
+    <div class="hp-threeNav-bd">
+        <ul class="hp-threeNav-item">
+                            <li class="on"><a href="/nba/">比赛中心</a></li>
+                            <li class=""><a href="/nba/standings">战绩排行</a></li>
+                            <li class=""><a href="/nba/stats/players/pts">数据排名</a></li>
+                            <li class=""><a href="/nba/schedule/">比赛赛程</a></li>
+                            <li class=""><a href="/nba/teams/">球队</a></li>
+                            <li class=""><a href="/nba/players/">球员</a></li>
+                    </ul>
+    </div>
+    <div class="hp-search">
+        <form id="hp-form-search" method="get" enctype="multipart/form-data" action="http://my.hoopchina.com/search">
+            <input type="text" value="搜索视频、帖子、碎碎念" class="it-search" />
+            <input type="submit" value="搜索" class="btn-search" />
+        </form>
+    </div>
+</div>
+<!--3级导航结束-->
+
+
+
+
+<p class="bread_crumbs"><a href="/nba/">NBA比赛中心</a> > <b>骑士VS勇士文字直播</b></p>
+
+<div class="table_list">
+    <div class="table_list_l"></div>
+    <div class="table_list_c">
+        <div class="table">
+            <ul>
+                                <li class="on">
+                    <a  href="/nba/daily/boxscore_150122.html">
+                    <p>进行中</p>
+                    <div class="team">
+                        <span class="name">骑士</span>30                    </div>
+                    <div class="bg_img_j border">
+                        <span class="name">勇士</span>38                    </div>
+                    </a>
+                </li>
+
+                
+            </ul>
+        </div>
+    </div>
+    <div class="table_list_r2"></div>
+</div>
+
+
+
+
+
+<div class="gamecenter_content">
+    <div class="gamecenter_content_l">
+        <div class="box_a">
+            <div class="top_bg">
+
+            </div>
+            
+        <div class="team_vs">
+            <div class="team_vs_box">
+                <div class="team_a">
+                    <div class="img">
+                        <a target="_blank" href="http://g.hupu.com/nba/teams/cavaliers">
+                            <img alt="骑士" src="http://c2.hoopchina.com.cn//images/gamespace/team/CLE.png?v=20150401" height="95" width="95" /></a>
+                    </div>
+                    <div class="message">
+                        <h2>30</h2>
+                        <p><a href="http://g.hupu.com/nba/teams/cavaliers" target='_blank'>骑士</a>
+                                                            (2)                                                    </p>
+                        <div>主队（53胜29负）</div>
+                    </div>
+                </div>
+                                <div class="team_num">
+                    第二节剩8:09                </div>
+                                <div class="team_b">
+                    <div class="img">
+                        <a target="_blank" href="http://g.hupu.com/nba/teams/warriors">
+                            <img alt="勇士" src="http://c2.hoopchina.com.cn//images/gamespace/team/GSW.png?v=20150401" height="95" width="95" /></a>
+                    </div>
+                    <div class="message">
+                        <h2>38</h2>
+                        <p><a href="http://g.hupu.com/nba/teams/warriors" target='_blank'>勇士</a>
+                                                            (1)                                                    </p>
+                        <div>客队（67胜15负）</div>
+                    </div>
+                </div>
+            </div>
+            <div class="about_fonts clearfix">
+                <p class="time_f">开赛：2015年6月12日  9:00</p>
+                <p class="consumTime">耗时：暂无统计</p>
+                <p class="arena">球馆：速贷中心</p>
+                <p class="peopleNum">上座：暂无统计</p>
+            </div>
+        </div>
+
+
+
+<div class="yuece_num">
+            <div class="yuece_num_a">
+            <table class="itinerary_table">
+                <tbody>
+                <tr class="title">
+                    <td></td>
+                    <td>一</td>
+                    <td>二</td>
+                    <td>三</td>
+                    <td>四</td>
+                                        <td class="total">总分</td>
+                </tr>
+
+                <tr>
+                    <td>骑士</td>
+                    <td>24</td>
+                    <td>6</td>
+                    <td></td>
+                    <td></td>
+                                        <td>30</td>
+                </tr>
+                <tr>
+                    <td>勇士</td>
+                    <td>31</td>
+                    <td>7</td>
+                    <td></td>
+                    <td></td>
+                                        <td>38</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+            <div class="yuece_num_b">
+                    <a  target='_self' href="/nba/daily/boxscore_150122.html" class="d on"><s></s>数据直播</a>
+                <a  target='_blank' href="http://goto.hupu.com/?a=goClick&amp;id=3727" class="e "><s></s>视频直播</a>
+                <a  target='_blank' href="http://goto.hupu.com/?a=goClick&amp;id=2845" class="f "><s></s>手机直播</a>
+                <a  target='_self' href="/nba/daily/playbyplay_150122.html" class="b "><s></s>文字直播</a>
+                <span class="a_1"><s></s>比赛战报</span>
+    
+    </div>
+</div>
+                            <div class="team_vs_good" matchId="150122">
+    <div class="a">
+        赞
+    </div>
+    <div class="b">
+        <div class="d" style="width: 50.47%"></div>
+    </div>
+    <div class="c">
+        赞
+    </div>
+    <div class="team_a">
+        <p><b>43473</b></p>
+        <p>骑士</p>
+    </div>
+    <div class="team_b">
+        <p><b>42664</b></p>
+        <p>勇士</p>
+    </div>
+</div>            
+        </div>
+                <div class="table_list_live">
+<div class="clearfix"><h2>骑士（主队）</h2>
+<div class="tips_layes">
+    ?
+    <div class="tips_tems">
+        <div class="post_tips">
+        </div>
+        <div class="fonts">
+            +/- ：指球员在场上时球队的净胜分<br/>
+PG ：控球后卫<br/>
+SG ：得分后卫<br/>
+G ：后卫<br/>
+SF ：小前锋<br/>
+PF ：大前锋<br/>
+F ：前锋<br/>
+G/F ：后卫/前锋<br/>
+C ：中锋<br/>
+F/C ：前锋/中锋<br/>
+        </div>
+    </div>
+</div>
+</div>
+<table>
+    <tbody>
+    <tr class="title bg_a">
+        <td class="left" width="150"><b>首发</b></td>
+        <td width="23"></td>
+        <td>时间</td>
+        <td>投篮</td>
+        <td>3分</td>
+        <td>罚球</td>
+        <td>前场</td>
+        <td>后场</td>
+        <td>篮板</td>
+        <td>助攻</td>
+        <td>犯规</td>
+        <td>抢断</td>
+        <td>失误</td>
+        <td>封盖</td>
+        <td>得分</td>
+        <td>+/-</td>
+    </tr>
+
+            <tr>
+            <td class="tdw-1 left">
+
+                                            <a href="http://g.hupu.com/nba/players/matthewdellavedova-4789.html" target="_blank">
+                            马修-戴拉维多瓦</a>
+                                </td>
+            <td>G</td>
+            <td>13</td>
+            <td>1-4</td>
+            <td>0-2</td>
+            <td>2-2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td><span class="high">3</span>            </td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>4            </td>
+            <td>-2            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+
+                                            <a href="http://g.hupu.com/nba/players/imanshumpert-3570.html" target="_blank">
+                            伊曼-香珀特</a>
+                                </td>
+            <td>G/F</td>
+            <td>12</td>
+            <td>1-2</td>
+            <td>1-2</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>3</td>
+            <td>3            </td>
+            <td>1            </td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>3            </td>
+            <td>-3            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+
+                                            <a href="http://g.hupu.com/nba/players/lebronjames-650.html" target="_blank">
+                            勒布朗-詹姆斯</a>
+                                </td>
+            <td>F</td>
+            <td>14</td>
+            <td>3-6</td>
+            <td>1-1</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>2            </td>
+            <td>1            </td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>7            </td>
+            <td>-8            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+
+                                            <a href="http://g.hupu.com/nba/players/tristanthompson-3557.html" target="_blank">
+                            特里斯坦-汤普森</a>
+                                </td>
+            <td>F/C</td>
+            <td>14</td>
+            <td>3-4</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>2</td>
+            <td>4</td>
+            <td><span class="high">6</span>            </td>
+            <td>0            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>6            </td>
+            <td>-8            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+
+                                            <a href="http://g.hupu.com/nba/players/timofeymozgov-3509.html" target="_blank">
+                            季莫费-莫兹戈夫</a>
+                                </td>
+            <td>C</td>
+            <td>10</td>
+            <td>4-8</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>1</td>
+            <td>1</td>
+            <td>2            </td>
+            <td>1            </td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td><span class="high">8</span>            </td>
+            <td>-2            </td>
+        </tr>
+    
+    <tr class="title bg_a">
+        <td class="left" width="150"><b>替补</b></td>
+        <td width="23"></td>
+        <td>时间</td>
+        <td>投篮</td>
+        <td>3分</td>
+        <td>罚球</td>
+        <td>前场</td>
+        <td>后场</td>
+        <td>篮板</td>
+        <td>助攻</td>
+        <td>犯规</td>
+        <td>抢断</td>
+        <td>失误</td>
+        <td>封盖</td>
+        <td>得分</td>
+        <td>+/-</td>
+    </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/jrsmith-488.html" target="_blank">
+                            JR-史密斯</a>
+                                </td>
+            <td>G/F</td>
+            <td>11</td>
+            <td>1-4</td>
+            <td>0-2</td>
+            <td>0-0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>1            </td>
+            <td>1            </td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2            </td>
+            <td>-12            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/jamesjones-390.html" target="_blank">
+                            詹姆斯-琼斯</a>
+                                </td>
+            <td>G/F</td>
+            <td>6</td>
+            <td>0-2</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>2            </td>
+            <td>0            </td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0            </td>
+            <td>-5            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/kevinlove-3004.html" target="_blank">
+                            凯文-乐福</a>
+                                </td>
+            <td>F/C</td>
+            <td>0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/joeharris-4957.html" target="_blank">
+                            乔-哈里斯</a>
+                                </td>
+            <td>SG</td>
+            <td>0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/kyrieirving-3554.html" target="_blank">
+                            凯里-欧文</a>
+                                </td>
+            <td>G</td>
+            <td>0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/andersonvarejao-659.html" target="_blank">
+                            安德森-瓦莱乔</a>
+                                </td>
+            <td>F/C</td>
+            <td>0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/kendrickperkins-47.html" target="_blank">
+                            肯德里克-帕金斯</a>
+                                </td>
+            <td>C</td>
+            <td>0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/mikemiller-16.html" target="_blank">
+                            迈克-米勒</a>
+                                </td>
+            <td>G/F</td>
+            <td>0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/brendanhaywood-130.html" target="_blank">
+                            布兰登-海伍德</a>
+                                </td>
+            <td>C</td>
+            <td>0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/shawnmarion-182.html" target="_blank">
+                            肖恩-马里昂</a>
+                                </td>
+            <td>G/F</td>
+            <td>0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+        </tr>
+    
+    <tr class="title bg_a">
+        <td width="150" class="left">统计</td>
+        <td>&nbsp;</td>
+        <td></td>
+        <td>13-30</td>
+        <td>2-7</td>
+        <td>2-2</td>
+        <td>4</td>
+        <td>12</td>
+        <td>16</td>
+        <td>7</td>
+        <td>6</td>
+        <td>0</td>
+        <td>3</td>
+        <td>2</td>
+        <td>30</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr class="title bg_a">
+        <td width="150" class="left">命中率</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>43.3%</td>
+        <td>28.6%</td>
+        <td>100.0%</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    </tbody>
+</table>
+
+</div><div class="table_list_live">
+<div class="clearfix"><h2>勇士（客队）</h2>
+<div class="tips_layes">
+    ?
+    <div class="tips_tems">
+        <div class="post_tips">
+        </div>
+        <div class="fonts">
+            +/- ：指球员在场上时球队的净胜分<br/>
+PG ：控球后卫<br/>
+SG ：得分后卫<br/>
+G ：后卫<br/>
+SF ：小前锋<br/>
+PF ：大前锋<br/>
+F ：前锋<br/>
+G/F ：后卫/前锋<br/>
+C ：中锋<br/>
+F/C ：前锋/中锋<br/>
+        </div>
+    </div>
+</div>
+</div>
+<table>
+    <tbody>
+    <tr class="title bg_a">
+        <td class="left" width="150"><b>首发</b></td>
+        <td width="23"></td>
+        <td>时间</td>
+        <td>投篮</td>
+        <td>3分</td>
+        <td>罚球</td>
+        <td>前场</td>
+        <td>后场</td>
+        <td>篮板</td>
+        <td>助攻</td>
+        <td>犯规</td>
+        <td>抢断</td>
+        <td>失误</td>
+        <td>封盖</td>
+        <td>得分</td>
+        <td>+/-</td>
+    </tr>
+
+            <tr>
+            <td class="tdw-1 left">
+
+                                            <a href="http://g.hupu.com/nba/players/stephencurry-3311.html" target="_blank">
+                            斯蒂芬-库里</a>
+                                </td>
+            <td>G</td>
+            <td>12</td>
+            <td>2-6</td>
+            <td>2-3</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td><span class="high">3</span>            </td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>6            </td>
+            <td>+7            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+
+                                            <a href="http://g.hupu.com/nba/players/andreiguodala-642.html" target="_blank">
+                            安德烈-伊格达拉</a>
+                                </td>
+            <td>G/F</td>
+            <td>14</td>
+            <td>4-7</td>
+            <td>1-3</td>
+            <td>0-0</td>
+            <td>1</td>
+            <td>2</td>
+            <td>3            </td>
+            <td>0            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td><span class="high">9</span>            </td>
+            <td><span class="high">+8</span>            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+
+                                            <a href="http://g.hupu.com/nba/players/klaythompson-3564.html" target="_blank">
+                            克莱-汤普森</a>
+                                </td>
+            <td>G/F</td>
+            <td>14</td>
+            <td>2-5</td>
+            <td>1-3</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>1            </td>
+            <td>0            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>5            </td>
+            <td>+3            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+
+                                            <a href="http://g.hupu.com/nba/players/harrisonbarnes-3644.html" target="_blank">
+                            哈里森-巴恩斯</a>
+                                </td>
+            <td>F</td>
+            <td>14</td>
+            <td>2-5</td>
+            <td>1-3</td>
+            <td>0-0</td>
+            <td>3</td>
+            <td>3</td>
+            <td><span class="high">6</span>            </td>
+            <td>0            </td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>5            </td>
+            <td>+7            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+
+                                            <a href="http://g.hupu.com/nba/players/draymondgreen-3672.html" target="_blank">
+                            德雷蒙德-格林</a>
+                                </td>
+            <td>F</td>
+            <td>10</td>
+            <td>2-3</td>
+            <td>0-1</td>
+            <td>1-1</td>
+            <td>0</td>
+            <td>2</td>
+            <td>2            </td>
+            <td><span class="high">3</span>            </td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>5            </td>
+            <td>+3            </td>
+        </tr>
+    
+    <tr class="title bg_a">
+        <td class="left" width="150"><b>替补</b></td>
+        <td width="23"></td>
+        <td>时间</td>
+        <td>投篮</td>
+        <td>3分</td>
+        <td>罚球</td>
+        <td>前场</td>
+        <td>后场</td>
+        <td>篮板</td>
+        <td>助攻</td>
+        <td>犯规</td>
+        <td>抢断</td>
+        <td>失误</td>
+        <td>封盖</td>
+        <td>得分</td>
+        <td>+/-</td>
+    </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/davidlee-1032.html" target="_blank">
+                            大卫-李</a>
+                                </td>
+            <td>F/C</td>
+            <td>6</td>
+            <td>1-3</td>
+            <td>0-0</td>
+            <td>2-2</td>
+            <td>0</td>
+            <td>2</td>
+            <td>2            </td>
+            <td>2            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>4            </td>
+            <td>+5            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/shaunlivingston-623.html" target="_blank">
+                            肖恩-利文斯顿</a>
+                                </td>
+            <td>G</td>
+            <td>6</td>
+            <td>0-1</td>
+            <td>0-0</td>
+            <td>2-2</td>
+            <td>0</td>
+            <td>2</td>
+            <td>2            </td>
+            <td><span class="high">3</span>            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2            </td>
+            <td>+6            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/leandrobarbosa-183.html" target="_blank">
+                            莱昂德罗-巴博萨</a>
+                                </td>
+            <td>G</td>
+            <td>4</td>
+            <td>1-2</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2            </td>
+            <td>+1            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/jamesmichaelmcadoo-4987.html" target="_blank">
+                            詹姆斯-迈克尔-麦卡杜</a>
+                                </td>
+            <td>PF</td>
+            <td>0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/ognjenkuzmic-4872.html" target="_blank">
+                            奥格年-库兹米奇</a>
+                                </td>
+            <td>C</td>
+            <td>0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/festusezeli-3667.html" target="_blank">
+                            费斯图斯-埃泽利</a>
+                                </td>
+            <td>C</td>
+            <td>0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/brandonrush-3031.html" target="_blank">
+                            布兰登-拉什</a>
+                                </td>
+            <td>SG</td>
+            <td>0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/andrewbogut-1031.html" target="_blank">
+                            安德鲁-博古特</a>
+                                </td>
+            <td>C</td>
+            <td>0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/marreesespeights-3050.html" target="_blank">
+                            马利斯-斯贝茨</a>
+                                </td>
+            <td>F/C</td>
+            <td>0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+        </tr>
+            <tr>
+            <td class="tdw-1 left">
+                                            <a href="http://g.hupu.com/nba/players/justinholiday-3741.html" target="_blank">
+                            贾斯汀-霍勒迪</a>
+                                </td>
+            <td>G/F</td>
+            <td>0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0-0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0            </td>
+            <td>0            </td>
+        </tr>
+    
+    <tr class="title bg_a">
+        <td width="150" class="left">统计</td>
+        <td>&nbsp;</td>
+        <td></td>
+        <td>14-32</td>
+        <td>5-13</td>
+        <td>5-5</td>
+        <td>4</td>
+        <td>12</td>
+        <td>16</td>
+        <td>11</td>
+        <td>3</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>38</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr class="title bg_a">
+        <td width="150" class="left">命中率</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>43.8%</td>
+        <td>38.5%</td>
+        <td>100.0%</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    </tbody>
+</table>
+
+</div>                <div class="table_choose">
+                        <a  target='_self' href="/nba/daily/boxscore_150122.html" class="d on"><s></s>数据直播</a>
+                <a  target='_self' href="/nba/daily/playbyplay_150122.html" class="b "><s></s>文字直播</a>
+                <span class="a_1"><s></s>比赛战报</span>
+                <a  target='_blank' href="http://goto.hupu.com/?a=goClick&amp;id=3727" class="e "><s></s>视频直播</a>
+                <a  target='_blank' href="http://goto.hupu.com/?a=goClick&amp;id=2845" class="f "><s></s>手机直播</a>
+            </div>
+        <div class="box_d">
+            <div id="hp-comment-showItem" data-appid="6" data-topicid="150122" data-title="06月12日骑士vs勇士数据统计－虎扑NBA原创报道" data-link="http://g.hupu.com/nba/daily/boxscore_150122.html"></div>
+        </div>
+    </div>
+    <div class="gamecenter_content_r">
+
+
+        <div id='div-gpt-ad-1387359684902-0' style='width:250px; height:250px;'>
+    <script type='text/javascript'>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1387359684902-0'); });
+    </script>
+    </div>
+
+<div class="play_rule">
+    <div class="title">比赛预测</div>
+    <div class="content">
+
+        <p style="display: none" class="name_color_red"></p>
+
+        <p><span class="bai">64.35%</span>的用户认为骑士赢</p>
+        <p><span class="bai">35.65%</span>的用户认为勇士赢</p>
+
+        <div class="yuce">
+
+        </div>
+
+            </div>
+</div>
+
+<div class="bbs_a">
+    <div class="title"><img alt="骑士" src="http://c2.hoopchina.com.cn//images/gamespace/team/40x40/CLE.png?v=20150401" height="40" width="40" />骑士论坛最新帖子</div>
+    <ul>
+                    <li><a href="http://bbs.hupu.com/12943576.html" target="_blank" title="第一节结束">第一节结束</a></li>
+                    <li><a href="http://bbs.hupu.com/12943554.html" target="_blank" title="我说你们能不能沉得住气一点儿？">我说你们能不能沉得住气一点儿？</a></li>
+                    <li><a href="http://bbs.hupu.com/12943512.html" target="_blank" title="苦力挺恶心人的">苦力挺恶心人的</a></li>
+                    <li><a href="http://bbs.hupu.com/12943502.html" target="_blank" title="骑士这节奏不对啊，不能打这么快…">骑士这节奏不对啊，不能打这么快…</a></li>
+                    <li><a href="http://bbs.hupu.com/12943499.html" target="_blank" title="这么打，骑士今天要输啊！">这么打，骑士今天要输啊！</a></li>
+                    <li><a href="http://bbs.hupu.com/12943497.html" target="_blank" title="大家不要紧张~多年的经验告诉你们~裁判先吹那个 后面就帮那个~继续看~">大家不要紧张~多年的经验告诉你们~裁判先吹那个 后面就帮那个~继续看~</a></li>
+                    <li><a href="http://bbs.hupu.com/12943488.html" target="_blank" title="感觉德拉出手有点多，特别是三分他一点不准">感觉德拉出手有点多，特别是三分他一点不准</a></li>
+                    <li><a href="http://bbs.hupu.com/12943462.html" target="_blank" title="怎么不叫暂停，太冲动了吧。">怎么不叫暂停，太冲动了吧。</a></li>
+            </ul>
+</div>
+<div class="bbs_a">
+    <div class="title"><img alt="勇士" src="http://c2.hoopchina.com.cn//images/gamespace/team/40x40/GSW.png?v=20150401" height="40" width="40" />勇士论坛最新帖子</div>
+    <ul>
+                    <li><a href="http://bbs.hupu.com/12943577.html" target="_blank" title="博古特呢？">博古特呢？</a></li>
+                    <li><a href="http://bbs.hupu.com/12943485.html" target="_blank" title="为什么没有开直播贴？">为什么没有开直播贴？</a></li>
+                    <li><a href="http://bbs.hupu.com/12943435.html" target="_blank" title="好快，你勇的节奏">好快，你勇的节奏</a></li>
+                    <li><a href="http://bbs.hupu.com/12943396.html" target="_blank" title="极小阵容 内线完全沦陷 不赞同科尔的想法">极小阵容 内线完全沦陷 不赞同科尔的想法</a></li>
+                    <li><a href="http://bbs.hupu.com/12943240.html" target="_blank" title="求解">求解</a></li>
+                    <li><a href="http://bbs.hupu.com/12943227.html" target="_blank" title="[流言板]变阵！伊格达拉先发，科尔使用小个阵容">[流言板]变阵！伊格达拉先发，科尔使用小个阵容</a></li>
+                    <li><a href="http://bbs.hupu.com/12943224.html" target="_blank" title="求解">求解</a></li>
+                    <li><a href="http://bbs.hupu.com/12943211.html" target="_blank" title="大卫李首发，汤普森第六人的变阵，大家怎么看？">大卫李首发，汤普森第六人的变阵，大家怎么看？</a></li>
+            </ul>
+</div>
+
+<div class="bbs_a">
+    <div class="title">24小时新闻排行榜</div>
+
+        <ul class="hour">
+                                <li><i>1</i><a href="http://voice.hupu.com/nba/1922047.html" target="_blank" title="福布斯公布百大收入最高运动员，詹姆斯第六">福布斯公布百大收入最高运动员，詹姆斯第六</a></li>
+                                <li><i>2</i><a href="http://voice.hupu.com/nba/1922030.html" target="_blank" title="热火倾向给韦德三年3600万？">热火倾向给韦德三年3600万？</a></li>
+                                <li><i>3</i><a href="http://voice.hupu.com/nba/1922038.html" target="_blank" title="前骑士球员：詹姆斯做的事情乔丹做不到">前骑士球员：詹姆斯做的事情乔丹做不到</a></li>
+                                <li><s>4</s><a href="http://voice.hupu.com/nba/1921966.html" target="_blank" title="魔术师：詹姆斯应该排在历史前四">魔术师：詹姆斯应该排在历史前四</a></li>
+                                <li><s>5</s><a href="http://voice.hupu.com/nba/1922022.html" target="_blank" title="哈达威：我的胯下运球是史上最强">哈达威：我的胯下运球是史上最强</a></li>
+                                <li><s>6</s><a href="http://voice.hupu.com/nba/1922021.html" target="_blank" title="戴拉维多瓦无惧自黑：我是很让人讨厌">戴拉维多瓦无惧自黑：我是很让人讨厌</a></li>
+                                <li><s>7</s><a href="http://voice.hupu.com/nba/1922019.html" target="_blank" title="科尔：格林明天应该能出场">科尔：格林明天应该能出场</a></li>
+                                <li><s>8</s><a href="http://voice.hupu.com/nba/1922034.html" target="_blank" title="库里：跟大卫-李配合感觉很自然">库里：跟大卫-李配合感觉很自然</a></li>
+                                <li><s>9</s><a href="http://voice.hupu.com/nba/1922014.html" target="_blank" title="欧文：詹姆斯要摧毁面前所有人">欧文：詹姆斯要摧毁面前所有人</a></li>
+                                <li><s>10</s><a href="http://voice.hupu.com/nba/1921999.html" target="_blank" title="帕金斯称从未见过詹皇如此有侵略性">帕金斯称从未见过詹皇如此有侵略性</a></li>
+        
+    </ul>
+    </div>
+
+<script type="text/javascript">
+    var homeTeamName='骑士';
+    var awayTeamName='勇士';
+    var matchId='150122';
+</script>
+
+
+
+
+
+    </div>
+</div>
+</div>
+
+
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+    var arr2 = $(".team_qushi").find("a").eq(0).attr("arr"),
+        name = $(".team_qushi").find("a").eq(0).attr("name"),
+        categories = $(".team_qushi").find("a").eq(0).attr("categories"),
+        tit = $(".team_qushi").find("a").eq(0).attr("tit");
+        measure = $(".team_qushi").find("a").eq(0).attr("measure");
+    $('#container').higs("spider",[
+        {
+            num: [22, 21, 12, 20, 15],
+            name:"骑士"
+        },
+        {
+            num: [30, 30, 25, 16, 13],
+            name:"勇士"
+        }
+    ]);//调用属性图  arr为数据
+
+    $('#container2').higs("line",{
+        num:arr2,
+        name:name,
+        text:tit,
+        categories:categories,
+        measure:measure
+    });//调用走势图  arr为数据
+
+    $(".team_qushi").delegate("a","click",function(){
+        arr2 = $(this).attr("arr");
+        name = $(this).attr("name");
+        tit = $(this).attr("tit");
+        measure = $(this).attr("measure");
+        $(this).addClass("on");
+        $(this).siblings().removeClass("on");
+        $('#container2').higs("line",{
+            num:arr2,
+            name:name,
+            categories:categories,
+            text:tit,
+            measure:measure
+        });
+    });
+ });
+</script><div class="hp-footer">
+                    
+                    <div class="hp-copyright">
+                    Copyright by 虎扑JRs &amp;
+                    <a href="http://www.hupu.com/" target="_blank" title="体育">虎扑体育</a> -
+                    <a href="http://www.hupu.com/declare.html" target="_blank">网站声明</a> -
+                    <a href="http://mobile.hupu.com/" target="_blank">手机虎扑</a> -
+                    <a href="http://jobs.hupu.com/" target="_blank">在虎扑工作</a> -
+                    <a href="http://marketing.hupu.com/contact/" target="_blank">联系我们</a> -
+					<a href="http://marketing.hupu.com/matches" target="_blank">赛事案例</a> -
+                    <a href="http://marketing.hupu.com/" target="_blank">广告服务</a> -
+                    <a href="http://www.hupu.com/sitemap.html" target="_blank">网站地图</a> -
+                    <a href="http://nba.hupu.com/" target="_blank" title="NBA">NBA</a> -
+                    <a href="http://cba.hupu.com/" target="_blank" title="CBA">CBA</a>  -
+                    <a href="http://soccer.hupu.com/" target="_blank" title="足球">足球</a> -
+                    <a href="http://soccer.hupu.com/china/" target="_blank" title="中超">中超</a> -
+                    <a href="http://nbl.hupu.com/" target="_blank" title="NBL">NBL</a>  -
+                    <a href="http://racing.hupu.com/" target="_blank" title="赛车">赛车</a> -
+                    </div>
+                    
+                </div>
+<script>
+_common.init({project:"nba"});
+</script>
+<script type="text/javascript" src="/js/gamespace/center.js?v=20150401"></script>
+<script type="text/javascript" src="http://b3.hoopchina.com.cn/web/module/comment/1.0.1/js/comment.js?v=20150401"></script>
+<script type="text/javascript" src="/js/gamespace/highcharts.js?v=20150401"></script>
+<script type="text/javascript" src="/js/gamespace/highcharts-more.js?v=20150401"></script>
+
+<!-- ipad广告 -->
+<script type="text/javascript">
+    if(/(iPad)/.test(navigator.userAgent)){
+        !function(K,g){var o=window,F=o.document,d=K.main||[],A=K.rest||[],P=Math,C=P.random(),j=d.length,l=A.length,c= -1,k=0,w=0,T=0,D=0,M=location.href,O=F.referrer,t=[],G=function(J){return("0"+J).substr(-2)},H=new Date,I=H.getFullYear()+G(H.getMonth()+1)+G(H.getDate())+G(H.getHours())+G(H.getMinutes())+(C+"").substr(2,4),B;if(!g)g="http://res.icast.cn/other/m/iFocus_Ad_Robot-1.0.js";for(var i=0;i<j;i++){D+=d[i].weight;d[i].adFlag=d[i].adFlag.replace(/^window\./,"");if(!B&&d[i].code.indexOf("icast.cn")!= -1)B=d[i]}if(O.indexOf("icast.cn")== -1){o.iFocus_Ad_Manager=o.iFocus_Ad_Manager||{};var v=K.name;iFocus_Ad_Manager[v]={};iFocus_Ad_Manager[v].checkAd=function(){k++;if(typeof(o[d[c].adFlag])!="undefined"){if(typeof(o[d[c].adFlag])=="function"){if(!o[d[c].adFlag]())e()}else{if(!o[d[c].adFlag])e()}}else{e()}};var e=function(){if(k<w){F.write('<script name="_iFocus_Ad_Robot" oid="'+v+'" src="'+g+'"><\/script>');}else{f()}};var f=function(){if(c!= -1&&d[c].track){(t[t.length]=new Image).src=d[c].track.replace(/\[RND\]/i,C).replace(/\[UU\]/,I)}if(A.constructor==Array){if(l>0)r(A[P.floor(C*l)].code)}else{if(A.code)r(A.code)}};var r=function(Q){F.write(Q.replace(/\[UU\]/,I).replace(/\[RND\]/i,C))};for(var i=0;i<j;i++){d[i].m=i==0?0:d[i-1].n;d[i].n=i==0?d[i].weight/D:(d[i-1].n+d[i].weight/D);if(C>=d[i].m&&C<=d[i].n){c=i;w=d[i].nestLevel;break}}if(c!= -1){r(d[c].code);if(d[c].adFlag)e()}else{f()}}else{if(B)r(B.code)}}(
+        {
+            "name":"ad1",
+            "main":[
+                {"code":"<script src='http://cast.ra.icast.cn/p/?id=1454&uu=[UU]&'></scr"+"ipt><script> __dace.sendEvent('hudongtong_g_ipad'); _hmt.push(['_trackEvent', 'gamespace', 'hudongtong_ipad', 'hdt_y']);</scr"+"ipt>","weight":100,"adFlag":"_IFOCUS_CONTROL_","nestLevel":3,"track":"http://tk.icast.cn/m/?p=1454&uu=[UU]&"}
+
+            ],
+            "rest":[
+                {"code":"<script>ac_as_id = 65453;ac_format = 0;ac_mode = 1;ac_group_id = 1;ac_server_base_url = 'afp.csbew.com'; document.write(unescape(\"%3Cscript src='http://static.csbew.com/k.js' type='text/javascript'%3E%3C/script%3E\")); _hmt.push(['_trackEvent', 'gamespace', 'hudongtong_ipad', 'hdt_y']);</scr"+"ipt>"}
+            ]
+        }
+        );
+    }
+
+//    if(1||/(iPad)/.test(navigator.userAgent)){
+        // document.write("<script src='http://cast.ra.icast.cn/p/?id=6062'><\/script>");
+//        document.write(unescape("%3Cscript src='http://cast.ra.icast.cn/p/?id=6062' type='text/javascript'%3E%3C/script%3E"));
+//        $(function() {
+//             _hmt.push(['_trackEvent', 'gamespace', 'hudongtong_ipad', 'hdt_y']);
+//             __dace.sendEvent('hudongtong_g_ipad');
+//        });
+//    }
+</script>
+
+<!-- ipad广告 -->
+
+<!-- 比赛页面1x1广告位 start -->
+<div id='div-gpt-ad-g_index_1x1' style='width:1px; height:1px;'>
+    <script type='text/javascript'>
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-g_index_1x1'); });
+    </script>
+</div>
+
+<!-- 比赛页面1x1广告位 end -->
+
+<!--
+
+<script type="text/javascript">
+
+    var htm_init = self.setInterval(function () {
+
+        if (typeof _hmt === 'object') {
+            for (var key in hmtArray) {
+                //console.log(1);
+                _hmt.push(hmtArray[key]);
+            }
+            clearInterval(htm_init);
+        } else {
+            //console.log(2);
+        }
+
+    }, 10);
+
+</script>
+
+-->
+
+</body>
+</html>

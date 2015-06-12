@@ -348,4 +348,20 @@ public class MatchData implements MatchDataService {
 		
 		return null;
 	}
+
+	/* (non-Javadoc)
+	 * @see dataservice.MatchDataService#getPlayerCareerMatches(java.lang.String)
+	 */
+	@Override
+	public ArrayList<MatchPlayerPO> getPlayerCareerMatches(String name) {
+		java.sql.Statement statement;
+		try {
+			statement = conn.createStatement();
+			ResultSet rs = statement.executeQuery("select * from match_player where player_name='"+name+"'");
+			return getMatchPlayers(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return new ArrayList<MatchPlayerPO>();
+	}
 }

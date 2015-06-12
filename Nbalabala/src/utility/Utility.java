@@ -15,6 +15,11 @@ public class Utility {
 		return name.substring(0, name.length() - 3);
 	}
 	
+	public static String increaseRegularSeason(String season) {
+		int startYear = Integer.parseInt(season.substring(0, 4)) + 1;
+		return getRegularStringByStartYear(startYear);
+	}
+	
 	public static String shortenName(String name) {
 		String trimed = trimName(name);
 		if (trimed.length() <= 13) return trimed;
