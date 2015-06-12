@@ -2,7 +2,6 @@ package bl.livebl;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -37,8 +36,10 @@ public class Live implements LiveBLService {
 		System.out.println(live.getCurrentSectionCount());
 		System.out.println(live.getHomeScores());
 		System.out.println(live.getRoadScores());
-		// HashMap<String, String> liveList = live.getLiveList();
-		// System.out.println(liveList);
+		ArrayList<String> textLive = live.getTextLive();
+		for(int i = 0; i < textLive.size(); i++) {
+			System.out.println(textLive.get(i));
+		}
 	}
 
 	/** 直播列表的URL */
@@ -63,10 +64,8 @@ public class Live implements LiveBLService {
 	private ArrayList<Integer> roadScores = new ArrayList<Integer>();
 	/** 当前多少小节 */
 	private int currentSectionCount = 0;
-	
-	public Live() {
-		refresh();
-	}
+	/** 文字直播 */
+	private ArrayList<String> textLive = new ArrayList<String>();
 	
 	/**
 	 * @see blservice.LiveBLService#getLiveList()
@@ -192,7 +191,45 @@ public class Live implements LiveBLService {
 	 */
 	@Override
 	public ArrayList<String> getTextLive() {
-		return null;
+//		if(!hasMatchStarted) {
+//			return null;
+//		}
+		return textLive;
+	}
+	
+	/**
+	 * @param source
+	 * @author cylong
+	 * @version 2015年6月12日  上午9:27:14
+	 */
+	private void getTextLive(String source) {
+		String eventReg = "<tr sid=\"(?<sid>\\d+)\">.*?<td width=\"70\">(?<time>.*?)</td>.*?<td width=\"70\">(?<team>.*?)</td>.*?<td>(?<event>.*?(<b>)?.*?(</b>)?.*?)</td>.*?<td width=\"139\" class=\"center\">(?<score>\\d+.\\d+)</td>.*?</tr>";
+		String pauseReg = "<tr sid=\"(?<sid>\\d+)\" class=\"pause\">.*?<td colspan=\"4\" style=\"text-align:center\"><b>(?<pause>.*?)</b></td>.*?</tr>";
+		Pattern eventPattern = Pattern.compile(eventReg);
+		Pattern pausePattern = Pattern.compile(pauseReg);
+		Matcher eventMatcher = eventPattern.matcher(source);
+		Matcher pauseMatcher = pausePattern.matcher(source);
+		int maxSID = 0; // 目前的最大事件数
+		while(eventMatcher.find()) {
+			int sid = Integer.parseInt(eventMatcher.group("sid"));
+			if(sid > maxSID) {
+				maxSID = sid;
+			}
+			String time = eventMatcher.group("time");
+			String team = eventMatcher.group("team");
+			String event = eventMatcher.group("event").replaceAll("<b>|</b>| ", "");
+			String score = eventMatcher.group("score");
+			String str = time + ";" + team + ";" + event + ";" + score;
+			textLive.add(str);
+		}
+		while(pauseMatcher.find()) {
+			int sid = Integer.parseInt(pauseMatcher.group("sid"));
+			if(sid > maxSID) {
+				maxSID = sid;
+			}
+			String pause = pauseMatcher.group("pause");
+			textLive.add(maxSID - sid, pause);
+		}
 	}
 	
 	/**
@@ -232,26 +269,31 @@ public class Live implements LiveBLService {
 	 * @version 2015年6月12日  上午12:37:11
 	 */
 	private void refreshLive() {
-//		if(!hasMatchStarted) {
-//			return;
-//		}
-//		HttpURLConnection urlConn = getConn(liveURL);
-//		InputStream input = null;
+		if(!hasMatchStarted) {
+			return;
+		}
+		HttpURLConnection urlConn = getConn(liveURL);
+		InputStream input = null;
 		BufferedReader reader = null;
 		ArrayList<String> scoreList = new ArrayList<String>(); // 小结分数，包含总分
 		try {
-			FileReader fr = new FileReader("C:\\Users\\cylong\\Downloads\\虎扑\\06月05日勇士vs骑士文字直播－虎扑NBA原创报道14.html");
-			reader = new BufferedReader(fr);
+//			FileReader fr = new FileReader("C:\\Users\\cylong\\Downloads\\虎扑\\06月05日勇士vs骑士文字直播－虎扑NBA原创报道14.html");
+//			reader = new BufferedReader(fr);
+			input = urlConn.getInputStream();
+			reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
 			String scoreReg = "<td>(?<score>\\d+)</td>";
 			Pattern scorePattern = Pattern.compile(scoreReg);
+			String source = "";
 			String temp = null;
 			while((temp = reader.readLine()) != null) {
+				source += temp;
 				Matcher scoreMatcher = scorePattern.matcher(temp);
 				if(scoreMatcher.find()) {
 					String score = scoreMatcher.group("score");
 					scoreList.add(score);
 				}
 			}
+			getTextLive(source); // 获得文字直路
 			homeScores.clear();
 			roadScores.clear();
 			int num = scoreList.size();
@@ -301,14 +343,18 @@ public class Live implements LiveBLService {
 					date = dateMatcher.group("date");
 					SimpleDateFormat sdfDate = new SimpleDateFormat("MM月dd日");
 					String currentDate = sdfDate.format(current);
-					tempBool_1 = currentDate.equals(date);
+					if(!tempBool_1) {
+						tempBool_1 = currentDate.equals(date.trim());
+					}
 				}
 				Matcher timeMatcher = timePattern.matcher(temp);
 				if(timeMatcher.find()) {
 					String time = timeMatcher.group("time");
 					SimpleDateFormat sdfTime = new SimpleDateFormat("HH：mm");
 					String currentTime = sdfTime.format(current);
-					tempBool_2 = currentTime.compareTo(time) > 0 ? true : false;
+					if(!tempBool_2) {
+						tempBool_2 = currentTime.compareTo(time.trim()) > 0 ? true : false;
+					}
 					Matcher teamMatcher = teamPattern.matcher(reader.readLine()); // 下一行就是球队名
 					if(teamMatcher.find()) {
 						String teamStr = teamMatcher.group("team");
