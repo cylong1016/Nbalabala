@@ -37,8 +37,10 @@ public class LivePanel extends GameFatherPanel {
 	
 	public LivePanel(String url) {
 		super(url);
-//		liveService = new LiveMOck();
+
 		liveService = new Live();
+		liveService.refresh();
+		System.out.println(liveService.getHomeAbbr());
 //		testData();
 		init();
 		text = liveService.getTextLive();

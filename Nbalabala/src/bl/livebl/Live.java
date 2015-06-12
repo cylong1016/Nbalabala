@@ -120,7 +120,7 @@ public class Live implements LiveBLService {
 	 */
 	@Override
 	public ArrayList<LivePlayerVO> getRoadPlayerRecords() {
-		return null;
+		return new ArrayList<LivePlayerVO>();
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class Live implements LiveBLService {
 	 */
 	@Override
 	public ArrayList<LivePlayerVO> getHomePlayerRecords() {
-		return null;
+		return new ArrayList<LivePlayerVO>();
 	}
 
 	/**
@@ -172,7 +172,7 @@ public class Live implements LiveBLService {
 //		if(!hasMatchStarted) {
 //			return null;
 //		}
-		return null;
+		return new double[] {0,0,0,0,0};
 	}
 
 	/**
@@ -183,7 +183,7 @@ public class Live implements LiveBLService {
 //		if(!hasMatchStarted) {
 //			return null;
 //		}
-		return null;
+		return new double[] {0,0,0,0,0};
 	}
 	
 	/**
