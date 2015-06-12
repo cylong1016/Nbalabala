@@ -11,7 +11,6 @@ import ui.panel.gamedata.ConPanel;
 import ui.panel.gamedata.GameFatherPanel;
 import utility.Constants;
 import vo.LivePlayerVO;
-import vo.MatchDetailVO;
 import bl.livebl.Live;
 import blservice.LiveBLService;
 
@@ -38,7 +37,10 @@ public class LivePanel extends GameFatherPanel {
 	
 	public LivePanel(String url) {
 		super(url);
-		liveService = new LiveMOck();
+
+		liveService = new Live();
+		liveService.refresh();
+		System.out.println(liveService.getHomeAbbr());
 //		testData();
 		init();
 		text = liveService.getTextLive();
