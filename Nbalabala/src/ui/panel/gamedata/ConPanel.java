@@ -22,13 +22,11 @@ public class ConPanel extends BottomPanel {
 	private static final long serialVersionUID = 3446121355783155791L;
 	private MyLabel[] sort,result1,result2;
 	private Rec[] rec1, rec2;
-	private MatchDetailVO vo;
 	private double[] lth1,lth2;
 	private DecimalFormat df = new DecimalFormat(".0");
 	
 	public ConPanel(MatchDetailVO vo) {
 		super(Images.GAME_CON);
-		this.vo = vo;
 		this.setBounds(22, 292, 952, 309);
 		lth1 = vo.getHomeFiveArgs();
 		lth2 = vo.getRoadFiveArgs();

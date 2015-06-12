@@ -12,6 +12,8 @@ import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import utility.Constants;
+import bl.livebl.Live;
+import blservice.LiveBLService;
 
 /**
  * 文字直播下半部分的panel
@@ -25,14 +27,17 @@ public class LiveBelowPanel extends BottomPanel {
 	private static final long serialVersionUID = 3575553054783466861L;
 	private TabButton[] tab;
 	private MyLabel playerlb_1,playerlb_2;
-	private String teamAbbr1,teamAbbr2;
 	private LiveDetailTable table ;
+	private ArrayList<String> text;
+	private int currentI;
+	private LiveBLService liveService;
 	
 	public LiveBelowPanel(String teamAbbr1,String teamAbbr2,ArrayList<String> text,Image bg) {
 		super(bg);
+		this.text = text;
 		this.setBounds(22, 292, 952, 309);
-		this.teamAbbr1 = teamAbbr1;
-		this.teamAbbr2 = teamAbbr2;
+		liveService = new Live();
+//		liveService = new LiveMock();
 	    table = new LiveDetailTable(teamAbbr1,teamAbbr2,text);
 		addButton();
 		setTable(text);
@@ -56,9 +61,61 @@ public class LiveBelowPanel extends BottomPanel {
 	}
 	
 	public void updateTable(ArrayList<String> text) {
+		this.text = text;
+		if(currentI == 0) {
+			table.setTable(text);
+		} else if(currentI == liveService.getCurrentSectionCount()){
+			findSection();
+			int begin = 0, end = 0;
+			switch(currentI){
+			case 1:
+				begin = section[0];
+				end = text.size();
+				break;
+			case 2:
+				begin = section[1];
+				end = section[0];
+				break;
+			case 3:
+				begin = section[2];
+				end = section[1];
+				break;
+			case 4:
+				begin = section[3];
+				end = section[2];
+				break;
+			}
+			 subArray = new ArrayList<String>();
+			 for(int i = begin ;i < end; i++) {
+				 subArray.add(text.get(i));
+			 }
+			 seeSectionTable(subArray);	
+		}
+	}
+	
+	public void seeSectionTable(ArrayList<String> text){
 		table.setTable(text);
 	}
 
+	private int[] section;
+	public void findSection(){
+		section = new int[4];
+		for(int i = 0; i < text.size(); i++) {
+			if(text.get(i).equals("第一小节结束")) {
+				section[0] = i;
+			}else if(text.get(i).equals("第二小节结束")) {
+				section[1] = i;
+			}else if(text.get(i).equals("第三小节结束")) {
+				section[2] = i;
+			}else if(text.get(i).equals("第四小节结束")) {
+				section[3] = i;
+			}
+			
+		}
+//		System.out.println(section[0]+" "+section[1]+" "+section[2]+" "+section[3]);
+	}
+	
+	private ArrayList<String> subArray;
 	public void addButton() {
 		tab = new TabButton[5];
 		for (int i = 0; i < 5; i++) {
@@ -71,47 +128,77 @@ public class LiveBelowPanel extends BottomPanel {
 		
 		tab[0].addMouseListener(new MouseAdapter(){
 			 public void mousePressed(MouseEvent e) {
+				 currentI = 0;
 				 tab[0].setOn();
 				 tab[1].setOff();
 				 tab[2].setOff();
 				 tab[3].setOff();
 				 tab[4].setOff();
+				 findSection();
+				 seeSectionTable(text);
 			 }
 		});
 		tab[1].addMouseListener(new MouseAdapter(){
 			 public void mousePressed(MouseEvent e) {
+				 currentI = 1;
 				 tab[1].setOn();
 				 tab[0].setOff();
 				 tab[2].setOff();
 				 tab[3].setOff();
 				 tab[4].setOff();
+				 findSection();
+				 subArray = new ArrayList<String>();
+				 for(int i = section[0] ;i < text.size(); i++) {
+					 subArray.add(text.get(i));
+				 }
+				 seeSectionTable(subArray);
 			 }
 		});
 		tab[2].addMouseListener(new MouseAdapter(){
 			 public void mousePressed(MouseEvent e) {
+				 currentI = 2;
 				 tab[2].setOn();
 				 tab[1].setOff();
 				 tab[0].setOff();
 				 tab[3].setOff();
 				 tab[4].setOff();
+				 findSection();
+				 subArray = new ArrayList<String>();
+				 for(int i = section[1] ;i < section[0]; i++) {
+					 subArray.add(text.get(i));
+				 }
+				 seeSectionTable(subArray);
 			 }
 		});
 		tab[3].addMouseListener(new MouseAdapter(){
 			 public void mousePressed(MouseEvent e) {
+				 currentI = 3;
 				 tab[3].setOn();
 				 tab[1].setOff();
 				 tab[2].setOff();
 				 tab[0].setOff();
 				 tab[4].setOff();
+				 subArray = new ArrayList<String>();
+				 for(int i = section[2] ;i < section[1]; i++) {
+					 subArray.add(text.get(i));
+				 }
+				 seeSectionTable(subArray);
 			 }
 		});
 		tab[4].addMouseListener(new MouseAdapter(){
 			 public void mousePressed(MouseEvent e) {
+				 currentI = 4;
 				 tab[4].setOn();
 				 tab[1].setOff();
 				 tab[2].setOff();
 				 tab[0].setOff();
 				 tab[3].setOff();
+				 findSection();
+				 subArray = new ArrayList<String>();
+				 for(int i = section[3] ;i < section[2]; i++) {
+					 subArray.add(text.get(i));
+				 }
+				 seeSectionTable(subArray); 
 			 }
 		});
 	}

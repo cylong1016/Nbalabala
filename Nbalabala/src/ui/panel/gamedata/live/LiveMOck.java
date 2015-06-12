@@ -82,10 +82,17 @@ public class LiveMock implements LiveBLService{
 	@Override
 	public ArrayList<String> getTextLive() {
 		ArrayList<String>text = new ArrayList<String>();
-		text.add("10:36;骑士;詹姆斯罚球不中;0-2");
-		text.add("第一小节结束");
-		text.add("11:00;勇士;詹姆斯扣篮球进;0-4");
+		text.add("第四小节结束");
+		text.add("48:00;勇士;艾弗森扣篮球进;0-4");
+		text.add("第三小节结束");
+		text.add("33:00;骑士;詹姆斯扣篮球进;0-4");
 		text.add("骑士换人");
+		text.add("第二小节结束");
+		text.add("20:00;勇士;詹姆斯扣篮球进;0-4");
+		text.add("18:00;勇士;詹姆斯扣篮球进;0-4");
+		text.add("第一小节结束");
+		text.add("08:00;勇士;詹姆斯扣篮球进;0-4");
+		text.add("01:36;骑士;詹姆斯罚球不中;0-2");
 		return text;
 	}
 
@@ -143,7 +150,7 @@ public class LiveMock implements LiveBLService{
 	@Override
 	public int getCurrentSectionCount() {
 		// TODO Auto-generated method stub
-		return 3;
+		return 1;
 	}
 
 	/* (non-Javadoc)

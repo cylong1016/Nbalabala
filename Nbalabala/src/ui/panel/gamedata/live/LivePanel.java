@@ -11,6 +11,7 @@ import ui.panel.gamedata.ConPanel;
 import ui.panel.gamedata.GameFatherPanel;
 import utility.Constants;
 import vo.LivePlayerVO;
+import bl.livebl.Live;
 import blservice.LiveBLService;
 
 /**
@@ -37,11 +38,9 @@ public class LivePanel extends GameFatherPanel {
 	
 	public LivePanel(String url) {
 		super(url);
-		liveService = new LiveMock();
-//		liveService = new Live();
+//		liveService = new LiveMock();
+		liveService = new Live();
 		liveService.refresh();
-		System.out.println(liveService.getHomeAbbr());
-//		testData();
 		init();
 		text = liveService.getTextLive();
 		vo1 = liveService.getHomePlayerRecords();
@@ -90,6 +89,11 @@ public class LivePanel extends GameFatherPanel {
 		ArrayList<Integer> roadScores = liveService.getRoadScores();
 		ArrayList<Integer> homeScores = liveService.getHomeScores();
 		int size = homeScores.size();
+		while(size < 5) {
+			roadScores.add(size-1, 0);;
+			homeScores.add(size-1, 0);
+			size++;
+		}
 		String[] totalScore = new String[]{roadScores.get(size-1).toString(),homeScores.get(size-1).toString()};
 		String total = roadScores.get(size-1).toString() +"-"+homeScores.get(size-1).toString();
 		String each = "";
