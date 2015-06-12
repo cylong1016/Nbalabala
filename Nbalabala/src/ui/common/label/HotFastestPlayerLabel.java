@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 
+import ui.MyFont;
 import ui.UIConfig;
 import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
@@ -61,7 +62,7 @@ public class HotFastestPlayerLabel extends JLabel{
 		}
 		nameLabel.setText(playerName);
 		String propertyStr = UIConfig.PERCENT_FORMAT.format(vo.getPromotion());
-		propertyLabel.setText(Constants.promotionText + propertyStr);
+		propertyLabel.setText(propertyStr);
 		teamLabel.setText(Constants.teamShortText + Constants.translateTeamAbbr(vo.getTeamAbbr()));
 		positionLabel.setText(Constants.positionShortText + vo.getPosition());
 	}
@@ -83,20 +84,20 @@ public class HotFastestPlayerLabel extends JLabel{
 			
 			int labelX = 80;
 			
-			nameLabel = new MyLabel(labelX, 30, 300, 33, playerName);
-			nameLabel.setFont(new Font("微软雅黑", Font.BOLD, 27));
+			nameLabel = new MyLabel(labelX, 30, 300, 40, playerName);
+			nameLabel.setFont(MyFont.YT_L);
 			nameLabel.setLeft();
 			this.add(nameLabel);
 			
 			String propertyStr = UIConfig.PERCENT_FORMAT.format(vo.getPromotion());
-			propertyLabel = new MyLabel(labelX, 70, 200, 26, Constants.promotionText +propertyStr);
-			propertyLabel.setFont(new Font("微软雅黑", Font.BOLD, 20));
-			propertyLabel.setForeground(UIConfig.HIST_FIRST_COLOR);
+			propertyLabel = new MyLabel(labelX, 70, 200, 40, propertyStr);
+			propertyLabel.setFont(MyFont.YT_L);
+			propertyLabel.setForeground(UIConfig.RED_WIN_COLOR);
 			propertyLabel.setLeft();
 			this.add(propertyLabel);
 			
 			String team = Constants.translateTeamAbbr(vo.getTeamAbbr());
-			teamLabel = new MyLabel(labelX, 120, 146, 26, Constants.teamShortText + team);
+			teamLabel = new MyLabel(labelX, 130, 146, 26, Constants.teamShortText + team);
 			teamLabel.setLeft();
 			this.add(teamLabel);
 			
@@ -110,20 +111,25 @@ public class HotFastestPlayerLabel extends JLabel{
 			
 			int labelWid = 175;
 			
-			nameLabel = new MyLabel(0,7,labelWid,20,vo.getName());
+			nameLabel = new MyLabel(0,3 ,labelWid,40,Utility.trimName(vo.getName()));
+			nameLabel.setFont(MyFont.YT_S);
 			
 			String propertyStr = UIConfig.FORMAT.format(vo.getPromotion());
 			propertyLabel = new MyLabel(0, 37, labelWid, 20, Constants.promotionText +propertyStr);
 			
 			String team = Constants.translateTeamAbbr(vo.getTeamAbbr());
-			teamLabel = new MyLabel(0, 67, labelWid, 20, Constants.teamShortText + team);
+			teamLabel = new MyLabel(0, 75, labelWid, 20, Constants.teamShortText + team);
 			
-			positionLabel = new MyLabel(0, 97, labelWid, 20, Constants.positionShortText + vo.getPosition());
+			positionLabel = new MyLabel(0, 97, labelWid, 20, Constants.positionShortText + vo.getPosition());			
 			
 			MyLabel labels[] = {nameLabel, propertyLabel, teamLabel, positionLabel};
 			for (int i = 0; i < labels.length; i++) {
 				labels[i].setRight();
 			}
+			
+			teamLabel.setForeground(MyFont.LIGHT_GRAY);
+			positionLabel.setForeground(MyFont.LIGHT_GRAY);
+
 			this.add(teamLabel);
 			this.add(propertyLabel);
 			this.add(nameLabel);

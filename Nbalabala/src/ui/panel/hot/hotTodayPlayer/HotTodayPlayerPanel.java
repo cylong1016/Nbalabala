@@ -8,7 +8,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
-import javax.swing.table.JTableHeader;
 
 import po.MatchPlayerPO;
 import ui.UIConfig;
@@ -39,7 +38,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 4256548887751307664L;
 
-	private int x = 103, y = 50, width = 55, height = 25, inter = 60, cellWidth = 70;
+	private int x = 103, y = 50, width = 55, height = 25, inter = 60, cellWidth = 60;
 	private HotTodayButton button[] = new HotTodayButton[5];
 	private HotBLService hot = new HotQuery();
 	private BottomTable table;
@@ -174,18 +173,21 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 		table = new BottomTable(rowData, Constants.HOT_COLUMNS, new Color(215, 72, 72));
 		
 		table.setRowHeight(57);
+		table.setHeaderColorAndFont();
+		table.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
 		table.setForeground(UIConfig.TABLE_HEADER_BACK_COLOR);
+//		table.setWidth(new int[] {});
 		int[] cells = new int[12];
 		for(int j = 0; j < cells.length; j++) {
 			cells[j] = cellWidth;
 		}
-		cells[2] = cells[8] = 120;
+		cells[2] = 125; // 名字
+		cells[1] = 80; // 头像
+		cells[6] = 65; // 在场时间
 		table.setWidth(cells);
-		JTableHeader header = table.getTableHeader();
-		header.setForeground(Color.red);
 		
 		scroll = new BottomScrollPane(table);
-		scroll.setBounds(90, 260, 810, 320);
+		scroll.setBounds(90, 260, 810, 340);
 		this.add(scroll);
 		setTable(playerVO);
 		
