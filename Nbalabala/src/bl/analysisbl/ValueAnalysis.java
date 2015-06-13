@@ -15,6 +15,7 @@ import utility.Utility;
 import vo.AnalysisCareerVO;
 import vo.AnalysisClutchVO;
 import vo.AnalysisDevotionVO;
+import vo.AnalysisTransferVO;
 import vo.ForecastVO;
 import enums.CareerData;
 import enums.InferenceData;
@@ -110,11 +111,8 @@ public class ValueAnalysis implements AnalysisBLService{
 			ArrayList<MatchPlayerPO> oneSeasonMatch = matchData.getMatchRecordByPlayerName(name, season);
 			matches.addAll(oneSeasonMatch);
 		}
-		
-		int count = (int)(Math.log(matches.size()) / Math.log(2));	//经验分组公式
-		int width = Math.min(82, matches.size() / count);	//TODO 这个数字有待考量
 	
-		ArrayList<Double> data = new DivideHandler().divideData(matches, width, forecastData);
+		ArrayList<Double> data = new DivideHandler().divideData(matches, forecastData);
 		new RegressionHandler().getNextValueByRegression(data);
 		return null;
 	}
@@ -124,7 +122,17 @@ public class ValueAnalysis implements AnalysisBLService{
 		System.out.println(t.quantile(0.05, 18));
 		
 	}
+
+	/* (non-Javadoc)
+	 * @see blservice.AnalysisBLService#getTransferData(java.lang.String, enums.InferenceData)
+	 */
+	@Override
+	public AnalysisTransferVO getTransferData(String name,
+			InferenceData inferenceData) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
-	}
+}
 

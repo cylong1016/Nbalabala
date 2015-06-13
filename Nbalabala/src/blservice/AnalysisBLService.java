@@ -10,6 +10,7 @@ import enums.InferenceData;
 import vo.AnalysisCareerVO;
 import vo.AnalysisClutchVO;
 import vo.AnalysisDevotionVO;
+import vo.AnalysisTransferVO;
 import vo.ForecastVO;
 
 /**
@@ -30,6 +31,9 @@ public interface AnalysisBLService {
 	public ArrayList<AnalysisDevotionVO> getDevotionData(String name);
 	
 	/** 返回某一球员的用于预测数据的样本点 */
-	public ForecastVO getForecastData(String name, InferenceData forecastData);
+	public ForecastVO getForecastData(String name, InferenceData inferenceData);
+	
+	/** 返回某一球员转会分析所需数据 */
+	public AnalysisTransferVO getTransferData(String name, InferenceData inferenceData);
 
 }

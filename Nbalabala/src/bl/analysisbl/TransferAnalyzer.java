@@ -1,7 +1,7 @@
 /**
  * 
  */
-package bl.analysisbl.regression;
+package bl.analysisbl;
 
 import java.util.ArrayList;
 
