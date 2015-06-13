@@ -299,7 +299,9 @@ public class PlayerDataPanel extends BottomPanel {
 			PlayerPositionSelectButton.current.back();
 			PlayerPositionSelectButton.current = (PlayerPositionSelectButton) e.getSource();
 			ArrayList<PlayerSeasonPO> playerRecords = playerSeason.getScreenedPlayers(
-					PlayerPositionSelectButton.current.position, PlayerDivisionSelectButton.current.division, PlayerScreenSelectButton.current.basis, seasonInput.getSeason());
+					PlayerPositionSelectButton.current.position,
+					PlayerDivisionSelectButton.current.division,
+					PlayerScreenSelectButton.current.basis, seasonInput.getSeason());
 			table = new AllPlayerSeasonTable(playerblService,playerRecords,current,totalOrAvg);
 			
 			addScrollPane(table);

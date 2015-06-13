@@ -55,7 +55,6 @@ public class GameDataPanel extends BottomPanel {
 		super(url);
 		matchDetailfile = matchQuery.getLatestMatches();
 //		matchDetailfile = matchQuery.screenMatchByTeam("PHI", "BOS");
-		System.out.println(matchDetailfile.size());
 		addComboBox();
 		addDateChooser();
 		addArray();

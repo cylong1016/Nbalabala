@@ -22,6 +22,5 @@ public class Nbalabala {
 		MainController.launch();
 		Constants.setEnglish();
 		
-
 	}
 }

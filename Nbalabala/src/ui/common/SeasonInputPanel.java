@@ -118,7 +118,7 @@ public class SeasonInputPanel extends JPanel {
 		int endInt = Integer.parseInt(start) + 1;
 		String end = String.valueOf(endInt).substring(2, 4);
 		String category = null;
-		if (rpLabel.getText().equals(Constants.regularText)) {
+		if (index == 0) {
 			category = "R";
 		}else {
 			category = "P";
