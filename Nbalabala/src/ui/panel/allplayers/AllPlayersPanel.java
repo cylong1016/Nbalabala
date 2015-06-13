@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import po.PlayerProfilePO;
+import ui.MyFont;
 import ui.UIConfig;
 import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
@@ -39,13 +40,15 @@ public class AllPlayersPanel extends BottomPanel {
 	private static final long serialVersionUID = 2951291212735567656L;
 
 	/** 按钮的横纵坐标 间隔 宽度 高度 */
-	private static final int BUTTON_X = 60, BUTTON_Y = 55, INTER = 33, WIDTH = 33, HEIGHT = 37;
+	private static final int BUTTON_X = 60, BUTTON_Y = 63, INTER = 33, WIDTH = 33, HEIGHT = 37;
 	private static final char[] LETTERS = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 
 		'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P','Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
 	private static final String IMG_PATH = UIConfig.IMG_PATH + "players/";
 	private static final String SEARCH_BUTTON_OFF = IMG_PATH + "search.png";
 	private static final String SEARCH_BUTTON_ON = IMG_PATH + "searchOn.png";
 	private static final String SEARCH_BUTTON_CLICK = IMG_PATH + "searchClick.png";
+	
+	private LetterButton current;
 	
 	/** 所有首字母的button */
 	private LetterButton[] initialButtons = new LetterButton[26];
@@ -107,13 +110,9 @@ public class AllPlayersPanel extends BottomPanel {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		table.setRowHeight(57);
-		table.setWidth(new int[] { 123, 200, 150, 104, 89, 116 });
-		table.setForeground(Color.WHITE);
-		table.setContentOpaque();
 		
 		SCROLL = new BottomScrollPane(table);
-		SCROLL.setBounds(101, 160, 802, 365);
+		SCROLL.setBounds(61, 117, 888, 465);
 		this.add(SCROLL);
 	}
 	
@@ -124,9 +123,10 @@ public class AllPlayersPanel extends BottomPanel {
 		ArrayList<ImageIcon> iconArr = new ArrayList<ImageIcon>();
 		table.setModel(new DefaultTableModel(rowData,Constants.allPlayerHeaders));
 		table.setRowHeight(57);
-		table.setWidth(new int[] { 123, 200, 150, 104, 89, 116 });
-		table.setForeground(Color.WHITE);
-		table.setContentOpaque();
+		table.setHeaderColorAndFont();
+		table.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
+		table.setWidth(new int[] { 150, 200, 150, 150, 89, 132 });
+		table.setForeground(MyFont.BLACK_GRAY);
 		
 		for (int i = 0; i < size; i++) {
 			PlayerProfilePO ppVO = players.get(i);
@@ -155,7 +155,7 @@ public class AllPlayersPanel extends BottomPanel {
 	 * @version 2015年3月20日 下午6:48:07
 	 */
 	public void addFindButton() {
-		queryButton = new ImgButton(SEARCH_BUTTON_OFF, 902, 15, SEARCH_BUTTON_ON, SEARCH_BUTTON_CLICK);
+		queryButton = new ImgButton(SEARCH_BUTTON_OFF, 902, 10, SEARCH_BUTTON_ON, SEARCH_BUTTON_CLICK);
 		this.add(queryButton);
 		queryButton.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -173,8 +173,10 @@ public class AllPlayersPanel extends BottomPanel {
 	 * @version 2015年3月20日 下午6:48:14
 	 */
 	public void iniSet() {
-		LetterButton.current = (LetterButton) initialButtons[0];
-		setEffect(initialButtons[0]);	
+		current = initialButtons[0];
+		setEffect(current);
+//		LetterButton.current = initialButtons[0];
+//		setEffect(LetterButton.current);	
 	}
 
 	/**
@@ -185,9 +187,7 @@ public class AllPlayersPanel extends BottomPanel {
 	 * @version 2015年3月20日 下午6:50:11
 	 */
 	public void setEffect(LetterButton button) {
-		button.setOpaque(true);
-		button.setBackground(LetterButton.LETTER_BG);
-		button.setForeground(Color.white);
+		button.setCurrent();
 	}
 
 	public void addListener() {
@@ -200,12 +200,15 @@ public class AllPlayersPanel extends BottomPanel {
 	class MouListener1 extends MouseAdapter {
 
 		public void mousePressed(MouseEvent e) {
-			if (e.getSource() == LetterButton.current) {
+			if (e.getSource() == current) {
 				return;
 			}
-			LetterButton.current.back();
-			LetterButton.current = (LetterButton) e.getSource();
-			char made = LetterButton.current.letter;
+			current.back();
+			current = (LetterButton) e.getSource();
+//			LetterButton.current.back();
+//			LetterButton.current = (LetterButton) e.getSource();
+//			char made = LetterButton.current.letter;
+			char made = current.letter;
 		    players = playerInfo.getPlayerProfileByInitial(made);
 		    setTable();
 		}
@@ -213,14 +216,14 @@ public class AllPlayersPanel extends BottomPanel {
 	}
 
 	public void addTextField() {
-		queryTextField = new MyTextField(754, 17, 135, 30);
+		queryTextField = new MyTextField(754, 10, 135, 30);
 		this.add(queryTextField);
 	}
 
 	public void setButton() {
 		for (int i = 0; i < initialButtons.length; i++) {
 			initialButtons[i] = new LetterButton(BUTTON_X + i * INTER, BUTTON_Y, WIDTH, HEIGHT, LETTERS[i] + "");
-			initialButtons[i].setForeground(LetterButton.LETTER_COLOR);
+			initialButtons[i].setForeground(Color.WHITE);
 		}
 	}
 

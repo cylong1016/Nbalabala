@@ -123,7 +123,8 @@ public class MainPanel extends Panel {
 		allPlayersBtn = new TabButton(blank + Constants.allPlayers, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
 		allPlayersBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainController.toAllPlayersPanel();			
+				MainController.toAllPlayersPanel();
+				
 			}
 		});	
 		allPlayersBtn.setLocation(LEFT_BTN_X, 239);

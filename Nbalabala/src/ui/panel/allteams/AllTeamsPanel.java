@@ -18,7 +18,7 @@ public class AllTeamsPanel extends BottomPanel {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 2125340581988541306L;
 	/** 横纵坐标 间隔 */
-	private static final int X1 = 220, X2 = 668, Y1 = 117, Y2 = 271, Y3 = 426, INTER = 27;
+	private static final int X1 = 185, X2 = 658, Y1 = 117, Y2 = 271, Y3 = 426, INTER = 27;
 	
 	private TeamButton[] buttonArr = new TeamButton[30];
 	private MouListener mou = new MouListener();

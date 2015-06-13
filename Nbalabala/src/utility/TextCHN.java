@@ -91,7 +91,7 @@ public class TextCHN {
 	
 	public static String hotShort = "热点";
 	public static String game = "赛程";
-	public static String ret = "返回";
+	public static String ret = "返回首页";
 	
 	public static String playerOnCourt = "在场球员";
 	
