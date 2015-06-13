@@ -1,7 +1,6 @@
 package ui.panel.gamedata;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import ui.MyFont;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.comboBox.MyComboBox;
@@ -118,12 +118,12 @@ public class GameDataPanel extends BottomPanel {
 	public void addLabel() {
 		number2 = new MyLabel(953, 315, 50, 50, pageNum + "");
 		number2.setForeground(Color.white);
-		number2.setFont(new Font("微软雅黑", 0, 18));
+		number2.setFont(MyFont.YT_M);
 		this.add(number2);
 
 		number1 = new MyLabel(940, 285, 50, 50, "1");
 		number1.setForeground(Color.white);
-		number1.setFont(new Font("微软雅黑", 0, 18));
+		number1.setFont(MyFont.YT_M);
 		this.add(number1);
 	}
 

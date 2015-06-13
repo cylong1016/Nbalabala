@@ -114,7 +114,7 @@ public class TextENG {
 			"ORB","DRB","TRB","AST","STL","BLK","TOV","PF","PTS"
 	};
 	
-	public static String [] matchPlayerHeaders = new String[] { "","Name", "ST", "Minutes", "FG", "FGA", "3P", "3PA", "FT", "FTA",
+	public static String [] matchPlayerHeaders = new String[] { "","Name", "ST", "Minutes", "FG", "3P", "FT",
 		"ORB", "DRB", "TRB", "AST", "STL", "BLK", "TOV", "PF", "PTS", "+/-" };
 	
 	/** 所有球员赛季数据中的表格分成四部分，为基本、进攻、防守、高阶 */

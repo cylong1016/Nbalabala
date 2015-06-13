@@ -66,6 +66,10 @@ public class LeftPanel extends Panel {
 		String smallBlank = "        ";
 		String bigBlank = "              ";
 		String arrow = "  >";
+		if (Constants.isEng) {
+			smallBlank = "";
+			bigBlank = "";
+		}
 		
 		allPlayersBtn = new TabButton(smallBlank + Constants.allPlayers + arrow, btnOnImg, btnClickImg);
 		allPlayersBtn.setLocation(0, FIRST_ZONE_Y);
