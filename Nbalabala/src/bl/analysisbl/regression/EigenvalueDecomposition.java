@@ -1,4 +1,4 @@
-package bl.analysisbl;
+package bl.analysisbl.regression;
 
 /** Eigenvalues and eigenvectors of a real matrix. 
 <P>

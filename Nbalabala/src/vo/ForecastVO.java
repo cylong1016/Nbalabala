@@ -3,6 +3,8 @@
  */
 package vo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Issac Ding
@@ -11,29 +13,21 @@ package vo;
  */
 public class ForecastVO {
 	
-	public double width;	//组距
-	public int size;	//组数
-	public double a;	//y = bx + a
-	public double b;
-	public double r;	//相关系数
+	public String name;
+	public double width;	//组距	(每多少场比赛划分为一组)
+	public ArrayList<Double> datas;
 	public int fromYear;	//起始年份
 	public int toYear;
 	public String conclusion;
 	
+	public String getName() {
+		return name;
+	}
+	public ArrayList<Double> getDatas() {
+		return datas;
+	}
 	public double getWidth() {
 		return width;
-	}
-	public int getSize() {
-		return size;
-	}
-	public double getA() {
-		return a;
-	}
-	public double getB() {
-		return b;
-	}
-	public double getR() {
-		return r;
 	}
 	public int getFromYear() {
 		return fromYear;

@@ -611,7 +611,6 @@ public class PlayerSeasonVOForCompute {
 //			}
 		}	
 		}catch(Exception e) {
-			System.out.println("lala");
 		}
 	}
 	

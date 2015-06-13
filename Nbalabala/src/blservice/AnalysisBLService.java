@@ -6,7 +6,7 @@ package blservice;
 import java.util.ArrayList;
 
 import enums.CareerData;
-import enums.ForecastData;
+import enums.InferenceData;
 import vo.AnalysisCareerVO;
 import vo.AnalysisClutchVO;
 import vo.AnalysisDevotionVO;
@@ -30,6 +30,6 @@ public interface AnalysisBLService {
 	public ArrayList<AnalysisDevotionVO> getDevotionData(String name);
 	
 	/** 返回某一球员的用于预测数据的样本点 */
-	public ForecastVO getForecastData(String name, ForecastData forecastData);
+	public ForecastVO getForecastData(String name, InferenceData forecastData);
 
 }

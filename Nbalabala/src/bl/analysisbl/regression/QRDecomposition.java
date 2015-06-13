@@ -1,4 +1,4 @@
-package bl.analysisbl;
+package bl.analysisbl.regression;
 
 /** QR Decomposition.
 <P>

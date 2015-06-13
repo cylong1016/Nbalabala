@@ -1,4 +1,4 @@
-package bl.analysisbl;
+package bl.analysisbl.regression;
 
    /** LU Decomposition.
    <P>

@@ -1,4 +1,4 @@
-package bl.analysisbl;
+package bl.analysisbl.regression;
 /**
  * Title:        Java Matrix Laboratory<p>
  * Description:  <p>

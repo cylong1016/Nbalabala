@@ -1,7 +1,7 @@
 /**
  * 
  */
-package bl.analysisbl;
+package bl.analysisbl.regression;
 
 /**
  *

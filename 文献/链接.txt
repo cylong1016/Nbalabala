@@ -1,0 +1,3 @@
+Java in Science: Data Interpolation and Extrapolation Using Numerical Methods of Polynomial Fittings
+
+http://www.developer.com/tech/article.php/762441/Java-in-Science-Data-Interpolation-and-Extrapolation-Using-Numerical-Methods-of-Polynomial-Fittings-Part-1.htm
