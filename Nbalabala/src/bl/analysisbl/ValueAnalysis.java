@@ -14,7 +14,9 @@ import utility.Utility;
 import vo.AnalysisCareerVO;
 import vo.AnalysisClutchVO;
 import vo.AnalysisDevotionVO;
+import vo.ForecastVO;
 import enums.CareerData;
+import enums.ForecastData;
 import blservice.AnalysisBLService;
 
 /**
@@ -88,6 +90,40 @@ public class ValueAnalysis implements AnalysisBLService{
 	public ArrayList<AnalysisDevotionVO> getDevotionData(String name) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see blservice.AnalysisBLService#getForecastData(java.lang.String, enums.ForecastData)
+	 */
+	@Override
+	public ForecastVO getForecastData(String name, ForecastData forecastData) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public static void main(String[] args) {
+	    //X轴
+	    double[] x = { 1, 2, 3, 4,5,6,7,8,9,10};
+	    //Y轴
+	    double[] y = { 1,4,9,16,25,26,49,64,81,100};
+	    Polyfit polyfit = null;
+	    Polyval polyval;
+	    try {
+	        //创建多项式拟合对象，其中的4表示是4次多项式拟合
+	        polyfit = new Polyfit(x, y, 4);
+	        polyval = new Polyval(x, polyfit);
+	        for (int i = 0; i <= polyval.getYout().length - 1; i++) {
+	          double bd = polyval.getYout()[i];
+	          System.out.println(i + 1 + "\t" + bd);
+	        }
+	        double[]coes = polyfit.getPolynomialCoefficients();
+	        for (int i=0;i<coes.length;i++) {
+	        	System.out.println(coes[i]);
+	        }
+	    }catch (Exception e) {
+	        System.out.println("Error : " + e.getMessage() + "\n");
+	        e.printStackTrace();
+	    }
 	}
 
 }
