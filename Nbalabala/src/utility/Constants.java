@@ -14,6 +14,8 @@ import enums.ScreenDivision;
  */
 public class Constants {
 	
+	public static boolean isEng = false;
+	
 	public void setChinese() {
 		Constants.translater = new TranslaterCN();
 		
@@ -127,6 +129,7 @@ public class Constants {
 	}
 	
 	public static void setEnglish() {
+		isEng = true;
 		Constants.translater = new TranslaterENG();
 		
 		leagueText = TextENG.leagueText;
