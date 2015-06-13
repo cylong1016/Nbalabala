@@ -432,7 +432,7 @@ public class AllTeamSeasonTable extends BottomTable{
 				setValueAt(vo.freethrowAttempt, i, 9);
 				setValueAt(percentDf.format(vo.freethrowPercent), i, 10);
 				setValueAt(df.format(vo.assistEff), i, 11);
-				setValueAt(vo.offensiveRound, i, 12);
+				setValueAt(df.format(vo.offensiveRound), i, 12);
 				setValueAt(df.format(vo.offensiveEff), i, 13);
 			}
 		}

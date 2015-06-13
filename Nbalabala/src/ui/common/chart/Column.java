@@ -8,6 +8,8 @@ import java.text.DecimalFormat;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import utility.Utility;
+
 /**
  * 柱状图的每一列
  * @author cylong
@@ -41,7 +43,7 @@ public class Column extends JPanel {
 
 	public Column(String name, double value, Color bgColor) {
 		this.value = value;
-		this.name = name;
+		this.name = Utility.shortenTrimedName(name);
 		this.setOpaque(false);
 		this.setLayout(new BorderLayout());
 
