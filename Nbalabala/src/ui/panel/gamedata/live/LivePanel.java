@@ -11,7 +11,6 @@ import ui.panel.gamedata.ConPanel;
 import ui.panel.gamedata.GameFatherPanel;
 import utility.Constants;
 import vo.LivePlayerVO;
-import bl.livebl.Live;
 import blservice.LiveBLService;
 
 /**
@@ -38,8 +37,8 @@ public class LivePanel extends GameFatherPanel {
 	
 	public LivePanel(String url) {
 		super(url);
-//		liveService = new LiveMock();
-		liveService = new Live();
+		liveService = new LiveMock();
+//		liveService = new Live();
 		liveService.refresh();
 		init();
 		text = liveService.getTextLive();
@@ -49,7 +48,7 @@ public class LivePanel extends GameFatherPanel {
 		roadPlayersArgs = liveService.getroadFiveArgs();
 		teamAbbr1 = liveService.getHomeAbbr();
 		teamAbbr2 = liveService.getRoadAbbr();
-		techPanel = new TechPanel(vo1,vo2,LivePanel.this);
+		techPanel = new TechPanel(teamAbbr1,teamAbbr2,vo1,vo2,LivePanel.this);
 		liveBelow = new LiveBelowPanel(teamAbbr1,teamAbbr2,text,Images.LIVE_BELOW);
 		conPanel = new ConPanel(homePlayersArgs,roadPlayersArgs);
 		this.add(techPanel);
@@ -64,7 +63,7 @@ public class LivePanel extends GameFatherPanel {
 		ArrayList<Integer> homeScores = liveService.getHomeScores();
 		int size = homeScores.size();
 		while(size < 5) {
-			roadScores.add(size-1, 0);;
+			roadScores.add(size-1, 0);
 			homeScores.add(size-1, 0);
 			size++;
 		}
@@ -170,8 +169,15 @@ public class LivePanel extends GameFatherPanel {
 			}
 		index ++;
 		conPanel = new ConPanel(liveService.getHomeFiveArgs(),liveService.getroadFiveArgs());
-		ArrayList<LivePlayerVO> players = liveService.getHomePlayerRecords();
-		techPanel.updateTable(players);
+		ArrayList<LivePlayerVO> homeplayers = liveService.getHomePlayerRecords();
+		ArrayList<LivePlayerVO> roadplayers = liveService.getRoadPlayerRecords();
+		homeplayers.add(new LivePlayerVO("kobe", "san", "F", true, "35:4", 4, 5, 4, 5, 4, 5, 6, 7, 8, 9, 1, 1, 2, 3));
+		roadplayers.add(new LivePlayerVO("allen", "san", "F", true, "35:4", 4, 5, 4, 5, 4, 5, 6, 7, 8, 9, 1, 1, 2, 3));
+		if(TechPanel.CURRENTI == 0) {
+			techPanel.updateHomeTable(homeplayers);
+		}else{
+			techPanel.updateRoadTable(roadplayers);
+		}
 		ArrayList<String> text = liveService.getTextLive();
 		liveBelow.updateTable(text);
 		if(currentI == 0) {
