@@ -22,8 +22,8 @@ public class TextENG {
 	public static String scoreText = "Points";
 	public static String formerFiveAvgText = "Former";
 	public static String[] POSITION_SELECT_TEXT = new String[] { "All", "F", "C", "G" };
-	public static String[] DIVISION_SELECT_TEXT = new String[] { "All", "Southeast", "Central", 
-		"Atlantic", "East", "West", "Pacific", "Northwest", "Southwest" };
+	public static String[] DIVISION_SELECT_TEXT = new String[] { "All", "SE", "Central", 
+		"Atlantic", "East", "West", "Pacific", "NW", "SW" };
 	public static String[] BASIS_SELECT_TEXT = new String[] { "All", "PTS", "RB", "AST", 
 		"PTS/RB/AST", "BLK", "STL", "PF", "TOV", "MP","EFF", "FG", "3P", "FT", "DD"};
 	public static String[] TOTAL_AVG_TEXT = new String[] { "Total", "Avg" };
@@ -43,11 +43,11 @@ public class TextENG {
 	
 	public static String winsText = "W";
 	public static String losesText = "L";
-	public static String divisionText = "Division ";
-	public static String homeText = "Home ";
-	public static String sinceText = "Since ";
+	public static String divisionText = "Division:";
+	public static String homeText = "Home:";
+	public static String sinceText = "Since:";
 	public static String kingText = "King";
-	public static String overallRankText = "Rank";
+	public static String overallRankText = "Rank ";
 	public static String lineupText = "Lineup";
 	
 	public static String scoreAvgText = "Points";
@@ -144,14 +144,14 @@ public class TextENG {
 	
 	
 	/** 球员个人信息页面中的赛季数据的空表 */
-	public static Object [][] onePlayerDataTableEmptyContent = 
-		{{"Average","","","","","","","","","","","","","","",""},
-		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-		{"Total","","","","","","","","","","","","","","",""},
-		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
+	public static Object [][] oneTeamDataTableEmptyContent = 
+		{{"Total","","","","","","","","","","","","","","","",""},
+		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		{"Average","","","","","","","","","","","","","","","",""},
+		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
 	
 	/** 球队信息页面中的赛季数据的空表 */
-	public static Object [][] oneTeamDataTableEmptyContent = 
+	public static Object [][] onePlayerDataTableEmptyContent = 
 		{{"Total","","","","","","","","","","","","","","","",""},
 		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 		{"Average","","","","","","","","","","","","","","","",""},

@@ -87,11 +87,8 @@ public class TeamLineupPanel extends BottomPanel {
 					.getBirthDate())), i, 2);
 			playerTable.setValueAt(Constants.translateVeteran(ppVO.fromYear),
 					i, 3);
-			playerTable.setValueAt(
-					Constants.translateHeight(ppVO.heightFoot + "-"
-							+ ppVO.heightInch), i, 4);
-			playerTable.setValueAt(Constants.translateWeight(ppVO.getWeight()),
-					i, 5);
+			playerTable.setValueAt((ppVO.heightFoot + "-"+ ppVO.heightInch), i, 4);
+			playerTable.setValueAt(ppVO.getWeight(), i, 5);
 			playerTable.setValueAt(Constants.translateDate(ppVO.birthDate), i,
 					6);
 			playerTable.setValueAt(ppVO.getSchool(), i, 7);
