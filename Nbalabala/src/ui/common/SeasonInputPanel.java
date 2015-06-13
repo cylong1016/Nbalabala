@@ -94,7 +94,7 @@ public class SeasonInputPanel extends JPanel {
 		rightDownButton = new ImgButton(Images.SEASON_INPUT_DOWN_OFF, Images.SEASON_INPUT_DOWN_ON);
 		this.setSize(100, 26);
 
-		rpLabel.setBounds(85, 0, 40, 26);
+		rpLabel.setBounds(82, 0, 50, 26);
 		this.add(rpLabel);
 
 		rightUpButton.setBounds(125, 0, 22, 13);

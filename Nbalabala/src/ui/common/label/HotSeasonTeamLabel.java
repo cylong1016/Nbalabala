@@ -72,7 +72,7 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 			
 			int labelX = 90;
 			
-			nameLabel = new MyLabel(labelX, 40, 146, 33, Constants.translateTeamAbbr(teamAbbr));
+			nameLabel = new MyLabel(labelX, 40, 230, 33, Constants.translateTeamAbbr(teamAbbr));
 			nameLabel.setFont(new Font("微软雅黑", Font.BOLD, 30));
 			nameLabel.setLeft();
 			

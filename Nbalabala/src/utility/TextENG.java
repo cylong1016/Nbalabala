@@ -69,8 +69,8 @@ public class TextENG {
 	
 	public static String teamAvgText = "Team Avg";
 	
-	public static String regularText = "Regular";
-	public static String playoffText = "Playoff";
+	public static String regularText = "REGU";
+	public static String playoffText = "POST";
 	
 	public static String lastestTwo = 	"Last     Matches";
 	public static String titleAvgData = " Total／Average";
