@@ -19,6 +19,8 @@ public class AnalysisTransferVO {
 	public String formerAbbr;
 	/** 当前球队缩写 */
 	public String currentAbbr;
+	/** 之前哪个赛季开始在前一个球队服役 */
+	public String startSeason;
 	/** 转会的赛季 */
 	public String transferSeason;
 	
@@ -27,6 +29,7 @@ public class AnalysisTransferVO {
 	public ArrayList<Double> currentData;	//当前的数据
 	/** 结论 */
 	public String conclusion;
+	
 	public String getName() {
 		return name;
 	}

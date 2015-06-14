@@ -134,5 +134,10 @@ public class Utility {
 		String endYear = String.valueOf(start + 1);
 		return start + "-" + endYear.substring(2,4) + "R";
 	}
+	
+	public static String getOverallSeason(int start) {
+		String endYear = String.valueOf(start + 1);
+		return start + "-" + endYear.substring(2,4);
+	}
 
 }

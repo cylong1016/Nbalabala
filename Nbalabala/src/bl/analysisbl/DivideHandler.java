@@ -16,12 +16,14 @@ import enums.InferenceData;
  */
 public class DivideHandler {
 	
+	private int width = 0;
+	
 	public ArrayList<Double> divideData(ArrayList<MatchPlayerPO> matches,
 			InferenceData forecastData) {
 		ArrayList<Double> data = new ArrayList<Double>();
 		
 		int count = (int)(Math.log(matches.size()) / Math.log(2));	//经验分组公式
-		int width = Math.min(82, matches.size() / count);	//TODO 这个数字有待考量
+		width = Math.min(20, matches.size() / count);	//TODO 这个数字有待考量
 		
 		int fieldM = 0;
 		int fieldA = 0;
@@ -226,6 +228,10 @@ public class DivideHandler {
 			break;
 		}
 		return data;
+	}
+	
+	public int getWidth() {
+		return width;
 	}
 
 }

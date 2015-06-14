@@ -35,9 +35,9 @@ public class MatchesAccumulator {
 //		 writeTeamsToDatabase();
 		MatchesAccumulator accumulator = new MatchesAccumulator();
 		accumulator.accumulate();
-		accumulator.update();
+//		accumulator.update();
 
-		accumulator.writeToDatabase();
+//		accumulator.writeToDatabase();
 //		correctMatch();
 	}
 	
