@@ -24,7 +24,9 @@ import ui.common.panel.Panel;
  */
 public class LineChart extends Panel{
 	
-	private String[] name,team;
+	/** serialVersionUID */
+	private static final long serialVersionUID = -238536006047910842L;
+	private String[] name, team;
 	private double[] num;
 	
 	public LineChart(String[] name,String[] team,double[] num){

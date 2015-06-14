@@ -28,6 +28,9 @@ import ui.common.panel.Panel;
  * @version 2015年6月9日  下午11:28:34
  */
 public class ScatterChart extends Panel{
+	/** serialVersionUID */
+	private static final long serialVersionUID = 2633383144443658841L;
+	
 	private double[] x_num,y_num;
 	
 	public ScatterChart(double[] x_num,double[] y_num){ 
