@@ -37,11 +37,9 @@ public class AnalysePanel extends BottomPanel{
 	private FuturePanel future;
 	private TurnPanel turn;
 	
-	public AnalysePanel(String url,String teamAbbr,String player){
+	public AnalysePanel(String url){
 		super(url);
-		this.teamAbbr =teamAbbr;
 		this.team = Constants.translateTeamAbbr(teamAbbr);
-		this.player = player;
 		lastFive = new LastFivePanel();
 		allSeason = new AllSeasonPanel();
 		contri = new ContriPanel();

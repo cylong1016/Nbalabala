@@ -174,6 +174,8 @@ public class TextCHN {
 		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
 	
 	public static String[] teamLineupHeaders = new String[] {"姓名", "位置", "年龄","球龄","身高","体重","生日","毕业学校"};
+
+	public static String live = "直播";
 	
 	
 	public static final String [] TEAM_ABBR = {"BOS","BRK","NYK","PHI","TOR","CHI","CLE","DET","IND","MIL","ATL","CHO","MIA","ORL","WAS",

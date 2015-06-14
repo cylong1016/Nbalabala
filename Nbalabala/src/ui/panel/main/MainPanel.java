@@ -66,6 +66,7 @@ public class MainPanel extends Panel {
 	private TabButton teamsDadaBtn;
 	private TabButton hotBtn;
 	private TabButton analysisBtn;
+	private TabButton liveBtn;
 	
 	private static final int LEFT_BTN_X = 40;
 	private static final int RIGHT_BTN_X = 284;
@@ -181,12 +182,22 @@ public class MainPanel extends Panel {
 		analysisBtn = new TabButton(Constants.analysis + blank, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK);
 		analysisBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO
+				MainController.toAnalysePanel();
 			}
 		});
 		analysisBtn.setLocation(RIGHT_BTN_X, 475);
 		analysisBtn.setFont(MyFont.YH_L);
 		this.add(analysisBtn);
+		
+		liveBtn = new TabButton(Constants.live + blank, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK);
+		liveBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainController.toLiveInPanel();
+			}
+		});
+		liveBtn.setLocation(RIGHT_BTN_X, 298);
+		liveBtn.setFont(MyFont.YH_L);
+		this.add(liveBtn);
 		
 		settingButton.setLocation(222, 222); //TODO 坐标放哪呀
 		settingButton.addActionListener(new ActionListener() {
@@ -266,6 +277,8 @@ public class MainPanel extends Panel {
 				MainController.toAllTeamsPanel();
 			} else if (hotPolygon.contains(mousePoint)) {
 				MainController.toHotPanel();
+			} else if (analysisBtn.contains(mousePoint)) {
+				MainController.toAnalysePanel();
 			}
 		}
 

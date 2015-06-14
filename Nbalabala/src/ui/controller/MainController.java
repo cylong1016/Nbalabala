@@ -11,6 +11,7 @@ import ui.panel.allplayers.AllPlayersPanel;
 import ui.panel.allplayers.PlayerInfoBottomPanel;
 import ui.panel.allteams.AllTeamsPanel;
 import ui.panel.allteams.TeamBottomPanel;
+import ui.panel.analyse.AnalysePanel;
 import ui.panel.gamedata.GameDataPanel;
 import ui.panel.gamedata.GamePanel;
 import ui.panel.gamedata.live.LiveInPanel;
@@ -64,6 +65,8 @@ public class MainController {
 	private static LiveInPanel liveInPanel;
 	/** 正在进行直播的界面 */
 	private static LivePanel livePanel;
+	/** 分析界面 */
+	private static AnalysePanel anaPanel;
 	/**
 	 * 初始化主界面
 	 * @author cylong
@@ -243,6 +246,12 @@ public class MainController {
 	public static void toLivePanel() {
 		livePanel = new LivePanel("images2.0/games/gamesBG.png");
 		frame.setPanel(livePanel);
+		frame.repaint();
+	}
+	
+	public static void toAnalysePanel() {
+		anaPanel = new AnalysePanel("images2.0/analysis/analysisBG.png");
+		frame.setPanel(anaPanel);
 		frame.repaint();
 	}
 

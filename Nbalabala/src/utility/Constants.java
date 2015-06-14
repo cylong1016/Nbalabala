@@ -640,6 +640,7 @@ public class Constants {
 	public static String hot =  TextCHN.hot;
 	public static String analysis = TextCHN.analysis;
 	public static String playerOnCourt = TextCHN.playerOnCourt;
+	public static String live = TextCHN.live;
 	
 	public static String hotShort = TextCHN.hotShort;
 	public static String game = TextCHN.game;
