@@ -176,6 +176,10 @@ public class TextCHN {
 	public static String[] teamLineupHeaders = new String[] {"姓名", "位置", "年龄","球龄","身高","体重","生日","毕业学校"};
 
 	public static String live = "直播";
+
+	public static String history = "交手历史";
+	public static String waitlive = "等待直播";
+	public static String tolive = "进入直播";
 	
 	
 	public static final String [] TEAM_ABBR = {"BOS","BRK","NYK","PHI","TOR","CHI","CLE","DET","IND","MIL","ATL","CHO","MIA","ORL","WAS",

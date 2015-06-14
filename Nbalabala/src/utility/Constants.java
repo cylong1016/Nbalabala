@@ -646,6 +646,10 @@ public class Constants {
 	public static String game = TextCHN.game;
 	public static String ret = TextCHN.ret;
 	
+	public static String history = TextCHN.history;
+	public static String waitlive = TextCHN.waitlive;
+	public static String tolive = TextCHN.tolive;
+	
 	public static String playerPosition = TextCHN.playerPosition;
 	public static String playerDivision = TextCHN.playerDivision;
 	public static String screenSelection = TextCHN.screenSelection;
