@@ -126,7 +126,7 @@ public class LeftPanel extends Panel {
 		liveBtn.setLocation(0, SECOND_ZONE_Y + inter * 1);
 		liveBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setCurrentBtn(liveBtn);
+				setCurrentOn(liveBtn);
 				MainController.toLiveInPanel();
 			}
 		});
@@ -183,7 +183,7 @@ public class LeftPanel extends Panel {
 	
 	protected void setInit(){
 		TabButton button[] = {allPlayersBtn, allTeamsBtn, playerDataBtn, teamDataBtn, 
-				gameBtn, hotBtn, analysisBtn, returnBtn};
+				gameBtn, liveBtn, hotBtn, analysisBtn, returnBtn};
 		for (int i = 0; i < button.length; i++) {
 			button[i].setFont(MyFont.YH_B);
 			button[i].setForeground(MyFont.BLACK_GRAY);
@@ -269,6 +269,10 @@ public class LeftPanel extends Panel {
 
 	public TabButton getGameBtn() {
 		return gameBtn;
+	}
+	
+	public TabButton getLiveBtn() {
+		return liveBtn;
 	}
 
 	public TabButton getHotBtn() {

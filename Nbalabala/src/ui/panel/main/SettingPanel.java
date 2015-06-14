@@ -3,7 +3,6 @@
  */
 package ui.panel.main;
 
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Statement;
@@ -12,14 +11,14 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JPasswordField;
 
-import data.Database;
-import data.seasondata.SeasonData;
 import ui.Images;
 import ui.common.button.ImgButton;
 import ui.common.comboBox.MyComboBox;
 import ui.common.panel.BottomPanel;
 import ui.common.textField.MyTextField;
 import utility.Constants;
+import data.Database;
+import data.seasondata.SeasonData;
 
 /**
  *
@@ -29,6 +28,9 @@ import utility.Constants;
  */
 public class SettingPanel extends BottomPanel{
 	
+	/** serialVersionUID */
+	private static final long serialVersionUID = 7784986737310630718L;
+
 	private JDialog dialog;
 	
 	private MyTextField userField = new MyTextField(146, 141, 144, 30);
