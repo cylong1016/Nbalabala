@@ -6,12 +6,14 @@ package ui.panel.main;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Statement;
 
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JPasswordField;
 
 import data.Database;
+import data.seasondata.SeasonData;
 import ui.Images;
 import ui.common.button.ImgButton;
 import ui.common.comboBox.MyComboBox;
@@ -47,6 +49,7 @@ public class SettingPanel extends BottomPanel{
 		this.add(userField);
 		pwField.setBounds(146, 188, 144, 30);
 		this.add(pwField);
+		pathField.setText(Constants.dataSourcePath);
 		this.add(pathField);
 		this.add(languageBox);
 		
@@ -54,7 +57,7 @@ public class SettingPanel extends BottomPanel{
 		for (int i=5; i<=30; i++) {
 			cacheSizes[i-5] = String.valueOf(i);
 		}
-		cacheBox = new MyComboBox(languages, 465, 188, 83, 30);
+		cacheBox = new MyComboBox(cacheSizes, 465, 188, 83, 30);
 		this.add(cacheBox);
 		
 		browsButton.setLocation(267, 291);
@@ -87,10 +90,25 @@ public class SettingPanel extends BottomPanel{
 		yesButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				Constants.changeDataSourcePath(pathField.getText());
+				new SeasonData().setSeasonCacheSize(cacheBox.getSelectedIndex() + 5);
+				if (languageBox.getSelectedIndex() == 0) {
+					Constants.setCHNSimplified();
+				}else if (languageBox.getSelectedIndex() == 1){
+					Constants.setCHNTraditional();
+				}else {
+					Constants.setEnglish();
+				}
+				Database.user = userField.getText();
+				Database.password = String.valueOf(userField.getText());
+				try {
+					Statement statement = Database.conn.createStatement();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
 			}
 		});
+		this.add(yesButton);
 		
 	}
 	

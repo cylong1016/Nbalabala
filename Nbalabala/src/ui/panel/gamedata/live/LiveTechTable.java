@@ -10,6 +10,7 @@ import ui.common.panel.BottomPanel;
 import ui.common.table.BottomTable;
 import ui.controller.MainController;
 import utility.Constants;
+import utility.Utility;
 import vo.LivePlayerVO;
 
 /**
@@ -73,11 +74,9 @@ public class LiveTechTable extends BottomTable{
 					if (e.getClickCount() < 2)
 						return;
 					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
-					System.out.println(rowI);
 					if (rowI > -1) {
-						MainController.toPlayerInfoPanel(players.get(rowI).nameEng, panel);
+						MainController.toPlayerInfoPanel(Utility.getPlayerIDByName(players.get(rowI).nameEng), panel);
 					}
-
 				}
 			});
 		} catch (Exception e) {

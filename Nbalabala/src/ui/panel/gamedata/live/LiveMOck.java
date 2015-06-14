@@ -113,7 +113,7 @@ public class LiveMock implements LiveBLService{
 	@Override
 	public ArrayList<LivePlayerVO> getHomePlayerRecords() {
 		ArrayList<LivePlayerVO> vos = new ArrayList<LivePlayerVO>();
-		vos.add(new LivePlayerVO("李四", "Lebron James", "F", true, "35:4", 4, 15, 14, 15, 14, 15, 16, 17, 8, 9, 1, 1, 2, 3));
+		vos.add(new LivePlayerVO("李四", "LeBron James", "F", true, "35:4", 4, 15, 14, 15, 14, 15, 16, 17, 8, 9, 1, 1, 2, 3));
 		return vos;
 	}
 

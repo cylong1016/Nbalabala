@@ -15,6 +15,10 @@ import javax.imageio.ImageIO;
 public class TeamLogoCache {
 
 	private static HashMap<String, Image> logos = new HashMap<String, Image>();
+	
+	public static void reloadLogos() {
+		
+	}
 
 	/** 先检查temp文件夹下有无转换好的png，如果没有，转换之 */
 	public static Image getTeamLogo(String abbr) {
@@ -45,7 +49,6 @@ public class TeamLogoCache {
 		new CacheThread().start();
 	}
 
-	
 	private class CacheThread extends Thread {
 		public void start() {
 			File file = new File("temp/");

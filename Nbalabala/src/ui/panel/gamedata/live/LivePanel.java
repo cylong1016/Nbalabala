@@ -172,8 +172,8 @@ public class LivePanel extends GameFatherPanel {
 		conPanel = new ConPanel(liveService.getHomeFiveArgs(),liveService.getRoadFiveArgs());
 		ArrayList<LivePlayerVO> homeplayers = liveService.getHomePlayerRecords();
 		ArrayList<LivePlayerVO> roadplayers = liveService.getRoadPlayerRecords();
-		homeplayers.add(new LivePlayerVO("kobe", "san", "F", true, "35:4", 4, 5, 4, 5, 4, 5, 6, 7, 8, 9, 1, 1, 2, 3));
-		roadplayers.add(new LivePlayerVO("allen", "san", "F", true, "35:4", 4, 5, 4, 5, 4, 5, 6, 7, 8, 9, 1, 1, 2, 3));
+//		homeplayers.add(new LivePlayerVO("kobe", "san", "F", true, "35:4", 4, 5, 4, 5, 4, 5, 6, 7, 8, 9, 1, 1, 2, 3));
+//		roadplayers.add(new LivePlayerVO("allen", "san", "F", true, "35:4", 4, 5, 4, 5, 4, 5, 6, 7, 8, 9, 1, 1, 2, 3));
 		if(TechPanel.CURRENTI == 0) {
 			techPanel.updateHomeTable(homeplayers);
 		}else{

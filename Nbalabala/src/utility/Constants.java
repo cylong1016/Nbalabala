@@ -3,6 +3,7 @@ package utility;
 import java.sql.Date;
 
 import data.playerdata.PlayerImageCache;
+import data.teamdata.TeamLogoCache;
 import enums.HotSeasonPlayerProperty;
 import enums.HotSeasonTeamProperty;
 import enums.ScreenDivision;
@@ -17,7 +18,11 @@ public class Constants {
 	public static boolean isEng = false;
 	
 	
-	public void setChinese() {
+	public static void setCHNTraditional() {
+		
+	}
+	
+	public static void setCHNSimplified() {
 		isEng = false;
 		Constants.translater = new TranslaterCN();
 		
@@ -283,6 +288,7 @@ public class Constants {
 	public static void changeDataSourcePath(String newPath) {
 		dataSourcePath = newPath + "\\";
 		PlayerImageCache.reloadImages();
+		TeamLogoCache.reloadLogos();
 	}
 	
 	public static String []playerType = TextCHN.playerType;

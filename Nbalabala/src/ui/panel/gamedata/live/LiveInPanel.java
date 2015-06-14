@@ -12,7 +12,6 @@ import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
 import utility.Constants;
-import bl.livebl.Live;
 import blservice.LiveBLService;
 
 /**
@@ -61,6 +60,17 @@ public class LiveInPanel extends BottomPanel{
 			gameDetail[3].setForeground(Color.blue);
 			gameDetail[4].setForeground(Color.orange);
 			gameDetail[5].setForeground(Color.gray);
+			gameDetail[1].addMouseListener(new MouseAdapter(){
+				public void mouseClicked(MouseEvent e) {
+					 MainController.toTeamBottomPanel(LiveInPanel.this, Constants.getAbbrByName(team[0]));;
+				 }
+			});
+			gameDetail[3].addMouseListener(new MouseAdapter(){
+				public void mouseClicked(MouseEvent e) {
+					 MainController.toTeamBottomPanel(LiveInPanel.this, Constants.getAbbrByName(team[1]));
+				 }
+			});
+			
 			gameDetail[4].addMouseListener(new MouseAdapter(){
 				 public void mouseClicked(MouseEvent e) {
 					 MainController.toGameLivePanel(LiveInPanel.this,Constants.getAbbrByName(team[0]),Constants.getAbbrByName(team[1]));
