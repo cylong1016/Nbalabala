@@ -13,6 +13,13 @@ public class Images {
 	
 	//public static final Image yunlongLoveSiyu = ......
 	
+	public static final ImageIcon BROWS_BUTTON = new ImageIcon("images2.0/main/searchBtn.png");
+	public static final ImageIcon BROWS_BUTTON_ON = new ImageIcon("images2.0/main/searchBtnOn.png");
+	public static final ImageIcon YES_BUTTON = new ImageIcon("images2.0/main/confirmBtn.png");
+	public static final ImageIcon YES_BUTTON_ON = new ImageIcon("images2.0/main/confirmBtnOn.png");
+	public static final ImageIcon NO_BUTTON = new ImageIcon("images2.0/main/cancelBtn.png");
+	public static final ImageIcon NO_BUTTON_ON = new ImageIcon("images2.0/main/cancelBtnOn.png");
+	
 	public static final ImageIcon SETTING_BUTTON = new ImageIcon("images2.0/main/settingBtn.png");
 	public static final ImageIcon SETTING_BUTTON_ON = new ImageIcon("images2.0/main/settingBtnOn.png");
 

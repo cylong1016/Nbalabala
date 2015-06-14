@@ -4,12 +4,16 @@
 package ui.panel.main;
 
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JPasswordField;
 
 import data.Database;
 import ui.Images;
+import ui.common.button.ImgButton;
 import ui.common.comboBox.MyComboBox;
 import ui.common.panel.BottomPanel;
 import ui.common.textField.MyTextField;
@@ -31,6 +35,9 @@ public class SettingPanel extends BottomPanel{
 	private String [] languages = {"简体", "繁体", "Eng"};
 	private MyComboBox languageBox = new MyComboBox(languages, 465, 141, 83, 30);
 	private MyComboBox cacheBox;
+	private ImgButton browsButton = new ImgButton(Images.BROWS_BUTTON, Images.BROWS_BUTTON_ON);
+	private ImgButton yesButton = new ImgButton(Images.YES_BUTTON, Images.YES_BUTTON_ON);
+	private ImgButton noButton = new ImgButton(Images.NO_BUTTON, Images.NO_BUTTON_ON);
 	
 	public SettingPanel(JDialog dialog) {
 		super(Images.SETTING_BG);
@@ -50,7 +57,40 @@ public class SettingPanel extends BottomPanel{
 		cacheBox = new MyComboBox(languages, 465, 188, 83, 30);
 		this.add(cacheBox);
 		
+		browsButton.setLocation(267, 291);
+		browsButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser chooser = new JFileChooser();
+				chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				chooser.setDialogTitle("选择数据文件夹");
+				int result = chooser.showOpenDialog(null);
+				if (result == JFileChooser.APPROVE_OPTION) {
+					String path = chooser.getSelectedFile().getAbsolutePath();
+					pathField.setText(path);
+				}
+			}
+		});
+		this.add(browsButton);
 		
+		noButton.setLocation(441, 292);
+		noButton.addActionListener(new ActionListener() {
+			JDialog dialog = SettingPanel.this.dialog;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dialog.dispose();
+			}
+		});
+		this.add(noButton);
+		
+		yesButton.setLocation(544, 292);
+		yesButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 	}
 	
