@@ -32,7 +32,8 @@ public class LiveMock implements LiveBLService{
 	@Override
 	public HashMap<String, String> getLiveList() {
 		HashMap<String, String> list = new HashMap<String, String>();
-		list.put("SDF", "用时");
+		list.put("06月15日 09：00","季后赛 勇士-骑士");
+		list.put("06月17日 08：00","季后赛 勇士-骑士");
 		return list;
 	}
 

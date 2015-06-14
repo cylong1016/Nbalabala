@@ -121,7 +121,8 @@ public class AnalysePanel extends BottomPanel{
 				String[] str = changeArray(teamQuery.getTeamDetailByAbbr(Constants.TEAM_ABBR[teamCom.getSelectedIndex()],
 						"2014-15R").getPlayers());
 				for(int i = 0 ;i < str.length; i++) {
-					playerCom.addItem(str[i]);
+					String[] name = str[i].split("$");
+					playerCom.addItem(name[0]);
 				}
 			}
 			
