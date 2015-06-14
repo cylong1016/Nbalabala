@@ -74,4 +74,18 @@ public class LivePlayerVO {
 		this.plusMinus = plusMinus;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "LivePlayerVO [nameChn=" + this.nameChn + ", nameEng=" + this.nameEng + ", position=" + this.position
+				+ ", isStarter=" + this.isStarter + ", timePlayed=" + this.timePlayed + ", fieldMade=" + this.fieldMade
+				+ ", fieldAttempt=" + this.fieldAttempt + ", threepointMade=" + this.threepointMade
+				+ ", threepointAttempt=" + this.threepointAttempt + ", freethrowMade=" + this.freethrowMade
+				+ ", freethrowAttempt=" + this.freethrowAttempt + ", totalRebound=" + this.totalRebound + ", assist="
+				+ this.assist + ", steal=" + this.steal + ", block=" + this.block + ", turnover=" + this.turnover
+				+ ", foul=" + this.foul + ", score=" + this.score + ", plusMinus=" + this.plusMinus + "]";
+	}
+	
 }
