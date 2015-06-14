@@ -29,7 +29,7 @@ public class TechPanel extends BottomPanel{
 	
 	public TechPanel(String teamAbbr1,String teamAbbr2,ArrayList<LivePlayerVO> homeplayers,ArrayList<LivePlayerVO> roadplayers,BottomPanel panel){
 		super("images2.0/games/techBG.png");
-		this.setBounds(27, 249, 948, 351);
+		this.setBounds(25, 249, 948, 351);
 		this.homeplayers = homeplayers;
 		this.roadplayers = roadplayers;
 		this.teamAbbr1 = teamAbbr1;
@@ -40,8 +40,8 @@ public class TechPanel extends BottomPanel{
 	}
 	
 	public void addButton(){
-		team1 = new TextButton(845,5,50,30,Constants.translateTeamAbbr(teamAbbr1));
-		team2 = new TextButton(899,5,50,30,Constants.translateTeamAbbr(teamAbbr2));
+		team1 = new TextButton(794 - 26,5,74,31,Constants.translateTeamAbbr(teamAbbr1));
+		team2 = new TextButton(868 - 25,5,74,31,Constants.translateTeamAbbr(teamAbbr2));
 		this.add(team1);
 		this.add(team2);
 		setEffect(team1);
@@ -73,7 +73,10 @@ public class TechPanel extends BottomPanel{
 
 	public void setTable(ArrayList<LivePlayerVO> players) {
 		scroll = new BottomScrollPane(table);
-		scroll.setBounds(5,35,940,280);
+		table.setHeaderColorAndFont();
+		table.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
+		
+		scroll.setBounds(UIConfig.RELA_X,36,table.setTableWidth(300, table.getRowCount()),300);
 		this.add(scroll);
 	}
 	

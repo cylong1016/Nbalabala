@@ -55,7 +55,7 @@ public class MainPanel extends Panel {
 	private Polygon hotPolygon;
 
 	/** 六边形的顶点数 */
-	private int npoints = 6;
+//	private int npoints = 6;
 	/** 鼠标坐标,开始为(0, 0) */
 	private Point mousePoint = new Point();
 	
@@ -74,42 +74,10 @@ public class MainPanel extends Panel {
 	public MainPanel() {
 //		MyMouseListener listener = new MyMouseListener();
 
-		// 球队数据按钮
-		int[] tdxpoints = {488, 568, 568, 488, 407, 407};
-		int[] tdypoints = {400, 447, 539, 586, 539, 447};
-		tdPolygon = new Polygon(tdxpoints, tdypoints, npoints);
-
-		// 球员数据按钮
-		int[] pdxpoints = {651, 731, 731, 652, 571, 571};
-		int[] pdypoints = {401, 447, 539, 586, 539, 447};
-		pdPolygon = new Polygon(pdxpoints, pdypoints, npoints);
-
-		// 比赛数据按钮
-		int[] gdxpoints = {732, 813, 813, 732, 652, 652};
-		int[] gdypoints = {259, 306, 399, 445, 399, 306};
-		gdPolygon = new Polygon(gdxpoints, gdypoints, npoints);
-
-		// 全部球员数据按钮
-		int[] apxpoints = {814, 895, 895, 814, 734, 734};
-		int[] apypoints = {119, 165, 257, 303, 257, 165};
-		apPolygon = new Polygon(apxpoints, apypoints, npoints);
-
-		// 全部球队数据按钮
-		int[] atxpoints = {897, 977, 977, 897, 816, 816};
-		int[] atypoints = {260, 306, 399, 445, 399, 306};
-		atPolygon = new Polygon(atxpoints, atypoints, npoints);
-
-		//热点按钮
-		int[] hotxpoints = {244, 244, 324, 404, 404, 324};
-		int[] hotypoints = {540, 446, 401, 446, 540, 586};
-		hotPolygon = new Polygon(hotxpoints, hotypoints, npoints);
-
-//		this.addMouseListener(listener);
-//		this.addMouseMotionListener(listener);
 		
 		addBtn();
 
-		addFileSelect();
+//		addFileSelect();
 	}
 
 	/**
@@ -189,7 +157,7 @@ public class MainPanel extends Panel {
 		analysisBtn.setFont(MyFont.YH_L);
 		this.add(analysisBtn);
 		
-		liveBtn = new TabButton(Constants.live + blank, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK);
+		liveBtn = new TabButton(Constants.live + bigBlank, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK);
 		liveBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainController.toLiveInPanel();
@@ -199,7 +167,7 @@ public class MainPanel extends Panel {
 		liveBtn.setFont(MyFont.YH_L);
 		this.add(liveBtn);
 		
-		settingButton.setLocation(222, 222); //TODO 坐标放哪呀
+		settingButton.setLocation(40, 553); 
 		settingButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
