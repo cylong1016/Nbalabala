@@ -2,6 +2,9 @@ package ui.common.jfreechart;
 
 import javax.swing.JFrame;
 
+import org.jfree.chart.renderer.category.LineRenderer3D;
+import org.jfree.chart.renderer.xy.XYLine3DRenderer;
+
 import ui.UIConfig;
 
 /**
@@ -22,10 +25,12 @@ public class Test extends JFrame{
 //		LineChart chart = new LineChart(name,name,num);
 //		ScatterChart chart = new ScatterChart(num,num);
 //		LineChart chart = new LineChart(name,name,num);
-//		ScatterChart chart = new ScatterChart(num,num);
+		ScatterChart chart = new ScatterChart(num,num);
 //		MixChart chart = new MixChart();
-		BoxChart chart = new BoxChart();
+//		BoxChart chart = new BoxChart();
+//		XYLine3DRenderer renderer = new XYLine3DRenderer();
 		Test frame = new Test();
+		
 		frame.add(chart);
 		frame.setVisible(true);
 		frame.repaint();

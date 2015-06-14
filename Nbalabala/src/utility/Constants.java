@@ -17,6 +17,7 @@ public class Constants {
 	public static boolean isEng = false;
 	
 	public void setChinese() {
+		isEng = false;
 		Constants.translater = new TranslaterCN();
 		
 		leagueText = TextCHN.leagueText;

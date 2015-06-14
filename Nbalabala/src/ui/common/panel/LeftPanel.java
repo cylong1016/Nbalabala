@@ -42,7 +42,7 @@ public class LeftPanel extends Panel {
 	private static final int THIRD_ZONE_Y = 408;
 	private static final int RET_Y = 524;
 	
-	private TabButton currentBtn;
+	private TabButton currentBtn = new TabButton();
 		
 	public LeftPanel() {
 		bgImage = Images.SIDEBAR_BG;
@@ -66,6 +66,10 @@ public class LeftPanel extends Panel {
 		String smallBlank = "        ";
 		String bigBlank = "              ";
 		String arrow = "  >";
+		if (Constants.isEng) {
+			smallBlank = "";
+			bigBlank = "";
+		}
 		
 		allPlayersBtn = new TabButton(smallBlank + Constants.allPlayers + arrow, btnOnImg, btnClickImg);
 		allPlayersBtn.setLocation(0, FIRST_ZONE_Y);
@@ -140,9 +144,8 @@ public class LeftPanel extends Panel {
 		});
 		this.add(analysisBtn);
 		
-		returnBtn = new TabButton("<  " + Constants.ret + bigBlank, Images.SIDEBAR_RET_ON, Images.SIDEBAR_RET_CLICK);
+		returnBtn = new TabButton("<  " + Constants.ret + smallBlank, Images.SIDEBAR_RET_ON, Images.SIDEBAR_RET_CLICK);
 		returnBtn.setLocation(0, RET_Y);
-		currentBtn = returnBtn;
 		returnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		
 				MainController.toMainPanel();
@@ -152,6 +155,12 @@ public class LeftPanel extends Panel {
 		
 		setInit();
 		
+	}
+	
+	public void setCurrentBtn(TabButton btn){
+		this.currentBtn = btn;
+		currentBtn.setForeground(Color.white);
+		currentBtn.setOn();
 	}
 	
 	protected void setCurrentOn(TabButton btn) {
@@ -231,5 +240,35 @@ public class LeftPanel extends Panel {
 			}
 		}
 	}
+
+	public TabButton getAllPlayersBtn() {
+		return allPlayersBtn;
+	}
+
+	public TabButton getAllTeamsBtn() {
+		return allTeamsBtn;
+	}
+
+	public TabButton getPlayerDataBtn() {
+		return playerDataBtn;
+	}
+
+	public TabButton getTeamDataBtn() {
+		return teamDataBtn;
+	}
+
+	public TabButton getGameBtn() {
+		return gameBtn;
+	}
+
+	public TabButton getHotBtn() {
+		return hotBtn;
+	}
+
+	public TabButton getAnalysisBtn() {
+		return analysisBtn;
+	}
+	
+	
 
 }

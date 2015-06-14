@@ -18,6 +18,8 @@ public class TextButton extends JButton {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -5390884444460444968L;
+	
+	private boolean isPressed = false;
 
 	/**
 	 * @param x 横坐标
@@ -42,14 +44,28 @@ public class TextButton extends JButton {
 	public void addListener(){
 		this.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
+				isPressed = true;
 				TextButton.this.setOpaque(true);
 				TextButton.this.setForeground(Color.white);
 				TextButton.this.setBackground(UIConfig.BUTTON_COLOR);
+			}
+			public void mouseEntered(MouseEvent e) {
+				TextButton.this.setOpaque(true);
+				TextButton.this.setForeground(Color.white);
+				TextButton.this.setBackground(UIConfig.BUTTON_COLOR);
+			}
+			public void mouseExited(MouseEvent e){
+				if (isPressed) {
+					return;
+				}
+				TextButton.this.setOpaque(false);
+				TextButton.this.setForeground(Color.black);
 			}
 		});
 	}
 
 	public void back() {
+		this.isPressed = false;
 		this.setOpaque(false);
 		this.setForeground(Color.black);
 	}

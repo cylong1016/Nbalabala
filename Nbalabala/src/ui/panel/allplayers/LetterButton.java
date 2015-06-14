@@ -19,12 +19,13 @@ public class LetterButton extends TextButton{
 	private static final long serialVersionUID = -372944070418167926L;
 	
 	private static final Font LETTER_FONT = new Font("微软雅黑", 1, 15);
-	/** 当前按钮 */
-	static LetterButton current;
+
 	/** 当前按钮代表哪个字母 */
 	char letter;
-	static final Color LETTER_BG = new Color(51, 66, 84, 130);
+	static final Color LETTER_BG = new Color(51, 66, 84);
 	static final Color LETTER_COLOR = new Color(38, 41, 46);
+	
+	private boolean isPressed = false;
 	/**
 	 * @param x
 	 * @param y
@@ -44,15 +45,32 @@ public class LetterButton extends TextButton{
 	public void addListener(){
 		this.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
+				isPressed = true;
 				LetterButton.this.setOpaque(true);
-				LetterButton.this.setForeground(Color.white);
 				LetterButton.this.setBackground(LETTER_BG);
+			}
+			public void mouseEntered(MouseEvent e) {
+				LetterButton.this.setOpaque(true);
+				LetterButton.this.setBackground(LETTER_BG);
+			}
+			public void mouseExited(MouseEvent e){
+				if (isPressed) {
+					return;
+				}
+				LetterButton.this.setOpaque(false);
 			}
 		});
 		
 	}
 	public void back() {
+		isPressed = false;
 		this.setOpaque(false);
-		this.setForeground(LETTER_COLOR);
+		this.setBackground(null);
+	}
+	
+	public void setCurrent(){
+		isPressed = true;
+		this.setOpaque(true);
+		this.setBackground(LETTER_BG);
 	}
 }

@@ -1,6 +1,5 @@
 package ui.common.label;
 
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -114,7 +113,7 @@ public class HotFastestPlayerLabel extends JLabel{
 			nameLabel = new MyLabel(0,3 ,labelWid,40,Utility.trimName(vo.getName()));
 			nameLabel.setFont(MyFont.YT_S);
 			
-			String propertyStr = UIConfig.FORMAT.format(vo.getPromotion());
+			String propertyStr = UIConfig.PERCENT_FORMAT.format(vo.getPromotion());
 			propertyLabel = new MyLabel(0, 37, labelWid, 20, Constants.promotionText +propertyStr);
 			
 			String team = Constants.translateTeamAbbr(vo.getTeamAbbr());

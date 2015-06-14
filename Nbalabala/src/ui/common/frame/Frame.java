@@ -16,7 +16,14 @@ import ui.UIConfig;
 import ui.common.frame.title.TitlePanel;
 import ui.common.panel.LeftPanel;
 import ui.common.panel.Panel;
+import ui.panel.allplayers.AllPlayersPanel;
+import ui.panel.allteams.AllTeamsPanel;
+import ui.panel.analyse.AnalysePanel;
+import ui.panel.gamedata.GameDataPanel;
+import ui.panel.hot.hotTodayPlayer.HotTodayPlayerPanel;
 import ui.panel.main.MainPanel;
+import ui.panel.playerData.PlayerDataPanel;
+import ui.panel.teamdata.TeamDataPanel;
 
 /**
  * 自定义Frame
@@ -75,9 +82,9 @@ public class Frame extends JFrame {
 			
 			if (currentPanel.getClass() == MainPanel.class) {
 				leftPanel = new LeftPanel();
+				setLeftPanelBtnOn(panel);
 			}
 		}	
-
 
 		currentPanel = panel;
 		this.add(leftPanel, BorderLayout.WEST);
@@ -90,6 +97,31 @@ public class Frame extends JFrame {
 		this.add(panel);
 		this.setVisible(true);
 		this.repaint();
+	}
+
+	private void setLeftPanelBtnOn(Panel panel) {
+		if (panel.getClass() == AllPlayersPanel.class) {
+			leftPanel.setCurrentBtn(leftPanel.getAllPlayersBtn());
+		}
+		else if(panel.getClass() == AllTeamsPanel.class){
+			leftPanel.setCurrentBtn(leftPanel.getAllTeamsBtn());
+		}
+		else if(panel.getClass() == PlayerDataPanel.class){
+			leftPanel.setCurrentBtn(leftPanel.getPlayerDataBtn());
+		}
+		else if(panel.getClass() == TeamDataPanel.class){
+			leftPanel.setCurrentBtn(leftPanel.getTeamDataBtn());
+		}
+		else if(panel.getClass() == GameDataPanel.class){
+			leftPanel.setCurrentBtn(leftPanel.getGameBtn());
+		}
+		else if(panel.getClass() == AnalysePanel.class){
+			leftPanel.setCurrentBtn(leftPanel.getAnalysisBtn());
+		}
+		else if(panel.getClass() == HotTodayPlayerPanel.class){
+			leftPanel.setCurrentBtn(leftPanel.getHotBtn());
+		}
+		
 	}
 
 	/**

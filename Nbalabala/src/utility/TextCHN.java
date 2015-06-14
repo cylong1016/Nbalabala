@@ -91,7 +91,7 @@ public class TextCHN {
 	
 	public static String hotShort = "热点";
 	public static String game = "赛程";
-	public static String ret = "返回";
+	public static String ret = "返回首页";
 	
 	public static String playerOnCourt = "在场球员";
 	
@@ -117,7 +117,7 @@ public class TextCHN {
 			"进攻篮板","防守篮板","篮板","助攻","抢断","盖帽","失误","犯规","得分"
 	};
 	
-	public static String [] matchPlayerHeaders = new String[] { "序号","球员名", "首发", "时间", "投篮命中", "投篮出手", "三分命中", "三分出手", "罚球命中", "罚球出手",
+	public static String [] matchPlayerHeaders = new String[] { "序号","球员名", "首发", "时间", "投篮", "三分", "罚球",
 		"进攻篮板", "防守篮板", "总篮板", "助攻", "抢断", "盖帽", "失误", "犯规", "个人得分", "+/-" };
 	
 	public static String[] livePlayerHeaders = new String[] {"序号","中文名","英文名","位置", "是否首发", "在场时间", "投篮命中", "投篮出手", "三分命中", "三分出手", " 罚球命中", 

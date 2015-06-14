@@ -38,7 +38,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 4256548887751307664L;
 
-	private int x = 103, y = 50, width = 55, height = 25, inter = 60, cellWidth = 60;
+	private int x = 90, y = 52, width = 80, height = 25, inter = 90, cellWidth = 60;
 	private HotTodayButton button[] = new HotTodayButton[5];
 	private HotBLService hot = new HotQuery();
 	private BottomTable table;
@@ -155,7 +155,6 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 					HotTodayButton.current = (HotTodayButton)e.getSource();
 					HotTodayButton currentButton = (HotTodayButton)e.getSource();
 					text = currentButton.text;
-					Constants.HOT_COLUMNS[5] = currentButton.text;
 					playerVO = hot.getHotTodayPlayers(currentButton.pro);
 					refresh();
 					HotTodayPlayerPanel.this.repaint();
@@ -222,7 +221,7 @@ public class HotTodayPlayerPanel extends HotFatherPanel {
 			ImageIcon ic = new ImageIcon(smallImg);
 			iconArr.add(ic);
 			table.setValueAt( (i + 1) + "", i, 0);
-			table.setValueAt(Utility.trimName(ppVO.getName()), i, 2); //不显示名字后面的编号
+			table.setValueAt(Utility.shortenName(ppVO.getName()), i, 2); //不显示名字后面的编号
 			table.setValueAt(Constants.translateTeamAbbr(ppVO.getTeamAbbr()), i, 3);
 			table.setValueAt(Constants.translateTeamAbbr(ppVO.getOppoAbbr()), i, 4);
 			table.setValueAt(ppVO.getPosition(), i, 5);

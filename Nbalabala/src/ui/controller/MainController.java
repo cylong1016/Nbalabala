@@ -2,6 +2,7 @@ package ui.controller;
 
 import javax.swing.JPanel;
 
+import ui.Images;
 import ui.UIConfig;
 import ui.common.frame.Frame;
 import ui.common.panel.BottomPanel;
@@ -68,9 +69,9 @@ public class MainController {
 	public static void launch() {
 		frame = new Frame();
 		mainPanel = new MainPanel();
-//		frame.setPanel(mainPanel);
+		frame.setPanel(mainPanel);
 //		frame.setPanel(new AnalysePanel("images2.0/analysis/analysisBG.png","LAK","Kobe Byrant"));
-		frame.setPanel(new LivePanel("images2.0/games/gamesBG.png"));
+//		frame.setPanel(new LivePanel("images2.0/games/gamesBG.png"));
 		frame.start();
 	}
 	
@@ -119,7 +120,7 @@ public class MainController {
 	 * @version 2015年3月18日 上午11:11:55
 	 */
 	public static void toAllPlayersPanel() {
-		allPlayersPanel = new AllPlayersPanel(UIConfig.IMG_PATH + "players/allPlayersBG.png");
+		allPlayersPanel = new AllPlayersPanel(Images.ALL_PLAYERS_BG_STR);
 		frame.setPanel(allPlayersPanel);
 	}
 
@@ -129,7 +130,7 @@ public class MainController {
 	 * @version 2015年3月18日 上午11:11:58
 	 */
 	public static void toAllTeamsPanel() {
-		allTeamsPanel = new AllTeamsPanel(UIConfig.IMG_PATH + "teams/allTeam.png");
+		allTeamsPanel = new AllTeamsPanel(Images.ALL_TEAMS_BG_STR);
 		frame.setPanel(allTeamsPanel);
 	}
 

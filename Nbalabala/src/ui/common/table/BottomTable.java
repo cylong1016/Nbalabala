@@ -330,6 +330,6 @@ public class BottomTable extends JTable {
 		BottomScrollPane scrollPane = new BottomScrollPane(table);
 		JScrollBar scrollBar = scrollPane.getVerticalScrollBar();
 		int width = (int) scrollBar.getPreferredSize().getWidth();
-		return height < (rowCount*UIConfig.ROW_HEIGHT)? UIConfig.TABLE_WID + width : UIConfig.TABLE_WID;
+		return (height - UIConfig.TABLE_HEADER_HEIGHT)  < (rowCount*UIConfig.ROW_HEIGHT)? UIConfig.TABLE_WID + width : UIConfig.TABLE_WID;
 	}
 }

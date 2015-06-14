@@ -1,9 +1,9 @@
 package ui.common.label;
 
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 
 import ui.MyFont;
 import ui.UIConfig;
@@ -41,6 +41,8 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 	private MyLabel propertyLabel;
 	private MyLabel teamLabel;
 	private MyLabel positionLabel;
+	private DecimalFormat df = UIConfig.FORMAT;
+	
 	
 	public void updateContent(HotSeasonPlayerVO vo, HotSeasonPlayerProperty property) {
 		if (actionPhotoPanel != null)
@@ -49,7 +51,13 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 			portraitLabel.setImage(PlayerImageCache.getPortraitByName(vo.getName()));
 		nameLabel.setText(Utility.trimName(vo.getName()));
 		String propertyName = Constants.getPropertyName(property);
-		String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
+		if (property == HotSeasonPlayerProperty.FIELD_PERCENT || property == HotSeasonPlayerProperty.THREE_POINT_PERCENT
+				|| property == HotSeasonPlayerProperty.FREETHROW_PERCENT) {
+			df = UIConfig.PERCENT_FORMAT;
+		}else {
+			df = UIConfig.FORMAT;
+		}
+		String propertyStr = df.format(vo.getProperty());
 		propertyLabel.setText(propertyName+"："+propertyStr);
 		teamLabel.setText(Constants.teamShortText + Constants.translateTeamAbbr(vo.getTeamAbbr()));
 		positionLabel.setText(Constants.positionShortText + vo.getPosition());
@@ -58,6 +66,13 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 	public HotSeasonPlayerLabel(HotSeasonPlayerVO vo, HotSeasonPlayerProperty property,int index) {
 		super(vo.getTop());
 		playerName = Utility.trimName(vo.getName());
+		String propertyName = Constants.getPropertyName(property);
+		if (property == HotSeasonPlayerProperty.FIELD_PERCENT || property == HotSeasonPlayerProperty.THREE_POINT_PERCENT
+				|| property == HotSeasonPlayerProperty.FREETHROW_PERCENT) {
+			df = UIConfig.PERCENT_FORMAT;
+		}else {
+			df = UIConfig.FORMAT;
+		}
 		if (vo.getTop() == 1) {
 			Image actionImage = PlayerImageCache.getActionImageByName(vo.getName());
 			actionPhotoPanel = new ActionPhotoPanel(actionImage);
@@ -71,9 +86,9 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 			nameLabel.setLeft();
 			this.add(nameLabel);
 			
-			String propertyStr = UIConfig.PERCENT_FORMAT.format(vo.getProperty());
+			String propertyStr = df.format(vo.getProperty());
 			if(index < 5){
-				propertyStr = UIConfig.FORMAT.format(vo.getProperty());
+				propertyStr = df.format(vo.getProperty());
 			}
 			propertyLabel = new MyLabel(labelX, 80, 200, 40, propertyStr);
 			propertyLabel.setFont(MyFont.YT_L);
@@ -101,8 +116,7 @@ public class HotSeasonPlayerLabel extends HotSeasonLabel{
 			nameLabel = new MyLabel(0,3,labelWid,30,Utility.trimName(vo.getName()));
 			nameLabel.setFont(MyFont.YT_S);
 			
-			String propertyName = Constants.getPropertyName(property);
-			String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
+			String propertyStr = df.format(vo.getProperty());
 			propertyLabel = new MyLabel(0, 37, labelWid, 20, propertyName+"："+propertyStr);
 			
 			String team = Constants.translateTeamAbbr(vo.getTeamAbbr());

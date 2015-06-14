@@ -138,9 +138,14 @@ public class GamePanel extends GameFatherPanel {
 
 	public void setTable(ArrayList<MatchPlayerPO> players) {
 		TechTable table = new TechTable(players,GamePanel.this);
+		
 		table.getColumnModel().getColumn(1).setPreferredWidth(170);
+		table.setHeaderColorAndFont();
+		table.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
+		table.setWidth(new int[] {33, 170, 43, 43, 43, 43, 43, 54, 54, 50, 43, 43, 43, 43, 43, 54, 43});
+		
 		scroll = new BottomScrollPane(table);
-		scroll.setBounds(25,300,940, 300);
+		scroll.setBounds(55,260,table.setTableWidth(330, table.getRowCount()), 330);
 		this.add(scroll);
 
 	}

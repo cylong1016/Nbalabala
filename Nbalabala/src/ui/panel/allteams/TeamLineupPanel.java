@@ -51,7 +51,7 @@ public class TeamLineupPanel extends BottomPanel {
 		String[][] rowData = new String[players.size()][Constants.teamLineupHeaders.length];
 		playerTable = new BottomTable(rowData, Constants.teamLineupHeaders);
 		playerTable.setRowHeight(UIConfig.ROW_HEIGHT);
-		playerTable.setWidth(new int[] { 156, 44, 44, 44, 118, 118, 77, 287 }); 
+		playerTable.setWidth(new int[] { 186, 44, 44, 44, 66, 66, 129, 309 }); 
 		playerTable.setHeaderColorAndFont();
 		playerTable.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
 		
@@ -87,11 +87,8 @@ public class TeamLineupPanel extends BottomPanel {
 					.getBirthDate())), i, 2);
 			playerTable.setValueAt(Constants.translateVeteran(ppVO.fromYear),
 					i, 3);
-			playerTable.setValueAt(
-					Constants.translateHeight(ppVO.heightFoot + "-"
-							+ ppVO.heightInch), i, 4);
-			playerTable.setValueAt(Constants.translateWeight(ppVO.getWeight()),
-					i, 5);
+			playerTable.setValueAt((ppVO.heightFoot + "-"+ ppVO.heightInch), i, 4);
+			playerTable.setValueAt(String.valueOf(ppVO.getWeight()), i, 5);
 			playerTable.setValueAt(Constants.translateDate(ppVO.birthDate), i,
 					6);
 			playerTable.setValueAt(ppVO.getSchool(), i, 7);

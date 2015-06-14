@@ -3,19 +3,25 @@
  */
 package bl.analysisbl;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import po.MatchPlayerPO;
 import po.PlayerProfilePO;
-import data.matchdata.MatchData;
-import data.playerdata.PlayerData;
-import data.seasondata.SeasonData;
+import ui.UIConfig;
 import utility.Utility;
 import vo.AnalysisCareerVO;
 import vo.AnalysisClutchVO;
 import vo.AnalysisDevotionVO;
-import enums.CareerData;
+import vo.AnalysisTransferVO;
+import vo.ForecastVO;
+import vo.YearMatchesVO;
 import blservice.AnalysisBLService;
+import data.matchdata.MatchData;
+import data.playerdata.PlayerData;
+import data.seasondata.SeasonData;
+import enums.CareerData;
+import enums.InferenceData;
 
 /**
  *
@@ -30,6 +36,12 @@ public class ValueAnalysis implements AnalysisBLService{
 	private SeasonData seasonData = new SeasonData();
 	
 	private PlayerData playerData = new PlayerData();
+	
+	private ArrayList<MatchPlayerPO> matches = new ArrayList<MatchPlayerPO>();
+	private String lastPlayer = null;
+	
+	private ArrayList<YearMatchesVO> yearMatchList = new ArrayList<YearMatchesVO>();
+	private String lastPlayerByYear = null;
 
 	/* (non-Javadoc)
 	 * @see blservice.AnalysisBLService#getCareerData(java.lang.String, enums.CareerData)
@@ -37,14 +49,11 @@ public class ValueAnalysis implements AnalysisBLService{
 	@Override
 	public ArrayList<AnalysisCareerVO> getCareerData(String name,
 			CareerData careerData) {
+		loadMatchesByYear(name);
 		ArrayList<AnalysisCareerVO> result = new ArrayList<AnalysisCareerVO>();
-		PlayerProfilePO profilePO = playerData.getPlayerProfileByName(name);
-		if (profilePO == null) return result;
-		int fromYear = profilePO.fromYear;
-		int toYear = profilePO.toYear;
-		for (int i = fromYear; i < toYear; i++) {
-			String season = Utility.getRegularStringByStartYear(i);
-			ArrayList<MatchPlayerPO> matches = matchData.getMatchRecordByPlayerName(name, season);
+		for (YearMatchesVO vo : yearMatchList) {
+			String season = Utility.getOverallSeason(vo.year);
+			ArrayList<MatchPlayerPO> matches = vo.matchList;
 			ArrayList<Double> oneSeasonData = new ArrayList<Double>();
 			if (careerData == CareerData.SCORE) {
 				for (MatchPlayerPO po : matches) {
@@ -67,10 +76,12 @@ public class ValueAnalysis implements AnalysisBLService{
 					oneSeasonData.add((double) po.threepointPercent);
 				}
 			}
-			result.add(new AnalysisCareerVO(season, oneSeasonData));
+			AnalysisCareerVO analysisCareerVO = new AnalysisCareerVO(season, oneSeasonData);
+			result.add(analysisCareerVO);
 		}
 		return result;
 	}
+
 
 	/* (non-Javadoc)
 	 * @see blservice.AnalysisBLService#getClutchData(java.lang.String)
@@ -90,4 +101,151 @@ public class ValueAnalysis implements AnalysisBLService{
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see blservice.AnalysisBLService#getForecastData(java.lang.String, enums.ForecastData)
+	 */
+	@Override
+	public ForecastVO getForecastData(String name, InferenceData inferenceData) {
+		loadMatches(name);
+		DivideHandler divideHandler = new DivideHandler();
+		ArrayList<Double> data = divideHandler.divideData(matches, inferenceData);
+		RegressionHandler regression = new RegressionHandler(data);
+		ForecastVO result = new ForecastVO();
+		result.width = divideHandler.getWidth();
+		
+		PlayerProfilePO profilePO = playerData.getPlayerProfileByName(name);
+		result.toYear = Utility.getOverallSeason(profilePO.toYear - 1);
+		result.fromYear = Utility.getOverallSeason(profilePO.fromYear);
+		result.nextY = regression.getNextValueByRegression();
+		result.name = name;
+		result.datas = data;
+		result.curveX = regression.getCurveX();
+		result.curveY = regression.getCurveY();
+		
+		DecimalFormat format = UIConfig.FORMAT;
+		if (inferenceData == InferenceData.FIELD_PERCENT || inferenceData == InferenceData.THREEPOINT_PERCENT
+				||inferenceData == InferenceData.FREETHROW_PERCENT 
+				|| inferenceData == InferenceData.REAL_FIELD_PERCENT) {
+			format = UIConfig.PERCENT_FORMAT;
+		}
+		String valueString = format.format(result.nextY);
+		
+		result.conclusion = "通过多项式回归分析，认为该球员此项数据在短期内将为" + valueString;
+		return result;
+	}
+	
+	public static void main(String[]args) {
+		ForecastVO vo = new ValueAnalysis().getForecastData("Kobe Bryant$01", InferenceData.SCORE);
+		System.out.println(vo.fromYear);
+		System.out.println(vo.toYear);
+		System.out.println(vo.conclusion);
+		double [] curveY = vo.curveY;
+		for (double d : curveY) {
+			System.out.println(d);
+		}
+		
+	}
+	//TODO 明显下降的球员：Steve Francis
+
+	/* (non-Javadoc)
+	 * @see blservice.AnalysisBLService#getTransferData(java.lang.String, enums.InferenceData)
+	 */
+	@Override
+	public AnalysisTransferVO getTransferData(String name,
+			InferenceData inferenceData) {
+		PlayerProfilePO profilePO = playerData.getPlayerProfileByName(name);
+		int fromYear = profilePO.fromYear;
+		int toYear = profilePO.toYear;
+		String team = null;
+		String currentTeam = null;
+		int transferYear = 0;
+		int startYear = 0;		// 从哪一年开始在上一支球队服役
+		boolean hasTransfer = false;
+		for (int i = toYear - 1; i >= fromYear; i--) {
+			String season = Utility.getRegularStringByStartYear(i);
+			String thatTeam = seasonData.getPlayerSeasonDataByName(name, season).teamAbbr;
+			if (team == null) {
+				team = thatTeam;
+				currentTeam = team;
+			}else if ((!team.equals(thatTeam)) && (!hasTransfer)) {
+				team = thatTeam;
+				transferYear = i + 1;
+				hasTransfer = true;
+			}else if ((!team.equals(thatTeam)) && (hasTransfer)) {
+				startYear = i + 1;
+				break;
+			}
+		}
+		
+		if (!hasTransfer) return null;	//没有转会过
+		if (startYear == 0) startYear = fromYear;
+		
+		loadMatchesByYear(name);
+		ArrayList<MatchPlayerPO> formerMatches = new ArrayList<MatchPlayerPO>();
+		ArrayList<MatchPlayerPO> currentMatches = new ArrayList<MatchPlayerPO>();
+		for (YearMatchesVO vo : yearMatchList) {
+			if (vo.year >= startYear && vo.year < transferYear) {
+				formerMatches.addAll(vo.matchList);
+			}else if (vo.year >= transferYear) {
+				currentMatches.addAll(vo.matchList);
+			}
+		}
+		
+		DivideHandler divideHandler = new DivideHandler();
+		ArrayList<Double> formerData = divideHandler.divideData(formerMatches, inferenceData);
+		ArrayList<Double> currentData = divideHandler.divideData(currentMatches, inferenceData);
+		String conclusion = new TransferAnalyzer().giveConclusion
+				(formerData, currentData, inferenceData);
+		
+		AnalysisTransferVO result = new AnalysisTransferVO();
+		result.conclusion = conclusion;
+		result.currentAbbr = currentTeam;
+		result.formerAbbr = team;
+		result.currentData = currentData;
+		result.formerData = formerData;
+		result.name = name;
+		result.startSeason = Utility.getOverallSeason(startYear);
+		result.transferSeason = Utility.getOverallSeason(transferYear);
+		return result;
+	}
+	
+	private void loadMatches(String name) {
+		if (lastPlayer != null && lastPlayer.equals(name) && matches.size() != 0) {
+			return;
+		}else {
+			matches.clear();
+			lastPlayer = name;
+			PlayerProfilePO profilePO = playerData.getPlayerProfileByName(name);
+			if (profilePO == null) return ;
+			int fromYear = profilePO.fromYear;
+			int toYear = profilePO.toYear;
+			for (int i = fromYear; i < toYear; i++) {
+				String season = Utility.getRegularStringByStartYear(i);
+				matches.addAll(matchData.getMatchRecordByPlayerName(name, season));
+			}
+		}
+	}
+	
+	private void loadMatchesByYear(String name) {
+		if (lastPlayerByYear != null && lastPlayerByYear.equals(name) && yearMatchList.size() != 0) {
+			return;
+		}else {
+			yearMatchList.clear();
+			lastPlayerByYear = name;
+			PlayerProfilePO profilePO = playerData.getPlayerProfileByName(name);
+			if (profilePO == null) return ;
+			int fromYear = profilePO.fromYear;
+			int toYear = profilePO.toYear;
+			for (int i = fromYear; i < toYear; i++) {
+				String season = Utility.getRegularStringByStartYear(i);
+				YearMatchesVO year= new YearMatchesVO();
+				year.matchList = matchData.getMatchRecordByPlayerName(name, season);
+				year.year = i;
+				yearMatchList.add(year);
+			}
+		}
+	}
+	
+
 }
+

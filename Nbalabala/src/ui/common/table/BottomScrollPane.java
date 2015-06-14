@@ -1,15 +1,11 @@
 package ui.common.table;
 
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JViewport;
 import javax.swing.border.EmptyBorder;
 
 import ui.UIConfig;

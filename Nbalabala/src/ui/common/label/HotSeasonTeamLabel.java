@@ -4,7 +4,9 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 
+import ui.MyFont;
 import ui.UIConfig;
 import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
@@ -34,20 +36,34 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 	
 	private ImgLabel imgLabel;
 	private MyLabel nameLabel;
+	private MyLabel propertyTxtLabel;
 	private MyLabel propertyLabel;
 	private MyLabel leagueLabel;
+	private DecimalFormat df = UIConfig.FORMAT;
 	
 	public void updateContent(HotSeasonTeamVO vo, HotSeasonTeamProperty property) {
+		if (property == HotSeasonTeamProperty.FIELD_PERCENT || property == HotSeasonTeamProperty.THREE_POINT_PERCENT
+				|| property == HotSeasonTeamProperty.FREETHROW_PERCENT) {
+			df = UIConfig.PERCENT_FORMAT;
+		}else {
+			df = UIConfig.FORMAT;
+		}
 		imgLabel.setImage(TeamLogoCache.getTeamLogo(teamAbbr));
 		nameLabel.setText(Constants.translateTeamAbbr(teamAbbr));
 		String propertyName = Constants.getPropertyName(property);
-		String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
+		String propertyStr = df.format(vo.getProperty());
 		propertyLabel.setText(propertyName+"："+propertyStr);
 		leagueLabel.setText( Constants.leagueText + vo.getLeague());
 	}
 	
 	public HotSeasonTeamLabel(HotSeasonTeamVO vo, HotSeasonTeamProperty property,int index) {
 		super(vo.getTop());
+		if (property == HotSeasonTeamProperty.FIELD_PERCENT || property == HotSeasonTeamProperty.THREE_POINT_PERCENT
+				|| property == HotSeasonTeamProperty.FREETHROW_PERCENT) {
+			df = UIConfig.PERCENT_FORMAT;
+		}else {
+			df = UIConfig.FORMAT;
+		}
 		teamAbbr = vo.getAbbr();
 		if (vo.getTop() == 1) {
 			Image logo = TeamLogoCache.getTeamLogo(teamAbbr);
@@ -58,24 +74,37 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 			
 			int labelX = 90;
 			
-			nameLabel = new MyLabel(labelX, 40, 146, 33, Constants.translateTeamAbbr(teamAbbr));
-			nameLabel.setFont(new Font("微软雅黑", Font.BOLD, 30));
+			nameLabel = new MyLabel(labelX, 40, 146, 40, Constants.translateTeamAbbr(teamAbbr));
+			if (Constants.isEng) {
+				nameLabel.setFont(MyFont.YT_XL);
+			}
+			else {
+				nameLabel.setFont(new Font("微软雅黑", Font.BOLD, 30));
+			}
+
 			nameLabel.setLeft();
 			
 			String propertyName = Constants.getPropertyName(property);
-			String propertyStr = UIConfig.PERCENT_FORMAT.format(vo.getProperty());
+			String propertyStr = df.format(vo.getProperty());
 			if(index < 5){
-				propertyStr = UIConfig.FORMAT.format(vo.getProperty());
+				propertyStr = df.format(vo.getProperty());
 			}
-			propertyLabel = new MyLabel(labelX, 85, 146, 26, propertyName+"："+propertyStr);
-			propertyLabel.setFont(new Font("微软雅黑", Font.BOLD, 20));
-			propertyLabel.setForeground(UIConfig.HIST_FIRST_COLOR);
+			propertyTxtLabel = new MyLabel(labelX, 85, 146, 26, propertyName+"：");
+			propertyTxtLabel.setFont(new Font("微软雅黑", Font.BOLD, 20));
+			propertyTxtLabel.setForeground(UIConfig.RED_WIN_COLOR);
+			propertyTxtLabel.setLeft();
+			
+			propertyLabel = new MyLabel(labelX + 60, 75, 146, 40, propertyStr);
+			propertyLabel.setFont(MyFont.YT_XL);
+			propertyLabel.setForeground(UIConfig.RED_WIN_COLOR);
 			propertyLabel.setLeft();
 			
 			leagueLabel = new MyLabel(labelX, 130, 146, 26, Constants.leagueText + vo.getLeague());
+			leagueLabel.setForeground(MyFont.LIGHT_GRAY);
 			leagueLabel.setLeft();
 			
 			this.add(propertyLabel);
+			this.add(propertyTxtLabel);
 			this.add(nameLabel);
 			this.add(leagueLabel);
 		}else{
@@ -88,13 +117,16 @@ public class HotSeasonTeamLabel extends HotSeasonLabel{
 			
 			int labelWid = 175;
 			
-			nameLabel = new MyLabel(0,7,labelWid,20, Constants.translateTeamAbbr(teamAbbr));
-			
+			nameLabel = new MyLabel(0,3,labelWid,30, Constants.translateTeamAbbr(teamAbbr));
+			if (Constants.isEng) {
+				nameLabel.setFont(MyFont.YT_S);
+			}
 			String propertyName = Constants.getPropertyName(property);
-			String propertyStr = UIConfig.FORMAT.format(vo.getProperty());
+			String propertyStr = df.format(vo.getProperty());
 			propertyLabel = new MyLabel(0, 37, labelWid, 20, propertyName+"："+propertyStr);
 			
-			leagueLabel = new MyLabel(0, 67, labelWid, 20, Constants.leagueText + vo.getLeague());
+			leagueLabel = new MyLabel(0, 77, labelWid, 20, Constants.leagueText + vo.getLeague());
+			leagueLabel.setForeground(MyFont.LIGHT_GRAY);
 			
 			MyLabel labels[] = {nameLabel, propertyLabel, leagueLabel};
 			for (int i = 0; i < labels.length; i++) {

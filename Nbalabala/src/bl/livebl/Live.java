@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -320,7 +321,7 @@ public class Live implements LiveBLService {
 					dataLiveURL = dataLiveMatcher.group("dataLiveURL");
 				}
 			}
-			captureTextLive(source); // 获得文字直路
+		//	captureTextLive(source); // 获得文字直路
 			captureDataLive(dataLiveURL); // 获得数据直播
 			homeScores.clear();
 			roadScores.clear();
@@ -419,7 +420,22 @@ public class Live implements LiveBLService {
 	}
 
 	private void captureDataLive(String url) {
-		
+		HttpURLConnection urlConn = getConn(LIVE_LIST_URL);
+		InputStream input = null;
+    	BufferedReader reader = null;
+		try {
+			input = urlConn.getInputStream();
+			reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
+			String source = "";
+			String temp = null;
+			while((temp = reader.readLine()) != null) {
+				source += temp;
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
 

@@ -7,6 +7,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import ui.Images;
+import ui.MyFont;
+import ui.UIConfig;
 import ui.common.label.ImgLabel;
 import ui.common.label.MyLabel;
 import ui.common.panel.Panel;
@@ -292,9 +294,8 @@ public class ProfilePanel extends Panel {
 		lb_1[lth] = new MyLabel(totalScoreX, scoreY, scoreWidth, scoreHeight, scoreAll[0]);
 		lb_2[lth] = new MyLabel(totalScoreX, scoreY_2, scoreWidth, scoreHeight, scoreAll[1]);
 		lb_3[lth] = new MyLabel(totalScoreX, scoreY_mid, scoreWidth, scoreHeight, Constants.totalScoreText);
-		Font all = new Font("微软雅黑", 1, 20);
-		lb_1[lth].setFont(all);
-		lb_2[lth].setFont(all);
+		lb_1[lth].setFont(MyFont.YT_S);
+		lb_2[lth].setFont(MyFont.YT_S);
 		lb_3[lth].setForeground(Color.gray);
 		setRed(lb_1[lth], lb_2[lth]);
 		this.add(lb_1[lth]);
@@ -304,9 +305,9 @@ public class ProfilePanel extends Panel {
 
 	public void setRed(MyLabel l1, MyLabel l2) {
 		if (Integer.parseInt(l1.text) > Integer.parseInt(l2.text)) {
-			l1.setForeground(Color.red);
+			l1.setForeground(UIConfig.RED_WIN_COLOR);
 		} else if (Integer.parseInt(l1.text) < Integer.parseInt(l2.text)) {
-			l2.setForeground(Color.red);
+			l2.setForeground(UIConfig.RED_WIN_COLOR);
 		} else {
 		}
 	}

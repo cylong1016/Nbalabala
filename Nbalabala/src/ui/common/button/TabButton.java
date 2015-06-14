@@ -39,6 +39,9 @@ public class TabButton extends JButton{
 	
 	private Color color = Color.WHITE;
 	
+	public TabButton() {
+	}
+	
 	
 	/**
 	 * @param text 标签名

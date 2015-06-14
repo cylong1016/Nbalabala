@@ -33,6 +33,18 @@ public class Utility {
 		}
 	}
 	
+	public static String shortenTrimedName(String trimed) {
+		if (trimed.length() <= 13) return trimed;
+		String [] names = trimed.split(" ");
+		if (names.length > 2) {
+			return names[0].charAt(0) + ". " + names[1].charAt(0) + ". " +names[2];
+		}else if (names.length > 1) {
+			return names[0].charAt(0) + ". " + names[1];
+		}else {
+			return trimed;
+		}
+	}
+	
 	public static String getCurrentAbbr(String oldAbbr) {
 		switch (oldAbbr) {
 		case "CHA":
@@ -121,6 +133,11 @@ public class Utility {
 	public static String getRegularStringByStartYear(int start) {
 		String endYear = String.valueOf(start + 1);
 		return start + "-" + endYear.substring(2,4) + "R";
+	}
+	
+	public static String getOverallSeason(int start) {
+		String endYear = String.valueOf(start + 1);
+		return start + "-" + endYear.substring(2,4);
 	}
 
 }
