@@ -19,12 +19,14 @@ public class LiveDetailTable extends BottomTable {
 	private static final long serialVersionUID = 3368275554423060712L;
 
 	private String teamAbbr1;
+	private String teamAbbr2;
 
 	public LiveDetailTable(String teamAbbr1, String teamAbbr2, ArrayList<String> text) {
 		super(new String[text.size()][4], new String[] { Constants.liveDetailHeaders[0],
 				Constants.translateTeamAbbr(teamAbbr1), Constants.liveDetailHeaders[1],
 				Constants.translateTeamAbbr(teamAbbr2) });
 		this.teamAbbr1 = teamAbbr1;
+		this.teamAbbr2 = teamAbbr2;
 		setTable(text);
 		setTableSize();
 	}
@@ -40,8 +42,10 @@ public class LiveDetailTable extends BottomTable {
 
 	public void setTable(ArrayList<String> text) {
 		this.setModel(new DefaultTableModel(text.size(), 4));
-		DefaultTableModel tableModel = (DefaultTableModel)this.getModel();
-		tableModel.setColumnIdentifiers(Constants.livePlayerHeaders);
+		DefaultTableModel tableModel = (DefaultTableModel)(this.getModel());
+		tableModel.setColumnIdentifiers(new String[] { Constants.liveDetailHeaders[0],
+				Constants.translateTeamAbbr(teamAbbr1), Constants.liveDetailHeaders[1],
+				Constants.translateTeamAbbr(teamAbbr2) });
 		setTableSize();
 		for (int i = 0; i < text.size(); i++) {
 			String mpVO = text.get(i);
