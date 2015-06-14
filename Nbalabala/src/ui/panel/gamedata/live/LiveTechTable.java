@@ -23,14 +23,18 @@ public class LiveTechTable extends BottomTable{
 	private static final long serialVersionUID = -2414449802167589112L;
 
 	private BottomPanel panel;
+	private ArrayList<LivePlayerVO> players;
 	
 	public LiveTechTable(ArrayList<LivePlayerVO> players,BottomPanel panel){
 		super(new String[players.size()][Constants.livePlayerHeaders.length+1],Constants.livePlayerHeaders);
 		this.panel = panel;
+		this.players = players;
 		setTable(players);
+		addListener(this);
 	}
 	
 	public void setTable(ArrayList<LivePlayerVO> players){
+		this.players = players;
 		this.setModel(new DefaultTableModel(players.size(),Constants.livePlayerHeaders.length+1));
 		for (int i = 0; i < players.size(); i++) {
 			LivePlayerVO mpVO = players.get(i);
@@ -59,10 +63,9 @@ public class LiveTechTable extends BottomTable{
 			setValueAt(mpVO.score + "",i,18);
 			setValueAt(mpVO.plusMinus + "",i,19);
 		}
-		addListener(this,players);
 	}
 	
-	public void addListener(final BottomTable table,final ArrayList<LivePlayerVO> players) {
+	public void addListener(final BottomTable table) {
 		try {
 			table.addMouseListener(new UserMouseAdapter() {
 
@@ -70,8 +73,9 @@ public class LiveTechTable extends BottomTable{
 					if (e.getClickCount() < 2)
 						return;
 					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
+					System.out.println(rowI);
 					if (rowI > -1) {
-						MainController.toPlayerInfoPanel(players.get(rowI).nameChn, panel);
+						MainController.toPlayerInfoPanel(players.get(rowI).nameEng, panel);
 					}
 
 				}

@@ -38,6 +38,12 @@ public class Live implements LiveBLService {
 		System.out.println(live.getCurrentSectionCount());
 		System.out.println(live.getHomeScores());
 		System.out.println(live.getRoadScores());
+		double[] homeFiveArgs = live.getHomeFiveArgs();
+		double[] roadFiveArgs = live.getRoadFiveArgs();
+		for(int i = 0; i < homeFiveArgs.length; i++) {
+			System.out.println(homeFiveArgs[i]);
+			System.out.println(roadFiveArgs[i]);
+		}
 		ArrayList<String> textLive = live.getTextLive();
 		for(int i = 0; i < textLive.size(); i++) {
 			System.out.println(textLive.get(i));
@@ -128,9 +134,6 @@ public class Live implements LiveBLService {
 	 */
 	@Override
 	public ArrayList<LivePlayerVO> getRoadPlayerRecords() {
-//		if(!hasMatchStarted) {
-//			return 0;
-//		}
 		return roadPlayerRecords;
 	}
 
@@ -139,9 +142,6 @@ public class Live implements LiveBLService {
 	 */
 	@Override
 	public ArrayList<LivePlayerVO> getHomePlayerRecords() {
-//		if(!hasMatchStarted) {
-//			return 0;
-//		}
 		return homePlayerRecords;
 	}
 
@@ -150,9 +150,6 @@ public class Live implements LiveBLService {
 	 */
 	@Override
 	public ArrayList<Integer> getRoadScores() {
-//		if(!hasMatchStarted) {
-//			return null;
-//		}
 		return roadScores;
 	}
 
@@ -161,9 +158,6 @@ public class Live implements LiveBLService {
 	 */
 	@Override
 	public ArrayList<Integer> getHomeScores() {
-//		if(!hasMatchStarted) {
-//			return null;
-//		}
 		return homeScores;
 	}
 
@@ -172,9 +166,6 @@ public class Live implements LiveBLService {
 	 */
 	@Override
 	public int getCurrentSectionCount() {
-//		if(!hasMatchStarted) {
-//			return 0;
-//		}
 		return currentSectionCount;
 	}
 
@@ -183,20 +174,14 @@ public class Live implements LiveBLService {
 	 */
 	@Override
 	public double[] getHomeFiveArgs() {
-//		if(!hasMatchStarted) {
-//			return null;
-//		}
 		return homeFiveArgs;
 	}
 
 	/**
-	 * @see blservice.LiveBLService#getroadFiveArgs()
+	 * @see blservice.LiveBLService#getRoadFiveArgs()
 	 */
 	@Override
-	public double[] getroadFiveArgs() {
-//		if(!hasMatchStarted) {
-//			return null;
-//		}
+	public double[] getRoadFiveArgs() {
 		return roadFiveArgs;
 	}
 	
@@ -205,9 +190,6 @@ public class Live implements LiveBLService {
 	 */
 	@Override
 	public ArrayList<String> getTextLive() {
-//		if(!hasMatchStarted) {
-//			return null;
-//		}
 		return textLive;
 	}
 	
@@ -304,8 +286,8 @@ public class Live implements LiveBLService {
 			reader = new BufferedReader(fr);
 			String scoreReg = "<td>(?<score>\\d+)</td>";
 			Pattern scorePattern = Pattern.compile(scoreReg);
-			String dataLiveReg = "<a.*? href=\"(?<dataLiveURL>)\".*?><s></s>数据直播</a>";
-			Pattern dataLivePattern = Pattern.compile(dataLiveReg);
+			String dataLiveURLReg = "<a target=.*? href=\"(?<dataLiveURL>.*?)\".*?><s></s>数据直播</a>";
+			Pattern dataLiveurlPattern = Pattern.compile(dataLiveURLReg);
 			String dataLiveURL = null;
 			String source = "";
 			String temp = null;
@@ -316,12 +298,12 @@ public class Live implements LiveBLService {
 					String score = scoreMatcher.group("score");
 					scoreList.add(score);
 				}
-				Matcher dataLiveMatcher = dataLivePattern.matcher(temp);
-				if(dataLiveMatcher.find()) {
-					dataLiveURL = dataLiveMatcher.group("dataLiveURL");
+				Matcher dataLiveURLMatcher = dataLiveurlPattern.matcher(temp);
+				if(dataLiveURLMatcher.find()) {
+					dataLiveURL = dataLiveURLMatcher.group("dataLiveURL");
 				}
 			}
-		//	captureTextLive(source); // 获得文字直路
+			captureTextLive(source); // 获得文字直路
 			captureDataLive(dataLiveURL); // 获得数据直播
 			homeScores.clear();
 			roadScores.clear();
@@ -420,22 +402,59 @@ public class Live implements LiveBLService {
 	}
 
 	private void captureDataLive(String url) {
-		HttpURLConnection urlConn = getConn(LIVE_LIST_URL);
+		HttpURLConnection urlConn = getConn(url);
 		InputStream input = null;
     	BufferedReader reader = null;
 		try {
 			input = urlConn.getInputStream();
 			reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
+			String playerDataReg = "";
 			String source = "";
 			String temp = null;
 			while((temp = reader.readLine()) != null) {
 				source += temp;
+			}
+			String statReg = "<tr .*?>.*?<td.*?>统计</td>(.*?<td>.*?</td>){7}<td>(?<rebound>.*?)</td>.*?<td>(?<assist>.*?)</td>(.*?<td>.*?</td>){6}.*?</tr>";
+			Pattern statPattern = Pattern.compile(statReg);
+			Matcher statMatcher = statPattern.matcher(source);
+			if(statMatcher.find()) {
+				homeFiveArgs[3] = Double.parseDouble(statMatcher.group("rebound"));
+				homeFiveArgs[4] = Double.parseDouble(statMatcher.group("assist"));
+			}
+			if(statMatcher.find()) {
+				roadFiveArgs[3] = Double.parseDouble(statMatcher.group("rebound"));
+				roadFiveArgs[4] = Double.parseDouble(statMatcher.group("assist"));
+			}
+			String fieldPercentReg = "<tr.*?>.*?<td.*?>命中率</td>(.*?<td>.*?</td>){2}.*?<td>(?<fieldMadPercent>.*?)</td>.*?<td>(?<threePointPercent>.*?)</td>.*?<td>(?<freePercent>.*?)</td>(.*?<td>.*?</td>){10}.*?</tr>";
+			Pattern fieldPercent = Pattern.compile(fieldPercentReg);
+			Matcher fieldPercentMatcher = fieldPercent.matcher(source);
+			if(fieldPercentMatcher.find()) {
+				String fieldMadPercent = fieldPercentMatcher.group("fieldMadPercent");
+				String threePointPercent = fieldPercentMatcher.group("threePointPercent");
+				String freePercent = fieldPercentMatcher.group("freePercent");
+				homeFiveArgs[0] = percentToDouble(fieldMadPercent);
+				homeFiveArgs[1] = percentToDouble(threePointPercent);
+				homeFiveArgs[2] = percentToDouble(freePercent);
+			}
+			if(fieldPercentMatcher.find()) {
+				String fieldMadPercent = fieldPercentMatcher.group("fieldMadPercent");
+				String threePointPercent = fieldPercentMatcher.group("threePointPercent");
+				String freePercent = fieldPercentMatcher.group("freePercent");
+				roadFiveArgs[0] = percentToDouble(fieldMadPercent);
+				roadFiveArgs[1] = percentToDouble(threePointPercent);
+				roadFiveArgs[2] = percentToDouble(freePercent);
 			}
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private double percentToDouble(String num) {
+		String douStr= num.replace("%", "");
+		double dou = Double.parseDouble(douStr) / 100;
+		return dou;
 	}
 }
 

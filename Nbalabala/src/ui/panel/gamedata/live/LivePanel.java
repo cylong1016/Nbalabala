@@ -11,6 +11,7 @@ import ui.panel.gamedata.ConPanel;
 import ui.panel.gamedata.GameFatherPanel;
 import utility.Constants;
 import vo.LivePlayerVO;
+import bl.livebl.Live;
 import blservice.LiveBLService;
 
 /**
@@ -37,15 +38,15 @@ public class LivePanel extends GameFatherPanel {
 	
 	public LivePanel(String url) {
 		super(url);
-		liveService = new LiveMock();
-//		liveService = new Live();
+//		liveService = new LiveMock();
+		liveService = new Live();
 		liveService.refresh();
 		init();
 		text = liveService.getTextLive();
 		vo1 = liveService.getHomePlayerRecords();
 		vo2 = liveService.getRoadPlayerRecords();
 		homePlayersArgs = liveService.getHomeFiveArgs();
-		roadPlayersArgs = liveService.getroadFiveArgs();
+		roadPlayersArgs = liveService.getRoadFiveArgs();
 		teamAbbr1 = liveService.getHomeAbbr();
 		teamAbbr2 = liveService.getRoadAbbr();
 		techPanel = new TechPanel(teamAbbr1,teamAbbr2,vo1,vo2,LivePanel.this);
@@ -168,7 +169,7 @@ public class LivePanel extends GameFatherPanel {
 				this.remove(conPanel);
 			}
 		index ++;
-		conPanel = new ConPanel(liveService.getHomeFiveArgs(),liveService.getroadFiveArgs());
+		conPanel = new ConPanel(liveService.getHomeFiveArgs(),liveService.getRoadFiveArgs());
 		ArrayList<LivePlayerVO> homeplayers = liveService.getHomePlayerRecords();
 		ArrayList<LivePlayerVO> roadplayers = liveService.getRoadPlayerRecords();
 		homeplayers.add(new LivePlayerVO("kobe", "san", "F", true, "35:4", 4, 5, 4, 5, 4, 5, 6, 7, 8, 9, 1, 1, 2, 3));

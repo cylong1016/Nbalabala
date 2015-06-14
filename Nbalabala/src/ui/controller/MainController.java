@@ -11,9 +11,9 @@ import ui.panel.allplayers.AllPlayersPanel;
 import ui.panel.allplayers.PlayerInfoBottomPanel;
 import ui.panel.allteams.AllTeamsPanel;
 import ui.panel.allteams.TeamBottomPanel;
-import ui.panel.analyse.AnalysePanel;
 import ui.panel.gamedata.GameDataPanel;
 import ui.panel.gamedata.GamePanel;
+import ui.panel.gamedata.live.LiveInPanel;
 import ui.panel.gamedata.live.LivePanel;
 import ui.panel.hot.hotFast.HotFastPanel;
 import ui.panel.hot.hotSeason.HotSeasonPlayerPanel;
@@ -60,7 +60,10 @@ public class MainController {
 	private static HotFastPanel hotFastPanel;
 	/** 球队信息界面 */
 	private static TeamBottomPanel teamBottomPanel;	
-	
+	/** 进入直播界面 */
+	private static LiveInPanel liveInPanel;
+	/** 正在进行直播的界面 */
+	private static LivePanel livePanel;
 	/**
 	 * 初始化主界面
 	 * @author cylong
@@ -69,9 +72,10 @@ public class MainController {
 	public static void launch() {
 		frame = new Frame();
 		mainPanel = new MainPanel();
-		frame.setPanel(mainPanel);
+//		frame.setPanel(mainPanel);
 //		frame.setPanel(new AnalysePanel("images2.0/analysis/analysisBG.png","LAK","Kobe Byrant"));
 //		frame.setPanel(new LivePanel("images2.0/games/gamesBG.png"));
+		frame.setPanel(new LiveInPanel("images2.0/games/liveinBG.png"));
 		frame.start();
 	}
 	
@@ -113,6 +117,19 @@ public class MainController {
 		gameDataPanel = new GameDataPanel(UIConfig.IMG_PATH_2 + "gameData/GameDataBG.png");
 		frame.setPanel(gameDataPanel);
 	}
+	
+	/**
+	 * 根据球队缩写获得比赛记录
+	 * @param teamAbbr1
+	 * @param teamAbbr2
+	 * @author cylong
+	 * @version 2015年6月14日  下午3:42:23
+	 */
+	public static void toGameLivePanel(BottomPanel panel,String teamAbbr1,String teamAbbr2) {
+		gameDataPanel = new GameDataPanel(panel,UIConfig.IMG_PATH_2 + "gameData/GameDataBG.png", teamAbbr1, teamAbbr2);
+		frame.setPanel(gameDataPanel);
+	}
+	
 
 	/**
 	 * 进入所有球员界面
@@ -214,6 +231,18 @@ public class MainController {
 	public static void toGameDetailPanel(int matchID, Panel fromPanel) {
 		gamePanel = new GamePanel(matchID, fromPanel);
 		frame.setPanel(gamePanel);
+		frame.repaint();
+	}
+	
+	public static void toLiveInPanel() {
+		liveInPanel = new LiveInPanel("images2.0/games/liveinBG.png");
+		frame.setPanel(liveInPanel);
+		frame.repaint();
+	}
+	
+	public static void toLivePanel() {
+		livePanel = new LivePanel("images2.0/games/gamesBG.png");
+		frame.setPanel(livePanel);
 		frame.repaint();
 	}
 

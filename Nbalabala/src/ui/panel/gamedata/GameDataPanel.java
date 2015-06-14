@@ -46,6 +46,8 @@ public class GameDataPanel extends BottomPanel {
 	private ArrayList<MatchDetailVO> matchDetailfile;
 	private int gameNum, pageNum;
 	private Boolean isInit = true;
+	private ImgButton back;
+	private BottomPanel panel;
 
 	/**
 	 * @param url
@@ -60,7 +62,31 @@ public class GameDataPanel extends BottomPanel {
 		addArray();
 		addLabel();
 		addButton();
+		addBack();
 	}
+	
+	public GameDataPanel(BottomPanel panel,String url,String teamAbbr1,String teamAbbr2) {
+		super(url);
+		this.panel = panel;
+		matchDetailfile = matchQuery.screenMatchByTeam(teamAbbr1, teamAbbr2);
+		addComboBox();
+		addDateChooser();
+		addArray();
+		addLabel();
+		addButton();
+		addBack();
+	}
+	
+		public void addBack() {
+			back = new ImgButton(UIConfig.IMG_PATH + "back.png", 0, 0, UIConfig.IMG_PATH + "backOn.png", UIConfig.IMG_PATH + "back.png");
+			this.add(back);
+			back.addMouseListener(new MouseAdapter() {
+				public void mousePressed(MouseEvent e) {
+					MainController.backToOnePanel(panel);
+				}
+
+			});
+		}
 	
 
 	/**
@@ -294,5 +320,6 @@ public class GameDataPanel extends BottomPanel {
 		}
 
 	}
+	
 
 }

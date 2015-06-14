@@ -102,7 +102,7 @@ public class LiveMock implements LiveBLService{
 	@Override
 	public ArrayList<LivePlayerVO> getRoadPlayerRecords() {
 		ArrayList<LivePlayerVO> vos = new ArrayList<LivePlayerVO>();
-		vos.add(new LivePlayerVO("张三", "san", "F", true, "35:4", 4, 5, 4, 5, 4, 5, 6, 7, 8, 9, 1, 1, 2, 3));
+		vos.add(new LivePlayerVO("张三", "Kobe Byrant", "F", true, "35:4", 4, 5, 4, 5, 4, 5, 6, 7, 8, 9, 1, 1, 2, 3));
 		return vos;
 	}
 
@@ -112,7 +112,7 @@ public class LiveMock implements LiveBLService{
 	@Override
 	public ArrayList<LivePlayerVO> getHomePlayerRecords() {
 		ArrayList<LivePlayerVO> vos = new ArrayList<LivePlayerVO>();
-		vos.add(new LivePlayerVO("李四", "si", "F", true, "35:4", 4, 15, 14, 15, 14, 15, 16, 17, 8, 9, 1, 1, 2, 3));
+		vos.add(new LivePlayerVO("李四", "Lebron James", "F", true, "35:4", 4, 15, 14, 15, 14, 15, 16, 17, 8, 9, 1, 1, 2, 3));
 		return vos;
 	}
 
@@ -165,7 +165,7 @@ public class LiveMock implements LiveBLService{
 	 * @see blservice.LiveBLService#getroadFiveArgs()
 	 */
 	@Override
-	public double[] getroadFiveArgs() {
+	public double[] getRoadFiveArgs() {
 		return new double[] {7,8,9,0.5,0.7};
 	}
 

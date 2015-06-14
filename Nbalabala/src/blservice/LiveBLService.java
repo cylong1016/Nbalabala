@@ -82,5 +82,5 @@ public interface LiveBLService {
 	public double [] getHomeFiveArgs();
 	
 	/** 长度为5数组，分别是客队 投篮命中率、三分命中率、罚球命中率、篮板、助攻 */
-	public double [] getroadFiveArgs();
+	public double [] getRoadFiveArgs();
 }
