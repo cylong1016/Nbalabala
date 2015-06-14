@@ -21,7 +21,7 @@ public class LiveDetailTable extends BottomTable {
 	private String teamAbbr1;
 
 	public LiveDetailTable(String teamAbbr1, String teamAbbr2, ArrayList<String> text) {
-		super(new String[text.size()][5], new String[] { Constants.liveDetailHeaders[0],
+		super(new String[text.size()][4], new String[] { Constants.liveDetailHeaders[0],
 				Constants.translateTeamAbbr(teamAbbr1), Constants.liveDetailHeaders[1],
 				Constants.translateTeamAbbr(teamAbbr2) });
 		this.teamAbbr1 = teamAbbr1;
@@ -39,7 +39,7 @@ public class LiveDetailTable extends BottomTable {
 	}
 
 	public void setTable(ArrayList<String> text) {
-		this.setModel(new DefaultTableModel(text.size(), 5));
+		this.setModel(new DefaultTableModel(text.size(), 4));
 		setTableSize();
 		for (int i = 0; i < text.size(); i++) {
 			String mpVO = text.get(i);
