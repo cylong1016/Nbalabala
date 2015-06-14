@@ -139,7 +139,7 @@ public class LeftPanel extends Panel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setCurrentOn(analysisBtn);
-				// TODO 到分析界面 
+				MainController.toAnalysePanel(); 
 			}
 		});
 		this.add(analysisBtn);
