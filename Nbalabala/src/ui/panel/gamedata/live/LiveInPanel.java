@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
+import ui.UIConfig;
 import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
@@ -29,6 +30,9 @@ public class LiveInPanel extends BottomPanel{
 	private MyLabel[]gameDetail;
 	private int index = 0;
 	private int[] gameDetail_x = {205,325,405,480,620,750};
+	
+	private static final Font PLAIN_FONT = new Font("微软雅黑", Font.PLAIN, 16);
+	private static final Font BOLD_FONT = new Font("微软雅黑", Font.BOLD ,16);
 	
 	//06月15日 08：00=季后赛 勇士-骑士, 06月17日 09：00=季后赛 骑士-勇士
 	public LiveInPanel(String url){
@@ -54,27 +58,46 @@ public class LiveInPanel extends BottomPanel{
 			for(int i = 0; i < 6; i++) {
 				gameDetail[i] = new MyLabel(gameDetail_x[i],140+81*index,100,50,line2[i]);
 				this.add(gameDetail[i]);
-				gameDetail[i].setFont(new Font("微软雅黑",0,16));
+				gameDetail[i].setFont(PLAIN_FONT);
 			}
-			gameDetail[1].setForeground(Color.blue);
-			gameDetail[3].setForeground(Color.blue);
+			gameDetail[1].setForeground(UIConfig.BLUE_TEXT_COLOR);
+			gameDetail[3].setForeground(UIConfig.BLUE_TEXT_COLOR);
 			gameDetail[4].setForeground(Color.orange);
 			gameDetail[5].setForeground(Color.gray);
+			
 			gameDetail[1].addMouseListener(new MouseAdapter(){
 				public void mouseClicked(MouseEvent e) {
 					 MainController.toTeamBottomPanel(LiveInPanel.this, Constants.getAbbrByName(team[0]));;
 				 }
+				public void mouseEntered(MouseEvent e) {
+					gameDetail[1].setFont(BOLD_FONT);
+				}
+				public void mouseExited(MouseEvent e) {
+					gameDetail[1].setFont(PLAIN_FONT);
+				}
 			});
 			gameDetail[3].addMouseListener(new MouseAdapter(){
 				public void mouseClicked(MouseEvent e) {
 					 MainController.toTeamBottomPanel(LiveInPanel.this, Constants.getAbbrByName(team[1]));
 				 }
+				public void mouseEntered(MouseEvent e) {
+					gameDetail[3].setFont(BOLD_FONT);
+				}
+				public void mouseExited(MouseEvent e) {
+					gameDetail[3].setFont(PLAIN_FONT);
+				}
 			});
 			
 			gameDetail[4].addMouseListener(new MouseAdapter(){
 				 public void mouseClicked(MouseEvent e) {
 					 MainController.toGameLivePanel(LiveInPanel.this,Constants.getAbbrByName(team[0]),Constants.getAbbrByName(team[1]));
 				 }
+				public void mouseEntered(MouseEvent e) {
+					gameDetail[4].setFont(BOLD_FONT);
+					}
+				public void mouseExited(MouseEvent e) {
+					gameDetail[4].setFont(PLAIN_FONT);
+				}
 			});
 			
 			date = new MyLabel(25,110 + 81 * index,100,30,keyArr[0]);
@@ -90,6 +113,12 @@ public class LiveInPanel extends BottomPanel{
 					 public void mouseClicked(MouseEvent e) {
 						 MainController.toLivePanel();
 					 }
+						public void mouseEntered(MouseEvent e) {
+							gameDetail[5].setFont(BOLD_FONT);
+						}
+						public void mouseExited(MouseEvent e) {
+							gameDetail[5].setFont(PLAIN_FONT);
+						}
 				});
 			}
 		}
