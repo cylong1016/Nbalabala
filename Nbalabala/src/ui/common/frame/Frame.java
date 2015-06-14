@@ -20,6 +20,7 @@ import ui.panel.allplayers.AllPlayersPanel;
 import ui.panel.allteams.AllTeamsPanel;
 import ui.panel.analyse.AnalysePanel;
 import ui.panel.gamedata.GameDataPanel;
+import ui.panel.gamedata.live.LiveInPanel;
 import ui.panel.hot.hotTodayPlayer.HotTodayPlayerPanel;
 import ui.panel.main.MainPanel;
 import ui.panel.playerData.PlayerDataPanel;
@@ -114,6 +115,9 @@ public class Frame extends JFrame {
 		}
 		else if(panel.getClass() == GameDataPanel.class){
 			leftPanel.setCurrentBtn(leftPanel.getGameBtn());
+		}
+		else if(panel.getClass() == LiveInPanel.class){
+			leftPanel.setCurrentBtn(leftPanel.getLiveBtn());
 		}
 		else if(panel.getClass() == AnalysePanel.class){
 			leftPanel.setCurrentBtn(leftPanel.getAnalysisBtn());
