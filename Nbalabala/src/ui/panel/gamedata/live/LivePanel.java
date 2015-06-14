@@ -69,13 +69,14 @@ public class LivePanel extends GameFatherPanel {
 		}
 		String homeName = liveService.getHomeAbbr();
 		String roadName = liveService.getRoadAbbr();
-		String total = roadScores.get(size-1).toString() +"-"+homeScores.get(size-1).toString();
+		System.out.println(homeName);
+		String total = homeScores.get(size-1).toString() +"-"+roadScores.get(size-1).toString();
 		String each = "";
 		for(int i = 0; i < size-1;i++){
 			each = each + homeScores.get(i)+"-"+roadScores.get(i)+";";
 		}
 		
-		String[] totalScore = new String[]{roadScores.get(size-1).toString(),homeScores.get(size-1).toString()};
+		String[] totalScore = new String[]{homeScores.get(size-1).toString(),roadScores.get(size-1).toString()};
 		addLabel(homeName,roadName,totalScore);
 		scPanel = new ScorePanel(homeName,roadName,total,each);
 		this.add(scPanel);
@@ -171,8 +172,6 @@ public class LivePanel extends GameFatherPanel {
 		conPanel = new ConPanel(liveService.getHomeFiveArgs(),liveService.getRoadFiveArgs());
 		ArrayList<LivePlayerVO> homeplayers = liveService.getHomePlayerRecords();
 		ArrayList<LivePlayerVO> roadplayers = liveService.getRoadPlayerRecords();
-//		homeplayers.add(new LivePlayerVO("kobe", "san", "F", true, "35:4", 4, 5, 4, 5, 4, 5, 6, 7, 8, 9, 1, 1, 2, 3));
-//		roadplayers.add(new LivePlayerVO("allen", "san", "F", true, "35:4", 4, 5, 4, 5, 4, 5, 6, 7, 8, 9, 1, 1, 2, 3));
 		if(TechPanel.CURRENTI == 0) {
 			techPanel.updateHomeTable(homeplayers);
 		}else{

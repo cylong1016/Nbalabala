@@ -26,7 +26,7 @@ public class AnalysePanel extends BottomPanel{
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 560926515968497035L;
-	private String teamAbbr,team,player;
+//	private String teamAbbr,team,player;
 	private MyComboBox teamCom,playerCom;
 	private TeamQueryBLService teamQuery = new TeamQuery();
 	private TabButton[] select;
@@ -39,7 +39,7 @@ public class AnalysePanel extends BottomPanel{
 	
 	public AnalysePanel(String url){
 		super(url);
-		this.team = Constants.translateTeamAbbr(teamAbbr);
+//		this.team = Constants.translateTeamAbbr(teamAbbr);
 		lastFive = new LastFivePanel();
 		allSeason = new AllSeasonPanel();
 		contri = new ContriPanel();
