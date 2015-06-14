@@ -29,7 +29,7 @@ public class LiveTechTable extends BottomTable{
 	private ArrayList<LivePlayerVO> players;
 	
 	public LiveTechTable(ArrayList<LivePlayerVO> players,BottomPanel panel){
-		super(new String[players.size()][Constants.livePlayerHeaders.length+1],Constants.livePlayerHeaders);
+		super(new String[players.size()][Constants.livePlayerHeaders.length],Constants.livePlayerHeaders);
 		this.panel = panel;
 		this.players = players;
 		setTable(players);
@@ -38,7 +38,7 @@ public class LiveTechTable extends BottomTable{
 	
 	public void setTable(ArrayList<LivePlayerVO> players){
 		this.players = players;
-		this.setModel(new DefaultTableModel(players.size(),Constants.livePlayerHeaders.length+1));
+		this.setModel(new DefaultTableModel(players.size(),Constants.livePlayerHeaders.length));
 		System.out.println(this.getColumnName(0));
 		for (int i = 0; i < players.size(); i++) {
 			LivePlayerVO mpVO = players.get(i);
