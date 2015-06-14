@@ -75,7 +75,7 @@ public class TechPanel extends BottomPanel{
 		scroll = new BottomScrollPane(table);
 		table.setHeaderColorAndFont();
 		table.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
-		
+		table.setWidth(new int[] {33, 130, 51, 51, 62, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51});
 		scroll.setBounds(UIConfig.RELA_X,36,table.setTableWidth(300, table.getRowCount()),300);
 		this.add(scroll);
 	}

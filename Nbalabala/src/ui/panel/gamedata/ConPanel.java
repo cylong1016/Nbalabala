@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.text.DecimalFormat;
 
 import ui.Images;
+import ui.UIConfig;
 import ui.common.label.MyLabel;
 import ui.common.label.Rec;
 import ui.common.panel.BottomPanel;
@@ -36,16 +37,17 @@ public class ConPanel extends BottomPanel {
 	}
 
 	public ConPanel(double[] lth1,double[] lth2){
+		super(Images.GAME_CON);
 		this.lth1 = lth1;
 		this.lth2 = lth2;
-		this.setBounds(22, 292, 952, 309);
+		this.setBounds(UIConfig.RELA_X-4, 250, 948, 349);
 		addLabel();
 		addRec();
 		this.updateUI();
 		this.repaint();
 	}
 	
-	private int lb_x = 416, lb_y = 20, lb_x2 = 536, lb_inter = 50, lb_width = 105, lb_height = 40;
+	private int lb_x = 414, lb_y = 60, lb_x2 = 522, lb_inter = 50, lb_width = 105, lb_height = 40;
 
 	public void addLabel() {
 		sort = new MyLabel[5];
@@ -97,8 +99,10 @@ public class ConPanel extends BottomPanel {
 	
 	public void setColor(Rec lb1, Rec lb2){
 		if(lb1.getLength() > lb2.getLength()) {
+			lb1.setBackground(UIConfig.BLUE_TEXT_COLOR);
 			lb2.setBackground(Color.gray);
 		}else {
+			lb2.setBackground(UIConfig.BLUE_TEXT_COLOR);
 			lb1.setBackground(Color.gray);
 		}
 	}

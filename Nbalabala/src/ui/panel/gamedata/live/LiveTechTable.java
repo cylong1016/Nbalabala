@@ -41,35 +41,48 @@ public class LiveTechTable extends BottomTable{
 		this.setModel(new DefaultTableModel(players.size(),Constants.livePlayerHeaders.length));
 		DefaultTableModel tableModel = (DefaultTableModel)this.getModel();
 		tableModel.setColumnIdentifiers(Constants.livePlayerHeaders);
+		setTableSize();
 		for (int i = 0; i < players.size(); i++) {
 			LivePlayerVO mpVO = players.get(i);
 			setValueAt((i+1)+"",i,0);
 			setValueAt(mpVO.nameChn,i,1);
-			setValueAt(mpVO.nameEng,i,2);
-			setValueAt(mpVO.position,i,3);
+//			setValueAt(mpVO.nameEng,i,2);
+			setValueAt(mpVO.position,i,2);
 			if (mpVO.isStarter) {
-				setValueAt("Y",i,4);
+				setValueAt("Y",i,3);
 			}else {
-				setValueAt("N",i,4);
+				setValueAt("N",i,3);
 			}
-			setValueAt(mpVO.timePlayed,i,5);
-			setValueAt(mpVO.fieldMade + "",i,6);
-			setValueAt(mpVO.fieldAttempt + "",i,7);
-			setValueAt(mpVO.threepointMade + "",i,8);
-			setValueAt(mpVO.threepointAttempt + "",i,9);
-			setValueAt(mpVO.freethrowMade + "",i,10);
-			setValueAt(mpVO.freethrowAttempt+ "",i,11);
-			setValueAt(mpVO.totalRebound + "",i,12);
-			setValueAt(mpVO.assist + "",i,13);
-			setValueAt(mpVO.steal + "",i,14);
-			setValueAt(mpVO.block + "",i,15);
-			setValueAt(mpVO.turnover + "",i,16);
-			setValueAt(mpVO.foul + "",i,17);
-			setValueAt(mpVO.score + "",i,18);
-			setValueAt(mpVO.plusMinus + "",i,19);
+			setValueAt(mpVO.timePlayed,i,4);
+			setValueAt(mpVO.fieldMade + "/" + mpVO.fieldAttempt,i,5);
+//			setValueAt(mpVO.fieldAttempt + "",i,7);
+			setValueAt(mpVO.threepointMade + "/" + mpVO.threepointAttempt,i,6);
+//			setValueAt(mpVO.threepointAttempt + "",i,9);
+			setValueAt(mpVO.freethrowMade + "/" + mpVO.freethrowAttempt,i,7);
+//			setValueAt(mpVO.freethrowAttempt+ "",i,11);
+			setValueAt(mpVO.totalRebound + "",i,8);
+			setValueAt(mpVO.assist + "",i,9);
+			setValueAt(mpVO.steal + "",i,10);
+			setValueAt(mpVO.block + "",i,11);
+			setValueAt(mpVO.turnover + "",i,12);
+			setValueAt(mpVO.foul + "",i,13);
+			setValueAt(mpVO.score + "",i,14);
+			setValueAt(mpVO.plusMinus + "",i,15);
 		}
 	}
 	
+	private void setTableSize() {
+//		table.setWidth(new int[] {33, 130, 51, 51, 62, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51});
+		for (int i = 0; i < 16; i++) {
+			this.getColumnModel().getColumn(i).setPreferredWidth(51);
+		}
+		this.getColumnModel().getColumn(0).setPreferredWidth(33);
+		this.getColumnModel().getColumn(1).setPreferredWidth(130);
+		this.getColumnModel().getColumn(4).setPreferredWidth(62);
+		
+		
+	}
+
 	public void addListener(final BottomTable table) {
 		try {
 			table.addMouseListener(new UserMouseAdapter() {

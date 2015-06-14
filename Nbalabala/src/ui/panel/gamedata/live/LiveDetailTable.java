@@ -35,8 +35,8 @@ public class LiveDetailTable extends BottomTable {
 		for(int i = 0; i<4; i = i+2) {
 			this.getColumnModel().getColumn(i).setPreferredWidth(100);
 		}
-		this.getColumnModel().getColumn(1).setPreferredWidth(300);
-		this.getColumnModel().getColumn(3).setPreferredWidth(300);
+		this.getColumnModel().getColumn(1).setPreferredWidth(285);
+		this.getColumnModel().getColumn(3).setPreferredWidth(285);
 		
 	}
 
