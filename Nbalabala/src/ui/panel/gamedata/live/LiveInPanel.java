@@ -55,7 +55,7 @@ public class LiveInPanel extends BottomPanel {
 		for (int i = 0; i < 6; i++) {
 			gameDetail[i + 6 * index] = new MyLabel(gameDetail_x[i], 140 + 81 * index, 100, 50, line2[i]);
 			this.add(gameDetail[i + 6 * index]);
-			gameDetail[i].setFont(PLAIN_FONT);
+			gameDetail[i + 6 * index].setFont(PLAIN_FONT);
 		}
 		gameDetail[1 + 6 * index].setForeground(UIConfig.BLUE_TEXT_COLOR);
 		gameDetail[3 + 6 * index].setForeground(UIConfig.BLUE_TEXT_COLOR);
