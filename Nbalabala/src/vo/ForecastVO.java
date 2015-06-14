@@ -41,10 +41,10 @@ public class ForecastVO {
 	public double getWidth() {
 		return width;
 	}
-	public int getFromYear() {
+	public String getFromYear() {
 		return fromYear;
 	}
-	public int getToYear() {
+	public String getToYear() {
 		return toYear;
 	}
 	public String getConclusion() {
