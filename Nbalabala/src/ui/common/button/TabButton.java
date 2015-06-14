@@ -15,7 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
-import ui.UIConfig;
+import ui.MyFont;
 
 /**
  * 选项卡标签按钮
@@ -35,9 +35,9 @@ public class TabButton extends JButton{
 	private boolean isMouseOn = false;
 	private int textX;
 	private int textY;
-	private Font font = UIConfig.FIRST_LEVEL_TAB_FONT;
+	private Font font = MyFont.YH_B;
 	
-	private Color color = Color.WHITE;
+	private Color color = MyFont.WHITE;
 	
 	public TabButton() {
 	}
@@ -80,6 +80,10 @@ public class TabButton extends JButton{
 		setEnabled(false);
 		repaint();
 	}
+
+	public void setEnabled(){
+		setEnabled(true);
+	}
 	
 	public void paintComponent(Graphics g) {
 		if (!isActive) {
@@ -111,7 +115,7 @@ public class TabButton extends JButton{
 		label.setFont(font);
 		Dimension textSize = label.getPreferredSize();
 		textX = (int)(width - textSize.getWidth()) / 2;
-		textY = (int)(height - textSize.getHeight() / 2);
+		textY = (int)(height - textSize.getHeight() / 2 - 3);
 	}
 	
 	class MouseHandler extends MouseAdapter{

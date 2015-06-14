@@ -63,7 +63,7 @@ public class Images {
 	public static final String SEASON_INPUT_DOWN_ON = "images2.0/SeasonInputDownOn.png";
 	
 	/** 首页的图片  */
-	public static final Image HOME_BG = new ImageIcon("images2.0/main/homeBG.png").getImage();
+	public static final Image HOME_BG = new ImageIcon("images2.0/main/homeBG2.png").getImage();
 	public static final Image HOME_BTN_ON = new ImageIcon("images2.0/main/buttonOn.png").getImage();
 	public static final Image HOME_BTN_CLICK = new ImageIcon("images2.0/main/buttonClick.png").getImage(); 
 	public static final Image HOME_BTN_R_ON = new ImageIcon("images2.0/main/rButtonOn.png").getImage();
@@ -88,4 +88,8 @@ public class Images {
 	public static final String ALL_TEAMS_BG_STR = "images2.0/teams/allTeamsBG.png";
 	public static final String TEAMS_BTN_ON = "images2.0/teams/allTeamBtnOn.png";
 	public static final String TEAMS_BTN_CLICK = "images2.0/teams/allTeamBtnClick.png";
+	
+	/** 热点界面的按钮  */
+	public static final Image HOT_BTN_ON = new ImageIcon("images2.0/hot/buttonOn.png").getImage();
+	public static final Image HOT_BTN_CLICK = new ImageIcon("images2.0/hot/buttonClick.png").getImage();
 }

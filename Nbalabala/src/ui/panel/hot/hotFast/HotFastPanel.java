@@ -47,6 +47,8 @@ public class HotFastPanel extends HotThreeFatherPanel {
 		addLabel();
 		addChart(ThreeButton.current.index);
 		repaint();
+		
+		setCurrent(3);
 	}
 
 	public void refresh() {

@@ -127,7 +127,9 @@ public class Constants {
 		ret = TextCHN.ret;
 		
 		ot = TextCHN.ot;
-	}
+		
+		
+ 	}
 	
 	public static void setEnglish() {
 		isEng = true;
@@ -362,6 +364,8 @@ public class Constants {
 	public static  String[] HOT_COLUMNS = TextCHN.HOT_COLUMNS;
 	
 	public static  String[] ANALYSE = TextCHN.ANALYSE;
+	
+	public static String[] HOT_BTN = TextCHN.HOT_BTN;
 	
 	public static String translateDivision(ScreenDivision division) {
 		return translater.translateTeamDivision(division);
@@ -631,6 +635,10 @@ public class Constants {
 	public static String hotShort = TextCHN.hotShort;
 	public static String game = TextCHN.game;
 	public static String ret = TextCHN.ret;
+	
+	public static String playerPosition = TextCHN.playerPosition;
+	public static String playerDivision = TextCHN.playerDivision;
+	public static String screenSelection = TextCHN.screenSelection;
 	
 	public static String translateHeight(String height){
 		return translater.translateHeight(height);

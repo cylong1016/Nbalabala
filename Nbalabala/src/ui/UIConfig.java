@@ -39,7 +39,7 @@ public class UIConfig {
 	/** button选中之后的颜色 */
 	public static final Color DARK_BUTTON_COLOR = new Color(15, 24, 44);
 	
-	public static final Color BUTTON_COLOR = new Color(63, 83, 188);
+	public static final Color BUTTON_COLOR = new Color(60, 79, 179);
 
 	/*----------------------------表格配置--------------------------------*/
 	/** 表格字体 */
@@ -85,7 +85,7 @@ public class UIConfig {
 	/** 球员的柱状图颜色 */
 	public static final Color HIST_PLAYER_COLOR = new Color(56, 167, 229);
 	/** 第一名的柱子颜色 */
-	public static final Color HIST_FIRST_COLOR = new Color(236, 31, 34);
+	public static final Color HIST_FIRST_COLOR = new Color(238, 189, 58);
 	/** 第二名 */
 	public static final Color HIST_SECOND_COLOR = new Color(180, 63, 86);
 	/** 第三名 */
@@ -94,9 +94,10 @@ public class UIConfig {
 	public static final Color HIST_FORTH_COLOR = new Color(115, 122, 171);
 	/** 第五名 */
 	public static final Color HIST_FIFTH_COLOR = new Color(85, 145, 204);
+	public static final Color LIGHT_GRAY = new Color(238, 212, 121);
 	/** 颜色组合 */
-	public static final Color[] HIST_COLORS= {HIST_FIRST_COLOR, HIST_SECOND_COLOR,
-		HIST_THIRD_COLOR, HIST_FORTH_COLOR, HIST_FIFTH_COLOR,HIST_FIRST_COLOR};
+	public static final Color[] HIST_COLORS= {HIST_FIRST_COLOR, LIGHT_GRAY,
+		LIGHT_GRAY, LIGHT_GRAY, LIGHT_GRAY,HIST_FIRST_COLOR};
 	
 	
 	/** 第一级选项卡按钮的字体 */
@@ -135,4 +136,7 @@ public class UIConfig {
 	}
 	 public static final Font FZYT_FONT = new Font("方正姚体", Font.PLAIN, 10);
 	 public static final Font ArialMT_FONT = new Font("ArialMT Regular", Font.PLAIN, 10);
+	 
+	 public static final int TITLE_LABEL_H = 43;
+	 public static final int TITLE_LABEL_W = 141;
 }

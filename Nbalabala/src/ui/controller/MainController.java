@@ -211,13 +211,13 @@ public class MainController {
 	}
 
 	public static void toHotSeasonPlayerPanel(){
-		hotSeasonPlayerPanel = new HotSeasonPlayerPanel(UIConfig.IMG_PATH_2 + "hot/hotSeasonPlayerBG.png");
+		hotSeasonPlayerPanel = new HotSeasonPlayerPanel(UIConfig.IMG_PATH_2 + "hot/hotSeasonBG.png");
 		frame.setPanel(hotSeasonPlayerPanel);
 		frame.repaint();
 	}
 	
 	public static void toHotSeasonTeamPanel(){
-		hotSeasonTeamPanel = new HotSeasonTeamPanel(UIConfig.IMG_PATH_2 + "hot/hotSeasonTeamBG.png");
+		hotSeasonTeamPanel = new HotSeasonTeamPanel(UIConfig.IMG_PATH_2 + "hot/hotSeasonBG.png");
 		frame.setPanel(hotSeasonTeamPanel);
 		frame.repaint();
 	}

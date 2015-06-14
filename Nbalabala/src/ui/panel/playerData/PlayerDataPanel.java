@@ -1,12 +1,16 @@
 package ui.panel.playerData;
 
 import java.awt.Color;
+import java.awt.Label;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
+
 import po.PlayerSeasonPO;
 import ui.Images;
+import ui.MyFont;
 import ui.UIConfig;
 import ui.common.SeasonInputPanel;
 import ui.common.button.TabButton;
@@ -36,7 +40,7 @@ public class PlayerDataPanel extends BottomPanel {
 	private static final long serialVersionUID = 1L;
 	
 	/** button的宽度 高度  */
-	private static final int WIDTH = 60, HEIGHT = 24, WIDTH_THREE = 75, WIDTH_LONG = 135;
+	private static final int WIDTH = 60, HEIGHT = 29, WIDTH_THREE = 75, WIDTH_LONG = 135;
 	/** 每行的button个数 */
 	private static final int POSITION_COUNT = 4, DIVISION_COUNT = 9, BASIS_COUNT = 15, 
 			TOTAL_AVG_COUNT = 2;
@@ -77,6 +81,11 @@ public class PlayerDataPanel extends BottomPanel {
 	private PlayerDivisionSelectButton[] divisionSelectButtons;
 	private PlayerScreenSelectButton[] screenSelectButtons;
 	private PlayerTotalAvgButton[] totalAvgButtons;
+	
+	/** 筛选标题label */
+	private JLabel playerPositionLabel;
+	private JLabel divisionLabel;
+	private JLabel screenLabel;
 
 	private TabButton tab[];
 	/** 通过接口调用方法 */
@@ -94,6 +103,8 @@ public class PlayerDataPanel extends BottomPanel {
 		super(url);
 		setButton();
 		addButton();
+		
+		addLabel();
 
 		iniSet();
 		addTab();
@@ -111,11 +122,37 @@ public class PlayerDataPanel extends BottomPanel {
 		addScrollPane(table);
 	}
 	
+	/**
+	 * 添加筛选的标题
+	 */
+	private void addLabel() {
+		int labelWid = UIConfig.TITLE_LABEL_W;
+		int labelHei = UIConfig.TITLE_LABEL_H;
+		playerPositionLabel = new JLabel(Constants.playerPosition);
+		playerPositionLabel.setBounds(54, 0, labelWid, labelHei);
+		
+		divisionLabel = new JLabel(Constants.playerDivision);
+		divisionLabel.setBounds(279, 0, labelWid, labelHei);
+		
+		screenLabel = new JLabel(Constants.screenSelection);
+		screenLabel.setBounds(553, 0, labelWid, labelHei);
+		
+		JLabel labels[] = {playerPositionLabel, divisionLabel, screenLabel};
+		for (int i = 0; i < labels.length; i++) {
+			labels[i].setFont(MyFont.YH_L);
+			labels[i].setForeground(MyFont.DARK_GRAY);
+			labels[i].setHorizontalAlignment((int) CENTER_ALIGNMENT);
+			this.add(labels[i]);
+		}
+		
+	}
+
 	private void addTab() {
 		tab = new TabButton[4];
 		for(int i = 0 ;i < 4; i++) {
 			tab[i] = new TabButton(Constants.PLAYER_DATA_SORT[i],Images.TEAM_FIRST_LEVEL_TAB_MOVE_ON, Images.TEAM_FIRST_LEVEL_TAB_CHOSEN);
 			tab[i].setLocation(24 + i * 237, 198);
+			tab[i].setForeground(MyFont.WHITE);
 			this.add(tab[i]);
 			tab[0].setOn();
 		}
@@ -201,6 +238,7 @@ public class PlayerDataPanel extends BottomPanel {
 		divisionSelectButtons = new PlayerDivisionSelectButton[DIVISION_COUNT];
 		screenSelectButtons = new PlayerScreenSelectButton[BASIS_COUNT];
 		totalAvgButtons = new PlayerTotalAvgButton[TOTAL_AVG_COUNT];
+
 		for (int i = 0; i < POSITION_COUNT; i++) {
 			positionSelectButtons[i] = new PlayerPositionSelectButton(POSITION_SELECT_X[i], 
 					POSITION_SELECT_Y[i], WIDTH, HEIGHT, Constants.POSITION_SELECT_TEXT[i]);

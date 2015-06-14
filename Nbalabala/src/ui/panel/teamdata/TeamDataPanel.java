@@ -5,8 +5,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
+
 import po.TeamSeasonPO;
 import ui.Images;
+import ui.MyFont;
 import ui.UIConfig;
 import ui.common.SeasonInputPanel;
 import ui.common.button.TabButton;
@@ -41,7 +44,7 @@ public class TeamDataPanel extends BottomPanel {
 	/** 枚举数组 */
 	private static final ScreenDivision[] DIVISION_ARRAY = ScreenDivision.values();
 	/** 宽 高 */
-	private static final int WIDTH_X = 60, HEIGHT = 24, WIDTH_THREE = 75;
+	private static final int WIDTH_X = 60, HEIGHT = 29, WIDTH_THREE = 75;
 
 	private static final int ALL_X = 807, ALL_Y = 8;
 
@@ -66,6 +69,8 @@ public class TeamDataPanel extends BottomPanel {
 	private TeamDivisionSelectButton[] divisionSelectButtons;
 	/** 总计和平均按钮 */
 	private TeamTotalAvgSelectButton[] totalAvgSelectButtons;
+	
+	private JLabel divisionLabel;
 
 	private TeamSeasonBLService teamSeason = new TeamSeasonAnalysis();
 
@@ -82,6 +87,9 @@ public class TeamDataPanel extends BottomPanel {
 		super(url);
 		addButton();
 		addTab();
+		
+		addLabel();
+		
 		TeamDivisionSelectButton.current = divisionSelectButtons[0];
 		TeamTotalAvgSelectButton.current = totalAvgSelectButtons[0];
 		setEffect(divisionSelectButtons[0]);
@@ -100,6 +108,16 @@ public class TeamDataPanel extends BottomPanel {
 		
 	}
 	
+	private void addLabel() {
+		divisionLabel = new JLabel(Constants.playerDivision);
+		divisionLabel.setBounds(657, 0, UIConfig.TITLE_LABEL_W, UIConfig.TITLE_LABEL_H);
+		
+		divisionLabel.setFont(MyFont.YH_L);
+		divisionLabel.setForeground(MyFont.DARK_GRAY);
+		divisionLabel.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+		this.add(divisionLabel);
+	}
+
 	private void addTab() {
 		tab = new TabButton[3];
 		for(int i = 0 ;i < 3; i++) {

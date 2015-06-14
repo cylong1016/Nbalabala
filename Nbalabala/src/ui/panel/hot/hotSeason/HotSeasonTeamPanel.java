@@ -36,6 +36,8 @@ public class HotSeasonTeamPanel extends HotThreeFatherPanel {
 		add_bt_Listener();
 		addLabel(0);
 		addChart();
+		
+		setCurrent(2);
 	}
 
 	public void refresh() {

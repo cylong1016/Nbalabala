@@ -59,5 +59,6 @@ public class MyFont{
 	public static final Color BLACK_GRAY = new Color(65, 65, 65);
 	public static final Color DARK_GRAY = new Color(91, 91, 91);
 	public static final Color LIGHT_GRAY = new Color(122, 122, 122);
+	public static final Color WHITE = new Color(252, 252, 252);
 
 }

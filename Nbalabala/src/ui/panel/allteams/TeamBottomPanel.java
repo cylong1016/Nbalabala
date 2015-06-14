@@ -195,7 +195,7 @@ public class TeamBottomPanel extends BottomPanel{
 		}
 	}
 	
-	/** 添加联盟内胜率、得分、篮板、助攻排名的label */
+	/** 添加联盟内排名、得分、篮板、助攻排名的label */
 	private void addRanks() {
 		int [] ranks = teamQuery.getRanks(abbr, Constants.LATEST_SEASON_REGULAR);
 		int interX = 80;
@@ -203,7 +203,7 @@ public class TeamBottomPanel extends BottomPanel{
 		rankLabel = new JLabel(Utility.getRankStr(ranks[0]));
 		rankLabel.setFont(UIConfig.LABEL_PLAIN_FONT);	//TODO 这个字体跟总排名的字体是一样的吧
 		rankLabel.setForeground(UIConfig.BLUE_TEXT_COLOR);	//TODO这个颜色我把它命名为“排名蓝”
-		rankLabel.setBounds(442, LEAGUE_LABEL_ROW_Y-3, 40, 30);
+		rankLabel.setBounds(440, LEAGUE_LABEL_ROW_Y-3, 40, 30);
 		this.add(rankLabel);
 		
 		//TODO 三个Label的位置。至于每个Label内部的“场均得分”，得分数值，和"nd"三个字符串的位置，见TeamScoreReboundAssistLabel.java

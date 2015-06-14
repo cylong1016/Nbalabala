@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 
 import ui.Images;
@@ -36,13 +35,7 @@ public class MainPanel extends Panel {
 
 	/** 背景图片 */
 	private static Image bgImg = Images.HOME_BG;
-	/** 主界面6个按钮的图片 */
-	private Image teamDataImg = new ImageIcon(imgUrl + "teamData.png").getImage();
-	private Image playerDataImg = new ImageIcon(imgUrl + "playerData.png").getImage();
-	private Image gameDataImg = new ImageIcon(imgUrl + "gameData.png").getImage();
-	private Image allPlayersImg = new ImageIcon(imgUrl + "allPlayers.png").getImage();
-	private Image allTeamsImg = new ImageIcon(imgUrl + "allTeams.png").getImage();
-	private Image hotImg = new ImageIcon(imgUrl + "hot.png").getImage();
+
 	private ImgButton fileSelect;
 
 	/** 球队数据六边形按钮 */
@@ -120,6 +113,7 @@ public class MainPanel extends Panel {
 	 */
 	private void addBtn() {
 		String blank = Constants.blank;
+		String bigBlank = blank + "     ";
 		allPlayersBtn = new TabButton(blank + Constants.allPlayers, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
 		allPlayersBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -127,7 +121,7 @@ public class MainPanel extends Panel {
 				
 			}
 		});	
-		allPlayersBtn.setLocation(LEFT_BTN_X, 239);
+		allPlayersBtn.setLocation(LEFT_BTN_X, 298);
 		allPlayersBtn.setFont(MyFont.YH_L);
 		this.add(allPlayersBtn);
 		
@@ -137,17 +131,17 @@ public class MainPanel extends Panel {
 				MainController.toAllTeamsPanel();				
 			}
 		});
-		allTeamsBtn.setLocation(LEFT_BTN_X, 298);
+		allTeamsBtn.setLocation(LEFT_BTN_X, 357);
 		allTeamsBtn.setFont(MyFont.YH_L);
 		this.add(allTeamsBtn);
 		
-		gamesDataBtn = new TabButton(blank + Constants.gamesData, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		gamesDataBtn = new TabButton(Constants.gamesData + bigBlank, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK);
 		gamesDataBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainController.toGamePanel();
 			}
 		});
-		gamesDataBtn.setLocation(LEFT_BTN_X, 357);
+		gamesDataBtn.setLocation(RIGHT_BTN_X, 357);
 		gamesDataBtn.setFont(MyFont.YH_L);
 		this.add(gamesDataBtn);
 		
@@ -171,7 +165,7 @@ public class MainPanel extends Panel {
 		teamsDadaBtn.setFont(MyFont.YH_L);
 		this.add(teamsDadaBtn);
 		
-		hotBtn = new TabButton(Constants.hot + blank, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK);
+		hotBtn = new TabButton(Constants.hot + bigBlank, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK);
 		hotBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainController.toHotPanel();
@@ -221,19 +215,7 @@ public class MainPanel extends Panel {
 	public void paint(Graphics g) {
 		g.drawImage(bgImg, 0, 0, this);
 		super.paint(g);
-		if (tdPolygon.contains(mousePoint)) {
-			g.drawImage(teamDataImg, 408, 400, this);
-		} else if (pdPolygon.contains(mousePoint)) {
-			g.drawImage(playerDataImg, 571, 401, this);
-		} else if (gdPolygon.contains(mousePoint)) {
-			g.drawImage(gameDataImg, 652, 260, this);
-		} else if (apPolygon.contains(mousePoint)) {
-			g.drawImage(allPlayersImg, 734, 118, this);
-		} else if (atPolygon.contains(mousePoint)) {
-			g.drawImage(allTeamsImg, 816, 260, this);
-		} else if (hotPolygon.contains(mousePoint)) {
-			g.drawImage(hotImg, 243, 401, this);
-		}
+
 	}
 
 	/**

@@ -1,11 +1,16 @@
 package ui.panel.hot;
 
+import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import ui.common.button.ImgButton;
+import ui.Images;
+import ui.MyFont;
+import ui.common.button.TabButton;
 import ui.common.panel.BottomPanel;
 import ui.controller.MainController;
+import utility.Constants;
 
 /**
  * 热点的父类方法，包括上面的选项卡
@@ -17,39 +22,65 @@ public class HotFatherPanel extends BottomPanel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -6969705072142965289L;
-	protected ImgButton[] button = new ImgButton[4];
-	protected int fa_width = 123, fa_height = 31, fa_x = 68, fa_y = 2, fa_inter = 124;
-	protected String allURL = "images2.0/hot/";
-	protected String[] url = new String[] { allURL + "todayOn.png", allURL + "seasonPlayerOn.png",
-			allURL + "seasonTeamOn.png", allURL + "fastestOn.png" };
+	
+//	private TabButton todayBtn;
+//	private TabButton seasonPlayerBtn;
+//	private TabButton seasonTeamBtn;
+//	private TabButton fastestBtn;
+	
+	protected TabButton[] buttons = new TabButton[4];
+	
+	private static final int BTN_Y = 2;
+	private static final int BTN_FIRST_X = 56;
+	private static final int BTN_INTER = 116;
+	
+	private static final Image ON = Images.HOT_BTN_ON;
+	private static final Image CLICK = Images.HOT_BTN_CLICK;
 
 
 	public HotFatherPanel(String url) {
 		super(url);
 		addSelectButton();
+		setCurrent(0);
 	}
 
-	public void addSelectButton() {
+	public void addSelectButton() {		
 		for (int i = 0; i < 4; i++) {
-			button[i] = new ImgButton(allURL + "blank.png", fa_x + i * fa_inter, fa_y, url[i], allURL
-					+ "blank.png");
-			this.add(button[i]);
+			buttons[i] = new TabButton(Constants.HOT_BTN[i], ON, CLICK);
+			buttons[i].setLocation(BTN_FIRST_X + i * BTN_INTER, BTN_Y);
+			buttons[i].setFont(MyFont.YH_S);
+			this.add(buttons[i]);
 		}
+		
+		
 		for (int i = 0; i < 4; i++) {
-			button[i].addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-					if(e.getSource() == button[0]){
+			buttons[i].addMouseListener(new MouseAdapter() {
+				
+				public void mouseClicked(MouseEvent e){
+					if(e.getSource() == buttons[0]){
 						MainController.toHotPanel();
-					}else if(e.getSource() == button[1]){
+					}else if(e.getSource() == buttons[1]){
 						MainController.toHotSeasonPlayerPanel();
-					}else if(e.getSource() == button[2]){
+					}else if(e.getSource() == buttons[2]){
 						MainController.toHotSeasonTeamPanel();
-					}else if(e.getSource() == button[3]){
+					}else if(e.getSource() == buttons[3]){
 						MainController.toHotFastPanel();
-					}
+					}					
 				}
-			});
-			
+
+			});	
+		
+
 		}
+	}
+	
+	protected void setCurrent(int index){
+		for (int i = 0; i < buttons.length; i++) {
+			buttons[i].setOff();
+			buttons[i].setForeground(Color.WHITE);
+		}
+		buttons[index].setOn();
+		buttons[index].setForeground(MyFont.DARK_GRAY);
+		
 	}
 }

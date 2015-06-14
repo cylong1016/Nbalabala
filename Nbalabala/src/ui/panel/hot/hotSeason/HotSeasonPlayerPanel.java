@@ -35,6 +35,8 @@ public class HotSeasonPlayerPanel extends HotThreeFatherPanel {
 		add_bt_Listener();
 		addLabel(0);
 		addChart();
+		
+		setCurrent(1);
 	}
 
 	public void refresh() {

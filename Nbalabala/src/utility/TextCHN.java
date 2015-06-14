@@ -83,10 +83,10 @@ public class TextCHN {
 	public static String blank = "               ";
 	public static String allPlayers ="所有球员";
 	public static String allTeams ="所有球队";
-	public static String gamesData = "比赛数据";
+	public static String gamesData = "赛程";
 	public static String playersData = "球员数据";
 	public static String teamsData = "球队数据";
-	public static String hot =  "查看热点";
+	public static String hot =  "热点";
 	public static String analysis = "价值分析";
 	
 	public static String hotShort = "热点";
@@ -94,6 +94,9 @@ public class TextCHN {
 	public static String ret = "返回首页";
 	
 	public static String playerOnCourt = "在场球员";
+	public static String playerPosition = "球员位置";
+	public static String playerDivision = "所在赛区";
+	public static String screenSelection = "筛选依据";
 	
 	public static String[] playerContrastColumns = {"场均得分", "场均篮板", "场均助攻", "罚球%", "三分%"};
 	
@@ -170,6 +173,7 @@ public class TextCHN {
 	
 	public static String[] teamLineupHeaders = new String[] {"姓名", "位置", "年龄","球龄","身高","体重","生日","毕业学校"};
 	
+	
 	public static final String [] TEAM_ABBR = {"BOS","BRK","NYK","PHI","TOR","CHI","CLE","DET","IND","MIL","ATL","CHO","MIA","ORL","WAS",
 		"GSW","LAC","LAL","PHO","SAC","DEN","MIN","OKC","POR","UTA","DAL","HOU","MEM","NOP","SAS"};
 	
@@ -198,5 +202,7 @@ public class TextCHN {
 	
 	public static final String[] ANALYSE = {"最后五分钟","生涯数据","球员贡献","球员走向","转会变化"};
 	public static final String[] LIVE_tEXT = {"全场","第一节","第二节","第三节","第四节"};
+	
+	public static final String[] HOT_BTN = {"今日热点球员",  "赛季热点球员", "赛季热点球队", "进步最快球员"};
 
 }
