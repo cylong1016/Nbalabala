@@ -41,8 +41,12 @@ public class Live implements LiveBLService {
 		System.out.println(live.getRoadScores());
 		double[] homeFiveArgs = live.getHomeFiveArgs();
 		double[] roadFiveArgs = live.getRoadFiveArgs();
+		System.out.println("主队5项数据");
 		for(int i = 0; i < homeFiveArgs.length; i++) {
 			System.out.println(homeFiveArgs[i]);
+		}
+		System.out.println("客队5项数据");
+		for(int i = 0; i < roadFiveArgs.length; i++) {
 			System.out.println(roadFiveArgs[i]);
 		}
 		ArrayList<LivePlayerVO> homePlayerRecords = live.getHomePlayerRecords();
@@ -202,8 +206,8 @@ public class Live implements LiveBLService {
 	public double[] getRoadFiveArgs() {
 		for(int i = 0; i < roadPlayerRecords.size(); i++) {
 			LivePlayerVO vo = roadPlayerRecords.get(i);
-			homeFiveArgs[3] += vo.totalRebound;
-			homeFiveArgs[4] += vo.assist;
+			roadFiveArgs[3] += vo.totalRebound;
+			roadFiveArgs[4] += vo.assist;
 		}
 		return roadFiveArgs;
 	}
