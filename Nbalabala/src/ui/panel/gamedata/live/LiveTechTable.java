@@ -74,7 +74,6 @@ public class LiveTechTable extends BottomTable{
 					if (e.getClickCount() < 2)
 						return;
 					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
-					System.out.println(rowI);
 					if (rowI > -1) {
 						MainController.toPlayerInfoPanel(Utility.getPlayerIDByName(players.get(rowI).nameEng), panel);
 					}

@@ -10,11 +10,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 
 import ui.Images;
 import ui.MyFont;
-import ui.UIConfig;
 import ui.common.button.ImgButton;
 import ui.common.button.TabButton;
 import ui.common.panel.Panel;
@@ -31,13 +29,8 @@ public class MainPanel extends Panel {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 1L;
 
-	/** 主界面的图片url */
-	private static String imgUrl = UIConfig.IMG_PATH + "main/";
-
 	/** 背景图片 */
 	private static Image bgImg = Images.HOME_BG;
-
-	private ImgButton fileSelect;
 	
 	private ImgButton settingButton = new ImgButton(Images.SETTING_BUTTON, Images.SETTING_BUTTON_ON);
 
@@ -108,8 +101,6 @@ public class MainPanel extends Panel {
 //		this.addMouseMotionListener(listener);
 		
 		addBtn();
-
-		addFileSelect();
 	}
 
 	/**
@@ -214,39 +205,12 @@ public class MainPanel extends Panel {
 				dialog.setUndecorated(true);
 				dialog.setLayout(null);
 				dialog.setSize(settingPanel.getSize());
-				System.out.println(dialog.getSize());
 				dialog.setLocation(x, y);
 				dialog.setResizable(false);
 				dialog.setVisible(true);
-
 			}
 		});
 		this.add(settingButton);
-	}
-
-	/**
-	 * 添加文件夹选择按钮
-	 * @author lsy
-	 * @version 2015年4月11日 下午8:44:18
-	 */
-	public void addFileSelect() {
-		fileSelect = new ImgButton(imgUrl + "fileSelect.png", 911, 461, imgUrl + "fileSelectOn.png", imgUrl + "fileSelect.png");
-		this.add(fileSelect);
-		fileSelect.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				JFileChooser chooser = new JFileChooser();
-				chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				chooser.setDialogTitle("选择数据文件夹");
-				int result = chooser.showOpenDialog(null);
-				if (result == JFileChooser.APPROVE_OPTION) {
-					String path = chooser.getSelectedFile().getAbsolutePath();
-					Constants.changeDataSourcePath(path);
-				}
-			}
-			
-		});
 	}
 
 	@Override
