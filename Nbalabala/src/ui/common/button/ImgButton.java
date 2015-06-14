@@ -36,6 +36,14 @@ public class ImgButton extends JButton {
 	public ImgButton() {
 
 	}
+	
+	public ImgButton(ImageIcon normal, ImageIcon on) {
+		set();
+		this.setIcon(normal);
+		this.setRolloverIcon(on);
+		this.setPressedIcon(on);
+		this.setSize(normal.getIconWidth(), normal.getIconHeight());
+	}
 
 	private void set() {
 		this.setBorderPainted(false);

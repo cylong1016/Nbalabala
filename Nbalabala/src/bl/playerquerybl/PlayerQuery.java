@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import po.MatchPlayerPO;
 import po.PlayerProfilePO;
 import po.PlayerSeasonPO;
+import utility.Constants;
 import vo.PlayerDetailVO;
 import bl.matchquerybl.MatchQuery;
 import bl.playerseasonbl.PlayerAvgSorter;
@@ -15,6 +16,7 @@ import data.seasondata.SeasonData;
 import dataservice.PlayerDataService;
 import dataservice.SeasonDataService;
 import enums.PlayerAvgSortBasis;
+import enums.PlayerType;
 import enums.SortOrder;
 
 /**
@@ -30,8 +32,27 @@ public class PlayerQuery implements PlayerQueryBLService{
 	 * @see blservice.PlayerQueryBLService#getPlayerProfileByInitial(char)
 	 */
 	@Override
-	public ArrayList<PlayerProfilePO> getPlayerProfileByInitial(char initial) {
-		return playerData.getPlayerProfileByInitial(initial);
+	public ArrayList<PlayerProfilePO> getPlayerProfileByInitial(char initial, PlayerType type) {
+		ArrayList<PlayerProfilePO> pos = playerData.getPlayerProfileByInitial(initial);
+		if (type == PlayerType.ALL) {
+			return pos;
+		}else if (type == PlayerType.ON_SERVICE) {
+			ArrayList<PlayerProfilePO> result = new ArrayList<PlayerProfilePO>();
+			for (PlayerProfilePO po : pos) {
+				if (po.toYear == Constants.THIS_YEAR) {
+					result.add(po);
+				}
+			}
+			return result;
+		}else {
+			ArrayList<PlayerProfilePO> result = new ArrayList<PlayerProfilePO>();
+			for (PlayerProfilePO po : pos) {
+				if (po.toYear != Constants.THIS_YEAR) {
+					result.add(po);
+				}
+			}
+			return result;
+		}
 	}
 
 	/**

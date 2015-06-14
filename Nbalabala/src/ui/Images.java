@@ -13,6 +13,16 @@ public class Images {
 	
 	//public static final Image yunlongLoveSiyu = ......
 	
+	public static final ImageIcon SETTING_BUTTON = new ImageIcon("images2.0/main/settingBtn.png");
+	public static final ImageIcon SETTING_BUTTON_ON = new ImageIcon("images2.0/main/settingBtnOn.png");
+
+	public static final Image SETTING_BG_CTR = new ImageIcon("images2.0/main/settingsCNT_BG.png").getImage();
+	public static final Image SETTING_BG_CHN = new ImageIcon("images2.0/main/settingsCNS_BG.png").getImage();
+	public static final Image SETTING_BG_ENG = new ImageIcon("images2.0/main/settingsENG_BG.png").getImage();
+	public static Image SETTING_BG = SETTING_BG_CHN;
+			
+	public static final Image SERVICE_TAB_ON = new ImageIcon("images2.0/players/allBtnClick.png").getImage();
+	
 	public static final Image PLAYER_INFO_BG = new ImageIcon("images2.0/players/playersBG.png").getImage();
 	
 	public static final Image PLAYER_TAB_MOVE_ON = 

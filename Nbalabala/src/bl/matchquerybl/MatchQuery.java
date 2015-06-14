@@ -2,6 +2,7 @@ package bl.matchquerybl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 
 import po.MatchDetailPO;
@@ -140,7 +141,14 @@ public class MatchQuery implements MatchQueryBLService{
 		java.sql.Date end = new java.sql.Date(calendar.getTimeInMillis());
 		calendar.add(Calendar.DATE, -14);	//显示两周内的比赛
 		java.sql.Date start = new java.sql.Date(calendar.getTimeInMillis());
-		return getVOsByPOs(matchData.getMatchDetailByDates(start, end));
+		ArrayList<MatchDetailPO> pos = matchData.getMatchDetailByDates(start, end);
+		Comparator<MatchDetailPO> comparator = new Comparator<MatchDetailPO>() {
+			public int compare(MatchDetailPO p1, MatchDetailPO p2) {
+				return - p1.getMatchProfile().date.compareTo(p2.getMatchProfile().date);
+			}
+		};
+		java.util.Collections.sort(pos, comparator);
+		return getVOsByPOs(pos);
 	}
 
 	/* (non-Javadoc)

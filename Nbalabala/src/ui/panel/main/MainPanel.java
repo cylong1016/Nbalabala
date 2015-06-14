@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 
 import ui.Images;
@@ -37,6 +38,8 @@ public class MainPanel extends Panel {
 	private static Image bgImg = Images.HOME_BG;
 
 	private ImgButton fileSelect;
+	
+	private ImgButton settingButton = new ImgButton(Images.SETTING_BUTTON, Images.SETTING_BUTTON_ON);
 
 	/** 球队数据六边形按钮 */
 	private Polygon tdPolygon;
@@ -184,6 +187,27 @@ public class MainPanel extends Panel {
 		analysisBtn.setLocation(RIGHT_BTN_X, 475);
 		analysisBtn.setFont(MyFont.YH_L);
 		this.add(analysisBtn);
+		
+		settingButton.setLocation(444, 444); //TODO 坐标放哪呀
+		settingButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Point location = getLocationOnScreen();
+				JDialog dialog= new JDialog(MainController.frame, true);
+				SettingPanel settingPanel = new SettingPanel(dialog);
+				int x = location.x + getWidth() / 2 - settingPanel.getWidth()
+						/ 2;
+				int y = location.y + getHeight() / 2
+						- settingPanel.getHeight() / 2;
+				dialog.getContentPane().add(settingPanel);
+				dialog.setUndecorated(true);
+				dialog.setLayout(null);
+				dialog.setSize(settingPanel.getSize());
+				dialog.setLocation(x, y);
+				dialog.setResizable(false);
+				dialog.setVisible(true);
+			}
+		});
 	}
 
 	/**

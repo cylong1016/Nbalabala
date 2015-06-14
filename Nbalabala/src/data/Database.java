@@ -21,10 +21,10 @@ public class Database {
     private static String url = "jdbc:mysql://127.0.0.1:3306/nbalabala";
 
     // MySQL配置时的用户名
-    private static String user = "root"; 
+    public static String user = "root"; 
 
-    // MySQL配置时的密码
-    private static String password = "cyl941016";
+    // MySQL配置时的密码cyl941016
+    public static String password = "root";
     
     public static Connection conn;
     

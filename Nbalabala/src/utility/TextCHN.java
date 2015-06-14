@@ -11,6 +11,8 @@ package utility;
  */
 public class TextCHN {
 	
+	public static String[] playerType = {"现役球员","退役球员","全部球员"};
+	
 	public static String leagueText = "联盟：";
 	public static String teamShortText = "球队：";
 	public static String promotionText = "五场提升：";

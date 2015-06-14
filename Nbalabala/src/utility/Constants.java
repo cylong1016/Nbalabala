@@ -16,9 +16,12 @@ public class Constants {
 	
 	public static boolean isEng = false;
 	
+	
 	public void setChinese() {
 		isEng = false;
 		Constants.translater = new TranslaterCN();
+		
+		playerType = TextCHN.playerType;
 		
 		leagueText = TextCHN.leagueText;
 		teamShortText = TextCHN.teamShortText;
@@ -134,6 +137,8 @@ public class Constants {
 	public static void setEnglish() {
 		isEng = true;
 		Constants.translater = new TranslaterENG();
+		
+		playerType = TextENG.playerType;
 		
 		leagueText = TextENG.leagueText;
 		teamShortText = TextENG.teamShortText;
@@ -256,6 +261,8 @@ public class Constants {
 	
 	public static int EARLIEST_YEAR = 1986;
 	
+	public static final int THIS_YEAR = 2015;
+	
 	public static String EARLIEST_SEASON_REGULAR = "1986-87R";
 	
 	public static String[] GAME_YEAR = setGameYear();
@@ -277,6 +284,8 @@ public class Constants {
 		dataSourcePath = newPath + "\\";
 		PlayerImageCache.reloadImages();
 	}
+	
+	public static String []playerType = TextCHN.playerType;
 	
 	public static String leagueText = TextCHN.leagueText;
 	public static String teamShortText = TextCHN.teamShortText;

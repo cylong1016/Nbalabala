@@ -3,6 +3,8 @@ package ui.panel.allplayers;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -14,10 +16,12 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import po.PlayerProfilePO;
+import ui.Images;
 import ui.MyFont;
 import ui.UIConfig;
 import ui.common.UserMouseAdapter;
 import ui.common.button.ImgButton;
+import ui.common.button.TabButton;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
 import ui.common.table.BottomTable;
@@ -27,6 +31,7 @@ import utility.Constants;
 import bl.playerquerybl.PlayerQuery;
 import blservice.PlayerQueryBLService;
 import data.playerdata.PlayerImageCache;
+import enums.PlayerType;
 
 /**
  * 全部球员信息主界面
@@ -38,6 +43,8 @@ public class AllPlayersPanel extends BottomPanel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 2951291212735567656L;
+	
+	private PlayerType playerType = PlayerType.ON_SERVICE;
 
 	/** 按钮的横纵坐标 间隔 宽度 高度 */
 	private static final int BUTTON_X = 60, BUTTON_Y = 63, INTER = 33, WIDTH = 33, HEIGHT = 37;
@@ -59,6 +66,10 @@ public class AllPlayersPanel extends BottomPanel {
 	
 	private PlayerQueryBLService playerInfo = new PlayerQuery();
 	
+	private TabButton onServiceTab;
+	private TabButton offServiceTab;
+	private TabButton allTab;
+	
 
 	public static BottomScrollPane SCROLL;
 	private BottomTable table;
@@ -75,11 +86,12 @@ public class AllPlayersPanel extends BottomPanel {
 		super(url);
 		setButton();
 		addButton();
+		addTabs();
 		addFindButton();
 		addTextField();
 		iniSet();		//一开始默认A选中
 		addListener();
-		players = playerInfo.getPlayerProfileByInitial('A');
+		players = playerInfo.getPlayerProfileByInitial('A', playerType);
 		addTable();
 		setTable();
 	}
@@ -209,7 +221,7 @@ public class AllPlayersPanel extends BottomPanel {
 //			LetterButton.current = (LetterButton) e.getSource();
 //			char made = LetterButton.current.letter;
 			char made = current.letter;
-		    players = playerInfo.getPlayerProfileByInitial(made);
+		    players = playerInfo.getPlayerProfileByInitial(made, playerType);
 		    setTable();
 		}
 		
@@ -233,6 +245,57 @@ public class AllPlayersPanel extends BottomPanel {
 			initialButtons[i].letter = LETTERS[i];
 		}
 	}
+	
+	private void addTabs() {
+		onServiceTab = new TabButton(Constants.playerType[0], 
+				Images.SERVICE_TAB_ON, Images.SERVICE_TAB_ON);
+		onServiceTab.setOn();
+		offServiceTab = new TabButton(Constants.playerType[1], 
+				Images.SERVICE_TAB_ON, Images.SERVICE_TAB_ON);
+		allTab = new TabButton(Constants.playerType[2], 
+				Images.SERVICE_TAB_ON, Images.SERVICE_TAB_ON);
+		onServiceTab.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				playerType = PlayerType.ON_SERVICE;
+				onServiceTab.setOn();
+				offServiceTab.setOff();
+				allTab.setOff();
+				players = playerInfo.getPlayerProfileByInitial(current.letter, playerType);
+				refresh();
+			}
+		});
+		offServiceTab.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				playerType = PlayerType.OFF_SERVICE;
+				onServiceTab.setOff();
+				offServiceTab.setOn();
+				allTab.setOff();
+				players = playerInfo.getPlayerProfileByInitial(current.letter, playerType);
+				refresh();
+			}
+		});
+		allTab.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				playerType = PlayerType.ALL;
+				onServiceTab.setOff();
+				offServiceTab.setOff();
+				allTab.setOn();
+				players = playerInfo.getPlayerProfileByInitial(current.letter, playerType);
+				refresh();
+			}
+		});
+		onServiceTab.setLocation(25,0);
+		add(onServiceTab);
+		offServiceTab.setLocation(215,0);
+		add(offServiceTab);
+		allTab.setLocation(405,0);
+		add(allTab);
+		
+	}
+	
 
 }
 

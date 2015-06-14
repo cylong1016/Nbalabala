@@ -2,6 +2,7 @@ package blservice;
 
 import java.util.ArrayList;
 
+import enums.PlayerType;
 import po.PlayerProfilePO;
 import vo.PlayerDetailVO;
 
@@ -12,7 +13,7 @@ import vo.PlayerDetailVO;
  */
 public interface PlayerQueryBLService {
 	
-	public ArrayList<PlayerProfilePO> getPlayerProfileByInitial(char initial);
+	public ArrayList<PlayerProfilePO> getPlayerProfileByInitial(char initial, PlayerType type);
 	
 	public PlayerDetailVO getPlayerDetailByName(String name, String season);
 	
