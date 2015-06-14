@@ -4,6 +4,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
 
 import ui.common.UserMouseAdapter;
 import ui.common.panel.BottomPanel;
@@ -27,7 +29,7 @@ public class LiveTechTable extends BottomTable{
 	private ArrayList<LivePlayerVO> players;
 	
 	public LiveTechTable(ArrayList<LivePlayerVO> players,BottomPanel panel){
-		super(new String[players.size()][Constants.livePlayerHeaders.length+1],Constants.livePlayerHeaders);
+		super(new String[players.size()][Constants.livePlayerHeaders.length],Constants.livePlayerHeaders);
 		this.panel = panel;
 		this.players = players;
 		setTable(players);
@@ -39,6 +41,7 @@ public class LiveTechTable extends BottomTable{
 		this.setModel(new DefaultTableModel(players.size(),Constants.livePlayerHeaders.length+1));
 		DefaultTableModel tableModel = (DefaultTableModel)this.getModel();
 		tableModel.setColumnIdentifiers(Constants.livePlayerHeaders);
+		this.setModel(new DefaultTableModel(players.size(),Constants.livePlayerHeaders.length));
 		for (int i = 0; i < players.size(); i++) {
 			LivePlayerVO mpVO = players.get(i);
 			setValueAt((i+1)+"",i,0);

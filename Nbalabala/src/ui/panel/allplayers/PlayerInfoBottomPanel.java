@@ -207,12 +207,12 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	private void addTitles() {
 		PlayerSeasonPO seasonPO = detailVO.getSeasonRecord();
 		
-		JLabel numLabel = new JLabel("12");
-		numLabel.setForeground(UIConfig.ORANGE_TEXT_COLOR);
+//		JLabel numLabel = new JLabel("12");
+//		numLabel.setForeground(UIConfig.ORANGE_TEXT_COLOR);
 		//TODO 球衣号码，那个硕大的橙色的文字的字体和bounds
-		numLabel.setBounds(LEFT_LABEL_COLUMN_X, FIRST_LABEL_ROW_Y, 50, 42);
-		numLabel.setFont(new Font("方正姚体", Font.PLAIN, 50));
-		this.add(numLabel);
+//		numLabel.setBounds(LEFT_LABEL_COLUMN_X, FIRST_LABEL_ROW_Y, 50, 42);
+//		numLabel.setFont(new Font("方正姚体", Font.PLAIN, 50));
+//		this.add(numLabel);
 		
 		JLabel nameLabel = new JLabel(Utility.trimName(name));
 		nameLabel.setOpaque(false);

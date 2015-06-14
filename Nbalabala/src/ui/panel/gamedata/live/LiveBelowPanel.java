@@ -7,6 +7,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import ui.Images;
+import ui.MyFont;
+import ui.UIConfig;
 import ui.common.button.TabButton;
 import ui.common.label.MyLabel;
 import ui.common.panel.BottomPanel;
@@ -35,7 +37,7 @@ public class LiveBelowPanel extends BottomPanel {
 	public LiveBelowPanel(String teamAbbr1,String teamAbbr2,ArrayList<String> text,Image bg) {
 		super(bg);
 		this.text = text;
-		this.setBounds(22, 292, 952, 309);
+		this.setBounds(UIConfig.RELA_X-4, 250, 948, 309);
 		liveService = new LiveMock();
 //		liveService = new LiveMock();
 	    table = new LiveDetailTable(teamAbbr1,teamAbbr2,text);
@@ -55,8 +57,11 @@ public class LiveBelowPanel extends BottomPanel {
 	private BottomScrollPane scroll;
 
 	public void setTable(ArrayList<String> text) {
+		table.setHeaderColorAndFont();
+		table.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
+		table.setWidth(new int[] {104, 290, 106, 290});
 		scroll = new BottomScrollPane(table);
-		scroll.setBounds(160,10,770,300);
+		scroll.setBounds(162-26, 10, 788, 300);
 		this.add(scroll);
 	}
 	
@@ -121,6 +126,7 @@ public class LiveBelowPanel extends BottomPanel {
 		for (int i = 0; i < 5; i++) {
 			tab[i] = new TabButton(Constants.LIVE_TEXT[i], Images.SECTION_ON, Images.SECTION_CLICK);
 			tab[i].setLocation(20, 18 + i * 34);
+			tab[i].setFont(MyFont.YH_S);
 			this.add(tab[i]);
 		}
 		tab[0].setLocation(20, 10);
