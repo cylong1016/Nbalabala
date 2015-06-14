@@ -38,7 +38,7 @@ public class LiveTechTable extends BottomTable{
 	
 	public void setTable(ArrayList<LivePlayerVO> players){
 		this.players = players;
-		this.setModel(new DefaultTableModel(players.size(),Constants.livePlayerHeaders.length+1));
+		this.setModel(new DefaultTableModel(players.size(),Constants.livePlayerHeaders.length));
 		DefaultTableModel tableModel = (DefaultTableModel)this.getModel();
 		tableModel.setColumnIdentifiers(Constants.livePlayerHeaders);
 		this.setModel(new DefaultTableModel(players.size(),Constants.livePlayerHeaders.length));

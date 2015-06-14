@@ -40,6 +40,8 @@ public class LiveDetailTable extends BottomTable {
 
 	public void setTable(ArrayList<String> text) {
 		this.setModel(new DefaultTableModel(text.size(), 4));
+		DefaultTableModel tableModel = (DefaultTableModel)this.getModel();
+		tableModel.setColumnIdentifiers(Constants.livePlayerHeaders);
 		setTableSize();
 		for (int i = 0; i < text.size(); i++) {
 			String mpVO = text.get(i);
