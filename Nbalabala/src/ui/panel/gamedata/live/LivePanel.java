@@ -51,8 +51,8 @@ public class LivePanel extends GameFatherPanel {
 		techPanel = new TechPanel(teamAbbr1,teamAbbr2,vo1,vo2,LivePanel.this);
 		liveBelow = new LiveBelowPanel(teamAbbr1,teamAbbr2,text,Images.LIVE_BELOW);
 		conPanel = new ConPanel(homePlayersArgs,roadPlayersArgs);
-		this.add(techPanel);
-		currentI = 0;
+		this.add(liveBelow);
+		currentI = 1;
 		addButton();
 		ThreadDis thread = new ThreadDis();
 		thread.start();
@@ -114,7 +114,7 @@ public class LivePanel extends GameFatherPanel {
 		tech.setLocation(btx, bty);
 		live.setLocation(btx + inter, bty);
 		contrastbt.setLocation(btx + 2 * inter, bty);
-		tech.setOn();
+		live.setOn();
 		this.add(tech);
 		this.add(live);
 		this.add(contrastbt);
