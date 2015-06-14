@@ -314,22 +314,22 @@ public class Live implements LiveBLService {
 	 * @version 2015年6月12日 上午12:37:11
 	 */
 	private void refreshLive() {
-//		if(!hasMatchStarted) {
-//			return;
-//		}
-//		HttpURLConnection urlConn = getConn(liveURL);
-//		InputStream input = null;
+		if(!hasMatchStarted) {
+			return;
+		}
+		HttpURLConnection urlConn = getConn(liveURL);
+		InputStream input = null;
 		BufferedReader reader = null;
 		ArrayList<String> scoreList = new ArrayList<String>(); // 小结分数，包含总分
 		try {
-//			input = urlConn.getInputStream();
-//			reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
-			FileReader fr = new FileReader("直播\\文字1.html");
-			reader = new BufferedReader(fr);
+			input = urlConn.getInputStream();
+			reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
+//			FileReader fr = new FileReader("直播\\文字1.html");
+//			reader = new BufferedReader(fr);
 			String scoreReg = "<td>(?<score>\\d+)</td>";
 			Pattern scorePattern = Pattern.compile(scoreReg);
-//			String dataLiveURLReg = "<a  target=.*? href=\"(?<dataLiveURL>.*?)\" class=\".*?><s></s>数据直播</a>";
-			String dataLiveURLReg = "<a  target=.*? href=\"(?<dataLiveURL>.*?)\" class=\"d \"><s></s>.*?</a>";
+			String dataLiveURLReg = "<a  target=.*? href=\"(?<dataLiveURL>.*?)\" class=\".*?><s></s>数据直播</a>";
+//			String dataLiveURLReg = "<a  target=.*? href=\"(?<dataLiveURL>.*?)\" class=\"d \"><s></s>.*?</a>";
 			Pattern dataLiveurlPattern = Pattern.compile(dataLiveURLReg);
 			String dataLiveURL = null;
 			String source = "";
@@ -446,8 +446,6 @@ public class Live implements LiveBLService {
 					if (playerNameMatcher.find()) {
 						String playerChnName = playerNameMatcher.group("playerName");
 						playerData.add(playerChnName);
-//						String playerNameURL = playerNameURLMatcher.group("playerNameURL");
-//						playerData.add(getPlayerEngName(playerChnName, playerNameURL));
 						playerData.add("");
 					}
 					while((temp = reader.readLine()) != null) { // 继续读取球员的数据
@@ -467,17 +465,6 @@ public class Live implements LiveBLService {
 					}
 				}
 			}
-//			String statReg = "<tr .*?>.*?<td.*?>统计</td>(.*?<td>.*?</td>){7}<td>(?<rebound>.*?)</td>.*?<td>(?<assist>.*?)</td>(.*?<td>.*?</td>){6}.*?</tr>";
-//			Pattern statPattern = Pattern.compile(statReg);
-//			Matcher statMatcher = statPattern.matcher(source);
-//			if(statMatcher.find()) {
-//				homeFiveArgs[3] = Double.parseDouble(statMatcher.group("rebound"));
-//				homeFiveArgs[4] = Double.parseDouble(statMatcher.group("assist"));
-//			}
-//			if(statMatcher.find()) {
-//				roadFiveArgs[3] = Double.parseDouble(statMatcher.group("rebound"));
-//				roadFiveArgs[4] = Double.parseDouble(statMatcher.group("assist"));
-//			}
 			String fieldPercentReg = "<tr.*?>.*?<td.*?>命中率</td>(.*?<td>.*?</td>){2}.*?<td>(?<fieldMadPercent>.*?)</td>.*?<td>(?<threePointPercent>.*?)</td>.*?<td>(?<freePercent>.*?)</td>(.*?<td>.*?</td>){10}.*?</tr>";
 			Pattern fieldPercent = Pattern.compile(fieldPercentReg);
 			Matcher fieldPercentMatcher = fieldPercent.matcher(source);
@@ -510,7 +497,7 @@ public class Live implements LiveBLService {
 	 * @param playerNameURL 英文名所在url
 	 * @return 球员英文名
 	 * @author cylong
-	 * @version 2015年6月15日  上午12:26:01
+	 * @version 2015年6月15日 上午12:26:01
 	 */
 	public String getPlayerEngName(String playerChnName, String playerNameURL) {
 		HttpURLConnection urlConn = getConn(playerNameURL);
@@ -524,7 +511,7 @@ public class Live implements LiveBLService {
 			Pattern engNamePattern = Pattern.compile(engNameReg);
 			while((temp = reader.readLine()) != null) {
 				Matcher engNameMatcher = engNamePattern.matcher(temp);
-				if(engNameMatcher.find()) {
+				if (engNameMatcher.find()) {
 					String engName = engNameMatcher.group("engName");
 					return engName;
 				}
@@ -579,7 +566,7 @@ public class Live implements LiveBLService {
 	/**
 	 * 将 49%的形式改成0.49格式
 	 * @author cylong
-	 * @version 2015年6月15日  上午12:15:31
+	 * @version 2015年6月15日 上午12:15:31
 	 */
 	private double percentToDouble(String num) {
 		String douStr = num.replace("%", "");
