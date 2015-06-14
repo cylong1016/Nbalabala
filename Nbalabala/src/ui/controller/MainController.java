@@ -72,9 +72,9 @@ public class MainController {
 	public static void launch() {
 		frame = new Frame();
 		mainPanel = new MainPanel();
-//		frame.setPanel(mainPanel);
+		frame.setPanel(mainPanel);
 //		frame.setPanel(new AnalysePanel("images2.0/analysis/analysisBG.png","LAK","Kobe Byrant"));
-		frame.setPanel(new LivePanel("images2.0/games/gamesBG.png"));
+//		frame.setPanel(new LivePanel("images2.0/games/gamesBG.png"));
 //		frame.setPanel(new LiveInPanel("images2.0/games/liveinBG.png"));
 		frame.start();
 	}

@@ -188,7 +188,7 @@ public class MainPanel extends Panel {
 		analysisBtn.setFont(MyFont.YH_L);
 		this.add(analysisBtn);
 		
-		settingButton.setLocation(444, 444); //TODO 坐标放哪呀
+		settingButton.setLocation(222, 222); //TODO 坐标放哪呀
 		settingButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -203,11 +203,14 @@ public class MainPanel extends Panel {
 				dialog.setUndecorated(true);
 				dialog.setLayout(null);
 				dialog.setSize(settingPanel.getSize());
+				System.out.println(dialog.getSize());
 				dialog.setLocation(x, y);
 				dialog.setResizable(false);
 				dialog.setVisible(true);
+
 			}
 		});
+		this.add(settingButton);
 	}
 
 	/**
