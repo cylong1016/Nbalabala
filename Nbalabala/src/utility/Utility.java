@@ -139,5 +139,15 @@ public class Utility {
 		String endYear = String.valueOf(start + 1);
 		return start + "-" + endYear.substring(2,4);
 	}
+	
+	
+	public static String getPlayerIDByName(String name) {
+		if (name.equals("Harrison Barnes") || name.equals("James Jones") 
+				|| name.equals("David Lee")) {
+			return name + "$02";
+		}else {
+			return name + "$01";
+		}
+	}
 
 }
