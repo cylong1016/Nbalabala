@@ -33,7 +33,7 @@ public class LiveInPanel extends BottomPanel{
 	//06月15日 08：00=季后赛 勇士-骑士, 06月17日 09：00=季后赛 骑士-勇士
 	public LiveInPanel(String url){
 		super(url);
-		live = new Live();
+		live = new LiveMock();
 		gameDetail = new MyLabel[6];
 		live.refresh();
 		readHash();

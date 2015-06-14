@@ -36,7 +36,7 @@ public class LiveBelowPanel extends BottomPanel {
 		super(bg);
 		this.text = text;
 		this.setBounds(22, 292, 952, 309);
-		liveService = new Live();
+		liveService = new LiveMock();
 //		liveService = new LiveMock();
 	    table = new LiveDetailTable(teamAbbr1,teamAbbr2,text);
 		addButton();
