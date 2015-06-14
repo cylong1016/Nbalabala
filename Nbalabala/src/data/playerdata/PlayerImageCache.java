@@ -8,6 +8,7 @@ import java.util.HashMap;
 import javax.imageio.ImageIO;
 
 import utility.Constants;
+import utility.Utility;
 
 /**
  * 
@@ -47,8 +48,9 @@ public class PlayerImageCache {
 	}
 	
 	public static Image getActionImageByName(String name) {
+		name = Utility.trimName(name);
 		try {
-			return  ImageIO.read(new File(Constants.dataSourcePath + "players/action/" + name + ".png"));
+			return  ImageIO.read(new File(Constants.dataSourcePath + "action//" + name + ".png"));
 		} catch (IOException e) {
 			try {
 				return ImageIO.read(new File("images/nullAction.png"));
@@ -60,7 +62,7 @@ public class PlayerImageCache {
 	
 	public static void reloadImages() {
 		portraits.clear();
-		File file = new File(Constants.dataSourcePath + "players//portrait//");
+		File file = new File(Constants.dataSourcePath + "portrait//");
 		if (!file.exists()) {
 			return;
 		}
@@ -76,7 +78,7 @@ public class PlayerImageCache {
 	private class CacheThread extends Thread{
 		
 		public void start() {
-			File file = new File(Constants.dataSourcePath + "players/portrait/");
+			File file = new File(Constants.dataSourcePath + "portrait//");
 			if (!file.exists()) {
 				return;
 			}
