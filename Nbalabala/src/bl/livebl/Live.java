@@ -2,7 +2,6 @@ package bl.livebl;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -294,8 +293,8 @@ public class Live implements LiveBLService {
 					}
 				}
 			}
-//			hasMatchStarted = tempBool_1 && tempBool_2; // 当前是否有直播
-			hasMatchStarted = true;
+			hasMatchStarted = tempBool_1 && tempBool_2; // 当前是否有直播
+//			hasMatchStarted = true; // TODO 测试
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -325,12 +324,12 @@ public class Live implements LiveBLService {
 		try {
 			input = urlConn.getInputStream();
 			reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
-			FileReader fr = new FileReader("直播\\文字1.html");
-			reader = new BufferedReader(fr);
+//			FileReader fr = new FileReader("直播\\文字1.html");
+//			reader = new BufferedReader(fr);
 			String scoreReg = "<td>(?<score>\\d+)</td>";
 			Pattern scorePattern = Pattern.compile(scoreReg);
-//			String dataLiveURLReg = "<a  target=.*? href=\"(?<dataLiveURL>.*?)\" class=\".*?><s></s>数据直播</a>";
-			String dataLiveURLReg = "<a  target=.*? href=\"(?<dataLiveURL>.*?)\" class=\"d \"><s></s>.*?</a>";
+			String dataLiveURLReg = "<a  target=.*? href=\"(?<dataLiveURL>.*?)\" class=\".*?><s></s>数据直播</a>";
+//			String dataLiveURLReg = "<a  target=.*? href=\"(?<dataLiveURL>.*?)\" class=\"d \"><s></s>.*?</a>";
 			Pattern dataLiveurlPattern = Pattern.compile(dataLiveURLReg);
 			String dataLiveURL = null;
 			String source = "";
