@@ -282,11 +282,12 @@ public class Live implements LiveBLService {
 		try {
 //			input = urlConn.getInputStream();
 //			reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
-			FileReader fr = new FileReader("C:\\Users\\cylong\\Downloads\\虎扑\\06月05日勇士vs骑士文字直播－虎扑NBA原创报道14.html");
+			FileReader fr = new FileReader("直播\\文字1.html");
 			reader = new BufferedReader(fr);
 			String scoreReg = "<td>(?<score>\\d+)</td>";
 			Pattern scorePattern = Pattern.compile(scoreReg);
-			String dataLiveURLReg = "<a target=.*? href=\"(?<dataLiveURL>.*?)\".*?><s></s>数据直播</a>";
+// 			String dataLiveURLReg = "<a  target=.*? href=\"(?<dataLiveURL>.*?)\" class=\".*?><s></s>数据直播</a>";
+ 			String dataLiveURLReg = "<a  target=.*? href=\"(?<dataLiveURL>.*?)\" class=\"d \"><s></s>.*?</a>";
 			Pattern dataLiveurlPattern = Pattern.compile(dataLiveURLReg);
 			String dataLiveURL = null;
 			String source = "";
@@ -303,8 +304,8 @@ public class Live implements LiveBLService {
 					dataLiveURL = dataLiveURLMatcher.group("dataLiveURL");
 				}
 			}
-			captureTextLive(source); // 获得文字直路
-			captureDataLive(dataLiveURL); // 获得数据直播
+			captureTextLive(source); // 获得文字直播
+		 	captureDataLive("http://g.hupu.com/" + dataLiveURL); // 获得数据直播
 			homeScores.clear();
 			roadScores.clear();
 			int num = scoreList.size();
@@ -409,22 +410,25 @@ public class Live implements LiveBLService {
 			input = urlConn.getInputStream();
 			reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
 			String playerDataReg = "";
+			Pattern playerDataPattern = Pattern.compile(playerDataReg);
 			String source = "";
 			String temp = null;
 			while((temp = reader.readLine()) != null) {
 				source += temp;
+				Matcher playerDataMatcher = playerDataPattern.matcher(temp);
 			}
 			String statReg = "<tr .*?>.*?<td.*?>统计</td>(.*?<td>.*?</td>){7}<td>(?<rebound>.*?)</td>.*?<td>(?<assist>.*?)</td>(.*?<td>.*?</td>){6}.*?</tr>";
 			Pattern statPattern = Pattern.compile(statReg);
 			Matcher statMatcher = statPattern.matcher(source);
-			if(statMatcher.find()) {
-				homeFiveArgs[3] = Double.parseDouble(statMatcher.group("rebound"));
-				homeFiveArgs[4] = Double.parseDouble(statMatcher.group("assist"));
-			}
-			if(statMatcher.find()) {
-				roadFiveArgs[3] = Double.parseDouble(statMatcher.group("rebound"));
-				roadFiveArgs[4] = Double.parseDouble(statMatcher.group("assist"));
-			}
+			System.out.println(url);
+//			if(statMatcher.find()) {
+//				homeFiveArgs[3] = Double.parseDouble(statMatcher.group("rebound"));
+//				homeFiveArgs[4] = Double.parseDouble(statMatcher.group("assist"));
+//			}
+//			if(statMatcher.find()) {
+//				roadFiveArgs[3] = Double.parseDouble(statMatcher.group("rebound"));
+//				roadFiveArgs[4] = Double.parseDouble(statMatcher.group("assist"));
+//			}
 			String fieldPercentReg = "<tr.*?>.*?<td.*?>命中率</td>(.*?<td>.*?</td>){2}.*?<td>(?<fieldMadPercent>.*?)</td>.*?<td>(?<threePointPercent>.*?)</td>.*?<td>(?<freePercent>.*?)</td>(.*?<td>.*?</td>){10}.*?</tr>";
 			Pattern fieldPercent = Pattern.compile(fieldPercentReg);
 			Matcher fieldPercentMatcher = fieldPercent.matcher(source);
