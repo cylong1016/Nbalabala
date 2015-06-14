@@ -20,7 +20,5 @@ public class Nbalabala {
 		new TeamLogoCache().loadLogos();
 		MainController.launch();
 //		Constants.setEnglish();
-		
-
 	}
 }

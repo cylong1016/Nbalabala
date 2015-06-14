@@ -2,6 +2,7 @@ package bl.livebl;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -66,6 +67,12 @@ public class Live implements LiveBLService {
 	private int currentSectionCount = 0;
 	/** 文字直播 */
 	private ArrayList<String> textLive = new ArrayList<String>();
+	/** 客场球员数据 */
+	private ArrayList<LivePlayerVO> roadPlayerRecords = new ArrayList<LivePlayerVO>();
+	/** 主场球员数据 */
+	private ArrayList<LivePlayerVO> homePlayerRecords = new ArrayList<LivePlayerVO>();
+	private double[] roadFiveArgs = new double[5];
+	private double[] homeFiveArgs = new double[5];
 	
 	/**
 	 * @see blservice.LiveBLService#getLiveList()
@@ -120,7 +127,10 @@ public class Live implements LiveBLService {
 	 */
 	@Override
 	public ArrayList<LivePlayerVO> getRoadPlayerRecords() {
-		return new ArrayList<LivePlayerVO>();
+//		if(!hasMatchStarted) {
+//			return 0;
+//		}
+		return roadPlayerRecords;
 	}
 
 	/**
@@ -128,7 +138,10 @@ public class Live implements LiveBLService {
 	 */
 	@Override
 	public ArrayList<LivePlayerVO> getHomePlayerRecords() {
-		return new ArrayList<LivePlayerVO>();
+//		if(!hasMatchStarted) {
+//			return 0;
+//		}
+		return homePlayerRecords;
 	}
 
 	/**
@@ -172,7 +185,7 @@ public class Live implements LiveBLService {
 //		if(!hasMatchStarted) {
 //			return null;
 //		}
-		return new double[] {0,0,0,0,0};
+		return homeFiveArgs;
 	}
 
 	/**
@@ -183,7 +196,7 @@ public class Live implements LiveBLService {
 //		if(!hasMatchStarted) {
 //			return null;
 //		}
-		return new double[] {0,0,0,0,0};
+		return roadFiveArgs;
 	}
 	
 	/**
@@ -202,7 +215,7 @@ public class Live implements LiveBLService {
 	 * @author cylong
 	 * @version 2015年6月12日  上午9:27:14
 	 */
-	private void getTextLive(String source) {
+	private void captureTextLive(String source) {
 		textLive.clear();
 		String eventReg = "<tr sid=\"(?<sid>\\d+)\">.*?<td width=\"70\">(?<time>.*?)</td>.*?<td width=\"70\">(?<team>.*?)</td>.*?<td>(?<event>.*?(<b>)?.*?(</b>)?.*?)</td>.*?<td width=\"139\" class=\"center\">(?<score>\\d+.\\d+)</td>.*?</tr>";
 		String pauseReg = "<tr sid=\"(?<sid>\\d+)\" class=\"pause\">.*?<td colspan=\"4\" style=\"text-align:center\"><b>(?<pause>.*?)</b></td>.*?</tr>";
@@ -276,20 +289,23 @@ public class Live implements LiveBLService {
 	 * @version 2015年6月12日  上午12:37:11
 	 */
 	private void refreshLive() {
-		if(!hasMatchStarted) {
-			return;
-		}
+//		if(!hasMatchStarted) {
+//			return;
+//		}
 		HttpURLConnection urlConn = getConn(liveURL);
 		InputStream input = null;
 		BufferedReader reader = null;
 		ArrayList<String> scoreList = new ArrayList<String>(); // 小结分数，包含总分
 		try {
-//			FileReader fr = new FileReader("C:\\Users\\cylong\\Downloads\\虎扑\\06月05日勇士vs骑士文字直播－虎扑NBA原创报道14.html");
-//			reader = new BufferedReader(fr);
-			input = urlConn.getInputStream();
-			reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
+//			input = urlConn.getInputStream();
+//			reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
+			FileReader fr = new FileReader("C:\\Users\\cylong\\Downloads\\虎扑\\06月05日勇士vs骑士文字直播－虎扑NBA原创报道14.html");
+			reader = new BufferedReader(fr);
 			String scoreReg = "<td>(?<score>\\d+)</td>";
 			Pattern scorePattern = Pattern.compile(scoreReg);
+			String dataLiveReg = "<a.*? href=\"(?<dataLiveURL>)\".*?><s></s>数据直播</a>";
+			Pattern dataLivePattern = Pattern.compile(dataLiveReg);
+			String dataLiveURL = null;
 			String source = "";
 			String temp = null;
 			while((temp = reader.readLine()) != null) {
@@ -299,8 +315,13 @@ public class Live implements LiveBLService {
 					String score = scoreMatcher.group("score");
 					scoreList.add(score);
 				}
+				Matcher dataLiveMatcher = dataLivePattern.matcher(temp);
+				if(dataLiveMatcher.find()) {
+					dataLiveURL = dataLiveMatcher.group("dataLiveURL");
+				}
 			}
-			getTextLive(source); // 获得文字直路
+			captureTextLive(source); // 获得文字直路
+			captureDataLive(dataLiveURL); // 获得数据直播
 			homeScores.clear();
 			roadScores.clear();
 			int num = scoreList.size();
@@ -397,4 +418,8 @@ public class Live implements LiveBLService {
     	}
 	}
 
+	private void captureDataLive(String url) {
+		
+	}
 }
+
