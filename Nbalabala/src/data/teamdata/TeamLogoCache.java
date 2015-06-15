@@ -7,6 +7,9 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
+import utility.Constants;
+import utility.Utility;
+
 /**
  * 
  * @author Issac Ding
@@ -17,32 +20,37 @@ public class TeamLogoCache {
 	private static HashMap<String, Image> logos = new HashMap<String, Image>();
 	
 	public static void reloadLogos() {
+		logos.clear();
 		
+		File file = new File(Constants.dataSourcePath + "/logo");
+		if (!file.exists()) {
+			file.mkdirs();
+		}
+		File[] files = file.listFiles();
+		for (File imgFile : files) {
+			String fileName = imgFile.getName();
+			try {
+				logos.put(fileName.substring(0, 3), ImageIO.read(imgFile));
+			} catch (IOException e) {
+				continue;
+			}
+		}
 	}
 
-	/** 先检查temp文件夹下有无转换好的png，如果没有，转换之 */
 	public static Image getTeamLogo(String abbr) {
-		if (abbr.equals("NOH"))
-			abbr = "NOP";
-		else if (abbr.equals("NJN"))
-			abbr = "BKN";
+		abbr = Utility.getCurrentAbbr(abbr);
 
 		Image result = logos.get(abbr);
 		if (result != null) {
 			return result;
 		}
-
-		File file = new File("temp/" + abbr + ".png");
+		
 		try {
-			logos.put(abbr, ImageIO.read(file));
-			return logos.get(abbr);
-		} catch (Exception e2) {
-			try {
-				return ImageIO.read(new File("images/nullTeam.png"));
-			} catch (IOException e1) {
-				return null;
-			}
+			return ImageIO.read(new File("images/nullTeam.png"));
+		} catch (IOException e1) {
+			return null;
 		}
+
 	}
 
 	public void loadLogos() {
@@ -51,7 +59,7 @@ public class TeamLogoCache {
 
 	private class CacheThread extends Thread {
 		public void start() {
-			File file = new File("temp/");
+			File file = new File(Constants.dataSourcePath + "/logo");
 			if (!file.exists()) {
 				file.mkdirs();
 			}

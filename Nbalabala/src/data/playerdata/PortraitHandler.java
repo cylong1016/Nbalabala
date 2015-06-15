@@ -20,16 +20,24 @@ public class PortraitHandler {
 	private static ArrayList<PlayerProfilePO> pos;
 	
 	public static void main(String[]args) {
-		new PlayerData();
-		pos = new ArrayList<PlayerProfilePO>(PlayerData.players.values());
+//		new PlayerData();
+//		pos = new ArrayList<PlayerProfilePO>(PlayerData.players.values());
 		
 		File folder = new java.io.File("NBAdata/current/");
 		File[] files = folder.listFiles();
 		for (File file : files) {
 			String playerName = file.getName().substring(0, file.getName().length() - 4);
-			int count = getNameCount(playerName);
-			String newFileName = playerName + "$0" + count + ".png";
-			file.renameTo(new File("NBAdata/current/" + newFileName));
+//			int count = getNameCount(playerName);
+//			String newFileName = playerName + "$0" + count + ".png";
+//			file.renameTo(new File("NBAdata/current/" + newFileName));
+			
+			if (file.getName().contains(".jpg")) {
+				for (File f2 : files) {
+					if (f2.getName().contains(".png") && f2.getName().substring(0, f2.getName().length() - 4).equals(playerName)) {
+						file.delete();
+					}
+				}
+			}
 		}
 		
 	}

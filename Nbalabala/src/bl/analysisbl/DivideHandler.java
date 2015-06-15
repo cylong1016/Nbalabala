@@ -19,10 +19,10 @@ public class DivideHandler {
 	private int width = 0;
 	
 	public ArrayList<Double> divideData(ArrayList<MatchPlayerPO> matches,
-			InferenceData forecastData) {
+			InferenceData forecastData, int size) {
 		ArrayList<Double> data = new ArrayList<Double>();
 		
-		int count = (int)(Math.log(matches.size()) / Math.log(2));	//经验分组公式
+		int count = (int)(Math.log(size) / Math.log(2));	//经验分组公式
 		width = Math.min(20, matches.size() / count);	//TODO 这个数字有待考量
 		
 		int fieldM = 0;

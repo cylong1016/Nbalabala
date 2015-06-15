@@ -90,6 +90,7 @@ public class SettingPanel extends BottomPanel{
 		
 		yesButton.setLocation(544, 292);
 		yesButton.addActionListener(new ActionListener() {
+			JDialog dialog = SettingPanel.this.dialog;
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Constants.changeDataSourcePath(pathField.getText());
@@ -108,6 +109,7 @@ public class SettingPanel extends BottomPanel{
 				} catch (Exception e2) {
 					// TODO: handle exception
 				}
+				dialog.dispose();
 			}
 		});
 		this.add(yesButton);

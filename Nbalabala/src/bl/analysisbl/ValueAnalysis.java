@@ -109,7 +109,7 @@ public class ValueAnalysis implements AnalysisBLService{
 	public ForecastVO getForecastData(String name, InferenceData inferenceData) {
 		loadMatches(name);
 		DivideHandler divideHandler = new DivideHandler();
-		ArrayList<Double> data = divideHandler.divideData(matches, inferenceData);
+		ArrayList<Double> data = divideHandler.divideData(matches, inferenceData, matches.size());
 		RegressionHandler regression = new RegressionHandler(data);
 		ForecastVO result = new ForecastVO();
 		result.width = divideHandler.getWidth();
@@ -194,8 +194,9 @@ public class ValueAnalysis implements AnalysisBLService{
 		}
 		
 		DivideHandler divideHandler = new DivideHandler();
-		ArrayList<Double> formerData = divideHandler.divideData(formerMatches, inferenceData);
-		ArrayList<Double> currentData = divideHandler.divideData(currentMatches, inferenceData);
+		int smallerSize = Math.min(formerMatches.size(), currentMatches.size());
+		ArrayList<Double> formerData = divideHandler.divideData(formerMatches, inferenceData, smallerSize);
+		ArrayList<Double> currentData = divideHandler.divideData(currentMatches, inferenceData, smallerSize);
 		String conclusion = new TransferAnalyzer().giveConclusion
 				(formerData, currentData, inferenceData);
 		
@@ -206,6 +207,7 @@ public class ValueAnalysis implements AnalysisBLService{
 		result.currentData = currentData;
 		result.formerData = formerData;
 		result.name = name;
+		result.width = divideHandler.getWidth();
 		result.startSeason = Utility.getOverallSeason(startYear);
 		result.transferSeason = Utility.getOverallSeason(transferYear);
 		return result;

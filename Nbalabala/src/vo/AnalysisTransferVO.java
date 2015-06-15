@@ -15,6 +15,8 @@ public class AnalysisTransferVO {
 	
 	public String name;
 	
+	public int width;
+	
 	/** 之前球队缩写 */
 	public String formerAbbr;
 	/** 当前球队缩写 */
@@ -32,6 +34,10 @@ public class AnalysisTransferVO {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public int getWidth() {
+		return width;
 	}
 	public String getFormerAbbr() {
 		return formerAbbr;
