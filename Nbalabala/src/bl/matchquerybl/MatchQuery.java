@@ -167,7 +167,7 @@ public class MatchQuery implements MatchQueryBLService{
 	 * @see blservice.MatchQueryBLService#getLives(java.util.Date, java.lang.String)
 	 */
 	@Override
-	public ArrayList<LiveRowVO> getLives(Date date, String homeAbbr) {
+	public ArrayList<String> getLives(Date date, String homeAbbr) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(date.getTime());
 		int year = calendar.get(Calendar.YEAR);

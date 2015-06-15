@@ -38,5 +38,5 @@ public interface MatchQueryBLService {
 	public MatchDetailVO getMatchDetailByID(int matchID);
 	
 	/** 返回一场比赛的实录 */
-	public ArrayList<LiveRowVO> getLives(Date date, String homeAbbr);
+	public ArrayList<String> getLives(Date date, String homeAbbr);
 }
