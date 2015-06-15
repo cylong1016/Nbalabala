@@ -21,7 +21,7 @@ import dataservice.PlayerDataService;
 public class PlayerData implements PlayerDataService{
 
 	/** 全部球员基本信息 */
-	private static HashMap<String, PlayerProfilePO> players = new HashMap<String, PlayerProfilePO>();
+	public static HashMap<String, PlayerProfilePO> players = new HashMap<String, PlayerProfilePO>();
 
 	public PlayerData() {
 		if (players.size() == 0) loadPlayers();
