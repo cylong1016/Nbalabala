@@ -111,8 +111,8 @@ public class LivePanel extends GameFatherPanel {
 			homeScores.add(size - 1, 0);
 			size++;
 		}
-		String[] totalScore = new String[]{roadScores.get(size - 1).toString(), homeScores.get(size - 1).toString()};
-		String total = roadScores.get(size - 1).toString() + "-" + homeScores.get(size - 1).toString();
+		String[] totalScore = new String[]{homeScores.get(size - 1).toString(), roadScores.get(size - 1).toString()};
+		String total = homeScores.get(size - 1).toString() + "-" + roadScores.get(size - 1).toString();
 		String each = "";
 		for(int i = 0; i < size - 1; i++) {
 			each = each + homeScores.get(i) + "-" + roadScores.get(i) + ";";
