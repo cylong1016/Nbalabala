@@ -58,7 +58,7 @@ public class LiveBelowPanel extends BottomPanel {
 	public void setTable(ArrayList<String> text) {
 		table.setHeaderColorAndFont();
 		table.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
-		table.setWidth(new int[] {60, 300, 100, 310});
+		table.setWidth(new int[] {60, 290, 100, 310});
 		scroll = new BottomScrollPane(table);
 		scroll.setBounds(162-26, 10, 788, 300);
 		this.add(scroll);
