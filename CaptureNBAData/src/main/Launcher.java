@@ -17,6 +17,9 @@ public class Launcher {
 		
 //		PlayerAdvance pa = new PlayerAdvance();
 //		pa.capture();
+		
+//		PlayerClutch pc = new PlayerClutch();
+//		pc.capture();
 	}
 
 }

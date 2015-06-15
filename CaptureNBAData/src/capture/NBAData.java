@@ -118,5 +118,16 @@ public abstract class NBAData {
 		}
 		return formatDate;
 	}
+	
+	/**
+	 * 将 49%的形式改成0.49格式
+	 * @author cylong
+	 * @version 2015年6月15日 上午12:15:31
+	 */
+	protected double percentToDouble(String num) {
+		String douStr = num.replace("%", "");
+		double dou = Double.parseDouble(douStr) / 100;
+		return dou;
+	}
 
 }
