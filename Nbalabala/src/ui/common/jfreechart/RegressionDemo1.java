@@ -19,7 +19,6 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.function.Function2D;
-import org.jfree.data.function.LineFunction2D;
 import org.jfree.data.function.PowerFunction2D;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.statistics.Regression;
@@ -28,6 +27,11 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
+
+import vo.ForecastVO;
+import bl.analysisbl.ValueAnalysis;
+import blservice.AnalysisBLService;
+import enums.InferenceData;
 
 /**
  * 在没找到更好的之前，这个类被寄予厚望
@@ -39,7 +43,7 @@ public class RegressionDemo1 extends ApplicationFrame {
 
         /** Dataset 1. */
         private XYDataset data1;
-        
+        private AnalysisBLService service = new ValueAnalysis();
         /**
          * Creates a new instance.
          */
@@ -56,16 +60,32 @@ public class RegressionDemo1 extends ApplicationFrame {
          */
         private XYDataset createSampleData1() {
             XYSeries series = new XYSeries("Series 1");
-            series.add(2.0, 56.27);
-            series.add(3.0, 41.32);
-            series.add(4.0, 31.45);
-            series.add(5.0, 30.05);
-            series.add(6.0, 24.69);
-            series.add(7.0, 19.78);
-            series.add(8.0, 20.94);
-            series.add(9.0, 16.73);
-            series.add(10.0, 14.21);
-            series.add(11.0, 12.44);
+            ForecastVO vo = service.getForecastData("LeBron James$01", InferenceData.ASSIST);
+            double[] x = vo.getCurveX();
+            double[] y = vo.getCurveY();
+            for(int i = 0 ; i < x.length ;i++) {
+            	series.add(x[i],y[i]);
+            }
+//            series.add(2.0, 56.27);
+//            series.add(3.0, 41.32);
+//            series.add(4.0, 31.45);
+//            series.add(5.0, 30.05);
+//            series.add(6.0, 24.69);
+//            series.add(7.0, 19.78);
+//            series.add(8.0, 20.94);
+//            series.add(9.0, 16.73);
+//            series.add(10.0, 14.21);
+//            series.add(11.0, 12.44);
+//            series.add(12.0, 56.27);
+//            series.add(13.0, 41.32);
+//            series.add(14.0, 31.45);
+//            series.add(15.0, 30.05);
+//            series.add(16.0, 24.69);
+//            series.add(17.0, 19.78);
+//            series.add(18.0, 20.94);
+//            series.add(19.0, 16.73);
+//            series.add(20.0, 14.21);
+//            series.add(21.0, 12.44);
             XYDataset result = new XYSeriesCollection(series);
             return result;
         }
@@ -77,46 +97,9 @@ public class RegressionDemo1 extends ApplicationFrame {
          */
         private JTabbedPane createContent() {
             JTabbedPane tabs = new JTabbedPane();
-            tabs.add("Linear", createChartPanel1());
+//            tabs.add("Linear", createChartPanel1());
             tabs.add("Power", createChartPanel2());
             return tabs;
-        }
-
-        /**
-         * Creates a chart based on the first dataset, with a fitted linear regression line.
-         *
-         * @return the chart panel.
-         */
-        private ChartPanel createChartPanel1() {
-
-            // create plot...
-            NumberAxis xAxis = new NumberAxis("X");
-            xAxis.setAutoRangeIncludesZero(false);
-            NumberAxis yAxis = new NumberAxis("Y");
-            yAxis.setAutoRangeIncludesZero(false);
-
-            XYLineAndShapeRenderer renderer1 = new XYLineAndShapeRenderer(false, 
-                    true);
-            XYPlot plot = new XYPlot(this.data1, xAxis, yAxis, renderer1);
-
-            // calculate the regression and create subplot 2...
-            double[] coefficients = Regression.getOLSRegression(this.data1, 0);
-            Function2D curve = new LineFunction2D(coefficients[0], coefficients[1]);
-            XYDataset regressionData = DatasetUtilities.sampleFunction2D(curve,
-                    2.0, 11.0, 100, "Fitted Regression Line");
-            
-            plot.setDataset(1, regressionData);
-            XYLineAndShapeRenderer renderer2 = new XYLineAndShapeRenderer(true, 
-                    false);
-            renderer2.setSeriesPaint(0, Color.blue);
-            plot.setRenderer(1, renderer2);
-
-            // create and return the chart panel...
-            JFreeChart chart = new JFreeChart("Linear Regression", 
-                    JFreeChart.DEFAULT_TITLE_FONT, plot, true);
-            ChartPanel chartPanel = new ChartPanel(chart, false);
-            return chartPanel;
-
         }
 
         /**
