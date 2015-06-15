@@ -105,13 +105,13 @@ public class LiveBelowPanel extends BottomPanel {
 	public void findSection(){
 		section = new int[4];
 		for(int i = 0; i < text.size(); i++) {
-			if(text.get(i).equals("第一小节结束")) {
+			if(text.get(i).equals("第1节结束")) {
 				section[0] = i;
-			}else if(text.get(i).equals("第二小节结束")) {
+			}else if(text.get(i).equals("第2节结束")) {
 				section[1] = i;
-			}else if(text.get(i).equals("第三小节结束")) {
+			}else if(text.get(i).equals("第3节结束")) {
 				section[2] = i;
-			}else if(text.get(i).equals("第四小节结束")) {
+			}else if(text.get(i).equals("第4节结束")) {
 				section[3] = i;
 			}
 			
