@@ -6,7 +6,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import po.PlayerProfilePO;
 import ui.Images;
 import ui.UIConfig;
 import ui.common.button.TabButton;
@@ -14,8 +13,8 @@ import ui.common.comboBox.MyComboBox;
 import ui.common.panel.BottomPanel;
 import ui.common.panel.Panel;
 import utility.Constants;
-import bl.teamquerybl.TeamQuery;
-import blservice.TeamQueryBLService;
+import bl.analysisbl.ValueAnalysis;
+import blservice.AnalysisBLService;
 
 /**
  * 球员分析界面
@@ -28,7 +27,6 @@ public class AnalysePanel extends BottomPanel{
 	private static final long serialVersionUID = 560926515968497035L;
 //	private String teamAbbr,team,player;
 	private MyComboBox teamCom,playerCom;
-	private TeamQueryBLService teamQuery = new TeamQuery();
 	private TabButton[] select;
 	private Panel currentPanel;
 	private LastFivePanel lastFive;
@@ -36,18 +34,21 @@ public class AnalysePanel extends BottomPanel{
 	private ContriPanel contri;
 	private FuturePanel future;
 	private TurnPanel turn;
+	private AnalysisBLService service;
 	
 	public AnalysePanel(String url){
 		super(url);
+		service = new ValueAnalysis();
 //		this.team = Constants.translateTeamAbbr(teamAbbr);
+		str = changeArray(service.getLineupNamesByAbbr("BOS"));
+		addComboBox();
 		lastFive = new LastFivePanel();
 		allSeason = new AllSeasonPanel();
 		contri = new ContriPanel();
 		future =new FuturePanel();
-		turn = new TurnPanel("LeBron James$01");
+		turn = new TurnPanel(str[0]);
 		currentPanel = lastFive;
 		addLabel();
-		addComboBox();
 	}
 	
 	public void addLabel(){
@@ -106,11 +107,12 @@ public class AnalysePanel extends BottomPanel{
 			
 		}
 	}
-	
+	private String[] str;
 	public void addComboBox(){
 		teamCom = new MyComboBox(Constants.TEAM_NAMES,599,10,120,30);
-		String[] str = changeArray(teamQuery.getTeamDetailByAbbr("BOS", "2014-15R").getPlayers());
-		playerCom = new MyComboBox(str,770,10,180,30);
+		String[] strCom = changeArray(service.getLineupNamesByAbbr("BOS"));
+		
+		playerCom = new MyComboBox(strCom,770,10,180,30);
 		this.add(teamCom);
 		teamCom.addActionListener(new ActionListener(){
 
@@ -118,8 +120,7 @@ public class AnalysePanel extends BottomPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				playerCom.removeAllItems();
-				String[] str = changeArray(teamQuery.getTeamDetailByAbbr(Constants.TEAM_ABBR[teamCom.getSelectedIndex()],
-						"2014-15R").getPlayers());
+				str = changeArray(service.getLineupNamesByAbbr(Constants.TEAM_ABBR[teamCom.getSelectedIndex()]));
 				for(int i = 0 ;i < str.length; i++) {
 					String[] name = str[i].split("$");
 					playerCom.addItem(name[0]);
@@ -137,11 +138,11 @@ public class AnalysePanel extends BottomPanel{
 	 * @author lsy
 	 * @version 2015年6月8日  下午2:33:59
 	 */
-	public String[] changeArray(ArrayList<PlayerProfilePO> arrayList){
+	public String[] changeArray(ArrayList<String> arrayList){
 		int lth = arrayList.size();
 		String[] str = new String[lth];
 		for(int i = 0 ;i < lth; i++){
-			str[i] = arrayList.get(i).getName();
+			str[i] = arrayList.get(i);
 		}
 		return str;
 	}

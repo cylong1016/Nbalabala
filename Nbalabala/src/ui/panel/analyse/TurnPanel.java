@@ -42,8 +42,12 @@ public class TurnPanel extends Panel {
 			chart = new LineChart(vo);
 			this.add(chart);
 			button = new SelectButton[10];
-			area = new JTextArea();
-			this.add(strLabel);
+			area = new JTextArea(vo.getConclusion());
+			area.setLineWrap(true);
+			area.setEditable(false);
+			area.setBounds(750, 220,200,200);
+			area.setOpaque(false);
+			this.add(area);
 			addButton();
 			setEffect();
 		}
