@@ -13,5 +13,5 @@ public class MySQLConf {
 	// 用户名
 	public static final String USER = "root";
 	// 密码
-	public static final String PASSWORD = "root";
+	public static final String PASSWORD = "cyl19941016";
 }

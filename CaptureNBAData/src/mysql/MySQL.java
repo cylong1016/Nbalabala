@@ -3,7 +3,6 @@ package mysql;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * @author cylong
@@ -31,16 +30,16 @@ public class MySQL {
 			if (!conn.isClosed()) {
 				System.out.println("Succeeded connecting to the Database!");
 			}
-			Statement statement = conn.createStatement();
 			// 删除需要爬的数据【以前存在的】
-			String sql = "TRUNCATE extra_time";
-			statement.execute(sql);
-			sql = "TRUNCATE match_player";
-			statement.execute(sql);
-			sql = "TRUNCATE match_profile";
-			statement.execute(sql);
-			sql = "TRUNCATE player_profile";
-			statement.execute(sql);
+//			Statement statement = conn.createStatement();
+//			String sql = "TRUNCATE extra_time";
+//			statement.execute(sql);
+//			sql = "TRUNCATE match_player";
+//			statement.execute(sql);
+//			sql = "TRUNCATE match_profile";
+//			statement.execute(sql);
+//			sql = "TRUNCATE player_profile";
+//			statement.execute(sql);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
