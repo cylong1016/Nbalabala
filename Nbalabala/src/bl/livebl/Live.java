@@ -404,8 +404,12 @@ public class Live implements LiveBLService {
 			}
 			String pause = pauseMatcher.group("pause");
 			isOver = Pattern.matches(".+?(比赛结束)+.+?", source);
-			if (isOver) {
-				textLive.add(sid - 2, pause);
+//			if (isOver) {
+//				textLive.add(sid - 2, pause);
+//			} else {
+//			}
+			if(maxSID - sid >= textLive.size()) {
+				textLive.add(pause);
 			} else {
 				textLive.add(maxSID - sid, pause);
 			}
