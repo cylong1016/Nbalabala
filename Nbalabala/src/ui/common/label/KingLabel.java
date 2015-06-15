@@ -62,7 +62,7 @@ public class KingLabel extends JLabel{
 		int top = vo.getTop();
 		switch (top) {
 		case 1:
-			setBounds(29, 36, 444, 267);
+			setBounds(29, 36, 444, 367);
 			break;
 		case 2:
 			setBounds(563, 36, 380, 70);
@@ -119,7 +119,7 @@ public class KingLabel extends JLabel{
 		if (vo.getTop() == 1) {
 			Image actionImage = PlayerImageCache.getActionImageByName(vo.getName());
 			actionPhotoPanel = new ActionPhotoPanel(actionImage);
-			actionPhotoPanel.setBounds(33,5,250,500);
+			actionPhotoPanel.setBounds(33,5,250,600);
 			actionPhotoPanel.setSize(1.3);
 			this.add(actionPhotoPanel);
 			

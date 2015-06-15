@@ -144,7 +144,7 @@ public class MatchQuery implements MatchQueryBLService{
 		ArrayList<MatchDetailPO> pos = matchData.getMatchDetailByDates(start, end);
 		Comparator<MatchDetailPO> comparator = new Comparator<MatchDetailPO>() {
 			public int compare(MatchDetailPO p1, MatchDetailPO p2) {
-				return - p1.getMatchProfile().date.compareTo(p2.getMatchProfile().date);
+				return p1.getMatchProfile().date.compareTo(p2.getMatchProfile().date);
 			}
 		};
 		java.util.Collections.sort(pos, comparator);
