@@ -144,7 +144,7 @@ public class ValueAnalysis implements AnalysisBLService{
 //		for (double d : curveY) {
 //			System.out.println(d);
 //		}
-		AnalysisTransferVO vo = new ValueAnalysis().getTransferData("LeBron James$01", InferenceData.ASSIST);
+		AnalysisTransferVO vo = new ValueAnalysis().getTransferData("Jerome Jordan$01", InferenceData.SCORE);
 		
 	}
 	//TODO 明显下降的球员：Steve Francis
@@ -166,6 +166,7 @@ public class ValueAnalysis implements AnalysisBLService{
 		for (int i = toYear - 1; i >= fromYear; i--) {
 			String season = Utility.getRegularStringByStartYear(i);
 			String thatTeam = seasonData.getPlayerSeasonDataByName(name, season).teamAbbr;
+			if (thatTeam.equals(Constants.UNKNOWN)) continue;
 			if (team == null) {
 				team = thatTeam;
 				currentTeam = team;
@@ -178,7 +179,6 @@ public class ValueAnalysis implements AnalysisBLService{
 				break;
 			}
 		}
-		
 		if (!hasTransfer) return null;	//没有转会过
 		if (startYear == 0) startYear = fromYear;
 		
@@ -192,6 +192,9 @@ public class ValueAnalysis implements AnalysisBLService{
 				currentMatches.addAll(vo.matchList);
 			}
 		}
+		
+		System.out.println(formerMatches.size());
+		System.out.println(currentMatches.size());
 		
 		DivideHandler divideHandler = new DivideHandler();
 		int smallerSize = Math.min(formerMatches.size(), currentMatches.size());
