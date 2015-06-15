@@ -16,7 +16,6 @@ import blservice.LiveBLService;
 
 /**
  * 直播界面
- * 
  * @author lsy
  * @version 2015年6月8日 下午9:07:28
  */
@@ -29,13 +28,12 @@ public class LivePanel extends GameFatherPanel {
 	private LiveBLService liveService;
 	private ConPanel conPanel;
 	private TechPanel techPanel;
-	private ArrayList<LivePlayerVO> vo1,vo2;
+	private ArrayList<LivePlayerVO> vo1, vo2;
 	private int currentI;
 	private ArrayList<String> text;
-	private double[] homePlayersArgs,roadPlayersArgs;
-	private String teamAbbr1,teamAbbr2;
+	private double[] homePlayersArgs, roadPlayersArgs;
+	private String teamAbbr1, teamAbbr2;
 
-	
 	public LivePanel(String url) {
 		super(url);
 		liveService = new Live();
@@ -48,63 +46,66 @@ public class LivePanel extends GameFatherPanel {
 		roadPlayersArgs = liveService.getRoadFiveArgs();
 		teamAbbr1 = liveService.getHomeAbbr();
 		teamAbbr2 = liveService.getRoadAbbr();
-		techPanel = new TechPanel(teamAbbr1,teamAbbr2,vo1,vo2,LivePanel.this);
-		liveBelow = new LiveBelowPanel(teamAbbr1,teamAbbr2,text,Images.LIVE_BELOW);
-		conPanel = new ConPanel(homePlayersArgs,roadPlayersArgs);
+		techPanel = new TechPanel(teamAbbr1, teamAbbr2, vo1, vo2, LivePanel.this);
+		liveBelow = new LiveBelowPanel(teamAbbr1, teamAbbr2, text, Images.LIVE_BELOW);
+		conPanel = new ConPanel(homePlayersArgs, roadPlayersArgs);
 		this.add(liveBelow);
 		currentI = 1;
 		addButton();
 		ThreadDis thread = new ThreadDis();
 		thread.start();
 	}
-	
-	public void init(){
+
+	public void init() {
 		ArrayList<Integer> roadScores = liveService.getRoadScores();
 		ArrayList<Integer> homeScores = liveService.getHomeScores();
 		int size = homeScores.size();
-		while(size < 5) {
-			roadScores.add(size-1, 0);
-			homeScores.add(size-1, 0);
-			size++;
+		if (size > 0) {
+			while(size < 5) {
+				roadScores.add(size - 1, 0);
+				homeScores.add(size - 1, 0);
+				size++;
+			}
+			String homeName = liveService.getHomeAbbr();
+			String roadName = liveService.getRoadAbbr();
+			System.out.println(homeName);
+			String total = homeScores.get(size - 1).toString() + "-" + roadScores.get(size - 1).toString();
+			String each = "";
+			for(int i = 0; i < size - 1; i++) {
+				each = each + homeScores.get(i) + "-" + roadScores.get(i) + ";";
+			}
+
+			String[] totalScore = new String[]{homeScores.get(size - 1).toString(), roadScores.get(size - 1).toString()};
+			addLabel(homeName, roadName, totalScore);
+			scPanel = new ScorePanel(homeName, roadName, total, each);
+			this.add(scPanel);
+			scPanel.setLocation(188, 110);
+			this.repaint();
 		}
-		String homeName = liveService.getHomeAbbr();
-		String roadName = liveService.getRoadAbbr();
-		System.out.println(homeName);
-		String total = homeScores.get(size-1).toString() +"-"+roadScores.get(size-1).toString();
-		String each = "";
-		for(int i = 0; i < size-1;i++){
-			each = each + homeScores.get(i)+"-"+roadScores.get(i)+";";
-		}
-		
-		String[] totalScore = new String[]{homeScores.get(size-1).toString(),roadScores.get(size-1).toString()};
-		addLabel(homeName,roadName,totalScore);
-		scPanel = new ScorePanel(homeName,roadName,total,each);
-		this.add(scPanel);
-		scPanel.setLocation(188, 110);
-		this.repaint();
-		
+
 	}
-	
-	public void changelbText(){
+
+	public void changelbText() {
 		ArrayList<Integer> roadScores = liveService.getRoadScores();
 		ArrayList<Integer> homeScores = liveService.getHomeScores();
 		int size = homeScores.size();
 		while(size < 5) {
-			roadScores.add(size-1, 0);;
-			homeScores.add(size-1, 0);
+			roadScores.add(size - 1, 0);
+			;
+			homeScores.add(size - 1, 0);
 			size++;
 		}
-		String[] totalScore = new String[]{roadScores.get(size-1).toString(),homeScores.get(size-1).toString()};
-		String total = roadScores.get(size-1).toString() +"-"+homeScores.get(size-1).toString();
+		String[] totalScore = new String[]{roadScores.get(size - 1).toString(), homeScores.get(size - 1).toString()};
+		String total = roadScores.get(size - 1).toString() + "-" + homeScores.get(size - 1).toString();
 		String each = "";
-		for(int i = 0; i < size-1;i++){
-			each = each + homeScores.get(i)+"-"+roadScores.get(i)+";";
+		for(int i = 0; i < size - 1; i++) {
+			each = each + homeScores.get(i) + "-" + roadScores.get(i) + ";";
 		}
 		setLabel(totalScore);
-		setScorelb(total,each);
-		
-//		setLabel(new String[]{"200","100"});
-//		setScorelb("170-153","24-35;3-13;12-25;43-30;45-46");
+		setScorelb(total, each);
+
+		//		setLabel(new String[]{"200","100"});
+		//		setScorelb("170-153","24-35;3-13;12-25;43-30;45-46");
 	}
 
 	public void addButton() {
@@ -119,6 +120,7 @@ public class LivePanel extends GameFatherPanel {
 		this.add(live);
 		this.add(contrastbt);
 		tech.addMouseListener(new MouseAdapter() {
+
 			public void mousePressed(MouseEvent e) {
 				tech.setOn();
 				live.setOff();
@@ -131,6 +133,7 @@ public class LivePanel extends GameFatherPanel {
 			}
 		});
 		live.addMouseListener(new MouseAdapter() {
+
 			public void mousePressed(MouseEvent e) {
 				tech.setOff();
 				live.setOn();
@@ -144,6 +147,7 @@ public class LivePanel extends GameFatherPanel {
 		});
 
 		contrastbt.addMouseListener(new MouseAdapter() {
+
 			public void mousePressed(MouseEvent e) {
 				tech.setOff();
 				live.setOff();
@@ -156,34 +160,34 @@ public class LivePanel extends GameFatherPanel {
 			}
 		});
 	}
-	
-	
+
 	int index = 0;
-	public void refresh(){
-			changelbText();
-			if(currentI == 0) {
-				this.remove(techPanel);
-			} else if(currentI == 1) {
-				this.remove(liveBelow);
-			} else{
-				this.remove(conPanel);
-			}
-		index ++;
-		conPanel = new ConPanel(liveService.getHomeFiveArgs(),liveService.getRoadFiveArgs());
+
+	public void refresh() {
+		changelbText();
+		if (currentI == 0) {
+			this.remove(techPanel);
+		} else if (currentI == 1) {
+			this.remove(liveBelow);
+		} else {
+			this.remove(conPanel);
+		}
+		index++;
+		conPanel = new ConPanel(liveService.getHomeFiveArgs(), liveService.getRoadFiveArgs());
 		ArrayList<LivePlayerVO> homeplayers = liveService.getHomePlayerRecords();
 		ArrayList<LivePlayerVO> roadplayers = liveService.getRoadPlayerRecords();
-		if(TechPanel.CURRENTI == 0) {
+		if (TechPanel.CURRENTI == 0) {
 			techPanel.updateHomeTable(homeplayers);
-		}else{
+		} else {
 			techPanel.updateRoadTable(roadplayers);
 		}
 		ArrayList<String> text = liveService.getTextLive();
 		liveBelow.updateTable(text);
-		if(currentI == 0) {
+		if (currentI == 0) {
 			this.add(techPanel);
-		} else if(currentI == 1) {
+		} else if (currentI == 1) {
 			this.add(liveBelow);
-		} else{
+		} else {
 			this.add(conPanel);
 		}
 		this.repaint();
@@ -192,14 +196,14 @@ public class LivePanel extends GameFatherPanel {
 	class ThreadDis extends Thread {
 
 		public void run() {
-			while (true) {
+			while(true) {
 				try {
 					Thread.sleep(3000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-					liveService.refresh();
-					refresh();
+				liveService.refresh();
+				refresh();
 			}
 		}
 	}
