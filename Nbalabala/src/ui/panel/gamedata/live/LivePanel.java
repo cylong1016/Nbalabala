@@ -5,8 +5,11 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import ui.Images;
+import ui.UIConfig;
+import ui.common.button.ImgButton;
 import ui.common.button.TabButton;
 import ui.common.panel.ScorePanel;
+import ui.controller.MainController;
 import ui.panel.gamedata.ConPanel;
 import ui.panel.gamedata.GameFatherPanel;
 import utility.Constants;
@@ -52,10 +55,23 @@ public class LivePanel extends GameFatherPanel {
 		this.add(liveBelow);
 		currentI = 1;
 		addButton();
+		addBack();
 		ThreadDis thread = new ThreadDis();
 		thread.start();
 	}
 
+	private ImgButton back;
+	public void addBack() {
+		back = new ImgButton(UIConfig.IMG_PATH + "back.png", 70, 150, UIConfig.IMG_PATH + "backOn.png", UIConfig.IMG_PATH + "back.png");
+		this.add(back);
+		back.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				MainController.toLiveInPanel();
+			}
+
+		});
+	}
+	
 	public void init() {
 		ArrayList<Integer> roadScores = liveService.getRoadScores();
 		ArrayList<Integer> homeScores = liveService.getHomeScores();

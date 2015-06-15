@@ -1,13 +1,17 @@
 package ui.panel.gamedata;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 
 import ui.Images;
 import ui.UIConfig;
+import ui.common.button.ImgButton;
 import ui.common.label.MyLabel;
 import ui.common.label.Rec;
 import ui.common.panel.BottomPanel;
+import ui.controller.MainController;
 import utility.Constants;
 import vo.MatchDetailVO;
 
@@ -43,8 +47,21 @@ public class ConPanel extends BottomPanel {
 		this.setBounds(UIConfig.RELA_X-4, 250, 948, 349);
 		addLabel();
 		addRec();
+//		addBack();
 		this.updateUI();
 		this.repaint();
+	}
+	
+	private ImgButton back;
+	public void addBack() {
+		back = new ImgButton(UIConfig.IMG_PATH + "back.png", 70, 150, UIConfig.IMG_PATH + "backOn.png", UIConfig.IMG_PATH + "back.png");
+		this.add(back);
+		back.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				MainController.toLiveInPanel();
+			}
+
+		});
 	}
 	
 	private int lb_x = 414, lb_y = 60, lb_x2 = 522, lb_inter = 50, lb_width = 105, lb_height = 40;
