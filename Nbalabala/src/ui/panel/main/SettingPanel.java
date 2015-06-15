@@ -3,6 +3,10 @@
  */
 package ui.panel.main;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Statement;
@@ -10,8 +14,10 @@ import java.sql.Statement;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JPasswordField;
+import javax.swing.border.Border;
 
 import ui.Images;
+import ui.MyFont;
 import ui.common.button.ImgButton;
 import ui.common.comboBox.MyComboBox;
 import ui.common.panel.BottomPanel;
@@ -48,11 +54,21 @@ public class SettingPanel extends BottomPanel{
 		this.dialog = dialog;
 		this.setLayout(null);
 		setSize(Images.SETTING_BG.getWidth(null), Images.SETTING_BG.getHeight(null));
+		
+		userField.setSettingField();
 		this.add(userField);
+		
 		pwField.setBounds(146, 188, 144, 30);
+		pwField.setBackground(Color.LIGHT_GRAY);
+		pwField.setBorder(null);
+		pwField.setForeground(MyFont.DARK_GRAY);
 		this.add(pwField);
+		
+		pathField.setSettingField();
 		pathField.setText(Constants.dataSourcePath);
 		this.add(pathField);
+		
+		languageBox.setBGColor(Color.LIGHT_GRAY);
 		this.add(languageBox);
 		
 		String [] cacheSizes = new String[26];
@@ -60,9 +76,10 @@ public class SettingPanel extends BottomPanel{
 			cacheSizes[i-5] = String.valueOf(i);
 		}
 		cacheBox = new MyComboBox(cacheSizes, 465, 188, 83, 30);
+		cacheBox.setBGColor(Color.LIGHT_GRAY);
 		this.add(cacheBox);
 		
-		browsButton.setLocation(267, 291);
+		browsButton.setLocation(267, 298);
 		browsButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -78,7 +95,7 @@ public class SettingPanel extends BottomPanel{
 		});
 		this.add(browsButton);
 		
-		noButton.setLocation(441, 292);
+		noButton.setLocation(474, 285);
 		noButton.addActionListener(new ActionListener() {
 			JDialog dialog = SettingPanel.this.dialog;
 			@Override
@@ -88,7 +105,7 @@ public class SettingPanel extends BottomPanel{
 		});
 		this.add(noButton);
 		
-		yesButton.setLocation(544, 292);
+		yesButton.setLocation(544, 285);
 		yesButton.addActionListener(new ActionListener() {
 			JDialog dialog = SettingPanel.this.dialog;
 			@Override

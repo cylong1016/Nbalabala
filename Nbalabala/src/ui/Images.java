@@ -80,7 +80,7 @@ public class Images {
 	public static final String SEASON_INPUT_DOWN_ON = "images2.0/SeasonInputDownOn.png";
 	
 	/** 首页的图片  */
-	public static final Image HOME_BG = new ImageIcon("images2.0/main/homeBG3.png").getImage();
+	public static final Image HOME_BG = new ImageIcon("images2.0/main/homeBG4.png").getImage();
 	public static final Image HOME_BTN_ON = new ImageIcon("images2.0/main/buttonOn.png").getImage();
 	public static final Image HOME_BTN_CLICK = new ImageIcon("images2.0/main/buttonClick.png").getImage(); 
 	public static final Image HOME_BTN_R_ON = new ImageIcon("images2.0/main/rButtonOn.png").getImage();

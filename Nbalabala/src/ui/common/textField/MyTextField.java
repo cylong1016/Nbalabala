@@ -1,9 +1,14 @@
 package ui.common.textField;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Insets;
 
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
+import ui.MyFont;
 import ui.UIConfig;
 
 /**
@@ -25,6 +30,15 @@ public class MyTextField extends JTextField{
 		this.setForeground(Color.white);
 		this.setBackground(null);
 		this.setBorder(null);
+	}
+	
+	public void setSettingField(){
+		this.setOpaque(true);
+		this.setBackground(Color.LIGHT_GRAY);
+		this.setForeground(MyFont.DARK_GRAY);
+//		this.setBorder(new );
+		
+		
 	}
 }
 

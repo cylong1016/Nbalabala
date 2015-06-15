@@ -48,6 +48,7 @@ public class MyComboBox extends JComboBox{
 	            	JButton button = new BasicArrowButton(5);   
 	            	button.setOpaque(false);
 	            	button.setBorderPainted(false);
+	            	button.setBorder(BorderFactory.createEmptyBorder());
 //	            	button.setBorder(UIConfig.BUTTON_COLOR);
 	            	button.setFocusable(false);
 	            	button.setBackground(UIConfig.BUTTON_COLOR);
@@ -71,7 +72,7 @@ public class MyComboBox extends JComboBox{
             protected JButton createArrowButton() {            
             	JButton button = new BasicArrowButton(5);   
             	button.setOpaque(false);
-            	button.setBorder(BorderFactory.createEmptyBorder()); // 去掉按钮的边框
+            	button.setBorder(BorderFactory.createLineBorder(color)); // 设置按钮边框的颜色
 //            	button.setBorder(UIConfig.BUTTON_COLOR);
             	button.setFocusable(false);
             	button.setBackground(color);

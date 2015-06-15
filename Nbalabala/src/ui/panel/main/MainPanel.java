@@ -11,6 +11,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JDialog;
 
+import com.sun.awt.AWTUtilities;
+
 import ui.Images;
 import ui.MyFont;
 import ui.common.button.ImgButton;
@@ -161,12 +163,13 @@ public class MainPanel extends Panel {
 		liveBtn.setFont(MyFont.YH_L);
 		this.add(liveBtn);
 		
-		settingButton.setLocation(40, 553); 
+		settingButton.setBounds(530, 495, 32, 32);
 		settingButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Point location = getLocationOnScreen();
 				JDialog dialog= new JDialog(MainController.frame, true);
+			
 				SettingPanel settingPanel = new SettingPanel(dialog);
 				int x = location.x + getWidth() / 2 - settingPanel.getWidth()
 						/ 2;
