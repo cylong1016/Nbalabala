@@ -238,7 +238,7 @@ public class MainController {
 	}
 	
 	public static void toLiveInPanel() {
-		liveInPanel = new LiveInPanel("images2.0/games/liveinBG.png");
+		liveInPanel = new LiveInPanel("images2.0/games/liveinOneBG.png");
 		frame.setPanel(liveInPanel);
 		frame.repaint();
 	}

@@ -25,7 +25,7 @@ public class Test extends JFrame{
 //		LineChart chart = new LineChart(name,name,num);
 //		ScatterChart chart = new ScatterChart(num,num);
 //		LineChart chart = new LineChart(name,name,num);
-		ScatterChart chart = new ScatterChart(num,num);
+//		ScatterChart chart = new ScatterChart(num,num);
 //		MixChart chart = new MixChart();
 //		BoxChart chart = new BoxChart();
 //		XYLine3DRenderer renderer = new XYLine3DRenderer();
