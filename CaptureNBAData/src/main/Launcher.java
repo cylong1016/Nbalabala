@@ -1,8 +1,5 @@
 package main;
 
-import capture.Match;
-import capture.Player;
-
 /**
  * 程序入口
  * @author cylong
@@ -11,10 +8,15 @@ import capture.Player;
 public class Launcher {
 
 	public static void main(String[] args) {
-		Match m = new Match();
-		m.capture();
-		Player p = new Player();
-		p.capture();
+		
+//		Match m = new Match();
+//		m.capture();
+		
+//		Player p = new Player();
+//		p.capture();
+		
+//		PlayerAdvance pa = new PlayerAdvance();
+//		pa.capture();
 	}
 
 }

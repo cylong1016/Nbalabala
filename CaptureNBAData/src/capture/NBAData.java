@@ -1,6 +1,9 @@
 package capture;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -67,6 +70,32 @@ public abstract class NBAData {
 			e.printStackTrace();
 		}
 		return urlConn;
+	}
+	
+	/**
+	 * 得到一个url的reader 读取网页数据
+	 * @param url
+	 * @return BufferedReader
+	 * @author cylong
+	 * @version 2015年6月15日  下午9:20:04
+	 */
+	protected BufferedReader getReader(String url) {
+		InputStream input = null;
+		BufferedReader reader = null;
+		HttpURLConnection urlConn = null;
+		try {
+			urlConn = (HttpURLConnection)new URL(url).openConnection();
+			urlConn.setRequestMethod("GET");
+			urlConn.setUseCaches(true);
+			urlConn.connect();
+			input = urlConn.getInputStream();
+			reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return reader;
 	}
 	
 	/**
