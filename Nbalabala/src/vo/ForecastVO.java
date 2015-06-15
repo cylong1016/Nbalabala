@@ -16,8 +16,8 @@ public class ForecastVO {
 	public String name;
 	public int width;	//组距	(每多少场比赛划分为一组)
 	public ArrayList<Double> datas;// 离散点的纵坐标，横坐标是1,2,3,4...
-	public String fromYear;	//起止年份
-	public String toYear;	
+	public String fromSeason;	//起止年份
+	public String toSeason;	
 	public String conclusion;	//预测结论
 	public double nextY;	//预测的下一个点的Y值，其横坐标是datas.size() + 1.这个点要着重画出
 	public double [] curveX;	//曲线上点的横坐标，间隔0.05
@@ -41,11 +41,11 @@ public class ForecastVO {
 	public double getWidth() {
 		return width;
 	}
-	public String getFromYear() {
-		return fromYear;
+	public String getFromseason() {
+		return fromSeason;
 	}
-	public String getToYear() {
-		return toYear;
+	public String getToseason() {
+		return toSeason;
 	}
 	public String getConclusion() {
 		return conclusion;

@@ -115,8 +115,8 @@ public class ValueAnalysis implements AnalysisBLService{
 		result.width = divideHandler.getWidth();
 		
 		PlayerProfilePO profilePO = playerData.getPlayerProfileByName(name);
-		result.toYear = Utility.getOverallSeason(profilePO.toYear - 1);
-		result.fromYear = Utility.getOverallSeason(profilePO.fromYear);
+		result.toSeason = Utility.getOverallSeason(profilePO.toYear - 1);
+		result.fromSeason = Utility.getOverallSeason(profilePO.fromYear);
 		result.nextY = regression.getNextValueByRegression();
 		result.name = name;
 		result.datas = data;
