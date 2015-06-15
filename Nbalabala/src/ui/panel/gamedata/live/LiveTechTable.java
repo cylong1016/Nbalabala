@@ -31,7 +31,7 @@ public class LiveTechTable extends BottomTable{
 		this.panel = panel;
 		this.players = players;
 		setTable(players);
-		addListener(this);
+//		addListener(this);
 	}
 	
 	public void setTable(ArrayList<LivePlayerVO> players){
@@ -81,23 +81,23 @@ public class LiveTechTable extends BottomTable{
 		
 	}
 
-	public void addListener(final BottomTable table) {
-		try {
-			table.addMouseListener(new UserMouseAdapter() {
-
-				public void mouseClicked(MouseEvent e) {
-					if (e.getClickCount() < 2)
-						return;
-					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
-					if (rowI > -1) {
-						MainController.toPlayerInfoPanel(Utility.getPlayerIDByName(players.get(rowI).nameEng), panel);
-					}
-				}
-			});
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public void addListener(final BottomTable table) {
+//		try {
+//			table.addMouseListener(new UserMouseAdapter() {
+//
+//				public void mouseClicked(MouseEvent e) {
+//					if (e.getClickCount() < 2)
+//						return;
+//					int rowI = table.rowAtPoint(e.getPoint());// 得到table的行号
+//					if (rowI > -1) {
+//						MainController.toPlayerInfoPanel(Utility.getPlayerIDByName(players.get(rowI).nameEng), panel);
+//					}
+//				}
+//			});
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 
 }
