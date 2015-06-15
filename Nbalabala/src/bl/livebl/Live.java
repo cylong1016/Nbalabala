@@ -190,6 +190,8 @@ public class Live implements LiveBLService {
 	 */
 	@Override
 	public double[] getHomeFiveArgs() {
+		homeFiveArgs[3] = 0;
+		homeFiveArgs[4] = 0;
 		for(int i = 0; i < homePlayerRecords.size(); i++) {
 			LivePlayerVO vo = homePlayerRecords.get(i);
 			homeFiveArgs[3] += vo.totalRebound;
@@ -203,6 +205,8 @@ public class Live implements LiveBLService {
 	 */
 	@Override
 	public double[] getRoadFiveArgs() {
+		roadFiveArgs[3] = 0;
+		roadFiveArgs[4] = 0;
 		for(int i = 0; i < roadPlayerRecords.size(); i++) {
 			LivePlayerVO vo = roadPlayerRecords.get(i);
 			roadFiveArgs[3] += vo.totalRebound;
