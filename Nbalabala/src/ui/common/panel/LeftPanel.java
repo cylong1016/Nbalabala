@@ -35,7 +35,7 @@ public class LeftPanel extends Panel {
 	
 	/** button */
 	private TabButton allPlayersBtn, allTeamsBtn, playerDataBtn, teamDataBtn;
-	private TabButton gameBtn, hotBtn, analysisBtn, returnBtn;
+	private TabButton gameBtn, liveBtn, hotBtn, analysisBtn, returnBtn;
 	
 	private static final int FIRST_ZONE_Y = 100;
 	private static final int SECOND_ZONE_Y = 296;
@@ -122,8 +122,18 @@ public class LeftPanel extends Panel {
 		});
 		this.add(gameBtn);
 		
+		liveBtn = new TabButton(bigBlank + Constants.live + arrow, btnOnImg, btnClickImg);
+		liveBtn.setLocation(0, SECOND_ZONE_Y + inter * 1);
+		liveBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setCurrentOn(liveBtn);
+				MainController.toLiveInPanel();
+			}
+		});
+		this.add(liveBtn);
+		
 		hotBtn = new TabButton(bigBlank + Constants.hotShort + arrow, btnOnImg, btnClickImg);
-		hotBtn.setLocation(0, SECOND_ZONE_Y + inter * 1);
+		hotBtn.setLocation(0, THIRD_ZONE_Y);
 		hotBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setCurrentOn(hotBtn);
@@ -133,7 +143,7 @@ public class LeftPanel extends Panel {
 		this.add(hotBtn);
 		
 		analysisBtn = new TabButton(smallBlank + Constants.analysis + arrow, btnOnImg, btnClickImg);
-		analysisBtn.setLocation(0, THIRD_ZONE_Y);
+		analysisBtn.setLocation(0, THIRD_ZONE_Y + inter * 1);
 		analysisBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -173,7 +183,7 @@ public class LeftPanel extends Panel {
 	
 	protected void setInit(){
 		TabButton button[] = {allPlayersBtn, allTeamsBtn, playerDataBtn, teamDataBtn, 
-				gameBtn, hotBtn, analysisBtn, returnBtn};
+				gameBtn, liveBtn, hotBtn, analysisBtn, returnBtn};
 		for (int i = 0; i < button.length; i++) {
 			button[i].setFont(MyFont.YH_B);
 			button[i].setForeground(MyFont.BLACK_GRAY);
@@ -259,6 +269,10 @@ public class LeftPanel extends Panel {
 
 	public TabButton getGameBtn() {
 		return gameBtn;
+	}
+	
+	public TabButton getLiveBtn() {
+		return liveBtn;
 	}
 
 	public TabButton getHotBtn() {

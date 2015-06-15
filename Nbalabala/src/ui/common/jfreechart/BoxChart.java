@@ -1,16 +1,12 @@
 package ui.common.jfreechart;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import org.jfree.chart.ChartPanel;
@@ -26,7 +22,9 @@ import ui.common.panel.Panel;
 /** @see http://stackoverflow.com/questions/6844759 */
 public class BoxChart extends Panel{
 
-    private static final int COLS = 20;
+    /** serialVersionUID */
+	private static final long serialVersionUID = -5806566237485794421L;
+	private static final int COLS = 20;
     private static final int VISIBLE = 4;
     private static final int ROWS = 5;
     private static final int VALUES = 10;
@@ -102,7 +100,10 @@ public class BoxChart extends Panel{
         controlPanel = new JPanel();
         controlPanel.add(new JButton(new AbstractAction("u22b2Prev") {
 
-            @Override
+            /** serialVersionUID */
+			private static final long serialVersionUID = 4522011730470666102L;
+
+			@Override
             public void actionPerformed(ActionEvent e) {
                 start -= VISIBLE;
                 if (start < 0) {
@@ -115,7 +116,10 @@ public class BoxChart extends Panel{
         }));
         controlPanel.add(new JButton(new AbstractAction("Nextu22b3") {
 
-            @Override
+            /** serialVersionUID */
+			private static final long serialVersionUID = -3479435161409432954L;
+
+			@Override
             public void actionPerformed(ActionEvent e) {
                 start += VISIBLE;
                 if (start > COLS - VISIBLE) {
