@@ -16,10 +16,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import ui.UIConfig;
 import ui.common.panel.Panel;
+import utility.Constants;
 import vo.AnalysisTransferVO;
-import bl.analysisbl.ValueAnalysis;
-import blservice.AnalysisBLService;
-import enums.InferenceData;
 
 /**
  * 折线图
@@ -30,23 +28,20 @@ public class LineChart extends Panel{
 	
 	/** serialVersionUID */
 	private static final long serialVersionUID = -238536006047910842L;
-	private String name;
-	private InferenceData inferenceData;
-	private double[] num;
-	private AnalysisBLService service;
 	private ArrayList<Double> formerData,currentData;
 	private AnalysisTransferVO vo;
 	
-	public LineChart(String name,InferenceData inferenceData){
-		this.name = name;
-		this.inferenceData = inferenceData;
-		service = new ValueAnalysis();
-		vo = service.getTransferData(name, inferenceData);
+	public LineChart(AnalysisTransferVO vo){
+		if(vo == null) {
+			return;
+		}
+		this.vo = vo;
 		formerData = vo.getFormerData();
 		currentData = vo.getCurrentData();
 		JPanel panel = new ChartPanel(createLineChart());
-		panel.setSize(800, 400);
+		panel.setSize(700, 400);
 		this.add(panel); // 将chart对象放入Panel面板中去，ChartPanel类已继承Jpanel
+		this.setBounds(20, 90, 700, 400);
 		this.repaint();
 	}
 	
@@ -55,11 +50,11 @@ public class LineChart extends Panel{
         int i = 0;
         
         for(i = 0;i<formerData.size(); i++ ){
-        	dataset.addValue(formerData.get(i), vo.getFormerAbbr(), i+"");
+        	dataset.addValue(formerData.get(i), Constants.translateTeamAbbr(vo.getFormerAbbr()), i+"");
         }
         
         for(int j = 0;j<currentData.size(); j++ ){
-        	dataset.addValue(currentData.get(j), vo.getCurrentAbbr(), i+j+"");
+        	dataset.addValue(currentData.get(j), Constants.translateTeamAbbr(vo.getCurrentAbbr()), i+j+"");
         }
         
         JFreeChart chart = ChartFactory.createLineChart("球员转会图", "时间", "数据",  

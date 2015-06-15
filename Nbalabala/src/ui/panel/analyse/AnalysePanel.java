@@ -44,7 +44,7 @@ public class AnalysePanel extends BottomPanel{
 		allSeason = new AllSeasonPanel();
 		contri = new ContriPanel();
 		future =new FuturePanel();
-		turn = new TurnPanel();
+		turn = new TurnPanel("LeBron James$01");
 		currentPanel = lastFive;
 		addLabel();
 		addComboBox();

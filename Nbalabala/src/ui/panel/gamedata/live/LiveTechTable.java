@@ -1,16 +1,12 @@
 package ui.panel.gamedata.live;
 
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 
-import ui.common.UserMouseAdapter;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomTable;
-import ui.controller.MainController;
 import utility.Constants;
-import utility.Utility;
 import vo.LivePlayerVO;
 
 /**
@@ -23,19 +19,19 @@ public class LiveTechTable extends BottomTable{
 	/** serialVersionUID */
 	private static final long serialVersionUID = -2414449802167589112L;
 
-	private BottomPanel panel;
-	private ArrayList<LivePlayerVO> players;
+//	private BottomPanel panel;
+//	private ArrayList<LivePlayerVO> players;
 	
 	public LiveTechTable(ArrayList<LivePlayerVO> players,BottomPanel panel){
 		super(new String[players.size()][Constants.livePlayerHeaders.length],Constants.livePlayerHeaders);
-		this.panel = panel;
-		this.players = players;
+//		this.panel = panel;
+//		this.players = players;
 		setTable(players);
 //		addListener(this);
 	}
 	
 	public void setTable(ArrayList<LivePlayerVO> players){
-		this.players = players;
+//		this.players = players;
 		this.setModel(new DefaultTableModel(players.size(),Constants.livePlayerHeaders.length));
 		DefaultTableModel tableModel = (DefaultTableModel)this.getModel();
 		tableModel.setColumnIdentifiers(Constants.livePlayerHeaders);

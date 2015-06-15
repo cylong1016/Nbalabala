@@ -213,4 +213,8 @@ public class TextCHN {
 	
 	public static final String[] HOT_BTN = {"今日热点球员",  "赛季热点球员", "赛季热点球队", "进步最快球员"};
 
+	public static final String[] ANY_SELECT = {"得分","篮板","助攻","投篮命中率","三分命中率","罚球命中率","效率","GMSC",
+		"投篮效率","真实命中率"};
+	
+
 }

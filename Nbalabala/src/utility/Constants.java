@@ -382,6 +382,8 @@ public class Constants {
 	
 	public static String[] HOT_BTN = TextCHN.HOT_BTN;
 	
+	public static String[] ANY_SELECT = TextCHN.ANY_SELECT;
+	
 	public static String translateDivision(ScreenDivision division) {
 		return translater.translateTeamDivision(division);
 	}
