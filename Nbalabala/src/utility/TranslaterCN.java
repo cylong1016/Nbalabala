@@ -228,7 +228,7 @@ public class TranslaterCN implements Translater{
 		case "WSB":
 			return "华盛顿"; 
 		case "GSW":
-			return "金洲";
+			return "金州";
 		case "LAC":
 		case "LAL":
 			return "洛杉矶";
