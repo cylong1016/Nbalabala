@@ -35,6 +35,7 @@ public class AnalysePanel extends BottomPanel{
 	private FuturePanel future;
 	private TurnPanel turn;
 	private AnalysisBLService service;
+	private static int currentI;
 	
 	public AnalysePanel(String url){
 		super(url);
@@ -66,6 +67,7 @@ public class AnalysePanel extends BottomPanel{
 				public void mouseClicked(MouseEvent e) {
 					AnalysePanel.this.remove(currentPanel);
 					if(e.getSource() == select[0]){
+						currentI = 0;
 						currentPanel = lastFive;
 						for(int i = 0 ;i < 5; i++) {
 							select[i].setOff();
@@ -73,6 +75,7 @@ public class AnalysePanel extends BottomPanel{
 						select[0].setOn();
 						AnalysePanel.this.add(currentPanel);
 					}else if(e.getSource() == select[1]){
+						currentI = 1;
 						currentPanel = allSeason;
 						for(int i = 0 ;i < 5; i++) {
 							select[i].setOff();
@@ -80,6 +83,7 @@ public class AnalysePanel extends BottomPanel{
 						select[1].setOn();
 						AnalysePanel.this.add(currentPanel);
 					}else if(e.getSource() == select[2]){
+						currentI = 2;
 						currentPanel = contri;
 						for(int i = 0 ;i < 5; i++) {
 							select[i].setOff();
@@ -87,6 +91,7 @@ public class AnalysePanel extends BottomPanel{
 						select[2].setOn();
 						AnalysePanel.this.add(currentPanel);
 					}else if(e.getSource() == select[3]){
+						currentI = 3;
 						currentPanel = future;
 						for(int i = 0 ;i < 5; i++) {
 							select[i].setOff();
@@ -94,6 +99,7 @@ public class AnalysePanel extends BottomPanel{
 						select[3].setOn();
 						AnalysePanel.this.add(currentPanel);
 					}else if(e.getSource() == select[4]){
+						currentI = 4;
 						currentPanel = turn;
 						for(int i = 0 ;i < 5; i++) {
 							select[i].setOff();
@@ -111,8 +117,12 @@ public class AnalysePanel extends BottomPanel{
 	public void addComboBox(){
 		teamCom = new MyComboBox(Constants.TEAM_NAMES,599,10,120,30);
 		String[] strCom = changeArray(service.getLineupNamesByAbbr("BOS"));
-		
-		playerCom = new MyComboBox(strCom,770,10,180,30);
+		String[] showStr = new String[strCom.length];
+		for(int i = 0 ; i < strCom.length; i++) {
+			String[] name = strCom[i].split("\\$");
+			showStr[i] = name[0];
+		}
+		playerCom = new MyComboBox(showStr,770,10,180,30);
 		this.add(teamCom);
 		teamCom.addActionListener(new ActionListener(){
 
@@ -122,8 +132,37 @@ public class AnalysePanel extends BottomPanel{
 				playerCom.removeAllItems();
 				str = changeArray(service.getLineupNamesByAbbr(Constants.TEAM_ABBR[teamCom.getSelectedIndex()]));
 				for(int i = 0 ;i < str.length; i++) {
-					String[] name = str[i].split("$");
+					String[] name = str[i].split("\\$");
 					playerCom.addItem(name[0]);
+				}
+			}
+			
+		});
+		
+		playerCom.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int index = playerCom.getSelectedIndex();
+				if(index == -1) {
+					index = 0;
+				}
+				System.out.println(index);
+				switch(currentI) {
+				case 0:
+					break;
+				case 1:
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					AnalysePanel.this.remove(turn);
+					turn = new TurnPanel(str[index]); 
+					AnalysePanel.this.add(turn);
+					AnalysePanel.this.repaint();
+					break;
 				}
 			}
 			
