@@ -28,6 +28,7 @@ import ui.controller.MainController;
 import utility.Constants;
 import utility.Utility;
 import vo.PlayerDetailVO;
+import bl.matchquerybl.MatchQuery;
 import bl.playerquerybl.PlayerQuery;
 import blservice.PlayerQueryBLService;
 import data.playerdata.PlayerImageCache;
@@ -117,13 +118,19 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		addBackButton();
 		addTabButtons();
 		
-		int matchCount = detailVO.getMatchRecords().size();
 		ArrayList<MatchPlayerPO> latestTwoMatches = new ArrayList<MatchPlayerPO>();
-		if (detailVO.getMatchRecords().size() > 1) {
-			latestTwoMatches.add(detailVO.getMatchRecords().get(matchCount - 2));
+		ArrayList<MatchPlayerPO> playoffMatches = new MatchQuery().
+				getMatchRecordByPlayerName(name, Constants.LATEST_SEASON);
+		if (playoffMatches.size() > 1) {
+			int matchCount = playoffMatches.size();
+			latestTwoMatches.add(playoffMatches.get(matchCount - 1));
+			latestTwoMatches.add(playoffMatches.get(matchCount - 2));
+		}else {
+			int matchCount = detailVO.getMatchRecords().size();
 			latestTwoMatches.add(detailVO.getMatchRecords().get(matchCount - 1));
+			latestTwoMatches.add(detailVO.getMatchRecords().get(matchCount - 2));
 		}
-				
+		
 		// 刚进入的时候显示的是柱状对比图的那个页面
 		briefPanel = new PlayerInfoBriefPanel(detailVO.getSeasonRecord(), 
 				playerQuery.getFiveArgsAvg(seasonInput.getSeason()), 

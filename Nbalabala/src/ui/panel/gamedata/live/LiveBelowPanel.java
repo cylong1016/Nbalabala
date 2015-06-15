@@ -38,7 +38,7 @@ public class LiveBelowPanel extends BottomPanel {
 		super(bg);
 		this.text = text;
 		this.setBounds(UIConfig.RELA_X-4, 250, 948, 309);
-		liveService = new Live();
+		liveService = new LiveMock();
 	    table = new LiveDetailTable(teamAbbr1,teamAbbr2,text);
 		addButton();
 		setTable(text);
