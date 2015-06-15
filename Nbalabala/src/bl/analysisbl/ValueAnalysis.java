@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import po.MatchPlayerPO;
 import po.PlayerProfilePO;
 import ui.UIConfig;
+import utility.Constants;
 import utility.Utility;
 import vo.AnalysisCareerVO;
 import vo.AnalysisClutchVO;
@@ -135,14 +136,15 @@ public class ValueAnalysis implements AnalysisBLService{
 	}
 	
 	public static void main(String[]args) {
-		ForecastVO vo = new ValueAnalysis().getForecastData("Kobe Bryant$01", InferenceData.SCORE);
-		System.out.println(vo.fromYear);
-		System.out.println(vo.toYear);
-		System.out.println(vo.conclusion);
-		double [] curveY = vo.curveY;
-		for (double d : curveY) {
-			System.out.println(d);
-		}
+//		ForecastVO vo = new ValueAnalysis().getForecastData("Kobe Bryant$01", InferenceData.SCORE);
+//		System.out.println(vo.fromYear);
+//		System.out.println(vo.toYear);
+//		System.out.println(vo.conclusion);
+//		double [] curveY = vo.curveY;
+//		for (double d : curveY) {
+//			System.out.println(d);
+//		}
+		AnalysisTransferVO vo = new ValueAnalysis().getTransferData("LeBron James$01", InferenceData.ASSIST);
 		
 	}
 	//TODO 明显下降的球员：Steve Francis
@@ -244,6 +246,15 @@ public class ValueAnalysis implements AnalysisBLService{
 				yearMatchList.add(year);
 			}
 		}
+	}
+
+
+	/* (non-Javadoc)
+	 * @see blservice.AnalysisBLService#getLineupNamesByAbbr(java.lang.String)
+	 */
+	@Override
+	public ArrayList<String> getLineupNamesByAbbr(String abbr) {
+		return new SeasonData().getPlayerNamesByTeamAbbr(abbr, Constants.LATEST_SEASON_REGULAR);
 	}
 	
 

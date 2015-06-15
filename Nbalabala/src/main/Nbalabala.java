@@ -15,9 +15,10 @@ import data.teamdata.TeamLogoCache;
 public class Nbalabala {
 
 	public static void main(String[] args) {
-		MainController.launch();
+
 		new PlayerImageCache().loadPortrait();
 		new TeamLogoCache().loadLogos();
+		MainController.launch();
 
 //		Constants.setEnglish();
 	}

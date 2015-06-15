@@ -36,4 +36,5 @@ public interface AnalysisBLService {
 	/** 返回某一球员转会分析所需数据 */
 	public AnalysisTransferVO getTransferData(String name, InferenceData inferenceData);
 
+	public ArrayList<String> getLineupNamesByAbbr(String abbr);
 }
