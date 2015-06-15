@@ -2,10 +2,10 @@ package ui.common.jfreechart;
 
 import javax.swing.JFrame;
 
-import org.jfree.chart.renderer.category.LineRenderer3D;
-import org.jfree.chart.renderer.xy.XYLine3DRenderer;
-
+import enums.InferenceData;
 import ui.UIConfig;
+import bl.analysisbl.ValueAnalysis;
+import blservice.AnalysisBLService;
 
 /**
  * 
@@ -19,11 +19,12 @@ public class Test extends JFrame{
 	}
 	
 	public static void main(String[] args){
+		AnalysisBLService service = new ValueAnalysis();
 		String[] name = {"Allen Iverson","James Peter","Kobe Byrant","CYL"};
 		double[] num = {35.4,18.3,26,30.4};
 //		BarChart chart = new BarChart(name,num);
 //		LineChart chart = new LineChart(name,name,num);
-//		ScatterChart chart = new ScatterChart(num,num);
+		ScatterChart chart = new ScatterChart(service.getForecastData("LeBron James", InferenceData.ASSIST));
 //		LineChart chart = new LineChart(name,name,num);
 //		ScatterChart chart = new ScatterChart(num,num);
 //		MixChart chart = new MixChart();

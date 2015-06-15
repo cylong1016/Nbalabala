@@ -12,6 +12,11 @@ import ui.common.button.TabButton;
 import ui.common.comboBox.MyComboBox;
 import ui.common.panel.BottomPanel;
 import ui.common.panel.Panel;
+import ui.panel.analyse.panel.AllSeasonPanel;
+import ui.panel.analyse.panel.ContriPanel;
+import ui.panel.analyse.panel.FuturePanel;
+import ui.panel.analyse.panel.LastFivePanel;
+import ui.panel.analyse.panel.TurnPanel;
 import utility.Constants;
 import bl.analysisbl.ValueAnalysis;
 import blservice.AnalysisBLService;
@@ -46,7 +51,7 @@ public class AnalysePanel extends BottomPanel{
 		lastFive = new LastFivePanel();
 		allSeason = new AllSeasonPanel();
 		contri = new ContriPanel();
-		future =new FuturePanel();
+		future =new FuturePanel(str[0]);
 		turn = new TurnPanel(str[0]);
 		currentPanel = lastFive;
 		addLabel();
@@ -147,7 +152,6 @@ public class AnalysePanel extends BottomPanel{
 				if(index == -1) {
 					index = 0;
 				}
-				System.out.println(index);
 				switch(currentI) {
 				case 0:
 					break;
@@ -156,6 +160,10 @@ public class AnalysePanel extends BottomPanel{
 				case 2:
 					break;
 				case 3:
+					AnalysePanel.this.remove(future);
+					future = new FuturePanel(str[index]); 
+					AnalysePanel.this.add(turn);
+					AnalysePanel.this.repaint();
 					break;
 				case 4:
 					AnalysePanel.this.remove(turn);

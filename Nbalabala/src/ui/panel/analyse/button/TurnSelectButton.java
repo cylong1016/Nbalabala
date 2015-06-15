@@ -1,4 +1,4 @@
-package ui.panel.analyse;
+package ui.panel.analyse.button;
 
 import ui.common.button.TextButton;
 import enums.InferenceData;
@@ -8,19 +8,19 @@ import enums.InferenceData;
  * @author lsy
  * @version 2015年6月15日  下午5:16:07
  */
-public class SelectButton extends TextButton{
+public class TurnSelectButton extends TextButton{
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -1625714034916406638L;
 
 	/** 代表当前选中的按钮 */
-	public static SelectButton current;
+	public static TurnSelectButton current;
 	/** 按钮上的字 */
 	private String text;
 	/** 枚举类型 */
 	private InferenceData inferenceData;
 
-	public SelectButton(int x, int y, int width, int height, String text) {
+	public TurnSelectButton(int x, int y, int width, int height, String text) {
 		super(x, y, width, height, text);
 		this.text = text;
 	}

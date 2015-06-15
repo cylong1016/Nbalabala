@@ -2,7 +2,7 @@ package ui.common.jfreechart;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.Random;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -14,11 +14,14 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.TextTitle;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import ui.common.panel.Panel;
+import utility.Constants;
+import vo.ForecastVO;
 
 
 
@@ -32,36 +35,39 @@ public class ScatterChart extends Panel{
 	private static final long serialVersionUID = 2633383144443658841L;
 	
 	private double[] x_num,y_num;
+	private ForecastVO vo;
 	
-	public ScatterChart(double[] x_num,double[] y_num){ 
-		this.x_num = x_num;
-		this.y_num = y_num;
+	public ScatterChart(ForecastVO vo){ 
+		this.vo = vo;
 		JPanel panel = new ChartPanel(createChart());
-		panel.setSize(800, 400);
+		panel.setSize(700, 400);
 		this.add(panel); // 将chart对象放入Panel面板中去，ChartPanel类已继承Jpanel
+		this.setBounds(20, 90, 700, 400);
 		this.repaint();
 	}
 	
 	 private XYDataset samplexydataset2() {
-		  int cols = 10;
-		  int rows = 10;
-		  double[][] values = new double[cols][rows];
+		 ArrayList<Double> datas = vo.getDatas();
 		  XYSeriesCollection xySeriesCollection = new XYSeriesCollection();
 		  XYSeries series = new XYSeries("Random");
-		  Random rand = new Random();
-		  for (int i = 0; i < values.length; i++) {
-		   for (int j = 0; j < values[i].length; j++) {
-		    double x = Math.round(rand.nextDouble() * 500);
-		    double y = Math.round(rand.nextDouble() * 500);
-		    series.add(x, y);
-		   }
+		  for(int i = 0 ; i < datas.size(); i++) {
+			  series.add(i, datas.get(i));
 		  }
-//		  for(int i = 0; i < x_num.length; i++) {
-//	 			series.add(x_num[i],y_num[i]);
-//		  }
 		  xySeriesCollection.addSeries(series);
 		  return xySeriesCollection;
 		 }
+	 
+	 private DefaultCategoryDataset lineData() {
+		 DefaultCategoryDataset dataset = new DefaultCategoryDataset();  
+		 double[] x = vo.getCurveX();
+		 double[] y = vo.getCurveY();
+	        int i = 0;
+	        
+//	        for(i = 0;i<formerData.size(); i++ ){
+//	        	dataset.addValue(formerData.get(i), Constants.translateTeamAbbr(vo.getFormerAbbr()), i+"");
+//	        }
+	        return dataset;
+	 }
 	
 	//生成图表对象 
 	public JFreeChart createChart() { 

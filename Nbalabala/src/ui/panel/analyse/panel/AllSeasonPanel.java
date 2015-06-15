@@ -1,4 +1,4 @@
-package ui.panel.analyse;
+package ui.panel.analyse.panel;
 
 import java.awt.Color;
 
