@@ -193,9 +193,6 @@ public class ValueAnalysis implements AnalysisBLService{
 			}
 		}
 		
-		System.out.println(formerMatches.size());
-		System.out.println(currentMatches.size());
-		
 		DivideHandler divideHandler = new DivideHandler();
 		int smallerSize = Math.min(formerMatches.size(), currentMatches.size());
 		ArrayList<Double> formerData = divideHandler.divideData(formerMatches, inferenceData, smallerSize);
