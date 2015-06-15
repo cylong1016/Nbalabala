@@ -214,7 +214,7 @@ public class LivePanel extends GameFatherPanel {
 		public void run() {
 			while(true) {
 				try {
-					Thread.sleep(3000);
+					Thread.sleep(6000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
