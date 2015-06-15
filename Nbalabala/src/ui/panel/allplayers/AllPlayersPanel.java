@@ -74,7 +74,7 @@ public class AllPlayersPanel extends BottomPanel {
 	public static BottomScrollPane SCROLL;
 	private BottomTable table;
 	/** 头像宽度 */
-	private static final int PORTRAIT_WIDTH = 70;
+	private static final int PORTRAIT_WIDTH = 83;
 	ArrayList<PlayerProfilePO> players;
 	Object [][] rowData;
 	int size,lth;
@@ -134,7 +134,7 @@ public class AllPlayersPanel extends BottomPanel {
 		rowData = new String[size][lth];
 		ArrayList<ImageIcon> iconArr = new ArrayList<ImageIcon>();
 		table.setModel(new DefaultTableModel(rowData,Constants.allPlayerHeaders));
-		table.setRowHeight(57);
+		table.setRowHeight(UIConfig.ALL_PLAYERS_ROW_H);
 		table.setHeaderColorAndFont();
 		table.setHeaderHeight(UIConfig.TABLE_HEADER_HEIGHT);
 		table.setWidth(new int[] { 150, 200, 150, 150, 89, 132 });
@@ -143,7 +143,7 @@ public class AllPlayersPanel extends BottomPanel {
 		for (int i = 0; i < size; i++) {
 			PlayerProfilePO ppVO = players.get(i);
 			Image protrait = PlayerImageCache.getPortraitByName(ppVO.getName());
-			int height = protrait.getHeight(null) * 70 / protrait.getWidth(null);// 按比例，将高度缩减
+			int height = protrait.getHeight(null) * PORTRAIT_WIDTH / protrait.getWidth(null);// 按比例，将高度缩减
 			Image smallImg = protrait.getScaledInstance(PORTRAIT_WIDTH, height, Image.SCALE_SMOOTH);
 			ImageIcon ic = new ImageIcon(smallImg);
 			iconArr.add(ic);

@@ -78,6 +78,8 @@ public class UIConfig {
 	public static final int RELA_X = 29;
 	/** 表格纵向滚动条的宽度 */
 	public static final int SCROLLBAR_WIDTH = 16;
+	/** 所有球员的表格行高 */
+	public static final int ALL_PLAYERS_ROW_H = 70;
 	/*----------------------------表格配置--------------------------------*/
 	/*----------------------------柱状图配置--------------------------------*/
 	/** 平均的柱状图颜色 */

@@ -332,4 +332,5 @@ public class BottomTable extends JTable {
 		int width = (int) scrollBar.getPreferredSize().getWidth();
 		return (height - UIConfig.TABLE_HEADER_HEIGHT)  < (rowCount*UIConfig.ROW_HEIGHT)? UIConfig.TABLE_WID + width : UIConfig.TABLE_WID;
 	}
+	
 }

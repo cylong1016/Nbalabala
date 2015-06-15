@@ -53,9 +53,9 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	/** 中间的横坐标 */
 	private static final int MID_LABEL_COLUMN_X = 351;
 	/** 右边一列三行开始的横坐标 */
-	private static final int RIGHT_LABEL_COLUMN_X = 600;
+	private static final int RIGHT_LABEL_COLUMN_X = 620;
 	/** 最上面一行的纵坐标 */
-	private static final int FIRST_LABEL_ROW_Y = 23;
+	private static final int FIRST_LABEL_ROW_Y = 15;
 	/** 中间label的纵坐标 */
 	private static final int MID_LABEL_ROW_Y = 63;
 	/** 最下面场均得分篮板助攻的纵坐标*/
@@ -223,7 +223,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 		JLabel nameLabel = new JLabel(Utility.trimName(name));
 		nameLabel.setOpaque(false);
 		//TODO 球员名字的字体和bounds
-		nameLabel.setBounds(MID_LABEL_COLUMN_X, FIRST_LABEL_ROW_Y, 350, 30);
+		nameLabel.setBounds(MID_LABEL_COLUMN_X, FIRST_LABEL_ROW_Y, 350, 50);
 		nameLabel.setFont(MyFont.YT_XL);
 		nameLabel.setForeground(MyFont.BLACK_GRAY);
 		this.add(nameLabel);
@@ -233,7 +233,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 				+ " / ");
 		Dimension preferred = positionLabel.getPreferredSize();
 		positionLabel.setFont(UIConfig.LABEL_PLAIN_FONT);
-		positionLabel.setBounds(MID_LABEL_COLUMN_X, MID_LABEL_ROW_Y, (int)preferred.getWidth(), (int)preferred.getHeight());
+		positionLabel.setBounds(MID_LABEL_COLUMN_X, MID_LABEL_ROW_Y, (int)preferred.getWidth() + 10, (int)preferred.getHeight());
 		positionLabel.setFont(MyFont.YH_S);
 		positionLabel.setForeground(MyFont.BLACK_GRAY);
 		this.add(positionLabel);

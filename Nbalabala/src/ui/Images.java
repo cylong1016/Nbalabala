@@ -98,7 +98,7 @@ public class Images {
 	
 	/** 所有球员界面的图片 */
 	public static final Image ALL_PLAYERS_BG = new ImageIcon("images2.0/players/allPlayersBG.png").getImage();
-	public static final String ALL_PLAYERS_BG_STR = "images2.0/players/allPlayersBG2.png";
+	public static final String ALL_PLAYERS_BG_STR = "images2.0/players/allPlayersBG.png";
 	
 	/** 所有球队界面的图片  */
 	public static final Image ALL_TEAMS_BG = new ImageIcon("images2.0/players/allTeamsBG.png").getImage();
