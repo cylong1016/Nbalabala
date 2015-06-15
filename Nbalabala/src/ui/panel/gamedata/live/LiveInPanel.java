@@ -133,7 +133,10 @@ public class LiveInPanel extends BottomPanel {
 		liveList = live.getLiveList();
 		Set<String> keySet = liveList.keySet();
 		iter = keySet.iterator();
-		addLabel(0);
-		addLabel(1);
+		int i = 0;
+		while(iter.hasNext()) {
+			addLabel(i);
+			i++;
+		}
 	}
 }
