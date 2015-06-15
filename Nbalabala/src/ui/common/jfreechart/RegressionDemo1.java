@@ -9,6 +9,7 @@ package ui.common.jfreechart;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -63,8 +64,9 @@ public class RegressionDemo1 extends ApplicationFrame {
             ForecastVO vo = service.getForecastData("LeBron James$01", InferenceData.ASSIST);
             double[] x = vo.getCurveX();
             double[] y = vo.getCurveY();
-            for(int i = 0 ; i < x.length ;i++) {
-            	series.add(x[i],y[i]);
+            ArrayList<Double> voArr = vo.getDatas();
+            for(int i = 0 ; i < voArr.size();i++) {
+            	series.add(i,voArr.get(i));
             }
 //            series.add(2.0, 56.27);
 //            series.add(3.0, 41.32);
