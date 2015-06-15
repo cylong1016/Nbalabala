@@ -7,8 +7,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import utility.Constants;
+import utility.Utility;
 import vo.LivePlayerVO;
 import blservice.LiveBLService;
 
@@ -239,7 +238,7 @@ public class Live implements LiveBLService {
 	 */
 	private void refreshLiveList() {
 		liveList.clear();
-		HttpURLConnection urlConn = getConn(LIVE_LIST_URL);
+		HttpURLConnection urlConn = Utility.getConn(LIVE_LIST_URL);
 		InputStream input = null;
 		BufferedReader reader = null;
 		try {
@@ -298,7 +297,6 @@ public class Live implements LiveBLService {
 				}
 			}
 			hasMatchStarted = tempBool_1 && tempBool_2; // 当前是否有直播
-//			hasMatchStarted = true; // TODO 测试
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -321,19 +319,18 @@ public class Live implements LiveBLService {
 		if(!hasMatchStarted) {
 			return;
 		}
-		HttpURLConnection urlConn = getConn(liveURL);
+		HttpURLConnection urlConn = Utility.getConn(liveURL);
 		InputStream input = null;
 		BufferedReader reader = null;
 		ArrayList<String> scoreList = new ArrayList<String>(); // 小结分数，包含总分
 		try {
 			input = urlConn.getInputStream();
 			reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
-//			FileReader fr = new FileReader("直播\\文字1.html");
+//			FileReader fr = new FileReader("live\\文字直播.html");
 //			reader = new BufferedReader(fr);
 			String scoreReg = "<td>(?<score>\\d+)</td>";
 			Pattern scorePattern = Pattern.compile(scoreReg);
 			String dataLiveURLReg = "<a  target=.*? href=\"(?<dataLiveURL>.*?)\" class=\".*?><s></s>数据直播</a>";
-//			String dataLiveURLReg = "<a  target=.*? href=\"(?<dataLiveURL>.*?)\" class=\"d \"><s></s>.*?</a>";
 			Pattern dataLiveurlPattern = Pattern.compile(dataLiveURLReg);
 			String dataLiveURL = null;
 			String source = "";
@@ -419,7 +416,7 @@ public class Live implements LiveBLService {
 	private void captureDataLive(String url) {
 		homePlayerRecords.clear();
 		roadPlayerRecords.clear();
-		HttpURLConnection urlConn = getConn(url);
+		HttpURLConnection urlConn = Utility.getConn(url);
 		InputStream input = null;
 		BufferedReader reader = null;
 		String homeOrRoad = "H"; // 主场还是客场
@@ -508,7 +505,7 @@ public class Live implements LiveBLService {
 	 * @version 2015年6月15日 上午12:26:01
 	 */
 	public String getPlayerEngName(String playerChnName, String playerNameURL) {
-		HttpURLConnection urlConn = getConn(playerNameURL);
+		HttpURLConnection urlConn = Utility.getConn(playerNameURL);
 		InputStream input = null;
 		BufferedReader reader = null;
 		try {
@@ -582,25 +579,4 @@ public class Live implements LiveBLService {
 		return dou;
 	}
 
-	/**
-	 * 得到某个url的连接
-	 * @param url
-	 * @return HttpURLConnection
-	 * @author cylong
-	 * @version 2015年5月21日 下午2:33:03
-	 */
-	protected HttpURLConnection getConn(String url) {
-		HttpURLConnection urlConn = null;
-		try {
-			urlConn = (HttpURLConnection)new URL(url).openConnection();
-			urlConn.setRequestMethod("GET");
-			urlConn.setUseCaches(true);
-			urlConn.connect();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return urlConn;
-	}
 }

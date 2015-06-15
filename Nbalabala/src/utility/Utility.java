@@ -1,5 +1,9 @@
 package utility;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Date;
 import java.util.Calendar;
 
@@ -10,6 +14,28 @@ import java.util.Calendar;
  * @version 2015年3月18日  下午10:20:35
  */
 public class Utility {
+	
+	/**
+	 * 得到某个url的连接
+	 * @param url
+	 * @return HttpURLConnection
+	 * @author cylong
+	 * @version 2015年5月21日 下午2:33:03
+	 */
+	public static HttpURLConnection getConn(String url) {
+		HttpURLConnection urlConn = null;
+		try {
+			urlConn = (HttpURLConnection)new URL(url).openConnection();
+			urlConn.setRequestMethod("GET");
+			urlConn.setUseCaches(true);
+			urlConn.connect();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return urlConn;
+	}
 	
 	public static String trimName(String name) {
 		return name.substring(0, name.length() - 3);
