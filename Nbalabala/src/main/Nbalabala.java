@@ -16,10 +16,7 @@ public class Nbalabala {
 
 	public static void main(String[] args) {
 		new TeamLogoCache().loadLogos();
+		new PlayerImageCache().loadPortrait();
 		MainController.launch();
-//		new PlayerImageCache().loadPortrait();
-
-
-//		Constants.setEnglish();
 	}
 }
