@@ -154,7 +154,7 @@ public class ValueAnalysis implements AnalysisBLService{
 	
 	public static void main(String[]args) {
 		AnalysisCompareVO compareVO = new ValueAnalysis().getCompareData
-				("Aaron Brooks$01", "Kobe Bryant$01", InferenceData.SCORE);
+				("Kevin Love$01", "James Harden$01", InferenceData.SCORE);
 		System.out.println(compareVO.conclusion);
 //		ForecastVO vo = new ValueAnalysis().getForecastData("Kobe Bryant$01", InferenceData.SCORE);
 //		System.out.println(vo.fromYear);
