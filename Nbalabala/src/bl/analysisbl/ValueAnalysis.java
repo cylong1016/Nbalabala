@@ -6,6 +6,7 @@ package bl.analysisbl;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import po.AdvancedDataPO;
 import po.MatchPlayerPO;
 import po.PlayerProfilePO;
 import ui.UIConfig;
@@ -13,7 +14,6 @@ import utility.Constants;
 import utility.Utility;
 import vo.AnalysisCareerVO;
 import vo.AnalysisClutchVO;
-import vo.AnalysisDevotionVO;
 import vo.AnalysisTransferVO;
 import vo.ForecastVO;
 import vo.YearMatchesVO;
@@ -97,7 +97,7 @@ public class ValueAnalysis implements AnalysisBLService{
 	 * @see blservice.AnalysisBLService#getDevotionData(java.lang.String)
 	 */
 	@Override
-	public ArrayList<AnalysisDevotionVO> getDevotionData(String name) {
+	public ArrayList<AdvancedDataPO> getDevotionData(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
