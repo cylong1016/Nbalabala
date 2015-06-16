@@ -8,13 +8,11 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import ui.UIConfig;
-import ui.common.table.BottomTable.InterlacedRenderer;
 
 /**
  *

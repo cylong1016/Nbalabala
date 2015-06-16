@@ -8,7 +8,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JTable;
 
 import po.ClutchPO;
@@ -21,30 +20,30 @@ import po.ClutchPO;
  */
 public class TwoDChart extends JTable {
 	
-	public static void main(String[] args) {
-		ArrayList<ClutchPO> cluthPOs = new ArrayList<ClutchPO>();
-		for(int i = 0; i <= 10; i++) {
-			ClutchPO po = new ClutchPO("lsy", "2014-15");
-			po.clutchScore = i;
-			po.clutchTime = i / 10.0;
-			cluthPOs.add(po);
-		}
-		TwoDChart chart = new TwoDChart(cluthPOs);
-		chart.setBounds(10, 10, 400, 300);
-		JFrame frame = new JFrame();
-		frame.setLayout(null);
-		frame.add(chart);
-		frame.setSize(600, 400);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		ArrayList<ClutchPO> cluthPOs = new ArrayList<ClutchPO>();
+//		for(int i = 0; i <= 10; i++) {
+//			ClutchPO po = new ClutchPO("lsy", "2014-15");
+//			po.clutchScore = i;
+//			po.clutchTime = i / 12.0;
+//			cluthPOs.add(po);
+//		}
+//		TwoDChart chart = new TwoDChart(cluthPOs);
+//		chart.setBounds(10, 10, 400, 300);
+//		JFrame frame = new JFrame();
+//		frame.setLayout(null);
+//		frame.add(chart);
+//		frame.setSize(600, 400);
+//		frame.setLocationRelativeTo(null);
+//		frame.setVisible(true);
+//	}
 
 	private ArrayList<ClutchPO> cluthPOs;
 	/** serialVersionUID */
 	private static final long serialVersionUID = -3980137740237014807L;
 	
 	/** 图中点的大小，最好是偶数 */
-	private int dotSize = 6;
+	private int dotSize = 10;
 	/** 圆点在panel上的的坐标 */
 	private Point dotPoint;
 	/** x轴长 */
@@ -64,7 +63,7 @@ public class TwoDChart extends JTable {
 	 */
 	@Override
 	public void setBounds(int x, int y, int width, int height) {
-		dotPoint = new Point(50, height - 50);
+		dotPoint = new Point(80, height - 80);
 		xLen = width - 100;
 		yLen = height - 100;
 		super.setBounds(x, y, width, height);
@@ -75,9 +74,10 @@ public class TwoDChart extends JTable {
 	private void addDots() {
 		maxScore = 0;
 		for(ClutchPO po : cluthPOs) { // 找到最大的得分
+			DecimalFormat df = new DecimalFormat("#.00");
+			po.clutchScore = Double.parseDouble(df.format(po.clutchScore));
+			po.clutchTime = Double.parseDouble(df.format(po.clutchTime));
 			if(po.clutchScore > maxScore) {
-				DecimalFormat df = new DecimalFormat("#.00");
-				po.clutchScore = Double.parseDouble(df.format(po.clutchScore));
 				maxScore = po.clutchScore;
 			}
 		}
