@@ -14,7 +14,6 @@ import ui.UIConfig;
 import utility.Constants;
 import utility.Utility;
 import vo.AnalysisCareerVO;
-import vo.AnalysisClutchVO;
 import vo.AnalysisTransferVO;
 import vo.ForecastVO;
 import vo.YearMatchesVO;
@@ -91,18 +90,26 @@ public class ValueAnalysis implements AnalysisBLService{
 	 * @see blservice.AnalysisBLService#getClutchData(java.lang.String)
 	 */
 	@Override
-	public ArrayList<ClutchPO> getClutchData(String name) {
-		ArrayList<String> 
-		return advancedData.getClutchData(name, Constants.LATEST_SEASON_REGULAR);
+	public ArrayList<ClutchPO> getClutchData(String teamAbbr) {
+		ArrayList<String> lineup = getLineupNamesByAbbr(teamAbbr);
+		ArrayList<ClutchPO> result = new ArrayList<ClutchPO>();
+		for (String name : lineup) {
+			result.add(advancedData.getClutchData(name, Constants.LATEST_SEASON_REGULAR));
+		}
+		return result;
 	}
 
 	/* (non-Javadoc)
 	 * @see blservice.AnalysisBLService#getDevotionData(java.lang.String)
 	 */
 	@Override
-	public ArrayList<AdvancedDataPO> getDevotionData(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<AdvancedDataPO> getDevotionData(String teamAbbr) {
+		ArrayList<String> lineup = getLineupNamesByAbbr(teamAbbr);
+		ArrayList<AdvancedDataPO> result = new ArrayList<AdvancedDataPO>();
+		for (String name : lineup) {
+			result.add(advancedData.getAdvancedData(name, Constants.LATEST_SEASON_REGULAR));
+		}
+		return result;
 	}
 
 	/* (non-Javadoc)
