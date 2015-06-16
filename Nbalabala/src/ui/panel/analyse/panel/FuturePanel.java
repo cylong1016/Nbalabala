@@ -18,10 +18,11 @@ import enums.InferenceData;
 
 /**
  * 球员走向
+ * 
  * @author lsy
- * @version 2015年6月8日  下午8:41:11
+ * @version 2015年6月8日 下午8:41:11
  */
-public class FuturePanel extends Panel{
+public class FuturePanel extends Panel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -5585803631916572420L;
@@ -32,27 +33,32 @@ public class FuturePanel extends Panel{
 	private String name;
 	private FutureSelectButton[] button;
 	private ForecastVO vo;
-	
-	public FuturePanel(String name){
+
+	public FuturePanel(String name) {
 		this.setBounds(0, 100, 1000, 490);
 		this.name = name;
 		vo = service.getForecastData(name, InferenceData.ASSIST);
-		chart = new ScatterChart(vo);
-		this.add(chart);
-		button = new FutureSelectButton[10];
-		area = new JTextArea(vo.getConclusion());
-		area.setLineWrap(true);
-		area.setEditable(false);
-		area.setBounds(750, 220,200,200);
-		area.setOpaque(false);
-		this.add(area);
-		addButton();
-		setEffect();
+		if (vo == null) {
+			//TODO 显示没有走向分析
+		} else {
+			chart = new ScatterChart(vo);
+			this.add(chart);
+			button = new FutureSelectButton[10];
+			area = new JTextArea(vo.getConclusion());
+			area.setLineWrap(true);
+			area.setEditable(false);
+			area.setBounds(750, 220, 200, 200);
+			area.setOpaque(false);
+			this.add(area);
+			addButton();
+			setEffect();
+		}
 	}
 
 	public void addButton() {
 		for (int i = 0; i < 5; i++) {
-			button[i] = new FutureSelectButton(bt_x + i * inter_x, bt_y, width, height, utility.Constants.ANY_SELECT[i]);
+			button[i] = new FutureSelectButton(bt_x + i * inter_x, bt_y, width, height,
+					utility.Constants.ANY_SELECT[i]);
 			button[i].setInferenceData(InferenceData.values()[i]);
 			this.add(button[i]);
 		}
@@ -65,7 +71,7 @@ public class FuturePanel extends Panel{
 		FutureSelectButton.current = button[0];
 		addListener();
 	}
-	
+
 	public void addListener() {
 		for (int i = 0; i < button.length; i++) {
 			button[i].addMouseListener(new MouseAdapter() {
@@ -76,7 +82,7 @@ public class FuturePanel extends Panel{
 					FutureSelectButton.current.back();
 					FutureSelectButton.current = (FutureSelectButton) e.getSource();
 					FuturePanel.this.remove(chart);
-					vo = service.getForecastData(name,FutureSelectButton.current.getInferenceData());
+					vo = service.getForecastData(name, FutureSelectButton.current.getInferenceData());
 					chart = new ScatterChart(vo);
 					area.setText(vo.getConclusion());
 					FuturePanel.this.add(chart);
@@ -92,5 +98,5 @@ public class FuturePanel extends Panel{
 		button[0].setBackground(UIConfig.BUTTON_COLOR);
 		button[0].setForeground(Color.white);
 	}
-	
+
 }

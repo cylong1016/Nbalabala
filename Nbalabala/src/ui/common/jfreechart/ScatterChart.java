@@ -9,18 +9,18 @@ import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.annotations.XYBoxAnnotation;
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.TextTitle;
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import ui.common.panel.Panel;
-import utility.Constants;
 import vo.ForecastVO;
 
 
@@ -36,9 +36,14 @@ public class ScatterChart extends Panel{
 	
 	private double[] x_num,y_num;
 	private ForecastVO vo;
+	private ArrayList<Double> datas;
+	private double[] x,y;
 	
 	public ScatterChart(ForecastVO vo){ 
 		this.vo = vo;
+		datas = vo.getDatas();
+		x = vo.getCurveX();
+		y = vo.getCurveY();
 		JPanel panel = new ChartPanel(createChart());
 		panel.setSize(700, 400);
 		this.add(panel); // 将chart对象放入Panel面板中去，ChartPanel类已继承Jpanel
@@ -47,31 +52,23 @@ public class ScatterChart extends Panel{
 	}
 	
 	 private XYDataset samplexydataset2() {
-		 ArrayList<Double> datas = vo.getDatas();
+		 
 		  XYSeriesCollection xySeriesCollection = new XYSeriesCollection();
-		  XYSeries series = new XYSeries("Random");
+		  XYSeries series = new XYSeries("Regression");
 		  for(int i = 0 ; i < datas.size(); i++) {
 			  series.add(i, datas.get(i));
 		  }
+          for(int i = 0 ; i < x.length;i++) {
+          	series.add(x[i],y[i]);
+          }
+          series.add(datas.size()+1,vo.getNextY());
 		  xySeriesCollection.addSeries(series);
 		  return xySeriesCollection;
-		 }
-	 
-	 private DefaultCategoryDataset lineData() {
-		 DefaultCategoryDataset dataset = new DefaultCategoryDataset();  
-		 double[] x = vo.getCurveX();
-		 double[] y = vo.getCurveY();
-	        int i = 0;
-	        
-//	        for(i = 0;i<formerData.size(); i++ ){
-//	        	dataset.addValue(formerData.get(i), Constants.translateTeamAbbr(vo.getFormerAbbr()), i+"");
-//	        }
-	        return dataset;
 	 }
 	
 	//生成图表对象 
 	public JFreeChart createChart() { 
-	    JFreeChart scatterChart = ChartFactory.createScatterPlot("散点图", "可爱吧", "哈哈哈", samplexydataset2(), PlotOrientation.VERTICAL, true, false, false);  
+	    JFreeChart scatterChart = ChartFactory.createScatterPlot("球员走向图", "比赛组数", "数据", samplexydataset2(), PlotOrientation.VERTICAL, true, false, false);  
 	    drawScatterChart(scatterChart, "", "");
 	    return scatterChart; 
 	} 
@@ -86,14 +83,16 @@ public class ScatterChart extends Panel{
 	           legend.setItemFont(new Font("宋体", Font.BOLD, 20)); 
 	       } 
 	       XYPlot xyplot = scatterChart.getXYPlot();   
+	       Plot plot = scatterChart.getPlot();
 	       xyplot.setNoDataMessage(noDataMsg);
 	       xyplot.setNoDataMessagePaint(Color.blue);  
-	       
 	       xyplot.setDomainGridlinePaint(Color.lightGray);//设置垂直网格线的颜色   
 	       xyplot.setRangeGridlinePaint(Color.lightGray);//设置水平网格线的颜色 
 //	       xyplot.setDomainGridlinesVisible(true);//设置垂直网格线是否显示   
 //	       xyplot.setRangeGridlinesVisible(true);//设置水平网格线是否显示
 	       
+//	       XYBoxAnnotation box = new XYBoxAnnotation(0, 0, datas.size(),100); 
+//	       xyplot.addAnnotation(box);
 	        xyplot.setBackgroundPaint(new Color(255, 253, 246));  
 	        xyplot.setForegroundAlpha((float) 0.5);
 	        ValueAxis vaaxis = xyplot.getDomainAxis();  

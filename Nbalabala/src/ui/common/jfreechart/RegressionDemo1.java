@@ -65,8 +65,8 @@ public class RegressionDemo1 extends ApplicationFrame {
             double[] x = vo.getCurveX();
             double[] y = vo.getCurveY();
             ArrayList<Double> voArr = vo.getDatas();
-            for(int i = 0 ; i < voArr.size();i++) {
-            	series.add(i,voArr.get(i));
+            for(int i = 0 ; i < x.length;i++) {
+            	series.add(x[i],y[i]);
             }
 //            series.add(2.0, 56.27);
 //            series.add(3.0, 41.32);

@@ -162,7 +162,7 @@ public class AnalysePanel extends BottomPanel{
 				case 3:
 					AnalysePanel.this.remove(future);
 					future = new FuturePanel(str[index]); 
-					AnalysePanel.this.add(turn);
+					AnalysePanel.this.add(future);
 					AnalysePanel.this.repaint();
 					break;
 				case 4:

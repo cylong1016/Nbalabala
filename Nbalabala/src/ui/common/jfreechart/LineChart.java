@@ -57,7 +57,7 @@ public class LineChart extends Panel{
         	dataset.addValue(currentData.get(j), Constants.translateTeamAbbr(vo.getCurrentAbbr()), i+j+"");
         }
         
-        JFreeChart chart = ChartFactory.createLineChart("球员转会图", "时间", "数据",  
+        JFreeChart chart = ChartFactory.createLineChart("球员转会图", "比赛组数", "数据",  
                 dataset, PlotOrientation.VERTICAL, true, true, true);  
         
         CategoryPlot categoryplot = (CategoryPlot) chart.getPlot();
