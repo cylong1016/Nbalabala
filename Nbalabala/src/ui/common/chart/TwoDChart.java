@@ -103,6 +103,8 @@ public class TwoDChart extends JTable {
 			g.drawLine(dotPoint.x - 4, y, dotPoint.x - 1, y);
 		}
 		
+		g.drawString("得分/48分钟", dotPoint.x, dotPoint.y - yLen);
+		
 		int xNum = 10; // x坐标轴上显示的点
 		for(int i = 0; i <= xNum; i++) {
 			int x = dotPoint.x + (xLen / xNum) * i;
