@@ -1,8 +1,6 @@
 package ui.common.jfreechart;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -11,12 +9,10 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
-import org.jfree.chart.block.ColorBlock;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.ui.RectangleEdge;
 
 import ui.MyFont;
 import ui.UIConfig;

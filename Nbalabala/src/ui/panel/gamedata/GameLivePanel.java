@@ -11,7 +11,6 @@ import ui.UIConfig;
 import ui.common.button.TabButton;
 import ui.common.panel.BottomPanel;
 import ui.common.table.BottomScrollPane;
-import ui.panel.gamedata.live.LiveDetailTable;
 import utility.Constants;
 import vo.MatchDetailVO;
 import bl.matchquerybl.MatchQuery;

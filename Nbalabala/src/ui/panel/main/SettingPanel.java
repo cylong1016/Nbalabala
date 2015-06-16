@@ -6,7 +6,6 @@ package ui.panel.main;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Statement;
 
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -117,11 +116,6 @@ public class SettingPanel extends BottomPanel{
 				}
 				Database.user = userField.getText();
 				Database.password = String.valueOf(userField.getText());
-				try {
-					Statement statement = Database.conn.createStatement();
-				} catch (Exception e2) {
-					// TODO: handle exception
-				}
 				dialog.dispose();
 			}
 		});
