@@ -1,19 +1,20 @@
 package ui.panel.analyse.panel;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import po.ClutchPO;
+import ui.Images;
 import ui.UIConfig;
-import ui.common.jfreechart.BarChart;
+import ui.common.chart.TwoDChart;
 import ui.common.panel.Panel;
 import ui.panel.analyse.button.LastFiveButton;
-import ui.panel.analyse.button.LastFiveButton;
-import vo.AnalysisCareerVO;
 import bl.analysisbl.ValueAnalysis;
 import blservice.AnalysisBLService;
-import enums.CareerData;
 
 /**
  * 最后五分钟底下的界面
@@ -25,20 +26,25 @@ public class LastFivePanel extends Panel{
 	/** serialVersionUID */
 	private static final long serialVersionUID = -5007878982571604781L;
 	private String name;
-	private BarChart chart;
+	private TwoDChart chart;
 	private LastFiveButton[] button;
 	private int bt_x = 31, bt_y = 16, inter_x = 100, width = 80, height = 30;
 	private AnalysisBLService service = new ValueAnalysis();
-	private ArrayList<AnalysisCareerVO> vo;
+	private ArrayList<ClutchPO> vo;
 	
 	public LastFivePanel(String name){
 		this.name = name;
-		vo = service.getCareerData(name, CareerData.SCORE);
+		vo = service.getClutchData("Kobe Bryant$01");
+		System.out.println(vo.size());
+//		for(int i = 0 ; i < vo.size() ; i ++) {
+//			System.out.println("time"+vo.get(i).getClutchTime());
+//		System.out.println("score"+vo.get(i).getClutchScore());
+//		}
 		if (vo == null) {
-			//TODO 显示没有走向分析
+			//TODO
 		} else {
-//			chart = new BarChart(vo);
-//			this.add(chart);
+			chart = new TwoDChart(vo);
+			this.add(chart);
 			button = new LastFiveButton[6];
 			addButton();
 			setEffect();
@@ -65,10 +71,10 @@ public class LastFivePanel extends Panel{
 					}
 					LastFiveButton.current.back();
 					LastFiveButton.current = (LastFiveButton) e.getSource();
-//					LastFivePanel.this.remove(chart);
-//					vo = service.getDevotionData(name);
-//					chart = new BoxChart(vo);
-//					LastFivePanel.this.add(chart);
+					LastFivePanel.this.remove(chart);
+					vo = service.getClutchData(name);
+					chart = new TwoDChart(vo);
+					LastFivePanel.this.add(chart);
 					LastFivePanel.this.repaint();
 				}
 

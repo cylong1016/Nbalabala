@@ -14,7 +14,6 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
 
-
 import ui.UIConfig;
 import ui.common.panel.Panel;
 import vo.AnalysisCareerVO;
