@@ -1,6 +1,7 @@
 package ui.common.jfreechart;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -29,14 +30,15 @@ public class NewLineChart extends Panel{
 	/** serialVersionUID */
 	private static final long serialVersionUID = 5397535344571493107L;
 	private AnalysisCompareVO vo;
+	private ArrayList<Double> formerData,currentData;
 
 	public NewLineChart(AnalysisCompareVO vo){
 		if(vo == null) {
 			return;
 		}
 		this.vo = vo;
-//		formerData = vo.getFormerData();
-//		currentData = vo.getCurrentData();
+		formerData = vo.getThisData();
+		currentData = vo.getThatData();
 		JPanel panel = new ChartPanel(createLineChart());
 		panel.setSize(UIConfig.CHAR_WIDTH, UIConfig.CHAR_HEIGHT); // 图表的大小 
 		this.add(panel); // 将chart对象放入Panel面板中去，ChartPanel类已继承Jpanel
@@ -47,14 +49,12 @@ public class NewLineChart extends Panel{
 	public JFreeChart createLineChart() {  
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();  
         int i = 0;
-        
-//        for(i = 0;i<formerData.size(); i++ ){
-//        	dataset.addValue(formerData.get(i), Constants.translateTeamAbbr(vo.getFormerAbbr()), i+"");
-//        }
-//        
-//        for(int j = 0;j<currentData.size(); j++ ){
-//        	dataset.addValue(currentData.get(j), Constants.translateTeamAbbr(vo.getCurrentAbbr()), i+j+"");
-//        }
+        for(i = 0;i<formerData.size(); i++ ){
+        	dataset.addValue(formerData.get(i), vo.getThisName(), i+"");
+        }
+        for(int j = 0;j<currentData.size(); j++ ){
+        	dataset.addValue(currentData.get(j), vo.getThatName(), j+"");
+        }
         
         JFreeChart chart = ChartFactory.createLineChart(Constants.LINE_CHART[0], Constants.LINE_CHART[1],
         		Constants.LINE_CHART[2],dataset, PlotOrientation.VERTICAL, true, true, true);  

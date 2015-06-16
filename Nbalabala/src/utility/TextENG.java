@@ -196,6 +196,6 @@ public class TextENG {
 	public static final String[] HOT_COLUMNS = {"RK", "Portrait", "Name", "Team", "Oppo", "Start", "MP", "PTS", "RB", "AST", "BLK",
 			"STL"};
 	
-	public static final String[] ANALYSE = {"最后五分钟","生涯数据","球员贡献","球员走向","转会变化"};
+	public static final String[] ANALYSE = {"决胜时刻","生涯数据","球队贡献","前程展望","转会分析","球员对比"};
 
 }

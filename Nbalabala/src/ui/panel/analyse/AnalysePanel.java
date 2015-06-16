@@ -63,7 +63,6 @@ public class AnalysePanel extends BottomPanel{
 	public void addLabel(){
 		select = new TabButton[6];
 		for(int i = 0 ;i < 6; i++) {
-			System.out.println(i + " "+ Constants.ANALYSE.length);
 			select[i] = new TabButton(Constants.ANALYSE[i],Images.ANA_ON,Images.ANA_CLICK);
 			select[i].setLocation(19+116*i, 60);
 			this.add(select[i]);

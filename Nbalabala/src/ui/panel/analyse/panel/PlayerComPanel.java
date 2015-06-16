@@ -55,9 +55,9 @@ public class PlayerComPanel extends Panel{
 	public PlayerComPanel(String name) {
 		this.name = name;
 		str = changeArray(service.getLineupNamesByAbbr("BOS"));
-		name2 = str[0];
+		name2 = str[1];
 		addComboBox();
-		service.getCompareData(name, name,InferenceData.SCORE);
+		vo = service.getCompareData(name, name2,InferenceData.SCORE);
 		if (vo == null) {
 			bgImg = Images.NO_DATA;
 			//TODO 显示没有走向分析
@@ -76,14 +76,15 @@ public class PlayerComPanel extends Panel{
 	}
 	
 	public void addComboBox(){
-		teamCom = new MyComboBox(Constants.TEAM_NAMES,599,105,120,30);
+		teamCom = new MyComboBox(Constants.TEAM_NAMES,599,45,120,30);
 		String[] strCom = changeArray(service.getLineupNamesByAbbr("BOS"));
 		String[] showStr = new String[strCom.length];
 		for(int i = 0 ; i < strCom.length; i++) {
 			String[] name = strCom[i].split("\\$");
 			showStr[i] = name[0];
 		}
-		playerCom = new MyComboBox(showStr,770,105,180,30);
+		playerCom = new MyComboBox(showStr,770,45,180,30);
+		playerCom.setSelectedIndex(1);
 		this.add(teamCom);
 		teamCom.addActionListener(new ActionListener(){
 
@@ -105,7 +106,17 @@ public class PlayerComPanel extends Panel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				int index = playerCom.getSelectedIndex();
+				if(index == -1){
+					index = 0;
+				}
 				name2 = str[index];
+				System.out.println(name+name2+CompareButton.current.getInferenceData());
+				vo = service.getCompareData(name, name2,CompareButton.current.getInferenceData());
+				area.setText(vo.getConclusion());
+				PlayerComPanel.this.remove(chart);
+				chart = new NewLineChart(vo);
+				PlayerComPanel.this.add(chart);
+				PlayerComPanel.this.repaint();
 			}
 			
 		});
@@ -177,7 +188,7 @@ public class PlayerComPanel extends Panel{
 					CompareButton.current.back();
 					CompareButton.current = (CompareButton) e.getSource();
 					PlayerComPanel.this.remove(chart);
-					vo = service.getCompareData(name,name,CompareButton.current.getInferenceData());
+					vo = service.getCompareData(name,name2,CompareButton.current.getInferenceData());
 					chart = new NewLineChart(vo);
 					area.setText(vo.getConclusion());
 					PlayerComPanel.this.add(chart);
