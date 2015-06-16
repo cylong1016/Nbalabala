@@ -19,9 +19,12 @@ import java.util.regex.Pattern;
 public class Match extends NBAData {
 
     /** 最近多少年的数据 */
-    private int maxYear = 30;
+    protected int maxYear = 30;
     /** 比赛ID */
-    private int matchID = 1;
+    protected int matchID = 1;
+    
+    /** 这个是为了子类写继续扒最新数据用，由于代码设计问题，这块写的不太好，如果以后有机会会改掉 */
+    protected String maxDate;
     
     public Match() {
     	this.captureUrl = ROOT + "/leagues";
@@ -41,7 +44,7 @@ public class Match extends NBAData {
      * @author cylong
      * @version 2015年5月19日  下午8:20:07
      */
-    private void captureMatchData() {
+    protected void captureMatchData() {
     	InputStream input = null;
     	BufferedReader reader = null;
     	HttpURLConnection urlConn = getConn(captureUrl);
@@ -85,14 +88,14 @@ public class Match extends NBAData {
 	 * @author cylong
 	 * @version 2015年5月19日  下午8:28:39
 	 */
-	private void captureNameAndScore(String season, String url) {
+	protected void captureNameAndScore(String season, String url) {
 		InputStream input = null;
 		BufferedReader reader = null;
 		HttpURLConnection urlConn = getConn(url);
 		String regularOrPlayoff = season + "R"; // 常规赛或者季后赛，默认常规赛
 		int culumnNum = 8; // 表格有8列数据
 		int i = culumnNum;
-		boolean hasDetalData = true; // 有些行没有球队的比赛信息
+		boolean hasDetailData = true; // 有些行没有球队的比赛信息
 		ArrayList<String> cellData = new ArrayList<String>();
 		try {
 			input = urlConn.getInputStream();
@@ -110,7 +113,7 @@ public class Match extends NBAData {
 					String href = ROOT + matcherCell.group("href");
 					if(i == 7) { // Box Score所在的那一行
 						if(!info.equals("Box Score")) { // 这一行没有球队的比赛信息
-							hasDetalData = false;
+							hasDetailData = false;
 						}
 						cellData.add(href);
 						System.out.println(href + "， gameID: " + matchID);
@@ -120,11 +123,19 @@ public class Match extends NBAData {
 					i--;
 					if(i == 0) { // 一行数据读取完毕
 						// 存入数据库
-						if(hasDetalData) { // 有详细信息再存入数据库
-							insertIntoMatchProfile(cellData, regularOrPlayoff); // 存储球队比赛数据
-							matchID++;
+						if(hasDetailData) { // 有详细信息再存入数据库
+							String date = dateFormat(cellData.get(0)); // 将读取下来的date转化成mysql标准格式
+							cellData.set(0, date);
+							System.out.println("-------------");
+							System.out.println(date);
+							System.out.println(maxDate);
+							System.out.println("-------------");
+							if(maxDate == null || maxDate.compareTo(date) < 0) {
+								// insertIntoMatchProfile(cellData, regularOrPlayoff); // 存储球队比赛数据
+								matchID++;
+							}
 						}
-						hasDetalData = true;
+						hasDetailData = true;
 						i = culumnNum;
 						cellData.clear();
 					}
@@ -149,7 +160,7 @@ public class Match extends NBAData {
 	 * @author cylong
 	 * @version 2015年5月19日  下午10:31:49
 	 */
-	private ArrayList<String> captureSectionAndPlayerData(String url) {
+	protected ArrayList<String> captureSectionAndPlayerData(String url) {
 		InputStream input = null;
 		BufferedReader reader = null;
 		HttpURLConnection urlConn = getConn(url);
@@ -229,7 +240,7 @@ public class Match extends NBAData {
 	 * @param home 主场球队名缩写
      * @version 2015年5月28日  下午3:45:12
      */
-	private void capturePlayerMatch(BufferedReader reader, String road, String home) {
+	protected void capturePlayerMatch(BufferedReader reader, String road, String home) {
     	String BASIC_BOX_SCORE_STATS = "Basic Box Score Stats"; // 球员比赛数据表格的表头
     	char homeOrRoad = 'R'; // R:客场、H:主场
     	String reserves = "Reserves"; // 候补球员的表头
@@ -300,7 +311,7 @@ public class Match extends NBAData {
 	 * @author cylong
 	 * @version 2015年5月28日  下午5:00:06
 	 */
-	private void insertIntoPlayerMatch(ArrayList<String> playerMatch) {
+	protected void insertIntoPlayerMatch(ArrayList<String> playerMatch) {
 		for(int i = 0; i < playerMatch.size(); i++) {
 			// 有些数据网站上是空的，存到数据库中为0
 			if(playerMatch.get(i).equals("")) {
@@ -377,9 +388,9 @@ public class Match extends NBAData {
 	 * @author cylong
 	 * @version 2015年5月25日  下午3:59:41
 	 */
-	private void insertIntoMatchProfile(ArrayList<String> cellData, String regularOrPlayoff) {
+	protected void insertIntoMatchProfile(ArrayList<String> cellData, String regularOrPlayoff) {
 		ArrayList<String> sectionScore = captureSectionAndPlayerData(cellData.get(1)); // 读取每小节分数和球员数据
-		String date = dateFormat(cellData.get(0)); // 将读取下来的date转化成mysql标准格式
+		String date = cellData.get(0);
 		if(date != null) {
 			date = "'" + date + "'";
 		}
@@ -434,7 +445,7 @@ public class Match extends NBAData {
 	 * @author cylong
 	 * @version 2015年5月24日  上午12:07:41
 	 */
-	private void insertIntoExtraTime(ArrayList<String> extraTime) {
+	protected void insertIntoExtraTime(ArrayList<String> extraTime) {
 		int otNum = extraTime.size() / 2; // 加时赛数
 		for(int i = 0; i < otNum; i++) {
 			String sql = "INSERT INTO extra_time ("
