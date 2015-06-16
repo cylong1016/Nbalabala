@@ -67,8 +67,8 @@ public class DateChooser extends JPanel {
 
 	private static final Font DATE_CHOOSER_FONT = new Font("微软雅黑", 0, 15);
 
-	private static final Color CAL_MAIN = new Color(239, 168, 16);
-	private static final Color CAL_SUB = new Color(241, 220, 182);
+	private static final Color CAL_MAIN = new Color(135, 189, 245);
+	private static final Color CAL_SUB = new Color(204, 229, 255);
 
 	private Date initDate;
 	private Calendar now = Calendar.getInstance();

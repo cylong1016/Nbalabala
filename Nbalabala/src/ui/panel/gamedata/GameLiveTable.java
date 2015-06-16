@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 import ui.common.table.BottomTable;
-import ui.common.table.TableAutoWrapRenderer;
 import utility.Constants;
 
 /**
