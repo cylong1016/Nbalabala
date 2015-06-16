@@ -42,7 +42,7 @@ public class PortraitHandler {
 		
 	}
 	
-	private static int getNameCount(String name) {
+	public static int getNameCount(String name) {
 		int count = 0;
 		for (PlayerProfilePO po : pos) { 
 			if (name.equals(Utility.trimName(po.getName()))) {

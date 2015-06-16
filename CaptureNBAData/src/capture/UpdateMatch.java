@@ -19,8 +19,7 @@ public class UpdateMatch extends Match {
 	}
 
 	public void update() {
-		// initMatchID();
-		matchID = 1310;
+		initMatchID();
 		String sql = "SELECT MAX(date) FROM match_profile";
 		try {
 			Statement state = mysqlConn.createStatement();
