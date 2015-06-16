@@ -23,8 +23,8 @@ public class RegressionHandler {
 	
 	private double [] curveY;
 	
-	private static final double X_INTER = 0.05;	//曲线上两点之间间隔
-	private static final int DOTS_BETWEEN = 20;
+	private static final double X_INTER = 0.02;	//曲线上两点之间间隔
+	private static final int DOTS_BETWEEN = 50;
 	
 	public RegressionHandler(ArrayList<Double> obs) throws Exception{
 		size = obs.size();
