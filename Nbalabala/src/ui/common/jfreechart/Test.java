@@ -15,6 +15,9 @@ import blservice.AnalysisBLService;
  */
 public class Test extends JFrame{
 	
+	/** serialVersionUID */
+	private static final long serialVersionUID = -2980974327089396371L;
+
 	public Test(){
 		this.setSize(UIConfig.WIDTH, UIConfig.HEIGHT);
 	}
