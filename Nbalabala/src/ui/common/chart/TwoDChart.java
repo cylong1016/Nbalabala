@@ -52,8 +52,13 @@ public class TwoDChart extends JTable {
 	private int yLen;
 	/** 所有球员的最大分数 */
 	private double maxScore;
+	private DecimalFormat df = new DecimalFormat("#.00");
 	
-	public TwoDChart(ArrayList<ClutchPO> cluthPOs) {
+	/** 当前选中的球员 */
+	private String currentName;
+	
+	public TwoDChart(ArrayList<ClutchPO> cluthPOs, String currentName) {
+		this.currentName = currentName;
 		this.cluthPOs = cluthPOs;
 		this.setBackground(Color.LIGHT_GRAY);
 	}
@@ -63,7 +68,7 @@ public class TwoDChart extends JTable {
 	 */
 	@Override
 	public void setBounds(int x, int y, int width, int height) {
-		dotPoint = new Point(80, height - 80);
+		dotPoint = new Point(50, height - 50);
 		xLen = width - 100;
 		yLen = height - 100;
 		super.setBounds(x, y, width, height);
@@ -74,7 +79,6 @@ public class TwoDChart extends JTable {
 	private void addDots() {
 		maxScore = 0;
 		for(ClutchPO po : cluthPOs) { // 找到最大的得分
-			DecimalFormat df = new DecimalFormat("#.00");
 			po.clutchScore = Double.parseDouble(df.format(po.clutchScore));
 			po.clutchTime = Double.parseDouble(df.format(po.clutchTime));
 			if(po.clutchScore > maxScore) {
@@ -99,18 +103,18 @@ public class TwoDChart extends JTable {
 		int yNum = 10; // y坐标轴上显示的点
 		for(int i = 0; i <= yNum; i++) {
 			int y = dotPoint.y - (yLen / yNum) * i;
-			g.drawString(String.valueOf(i * maxScore / yNum), dotPoint.x - 30, y + 5);
+			g.drawString(df.format(i * maxScore / yNum), dotPoint.x - 30, y + 5);
 			g.drawLine(dotPoint.x - 4, y, dotPoint.x - 1, y);
 		}
-		
 		g.drawString("得分/48分钟", dotPoint.x, dotPoint.y - yLen);
 		
 		int xNum = 10; // x坐标轴上显示的点
 		for(int i = 0; i <= xNum; i++) {
 			int x = dotPoint.x + (xLen / xNum) * i;
-			g.drawString(String.valueOf(i * 1.0 / xNum), x - 10, dotPoint.y + 20);
+			g.drawString(df.format(i * 1.0 / xNum), x - 10, dotPoint.y + 20);
 			g.drawLine(x, dotPoint.y + 1, x, dotPoint.y + 4);
 		}
+		g.drawString("上场时间比率", dotPoint.y, dotPoint.x + xLen / 2);
 		g.drawRect(dotPoint.x, dotPoint.y - yLen, xLen, yLen);
 	}
 }
