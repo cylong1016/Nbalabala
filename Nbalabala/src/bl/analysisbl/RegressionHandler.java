@@ -26,7 +26,7 @@ public class RegressionHandler {
 	private static final double X_INTER = 0.05;	//曲线上两点之间间隔
 	private static final int DOTS_BETWEEN = 20;
 	
-	public RegressionHandler(ArrayList<Double> obs) {
+	public RegressionHandler(ArrayList<Double> obs) throws Exception{
 		size = obs.size();
 		double [] x = new double[size];
 		double [] y = new double[size];
@@ -35,19 +35,16 @@ public class RegressionHandler {
 			y[i] = obs.get(i);
 		}
 	    Polyfit polyfit = null;
-	    try {
-	        //创建多项式拟合对象，其中的4表示是4次多项式拟合
-	        polyfit = new Polyfit(x, y, 4);
-	        coes = polyfit.getPolynomialCoefficients();
-	    }catch (Exception e) {
-	        e.printStackTrace();
-	    }
+	   
+	    //创建多项式拟合对象，其中的4表示是4次多项式拟合
+	    polyfit = new Polyfit(x, y, Math.min(4, obs.size() - 1));
+	    coes = polyfit.getPolynomialCoefficients();
 	    
 	    curveX = new double[obs.size() * DOTS_BETWEEN];
 	    curveY = new double[curveX.length];
 	    
 	    for (int i=0;i<curveX.length;i++) {
-	    	curveX[i] = X_INTER * i;
+	    	curveX[i] = 1+ X_INTER * i;
 	    	curveY[i] = getY(curveX[i]);
 	    }
 	}

@@ -2,6 +2,7 @@ package ui.common.jfreechart;
 
 import javax.swing.JFrame;
 
+import enums.CareerData;
 import enums.InferenceData;
 import ui.UIConfig;
 import bl.analysisbl.ValueAnalysis;
@@ -22,13 +23,13 @@ public class Test extends JFrame{
 		AnalysisBLService service = new ValueAnalysis();
 		String[] name = {"Allen Iverson","James Peter","Kobe Byrant","CYL"};
 		double[] num = {35.4,18.3,26,30.4};
-//		BarChart chart = new BarChart(name,num);
+		BarChart chart = new BarChart(name,num);
 //		LineChart chart = new LineChart(name,name,num);
-		ScatterChart chart = new ScatterChart(service.getForecastData("LeBron James", InferenceData.ASSIST));
+//		ScatterChart chart = new ScatterChart(service.getForecastData("LeBron James", InferenceData.ASSIST));
 //		LineChart chart = new LineChart(name,name,num);
 //		ScatterChart chart = new ScatterChart(num,num);
 //		MixChart chart = new MixChart();
-//		BoxChart chart = new BoxChart();
+//		BoxChart chart = new BoxChart(service.getCareerData("LeBron James$01", CareerData.ASSIST));
 //		XYLine3DRenderer renderer = new XYLine3DRenderer();
 		Test frame = new Test();
 		

@@ -1,5 +1,7 @@
 package main;
 
+import capture.UpdateMatch;
+
 /**
  * 程序入口
  * @author cylong
@@ -20,6 +22,9 @@ public class Launcher {
 		
 //		PlayerClutch pc = new PlayerClutch();
 //		pc.capture();
+		
+		UpdateMatch um = new UpdateMatch();
+		um.capture();
 	}
 
 }

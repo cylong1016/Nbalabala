@@ -81,17 +81,25 @@ public class ConPanel extends BottomPanel {
 		result1 = new MyLabel[5];
 		result2 = new MyLabel[5];
 		for (int i = 0; i < 3; i++) {
-			lth1[i] = Double.parseDouble(df.format(lth1[i]*100));
+			if(lth1[i] < 1) {
+				lth1[i] = Double.parseDouble(df.format(lth1[i]*100));
+			}else{
+				lth1[i] = Double.parseDouble(df.format(lth1[i]));
+			}
 			rec1[i] = new Rec((int) (lb_x - 4 * lth1[i]), lb_y + i * lb_inter, lth1[i]);
-			result1[i] = new MyLabel((int)(lb_x - 4 * lth1[i] - 40),lb_y + i * lb_inter,40,40,lth1[i]+"%");
+			result1[i] = new MyLabel((int)(lb_x - 4 * lth1[i] - 60),lb_y + i * lb_inter,60,40,lth1[i]+"%");
 			this.add(rec1[i]);
 			this.add(result1[i]);
 		}
 		for (int i = 0; i < 3; i++) {
-			lth2[i] = Double.parseDouble(df.format(lth2[i]*100));
+			if(lth2[i] < 1) {
+				lth2[i] = Double.parseDouble(df.format(lth2[i]*100));
+			}else{
+				lth2[i] = Double.parseDouble(df.format(lth2[i]));
+			}
 			rec2[i] = new Rec(lb_x2, lb_y + i * lb_inter, lth2[i]);
 			this.add(rec2[i]);
-			result2[i] = new MyLabel((int)(lb_x2+4*lth2[i]),lb_y + i * lb_inter,40,40,lth2[i]+"%");
+			result2[i] = new MyLabel((int)(lb_x2+4*lth2[i]),lb_y + i * lb_inter,60,40,lth2[i]+"%");
 			this.add(result2[i]);
 		}
 		

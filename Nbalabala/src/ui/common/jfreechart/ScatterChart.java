@@ -9,9 +9,7 @@ import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.annotations.XYBoxAnnotation;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.title.LegendTitle;
@@ -23,6 +21,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 import ui.MyFont;
 import ui.UIConfig;
 import ui.common.panel.Panel;
+import utility.Constants;
 import vo.ForecastVO;
 
 
@@ -36,7 +35,6 @@ public class ScatterChart extends Panel{
 	/** serialVersionUID */
 	private static final long serialVersionUID = 2633383144443658841L;
 	
-	private double[] x_num,y_num;
 	private ForecastVO vo;
 	private ArrayList<Double> datas;
 	private double[] x,y;
@@ -58,7 +56,7 @@ public class ScatterChart extends Panel{
 		  XYSeriesCollection xySeriesCollection = new XYSeriesCollection();
 		  XYSeries series = new XYSeries("Regression");
 		  for(int i = 0 ; i < datas.size(); i++) {
-			  series.add(i, datas.get(i));
+			  series.add(i+1, datas.get(i));
 		  }
           for(int i = 0 ; i < x.length;i++) {
           	series.add(x[i],y[i]);
@@ -70,7 +68,8 @@ public class ScatterChart extends Panel{
 	
 	//生成图表对象 
 	public JFreeChart createChart() { 
-	    JFreeChart scatterChart = ChartFactory.createScatterPlot("球员走向图", "比赛组数", "数据", samplexydataset2(), PlotOrientation.VERTICAL, true, false, false);  
+	    JFreeChart scatterChart = ChartFactory.createScatterPlot(Constants.SCATTER_CHART[0],
+	    		Constants.SCATTER_CHART[1],Constants.SCATTER_CHART[2],samplexydataset2(), PlotOrientation.VERTICAL, true, false, false);  
 	    drawScatterChart(scatterChart, "", "");
 	    return scatterChart; 
 	} 
@@ -97,6 +96,8 @@ public class ScatterChart extends Panel{
 //	       xyplot.addAnnotation(box);
 	        xyplot.setBackgroundPaint(Color.WHITE);  
 	        xyplot.setForegroundAlpha((float) 0.5);
+//	        ValueAxis vaaxis = xyplot.getDomainAxis();  
+
 	        ValueAxis va = xyplot.getDomainAxis(0);  
 	        	        
 	        va.setAxisLinePaint(new Color(215, 215, 215)); // 坐标轴颜色  

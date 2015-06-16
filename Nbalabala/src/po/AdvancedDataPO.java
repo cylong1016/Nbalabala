@@ -32,4 +32,36 @@ public class AdvancedDataPO {
 		this.season = season;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public String getSeason() {
+		return season;
+	}
+
+	public int getGp() {
+		return gp;
+	}
+
+	public double getMpg() {
+		return mpg;
+	}
+
+	public double getOrpm() {
+		return orpm;
+	}
+
+	public double getDrpm() {
+		return drpm;
+	}
+
+	public double getRpm() {
+		return rpm;
+	}
+
+	public double getWar() {
+		return war;
+	}
+
 }

@@ -5,13 +5,13 @@ package blservice;
 
 import java.util.ArrayList;
 
-import enums.CareerData;
-import enums.InferenceData;
+import po.AdvancedDataPO;
+import po.ClutchPO;
 import vo.AnalysisCareerVO;
-import vo.AnalysisClutchVO;
-import vo.AnalysisDevotionVO;
 import vo.AnalysisTransferVO;
 import vo.ForecastVO;
+import enums.CareerData;
+import enums.InferenceData;
 
 /**
  *
@@ -25,10 +25,10 @@ public interface AnalysisBLService {
 	public ArrayList<AnalysisCareerVO> getCareerData(String name, CareerData careerData);
 	
 	/** 返回某一球员的最后5分钟决胜数据（同一个人，不同赛季） */
-	public ArrayList<AnalysisClutchVO> getClutchData(String name);
+	public ArrayList<ClutchPO> getClutchData(String name);
 	
 	/** 返回某一球员及其所属球队所有人的团队贡献值 */
-	public ArrayList<AnalysisDevotionVO> getDevotionData(String name);
+	public ArrayList<AdvancedDataPO> getDevotionData(String name);
 	
 	/** 返回某一球员的用于预测数据的样本点 */
 	public ForecastVO getForecastData(String name, InferenceData inferenceData);

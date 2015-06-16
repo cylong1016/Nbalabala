@@ -10,7 +10,6 @@ import ui.UIConfig;
 import ui.common.jfreechart.ScatterChart;
 import ui.common.panel.Panel;
 import ui.panel.analyse.button.FutureSelectButton;
-import ui.panel.hot.ThreeButton;
 import vo.ForecastVO;
 import bl.analysisbl.ValueAnalysis;
 import blservice.AnalysisBLService;
@@ -37,7 +36,7 @@ public class FuturePanel extends Panel {
 	public FuturePanel(String name) {
 		this.setBounds(0, 100, 1000, 490);
 		this.name = name;
-		vo = service.getForecastData(name, InferenceData.ASSIST);
+		vo = service.getForecastData(name, InferenceData.SCORE);
 		if (vo == null) {
 			//TODO 显示没有走向分析
 		} else {
@@ -76,7 +75,7 @@ public class FuturePanel extends Panel {
 		for (int i = 0; i < button.length; i++) {
 			button[i].addMouseListener(new MouseAdapter() {
 				public void mousePressed(MouseEvent e) {
-					if (e.getSource() == ThreeButton.current) {
+					if (e.getSource() == FutureSelectButton.current) {
 						return;
 					}
 					FutureSelectButton.current.back();

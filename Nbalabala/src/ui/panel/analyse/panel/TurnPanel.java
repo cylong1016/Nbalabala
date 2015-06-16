@@ -9,12 +9,12 @@ import javax.swing.JTextArea;
 import ui.MyFont;
 import ui.UIConfig;
 import ui.common.jfreechart.LineChart;
+
 import ui.common.jfreechart.ScatterChart;
 import ui.common.label.MyLabel;
+
 import ui.common.panel.Panel;
-import ui.panel.analyse.button.FutureSelectButton;
 import ui.panel.analyse.button.TurnSelectButton;
-import ui.panel.hot.ThreeButton;
 import vo.AnalysisTransferVO;
 import bl.analysisbl.ValueAnalysis;
 import blservice.AnalysisBLService;
@@ -108,7 +108,7 @@ public class TurnPanel extends Panel {
 		for (int i = 0; i < button.length; i++) {
 			button[i].addMouseListener(new MouseAdapter() {
 				public void mousePressed(MouseEvent e) {
-					if (e.getSource() == ThreeButton.current) {
+					if (e.getSource() == TurnSelectButton.current) {
 						return;
 					}
 					TurnSelectButton.current.back();

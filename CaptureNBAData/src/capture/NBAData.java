@@ -113,7 +113,13 @@ public abstract class NBAData {
 		if(matcherDate.find()) {
 			String year = matcherDate.group("year");
 			String month = this.month.get(matcherDate.group("month"));
+			if(month.length() == 1) {
+				month = "0" + month;
+			}
 			String day = matcherDate.group("day");
+			if(day.length() == 1) {
+				day = "0" + day;
+			}
 			formatDate = year + "-" + month + "-" + day;
 		}
 		return formatDate;
