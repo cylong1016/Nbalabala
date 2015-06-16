@@ -404,6 +404,8 @@ public class Constants {
 	
 	public static String[] GAME_LIVE = TextCHN.GAME_LIVE;
 	
+	public static String[] NEW_LINE_CHART = TextCHN.NEW_LINE_CHART;
+	
 	public static String translateDivision(ScreenDivision division) {
 		return translater.translateTeamDivision(division);
 	}

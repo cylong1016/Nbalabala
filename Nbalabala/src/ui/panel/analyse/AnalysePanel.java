@@ -50,7 +50,7 @@ public class AnalysePanel extends BottomPanel{
 //		this.team = Constants.translateTeamAbbr(teamAbbr);
 		str = changeArray(service.getLineupNamesByAbbr("BOS"));
 		addComboBox();
-		lastFive = new LastFivePanel("BOS");
+		lastFive = new LastFivePanel("BOS",str[0]);
 		allSeason = new AllSeasonPanel(str[0]);
 		contri = new ContriPanel("BOS",0);
 		future =new FuturePanel(str[0]);
@@ -156,7 +156,6 @@ public class AnalysePanel extends BottomPanel{
 						AnalysePanel.this.remove(contri);
 						AnalysePanel.this.add(currentPanel);
 					}
-					System.out.println("click"+currentI);
 					AnalysePanel.this.repaint();
 				}
 			});
@@ -197,11 +196,10 @@ public class AnalysePanel extends BottomPanel{
 				if(index == -1) {
 					index = 0;
 				}
-				System.out.println("currentI"+currentI);
 				switch(currentI) {
 				case 0:
 					AnalysePanel.this.remove(lastFive);
-					lastFive = new LastFivePanel(str[index]); 
+					lastFive = new LastFivePanel(Constants.TEAM_ABBR[teamCom.getSelectedIndex()],str[index]); 
 					AnalysePanel.this.add(lastFive);
 					AnalysePanel.this.repaint();
 					break;

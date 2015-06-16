@@ -56,8 +56,8 @@ public class NewLineChart extends Panel{
         	dataset.addValue(currentData.get(j), vo.getThatName(), j+"");
         }
         
-        JFreeChart chart = ChartFactory.createLineChart(Constants.LINE_CHART[0], Constants.LINE_CHART[1],
-        		Constants.LINE_CHART[2],dataset, PlotOrientation.VERTICAL, true, true, true);  
+        JFreeChart chart = ChartFactory.createLineChart(Constants.NEW_LINE_CHART[0], Constants.NEW_LINE_CHART[1],
+        		Constants.NEW_LINE_CHART[2],dataset, PlotOrientation.VERTICAL, true, true, true);  
         
 //        chart.getLegend().setPosition(RectangleEdge.RIGHT);  //  图例居右
         

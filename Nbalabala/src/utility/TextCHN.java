@@ -231,5 +231,7 @@ public class TextCHN {
 
 	public static final String[] ANALYSE = {"决胜时刻","生涯数据","球队贡献","前程展望","转会分析","球员对比"};
 
+	public static final String[] NEW_LINE_CHART = {"球员对比图", "比赛组数", "数据"};
+
 
 }

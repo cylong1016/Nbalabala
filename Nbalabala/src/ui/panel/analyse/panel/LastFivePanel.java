@@ -22,15 +22,15 @@ public class LastFivePanel extends Panel{
 	private AnalysisBLService service = new ValueAnalysis();
 	private ArrayList<ClutchPO> pos;
 	
-	public LastFivePanel(String name){
-		pos = service.getClutchData(name);
+	public LastFivePanel(String teamName,String playerName){
+		pos = service.getClutchData(teamName);
 		for(ClutchPO po : pos) {
 			po.name = Utility.trimName(po.name);
 		}
 		if (pos == null) {
 			// TODO
 		} else {
-			chart = new TwoDChart(pos);
+			chart = new TwoDChart(pos,Utility.trimName(playerName));
 			chart.setBounds(130, 90, 700, 400);
 			this.add(chart);
 		}
