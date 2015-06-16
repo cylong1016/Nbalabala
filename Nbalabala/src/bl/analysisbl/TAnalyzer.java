@@ -16,13 +16,17 @@ import enums.InferenceData;
  * @since 2015年6月13日 下午10:32:57
  * @version 1.0
  */
-public class TransferAnalyzer {
+public class TAnalyzer {
 	
-	public String giveConclusion(ArrayList<Double> former, ArrayList<Double> current,
+	private double left = 0;
+	private double right = 0;
+	private DecimalFormat format = UIConfig.FORMAT;
+	
+	
+	public TAnalyzer(ArrayList<Double> former, ArrayList<Double> current,
 			InferenceData inferenceData) {
 		ArrayList<Double> smaller = null;
 		ArrayList<Double> larger = null;
-		DecimalFormat format = UIConfig.FORMAT;
 		if (inferenceData == InferenceData.FIELD_PERCENT || inferenceData == InferenceData.THREEPOINT_PERCENT
 				||inferenceData == InferenceData.FREETHROW_PERCENT 
 				|| inferenceData == InferenceData.REAL_FIELD_PERCENT) {
@@ -46,19 +50,17 @@ public class TransferAnalyzer {
 		double a = avg(z);
 		double b = Math.sqrt(var(z) / (n1 - 1)) * t.quantile(0.05, n1 - 1);
 		
-		double left = a - b;
-		double right = a + b;	//到此为止，计算出来的置信区间是smaller - larger的
+		left = a - b;
+		right = a + b;	//到此为止，计算出来的置信区间是smaller - larger的
 								//而我需要的是current - former的
 		if (smaller == former) {
 			left = - left;
 			right = - right;
 		}
-		
-		String leftStr = format.format(left);
-		String rightStr = format.format(right);
-		String interval = "(" + leftStr + ", " + rightStr + ")";
+	}
+	
+	public String getTransferConclusion() {
 		String conclusion = null;
-		
 		if (left > 0 && right > 0) {
 			conclusion = "有90%把握认为该球员此项数据有显著提升";
 		}else if (left < 0 && right < 0) {
@@ -66,8 +68,24 @@ public class TransferAnalyzer {
 		}else {
 			conclusion = "无90%把握认为该球员此项数据有显著变化";
 		}
+		return conclusion;
+	}
+	
+	public String getCompareConclusion(String thisName, String thatName) {
+		String leftStr = format.format(-right);
+		String rightStr = format.format(-left);
+		String interval = "(" + leftStr + ", " + rightStr + ")";
+		String conclusion = thisName + "此项数据与" + thatName + 
+				"之差的90%置信区间为" + interval;
 		
-		return "该球员此项数据转会后与转会前之差的90%置信区间为" + interval + "，故" + conclusion;
+		if (left > 0 && right > 0) {
+			conclusion = conclusion + "，故可认为该球员此项数据显著低于" + thatName;
+		}else if (left < 0 && right < 0) {
+			conclusion = conclusion + "，故可认为该球员此项数据显著高于" + thatName;
+		}else {
+			conclusion = conclusion + "，故可认为两人此项数据无显著差异";
+		}
+		return conclusion;
 	}
 	
 	private double avg(ArrayList<Double> data) {

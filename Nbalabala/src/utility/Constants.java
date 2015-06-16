@@ -264,6 +264,8 @@ public class Constants {
 	
 	public static String LATEST_SEASON_REGULAR = "2014-15R";
 	
+	public static String LATEST_SEASON_OVERALL = "2014-15";
+	
 	public static int EARLIEST_YEAR = 1986;
 	
 	public static final int THIS_YEAR = 2015;
