@@ -153,6 +153,9 @@ public class ValueAnalysis implements AnalysisBLService{
 	}
 	
 	public static void main(String[]args) {
+		AnalysisCompareVO compareVO = new ValueAnalysis().getCompareData
+				("Aaron Brooks$01", "Kobe Bryant$01", InferenceData.SCORE);
+		System.out.println(compareVO.conclusion);
 //		ForecastVO vo = new ValueAnalysis().getForecastData("Kobe Bryant$01", InferenceData.SCORE);
 //		System.out.println(vo.fromYear);
 //		System.out.println(vo.toYear);
@@ -286,7 +289,7 @@ public class ValueAnalysis implements AnalysisBLService{
 		int toYear = profilePO.toYear;
 		for (int i = fromYear; i < toYear; i++) {
 			String season = Utility.getRegularStringByStartYear(i);
-			thatMatches.addAll(matchData.getMatchRecordByPlayerName(thisName, season));
+			thatMatches.addAll(matchData.getMatchRecordByPlayerName(thatName, season));
 		}
 		int smaller = Math.min(matches.size(), thatMatches.size());
 		DivideHandler divideHandler = new DivideHandler();
