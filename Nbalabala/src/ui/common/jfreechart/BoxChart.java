@@ -1,6 +1,11 @@
 package ui.common.jfreechart;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Paint;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +19,11 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
 
+import com.sun.corba.se.impl.orbutil.closure.Constant;
+
+import ui.UIConfig;
 import ui.common.panel.Panel;
+import utility.Constants;
 import vo.AnalysisCareerVO;
 
 /** @see http://stackoverflow.com/questions/6844759 */
@@ -40,7 +49,7 @@ public class BoxChart extends Panel{
         createChartPanel();
 		chartPanel.setSize(700, 400);
 		this.add(chartPanel); // 将chart对象放入Panel面板中去，ChartPanel类已继承Jpanel
-		this.setBounds(20, 90, 700, 400);
+		this.setBounds(130, 90, 700, 400);
 		this.repaint();
     }
 
@@ -71,14 +80,20 @@ public class BoxChart extends Panel{
         CategoryAxis xAxis = new CategoryAxis("赛季");
         NumberAxis yAxis = new NumberAxis("数值");
         BoxAndWhiskerRenderer renderer = new BoxAndWhiskerRenderer();
+//        renderer.setFillBox(false); // 设置不填充颜色
+        renderer.setFillBox(true);
         renderer.setBaseCreateEntities(false);
-        renderer.setBaseItemLabelPaint(Color.yellow);
+        renderer.setSeriesPaint(0, new Color(249, 191, 67));
+        renderer.setSeriesOutlinePaint(0, Color.yellow);      
+//        renderer.setFaroutPaint(Color.LIGHT_GRAY);
         plot = new CategoryPlot(dataset, xAxis, yAxis, renderer);
 //        plot.setBackgroundPaint(Color.LIGHT_GRAY);
-        plot.setForegroundAlpha((float) 0.6);
+        plot.setForegroundAlpha((float) 0.9);
         plot.setWeight(5);
         JFreeChart chart = new JFreeChart("", plot);
         chartPanel = new ChartPanel(chart);
+        
+        chart.setBackgroundPaint(UIConfig.CHAR_BG_COLOR);
     }
 
     public ChartPanel getChartPanel() {

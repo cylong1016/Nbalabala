@@ -1,10 +1,13 @@
 package ui.panel.analyse.panel;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import ui.Images;
 import ui.UIConfig;
 import ui.common.jfreechart.BoxChart;
 import ui.common.panel.Panel;
@@ -30,11 +33,13 @@ public class AllSeasonPanel extends Panel{
 	private AnalysisBLService service = new ValueAnalysis();
 	private ArrayList<AnalysisCareerVO> vo;
 	
+	private Image bgImg = Images.BG_IMAGE;
+	
 	public AllSeasonPanel(String name){
 		this.name = name;
 		vo = service.getCareerData(name, CareerData.SCORE);
 		if (vo == null) {
-			//TODO 显示没有走向分析
+			bgImg = Images.NO_DATA;
 		} else {
 			chart = new BoxChart(vo);
 			this.add(chart);
@@ -81,7 +86,11 @@ public class AllSeasonPanel extends Panel{
 		button[0].setBackground(UIConfig.BUTTON_COLOR);
 		button[0].setForeground(Color.white);
 	}
-
-
+	
+	public void paint(Graphics g) {
+		g.drawImage(bgImg, 0, 0, this);
+		// g2d.drawImage(slider, 0, 0, this);
+		super.paint(g);
+	}
 	
 }	

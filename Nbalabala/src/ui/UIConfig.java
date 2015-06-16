@@ -160,5 +160,7 @@ public class UIConfig {
 		
 	 public static final int CONCLUSION_Y = 128;
 	 public static final int CONCLUSION_X = 687;
+	 
+	 public static final Color CHART_ORANGE = new Color(249, 191, 67);
 
 }

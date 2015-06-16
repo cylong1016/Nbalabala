@@ -75,6 +75,7 @@ public class ScatterChart extends Panel{
 	 
 	public void drawScatterChart(JFreeChart scatterChart, String title, String noDataMsg) { 
 		scatterChart.setBackgroundPaint(UIConfig.CHAR_BG_COLOR);
+		
 	    //title, legend, plot 三个部分设置字体的方法分别如下:   
 	       TextTitle textTitle = scatterChart.getTitle();
 	       textTitle.setFont(MyFont.YH_B);  // 图表标题的字体
