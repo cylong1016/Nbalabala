@@ -32,7 +32,7 @@ public class ConPanel extends BottomPanel {
 	
 	public ConPanel(MatchDetailVO vo) {
 		super(Images.GAME_CON);
-		this.setBounds(22, 292, 952, 309);
+		this.setBounds(UIConfig.RELA_X, 250, 948, 349);
 		lth1 = vo.getHomeFiveArgs();
 		lth2 = vo.getRoadFiveArgs();
 		addLabel();
