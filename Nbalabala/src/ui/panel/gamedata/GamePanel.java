@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import po.MatchPlayerPO;
 import ui.Images;
 import ui.UIConfig;
-import ui.common.button.ImgButton;
 import ui.common.button.TabButton;
 import ui.common.panel.Panel;
 import ui.common.table.BottomScrollPane;
-import ui.controller.MainController;
 import utility.Constants;
 import vo.MatchDetailVO;
 
