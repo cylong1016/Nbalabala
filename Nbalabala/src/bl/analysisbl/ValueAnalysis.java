@@ -7,6 +7,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import po.AdvancedDataPO;
+import po.ClutchPO;
 import po.MatchPlayerPO;
 import po.PlayerProfilePO;
 import ui.UIConfig;
@@ -18,6 +19,7 @@ import vo.AnalysisTransferVO;
 import vo.ForecastVO;
 import vo.YearMatchesVO;
 import blservice.AnalysisBLService;
+import data.advanceddata.AdvancedData;
 import data.matchdata.MatchData;
 import data.playerdata.PlayerData;
 import data.seasondata.SeasonData;
@@ -35,6 +37,7 @@ public class ValueAnalysis implements AnalysisBLService{
 	private MatchData matchData = new MatchData();
 	
 	private SeasonData seasonData = new SeasonData();
+	private AdvancedData advancedData = new AdvancedData();
 	
 	private PlayerData playerData = new PlayerData();
 	
@@ -88,9 +91,9 @@ public class ValueAnalysis implements AnalysisBLService{
 	 * @see blservice.AnalysisBLService#getClutchData(java.lang.String)
 	 */
 	@Override
-	public ArrayList<AnalysisClutchVO> getClutchData(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<ClutchPO> getClutchData(String name) {
+		ArrayList<String> 
+		return advancedData.getClutchData(name, Constants.LATEST_SEASON_REGULAR);
 	}
 
 	/* (non-Javadoc)

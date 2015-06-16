@@ -39,12 +39,11 @@ public class AdvancedHandler {
 		}
 		readAdvanced();
 		readClutch();
-		
 		for (String player : active) {
-			
 			boolean hasSameAdvancePlayer = false;
 			for (AdvancedDataPO advancedDataPO : advanced) {
 				if (sameAs(player, advancedDataPO.name)) {
+					System.out.println(player);
 					hasSameAdvancePlayer = true;
 					insertAdvanced(player, advancedDataPO);
 					break;
@@ -84,7 +83,13 @@ public class AdvancedHandler {
 	
 	public static boolean match(String my, String his) {
 		String myLastName = my.substring(my.lastIndexOf(' '), my.length() );
-		String hisLastName = his.substring(his.lastIndexOf(' '), his.length() );
+		String hisLastName = null;
+		try {
+			hisLastName = his.substring(his.lastIndexOf(' '), his.length() );
+		} catch (Exception e) {
+			return false;
+		}
+		
 		if (!myLastName.equals(hisLastName)) return false;
 		return my.charAt(0) == his.charAt(0);
 	}
@@ -128,7 +133,7 @@ public class AdvancedHandler {
 			ps = conn.prepareStatement("select * from player_clutch");
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				ClutchPO po = new ClutchPO(rs.getString(1),rs.getString(2));
+				ClutchPO po = new ClutchPO(rs.getString(2), null);
 				po.clutchTime = rs.getFloat(3);
 				po.clutchScore = rs.getFloat(4);
 				clutch.add(po);
@@ -144,7 +149,7 @@ public class AdvancedHandler {
 			ps = conn.prepareStatement("select * from player_advance");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				AdvancedDataPO po = new AdvancedDataPO(rs.getString(1), rs.getString(2));
+				AdvancedDataPO po = new AdvancedDataPO(rs.getString(2), null);
 				po.gp = rs.getInt(3);
 				po.mpg = rs.getFloat(4);
 				po.orpm = rs.getFloat(5);

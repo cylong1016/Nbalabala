@@ -1,589 +1,498 @@
--- phpMyAdmin SQL Dump
--- version 4.0.4.1
--- http://www.phpmyadmin.net
---
--- 主机: 127.0.0.1
--- 生成日期: 2015 �?06 �?16 �?00:35
--- 服务器版本: 5.6.21
--- PHP 版本: 5.6.3
+/*
+Navicat MySQL Data Transfer
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+Source Server         : nba
+Source Server Version : 50621
+Source Host           : localhost:3306
+Source Database       : nbalabala
 
+Target Server Type    : MYSQL
+Target Server Version : 50621
+File Encoding         : 65001
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+Date: 2015-06-16 11:43:46
+*/
 
---
--- 数据库: `nbalabala`
---
+SET FOREIGN_KEY_CHECKS=0;
 
--- --------------------------------------------------------
-
---
--- 表的结构 `player_clutch`
---
-
-CREATE TABLE IF NOT EXISTS `player_clutch` (
-  `id` int(11) NOT NULL DEFAULT '0',
+-- ----------------------------
+-- Table structure for `player_clutch`
+-- ----------------------------
+DROP TABLE IF EXISTS `player_clutch`;
+CREATE TABLE `player_clutch` (
   `name` varchar(60) NOT NULL,
-  `time` float DEFAULT NULL,
-  `score` float DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `season` char(8) DEFAULT NULL,
+  `clutch_time` float DEFAULT NULL,
+  `clutch_score` float DEFAULT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- 转存表中的数据 `player_clutch`
---
-
-INSERT INTO `player_clutch` (`id`, `name`, `time`, `score`) VALUES
-(1, 'Kyle Korver', 0.74, 29.1),
-(2, 'Jeff Teague', 0.84, 38.2),
-(3, 'Paul Millsap', 0.81, 19.8),
-(4, 'Al Horford', 0.71, 24.4),
-(5, 'Thabo Sefolosha', 0.15, 0),
-(6, 'DeMarre Carroll', 0.7, 13.4),
-(7, 'John Jenkins', 0.03, 0),
-(8, 'Mike Muscala', 0.06, 48.6),
-(9, 'Dennis Schroder', 0.27, 38.1),
-(10, 'Mike Scott', 0.13, 43.6),
-(11, 'Shelvin Mack', 0.06, 12.9),
-(12, 'Pero Antic', 0.17, 13.8),
-(13, 'Elton Brand', 0.08, 0),
-(14, 'Austin Daye', 0.03, 0),
-(15, 'Kent Bazemore', 0.16, 26.6),
-(16, 'Adreian Payne', 0, 0),
-(17, 'Luigi Datome', 0, 0),
-(18, 'Tayshaun Prince', 0.05, 10.2),
-(19, 'Isaiah Thomas', 0.14, 50),
-(20, 'Jonas Jerebko', 0.04, 24.7),
-(21, 'Jae Crowder', 0.39, 16.8),
-(22, 'Marcus Thornton', 0.06, 16.9),
-(23, 'Kelly Olynyk', 0.27, 16.9),
-(24, 'Brandan Wright', 0, 0),
-(25, 'Jared Sullinger', 0.43, 25.5),
-(26, 'Gerald Wallace', 0.01, 0),
-(27, 'Rajon Rondo', 0.2, 0),
-(28, 'Jeff Green', 0.35, 30.3),
-(29, 'Brandon Bass', 0.51, 16.6),
-(30, 'Evan Turner', 0.7, 20.5),
-(31, 'Tyler Zeller', 0.35, 21.2),
-(32, 'Phil Pressey', 0.05, 20.4),
-(33, 'Marcus Smart', 0.53, 22.7),
-(34, 'Avery Bradley', 0.81, 24.8),
-(35, 'James Young', 0.01, 0),
-(36, 'Jameer Nelson', 0, 0),
-(37, 'Shavlik Randolph', 0, 0),
-(38, 'Dwight Powell', 0, 0),
-(39, 'Cory Jefferson', 0.02, 13.5),
-(40, 'Brook Lopez', 0.73, 25.9),
-(41, 'Deron Williams', 0.6, 16.3),
-(42, 'Thaddeus Young', 0.26, 15.9),
-(43, 'Joe Johnson', 0.98, 26.9),
-(44, 'Sergey Karasev', 0.06, 0),
-(45, 'Kevin Garnett', 0.2, 0),
-(46, 'Alan Anderson', 0.39, 14.2),
-(47, 'Mirza Teletovic', 0.19, 14.6),
-(48, 'Mason Plumlee', 0.22, 0),
-(49, 'Bojan Bogdanovic', 0.48, 13.9),
-(50, 'Jarrett Jack', 0.7, 17.5),
-(51, 'Jerome Jordan', 0, 32),
-(52, 'Jorge Gutierrez', 0, 0),
-(53, 'Markel Brown', 0.08, 0),
-(54, 'Brandon Davies', 0, 0),
-(55, 'Darius Morris', 0.01, 36.5),
-(56, 'Earl Clark', 0, 0),
-(57, 'Andrei Kirilenko', 0, 0),
-(58, 'Michael Kidd-Gilchrist', 0.32, 0),
-(59, 'Jannero Pargo', 0, 0),
-(60, 'Gerald Henderson', 0.62, 24.8),
-(61, 'Al Jefferson', 0.74, 23.6),
-(62, 'Mo Williams', 0.26, 31.1),
-(63, 'Cody Zeller', 0.42, 0),
-(64, 'Bismack Biyombo', 0.14, 0),
-(65, 'Kemba Walker', 0.76, 27.6),
-(66, 'Troy Daniels', 0, 0),
-(67, 'Brian Roberts', 0.23, 0),
-(68, 'Marvin Williams', 0.62, 0),
-(69, 'Gary Neal', 0.4, 13.3),
-(70, 'Lance Stephenson', 0.37, 0),
-(71, 'Noah Vonleh', 0, 0),
-(72, 'P.J. Hairston', 0.01, 0),
-(73, 'Jason Maxiell', 0.03, 27.4),
-(74, 'Jeff Taylor', 0, 38.9),
-(75, 'Jimmy Butler', 0.68, 28.2),
-(76, 'Pau Gasol', 0.85, 30.8),
-(77, 'Nikola Mirotic', 0.44, 19.5),
-(78, 'Mike Dunleavy', 0.32, 10.8),
-(79, 'Taj Gibson', 0.25, 12.7),
-(80, 'Derrick Rose', 0.55, 28),
-(81, 'Tony Snell', 0.26, 0),
-(82, 'Joakim Noah', 0.59, 10.4),
-(83, 'Aaron Brooks', 0.44, 31.6),
-(84, 'Nazr Mohammed', 0, 0),
-(85, 'E''Twaun Moore', 0.13, 15.5),
-(86, 'Kirk Hinrich', 0.43, 17.9),
-(87, 'Doug McDermott', 0, 0),
-(88, 'Cameron Bairstow', 0, 0),
-(89, 'LeBron James', 0.8, 51.5),
-(90, 'Kyrie Irving', 0.73, 37.8),
-(91, 'Kevin Love', 0.68, 14.3),
-(92, 'Timofey Mozgov', 0.12, 26.2),
-(93, 'J.R. Smith', 0.38, 12.2),
-(94, 'Iman Shumpert', 0.15, 12.5),
-(95, 'Tristan Thompson', 0.6, 11.8),
-(96, 'Anderson Varejao', 0.11, 24.1),
-(97, 'Shawn Marion', 0.14, 11.1),
-(98, 'Matthew Dellavedova', 0.51, 10.7),
-(99, 'Dion Waiters', 0.1, 0),
-(100, 'James Jones', 0.12, 0),
-(101, 'Mike Miller', 0.13, 0),
-(102, 'Brendan Haywood', 0.07, 28),
-(103, 'Joe Harris', 0.2, 0),
-(104, 'Kendrick Perkins', 0.07, 11),
-(105, 'Will Cherry', 0, 0),
-(106, 'Alex Kirk', 0, 0),
-(107, 'A.J. Price', 0.01, 58.2),
-(108, 'Lou Amundson', 0, 0),
-(109, 'Brandan Wright', 0.02, 21.7),
-(110, 'Tyson Chandler', 0.83, 0),
-(111, 'Dirk Nowitzki', 0.78, 34.9),
-(112, 'Monta Ellis', 0.88, 45.1),
-(113, 'Chandler Parsons', 0.78, 19.1),
-(114, 'Bernard James', 0.04, 0),
-(115, 'Jose Juan Barea', 0.19, 28.6),
-(116, 'Amar''e Stoudemire', 0.01, 0),
-(117, 'Devin Harris', 0.46, 13.3),
-(118, 'Al-Farouq Aminu', 0.16, 10.9),
-(119, 'Raymond Felton', 0.03, 62.6),
-(120, 'Rajon Rondo', 0.42, 15.8),
-(121, 'Jae Crowder', 0.01, 0),
-(122, 'Charlie Villanueva', 0.05, 20.6),
-(123, 'Richard Jefferson', 0.18, 27.4),
-(124, 'Jameer Nelson', 0.05, 15.9),
-(125, 'Dwight Powell', 0.02, 0),
-(126, 'Greg Smith', 0, 0),
-(127, 'Ricky Ledo', 0, 0),
-(128, 'Danilo Gallinari', 0.39, 31),
-(129, 'Ty Lawson', 0.87, 20.2),
-(130, 'Will Barton', 0.16, 10.8),
-(131, 'Kenneth Faried', 0.63, 20.8),
-(132, 'Arron Afflalo', 0.61, 18.4),
-(133, 'Darrell Arthur', 0.29, 22.1),
-(134, 'Jameer Nelson', 0.21, 23.9),
-(135, 'Wilson Chandler', 0.79, 22.7),
-(136, 'Jusuf Nurkic', 0.05, 20.6),
-(137, 'Timofey Mozgov', 0.26, 18.2),
-(138, 'Alonzo Gee', 0.1, 0),
-(139, 'Randy Foye', 0.21, 18.3),
-(140, 'JaVale McGee', 0.02, 72.9),
-(141, 'J.J. Hickson', 0.18, 16.2),
-(142, 'Nate Robinson', 0.01, 0),
-(143, 'Ian Clark', 0, 0),
-(144, 'Erick Green', 0.02, 47.2),
-(145, 'Gary Harris', 0.07, 0),
-(146, 'Joffrey Lauvergne', 0.02, 28.9),
-(147, 'Jamaal Franklin', 0.02, 0),
-(148, 'Quincy Miller', 0, 0),
-(149, 'Reggie Jackson', 0.29, 37.7),
-(150, 'Luigi Datome', 0, 0),
-(151, 'Brandon Jennings', 0.42, 27),
-(152, 'Greg Monroe', 0.62, 20.8),
-(153, 'Andre Drummond', 0.56, 20.1),
-(154, 'Anthony Tolliver', 0.22, 11.8),
-(155, 'Joel Anthony', 0.02, 0),
-(156, 'Kentavious Caldwell-Pope', 0.88, 20.9),
-(157, 'Jonas Jerebko', 0.08, 16),
-(158, 'Jodie Meeks', 0.43, 15.8),
-(159, 'D.J. Augustin', 0.22, 17.6),
-(160, 'Caron Butler', 0.25, 12.7),
-(161, 'Tayshaun Prince', 0.16, 21.7),
-(162, 'Kyle Singler', 0.25, 0),
-(163, 'John Lucas', 0, 0),
-(164, 'Josh Smith', 0.38, 15.9),
-(165, 'Spencer Dinwiddie', 0.1, 16.1),
-(166, 'Cartier Martin', 0.01, 0),
-(167, 'Shawne Williams', 0.02, 0),
-(168, 'Stephen Curry', 0.86, 52.2),
-(169, 'Klay Thompson', 0.91, 35),
-(170, 'Draymond Green', 0.8, 12.4),
-(171, 'Andrew Bogut', 0.44, 15.8),
-(172, 'Andre Iguodala', 0.81, 16.7),
-(173, 'Harrison Barnes', 0.31, 17.5),
-(174, 'James McAdoo', 0.07, 33.1),
-(175, 'Marreese Speights', 0.18, 38.7),
-(176, 'Leandro Barbosa', 0.04, 10.9),
-(177, 'Festus Ezeli', 0.03, 27),
-(178, 'Shaun Livingston', 0.2, 0),
-(179, 'David Lee', 0.17, 0),
-(180, 'Justin Holiday', 0.06, 16.6),
-(181, 'Ognjen Kuzmic', 0, 0),
-(182, 'Brandon Rush', 0.06, 15.7),
-(183, 'James Harden', 0.92, 47),
-(184, 'Dwight Howard', 0.32, 14.4),
-(185, 'Terrence Jones', 0.26, 18.7),
-(186, 'Josh Smith', 0.32, 23.2),
-(187, 'Trevor Ariza', 0.95, 12.5),
-(188, 'Corey Brewer', 0.26, 21.2),
-(189, 'Jason Terry', 0.4, 16.1),
-(190, 'Pablo Prigioni', 0.02, 13.8),
-(191, 'Patrick Beverley', 0.65, 12.8),
-(192, 'Donatas Motiejunas', 0.54, 13.8),
-(193, 'Isaiah Canaan', 0.02, 0),
-(194, 'Tarik Black', 0.03, 0),
-(195, 'Clint Capela', 0, 0),
-(196, 'Francisco Garcia', 0.07, 0),
-(197, 'Kostas Papanikolaou', 0.08, 15.6),
-(198, 'Joey Dorsey', 0.02, 0),
-(199, 'Nick Johnson', 0.05, 12.4),
-(200, 'Alexey Shved', 0, 0),
-(201, 'K.J. McDaniels', 0, 0),
-(202, 'Troy Daniels', 0.01, 0),
-(203, 'George Hill', 0.46, 36.3),
-(204, 'Paul George', 0.02, 24.1),
-(205, 'A.J. Price', 0, 0),
-(206, 'Luis Scola', 0.28, 12.7),
-(207, 'C.J. Miles', 0.59, 27.1),
-(208, 'David West', 0.69, 15.7),
-(209, 'Lavoy Allen', 0.2, 0),
-(210, 'C.J. Watson', 0.37, 18.3),
-(211, 'Rodney Stuckey', 0.51, 24),
-(212, 'Roy Hibbert', 0.7, 12.8),
-(213, 'Donald Sloan', 0.27, 30.6),
-(214, 'Damjan Rudez', 0.08, 23.3),
-(215, 'Ian Mahinmi', 0.09, 13.3),
-(216, 'Shayne Whittington', 0, 0),
-(217, 'Solomon Hill', 0.52, 10.7),
-(218, 'Chris Copeland', 0.17, 13.9),
-(219, 'Chris Paul', 0.99, 32.5),
-(220, 'Blake Griffin', 0.82, 27.5),
-(221, 'DeAndre Jordan', 0.94, 0),
-(222, 'J.J. Redick', 0.77, 19.7),
-(223, 'Jamal Crawford', 0.54, 36.7),
-(224, 'Matt Barnes', 0.62, 10.2),
-(225, 'Reggie Bullock', 0, 0),
-(226, 'Hedo Turkoglu', 0.04, 17.1),
-(227, 'Ekpe Udoh', 0, 0),
-(228, 'Jared Cunningham', 0, 0),
-(229, 'Austin Rivers', 0.07, 0),
-(230, 'Nate Robinson', 0.02, 0),
-(231, 'Jordan Farmar', 0, 0),
-(232, 'Glen Davis', 0.02, 0),
-(233, 'Lester Hudson', 0, 0),
-(234, 'Spencer Hawes', 0.07, 14.5),
-(235, 'C.J. Wilcox', 0, 0),
-(236, 'Jordan Hamilton', 0, 0),
-(237, 'Chris Douglas-Roberts', 0, 0),
-(238, 'Dahntay Jones', 0.01, 44),
-(239, 'Nick Young', 0.41, 18),
-(240, 'Ed Davis', 0.23, 16.1),
-(241, 'Wayne Ellington', 0.63, 14.8),
-(242, 'Xavier Henry', 0, 0),
-(243, 'Carlos Boozer', 0.4, 16.9),
-(244, 'Kobe Bryant', 0.42, 46.6),
-(245, 'Tarik Black', 0.1, 0),
-(246, 'Jordan Clarkson', 0.4, 24.4),
-(247, 'Jeremy Lin', 0.51, 19.1),
-(248, 'Wesley Johnson', 0.7, 14),
-(249, 'Jordan Hill', 0.64, 22.3),
-(250, 'Dwight Buycks', 0, 0),
-(251, 'Robert Sacre', 0.12, 15),
-(252, 'Ryan Kelly', 0.22, 0),
-(253, 'Jabari Brown', 0.12, 12.8),
-(254, 'Ronnie Price', 0.04, 0),
-(255, 'Vander Blue', 0, 75.8),
-(256, 'Julius Randle', 0, 0),
-(257, 'Russ Smith', 0, 0),
-(258, 'Zach Randolph', 0.78, 19.1),
-(259, 'Marc Gasol', 0.96, 26.8),
-(260, 'Tony Allen', 0.45, 15.6),
-(261, 'Mike Conley', 0.87, 32.7),
-(262, 'Nick Calathes', 0.11, 0),
-(263, 'Jarnell Stokes', 0, 0),
-(264, 'Kosta Koufos', 0.05, 0),
-(265, 'Jeff Green', 0.29, 21.5),
-(266, 'Jordan Adams', 0, 0),
-(267, 'Beno Udrih', 0.17, 14.1),
-(268, 'JaMychal Green', 0.01, 0),
-(269, 'Courtney Lee', 0.72, 16.2),
-(270, 'Tayshaun Prince', 0.16, 27.3),
-(271, 'Vince Carter', 0.19, 15),
-(272, 'Quincy Pondexter', 0.15, 11.4),
-(273, 'Jon Leuer', 0.04, 12.2),
-(274, 'Hassan Whiteside', 0.3, 22.4),
-(275, 'Dwyane Wade', 0.75, 42.8),
-(276, 'Luol Deng', 0.73, 0),
-(277, 'Chris Bosh', 0.43, 33.9),
-(278, 'Chris Andersen', 0.23, 12.1),
-(279, 'Goran Dragic', 0.24, 20),
-(280, 'James Ennis', 0.13, 0),
-(281, 'Josh McRoberts', 0.07, 0),
-(282, 'Mario Chalmers', 0.64, 18.2),
-(283, 'Tyler Johnson', 0.17, 22.5),
-(284, 'Michael Beasley', 0.11, 31.5),
-(285, 'Henry Walker', 0.29, 22.9),
-(286, 'Shawne Williams', 0.18, 0),
-(287, 'Danny Granger', 0.14, 19.3),
-(288, 'Shabazz Napier', 0.17, 0),
-(289, 'Shannon Brown', 0, 82.3),
-(290, 'Norris Cole', 0.19, 14.6),
-(291, 'Andre Dawkins', 0, 0),
-(292, 'Justin Hamilton', 0.02, 29.2),
-(293, 'Udonis Haslem', 0.08, 0),
-(294, 'Zoran Dragic', 0.03, 41.1),
-(295, 'Khris Middleton', 0.77, 20.9),
-(296, 'Michael Carter-Williams', 0.3, 16.3),
-(297, 'Kendall Marshall', 0.01, 0),
-(298, 'Zaza Pachulia', 0.53, 10.3),
-(299, 'Brandon Knight', 0.54, 38.8),
-(300, 'Jared Dudley', 0.28, 11.5),
-(301, 'Giannis Antetokounmpo', 0.81, 16.7),
-(302, 'John Henson', 0.26, 11.5),
-(303, 'Ersan Ilyasova', 0.33, 19),
-(304, 'Jorge Gutierrez', 0, 0),
-(305, 'O.J. Mayo', 0.39, 13.8),
-(306, 'Jerryd Bayless', 0.39, 24.1),
-(307, 'Miles Plumlee', 0, 0),
-(308, 'Larry Sanders', 0.12, 0),
-(309, 'Jabari Parker', 0.17, 17.1),
-(310, 'Nate Wolters', 0, 0),
-(311, 'Kenyon Martin', 0, 0),
-(312, 'Tyler Ennis', 0.01, 0),
-(313, 'Chris Johnson', 0, 0),
-(314, 'Johnny O''Bryant', 0, 0),
-(315, 'Sean Kilpatrick', 0.01, 32.7),
-(316, 'Kevin Garnett', 0.03, 0),
-(317, 'Shabazz Muhammad', 0.12, 19.4),
-(318, 'Ricky Rubio', 0.35, 17.9),
-(319, 'Arinze Onuaku', 0, 0),
-(320, 'Glenn Robinson', 0, 0),
-(321, 'Kevin Martin', 0.43, 28.8),
-(322, 'Nikola Pekovic', 0.32, 21.5),
-(323, 'Thaddeus Young', 0.57, 23.4),
-(324, 'Andrew Wiggins', 0.9, 22),
-(325, 'Mo Williams', 0.38, 34),
-(326, 'Chase Budinger', 0.26, 14.5),
-(327, 'Jeff Adrien', 0.01, 0),
-(328, 'Gary Neal', 0.06, 22),
-(329, 'Gorgui Dieng', 0.64, 13.5),
-(330, 'Troy Daniels', 0, 0),
-(331, 'Justin Hamilton', 0, 0),
-(332, 'Lorenzo Brown', 0.12, 0),
-(333, 'Corey Brewer', 0.19, 16.5),
-(334, 'Anthony Bennett', 0.05, 10.1),
-(335, 'Robbie Hummel', 0.05, 11.6),
-(336, 'Zach LaVine', 0.32, 20.8),
-(337, 'Miroslav Raduljica', 0, 0),
-(338, 'Ronny Turiaf', 0, 0),
-(339, 'Adreian Payne', 0.07, 0),
-(340, 'Anthony Davis', 0.72, 43.8),
-(341, 'Toney Douglas', 0, 0),
-(342, 'Tyreke Evans', 0.94, 23),
-(343, 'Jrue Holiday', 0.34, 15.6),
-(344, 'Alexis Ajinca', 0.15, 19.3),
-(345, 'Ryan Anderson', 0.46, 10.3),
-(346, 'Eric Gordon', 0.74, 24),
-(347, 'Omer Asik', 0.41, 10.7),
-(348, 'Quincy Pondexter', 0.3, 10.8),
-(349, 'Norris Cole', 0.26, 13.4),
-(350, 'Jimmer Fredette', 0.07, 30.8),
-(351, 'Daunte Cunningham', 0.37, 0),
-(352, 'Elliot Williams', 0, 0),
-(353, 'Austin Rivers', 0.06, 0),
-(354, 'Jeff Withey', 0, 0),
-(355, 'Gal Mekel', 0, 0),
-(356, 'Luke Babbitt', 0.12, 26.2),
-(357, 'Nate Wolters', 0, 0),
-(358, 'John Salmons', 0, 0),
-(359, 'Darius Miller', 0, 0),
-(360, 'Russ Smith', 0, 0),
-(361, 'Carmelo Anthony', 0.46, 44),
-(362, 'Amare Stoudemire', 0.27, 20.9),
-(363, 'Alexey Shved', 0.17, 19.9),
-(364, 'Pablo Prigioni', 0.31, 0),
-(365, 'Langston Galloway', 0.48, 17),
-(366, 'J.R. Smith', 0.22, 16.2),
-(367, 'Quincy Acy', 0.12, 0),
-(368, 'Travis Wear', 0.04, 0),
-(369, 'Andrea Bargnani', 0.22, 16.3),
-(370, 'Cole Aldrich', 0.17, 23.2),
-(371, 'Ricky Ledo', 0, 0),
-(372, 'Lou Amundson', 0.2, 14.1),
-(373, 'Tim Hardaway', 0.39, 19.3),
-(374, 'Iman Shumpert', 0.18, 15.5),
-(375, 'Lance Thomas', 0.37, 13.6),
-(376, 'Samuel Dalembert', 0.14, 15.6),
-(377, 'Shane Larkin', 0.39, 15),
-(378, 'Cleanthony Early', 0.05, 22.5),
-(379, 'Jose Calderon', 0.32, 16.5),
-(380, 'Jason Smith', 0.43, 15),
-(381, 'Kevin Durant', 0.24, 50.2),
-(382, 'Russell Westbrook', 0.71, 51.2),
-(383, 'Enes Kanter', 0.23, 12.6),
-(384, 'Anthony Morrow', 0.49, 19.8),
-(385, 'Serge Ibaka', 0.77, 10.3),
-(386, 'Jeremy Lamb', 0.18, 0),
-(387, 'Andre Roberson', 0.26, 0),
-(388, 'Reggie Jackson', 0.49, 27.7),
-(389, 'Steven Adams', 0.6, 0),
-(390, 'D.J. Augustin', 0.23, 11.5),
-(391, 'Dion Waiters', 0.38, 12.4),
-(392, 'Mitch McGary', 0, 0),
-(393, 'Nick Collison', 0.06, 13.6),
-(394, 'Kendrick Perkins', 0.02, 0),
-(395, 'Sebastian Telfair', 0.03, 24.1),
-(396, 'Kyle Singler', 0.1, 0),
-(397, 'Lance Thomas', 0.02, 28.4),
-(398, 'Perry Jones', 0.1, 0),
-(399, 'Ish Smith', 0.01, 39.7),
-(400, 'Steve Novak', 0, 0),
-(401, 'Grant Jerrett', 0, 0),
-(402, 'Tobias Harris', 0.84, 19.8),
-(403, 'Nikola Vucevic', 0.86, 23),
-(404, 'Evan Fournier', 0.39, 21.8),
-(405, 'Victor Oladipo', 0.76, 28.2),
-(406, 'Elfrid Payton', 0.79, 21),
-(407, 'Dewayne Dedmon', 0.07, 0),
-(408, 'Ben Gordon', 0.13, 17.2),
-(409, 'Willie Green', 0.29, 0),
-(410, 'Kyle O''Quinn', 0.03, 29.2),
-(411, 'Aaron Gordon', 0.15, 21.8),
-(412, 'Luke Ridnour', 0.11, 0),
-(413, 'Maurice Harkless', 0.05, 35.6),
-(414, 'Channing Frye', 0.43, 13.7),
-(415, 'Andrew Nicholson', 0.02, 0),
-(416, 'Devyn Marble', 0.01, 0),
-(417, 'Tyler Ennis', 0, 0),
-(418, 'Isaiah Thomas', 0.36, 32.1),
-(419, 'Eric Bledsoe', 0.93, 29.2),
-(420, 'Markieff Morris', 0.85, 26.1),
-(421, 'Goran Dragic', 0.59, 17.1),
-(422, 'Gerald Green', 0.24, 19.7),
-(423, 'P.J. Tucker', 0.78, 14.4),
-(424, 'Brandan Wright', 0.09, 10),
-(425, 'Marcus Morris', 0.44, 0),
-(426, 'Miles Plumlee', 0.16, 0),
-(427, 'Alex Len', 0.31, 0),
-(428, 'T.J. Warren', 0.02, 34.2),
-(429, 'Brandon Knight', 0.11, 24.2),
-(430, 'Marxus Thornton', 0, 0),
-(431, 'Jerel McNeal', 0, 0),
-(432, 'Zoran Dragic', 0, 0),
-(433, 'Anthony Tolliver', 0, 0),
-(434, 'Archie Goodwin', 0.04, 36.2),
-(435, 'Shavlik Randolph', 0, 0),
-(436, 'Reggie Bullock', 0, 0),
-(437, 'A.J. Price', 0, 0),
-(438, 'Earl Barron', 0, 0),
-(439, 'Seth Curry', 0, 0),
-(440, 'LaMarcus Aldridge', 0.85, 42.9),
-(441, 'Damian Lillard', 0.98, 32.5),
-(442, 'Wesley Matthews', 0.79, 20.9),
-(443, 'Victor Claver', 0, 0),
-(444, 'Nicolas Batum', 0.71, 14.5),
-(445, 'C.J. McCollum', 0.06, 33.9),
-(446, 'Robin Lopez', 0.35, 10),
-(447, 'Dorell Wright', 0.2, 14.3),
-(448, 'Joel Freeland', 0.09, 0),
-(449, 'Thomas Robinson', 0.11, 16.2),
-(450, 'Chris Kaman', 0.14, 0),
-(451, 'Allen Crabbe', 0.08, 0),
-(452, 'Meyers Leonard', 0.09, 0),
-(453, 'Arron Afflalo', 0.21, 22.5),
-(454, 'Steve Blake', 0.21, 0),
-(455, 'Will Barton', 0.06, 0),
-(456, 'Tim Frazier', 0, 0),
-(457, 'Alonzo Gee', 0, 0),
-(458, 'DeMarcus Cousins', 0.64, 41.9),
-(459, 'David Stockton', 0, 0),
-(460, 'Quincy Miller', 0, 0),
-(461, 'Rudy Gay', 0.8, 23.1),
-(462, 'Darren Collison', 0.66, 25.9),
-(463, 'Omri Casspi', 0.23, 12.9),
-(464, 'Ben McLemore', 0.77, 0),
-(465, 'Andre Miller', 0.2, 26),
-(466, 'Reggie Evans', 0.08, 0),
-(467, 'Ray McCallum', 0.33, 11.9),
-(468, 'Carl Landry', 0.21, 0),
-(469, 'Derrick Williams', 0.36, 14.7),
-(470, 'Ryan Hollins', 0.01, 24.2),
-(471, 'Jason Thompson', 0.51, 0),
-(472, 'Nik Stauskas', 0.06, 10.5),
-(473, 'Ramon Sessions', 0.07, 18.6),
-(474, 'Kawhi Leonard', 0.45, 18.5),
-(475, 'Manu Ginobili', 0.66, 28.2),
-(476, 'Danny Green', 0.69, 26.3),
-(477, 'Tim Duncan', 0.87, 23.3),
-(478, 'Tiago Splitter', 0.24, 0),
-(479, 'Cory Joseph', 0.38, 16.6),
-(480, 'Patrick Mills', 0.12, 23.7),
-(481, 'Boris Diaw', 0.5, 0),
-(482, 'Aron Baynes', 0.07, 0),
-(483, 'Tony Parker', 0.45, 22.8),
-(484, 'Marco Belinelli', 0.35, 17.3),
-(485, 'Matt Bonner', 0.1, 0),
-(486, 'Jeff Ayres', 0, 0),
-(487, 'Reggie Williams', 0, 0),
-(488, 'Kyle Anderson', 0.05, 0),
-(489, 'Austin Daye', 0, 0),
-(490, 'JaMychal Green', 0, 0),
-(491, 'Lou Williams', 0.67, 22.5),
-(492, 'DeMar DeRozan', 0.65, 35.4),
-(493, 'Kyle Lowry', 0.78, 34.1),
-(494, 'James Johnson', 0.21, 11.9),
-(495, 'Patrick Patterson', 0.81, 11.9),
-(496, 'Tyler Hansbrough', 0.11, 0),
-(497, 'Jonas Valanciunas', 0.34, 10.6),
-(498, 'Amir Johnson', 0.54, 16.2),
-(499, 'Greivis Vasquez', 0.31, 0),
-(500, 'Terrence Ross', 0.48, 18.4),
-(501, 'Chuck Hayes', 0.04, 0),
-(502, 'Lucas Nogueira', 0, 0),
-(503, 'Landry Fields', 0.01, 0),
-(504, 'Greg Stiemsma', 0, 0),
-(505, 'Bruno Caboclo', 0, 0),
-(506, 'Gordon Hayward', 0.82, 39),
-(507, 'Rudy Gobert', 0.57, 11.4),
-(508, 'Jeremy Evans', 0, 0),
-(509, 'Derrick Favors', 0.82, 23.9),
-(510, 'Trevor Booker', 0.23, 11.8),
-(511, 'Chris Johnson', 0, 0),
-(512, 'Rodney Hood', 0.3, 19.1),
-(513, 'Bryce Cotton', 0.03, 11),
-(514, 'Enes Kanter', 0.32, 24.2),
-(515, 'Elliot Williams', 0, 0),
-(516, 'Joe Ingles', 0.22, 12.4),
-(517, 'Elijah Millsap', 0.28, 0),
-(518, 'Trey Burke', 0.67, 24),
-(519, 'Alec Burks', 0.3, 22.6),
-(520, 'Dante Exum', 0.36, 0),
-(521, 'Jack Cooley', 0, 0),
-(522, 'Grant Jerrett', 0, 0),
-(523, 'Ian Clark', 0, 0),
-(524, 'Steve Novak', 0, 0),
-(525, 'Patrick Christopher', 0, 0),
-(526, 'John Wall', 0.95, 33.4),
-(527, 'Marcin Gortat', 0.53, 15.6),
-(528, 'Bradley Beal', 0.65, 15),
-(529, ' Nene', 0.58, 16.1),
-(530, 'Paul Pierce', 0.69, 19),
-(531, 'Ramon Sessions', 0.04, 19.7),
-(532, 'Otto Porter', 0.19, 11),
-(533, 'Drew Gooden', 0.18, 0),
-(534, 'Kris Humphries', 0.28, 18.3),
-(535, 'Toure'' Murry', 0, 0),
-(536, 'Rasual Butler', 0.46, 0),
-(537, 'Andre Miller', 0.01, 17.5),
-(538, 'Garrett Temple', 0.15, 0),
-(539, 'Kevin Seraphin', 0.09, 10.4),
-(540, 'Martell Webster', 0.05, 25.6),
-(541, 'DeJuan Blair', 0.04, 0),
-(542, 'Will Bynum', 0.01, 27.2),
-(543, 'Glen Rice', 0, 0);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- ----------------------------
+-- Records of player_clutch
+-- ----------------------------
+INSERT INTO `player_clutch` VALUES ('A.J. Price$01', '2014-15R', '0.01', '58.2');
+INSERT INTO `player_clutch` VALUES ('Aaron Brooks$01', '2014-15R', '0.44', '31.6');
+INSERT INTO `player_clutch` VALUES ('Aaron Gordon$01', '2014-15R', '0.15', '21.8');
+INSERT INTO `player_clutch` VALUES ('Adreian Payne$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Al Horford$01', '2014-15R', '0.71', '24.4');
+INSERT INTO `player_clutch` VALUES ('Al Jefferson$01', '2014-15R', '0.74', '23.6');
+INSERT INTO `player_clutch` VALUES ('Al-Farouq Aminu$01', '2014-15R', '0.16', '10.9');
+INSERT INTO `player_clutch` VALUES ('Alan Anderson$01', '2014-15R', '0.39', '14.2');
+INSERT INTO `player_clutch` VALUES ('Alec Burks$01', '2014-15R', '0.3', '22.6');
+INSERT INTO `player_clutch` VALUES ('Alex Kirk$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Alex Len$01', '2014-15R', '0.31', '0');
+INSERT INTO `player_clutch` VALUES ('Alexey Shved$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Alexis Ajinca$01', '2014-15R', '0.15', '19.3');
+INSERT INTO `player_clutch` VALUES ('Allen Crabbe$01', '2014-15R', '0.08', '0');
+INSERT INTO `player_clutch` VALUES ('Alonzo Gee$01', '2014-15R', '0.1', '0');
+INSERT INTO `player_clutch` VALUES ('Amar\'e Stoudemire$01', '2014-15R', '0.01', '0');
+INSERT INTO `player_clutch` VALUES ('Amir Johnson$01', '2014-15R', '0.54', '16.2');
+INSERT INTO `player_clutch` VALUES ('Anderson Varejao$01', '2014-15R', '0.11', '24.1');
+INSERT INTO `player_clutch` VALUES ('Andre Dawkins$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Andre Drummond$01', '2014-15R', '0.56', '20.1');
+INSERT INTO `player_clutch` VALUES ('Andre Iguodala$01', '2014-15R', '0.81', '16.7');
+INSERT INTO `player_clutch` VALUES ('Andre Miller$02', '2014-15R', '0.2', '26');
+INSERT INTO `player_clutch` VALUES ('Andre Roberson$03', '2014-15R', '0.26', '0');
+INSERT INTO `player_clutch` VALUES ('Andrea Bargnani$01', '2014-15R', '0.22', '16.3');
+INSERT INTO `player_clutch` VALUES ('Andrei Kirilenko$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Andrew Bogut$01', '2014-15R', '0.44', '15.8');
+INSERT INTO `player_clutch` VALUES ('Andrew Nicholson$01', '2014-15R', '0.02', '0');
+INSERT INTO `player_clutch` VALUES ('Andrew Wiggins$01', '2014-15R', '0.9', '22');
+INSERT INTO `player_clutch` VALUES ('Anthony Bennett$01', '2014-15R', '0.05', '10.1');
+INSERT INTO `player_clutch` VALUES ('Anthony Davis$02', '2014-15R', '0.72', '43.8');
+INSERT INTO `player_clutch` VALUES ('Anthony Morrow$01', '2014-15R', '0.49', '19.8');
+INSERT INTO `player_clutch` VALUES ('Anthony Tolliver$01', '2014-15R', '0.22', '11.8');
+INSERT INTO `player_clutch` VALUES ('Archie Goodwin$01', '2014-15R', '0.04', '36.2');
+INSERT INTO `player_clutch` VALUES ('Arinze Onuaku$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Aron Baynes$01', '2014-15R', '0.07', '0');
+INSERT INTO `player_clutch` VALUES ('Arron Afflalo$01', '2014-15R', '0.61', '18.4');
+INSERT INTO `player_clutch` VALUES ('Austin Daye$01', '2014-15R', '0.03', '0');
+INSERT INTO `player_clutch` VALUES ('Austin Rivers$01', '2014-15R', '0.07', '0');
+INSERT INTO `player_clutch` VALUES ('Avery Bradley$01', '2014-15R', '0.81', '24.8');
+INSERT INTO `player_clutch` VALUES ('Ben Gordon$01', '2014-15R', '0.13', '17.2');
+INSERT INTO `player_clutch` VALUES ('Ben McLemore$01', '2014-15R', '0.77', '0');
+INSERT INTO `player_clutch` VALUES ('Beno Udrih$01', '2014-15R', '0.17', '14.1');
+INSERT INTO `player_clutch` VALUES ('Bernard James$01', '2014-15R', '0.04', '0');
+INSERT INTO `player_clutch` VALUES ('Bismack Biyombo$01', '2014-15R', '0.14', '0');
+INSERT INTO `player_clutch` VALUES ('Blake Griffin$01', '2014-15R', '0.82', '27.5');
+INSERT INTO `player_clutch` VALUES ('Bojan Bogdanovic$02', '2014-15R', '0.48', '13.9');
+INSERT INTO `player_clutch` VALUES ('Boris Diaw$01', '2014-15R', '0.5', '0');
+INSERT INTO `player_clutch` VALUES ('Bradley Beal$01', '2014-15R', '0.65', '15');
+INSERT INTO `player_clutch` VALUES ('Brandan Wright$03', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Brandon Bass$01', '2014-15R', '0.51', '16.6');
+INSERT INTO `player_clutch` VALUES ('Brandon Davies$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Brandon Jennings$01', '2014-15R', '0.42', '27');
+INSERT INTO `player_clutch` VALUES ('Brandon Knight$03', '2014-15R', '0.54', '38.8');
+INSERT INTO `player_clutch` VALUES ('Brandon Rush$01', '2014-15R', '0.06', '15.7');
+INSERT INTO `player_clutch` VALUES ('Brendan Haywood$01', '2014-15R', '0.07', '28');
+INSERT INTO `player_clutch` VALUES ('Brian Roberts$01', '2014-15R', '0.23', '0');
+INSERT INTO `player_clutch` VALUES ('Brook Lopez$01', '2014-15R', '0.73', '25.9');
+INSERT INTO `player_clutch` VALUES ('Bruno Caboclo$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Bryce Cotton$01', '2014-15R', '0.03', '11');
+INSERT INTO `player_clutch` VALUES ('C.J. McCollum$01', '2014-15R', '0.06', '33.9');
+INSERT INTO `player_clutch` VALUES ('C.J. Miles$01', '2014-15R', '0.59', '27.1');
+INSERT INTO `player_clutch` VALUES ('C.J. Watson$01', '2014-15R', '0.37', '18.3');
+INSERT INTO `player_clutch` VALUES ('C.J. Wilcox$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Cameron Bairstow$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Carl Landry$01', '2014-15R', '0.21', '0');
+INSERT INTO `player_clutch` VALUES ('Carlos Boozer$01', '2014-15R', '0.4', '16.9');
+INSERT INTO `player_clutch` VALUES ('Carmelo Anthony$01', '2014-15R', '0.46', '44');
+INSERT INTO `player_clutch` VALUES ('Caron Butler$01', '2014-15R', '0.25', '12.7');
+INSERT INTO `player_clutch` VALUES ('Cartier Martin$01', '2014-15R', '0.01', '0');
+INSERT INTO `player_clutch` VALUES ('Chandler Parsons$01', '2014-15R', '0.78', '19.1');
+INSERT INTO `player_clutch` VALUES ('Channing Frye$01', '2014-15R', '0.43', '13.7');
+INSERT INTO `player_clutch` VALUES ('Charlie Villanueva$01', '2014-15R', '0.05', '20.6');
+INSERT INTO `player_clutch` VALUES ('Chase Budinger$01', '2014-15R', '0.26', '14.5');
+INSERT INTO `player_clutch` VALUES ('Chris Andersen$01', '2014-15R', '0.23', '12.1');
+INSERT INTO `player_clutch` VALUES ('Chris Bosh$01', '2014-15R', '0.43', '33.9');
+INSERT INTO `player_clutch` VALUES ('Chris Copeland$01', '2014-15R', '0.17', '13.9');
+INSERT INTO `player_clutch` VALUES ('Chris Douglas-Roberts$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Chris Johnson$04', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Chris Kaman$01', '2014-15R', '0.14', '0');
+INSERT INTO `player_clutch` VALUES ('Chris Paul$01', '2014-15R', '0.99', '32.5');
+INSERT INTO `player_clutch` VALUES ('Chuck Hayes$01', '2014-15R', '0.04', '0');
+INSERT INTO `player_clutch` VALUES ('Cleanthony Early$01', '2014-15R', '0.05', '22.5');
+INSERT INTO `player_clutch` VALUES ('Clint Capela$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Cody Zeller$01', '2014-15R', '0.42', '0');
+INSERT INTO `player_clutch` VALUES ('Cole Aldrich$01', '2014-15R', '0.17', '23.2');
+INSERT INTO `player_clutch` VALUES ('Corey Brewer$01', '2014-15R', '0.26', '21.2');
+INSERT INTO `player_clutch` VALUES ('Cory Jefferson$01', '2014-15R', '0.02', '13.5');
+INSERT INTO `player_clutch` VALUES ('Cory Joseph$01', '2014-15R', '0.38', '16.6');
+INSERT INTO `player_clutch` VALUES ('Courtney Lee$01', '2014-15R', '0.72', '16.2');
+INSERT INTO `player_clutch` VALUES ('D.J. Augustin$01', '2014-15R', '0.22', '17.6');
+INSERT INTO `player_clutch` VALUES ('Dahntay Jones$02', '2014-15R', '0.01', '44');
+INSERT INTO `player_clutch` VALUES ('Damian Lillard$01', '2014-15R', '0.98', '32.5');
+INSERT INTO `player_clutch` VALUES ('Damjan Rudez$01', '2014-15R', '0.08', '23.3');
+INSERT INTO `player_clutch` VALUES ('Danilo Gallinari$01', '2014-15R', '0.39', '31');
+INSERT INTO `player_clutch` VALUES ('Danny Granger$01', '2014-15R', '0.14', '19.3');
+INSERT INTO `player_clutch` VALUES ('Danny Green$02', '2014-15R', '0.69', '26.3');
+INSERT INTO `player_clutch` VALUES ('Dante Exum$01', '2014-15R', '0.36', '0');
+INSERT INTO `player_clutch` VALUES ('Darius Miller$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Darius Morris$01', '2014-15R', '0.01', '36.5');
+INSERT INTO `player_clutch` VALUES ('Darrell Arthur$01', '2014-15R', '0.29', '22.1');
+INSERT INTO `player_clutch` VALUES ('Darren Collison$01', '2014-15R', '0.66', '25.9');
+INSERT INTO `player_clutch` VALUES ('David Lee$02', '2014-15R', '0.17', '0');
+INSERT INTO `player_clutch` VALUES ('David Stockton$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('David West$01', '2014-15R', '0.69', '15.7');
+INSERT INTO `player_clutch` VALUES ('DeAndre Jordan$01', '2014-15R', '0.94', '0');
+INSERT INTO `player_clutch` VALUES ('DeJuan Blair$01', '2014-15R', '0.04', '0');
+INSERT INTO `player_clutch` VALUES ('DeMar DeRozan$01', '2014-15R', '0.65', '35.4');
+INSERT INTO `player_clutch` VALUES ('DeMarcus Cousins$01', '2014-15R', '0.64', '41.9');
+INSERT INTO `player_clutch` VALUES ('DeMarre Carroll$01', '2014-15R', '0.7', '13.4');
+INSERT INTO `player_clutch` VALUES ('Dennis Schroder$01', '2014-15R', '0.27', '38.1');
+INSERT INTO `player_clutch` VALUES ('Deron Williams$01', '2014-15R', '0.6', '16.3');
+INSERT INTO `player_clutch` VALUES ('Derrick Favors$01', '2014-15R', '0.82', '23.9');
+INSERT INTO `player_clutch` VALUES ('Derrick Rose$01', '2014-15R', '0.55', '28');
+INSERT INTO `player_clutch` VALUES ('Derrick Williams$02', '2014-15R', '0.36', '14.7');
+INSERT INTO `player_clutch` VALUES ('Devin Harris$01', '2014-15R', '0.46', '13.3');
+INSERT INTO `player_clutch` VALUES ('Devyn Marble$01', '2014-15R', '0.01', '0');
+INSERT INTO `player_clutch` VALUES ('Dewayne Dedmon$01', '2014-15R', '0.07', '0');
+INSERT INTO `player_clutch` VALUES ('Dion Waiters$01', '2014-15R', '0.1', '0');
+INSERT INTO `player_clutch` VALUES ('Dirk Nowitzki$01', '2014-15R', '0.78', '34.9');
+INSERT INTO `player_clutch` VALUES ('Donald Sloan$01', '2014-15R', '0.27', '30.6');
+INSERT INTO `player_clutch` VALUES ('Donatas Motiejunas$01', '2014-15R', '0.54', '13.8');
+INSERT INTO `player_clutch` VALUES ('Dorell Wright$01', '2014-15R', '0.2', '14.3');
+INSERT INTO `player_clutch` VALUES ('Doug McDermott$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Draymond Green$01', '2014-15R', '0.8', '12.4');
+INSERT INTO `player_clutch` VALUES ('Drew Gooden$01', '2014-15R', '0.18', '0');
+INSERT INTO `player_clutch` VALUES ('Dwight Buycks$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Dwight Howard$01', '2014-15R', '0.32', '14.4');
+INSERT INTO `player_clutch` VALUES ('Dwight Powell$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Dwyane Wade$01', '2014-15R', '0.75', '42.8');
+INSERT INTO `player_clutch` VALUES ('E\'Twaun Moore$01', '2014-15R', '0.13', '15.5');
+INSERT INTO `player_clutch` VALUES ('Earl Barron$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Earl Clark$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Ed Davis$01', '2014-15R', '0.23', '16.1');
+INSERT INTO `player_clutch` VALUES ('Ekpe Udoh$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Elfrid Payton$01', '2014-15R', '0.79', '21');
+INSERT INTO `player_clutch` VALUES ('Elijah Millsap$01', '2014-15R', '0.28', '0');
+INSERT INTO `player_clutch` VALUES ('Elliot Williams$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Elton Brand$01', '2014-15R', '0.08', '0');
+INSERT INTO `player_clutch` VALUES ('Enes Kanter$01', '2014-15R', '0.23', '12.6');
+INSERT INTO `player_clutch` VALUES ('Eric Bledsoe$01', '2014-15R', '0.93', '29.2');
+INSERT INTO `player_clutch` VALUES ('Eric Gordon$01', '2014-15R', '0.74', '24');
+INSERT INTO `player_clutch` VALUES ('Erick Green$01', '2014-15R', '0.02', '47.2');
+INSERT INTO `player_clutch` VALUES ('Ersan Ilyasova$01', '2014-15R', '0.33', '19');
+INSERT INTO `player_clutch` VALUES ('Evan Fournier$01', '2014-15R', '0.39', '21.8');
+INSERT INTO `player_clutch` VALUES ('Evan Turner$01', '2014-15R', '0.7', '20.5');
+INSERT INTO `player_clutch` VALUES ('Festus Ezeli$01', '2014-15R', '0.03', '27');
+INSERT INTO `player_clutch` VALUES ('Francisco Garcia$01', '2014-15R', '0.07', '0');
+INSERT INTO `player_clutch` VALUES ('Gal Mekel$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Garrett Temple$01', '2014-15R', '0.15', '0');
+INSERT INTO `player_clutch` VALUES ('Gary Harris$01', '2014-15R', '0.07', '0');
+INSERT INTO `player_clutch` VALUES ('Gary Neal$01', '2014-15R', '0.4', '13.3');
+INSERT INTO `player_clutch` VALUES ('George Hill$01', '2014-15R', '0.46', '36.3');
+INSERT INTO `player_clutch` VALUES ('Gerald Green$01', '2014-15R', '0.24', '19.7');
+INSERT INTO `player_clutch` VALUES ('Gerald Henderson$02', '2014-15R', '0.62', '24.8');
+INSERT INTO `player_clutch` VALUES ('Gerald Wallace$01', '2014-15R', '0.01', '0');
+INSERT INTO `player_clutch` VALUES ('Giannis Antetokounmpo$01', '2014-15R', '0.81', '16.7');
+INSERT INTO `player_clutch` VALUES ('Glen Davis$01', '2014-15R', '0.02', '0');
+INSERT INTO `player_clutch` VALUES ('Glen Rice$02', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Glenn Robinson$02', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Goran Dragic$01', '2014-15R', '0.24', '20');
+INSERT INTO `player_clutch` VALUES ('Gordon Hayward$01', '2014-15R', '0.82', '39');
+INSERT INTO `player_clutch` VALUES ('Gorgui Dieng$01', '2014-15R', '0.64', '13.5');
+INSERT INTO `player_clutch` VALUES ('Grant Jerrett$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Greg Monroe$01', '2014-15R', '0.62', '20.8');
+INSERT INTO `player_clutch` VALUES ('Greg Smith$02', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Greg Stiemsma$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Greivis Vasquez$01', '2014-15R', '0.31', '0');
+INSERT INTO `player_clutch` VALUES ('Harrison Barnes$02', '2014-15R', '0.31', '17.5');
+INSERT INTO `player_clutch` VALUES ('Hassan Whiteside$01', '2014-15R', '0.3', '22.4');
+INSERT INTO `player_clutch` VALUES ('Hedo Turkoglu$01', '2014-15R', '0.04', '17.1');
+INSERT INTO `player_clutch` VALUES ('Henry Walker$01', '2014-15R', '0.29', '22.9');
+INSERT INTO `player_clutch` VALUES ('Ian Clark$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Ian Mahinmi$01', '2014-15R', '0.09', '13.3');
+INSERT INTO `player_clutch` VALUES ('Iman Shumpert$01', '2014-15R', '0.15', '12.5');
+INSERT INTO `player_clutch` VALUES ('Isaiah Canaan$01', '2014-15R', '0.02', '0');
+INSERT INTO `player_clutch` VALUES ('Isaiah Thomas$02', '2014-15R', '0.14', '50');
+INSERT INTO `player_clutch` VALUES ('Ish Smith$01', '2014-15R', '0.01', '39.7');
+INSERT INTO `player_clutch` VALUES ('J.J. Hickson$01', '2014-15R', '0.18', '16.2');
+INSERT INTO `player_clutch` VALUES ('J.J. Redick$01', '2014-15R', '0.77', '19.7');
+INSERT INTO `player_clutch` VALUES ('J.R. Smith$01', '2014-15R', '0.38', '12.2');
+INSERT INTO `player_clutch` VALUES ('Jabari Brown$01', '2014-15R', '0.12', '12.8');
+INSERT INTO `player_clutch` VALUES ('Jabari Parker$01', '2014-15R', '0.17', '17.1');
+INSERT INTO `player_clutch` VALUES ('Jack Cooley$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Jae Crowder$01', '2014-15R', '0.39', '16.8');
+INSERT INTO `player_clutch` VALUES ('Jamaal Franklin$01', '2014-15R', '0.02', '0');
+INSERT INTO `player_clutch` VALUES ('Jamal Crawford$01', '2014-15R', '0.54', '36.7');
+INSERT INTO `player_clutch` VALUES ('Jameer Nelson$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('James Ennis$01', '2014-15R', '0.13', '0');
+INSERT INTO `player_clutch` VALUES ('James Harden$01', '2014-15R', '0.92', '47');
+INSERT INTO `player_clutch` VALUES ('James Johnson$01', '2014-15R', '0.21', '11.9');
+INSERT INTO `player_clutch` VALUES ('James Jones$02', '2014-15R', '0.12', '0');
+INSERT INTO `player_clutch` VALUES ('James Young$01', '2014-15R', '0.01', '0');
+INSERT INTO `player_clutch` VALUES ('JaMychal Green$01', '2014-15R', '0.01', '0');
+INSERT INTO `player_clutch` VALUES ('Jannero Pargo$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Jared Cunningham$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Jared Dudley$01', '2014-15R', '0.28', '11.5');
+INSERT INTO `player_clutch` VALUES ('Jared Sullinger$01', '2014-15R', '0.43', '25.5');
+INSERT INTO `player_clutch` VALUES ('Jarnell Stokes$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Jarrett Jack$01', '2014-15R', '0.7', '17.5');
+INSERT INTO `player_clutch` VALUES ('Jason Maxiell$01', '2014-15R', '0.03', '27.4');
+INSERT INTO `player_clutch` VALUES ('Jason Smith$02', '2014-15R', '0.43', '15');
+INSERT INTO `player_clutch` VALUES ('Jason Terry$01', '2014-15R', '0.4', '16.1');
+INSERT INTO `player_clutch` VALUES ('Jason Thompson$02', '2014-15R', '0.51', '0');
+INSERT INTO `player_clutch` VALUES ('JaVale McGee$01', '2014-15R', '0.02', '72.9');
+INSERT INTO `player_clutch` VALUES ('Jeff Adrien$01', '2014-15R', '0.01', '0');
+INSERT INTO `player_clutch` VALUES ('Jeff Ayres$02', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Jeff Green$02', '2014-15R', '0.35', '30.3');
+INSERT INTO `player_clutch` VALUES ('Jeff Teague$01', '2014-15R', '0.84', '38.2');
+INSERT INTO `player_clutch` VALUES ('Jeff Withey$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Jerel McNeal$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Jeremy Evans$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Jeremy Lamb$01', '2014-15R', '0.18', '0');
+INSERT INTO `player_clutch` VALUES ('Jeremy Lin$01', '2014-15R', '0.51', '19.1');
+INSERT INTO `player_clutch` VALUES ('Jerome Jordan$01', '2014-15R', '0', '32');
+INSERT INTO `player_clutch` VALUES ('Jerryd Bayless$01', '2014-15R', '0.39', '24.1');
+INSERT INTO `player_clutch` VALUES ('Jimmer Fredette$01', '2014-15R', '0.07', '30.8');
+INSERT INTO `player_clutch` VALUES ('Jimmy Butler$01', '2014-15R', '0.68', '28.2');
+INSERT INTO `player_clutch` VALUES ('Joakim Noah$01', '2014-15R', '0.59', '10.4');
+INSERT INTO `player_clutch` VALUES ('Jodie Meeks$01', '2014-15R', '0.43', '15.8');
+INSERT INTO `player_clutch` VALUES ('Joe Harris$01', '2014-15R', '0.2', '0');
+INSERT INTO `player_clutch` VALUES ('Joe Ingles$01', '2014-15R', '0.22', '12.4');
+INSERT INTO `player_clutch` VALUES ('Joe Johnson$02', '2014-15R', '0.98', '26.9');
+INSERT INTO `player_clutch` VALUES ('Joel Anthony$01', '2014-15R', '0.02', '0');
+INSERT INTO `player_clutch` VALUES ('Joel Freeland$01', '2014-15R', '0.09', '0');
+INSERT INTO `player_clutch` VALUES ('Joey Dorsey$01', '2014-15R', '0.02', '0');
+INSERT INTO `player_clutch` VALUES ('Joffrey Lauvergne$01', '2014-15R', '0.02', '28.9');
+INSERT INTO `player_clutch` VALUES ('John Henson$01', '2014-15R', '0.26', '11.5');
+INSERT INTO `player_clutch` VALUES ('John Jenkins$01', '2014-15R', '0.03', '0');
+INSERT INTO `player_clutch` VALUES ('John Lucas$02', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('John Salmons$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('John Wall$01', '2014-15R', '0.95', '33.4');
+INSERT INTO `player_clutch` VALUES ('Johnny O\'Bryant$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Jon Leuer$01', '2014-15R', '0.04', '12.2');
+INSERT INTO `player_clutch` VALUES ('Jonas Jerebko$01', '2014-15R', '0.04', '24.7');
+INSERT INTO `player_clutch` VALUES ('Jonas Valanciunas$01', '2014-15R', '0.34', '10.6');
+INSERT INTO `player_clutch` VALUES ('Jordan Adams$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Jordan Clarkson$01', '2014-15R', '0.4', '24.4');
+INSERT INTO `player_clutch` VALUES ('Jordan Farmar$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Jordan Hamilton$02', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Jordan Hill$01', '2014-15R', '0.64', '22.3');
+INSERT INTO `player_clutch` VALUES ('Jorge Gutierrez$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Jose Calderon$01', '2014-15R', '0.32', '16.5');
+INSERT INTO `player_clutch` VALUES ('Josh McRoberts$01', '2014-15R', '0.07', '0');
+INSERT INTO `player_clutch` VALUES ('Josh Smith$03', '2014-15R', '0.38', '15.9');
+INSERT INTO `player_clutch` VALUES ('Jrue Holiday$01', '2014-15R', '0.34', '15.6');
+INSERT INTO `player_clutch` VALUES ('Julius Randle$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Justin Hamilton$01', '2014-15R', '0.02', '29.2');
+INSERT INTO `player_clutch` VALUES ('Justin Holiday$01', '2014-15R', '0.06', '16.6');
+INSERT INTO `player_clutch` VALUES ('Jusuf Nurkic$01', '2014-15R', '0.05', '20.6');
+INSERT INTO `player_clutch` VALUES ('K.J. McDaniels$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Kawhi Leonard$01', '2014-15R', '0.45', '18.5');
+INSERT INTO `player_clutch` VALUES ('Kelly Olynyk$01', '2014-15R', '0.27', '16.9');
+INSERT INTO `player_clutch` VALUES ('Kemba Walker$02', '2014-15R', '0.76', '27.6');
+INSERT INTO `player_clutch` VALUES ('Kendall Marshall$01', '2014-15R', '0.01', '0');
+INSERT INTO `player_clutch` VALUES ('Kendrick Perkins$01', '2014-15R', '0.07', '11');
+INSERT INTO `player_clutch` VALUES ('Kenneth Faried$01', '2014-15R', '0.63', '20.8');
+INSERT INTO `player_clutch` VALUES ('Kent Bazemore$01', '2014-15R', '0.16', '26.6');
+INSERT INTO `player_clutch` VALUES ('Kentavious Caldwell-Pope$01', '2014-15R', '0.88', '20.9');
+INSERT INTO `player_clutch` VALUES ('Kenyon Martin$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Kevin Durant$01', '2014-15R', '0.24', '50.2');
+INSERT INTO `player_clutch` VALUES ('Kevin Garnett$01', '2014-15R', '0.2', '0');
+INSERT INTO `player_clutch` VALUES ('Kevin Love$01', '2014-15R', '0.68', '14.3');
+INSERT INTO `player_clutch` VALUES ('Kevin Martin$02', '2014-15R', '0.43', '28.8');
+INSERT INTO `player_clutch` VALUES ('Kevin Seraphin$01', '2014-15R', '0.09', '10.4');
+INSERT INTO `player_clutch` VALUES ('Khris Middleton$01', '2014-15R', '0.77', '20.9');
+INSERT INTO `player_clutch` VALUES ('Kirk Hinrich$01', '2014-15R', '0.43', '17.9');
+INSERT INTO `player_clutch` VALUES ('Klay Thompson$01', '2014-15R', '0.91', '35');
+INSERT INTO `player_clutch` VALUES ('Kobe Bryant$01', '2014-15R', '0.42', '46.6');
+INSERT INTO `player_clutch` VALUES ('Kosta Koufos$01', '2014-15R', '0.05', '0');
+INSERT INTO `player_clutch` VALUES ('Kostas Papanikolaou$01', '2014-15R', '0.08', '15.6');
+INSERT INTO `player_clutch` VALUES ('Kris Humphries$01', '2014-15R', '0.28', '18.3');
+INSERT INTO `player_clutch` VALUES ('Kyle Anderson$01', '2014-15R', '0.05', '0');
+INSERT INTO `player_clutch` VALUES ('Kyle Korver$01', '2014-15R', '0.74', '29.1');
+INSERT INTO `player_clutch` VALUES ('Kyle Lowry$01', '2014-15R', '0.78', '34.1');
+INSERT INTO `player_clutch` VALUES ('Kyle O\'Quinn$01', '2014-15R', '0.03', '29.2');
+INSERT INTO `player_clutch` VALUES ('Kyle Singler$01', '2014-15R', '0.25', '0');
+INSERT INTO `player_clutch` VALUES ('Kyrie Irving$01', '2014-15R', '0.73', '37.8');
+INSERT INTO `player_clutch` VALUES ('LaMarcus Aldridge$01', '2014-15R', '0.85', '42.9');
+INSERT INTO `player_clutch` VALUES ('Lance Stephenson$01', '2014-15R', '0.37', '0');
+INSERT INTO `player_clutch` VALUES ('Lance Thomas$01', '2014-15R', '0.37', '13.6');
+INSERT INTO `player_clutch` VALUES ('Landry Fields$01', '2014-15R', '0.01', '0');
+INSERT INTO `player_clutch` VALUES ('Langston Galloway$01', '2014-15R', '0.48', '17');
+INSERT INTO `player_clutch` VALUES ('Larry Sanders$01', '2014-15R', '0.12', '0');
+INSERT INTO `player_clutch` VALUES ('Lavoy Allen$01', '2014-15R', '0.2', '0');
+INSERT INTO `player_clutch` VALUES ('Leandro Barbosa$01', '2014-15R', '0.04', '10.9');
+INSERT INTO `player_clutch` VALUES ('LeBron James$01', '2014-15R', '0.8', '51.5');
+INSERT INTO `player_clutch` VALUES ('Lester Hudson$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Lorenzo Brown$01', '2014-15R', '0.12', '0');
+INSERT INTO `player_clutch` VALUES ('Lou Williams$02', '2014-15R', '0.67', '22.5');
+INSERT INTO `player_clutch` VALUES ('Lucas Nogueira$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Luigi Datome$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Luis Scola$01', '2014-15R', '0.28', '12.7');
+INSERT INTO `player_clutch` VALUES ('Luke Babbitt$01', '2014-15R', '0.12', '26.2');
+INSERT INTO `player_clutch` VALUES ('Luke Ridnour$01', '2014-15R', '0.11', '0');
+INSERT INTO `player_clutch` VALUES ('Luol Deng$01', '2014-15R', '0.73', '0');
+INSERT INTO `player_clutch` VALUES ('Manu Ginobili$01', '2014-15R', '0.66', '28.2');
+INSERT INTO `player_clutch` VALUES ('Marc Gasol$01', '2014-15R', '0.96', '26.8');
+INSERT INTO `player_clutch` VALUES ('Marcin Gortat$01', '2014-15R', '0.53', '15.6');
+INSERT INTO `player_clutch` VALUES ('Marco Belinelli$01', '2014-15R', '0.35', '17.3');
+INSERT INTO `player_clutch` VALUES ('Marcus Morris$03', '2014-15R', '0.44', '0');
+INSERT INTO `player_clutch` VALUES ('Marcus Smart$01', '2014-15R', '0.53', '22.7');
+INSERT INTO `player_clutch` VALUES ('Marcus Thornton$01', '2014-15R', '0.06', '16.9');
+INSERT INTO `player_clutch` VALUES ('Mario Chalmers$01', '2014-15R', '0.64', '18.2');
+INSERT INTO `player_clutch` VALUES ('Markel Brown$02', '2014-15R', '0.08', '0');
+INSERT INTO `player_clutch` VALUES ('Markieff Morris$02', '2014-15R', '0.85', '26.1');
+INSERT INTO `player_clutch` VALUES ('Marreese Speights$01', '2014-15R', '0.18', '38.7');
+INSERT INTO `player_clutch` VALUES ('Martell Webster$02', '2014-15R', '0.05', '25.6');
+INSERT INTO `player_clutch` VALUES ('Marvin Williams$02', '2014-15R', '0.62', '0');
+INSERT INTO `player_clutch` VALUES ('Mason Plumlee$01', '2014-15R', '0.22', '0');
+INSERT INTO `player_clutch` VALUES ('Matt Barnes$02', '2014-15R', '0.62', '10.2');
+INSERT INTO `player_clutch` VALUES ('Matt Bonner$01', '2014-15R', '0.1', '0');
+INSERT INTO `player_clutch` VALUES ('Matthew Dellavedova$01', '2014-15R', '0.51', '10.7');
+INSERT INTO `player_clutch` VALUES ('Maurice Harkless$01', '2014-15R', '0.05', '35.6');
+INSERT INTO `player_clutch` VALUES ('Meyers Leonard$01', '2014-15R', '0.09', '0');
+INSERT INTO `player_clutch` VALUES ('Michael Beasley$01', '2014-15R', '0.11', '31.5');
+INSERT INTO `player_clutch` VALUES ('Michael Carter-Williams$01', '2014-15R', '0.3', '16.3');
+INSERT INTO `player_clutch` VALUES ('Michael Kidd-Gilchrist$01', '2014-15R', '0.32', '0');
+INSERT INTO `player_clutch` VALUES ('Mike Conley$01', '2014-15R', '0.87', '32.7');
+INSERT INTO `player_clutch` VALUES ('Mike Dunleavy$02', '2014-15R', '0.32', '10.8');
+INSERT INTO `player_clutch` VALUES ('Mike Miller$01', '2014-15R', '0.13', '0');
+INSERT INTO `player_clutch` VALUES ('Mike Muscala$01', '2014-15R', '0.06', '48.6');
+INSERT INTO `player_clutch` VALUES ('Mike Scott$01', '2014-15R', '0.13', '43.6');
+INSERT INTO `player_clutch` VALUES ('Miles Plumlee$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Miroslav Raduljica$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Mirza Teletovic$01', '2014-15R', '0.19', '14.6');
+INSERT INTO `player_clutch` VALUES ('Mitch McGary$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Mo Williams$01', '2014-15R', '0.26', '31.1');
+INSERT INTO `player_clutch` VALUES ('Monta Ellis$01', '2014-15R', '0.88', '45.1');
+INSERT INTO `player_clutch` VALUES ('Nate Robinson$01', '2014-15R', '0.01', '0');
+INSERT INTO `player_clutch` VALUES ('Nate Wolters$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Nazr Mohammed$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Nick Calathes$01', '2014-15R', '0.11', '0');
+INSERT INTO `player_clutch` VALUES ('Nick Collison$01', '2014-15R', '0.06', '13.6');
+INSERT INTO `player_clutch` VALUES ('Nick Johnson$01', '2014-15R', '0.05', '12.4');
+INSERT INTO `player_clutch` VALUES ('Nick Young$01', '2014-15R', '0.41', '18');
+INSERT INTO `player_clutch` VALUES ('Nicolas Batum$01', '2014-15R', '0.71', '14.5');
+INSERT INTO `player_clutch` VALUES ('Nik Stauskas$01', '2014-15R', '0.06', '10.5');
+INSERT INTO `player_clutch` VALUES ('Nikola Mirotic$01', '2014-15R', '0.44', '19.5');
+INSERT INTO `player_clutch` VALUES ('Nikola Pekovic$01', '2014-15R', '0.32', '21.5');
+INSERT INTO `player_clutch` VALUES ('Nikola Vucevic$01', '2014-15R', '0.86', '23');
+INSERT INTO `player_clutch` VALUES ('Noah Vonleh$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Norris Cole$01', '2014-15R', '0.19', '14.6');
+INSERT INTO `player_clutch` VALUES ('O.J. Mayo$01', '2014-15R', '0.39', '13.8');
+INSERT INTO `player_clutch` VALUES ('Ognjen Kuzmic$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Omer Asik$01', '2014-15R', '0.41', '10.7');
+INSERT INTO `player_clutch` VALUES ('Omri Casspi$01', '2014-15R', '0.23', '12.9');
+INSERT INTO `player_clutch` VALUES ('Otto Porter$01', '2014-15R', '0.19', '11');
+INSERT INTO `player_clutch` VALUES ('P.J. Hairston$02', '2014-15R', '0.01', '0');
+INSERT INTO `player_clutch` VALUES ('P.J. Tucker$01', '2014-15R', '0.78', '14.4');
+INSERT INTO `player_clutch` VALUES ('Pablo Prigioni$01', '2014-15R', '0.02', '13.8');
+INSERT INTO `player_clutch` VALUES ('Patrick Beverley$01', '2014-15R', '0.65', '12.8');
+INSERT INTO `player_clutch` VALUES ('Patrick Christopher$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Patrick Mills$02', '2014-15R', '0.12', '23.7');
+INSERT INTO `player_clutch` VALUES ('Patrick Patterson$01', '2014-15R', '0.81', '11.9');
+INSERT INTO `player_clutch` VALUES ('Pau Gasol$01', '2014-15R', '0.85', '30.8');
+INSERT INTO `player_clutch` VALUES ('Paul George$01', '2014-15R', '0.02', '24.1');
+INSERT INTO `player_clutch` VALUES ('Paul Millsap$01', '2014-15R', '0.81', '19.8');
+INSERT INTO `player_clutch` VALUES ('Paul Pierce$01', '2014-15R', '0.69', '19');
+INSERT INTO `player_clutch` VALUES ('Pero Antic$01', '2014-15R', '0.17', '13.8');
+INSERT INTO `player_clutch` VALUES ('Perry Jones$01', '2014-15R', '0.1', '0');
+INSERT INTO `player_clutch` VALUES ('Phil Pressey$01', '2014-15R', '0.05', '20.4');
+INSERT INTO `player_clutch` VALUES ('Quincy Acy$01', '2014-15R', '0.12', '0');
+INSERT INTO `player_clutch` VALUES ('Quincy Miller$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Quincy Pondexter$01', '2014-15R', '0.15', '11.4');
+INSERT INTO `player_clutch` VALUES ('Rajon Rondo$01', '2014-15R', '0.2', '0');
+INSERT INTO `player_clutch` VALUES ('Ramon Sessions$01', '2014-15R', '0.07', '18.6');
+INSERT INTO `player_clutch` VALUES ('Randy Foye$01', '2014-15R', '0.21', '18.3');
+INSERT INTO `player_clutch` VALUES ('Rasual Butler$01', '2014-15R', '0.46', '0');
+INSERT INTO `player_clutch` VALUES ('Ray McCallum$01', '2014-15R', '0.33', '11.9');
+INSERT INTO `player_clutch` VALUES ('Raymond Felton$01', '2014-15R', '0.03', '62.6');
+INSERT INTO `player_clutch` VALUES ('Reggie Bullock$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Reggie Evans$01', '2014-15R', '0.08', '0');
+INSERT INTO `player_clutch` VALUES ('Reggie Jackson$01', '2014-15R', '0.29', '37.7');
+INSERT INTO `player_clutch` VALUES ('Reggie Williams$02', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Richard Jefferson$01', '2014-15R', '0.18', '27.4');
+INSERT INTO `player_clutch` VALUES ('Ricky Ledo$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Ricky Rubio$01', '2014-15R', '0.35', '17.9');
+INSERT INTO `player_clutch` VALUES ('Robbie Hummel$01', '2014-15R', '0.05', '11.6');
+INSERT INTO `player_clutch` VALUES ('Robert Sacre$01', '2014-15R', '0.12', '15');
+INSERT INTO `player_clutch` VALUES ('Robin Lopez$01', '2014-15R', '0.35', '10');
+INSERT INTO `player_clutch` VALUES ('Rodney Hood$01', '2014-15R', '0.3', '19.1');
+INSERT INTO `player_clutch` VALUES ('Rodney Stuckey$01', '2014-15R', '0.51', '24');
+INSERT INTO `player_clutch` VALUES ('Ronnie Price$01', '2014-15R', '0.04', '0');
+INSERT INTO `player_clutch` VALUES ('Ronny Turiaf$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Roy Hibbert$01', '2014-15R', '0.7', '12.8');
+INSERT INTO `player_clutch` VALUES ('Rudy Gay$01', '2014-15R', '0.8', '23.1');
+INSERT INTO `player_clutch` VALUES ('Rudy Gobert$01', '2014-15R', '0.57', '11.4');
+INSERT INTO `player_clutch` VALUES ('Russ Smith$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Russell Westbrook$01', '2014-15R', '0.71', '51.2');
+INSERT INTO `player_clutch` VALUES ('Ryan Anderson$01', '2014-15R', '0.46', '10.3');
+INSERT INTO `player_clutch` VALUES ('Ryan Hollins$01', '2014-15R', '0.01', '24.2');
+INSERT INTO `player_clutch` VALUES ('Ryan Kelly$01', '2014-15R', '0.22', '0');
+INSERT INTO `player_clutch` VALUES ('Samuel Dalembert$01', '2014-15R', '0.14', '15.6');
+INSERT INTO `player_clutch` VALUES ('Sean Kilpatrick$01', '2014-15R', '0.01', '32.7');
+INSERT INTO `player_clutch` VALUES ('Sebastian Telfair$01', '2014-15R', '0.03', '24.1');
+INSERT INTO `player_clutch` VALUES ('Serge Ibaka$01', '2014-15R', '0.77', '10.3');
+INSERT INTO `player_clutch` VALUES ('Sergey Karasev$01', '2014-15R', '0.06', '0');
+INSERT INTO `player_clutch` VALUES ('Seth Curry$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Shabazz Muhammad$01', '2014-15R', '0.12', '19.4');
+INSERT INTO `player_clutch` VALUES ('Shabazz Napier$01', '2014-15R', '0.17', '0');
+INSERT INTO `player_clutch` VALUES ('Shane Larkin$01', '2014-15R', '0.39', '15');
+INSERT INTO `player_clutch` VALUES ('Shannon Brown$01', '2014-15R', '0', '82.3');
+INSERT INTO `player_clutch` VALUES ('Shaun Livingston$01', '2014-15R', '0.2', '0');
+INSERT INTO `player_clutch` VALUES ('Shavlik Randolph$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Shawn Marion$01', '2014-15R', '0.14', '11.1');
+INSERT INTO `player_clutch` VALUES ('Shawne Williams$03', '2014-15R', '0.02', '0');
+INSERT INTO `player_clutch` VALUES ('Shayne Whittington$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Shelvin Mack$01', '2014-15R', '0.06', '12.9');
+INSERT INTO `player_clutch` VALUES ('Solomon Hill$01', '2014-15R', '0.52', '10.7');
+INSERT INTO `player_clutch` VALUES ('Spencer Dinwiddie$01', '2014-15R', '0.1', '16.1');
+INSERT INTO `player_clutch` VALUES ('Spencer Hawes$01', '2014-15R', '0.07', '14.5');
+INSERT INTO `player_clutch` VALUES ('Stephen Curry$01', '2014-15R', '0.86', '52.2');
+INSERT INTO `player_clutch` VALUES ('Steve Blake$01', '2014-15R', '0.21', '0');
+INSERT INTO `player_clutch` VALUES ('Steve Novak$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Steven Adams$01', '2014-15R', '0.6', '0');
+INSERT INTO `player_clutch` VALUES ('T.J. Warren$01', '2014-15R', '0.02', '34.2');
+INSERT INTO `player_clutch` VALUES ('Taj Gibson$01', '2014-15R', '0.25', '12.7');
+INSERT INTO `player_clutch` VALUES ('Tarik Black$01', '2014-15R', '0.03', '0');
+INSERT INTO `player_clutch` VALUES ('Tayshaun Prince$01', '2014-15R', '0.05', '10.2');
+INSERT INTO `player_clutch` VALUES ('Terrence Jones$01', '2014-15R', '0.26', '18.7');
+INSERT INTO `player_clutch` VALUES ('Terrence Ross$01', '2014-15R', '0.48', '18.4');
+INSERT INTO `player_clutch` VALUES ('Thabo Sefolosha$01', '2014-15R', '0.15', '0');
+INSERT INTO `player_clutch` VALUES ('Thaddeus Young$01', '2014-15R', '0.26', '15.9');
+INSERT INTO `player_clutch` VALUES ('Thomas Robinson$01', '2014-15R', '0.11', '16.2');
+INSERT INTO `player_clutch` VALUES ('Tiago Splitter$01', '2014-15R', '0.24', '0');
+INSERT INTO `player_clutch` VALUES ('Tim Duncan$01', '2014-15R', '0.87', '23.3');
+INSERT INTO `player_clutch` VALUES ('Tim Frazier$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Tim Hardaway$02', '2014-15R', '0.39', '19.3');
+INSERT INTO `player_clutch` VALUES ('Timofey Mozgov$01', '2014-15R', '0.12', '26.2');
+INSERT INTO `player_clutch` VALUES ('Tobias Harris$02', '2014-15R', '0.84', '19.8');
+INSERT INTO `player_clutch` VALUES ('Toney Douglas$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Tony Allen$01', '2014-15R', '0.45', '15.6');
+INSERT INTO `player_clutch` VALUES ('Tony Parker$01', '2014-15R', '0.45', '22.8');
+INSERT INTO `player_clutch` VALUES ('Tony Snell$01', '2014-15R', '0.26', '0');
+INSERT INTO `player_clutch` VALUES ('Toure\' Murry$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Travis Wear$01', '2014-15R', '0.04', '0');
+INSERT INTO `player_clutch` VALUES ('Trevor Ariza$01', '2014-15R', '0.95', '12.5');
+INSERT INTO `player_clutch` VALUES ('Trevor Booker$01', '2014-15R', '0.23', '11.8');
+INSERT INTO `player_clutch` VALUES ('Trey Burke$01', '2014-15R', '0.67', '24');
+INSERT INTO `player_clutch` VALUES ('Tristan Thompson$01', '2014-15R', '0.6', '11.8');
+INSERT INTO `player_clutch` VALUES ('Troy Daniels$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Ty Lawson$01', '2014-15R', '0.87', '20.2');
+INSERT INTO `player_clutch` VALUES ('Tyler Ennis$01', '2014-15R', '0.01', '0');
+INSERT INTO `player_clutch` VALUES ('Tyler Hansbrough$01', '2014-15R', '0.11', '0');
+INSERT INTO `player_clutch` VALUES ('Tyler Johnson$01', '2014-15R', '0.17', '22.5');
+INSERT INTO `player_clutch` VALUES ('Tyler Zeller$01', '2014-15R', '0.35', '21.2');
+INSERT INTO `player_clutch` VALUES ('Tyreke Evans$01', '2014-15R', '0.94', '23');
+INSERT INTO `player_clutch` VALUES ('Tyson Chandler$01', '2014-15R', '0.83', '0');
+INSERT INTO `player_clutch` VALUES ('Udonis Haslem$01', '2014-15R', '0.08', '0');
+INSERT INTO `player_clutch` VALUES ('Vander Blue$01', '2014-15R', '0', '75.8');
+INSERT INTO `player_clutch` VALUES ('Victor Claver$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Victor Oladipo$01', '2014-15R', '0.76', '28.2');
+INSERT INTO `player_clutch` VALUES ('Vince Carter$01', '2014-15R', '0.19', '15');
+INSERT INTO `player_clutch` VALUES ('Wayne Ellington$01', '2014-15R', '0.63', '14.8');
+INSERT INTO `player_clutch` VALUES ('Wesley Johnson$01', '2014-15R', '0.7', '14');
+INSERT INTO `player_clutch` VALUES ('Wesley Matthews$02', '2014-15R', '0.79', '20.9');
+INSERT INTO `player_clutch` VALUES ('Will Barton$01', '2014-15R', '0.16', '10.8');
+INSERT INTO `player_clutch` VALUES ('Will Bynum$01', '2014-15R', '0.01', '27.2');
+INSERT INTO `player_clutch` VALUES ('Will Cherry$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Willie Green$01', '2014-15R', '0.29', '0');
+INSERT INTO `player_clutch` VALUES ('Wilson Chandler$01', '2014-15R', '0.79', '22.7');
+INSERT INTO `player_clutch` VALUES ('Xavier Henry$01', '2014-15R', '0', '0');
+INSERT INTO `player_clutch` VALUES ('Zach LaVine$01', '2014-15R', '0.32', '20.8');
+INSERT INTO `player_clutch` VALUES ('Zach Randolph$01', '2014-15R', '0.78', '19.1');
+INSERT INTO `player_clutch` VALUES ('Zaza Pachulia$01', '2014-15R', '0.53', '10.3');
+INSERT INTO `player_clutch` VALUES ('Zoran Dragic$01', '2014-15R', '0.03', '41.1');
