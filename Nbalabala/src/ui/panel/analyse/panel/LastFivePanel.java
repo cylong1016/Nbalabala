@@ -32,11 +32,6 @@ public class LastFivePanel extends Panel{
 	public LastFivePanel(String name){
 		this.name = name;
 		vo = service.getClutchData(name);
-		System.out.println(vo.size());
-//		for(int i = 0 ; i < vo.size() ; i ++) {
-//			System.out.println("time"+vo.get(i).getClutchTime());
-//		System.out.println("score"+vo.get(i).getClutchScore());
-//		}
 		if (vo == null) {
 			//TODO
 		} else {
