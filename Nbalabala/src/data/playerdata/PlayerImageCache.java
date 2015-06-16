@@ -77,7 +77,7 @@ public class PlayerImageCache {
 	
 	private class CacheThread extends Thread{
 		
-		public void start() {
+		public void run() {
 			File file = new File(Constants.dataSourcePath + "portrait//");
 			if (!file.exists()) {
 				return;
