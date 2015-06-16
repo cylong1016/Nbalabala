@@ -73,8 +73,6 @@ public class LiveTechTable extends BottomTable{
 		this.getColumnModel().getColumn(0).setPreferredWidth(33);
 		this.getColumnModel().getColumn(1).setPreferredWidth(130);
 		this.getColumnModel().getColumn(4).setPreferredWidth(62);
-		
-		
 	}
 
 //	public void addListener(final BottomTable table) {

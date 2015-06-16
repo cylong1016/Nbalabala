@@ -28,9 +28,9 @@ public class LivePanel extends GameFatherPanel {
 	private static final long serialVersionUID = -1777953751279202293L;
 	private TabButton tech, live, contrastbt;
 	private LiveBelowPanel liveBelow;
+	private TechPanel techPanel;
 	private LiveBLService liveService;
 	private ConPanel conPanel;
-	private TechPanel techPanel;
 	private ArrayList<LivePlayerVO> vo1, vo2;
 	private int currentI;
 	private ArrayList<String> text;

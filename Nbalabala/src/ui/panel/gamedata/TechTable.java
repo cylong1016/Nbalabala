@@ -28,10 +28,10 @@ public class TechTable extends BottomTable{
 		super(new String[players.size()][Constants.matchPlayerHeaders.length+1],Constants.matchPlayerHeaders);
 		this.players = players;
 		this.panel = panel;
-		setTable();
+		setTable(players);
 	}
 	
-	public void setTable(){
+	public void setTable(ArrayList<MatchPlayerPO> players){
 		
 		// { "序号","球员名", "首发", "时间", "投篮", "三分", "罚球",
 		// "进攻篮板", "防守篮板", "总篮板", "助攻", "抢断", "盖帽", "失误", "犯规", "个人得分", "+/-" };

@@ -27,15 +27,21 @@ public class GamePanel extends GameFatherPanel {
 	private  MatchDetailVO matchDetail;
 
 	/** 球队中文全称 */
-	private TabButton teambt1,teambt2,contrastbt;
+	private TabButton teambt1,live,contrastbt;
 	private ConPanel conPanel;
-	private Boolean isScroll = true;
 	private Panel gameData;
+	private GameLivePanel liveBelow;
+	private TechPanel techPanel;
 	
 	public GamePanel(int matchID, Panel gameData) {
 		super(UIConfig.IMG_PATH_2 + "games/gamesBG.png");
 		this.gameData = gameData;
 		this.matchDetail = matchQuery.getMatchDetailByID(matchID);
+		
+		techPanel = new TechPanel(matchDetail,GamePanel.this);
+		conPanel = new ConPanel(matchDetail);
+		liveBelow = new GameLivePanel(matchDetail);
+		this.add(techPanel);
 		initiate();
 		addBack();
 	}
@@ -44,15 +50,19 @@ public class GamePanel extends GameFatherPanel {
 		super(url,matchDetail);
 		this.gameData = gameData;
 		this.matchDetail = matchDetail;
+		
+		techPanel = new TechPanel(matchDetail,GamePanel.this);
+		conPanel = new ConPanel(matchDetail);
+//		liveBelow = new LivePanel();
+		
+		this.add(techPanel);
 		initiate();
 		addBack();
 	}
 	
 	private void initiate() {
 		matchPro = matchDetail.getProfile();
-		conPanel = new ConPanel(matchDetail);
 		addButton();
-		initSetTabel();
 	}
 	
 
@@ -66,67 +76,48 @@ public class GamePanel extends GameFatherPanel {
 
 		});
 	}
-	
 
-	public void initSetTabel() {
-		ArrayList<MatchPlayerPO> homePlayers = matchDetail.getHomePlayers();
-		setTable(homePlayers);
-	}
 
 	public void addButton() {
 		teambt1 = new TabButton(teamStr1,Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
-		teambt2 = new TabButton(teamStr2,Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
+		live = new TabButton(teamStr2,Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
 		contrastbt = new TabButton(Constants.contrastText,Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
 		teambt1.setLocation(btx, bty);
-		teambt2.setLocation(btx + 2 * inter, bty);
-		contrastbt.setLocation(btx + inter, bty);
+		live.setLocation(btx + inter, bty);
+		contrastbt.setLocation(btx + 2* inter, bty);
 		teambt1.setOn();
 		this.add(teambt1);
-		this.add(teambt2);
+		this.add(live);
 		this.add(contrastbt);
 		teambt1.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				teambt1.setOn();
-				teambt2.setOff();
+				live.setOff();
 				contrastbt.setOff();
-				if(isScroll) {
-					GamePanel.this.remove(scroll);
-				}else{
-					GamePanel.this.remove(conPanel);
-				}
-				isScroll = true;
-				ArrayList<MatchPlayerPO> homePlayers = matchDetail.getHomePlayers();
-				setTable(homePlayers);
+				GamePanel.this.remove(liveBelow);
+				GamePanel.this.remove(conPanel);
+				GamePanel.this.add(techPanel);
 				GamePanel.this.repaint();
 			}
 		});
-		teambt2.addMouseListener(new MouseAdapter() {
+		live.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				teambt1.setOff();
-				teambt2.setOn();
+				live.setOn();
 				contrastbt.setOff();
-				if(isScroll) {
-					GamePanel.this.remove(scroll);
-				}else{
-					GamePanel.this.remove(conPanel);
-				}
-				isScroll = true;
-				ArrayList<MatchPlayerPO> roadPlayers = matchDetail.getRoadPlayers();
-				setTable(roadPlayers);
+				GamePanel.this.remove(conPanel);
+				GamePanel.this.remove(techPanel);
+				GamePanel.this.add(liveBelow);
 				GamePanel.this.repaint();
 			}
 		});
 		contrastbt.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				teambt1.setOff();
-				teambt2.setOff();
+				live.setOff();
 				contrastbt.setOn();
-				if(isScroll) {
-					GamePanel.this.remove(scroll);
-				}else{
-					GamePanel.this.remove(conPanel);
-				}
-				isScroll = false;
+				GamePanel.this.remove(liveBelow);
+				GamePanel.this.remove(techPanel);
 				GamePanel.this.add(conPanel);
 				GamePanel.this.repaint();
 			}

@@ -308,6 +308,7 @@ public class GameDataPanel extends BottomPanel {
 			if (team2 != 0) {
 				teamAbbr_2 = Constants.TEAM_ABBR[team2 - 1];
 			}
+			if(team1 != 0 && team2 != 0) {
 			matchDetailfile = matchQuery.screenMatchByTeam(teamAbbr_1, teamAbbr_2);
 			isInit = false;
 			addArray();
@@ -318,6 +319,7 @@ public class GameDataPanel extends BottomPanel {
 			}
 			number1.setlbText("1");
 			GameDataPanel.this.repaint();
+			}
 		}
 
 	}
