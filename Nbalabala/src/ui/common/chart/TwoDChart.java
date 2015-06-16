@@ -90,6 +90,9 @@ public class TwoDChart extends JTable {
 			Dot dot = new Dot(dotPoint.x + (int)(po.clutchTime * xLen), 
 					dotPoint.y - (int)((po.clutchScore / maxScore) * yLen) - dotSize, dotSize, 
 					po.name + "(" + po.clutchTime + ", " + po.clutchScore + ")");
+			if(po.name.equals(currentName)) {
+				dot.setBackground(Color.ORANGE); // 当前选中的球员点颜色改变
+			}
 			this.add(dot);
 		}
 	}
@@ -103,18 +106,18 @@ public class TwoDChart extends JTable {
 		int yNum = 10; // y坐标轴上显示的点
 		for(int i = 0; i <= yNum; i++) {
 			int y = dotPoint.y - (yLen / yNum) * i;
-			g.drawString(df.format(i * maxScore / yNum), dotPoint.x - 30, y + 5);
-			g.drawLine(dotPoint.x - 4, y, dotPoint.x - 1, y);
+			g.drawString(df.format(i * maxScore / yNum), dotPoint.x - 40, y + 5);
+			g.drawLine(dotPoint.x - 6, y, dotPoint.x - 1, y);
 		}
-		g.drawString("得分/48分钟", dotPoint.x, dotPoint.y - yLen);
+		g.drawString("得分/48分钟", dotPoint.x - 30, dotPoint.y - yLen - 10);
 		
 		int xNum = 10; // x坐标轴上显示的点
 		for(int i = 0; i <= xNum; i++) {
 			int x = dotPoint.x + (xLen / xNum) * i;
-			g.drawString(df.format(i * 1.0 / xNum), x - 10, dotPoint.y + 20);
+			g.drawString(String.valueOf(i * 1.0 / xNum), x - 10, dotPoint.y + 20);
 			g.drawLine(x, dotPoint.y + 1, x, dotPoint.y + 4);
 		}
-		g.drawString("上场时间比率", dotPoint.y, dotPoint.x + xLen / 2);
+		g.drawString("上场时间比率", dotPoint.x + xLen / 2, dotPoint.y + 35);
 		g.drawRect(dotPoint.x, dotPoint.y - yLen, xLen, yLen);
 	}
 }
