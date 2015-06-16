@@ -71,6 +71,8 @@ public class TurnPanel extends Panel {
 			
 			addLabel();
 			
+			bgImg = Images.TRANS_BG;
+			
 
 		}
 		this.setOpaque(false);

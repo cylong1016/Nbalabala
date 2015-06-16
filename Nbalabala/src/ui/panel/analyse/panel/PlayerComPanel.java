@@ -77,6 +77,7 @@ public class PlayerComPanel extends Panel{
 				setEffect();
 				addLabel();
 				addConclusion();
+				bgImg = Images.COMPARE_BG;
 			}
 		} catch (Exception e) {
 			// TODO 显示对方球员参加比赛太少无法比较
@@ -150,7 +151,6 @@ public class PlayerComPanel extends Panel{
 		area.setBounds(CONCLUSION_X, 291 ,280, 400);
 		area.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		area.setOpaque(false);
-		setColor();
 		this.add(area);
 		
 	}
@@ -254,7 +254,6 @@ public class PlayerComPanel extends Panel{
 						conclusion = vo.getConclusion();
 						area.setText(conclusion);
 						PlayerComPanel.this.add(chart);
-						setColor();
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 //						e1.printStackTrace();

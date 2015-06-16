@@ -45,6 +45,7 @@ public class ContriPanel extends Panel{
 			button = new ContriButton[6];
 			addButton();
 			setEffect();
+			bgImg = Images.BG_IMAGE;
 			chart = new BarChart(po,ContriButton.current.getPlayerCurrent(),playerIndex);
 			this.add(chart);
 		}
