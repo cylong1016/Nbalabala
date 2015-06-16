@@ -36,6 +36,7 @@ public class TabButton extends JButton{
 	private int textX;
 	private int textY;
 	private Font font = MyFont.YH_B;
+	private int align = 0;				//0居中 1左对齐 2右对齐
 	
 	private Color color = MyFont.WHITE;
 	
@@ -69,10 +70,20 @@ public class TabButton extends JButton{
 
 	}
 	
+	public TabButton(String text, Image moveOn, Image chosen, int align) {
+		this(text, moveOn, chosen);
+		this.align = align;
+	}
+	
 	public void setOff() {
 		isActive = true;
 		setEnabled(true);
 		repaint();
+	}
+	
+	public void setText(String text) {
+		this.text = text;
+		calculateTextLocation();
 	}
 	
 	public void setOn() {
@@ -114,8 +125,17 @@ public class TabButton extends JButton{
 		JLabel label = new JLabel(text);
 		label.setFont(font);
 		Dimension textSize = label.getPreferredSize();
-		textX = (int)(width - textSize.getWidth()) / 2;
-		textY = (int)(height - textSize.getHeight() / 2 - 3);
+		if (align == 0) {
+			textX = (int)(width - textSize.getWidth()) / 2;
+			textY = (int)(height - textSize.getHeight() / 2 - 3);
+		}else if (align == 1){
+			textX = 15;
+			textY = (int)(height - textSize.getHeight() / 2 - 3);
+		}else {
+			textX = width - 15 - (int)textSize.getWidth();
+			textY = (int)(height - textSize.getHeight() / 2 - 3);
+		}
+		
 	}
 	
 	class MouseHandler extends MouseAdapter{

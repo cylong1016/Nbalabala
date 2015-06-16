@@ -80,7 +80,7 @@ public class MainPanel extends Panel {
 	private void addBtn() {
 		String blank = Constants.blank;
 		String bigBlank = blank + "     ";
-		allPlayersBtn = new TabButton(blank + Constants.allPlayers, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		allPlayersBtn = new TabButton(Constants.allPlayers, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK, 2);
 		allPlayersBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainController.toAllPlayersPanel();
@@ -91,7 +91,7 @@ public class MainPanel extends Panel {
 		allPlayersBtn.setFont(MyFont.YH_L);
 		this.add(allPlayersBtn);
 		
-		allTeamsBtn = new TabButton(blank + Constants.allTeams, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		allTeamsBtn = new TabButton(Constants.allTeams, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK, 2);
 		allTeamsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainController.toAllTeamsPanel();				
@@ -101,7 +101,7 @@ public class MainPanel extends Panel {
 		allTeamsBtn.setFont(MyFont.YH_L);
 		this.add(allTeamsBtn);
 		
-		gamesDataBtn = new TabButton(Constants.gamesData + bigBlank, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK);
+		gamesDataBtn = new TabButton(Constants.gamesData + bigBlank, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK, 1);
 		gamesDataBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainController.toGamePanel();
@@ -111,7 +111,7 @@ public class MainPanel extends Panel {
 		gamesDataBtn.setFont(MyFont.YH_L);
 		this.add(gamesDataBtn);
 		
-		playersDataBtn = new TabButton(blank + Constants.playersData, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		playersDataBtn = new TabButton(Constants.playersData, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK, 2);
 		playersDataBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainController.toPlayerPanel();
@@ -121,7 +121,7 @@ public class MainPanel extends Panel {
 		playersDataBtn.setFont(MyFont.YH_L);
 		this.add(playersDataBtn);
 		
-		teamsDadaBtn = new TabButton(blank + Constants.teamsData, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK);
+		teamsDadaBtn = new TabButton(Constants.teamsData, Images.HOME_BTN_ON, Images.HOME_BTN_CLICK, 2);
 		teamsDadaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainController.toTeamPanel();
@@ -131,7 +131,7 @@ public class MainPanel extends Panel {
 		teamsDadaBtn.setFont(MyFont.YH_L);
 		this.add(teamsDadaBtn);
 		
-		hotBtn = new TabButton(Constants.hot + bigBlank, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK);
+		hotBtn = new TabButton(Constants.hot, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK, 1);
 		hotBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainController.toHotPanel();
@@ -141,7 +141,7 @@ public class MainPanel extends Panel {
 		hotBtn.setFont(MyFont.YH_L);
 		this.add(hotBtn);
 		
-		analysisBtn = new TabButton(Constants.analysis + blank, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK);
+		analysisBtn = new TabButton(Constants.analysis, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK, 1);
 		analysisBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainController.toAnalysePanel();
@@ -151,7 +151,7 @@ public class MainPanel extends Panel {
 		analysisBtn.setFont(MyFont.YH_L);
 		this.add(analysisBtn);
 		
-		liveBtn = new TabButton(Constants.live + bigBlank, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK);
+		liveBtn = new TabButton(Constants.live, Images.HOME_BTN_R_ON, Images.HOME_BTN_R_CLICK, 1);
 		liveBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainController.toLiveInPanel();
@@ -168,7 +168,7 @@ public class MainPanel extends Panel {
 				Point location = getLocationOnScreen();
 				JDialog dialog= new JDialog(MainController.frame, true);
 			
-				SettingPanel settingPanel = new SettingPanel(dialog);
+				SettingPanel settingPanel = new SettingPanel(dialog, MainPanel.this);
 				int x = location.x + getWidth() / 2 - settingPanel.getWidth()
 						/ 2;
 				int y = location.y + getHeight() / 2
@@ -190,6 +190,18 @@ public class MainPanel extends Panel {
 		g.drawImage(bgImg, 0, 0, this);
 		super.paint(g);
 
+	}
+	
+	public void refresh() {
+		allPlayersBtn.setText(Constants.allPlayers);
+		allTeamsBtn.setText(Constants.allTeams);
+		gamesDataBtn.setText(Constants.gamesData);
+		playersDataBtn.setText(Constants.playersData);
+		teamsDadaBtn.setText(Constants.teamsData);
+		hotBtn.setText(Constants.hot);
+		analysisBtn.setText(Constants.analysis);
+		liveBtn.setText(Constants.live);
+		repaint();
 	}
 
 	/**

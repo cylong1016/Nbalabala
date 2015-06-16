@@ -49,8 +49,7 @@ public class BoxChart extends Panel{
         columns = new ArrayList<String>(vo.size());
         data = new ArrayList<List<List<Double>>>();
         for (int i = 0; i < size; i++) {
-            String name = String.valueOf(i + 1);
-            columns.add(name);
+            columns.add(vo.get(i).getSeason().substring(0,4));
             List<List<Double>> list = new ArrayList<List<Double>>();
             for (int j = 0; j < size; j++) {
                 list.add(vo.get(i).getDatas());
@@ -69,8 +68,8 @@ public class BoxChart extends Panel{
     }
 
     private void createChartPanel() {
-        CategoryAxis xAxis = new CategoryAxis("");
-        NumberAxis yAxis = new NumberAxis("Value");
+        CategoryAxis xAxis = new CategoryAxis("赛季");
+        NumberAxis yAxis = new NumberAxis("数值");
         BoxAndWhiskerRenderer renderer = new BoxAndWhiskerRenderer();
         renderer.setBaseCreateEntities(false);
         renderer.setBaseItemLabelPaint(Color.yellow);
@@ -78,7 +77,7 @@ public class BoxChart extends Panel{
 //        plot.setBackgroundPaint(Color.LIGHT_GRAY);
         plot.setForegroundAlpha((float) 0.6);
         plot.setWeight(5);
-        JFreeChart chart = new JFreeChart("BoxAndWhiskerDemo", plot);
+        JFreeChart chart = new JFreeChart("", plot);
         chartPanel = new ChartPanel(chart);
     }
 

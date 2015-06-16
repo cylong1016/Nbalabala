@@ -13,6 +13,7 @@ public class TextENG {
 	
 	public static String[] playerType = {"Active","Retired","All"};
 	
+	public static String live = "Live";
 	public static String leagueText = "League：";
 	public static String teamShortText = "TM:";
 	public static String promotionText = "Promotion:";

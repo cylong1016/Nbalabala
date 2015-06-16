@@ -33,6 +33,7 @@ public class SettingPanel extends BottomPanel{
 	private static final long serialVersionUID = 7784986737310630718L;
 
 	private JDialog dialog;
+	private MainPanel mainPanel; 
 	
 	private MyTextField userField = new MyTextField(146, 141, 144, 30);
 	private JPasswordField pwField = new JPasswordField(Database.password);
@@ -44,9 +45,10 @@ public class SettingPanel extends BottomPanel{
 	private ImgButton yesButton = new ImgButton(Images.YES_BUTTON, Images.YES_BUTTON_ON);
 	private ImgButton noButton = new ImgButton(Images.NO_BUTTON, Images.NO_BUTTON_ON);
 	
-	public SettingPanel(JDialog dialog) {
+	public SettingPanel(JDialog dialog, MainPanel mainPanel) {
 		super(Images.SETTING_BG);
 		this.dialog = dialog;
+		this.mainPanel = mainPanel;
 		this.setLayout(null);
 		setSize(Images.SETTING_BG.getWidth(null), Images.SETTING_BG.getHeight(null));
 		
@@ -103,6 +105,7 @@ public class SettingPanel extends BottomPanel{
 		yesButton.setLocation(544, 285);
 		yesButton.addActionListener(new ActionListener() {
 			JDialog dialog = SettingPanel.this.dialog;
+			MainPanel mainPanel = SettingPanel.this.mainPanel;
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Constants.changeDataSourcePath(pathField.getText());
@@ -117,6 +120,7 @@ public class SettingPanel extends BottomPanel{
 				Database.user = userField.getText();
 				Database.password = String.valueOf(userField.getText());
 				dialog.dispose();
+				mainPanel.refresh();
 			}
 		});
 		this.add(yesButton);

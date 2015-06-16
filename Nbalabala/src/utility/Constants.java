@@ -27,6 +27,7 @@ public class Constants {
 		Constants.translater = new TranslaterCN();
 		
 		playerType = TextCHN.playerType;
+		live = TextCHN.live;
 		
 		leagueText = TextCHN.leagueText;
 		teamShortText = TextCHN.teamShortText;
@@ -147,6 +148,7 @@ public class Constants {
 		
 		playerType = TextENG.playerType;
 		
+		live = TextENG.live;
 		leagueText = TextENG.leagueText;
 		teamShortText = TextENG.teamShortText;
 		promotionText = TextENG.promotionText;
@@ -292,9 +294,11 @@ public class Constants {
 	
 	/** 如果在程序运行中改变数据目录，需要清空已经读取的数据，同时由Controller控制返回首页 */
 	public static void changeDataSourcePath(String newPath) {
-		dataSourcePath = newPath + "\\";
-		PlayerImageCache.reloadImages();
-		TeamLogoCache.reloadLogos();
+		if (!newPath.equals(dataSourcePath)) {
+			dataSourcePath = newPath + "\\";
+			PlayerImageCache.reloadImages();
+			TeamLogoCache.reloadLogos();
+		}
 	}
 	
 	public static String []playerType = TextCHN.playerType;
