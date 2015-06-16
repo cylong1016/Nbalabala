@@ -212,7 +212,7 @@ public class TextCHN {
 	public static final String[] HOT_COLUMNS = {"名次", "头像", "姓名", "球队", "对手", "位置", "在场时间", "得分", "篮板", "助攻", "盖帽",
 			"抢断"};
 	
-	public static final String[] ANALYSE = {"最后五分钟","生涯数据","球员贡献","球员走向","转会变化"};
+	public static final String[] ANALYSE = {"最后五分钟","生涯数据","球员贡献","球员走向","转会变化","球员对比"};
 	public static final String[] LIVE_tEXT = {"全场","第一节","第二节","第三节","第四节"};
 	
 	public static final String[] HOT_BTN = {"今日热点球员",  "赛季热点球员", "赛季热点球队", "进步最快球员"};

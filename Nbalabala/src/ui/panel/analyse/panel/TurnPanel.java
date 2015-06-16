@@ -33,9 +33,9 @@ public class TurnPanel extends Panel {
 	private static final long serialVersionUID = 97048605908825431L;
 	private LineChart chart;
 	private TurnSelectButton[] button;
-	private int bt_x = 31, bt_y = 16, inter_x = 100, width = 80, height = 30;
 	private String name;
 	private AnalysisBLService service = new ValueAnalysis();
+	private int bt_x = 31, bt_y = 16, inter_x = 100, width = 80, height = 30;
 	private JTextArea area;
 	private MyLabel formerTeam, currentTeam;
 	private MyLabel startSeason, transSeason;

@@ -15,6 +15,34 @@ public class AnalysisCompareVO {
 	
 	public String thisName;
 	
+	public String getThisName() {
+		return thisName;
+	}
+
+	public String getThatName() {
+		return thatName;
+	}
+
+	public ArrayList<Double> getThisData() {
+		return thisData;
+	}
+
+	public ArrayList<Double> getThatData() {
+		return thatData;
+	}
+
+	public String getStartSeason() {
+		return startSeason;
+	}
+
+	public String getEndSeason() {
+		return endSeason;
+	}
+
+	public String getConclusion() {
+		return conclusion;
+	}
+
 	public String thatName;
 	
 	public ArrayList<Double> thisData;
