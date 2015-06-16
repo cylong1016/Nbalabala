@@ -24,8 +24,8 @@ public class TwoDChart extends JTable {
 		ArrayList<ClutchPO> cluthPOs = new ArrayList<ClutchPO>();
 		for(int i = 0; i < 10; i++) {
 			ClutchPO po = new ClutchPO("lsy", "2014-15");
-			po.clutchScore = i + 5;
-			po.clutchTime = i / 20.0;
+			po.clutchScore = i;
+			po.clutchTime = i / 10.0;
 			cluthPOs.add(po);
 		}
 		TwoDChart chart = new TwoDChart(cluthPOs);
@@ -54,6 +54,8 @@ public class TwoDChart extends JTable {
 	private int xLen;
 	/** y轴长 */
 	private int yLen;
+	/** 所有球员的最大分数 */
+	private double maxScore;
 	
 	public TwoDChart(ArrayList<ClutchPO> cluthPOs) {
 		this.cluthPOs = cluthPOs;
@@ -78,15 +80,17 @@ public class TwoDChart extends JTable {
 	}
 	
 	private void addDots() {
-		double maxScore = 0;
+		maxScore = 0;
 		for(ClutchPO po : cluthPOs) { // 找到最大的得分
 			if(po.clutchScore > maxScore) {
 				maxScore = po.clutchScore;
 			}
 		}
-		maxScore += 5;
+		maxScore += 4;
 		for(ClutchPO po : cluthPOs) {
-			Dot dot = new Dot(dotPoint.x + (int)(po.clutchTime * xLen), dotPoint.y - (int)((po.clutchScore / maxScore) * yLen), dotSize, po.name);
+			Dot dot = new Dot(dotPoint.x + (int)(po.clutchTime * xLen), 
+					dotPoint.y - (int)((po.clutchScore / maxScore) * yLen) - dotSize, dotSize, 
+					po.name + "(" + po.clutchTime + ", " + po.clutchScore + ")");
 			this.add(dot);
 		}
 	}
@@ -97,8 +101,18 @@ public class TwoDChart extends JTable {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		for(int i = 0; i < 10; i++) {
-//			g.drawLine(dotPoint.x - 4, dotPoint.y, dotPoint.x, y2);
+		int yNum = 10; // y坐标轴上显示的点
+		for(int i = 0; i <= yNum; i++) {
+			int y = dotPoint.y - (yLen / yNum) * i;
+			g.drawString(String.valueOf(i * maxScore / yNum), dotPoint.x - 30, y + 5);
+			g.drawLine(dotPoint.x - 4, y, dotPoint.x - 1, y);
+		}
+		
+		int xNum = 10; // x坐标轴上显示的点
+		for(int i = 0; i <= xNum; i++) {
+			int x = dotPoint.x + (xLen / xNum) * i;
+			g.drawString(String.valueOf(i * 1.0 / xNum), x - 10, dotPoint.y + 20);
+			g.drawLine(x, dotPoint.y + 1, x, dotPoint.y + 4);
 		}
 		g.drawRect(dotPoint.x, dotPoint.y - yLen, xLen, yLen);
 	}
