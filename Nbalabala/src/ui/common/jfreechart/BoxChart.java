@@ -1,11 +1,6 @@
 package ui.common.jfreechart;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +14,8 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
 
-import com.sun.corba.se.impl.orbutil.closure.Constant;
-
 import ui.UIConfig;
 import ui.common.panel.Panel;
-import utility.Constants;
 import vo.AnalysisCareerVO;
 
 /** @see http://stackoverflow.com/questions/6844759 */

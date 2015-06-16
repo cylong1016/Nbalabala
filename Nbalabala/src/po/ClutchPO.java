@@ -11,6 +11,22 @@ package po;
  */
 public class ClutchPO {
 	
+	public String getName() {
+		return name;
+	}
+
+	public String getSeason() {
+		return season;
+	}
+
+	public double getClutchTime() {
+		return clutchTime;
+	}
+
+	public double getClutchScore() {
+		return clutchScore;
+	}
+
 	public String name;
 	
 	public String season;

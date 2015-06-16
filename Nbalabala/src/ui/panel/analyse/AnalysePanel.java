@@ -165,6 +165,10 @@ public class AnalysePanel extends BottomPanel{
 				}
 				switch(currentI) {
 				case 0:
+					AnalysePanel.this.remove(lastFive);
+					lastFive = new LastFivePanel(str[index]); 
+					AnalysePanel.this.add(lastFive);
+					AnalysePanel.this.repaint();
 					break;
 				case 1:
 					AnalysePanel.this.remove(allSeason);

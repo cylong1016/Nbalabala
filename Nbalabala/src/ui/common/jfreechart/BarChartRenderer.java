@@ -17,6 +17,9 @@ import org.jfree.chart.renderer.category.BarRenderer;
  */
 public class BarChartRenderer extends BarRenderer{
 	
+	/** serialVersionUID */
+	private static final long serialVersionUID = -4176995666275652872L;
+
 	private static Paint CHOSEN_COLOR;
 	
 	private static Paint OTHER_COLOR;
