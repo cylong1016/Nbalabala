@@ -22,7 +22,7 @@ public class MyFont{
 	public static Font HiraginoB;
 	static{
 		try {
-	        java.io.FileInputStream fi = new java.io.FileInputStream(new File("Hiragino.ttf"));
+	        java.io.FileInputStream fi = new java.io.FileInputStream(new File("font/Hiragino.ttf"));
 	        java.io.BufferedInputStream fb = new java.io.BufferedInputStream(fi);
 	        Font nf = Font.createFont(Font.TRUETYPE_FONT, fb);
 	        HiraginoXS = nf.deriveFont(Font.PLAIN, 12);
