@@ -66,14 +66,14 @@ public class GamePanel extends GameFatherPanel {
 	
 
 	public void addBack() {
-		back = new ImgButton(UIConfig.IMG_PATH + "back.png", 70, 150, UIConfig.IMG_PATH + "backOn.png", UIConfig.IMG_PATH + "back.png");
-		this.add(back);
-		back.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				MainController.backToOnePanel(gameData);
-			}
-
-		});
+//		back = new ImgButton(UIConfig.IMG_PATH + "back.png", 70, 150, UIConfig.IMG_PATH + "backOn.png", UIConfig.IMG_PATH + "back.png");
+//		this.add(back);
+//		back.addMouseListener(new MouseAdapter() {
+//			public void mousePressed(MouseEvent e) {
+//				MainController.backToOnePanel(gameData);
+//			}
+//
+//		});
 	}
 
 

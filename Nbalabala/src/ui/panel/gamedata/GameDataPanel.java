@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
 
 import ui.Images;
 import ui.MyFont;
@@ -253,17 +254,17 @@ public class GameDataPanel extends BottomPanel {
 //	}
 
 	public void refresh() {
-//		Date date = dateChooser.getDate();
-//		matchDetailfile = matchQuery.screenMatchByDate(date);
-//		isInit = false;
-//		addArray();
-//		if (pageNum == 0) {
-//			number2.setlbText("1");
-//		} else {
-//			number2.setlbText(pageNum + "");
-//		}
-//		number1.setlbText("1");
-//		GameDataPanel.this.repaint();
+		Date date = dateChooser.getDate();
+		matchDetailfile = matchQuery.screenMatchByDate(date);
+		isInit = false;
+		addArray();
+		if (pageNum == 0) {
+			number2.setlbText("1");
+		} else {
+			number2.setlbText(pageNum + "");
+		}
+		number1.setlbText("1");
+		GameDataPanel.this.repaint();
 	}
 
 	/**
