@@ -191,9 +191,9 @@ public class AnalysePanel extends BottomPanel{
 					AnalysePanel.this.repaint();
 					break;
 				case 5:
-					AnalysePanel.this.remove(turn);
-					turn = new TurnPanel(str[index]); 
-					AnalysePanel.this.add(turn);
+					AnalysePanel.this.remove(compare);
+					compare = new PlayerComPanel(str[index]); 
+					AnalysePanel.this.add(compare);
 					AnalysePanel.this.repaint();
 					break;
 				}
