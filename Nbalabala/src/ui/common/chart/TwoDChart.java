@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 
 import po.ClutchPO;
+import ui.UIConfig;
 
 
 /**
@@ -60,7 +61,7 @@ public class TwoDChart extends JTable {
 	public TwoDChart(ArrayList<ClutchPO> cluthPOs, String currentName) {
 		this.currentName = currentName;
 		this.cluthPOs = cluthPOs;
-		this.setBackground(Color.LIGHT_GRAY);
+		this.setBackground(UIConfig.CHAR_BG_COLOR);
 	}
 	
 	/**
@@ -135,7 +136,7 @@ class Dot extends JButton {
 		this.setMargin(new Insets(0,0,0,0));
 		this.setToolTipText(name);
 		this.setOpaque(true);
-		this.setBackground(Color.BLUE);
+		this.setBackground(UIConfig.LIGHT_BLUE);
 	}
 	
 }

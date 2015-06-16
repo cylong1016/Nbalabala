@@ -1,6 +1,7 @@
 package ui.panel.analyse.panel;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 
 import javax.swing.JTextArea;
 
+import ui.Images;
 import ui.MyFont;
 import ui.UIConfig;
 import ui.common.comboBox.MyComboBox;
@@ -36,20 +38,23 @@ public class PlayerComPanel extends Panel{
 	private String name,name2;
 	private AnalysisBLService service = new ValueAnalysis();
 	private AnalysisCompareVO  vo;
-	private Image bgImg;
+
 	private NewLineChart chart;
 	private CompareButton button[];
-	private int bt_x = 31, bt_y = 16, inter_x = 100, width = 80, height = 30;
+	private int bt_x = 31, bt_y = 16, inter_x = 90, width = 80, height = 30;
 	private JTextArea area;
-	private MyLabel formerTeam, currentTeam;
+	private MyLabel formerTeam, currentTeam, season;
 	private MyComboBox teamCom,playerCom;
 	/** 结论的纵坐标 */
-	private static final int CONCLUSION_Y = UIConfig.CONCLUSION_Y;
+	private static final int CONCLUSION_Y = 166;
 	private static final int CONCLUSION_X = UIConfig.CONCLUSION_X;
 	
-	private static final int TEAM_WID = 100;
+	private static final int TEAM_WID = 279;
 	private static final int TEAM_HEIGHT = 44;
 	private String[] str;
+	
+	private Image bgImg = Images.COMPARE_BG;
+	private String conclusion;
 	
 	public PlayerComPanel(String name) {
 		this.name = name;
@@ -61,19 +66,21 @@ public class PlayerComPanel extends Panel{
 		try {
 			vo = service.getCompareData(name, name2,InferenceData.SCORE);
 			if (vo == null) {
-//				bgImg = Images.NO_DATA;
+				bgImg = Images.COMED_LESS;
 				//TODO 显示自己比赛太少无法显示
 			} else {
-				addConclusion();
+				
 				chart = new NewLineChart(vo);
 				chart.setVisible(true);
 				this.add(chart);
 				addButton();
 				setEffect();
 				addLabel();
+				addConclusion();
 			}
 		} catch (Exception e) {
 			// TODO 显示对方球员参加比赛太少无法比较
+			bgImg = Images.COMING_LESS;
 		}
 		this.setOpaque(false);
 		this.setBounds(0, 100, 1000, 490);
@@ -81,14 +88,14 @@ public class PlayerComPanel extends Panel{
 	}
 	
 	public void addComboBox(){
-		teamCom = new MyComboBox(Constants.TEAM_NAMES,599,45,120,30);
+		teamCom = new MyComboBox(Constants.TEAM_NAMES,670,bt_y,100,30);
 		String[] strCom = changeArray(service.getLineupNamesByAbbr("BOS"));
 		String[] showStr = new String[strCom.length];
 		for(int i = 0 ; i < strCom.length; i++) {
 			String[] name = strCom[i].split("\\$");
 			showStr[i] = name[0];
 		}
-		playerCom = new MyComboBox(showStr,770,45,180,30);
+		playerCom = new MyComboBox(showStr,785,bt_y,180,30);
 		playerCom.setSelectedIndex(1);
 		this.add(teamCom);
 		teamCom.addActionListener(new ActionListener(){
@@ -134,30 +141,59 @@ public class PlayerComPanel extends Panel{
 	}
 	
 	private void addConclusion() {
-		area = new JTextArea(vo.getConclusion());
+		conclusion = vo.getConclusion();
+		area = new JTextArea(conclusion);
 		area.setLineWrap(true);
 		area.setEditable(false);
-		area.setBounds(CONCLUSION_X, CONCLUSION_Y + 200 ,200,200);
-		area.setFont(MyFont.YH_B);
+		area.setBounds(CONCLUSION_X, 291 ,280, 400);
+		area.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		area.setOpaque(false);
+		setColor();
 		this.add(area);
 		
 	}
+	
+//	private String setAreaText(String conclusion){
+//		String result[] = conclusion.split("(");
+//		String zone[] = result[1].split(")");
+//		
+//		return result[0] + '\n' + zone[0] + '\n' + zone[1];
+//	}
+	
+	private void setColor(){
+		if (!conclusion.substring(conclusion.length() - 5).equals("无显著差异")) {
+			int begin = conclusion.length() - currentTeam.text.length()- 2;
+			System.out.println(conclusion.substring(begin, begin+1));
+//			if (conclusion.substring(begin, begin+1).equals("高")) {
+//				formerTeam.setForeground(UIConfig.CHART_ORANGE);
+//			}
+			
+		}
+	}
 
 	private void addLabel() {
+		
+		season = new MyLabel(vo.getStartSeason() + " ~ " + vo.getEndSeason());
+		season.setBounds(CONCLUSION_X, CONCLUSION_Y - TEAM_HEIGHT - 4, TEAM_WID, TEAM_HEIGHT);
+		season.setFont(MyFont.YT_S);
+		season.setForeground(Color.white);
+		season.setCenter();
+		this.add(season);
+		
 		formerTeam = new MyLabel(vo.getThisName());
 		formerTeam.setBounds(CONCLUSION_X, CONCLUSION_Y, TEAM_WID, TEAM_HEIGHT);
 		formerTeam.setFont(MyFont.YT_M);
-		formerTeam.setForeground(Color.WHITE);
+		formerTeam.setForeground(MyFont.DARK_GRAY);
 		formerTeam.setCenter();
 		this.add(formerTeam);
 		
 		currentTeam = new MyLabel(vo.getThatName());
 		currentTeam.setBounds(CONCLUSION_X, CONCLUSION_Y + TEAM_HEIGHT + 4, TEAM_WID, TEAM_HEIGHT);
 		currentTeam.setFont(MyFont.YT_M);
-		currentTeam.setForeground(Color.WHITE);
+		currentTeam.setForeground(MyFont.DARK_GRAY);
 		currentTeam.setCenter();
 		this.add(currentTeam);
+		
 		
 //		startSeason = new MyLabel(vo.startSeason + "  ~  " + vo.transferSeason);
 //		startSeason.setBounds(CONCLUSION_X + TEAM_WID, CONCLUSION_Y, SEASON_WID, TEAM_HEIGHT);
@@ -213,8 +249,10 @@ public class PlayerComPanel extends Panel{
 					try {
 						vo = service.getCompareData(name,name2,CompareButton.current.getInferenceData());
 						chart = new NewLineChart(vo);
-						area.setText(vo.getConclusion());
+						conclusion = vo.getConclusion();
+						area.setText(conclusion);
 						PlayerComPanel.this.add(chart);
+						setColor();
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 //						e1.printStackTrace();

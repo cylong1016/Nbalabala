@@ -1,5 +1,6 @@
 package ui.panel.analyse.panel;
 
+import java.awt.Image;
 import java.util.ArrayList;
 
 import po.ClutchPO;
@@ -22,6 +23,8 @@ public class LastFivePanel extends Panel{
 	private AnalysisBLService service = new ValueAnalysis();
 	private ArrayList<ClutchPO> pos;
 	
+//	private Image bgImg = ;
+	
 	public LastFivePanel(String teamName,String playerName){
 		pos = service.getClutchData(teamName);
 		for(ClutchPO po : pos) {
@@ -31,7 +34,7 @@ public class LastFivePanel extends Panel{
 			// TODO
 		} else {
 			chart = new TwoDChart(pos,Utility.trimName(playerName));
-			chart.setBounds(130, 90, 700, 400);
+			chart.setBounds(50, 40, 900, 420);
 			this.add(chart);
 		}
 		this.setBounds(0, 100, 1000, 490);

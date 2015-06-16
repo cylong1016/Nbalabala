@@ -96,10 +96,10 @@ public class UIConfig {
 	public static final Color HIST_FORTH_COLOR = new Color(115, 122, 171);
 	/** 第五名 */
 	public static final Color HIST_FIFTH_COLOR = new Color(85, 145, 204);
-	public static final Color LIGHT_GRAY = new Color(135, 189, 245);
+	public static final Color LIGHT_BLUE = new Color(135, 189, 245);
 	/** 颜色组合 */
-	public static final Color[] HIST_COLORS= {HIST_FIRST_COLOR, LIGHT_GRAY,
-		LIGHT_GRAY, LIGHT_GRAY, LIGHT_GRAY,HIST_FIRST_COLOR};
+	public static final Color[] HIST_COLORS= {HIST_FIRST_COLOR, LIGHT_BLUE,
+		LIGHT_BLUE, LIGHT_BLUE, LIGHT_BLUE,HIST_FIRST_COLOR};
 	
 	
 	/** 第一级选项卡按钮的字体 */
