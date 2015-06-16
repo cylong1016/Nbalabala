@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
 import ui.MyFont;
@@ -56,6 +57,8 @@ public class PlayerComPanel extends Panel{
 		str = changeArray(service.getLineupNamesByAbbr("BOS"));
 		name2 = str[1]; 
 		addComboBox();
+		button = new CompareButton[7];
+		setButton();
 		try {
 			vo = service.getCompareData(name, name2,InferenceData.SCORE);
 			if (vo == null) {
@@ -64,8 +67,8 @@ public class PlayerComPanel extends Panel{
 			} else {
 				addConclusion();
 				chart = new NewLineChart(vo);
+				chart.setVisible(true);
 				this.add(chart);
-				button = new CompareButton[7];
 				addButton();
 				setEffect();
 				addLabel();
@@ -168,15 +171,29 @@ public class PlayerComPanel extends Panel{
 //		this.add(transSeason);
 	}
 
-	public void addButton() {
+	public void setButton() {
 		for (int i = 0; i < 3; i++) {
 			button[i] = new CompareButton(bt_x + i * inter_x, bt_y, width, height, utility.Constants.ANY_SELECT[i]);
 			button[i].setInferenceData(InferenceData.values()[i]);
-			this.add(button[i]);
 		}
 		for (int i = 3; i < button.length; i++) {
 			button[i] = new CompareButton(bt_x + i * inter_x, bt_y, width, height, utility.Constants.ANY_SELECT[i + 3]);
 			button[i].setInferenceData(InferenceData.values()[i + 3]);
+		}
+
+		CompareButton.current = button[0];
+		addListener();
+	}
+	
+	public void addButton() {
+		for (int i = 0; i < 3; i++) {
+//			button[i] = new CompareButton(bt_x + i * inter_x, bt_y, width, height, utility.Constants.ANY_SELECT[i]);
+//			button[i].setInferenceData(InferenceData.values()[i]);
+			this.add(button[i]);
+		}
+		for (int i = 3; i < button.length; i++) {
+//			button[i] = new CompareButton(bt_x + i * inter_x, bt_y, width, height, utility.Constants.ANY_SELECT[i + 3]);
+//			button[i].setInferenceData(InferenceData.values()[i + 3]);
 			this.add(button[i]);
 		}
 

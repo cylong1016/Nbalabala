@@ -5,6 +5,7 @@ package bl.analysisbl;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import po.AdvancedDataPO;
 import po.ClutchPO;
@@ -154,7 +155,6 @@ public class ValueAnalysis implements AnalysisBLService{
 	}
 	
 	public static void main(String[]args) {
-System.out.println(new ValueAnalysis().getClutchData("DET").size());
 	}
 	//TODO 明显下降的球员：Steve Francis
 
@@ -264,7 +264,14 @@ System.out.println(new ValueAnalysis().getClutchData("DET").size());
 	 */
 	@Override
 	public ArrayList<String> getLineupNamesByAbbr(String abbr) {
-		return new SeasonData().getPlayerNamesByTeamAbbr(abbr, Constants.LATEST_SEASON_REGULAR);
+		ArrayList<String> list = new SeasonData().getPlayerNamesByTeamAbbr(abbr, Constants.LATEST_SEASON_REGULAR);
+		Comparator<String> comparator = new Comparator<String>() {
+			public int compare(String s1, String s2) {
+				return s1.compareTo(s2);
+			}
+		};
+		java.util.Collections.sort(list, comparator);
+		return list;
 	}
 
 
@@ -283,6 +290,7 @@ System.out.println(new ValueAnalysis().getClutchData("DET").size());
 			thatMatches.addAll(matchData.getMatchRecordByPlayerName(thatName, season));
 		}
 		int smaller = Math.min(matches.size(), thatMatches.size());
+		ArrayList<MatchPlayerPO> smallerList = matches.size() < thatMatches.size()? matches: thatMatches;
 		DivideHandler divideHandler = new DivideHandler();
 		ArrayList<MatchPlayerPO> partThis = new ArrayList<MatchPlayerPO>
 			(matches.subList(matches.size() - smaller, matches.size()));
@@ -290,8 +298,8 @@ System.out.println(new ValueAnalysis().getClutchData("DET").size());
 			(thatMatches.subList(thatMatches.size() - smaller, thatMatches.size()));
 		ArrayList<Double> thisData = divideHandler.divideData(partThis, inferenceData, smaller);
 		ArrayList<Double> thatData = divideHandler.divideData(partThat, inferenceData, smaller);
-		if (thisData.size() < 2) return null;
-		if (thatData.size() < 2) throw new Exception();
+		if (thisData.size() < 2 && smallerList == matches ) return null;
+		if (thatData.size() < 2 && smallerList == thatMatches ) throw new Exception();
 		String conclusion = new TAnalyzer(thisData, thatData, inferenceData)
 			.getCompareConclusion(Utility.trimName(thisName), Utility.trimName(thatName));
 		AnalysisCompareVO result = new AnalysisCompareVO();
