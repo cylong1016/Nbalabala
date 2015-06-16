@@ -65,7 +65,7 @@ public class FuturePanel extends Panel {
 			addButton();
 			addLabel();
 			addConclusion();
-			
+			bgImg = Images.FUTURE_BG;
 			setEffect();
 		}
 	}

@@ -46,6 +46,7 @@ public class AllSeasonPanel extends Panel{
 			button = new SeasonSelectButton[5];
 			addButton();
 			setEffect();
+			bgImg = Images.BG_IMAGE;
 		}
 		this.setBounds(0, 100, 1000, 490);
 		this.repaint();

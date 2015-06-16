@@ -77,6 +77,7 @@ public class PlayerComPanel extends Panel{
 				setEffect();
 				addLabel();
 				addConclusion();
+				bgImg = Images.COMPARE_BG;
 			}
 		} catch (Exception e) {
 			// TODO 显示对方球员参加比赛太少无法比较
