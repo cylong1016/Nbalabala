@@ -55,7 +55,7 @@ public class PlayerComPanel extends Panel{
 	public PlayerComPanel(String name) {
 		this.name = name;
 		str = changeArray(service.getLineupNamesByAbbr("BOS"));
-		name2 = str[1];
+		name2 = str[1]; 
 		addComboBox();
 		try {
 			vo = service.getCompareData(name, name2,InferenceData.SCORE);
