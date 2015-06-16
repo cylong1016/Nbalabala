@@ -15,6 +15,11 @@ import java.util.Calendar;
  */
 public class Utility {
 	
+	public static String getLastName(String name) {
+		String trimed = trimName(name);
+		return trimed.substring(trimed.lastIndexOf(" ") + 1, trimed.length());
+	}
+	
 	/**
 	 * 得到某个url的连接
 	 * @param url

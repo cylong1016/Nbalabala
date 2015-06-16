@@ -223,7 +223,7 @@ public class TextCHN {
 	public static final String[] SCATTER_CHART = {"球员走向图", "比赛组数", "数据"};
 	public static final String[] LINE_CHART = {"球员转会图", "比赛组数", "数据"};
 
-	public static final String[] BAR_CHART = {"球队贡献", "球员姓名", "数据"};
+	public static final String[] BAR_CHART = {"球队贡献", "球员", "数据"};
 
 	//参赛场数 场均上场时间 ORPM DRPM RPM WAR
 	public static final String[] BAR_SELECT = {"参赛场数","上场时间","ORPM","DRPM","RPM","WAR"};

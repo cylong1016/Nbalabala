@@ -71,6 +71,7 @@ public class ContriPanel extends Panel{
 					chart = new BarChart(po,ContriButton.current.getPlayerCurrent(),playerIndex);
 					ContriPanel.this.add(chart);
 					ContriPanel.this.repaint();
+					ContriPanel.this.getParent().repaint();
 				}
 
 			});
