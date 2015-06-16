@@ -12,7 +12,6 @@ import ui.Images;
 import ui.MyFont;
 import ui.UIConfig;
 import ui.common.jfreechart.LineChart;
-import ui.common.jfreechart.ScatterChart;
 import ui.common.label.MyLabel;
 import ui.common.panel.Panel;
 import ui.panel.analyse.button.TurnSelectButton;
