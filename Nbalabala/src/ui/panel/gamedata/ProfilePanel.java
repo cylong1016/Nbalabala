@@ -59,6 +59,9 @@ public class ProfilePanel extends Panel {
 	private MatchProfileVO matchPro;
 	private Panel bottomPanel;
 	public boolean isIni;
+	private static final Font PLAIN_FONT = new Font("微软雅黑", Font.PLAIN, 14);
+	private static final Font BOLD_FONT = new Font("微软雅黑", Font.BOLD, 14);
+	private String[] homeKing,roadKing;
 
 	public ProfilePanel(MatchDetailVO matchDetail,Panel bottomPanel) {
 		this.matchDetail = matchDetail;
@@ -181,6 +184,31 @@ public class ProfilePanel extends Panel {
 		teamLabel1.setFont(teamNameFont);
 		teamLabel2.setFont(teamNameFont);
 		
+		teamLabel1.addMouseListener(new MouseAdapter(){
+			public void mousePressed(MouseEvent e) {
+				MainController.toTeamBottomPanel(bottomPanel,teamShort1);
+			}
+			public void mouseEntered(MouseEvent e) {
+				teamLabel1.setFont(new Font("微软雅黑",1,23));
+			}
+			public void mouseExited(MouseEvent e) {
+				teamLabel1.setFont(new Font("微软雅黑",0,23));
+			}
+		});
+	
+		teamLabel2.addMouseListener(new MouseAdapter(){
+			 public void mousePressed(MouseEvent e) {
+				 MainController.toTeamBottomPanel(bottomPanel,teamShort2);
+			 }
+			 public void mouseEntered(MouseEvent e) {
+				 teamLabel2.setFont(new Font("微软雅黑",1,23));
+				}
+
+				public void mouseExited(MouseEvent e) {
+					teamLabel2.setFont(new Font("微软雅黑",0,23));
+				}
+		});
+		
 //		placeLabel1 = new MyLabel(labelX, labelY_1, width, height, place1);
 //		placeLabel2 = new MyLabel(labelX, labelY_3, width, height, place2);
 		
@@ -238,8 +266,8 @@ public class ProfilePanel extends Panel {
 		lb_result = new MyLabel[6];
 		int[] homeValue = matchDetail.gethomeHighestValues();
 		int[] roadValue = matchDetail.getRoadHighestValues();
-		String[] homeKing = matchDetail.gethomeHighestNames();
-		String[] roadKing = matchDetail.getRoadHighestNames();
+		homeKing = matchDetail.gethomeHighestNames();
+		roadKing = matchDetail.getRoadHighestNames();
 		for(int i = 0;i<3;i++){
 			lb_king[i] = new MyLabel(kingX_1,rightY_2+i*inter,3*width,height,Utility.trimName(homeKing[i]));
 			lb_king[i+3] = new MyLabel(kingX_2,rightY_2+i*inter,3*width,height,Utility.trimName(roadKing[i]));
@@ -258,7 +286,7 @@ public class ProfilePanel extends Panel {
 			lb_king[i].setForeground(Color.blue);
 		}
 	}
-
+	
 	public void addButton() {
 		tech = new MyLabel(830, 138, 80, 20, Constants.techText);
 		tech.setForeground(Color.white);
@@ -266,8 +294,15 @@ public class ProfilePanel extends Panel {
 		tech.addMouseListener(new MouseAdapter(){
 			 public void mousePressed(MouseEvent e) {
 				 tech.setForeground(Color.gray);
-				 MainController.toOneGamePanel(matchDetail,bottomPanel);;
+				 MainController.toOneGamePanel(matchDetail,bottomPanel);
 			 }
+			 public void mouseEntered(MouseEvent e) {
+				 tech.setFont(BOLD_FONT);
+				}
+
+				public void mouseExited(MouseEvent e) {
+					tech.setFont(PLAIN_FONT);
+				}
 		});
 	}
 

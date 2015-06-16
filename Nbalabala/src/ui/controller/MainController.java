@@ -155,8 +155,8 @@ public class MainController {
 		frame.setPanel(allTeamsPanel);
 	}
 
-	public static void toTeamBottomPanel(BottomPanel from, String abbr) {
-		teamBottomPanel = new TeamBottomPanel(from, Utility.getCurrentAbbr(abbr));
+	public static void toTeamBottomPanel(Panel from, String abbr) {
+		teamBottomPanel = new TeamBottomPanel((BottomPanel)from, Utility.getCurrentAbbr(abbr));
 		frame.setPanel(teamBottomPanel);
 	}
 	
