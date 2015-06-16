@@ -12,6 +12,6 @@ public class MySQLConf {
 	public static final String URL = "jdbc:mysql://localhost/nbalabala";
 	// 用户名
 	public static final String USER = "root";
-	// 密码
-	public static final String PASSWORD = "cyl19941016";
+	// 密码cyl19941016
+	public static final String PASSWORD = "root";
 }
