@@ -50,7 +50,7 @@ public class AnalysePanel extends BottomPanel{
 		addComboBox();
 		lastFive = new LastFivePanel(str[0]);
 		allSeason = new AllSeasonPanel(str[0]);
-		contri = new ContriPanel(str[0]);
+		contri = new ContriPanel("BOS",0);
 		future =new FuturePanel(str[0]);
 		turn = new TurnPanel(str[0]);
 		currentPanel = lastFive;
@@ -162,6 +162,10 @@ public class AnalysePanel extends BottomPanel{
 					AnalysePanel.this.repaint();
 					break;
 				case 2:
+					AnalysePanel.this.remove(contri);
+					contri = new ContriPanel(Constants.TEAM_ABBR[teamCom.getSelectedIndex()],playerCom.getSelectedIndex()); 
+					AnalysePanel.this.add(contri);
+					AnalysePanel.this.repaint();
 					break;
 				case 3:
 					AnalysePanel.this.remove(future);

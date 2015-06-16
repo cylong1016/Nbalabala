@@ -388,6 +388,10 @@ public class Constants {
 	
 	public static String[] LINE_CHART = TextCHN.LINE_CHART;
 	
+	public static String[] BAR_CHART = TextCHN.BAR_CHART;
+	
+	public static String[] BAR_SELECT = TextCHN.BAR_SELECT;
+	
 	public static String translateDivision(ScreenDivision division) {
 		return translater.translateTeamDivision(division);
 	}

@@ -16,7 +16,17 @@ public class ContriButton extends TextButton{
 	public static ContriButton current;
 	/** 按钮上的字 */
 	private String text;
-	
+	private int playerCurrent;
+
+
+	public int getPlayerCurrent() {
+		return playerCurrent;
+	}
+
+	public void setPlayerCurrent(int playerCurrent) {
+		this.playerCurrent = playerCurrent;
+	}
+
 	public ContriButton(int x, int y, int width, int height, String text) {
 		super(x, y, width, height, text);
 		this.text = text;

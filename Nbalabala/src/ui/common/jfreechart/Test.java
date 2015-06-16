@@ -23,7 +23,7 @@ public class Test extends JFrame{
 		AnalysisBLService service = new ValueAnalysis();
 		String[] name = {"Allen Iverson","James Peter","Kobe Byrant","CYL"};
 		double[] num = {35.4,18.3,26,30.4};
-		BarChart chart = new BarChart(name,num);
+		BarChart chart = new BarChart(service.getDevotionData("BOS"),0,2);
 //		LineChart chart = new LineChart(name,name,num);
 //		ScatterChart chart = new ScatterChart(service.getForecastData("LeBron James", InferenceData.ASSIST));
 //		LineChart chart = new LineChart(name,name,num);

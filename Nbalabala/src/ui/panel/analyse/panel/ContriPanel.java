@@ -5,6 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import po.AdvancedDataPO;
 import enums.CareerData;
 import ui.UIConfig;
 import ui.common.jfreechart.BarChart;
@@ -25,24 +26,26 @@ public class ContriPanel extends Panel{
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -4897422799964523061L;
-	private String name;
+	private String teamName;
 	private BarChart chart;
 	private ContriButton[] button;
 	private int bt_x = 20, bt_y = 20, inter_x = 120, width = 80, height = 25;
 	private AnalysisBLService service = new ValueAnalysis();
-	private ArrayList<AnalysisCareerVO> vo;
+	private ArrayList<AdvancedDataPO> po;
+	private int playerIndex;
 	
-	public ContriPanel(String name){
-		this.name = name;
-		vo = service.getCareerData(name, CareerData.SCORE);
-		if (vo == null) {
+	public ContriPanel(String teamName,int playerIndex){
+		this.teamName = teamName;
+		this.playerIndex = playerIndex;
+		po = service.getDevotionData(teamName);
+		if (po == null) {
 			//TODO 显示没有走向分析
 		} else {
-//			chart = new BarChart(vo);
-//			this.add(chart);
 			button = new ContriButton[6];
 			addButton();
 			setEffect();
+			chart = new BarChart(po,ContriButton.current.getPlayerCurrent(),playerIndex);
+			this.add(chart);
 		}
 		this.setBounds(0, 100, 1000, 490);
 		this.repaint();
@@ -50,8 +53,9 @@ public class ContriPanel extends Panel{
 
 	public void addButton() {
 		for (int i = 0; i < 6; i++) {
-			button[i] = new ContriButton(bt_x + i * inter_x, bt_y, width, height, utility.Constants.ANY_SELECT[i]);
+			button[i] = new ContriButton(bt_x + i * inter_x, bt_y, width, height, utility.Constants.BAR_SELECT[i]);
 			this.add(button[i]);
+			button[i].setPlayerCurrent(i);
 		}
 		ContriButton.current = button[0];
 		addListener();
@@ -66,10 +70,10 @@ public class ContriPanel extends Panel{
 					}
 					ContriButton.current.back();
 					ContriButton.current = (ContriButton) e.getSource();
-//					ContriPanel.this.remove(chart);
-//					vo = service.getDevotionData(name);
-//					chart = new BoxChart(vo);
-//					ContriPanel.this.add(chart);
+					ContriPanel.this.remove(chart);
+					po = service.getDevotionData(teamName);
+					chart = new BarChart(po,ContriButton.current.getPlayerCurrent(),playerIndex);
+					ContriPanel.this.add(chart);
 					ContriPanel.this.repaint();
 				}
 

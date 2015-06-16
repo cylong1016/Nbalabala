@@ -2,6 +2,7 @@ package ui.common.jfreechart;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -16,7 +17,9 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+import po.AdvancedDataPO;
 import ui.common.panel.Panel;
+import utility.Constants;
 
 /**
  * 柱状图
@@ -26,17 +29,21 @@ import ui.common.panel.Panel;
 public class BarChart extends Panel {
 	/** serialVersionUID */
 	private static final long serialVersionUID = -6096004426282934590L;
-	private String[] name;
-	private double[] num;
 	private String[] color;
-
-	public BarChart(String[] name, double[] num) {
-		this.name = name;
-		this.num = num;
-		color = new String[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k" };
+	private ArrayList<AdvancedDataPO> po;
+	private int select;
+	private int playerIndex;
+	
+	//参赛场数 场均上场时间 ORPM DRPM RPM WAR
+	public BarChart(ArrayList<AdvancedDataPO> po,int select,int playerIndex) {
+		this.po = po;
+		this.select = select;
+		this.playerIndex = playerIndex;
+		color = new String[] { "1", "2"};
 		JFreeChart chart = createChart(createDataset());
 		JPanel panel = new ChartPanel(chart);
-		panel.setSize(800, 400);
+		panel.setSize(700, 400);
+		this.setBounds(20, 90, 700, 400);
 		this.add(panel); // 将chart对象放入Panel面板中去，ChartPanel类已继承Jpanel
 		this.repaint();
 	}
@@ -44,15 +51,59 @@ public class BarChart extends Panel {
 	public CategoryDataset createDataset() // 创建柱状图数据集
 	{
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		for (int i = 0; i < name.length; i++) {
-			dataset.setValue(num[i], color[i], name[i]);
+		for (int i = 0; i < po.size(); i++) {
+			switch(select){
+			case 0:
+				if(i == playerIndex) {
+					dataset.setValue(po.get(i).getGp(), color[0], po.get(i).getName());
+				}else{
+				dataset.setValue(po.get(i).getGp(), color[1], po.get(i).getName());
+				}
+				break;
+			case 1:
+				if(i == playerIndex) {
+					dataset.setValue(po.get(i).getGp(), color[0], po.get(i).getName());
+				}else{
+				dataset.setValue(po.get(i).getMpg(), color[1], po.get(i).getName());
+				}
+				break;
+			case 2:
+				if(i == playerIndex) {
+					dataset.setValue(po.get(i).getGp(), color[0], po.get(i).getName());
+				}else{
+				dataset.setValue(po.get(i).getOrpm(), color[1], po.get(i).getName());
+				}
+				break;
+			case 3:
+				if(i == playerIndex) {
+					dataset.setValue(po.get(i).getGp(), color[0], po.get(i).getName());
+				}else{
+				dataset.setValue(po.get(i).getDrpm(), color[1], po.get(i).getName());
+				}
+				break;
+			case 4:
+				if(i == playerIndex) {
+					dataset.setValue(po.get(i).getGp(), color[0], po.get(i).getName());
+				}else{
+				dataset.setValue(po.get(i).getRpm(), color[1], po.get(i).getName());
+				}
+				break;
+			case 5:
+				if(i == playerIndex) {
+					dataset.setValue(po.get(i).getGp(), color[0], po.get(i).getName());
+				}else{
+				dataset.setValue(po.get(i).getWar(), color[1], po.get(i).getName());
+				}
+				break;
+			}
 		}
 		return dataset;
 	}
 
 	public JFreeChart createChart(CategoryDataset dataset) // 用数据集创建一个图表
 	{
-		JFreeChart chart = ChartFactory.createBarChart("hi", "球员姓名", "球队贡献", dataset, PlotOrientation.VERTICAL,
+		JFreeChart chart = ChartFactory.createBarChart(Constants.BAR_CHART[0],Constants.BAR_CHART[1],
+				Constants.BAR_CHART[2],dataset, PlotOrientation.VERTICAL,
 				true, true, false); // 创建一个JFreeChart
 		BarRenderer mRenderer = new BarRenderer();
 		// mRenderer.setItemLabelGenerator(new
@@ -76,8 +127,8 @@ public class BarChart extends Panel {
 		// domainAxis.setCategoryLabelPositionOffset(10);//图表横轴与标签的距离(10像素)
 		domainAxis.setCategoryMargin(0.2);// 横轴标签之间的距离20%
 		plot.setDomainAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);// 学校显示在下端(柱子竖直)或左侧(柱子水平)
-		plot.setBackgroundAlpha((float) 0.1);// 设置透明度
-		plot.setBackgroundPaint(Color.green);// 设置颜色
+		plot.setBackgroundAlpha((float) 0.5);// 设置透明度
+//		plot.setBackgroundPaint(Color.green);// 设置颜色
 		// 设置网格竖线颜色
 		plot.setDomainGridlinePaint(Color.blue);
 		// plot.setDomainGridlinesVisible(true);
