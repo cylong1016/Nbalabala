@@ -81,6 +81,12 @@ public class AnalysePanel extends BottomPanel{
 							select[i].setOff();
 						}
 						select[0].setOn();
+						
+						AnalysePanel.this.remove(contri);
+						AnalysePanel.this.remove(allSeason);
+						AnalysePanel.this.remove(turn);
+						AnalysePanel.this.remove(compare);
+						AnalysePanel.this.remove(future);
 						AnalysePanel.this.add(currentPanel);
 					}else if(e.getSource() == select[1]){
 						currentI = 1;
@@ -89,6 +95,12 @@ public class AnalysePanel extends BottomPanel{
 							select[i].setOff();
 						}
 						select[1].setOn();
+						
+						AnalysePanel.this.remove(contri);
+						AnalysePanel.this.remove(lastFive);
+						AnalysePanel.this.remove(turn);
+						AnalysePanel.this.remove(compare);
+						AnalysePanel.this.remove(future);
 						AnalysePanel.this.add(currentPanel);
 					}else if(e.getSource() == select[2]){
 						currentI = 2;
@@ -97,6 +109,12 @@ public class AnalysePanel extends BottomPanel{
 							select[i].setOff();
 						}
 						select[2].setOn();
+						
+						AnalysePanel.this.remove(allSeason);
+						AnalysePanel.this.remove(lastFive);
+						AnalysePanel.this.remove(turn);
+						AnalysePanel.this.remove(compare);
+						AnalysePanel.this.remove(future);
 						AnalysePanel.this.add(currentPanel);
 					}else if(e.getSource() == select[3]){
 						currentI = 3;
@@ -105,6 +123,11 @@ public class AnalysePanel extends BottomPanel{
 							select[i].setOff();
 						}
 						select[3].setOn();
+						AnalysePanel.this.remove(allSeason);
+						AnalysePanel.this.remove(lastFive);
+						AnalysePanel.this.remove(turn);
+						AnalysePanel.this.remove(compare);
+						AnalysePanel.this.remove(contri);
 						AnalysePanel.this.add(currentPanel);
 					}else if(e.getSource() == select[4]){
 						currentI = 4;
@@ -113,6 +136,11 @@ public class AnalysePanel extends BottomPanel{
 							select[i].setOff();
 						}
 						select[4].setOn();
+						AnalysePanel.this.remove(allSeason);
+						AnalysePanel.this.remove(lastFive);
+						AnalysePanel.this.remove(future);
+						AnalysePanel.this.remove(compare);
+						AnalysePanel.this.remove(contri);
 						AnalysePanel.this.add(currentPanel);
 					}else if(e.getSource() == select[5]){
 						currentI = 5;
@@ -121,8 +149,14 @@ public class AnalysePanel extends BottomPanel{
 							select[i].setOff();
 						}
 						select[5].setOn();
+						AnalysePanel.this.remove(allSeason);
+						AnalysePanel.this.remove(lastFive);
+						AnalysePanel.this.remove(future);
+						AnalysePanel.this.remove(turn);
+						AnalysePanel.this.remove(contri);
 						AnalysePanel.this.add(currentPanel);
 					}
+					System.out.println("click"+currentI);
 					AnalysePanel.this.repaint();
 				}
 			});
@@ -163,6 +197,7 @@ public class AnalysePanel extends BottomPanel{
 				if(index == -1) {
 					index = 0;
 				}
+				System.out.println("currentI"+currentI);
 				switch(currentI) {
 				case 0:
 					AnalysePanel.this.remove(lastFive);
