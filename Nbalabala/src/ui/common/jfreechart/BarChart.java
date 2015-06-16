@@ -55,44 +55,44 @@ public class BarChart extends Panel {
 			switch(select){
 			case 0:
 				if(i == playerIndex) {
-					dataset.setValue(po.get(i).getGp(), comment[0], Utility.getLastName(po.get(i).getName()));
+					dataset.addValue(po.get(i).getGp(), comment[0], Utility.getLastName(po.get(i).getName()));
 				}else{
-					dataset.setValue(po.get(i).getGp(), comment[0], Utility.getLastName(po.get(i).getName()));
+					dataset.addValue(po.get(i).getGp(), comment[1], Utility.getLastName(po.get(i).getName()));
 				}
 				break;
 			case 1:
 				if(i == playerIndex) {
 					dataset.setValue(po.get(i).getMpg(), comment[0], Utility.getLastName(po.get(i).getName()));
 				}else{
-					dataset.setValue(po.get(i).getMpg(), comment[1], Utility.getLastName(po.get(i).getName()));
+					dataset.setValue(po.get(i).getMpg(), comment[0], Utility.getLastName(po.get(i).getName()));
 				}
 				break;
 			case 2:
 				if(i == playerIndex) {
 					dataset.setValue(po.get(i).getOrpm(), comment[0], Utility.getLastName(po.get(i).getName()));
 				}else{
-				dataset.setValue(po.get(i).getOrpm(), comment[1], Utility.getLastName(po.get(i).getName()));
+				dataset.setValue(po.get(i).getOrpm(), comment[0], Utility.getLastName(po.get(i).getName()));
 				}
 				break;
 			case 3:
 				if(i == playerIndex) {
 					dataset.setValue(po.get(i).getDrpm(), comment[0], Utility.getLastName(po.get(i).getName()));
 				}else{
-				dataset.setValue(po.get(i).getDrpm(), comment[1], Utility.getLastName(po.get(i).getName()));
+				dataset.setValue(po.get(i).getDrpm(), comment[0], Utility.getLastName(po.get(i).getName()));
 				}
 				break;
 			case 4:
 				if(i == playerIndex) {
 					dataset.setValue(po.get(i).getRpm(), comment[0], Utility.getLastName(po.get(i).getName()));
 				}else{
-				dataset.setValue(po.get(i).getRpm(), comment[1], Utility.getLastName(po.get(i).getName()));
+				dataset.setValue(po.get(i).getRpm(), comment[0], Utility.getLastName(po.get(i).getName()));
 				}
 				break;
 			case 5:
 				if(i == playerIndex) {
 					dataset.setValue(po.get(i).getWar(), comment[0], Utility.getLastName(po.get(i).getName()));
 				}else{
-				dataset.setValue(po.get(i).getWar(), comment[1], Utility.getLastName(po.get(i).getName()));
+				dataset.setValue(po.get(i).getWar(), comment[0], Utility.getLastName(po.get(i).getName()));
 				}
 				break;
 			}
@@ -104,7 +104,7 @@ public class BarChart extends Panel {
 	{
 		JFreeChart chart = ChartFactory.createBarChart(Constants.BAR_CHART[0],Constants.BAR_CHART[1],
 				Constants.BAR_CHART[2],dataset, PlotOrientation.VERTICAL,
-				true, true, false); // 创建一个JFreeChart
+				false, true, false); // 创建一个JFreeChart
 
 		// chart.setTitle(new TextTitle("", new Font("宋体", Font.BOLD +
 		// Font.ITALIC, 20)));// 可以重新设置标题，替换“hi”标题
