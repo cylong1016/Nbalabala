@@ -110,7 +110,12 @@ public class ValueAnalysis implements AnalysisBLService{
 		loadMatches(name);
 		DivideHandler divideHandler = new DivideHandler();
 		ArrayList<Double> data = divideHandler.divideData(matches, inferenceData, matches.size());
-		RegressionHandler regression = new RegressionHandler(data);
+		RegressionHandler regression;
+		try {
+			regression = new RegressionHandler(data);
+		} catch (Exception e) {
+			return null;
+		}
 		ForecastVO result = new ForecastVO();
 		result.width = divideHandler.getWidth();
 		
@@ -144,8 +149,6 @@ public class ValueAnalysis implements AnalysisBLService{
 //		for (double d : curveY) {
 //			System.out.println(d);
 //		}
-		AnalysisTransferVO vo = new ValueAnalysis().getTransferData("Jerome Jordan$01", InferenceData.SCORE);
-		
 	}
 	//TODO 明显下降的球员：Steve Francis
 
