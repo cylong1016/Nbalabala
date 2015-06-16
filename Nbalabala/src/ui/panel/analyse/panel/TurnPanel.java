@@ -78,7 +78,14 @@ public class TurnPanel extends Panel {
 	}
 
 	private void addConclusion() {
-		area = new JTextArea(vo.getConclusion());
+
+		// 90%把握认为（球员）此数据
+		String conclusion[] = vo.getConclusion().split(" ");
+//		if (condition) {
+//			
+//		}
+		area = new JTextArea(conclusion[0] + "90%把握认为" + '\n' + "此数据" + conclusion[1]);
+		
 		area.setLineWrap(true);
 		area.setEditable(false);
 		area.setBounds(CONCLUSION_X, CONCLUSION_Y + 200 ,200,200);
@@ -142,7 +149,8 @@ public class TurnPanel extends Panel {
 					TurnPanel.this.remove(chart);
 					vo = service.getTransferData(name,TurnSelectButton.current.getInferenceData());
 					chart = new LineChart(vo);
-					area.setText(vo.getConclusion());
+					String conclusion[] = vo.getConclusion().split(" ");
+					area.setText(conclusion[0] + "90%把握认为" + '\n' + "此数据" + conclusion[1]);
 					TurnPanel.this.add(chart);
 					TurnPanel.this.repaint();
 				}

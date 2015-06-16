@@ -48,7 +48,7 @@ public class MyFont{
 	/** 数据王第一名的分数 */
 	public static final Font YT_XL = new Font("方正姚体", Font.PLAIN, 36);
 	
-	public static final Font YT_XXL = new Font("方正姚体", Font.PLAIN, 70);
+	public static final Font YT_XXL = new Font("方正姚体", Font.PLAIN, 65);
 	 
 	public static final Font Arial_S = new Font("ArialMT", Font.PLAIN, 12);
 	public static final Font Arial_B = new Font("ArialMT", Font.PLAIN, 14);

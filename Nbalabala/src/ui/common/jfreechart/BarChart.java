@@ -18,6 +18,8 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import po.AdvancedDataPO;
+import ui.MyFont;
+import ui.UIConfig;
 import ui.common.panel.Panel;
 import utility.Constants;
 
@@ -42,8 +44,8 @@ public class BarChart extends Panel {
 		color = new String[] { "1", "2"};
 		JFreeChart chart = createChart(createDataset());
 		JPanel panel = new ChartPanel(chart);
-		panel.setSize(700, 400);
-		this.setBounds(20, 90, 700, 400);
+		panel.setSize(900, UIConfig.CHAR_HEIGHT);
+		this.setBounds(UIConfig.CHAR_X, UIConfig.CHAR_Y, 1000, 500);
 		this.add(panel); // 将chart对象放入Panel面板中去，ChartPanel类已继承Jpanel
 		this.repaint();
 	}
@@ -106,6 +108,8 @@ public class BarChart extends Panel {
 				Constants.BAR_CHART[2],dataset, PlotOrientation.VERTICAL,
 				true, true, false); // 创建一个JFreeChart
 		BarRenderer mRenderer = new BarRenderer();
+		chart.setBackgroundPaint(UIConfig.CHAR_BG_COLOR);
+		chart.getTitle().setFont(MyFont.YH_B);
 		// mRenderer.setItemLabelGenerator(new
 		// StandardCategoryItemLabelGenerator());
 		// mRenderer.setItemLabelsVisible(true);
