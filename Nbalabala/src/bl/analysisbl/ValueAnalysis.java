@@ -153,9 +153,9 @@ public class ValueAnalysis implements AnalysisBLService{
 	}
 	
 	public static void main(String[]args) {
-		AnalysisCompareVO compareVO = new ValueAnalysis().getCompareData
-				("Kevin Love$01", "James Harden$01", InferenceData.SCORE);
-		System.out.println(compareVO.conclusion);
+//		AnalysisCompareVO compareVO = new ValueAnalysis().getCompareData
+//				("Kevin Love$01", "James Harden$01", InferenceData.SCORE);
+//		System.out.println(compareVO.conclusion);
 //		ForecastVO vo = new ValueAnalysis().getForecastData("Kobe Bryant$01", InferenceData.SCORE);
 //		System.out.println(vo.fromYear);
 //		System.out.println(vo.toYear);
@@ -281,7 +281,7 @@ public class ValueAnalysis implements AnalysisBLService{
 	 * @see blservice.AnalysisBLService#getCompareData(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public AnalysisCompareVO getCompareData(String thisName, String thatName, InferenceData inferenceData) {
+	public AnalysisCompareVO getCompareData(String thisName, String thatName, InferenceData inferenceData) throws Exception{
 		loadMatches(thisName);
 		ArrayList<MatchPlayerPO> thatMatches = new ArrayList<MatchPlayerPO>();
 		PlayerProfilePO profilePO = playerData.getPlayerProfileByName(thatName);
@@ -299,6 +299,8 @@ public class ValueAnalysis implements AnalysisBLService{
 			(thatMatches.subList(thatMatches.size() - smaller, thatMatches.size()));
 		ArrayList<Double> thisData = divideHandler.divideData(partThis, inferenceData, smaller);
 		ArrayList<Double> thatData = divideHandler.divideData(partThat, inferenceData, smaller);
+		if (thisData.size() < 2) return null;
+		if (thatData.size() < 2) throw new Exception();
 		String conclusion = new TAnalyzer(thisData, thatData, inferenceData)
 			.getCompareConclusion(Utility.trimName(thisName), Utility.trimName(thatName));
 		AnalysisCompareVO result = new AnalysisCompareVO();

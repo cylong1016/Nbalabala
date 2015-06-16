@@ -1,14 +1,11 @@
 package ui.panel.analyse.panel;
 
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import po.ClutchPO;
-import ui.Images;
 import ui.UIConfig;
 import ui.common.chart.TwoDChart;
 import ui.common.panel.Panel;
@@ -34,7 +31,7 @@ public class LastFivePanel extends Panel{
 	
 	public LastFivePanel(String name){
 		this.name = name;
-		vo = service.getClutchData("Kobe Bryant$01");
+		vo = service.getClutchData(name);
 		System.out.println(vo.size());
 //		for(int i = 0 ; i < vo.size() ; i ++) {
 //			System.out.println("time"+vo.get(i).getClutchTime());

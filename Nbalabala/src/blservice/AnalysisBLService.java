@@ -38,7 +38,8 @@ public interface AnalysisBLService {
 	public AnalysisTransferVO getTransferData(String name, InferenceData inferenceData);
 	
 	/** 返回某一球员和另一球员对比的数据 */
-	public AnalysisCompareVO getCompareData(String thisName, String thatName, InferenceData inferenceData);
+	public AnalysisCompareVO getCompareData(String thisName, String thatName, InferenceData inferenceData)
+		throws Exception;
 
 	public ArrayList<String> getLineupNamesByAbbr(String abbr);
 }
