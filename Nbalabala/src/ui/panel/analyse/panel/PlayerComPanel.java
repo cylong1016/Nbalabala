@@ -132,6 +132,9 @@ public class PlayerComPanel extends Panel{
 					formerTeam.setText(vo.getThisName());
 					currentTeam.setText(vo.getThatName());
 				} catch (Exception e) {
+					PlayerComPanel.this.remove(chart);
+					PlayerComPanel.this.remove(currentTeam);
+					PlayerComPanel.this.remove(formerTeam);
 					// TODO 显示对方比赛太少无法比较
 				}
 				PlayerComPanel.this.repaint();
@@ -255,6 +258,7 @@ public class PlayerComPanel extends Panel{
 						area.setText(conclusion);
 						PlayerComPanel.this.add(chart);
 					} catch (Exception e1) {
+						PlayerComPanel.this.remove(chart);
 						// TODO Auto-generated catch block
 //						e1.printStackTrace();
 						//TODO 显示对方比赛太少无法比较
