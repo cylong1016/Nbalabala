@@ -2,6 +2,7 @@ package ui.panel.analyse.panel;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -38,6 +39,8 @@ public class FuturePanel extends Panel {
 	private FutureSelectButton[] button;
 	private ForecastVO vo;
 	
+	private Image bgImg = Images.FUTURE_BG;
+	
 	private MyLabel startSeason, endSeason, widthSeason;
 	
 	private static final int CONCLUSION_Y = UIConfig.CONCLUSION_Y;
@@ -51,6 +54,7 @@ public class FuturePanel extends Panel {
 		this.name = name;
 		vo = service.getForecastData(name, InferenceData.SCORE);
 		if (vo == null) {
+			bgImg = Images.NO_DATA;
 			//TODO 显示没有走向分析
 		} else {
 			chart = new ScatterChart(vo);
@@ -154,7 +158,7 @@ public class FuturePanel extends Panel {
 	}
 	
 	public void paint(Graphics g) {
-		g.drawImage(Images.FUTURE_BG, 0, 0, this);
+		g.drawImage(bgImg, 0, 0, this);
 		// g2d.drawImage(slider, 0, 0, this);
 		super.paint(g);
 	}

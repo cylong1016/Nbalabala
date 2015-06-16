@@ -116,6 +116,8 @@ public class Images {
 	
 	public static final Image TRANS_BG = new ImageIcon("images2.0/analysis/TransBG.png").getImage();
 	public static final Image FUTURE_BG = new ImageIcon("images2.0/analysis/FutureBG.png").getImage();
-
+	
+	public static final Image NO_TRANS = new ImageIcon("images2.0/analysis/noTrans.png").getImage();
+	public static final Image NO_DATA = new ImageIcon("images2.0/analysis/tooLess.png").getImage();
 
 }

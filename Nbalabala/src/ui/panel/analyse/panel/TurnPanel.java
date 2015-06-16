@@ -2,6 +2,7 @@ package ui.panel.analyse.panel;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -40,6 +41,8 @@ public class TurnPanel extends Panel {
 	private MyLabel startSeason, transSeason;
 	private AnalysisTransferVO vo;
 	
+	private Image bgImg = Images.TRANS_BG;
+	
 	/** 结论的纵坐标 */
 	private static final int CONCLUSION_Y = UIConfig.CONCLUSION_Y;
 	private static final int CONCLUSION_X = UIConfig.CONCLUSION_X;
@@ -52,6 +55,7 @@ public class TurnPanel extends Panel {
 		this.name = name;
 		vo = service.getTransferData(name, InferenceData.SCORE);
 		if(vo == null) {
+			bgImg = Images.NO_TRANS;
 			//TODO 提示该球员没有转会
 		}else{	
 			
@@ -154,7 +158,7 @@ public class TurnPanel extends Panel {
 	}
 	
 	public void paint(Graphics g) {
-		g.drawImage(Images.TRANS_BG, 0, 0, this);
+		g.drawImage(bgImg, 0, 0, this);
 		// g2d.drawImage(slider, 0, 0, this);
 		super.paint(g);
 	}
