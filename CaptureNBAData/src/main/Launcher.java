@@ -32,7 +32,7 @@ public class Launcher {
 //		UpdateMatch um = new UpdateMatch();
 //		um.capture();
 		
-		imgCut();
+//		imgCut();
 	}
 	
 	public static void imgCut() throws IOException {

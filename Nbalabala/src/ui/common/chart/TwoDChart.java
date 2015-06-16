@@ -21,24 +21,6 @@ import ui.UIConfig;
  */
 public class TwoDChart extends JTable {
 	
-//	public static void main(String[] args) {
-//		ArrayList<ClutchPO> cluthPOs = new ArrayList<ClutchPO>();
-//		for(int i = 0; i <= 10; i++) {
-//			ClutchPO po = new ClutchPO("lsy", "2014-15");
-//			po.clutchScore = i;
-//			po.clutchTime = i / 12.0;
-//			cluthPOs.add(po);
-//		}
-//		TwoDChart chart = new TwoDChart(cluthPOs);
-//		chart.setBounds(10, 10, 400, 300);
-//		JFrame frame = new JFrame();
-//		frame.setLayout(null);
-//		frame.add(chart);
-//		frame.setSize(600, 400);
-//		frame.setLocationRelativeTo(null);
-//		frame.setVisible(true);
-//	}
-
 	private ArrayList<ClutchPO> cluthPOs;
 	/** serialVersionUID */
 	private static final long serialVersionUID = -3980137740237014807L;
@@ -90,7 +72,7 @@ public class TwoDChart extends JTable {
 		for(ClutchPO po : cluthPOs) {
 			Dot dot = new Dot(dotPoint.x + (int)(po.clutchTime * xLen), 
 					dotPoint.y - (int)((po.clutchScore / maxScore) * yLen) - dotSize, dotSize, 
-					po.name + "(" + po.clutchTime + ", " + po.clutchScore + ")");
+					po.name + " (" + po.clutchTime + ", " + po.clutchScore + ")");
 			if(po.name.equals(currentName)) {
 				dot.setBackground(Color.ORANGE); // 当前选中的球员点颜色改变
 			}

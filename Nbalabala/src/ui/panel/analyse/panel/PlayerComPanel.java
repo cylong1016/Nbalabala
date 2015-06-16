@@ -165,7 +165,7 @@ public class PlayerComPanel extends Panel{
 //		return result[0] + '\n' + zone[0] + '\n' + zone[1];
 //	}
 	
-	private void setColor(){
+	public void setColor(){
 		if (!conclusion.substring(conclusion.length() - 5).equals("无显著差异")) {
 			int begin = conclusion.length() - currentTeam.text.length()- 2;
 			System.out.println(conclusion.substring(begin, begin+1));

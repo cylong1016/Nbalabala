@@ -1,6 +1,5 @@
 package ui.panel.analyse.panel;
 
-import java.awt.Image;
 import java.util.ArrayList;
 
 import po.ClutchPO;

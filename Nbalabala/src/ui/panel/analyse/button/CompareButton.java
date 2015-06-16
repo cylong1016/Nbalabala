@@ -1,6 +1,5 @@
 package ui.panel.analyse.button;
 
-import ui.UIConfig;
 import ui.common.button.TextButton;
 import enums.InferenceData;
 
