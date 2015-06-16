@@ -68,6 +68,7 @@ public class LineChart extends Panel{
 //        chart.getLegend().setPosition(RectangleEdge.RIGHT);  //  图例居右
         
         chart.setBackgroundPaint(UIConfig.CHAR_BG_COLOR); // 图表外的背景色
+        chart.setBackgroundImageAlpha(0f);
         chart.getTitle().setFont( MyFont.YH_B); // 图表标题的字体
         
         CategoryPlot categoryplot = (CategoryPlot) chart.getPlot();

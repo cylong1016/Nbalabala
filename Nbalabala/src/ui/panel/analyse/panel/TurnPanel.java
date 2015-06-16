@@ -1,18 +1,19 @@
 package ui.panel.analyse.panel;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JTextArea;
 
+import ui.Images;
 import ui.MyFont;
 import ui.UIConfig;
 import ui.common.jfreechart.LineChart;
-
 import ui.common.jfreechart.ScatterChart;
 import ui.common.label.MyLabel;
-
 import ui.common.panel.Panel;
 import ui.panel.analyse.button.TurnSelectButton;
 import vo.AnalysisTransferVO;
@@ -70,6 +71,7 @@ public class TurnPanel extends Panel {
 			
 
 		}
+		this.setOpaque(false);
 		this.setBounds(0, 100, 1000, 490);
 		this.repaint();
 	}
@@ -129,6 +131,12 @@ public class TurnPanel extends Panel {
 		button[0].setOpaque(true);
 		button[0].setBackground(UIConfig.BUTTON_COLOR);
 		button[0].setForeground(Color.white);
+	}
+	
+	public void paint(Graphics g) {
+		g.drawImage(Images.TRANS_BG, 0, 0, this);
+		// g2d.drawImage(slider, 0, 0, this);
+		super.paint(g);
 	}
 
 }
