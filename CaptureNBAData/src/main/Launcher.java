@@ -32,6 +32,10 @@ public class Launcher {
 //		UpdateMatch um = new UpdateMatch();
 //		um.capture();
 		
+		imgCut();
+	}
+	
+	public static void imgCut() throws IOException {
 		File portraitsDir = new File("images/portrait");
 		File[] portraits = portraitsDir.listFiles();
 		for(int i = 0; i < portraits.length; i++) {
