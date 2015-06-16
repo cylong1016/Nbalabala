@@ -113,12 +113,8 @@ public class PlayerComPanel extends Panel{
 					index = 0;
 				}
 				name2 = str[index];
-//				System.out.println(name+name2+CompareButton.current.getInferenceData());
-				System.out.println(CompareButton.current.getInferenceData());
+				System.out.println(name+name2+CompareButton.current.getInferenceData());
 				try {
-//					System.out.println(name);
-//					System.out.println(name2);
-
 					vo = service.getCompareData(name, name2,CompareButton.current.getInferenceData());
 					area.setText(vo.getConclusion());
 					PlayerComPanel.this.remove(chart);
