@@ -126,12 +126,8 @@ public class Match extends NBAData {
 						if(hasDetailData) { // 有详细信息再存入数据库
 							String date = dateFormat(cellData.get(0)); // 将读取下来的date转化成mysql标准格式
 							cellData.set(0, date);
-							System.out.println("-------------");
-							System.out.println(date);
-							System.out.println(maxDate);
-							System.out.println("-------------");
 							if(maxDate == null || maxDate.compareTo(date) < 0) {
-								// insertIntoMatchProfile(cellData, regularOrPlayoff); // 存储球队比赛数据
+								insertIntoMatchProfile(cellData, regularOrPlayoff); // 存储球队比赛数据
 								matchID++;
 							}
 						}
