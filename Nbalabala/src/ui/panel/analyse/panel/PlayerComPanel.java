@@ -57,17 +57,22 @@ public class PlayerComPanel extends Panel{
 		str = changeArray(service.getLineupNamesByAbbr("BOS"));
 		name2 = str[1];
 		addComboBox();
-		vo = service.getCompareData(name, name2,InferenceData.SCORE);
-		if (vo == null) {
-			bgImg = Images.NO_DATA;
-		} else {
-			addConclusion();
-			chart = new NewLineChart(vo);
-			this.add(chart);
-			button = new CompareButton[7];
-			addButton();
-			setEffect();
-			addLabel();
+		try {
+			vo = service.getCompareData(name, name2,InferenceData.SCORE);
+			if (vo == null) {
+//				bgImg = Images.NO_DATA;
+				//TODO 显示自己比赛太少无法显示
+			} else {
+				addConclusion();
+				chart = new NewLineChart(vo);
+				this.add(chart);
+				button = new CompareButton[7];
+				addButton();
+				setEffect();
+				addLabel();
+			}
+		} catch (Exception e) {
+			// TODO 显示对方球员参加比赛太少无法比较
 		}
 		this.setOpaque(false);
 		this.setBounds(0, 100, 1000, 490);
@@ -110,11 +115,15 @@ public class PlayerComPanel extends Panel{
 				}
 				name2 = str[index];
 				System.out.println(name+name2+CompareButton.current.getInferenceData());
-				vo = service.getCompareData(name, name2,CompareButton.current.getInferenceData());
-				area.setText(vo.getConclusion());
-				PlayerComPanel.this.remove(chart);
-				chart = new NewLineChart(vo);
-				PlayerComPanel.this.add(chart);
+				try {
+					vo = service.getCompareData(name, name2,CompareButton.current.getInferenceData());
+					area.setText(vo.getConclusion());
+					PlayerComPanel.this.remove(chart);
+					chart = new NewLineChart(vo);
+					PlayerComPanel.this.add(chart);
+				} catch (Exception e) {
+					// TODO 显示对方比赛太少无法比较
+				}
 				PlayerComPanel.this.repaint();
 			}
 			
@@ -187,10 +196,16 @@ public class PlayerComPanel extends Panel{
 					CompareButton.current.back();
 					CompareButton.current = (CompareButton) e.getSource();
 					PlayerComPanel.this.remove(chart);
-					vo = service.getCompareData(name,name2,CompareButton.current.getInferenceData());
-					chart = new NewLineChart(vo);
-					area.setText(vo.getConclusion());
-					PlayerComPanel.this.add(chart);
+					try {
+						vo = service.getCompareData(name,name2,CompareButton.current.getInferenceData());
+						chart = new NewLineChart(vo);
+						area.setText(vo.getConclusion());
+						PlayerComPanel.this.add(chart);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+						//TODO 显示对方比赛太少无法比较
+					}
 					PlayerComPanel.this.repaint();
 				}
 
