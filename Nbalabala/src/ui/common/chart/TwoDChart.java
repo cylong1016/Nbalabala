@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.Point;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -22,7 +23,7 @@ public class TwoDChart extends JTable {
 	
 	public static void main(String[] args) {
 		ArrayList<ClutchPO> cluthPOs = new ArrayList<ClutchPO>();
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i <= 10; i++) {
 			ClutchPO po = new ClutchPO("lsy", "2014-15");
 			po.clutchScore = i;
 			po.clutchTime = i / 10.0;
@@ -42,10 +43,6 @@ public class TwoDChart extends JTable {
 	/** serialVersionUID */
 	private static final long serialVersionUID = -3980137740237014807L;
 	
-	private int x;
-	private int y;
-	private int width;
-	private int height;
 	/** 图中点的大小，最好是偶数 */
 	private int dotSize = 6;
 	/** 圆点在panel上的的坐标 */
@@ -83,6 +80,8 @@ public class TwoDChart extends JTable {
 		maxScore = 0;
 		for(ClutchPO po : cluthPOs) { // 找到最大的得分
 			if(po.clutchScore > maxScore) {
+				DecimalFormat df = new DecimalFormat("#.00");
+				po.clutchScore = Double.parseDouble(df.format(po.clutchScore));
 				maxScore = po.clutchScore;
 			}
 		}
