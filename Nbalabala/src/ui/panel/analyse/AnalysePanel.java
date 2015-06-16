@@ -49,7 +49,7 @@ public class AnalysePanel extends BottomPanel{
 		str = changeArray(service.getLineupNamesByAbbr("BOS"));
 		addComboBox();
 		lastFive = new LastFivePanel();
-		allSeason = new AllSeasonPanel();
+		allSeason = new AllSeasonPanel(str[0]);
 		contri = new ContriPanel();
 		future =new FuturePanel(str[0]);
 		turn = new TurnPanel(str[0]);
@@ -156,6 +156,10 @@ public class AnalysePanel extends BottomPanel{
 				case 0:
 					break;
 				case 1:
+					AnalysePanel.this.remove(allSeason);
+					allSeason = new AllSeasonPanel(str[index]); 
+					AnalysePanel.this.add(allSeason);
+					AnalysePanel.this.repaint();
 					break;
 				case 2:
 					break;

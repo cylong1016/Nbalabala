@@ -215,6 +215,6 @@ public class TextCHN {
 
 	public static final String[] ANY_SELECT = {"得分","篮板","助攻","投篮命中率","三分命中率","罚球命中率","效率","GMSC",
 		"投篮效率","真实命中率"};
-	
+
 
 }
