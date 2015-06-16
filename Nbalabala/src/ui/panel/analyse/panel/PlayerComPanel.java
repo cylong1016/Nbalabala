@@ -128,6 +128,8 @@ public class PlayerComPanel extends Panel{
 					PlayerComPanel.this.remove(chart);
 					chart = new NewLineChart(vo);
 					PlayerComPanel.this.add(chart);
+					formerTeam.setText(vo.getThisName());
+					currentTeam.setText(vo.getThatName());
 				} catch (Exception e) {
 					// TODO 显示对方比赛太少无法比较
 				}
