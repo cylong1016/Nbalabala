@@ -6,6 +6,8 @@ package bl.analysisbl;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 import po.AdvancedDataPO;
 import po.ClutchPO;
 import po.MatchPlayerPO;
@@ -97,6 +99,7 @@ public class ValueAnalysis implements AnalysisBLService{
 		for (String name : lineup) {
 			result.add(advancedData.getClutchData(name, Constants.LATEST_SEASON_REGULAR));
 		}
+
 		return result;
 	}
 
@@ -153,17 +156,7 @@ public class ValueAnalysis implements AnalysisBLService{
 	}
 	
 	public static void main(String[]args) {
-//		AnalysisCompareVO compareVO = new ValueAnalysis().getCompareData
-//				("Kevin Love$01", "James Harden$01", InferenceData.SCORE);
-//		System.out.println(compareVO.conclusion);
-//		ForecastVO vo = new ValueAnalysis().getForecastData("Kobe Bryant$01", InferenceData.SCORE);
-//		System.out.println(vo.fromYear);
-//		System.out.println(vo.toYear);
-//		System.out.println(vo.conclusion);
-//		double [] curveY = vo.curveY;
-//		for (double d : curveY) {
-//			System.out.println(d);
-//		}
+System.out.println(new ValueAnalysis().getClutchData("DET").size());
 	}
 	//TODO 明显下降的球员：Steve Francis
 
