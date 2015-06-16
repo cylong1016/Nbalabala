@@ -142,6 +142,11 @@ public class UIConfig {
 	 public static final int TITLE_LABEL_H = 43;
 	 public static final int TITLE_LABEL_W = 141;
 	 
+	 /** 返回按钮的位置 */
 	 public static final int RETURN_X = 10;
 	 public static final int RETURN_Y = 26;
+	 
+	 /*----------------------------图表配置--------------------------------*/
+	 public static final Color CHAR_BG_COLOR = new Color(249, 249, 249);
+	 public static final int RIGHT_CHAR_X = 26;
 }

@@ -6,9 +6,11 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JTextArea;
 
+import ui.MyFont;
 import ui.UIConfig;
 import ui.common.jfreechart.LineChart;
 import ui.common.jfreechart.ScatterChart;
+import ui.common.label.MyLabel;
 import ui.common.panel.Panel;
 import ui.panel.analyse.button.FutureSelectButton;
 import ui.panel.analyse.button.TurnSelectButton;
@@ -34,42 +36,70 @@ public class TurnPanel extends Panel {
 	private String name;
 	private AnalysisBLService service = new ValueAnalysis();
 	private JTextArea area;
+	private MyLabel formerTeam, currentTeam;
+	private MyLabel startSeason, transSeason;
 	private AnalysisTransferVO vo;
+	
+	/** 结论的纵坐标 */
+	private static final int CONCLUSION_Y = 100;
+	private static final int CONCLUSION_X = 740;
 
 	public TurnPanel(String name) {
 		this.name = name;
-		vo = service.getTransferData(name, InferenceData.ASSIST);
+		vo = service.getTransferData(name, InferenceData.SCORE);
 		if(vo == null) {
 			//TODO 提示该球员没有转会
-		}else{
-			chart = new LineChart(vo);
-			this.add(chart);
-			button = new TurnSelectButton[10];
+		}else{	
+			
 			area = new JTextArea(vo.getConclusion());
 			area.setLineWrap(true);
 			area.setEditable(false);
-			area.setBounds(750, 220,200,200);
+			area.setBounds(CONCLUSION_X, CONCLUSION_Y + 200 ,200,200);
+			area.setFont(MyFont.YH_B);
 			area.setOpaque(false);
 			this.add(area);
+			
+			chart = new LineChart(vo);
+
+			this.add(chart);
+			button = new TurnSelectButton[10];
 			addButton();
 			setEffect();
+			
+			addLabel();
+			
+
 		}
 		this.setBounds(0, 100, 1000, 490);
 		this.repaint();
 	}
 
+	private void addLabel() {
+		formerTeam = new MyLabel(vo.getFormerAbbr());
+		formerTeam.setBounds(CONCLUSION_X, CONCLUSION_Y, width, height);
+		this.add(formerTeam);
+		
+		currentTeam = new MyLabel(vo.getCurrentAbbr());
+		currentTeam.setBounds(CONCLUSION_X, CONCLUSION_Y + inter_y, width, height);
+		this.add(currentTeam);
+		
+		startSeason = new MyLabel(vo.startSeason + " - " + vo.transferSeason);
+		startSeason.setBounds(CONCLUSION_X + width, CONCLUSION_Y, width, height);
+		this.add(startSeason);
+		
+		transSeason = new MyLabel(vo.transferSeason + " - " + vo.currentData);
+		transSeason.setBounds(CONCLUSION_X + width, CONCLUSION_Y + inter_y, width, height);
+		this.add(transSeason);
+	}
+
 	public void addButton() {
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < button.length; i++) {
 			button[i] = new TurnSelectButton(bt_x + i * inter_x, bt_y, width, height, utility.Constants.ANY_SELECT[i]);
+//			button[i] = new TurnSelectButton(bt_x, bt_y + i * inter_y, width, height, utility.Constants.ANY_SELECT[i]);
 			button[i].setInferenceData(InferenceData.values()[i]);
 			this.add(button[i]);
 		}
-		for (int i = 5; i < 10; i++) {
-			button[i] = new TurnSelectButton(bt_x + (i - 5) * inter_x, bt_y + inter_y, width, height,
-					utility.Constants.ANY_SELECT[i]);
-			button[i].setInferenceData(InferenceData.values()[i]);
-			this.add(button[i]);
-		}
+
 		TurnSelectButton.current = button[0];
 		addListener();
 	}

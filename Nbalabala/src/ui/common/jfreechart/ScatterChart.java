@@ -20,6 +20,8 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+import ui.MyFont;
+import ui.UIConfig;
 import ui.common.panel.Panel;
 import vo.ForecastVO;
 
@@ -74,16 +76,16 @@ public class ScatterChart extends Panel{
 	} 
 	 
 	public void drawScatterChart(JFreeChart scatterChart, String title, String noDataMsg) { 
+		scatterChart.setBackgroundPaint(UIConfig.CHAR_BG_COLOR);
 	    //title, legend, plot 三个部分设置字体的方法分别如下:   
 	       TextTitle textTitle = scatterChart.getTitle();   
 	       textTitle.setFont(new Font("宋体", Font.BOLD, 20));   
 	       LegendTitle legend = scatterChart.getLegend();   
 	       if (legend != null) 
 	       {   
-	           legend.setItemFont(new Font("宋体", Font.BOLD, 20)); 
+	           legend.setItemFont(MyFont.YH_L); 
 	       } 
 	       XYPlot xyplot = scatterChart.getXYPlot();   
-	       Plot plot = scatterChart.getPlot();
 	       xyplot.setNoDataMessage(noDataMsg);
 	       xyplot.setNoDataMessagePaint(Color.blue);  
 	       xyplot.setDomainGridlinePaint(Color.lightGray);//设置垂直网格线的颜色   
@@ -93,9 +95,8 @@ public class ScatterChart extends Panel{
 	       
 //	       XYBoxAnnotation box = new XYBoxAnnotation(0, 0, datas.size(),100); 
 //	       xyplot.addAnnotation(box);
-	        xyplot.setBackgroundPaint(new Color(255, 253, 246));  
+	        xyplot.setBackgroundPaint(Color.WHITE);  
 	        xyplot.setForegroundAlpha((float) 0.5);
-	        ValueAxis vaaxis = xyplot.getDomainAxis();  
 	        ValueAxis va = xyplot.getDomainAxis(0);  
 	        	        
 	        va.setAxisLinePaint(new Color(215, 215, 215)); // 坐标轴颜色  

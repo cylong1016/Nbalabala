@@ -118,6 +118,7 @@ public class AllPlayersPanel extends BottomPanel {
 					}
 					
 				}
+
 			});
 		} catch (Exception e) {
 			e.printStackTrace();

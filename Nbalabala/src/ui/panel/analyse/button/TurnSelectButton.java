@@ -23,6 +23,7 @@ public class TurnSelectButton extends TextButton{
 	public TurnSelectButton(int x, int y, int width, int height, String text) {
 		super(x, y, width, height, text);
 		this.text = text;
+
 	}
 	public InferenceData getInferenceData() {
 		return inferenceData;

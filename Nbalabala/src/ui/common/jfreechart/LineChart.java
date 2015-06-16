@@ -1,6 +1,8 @@
 package ui.common.jfreechart;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -9,11 +11,14 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.block.ColorBlock;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.ui.RectangleEdge;
 
+import ui.MyFont;
 import ui.UIConfig;
 import ui.common.panel.Panel;
 import utility.Constants;
@@ -39,9 +44,9 @@ public class LineChart extends Panel{
 		formerData = vo.getFormerData();
 		currentData = vo.getCurrentData();
 		JPanel panel = new ChartPanel(createLineChart());
-		panel.setSize(700, 400);
+		panel.setSize(600, 400); // 图表的大小 
 		this.add(panel); // 将chart对象放入Panel面板中去，ChartPanel类已继承Jpanel
-		this.setBounds(20, 90, 700, 400);
+		this.setBounds(20, 70, 700, 400); // 图表的位置
 		this.repaint();
 	}
 	
@@ -60,19 +65,40 @@ public class LineChart extends Panel{
         JFreeChart chart = ChartFactory.createLineChart("球员转会图", "比赛组数", "数据",  
                 dataset, PlotOrientation.VERTICAL, true, true, true);  
         
+//        chart.getLegend().setPosition(RectangleEdge.RIGHT);  //  图例居右
+        
+        chart.setBackgroundPaint(UIConfig.CHAR_BG_COLOR); // 图表外的背景色
+        chart.getTitle().setFont( MyFont.YH_B); // 图表标题的字体
+        
         CategoryPlot categoryplot = (CategoryPlot) chart.getPlot();
         LineAndShapeRenderer lineandshaperenderer = (LineAndShapeRenderer) categoryplot.getRenderer();
         lineandshaperenderer.setBaseShapesVisible(true); // series 点（即数据点）可见
         lineandshaperenderer.setBaseLinesVisible(true); // series 点（即数据点）间有连线可见
- 
-        categoryplot.setRangeGridlinePaint(Color.white);// 虚线色彩
-        categoryplot.setDomainGridlinePaint(Color.white);// 虚线色彩
-        categoryplot.setBackgroundPaint(Color.lightGray);//背景颜色
+        
+        lineandshaperenderer.setDrawOutlines(true);  
+        lineandshaperenderer.setUseFillPaint(true);  
+        lineandshaperenderer.setBaseFillPaint(Color.white);
+        
+        // 设置折线加粗  
+//        lineandshaperenderer.setSeriesStroke(1, new BasicStroke(3F));  
+//        lineandshaperenderer.setSeriesOutlineStroke(1, new BasicStroke(2.0F));  
+        // 设置折线拐点  
+//        lineandshaperenderer.setSeriesShape(0,  
+//                new java.awt.geom.Ellipse2D.Double(-5D, -5D, 10D, 10D)); 
+        
+//        categoryplot.setForegroundAlpha(0.5f);
+        categoryplot.setRangeGridlinePaint(Color.gray);// 虚线色彩
+        categoryplot.setDomainGridlinePaint(Color.gray);// 虚线色彩
+        categoryplot.setBackgroundPaint(Color.white);//背景颜色
+        
         CategoryAxis domainAxis = categoryplot.getDomainAxis();
         
         domainAxis.setLabelFont(UIConfig.FONT);// 轴标题
- 
         domainAxis.setTickLabelFont(UIConfig.FONT);// 轴数值
+        
+        domainAxis.setAxisLinePaint(new Color(215, 215, 215)); // 坐标轴颜色  
+        domainAxis.setLabelPaint(new Color(10, 10, 10)); // 坐标轴标题颜色  
+        domainAxis.setTickLabelPaint(new Color(102, 102, 102)); // 坐标轴标尺值颜色  
  
         return chart;
     }  
