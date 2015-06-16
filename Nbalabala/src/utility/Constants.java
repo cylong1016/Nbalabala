@@ -384,6 +384,10 @@ public class Constants {
 	
 	public static String[] ANY_SELECT = TextCHN.ANY_SELECT;
 	
+	public static String[] SCATTER_CHART = TextCHN.SCATTER_CHART;
+	
+	public static String[] LINE_CHART = TextCHN.LINE_CHART;
+	
 	public static String translateDivision(ScreenDivision division) {
 		return translater.translateTeamDivision(division);
 	}

@@ -19,6 +19,7 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import ui.common.panel.Panel;
+import utility.Constants;
 import vo.ForecastVO;
 
 
@@ -65,7 +66,8 @@ public class ScatterChart extends Panel{
 	
 	//生成图表对象 
 	public JFreeChart createChart() { 
-	    JFreeChart scatterChart = ChartFactory.createScatterPlot("球员走向图", "比赛组数", "数据", samplexydataset2(), PlotOrientation.VERTICAL, true, false, false);  
+	    JFreeChart scatterChart = ChartFactory.createScatterPlot(Constants.SCATTER_CHART[0],
+	    		Constants.SCATTER_CHART[1],Constants.SCATTER_CHART[2],samplexydataset2(), PlotOrientation.VERTICAL, true, false, false);  
 	    drawScatterChart(scatterChart, "", "");
 	    return scatterChart; 
 	} 
