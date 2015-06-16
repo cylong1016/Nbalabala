@@ -136,6 +136,8 @@ public class Constants {
 		
 		ot = TextCHN.ot;
 		
+		today = TextCHN.today;
+		
 		
  	}
 	
@@ -253,6 +255,8 @@ public class Constants {
 		ret = TextENG.ret;
 		
 		playerContrastColumns = TextENG.playerContrastColumns;
+		
+		today = TextENG.today;
 	}
 	
 
@@ -673,6 +677,8 @@ public class Constants {
 	public static String playerPosition = TextCHN.playerPosition;
 	public static String playerDivision = TextCHN.playerDivision;
 	public static String screenSelection = TextCHN.screenSelection;
+	
+	public static String today = TextCHN.today;
 	
 	public static String translateHeight(String height){
 		return translater.translateHeight(height);

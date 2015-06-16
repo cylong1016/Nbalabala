@@ -94,6 +94,7 @@ public class TextENG {
 	public static String game = "Schedule";
 	public static String ret = "Back";
 	
+	public static String today = "today";
 	
 	public static String [] playerContrastColumns = {"Points", "Rebound", "Assist", "FT%", "3P%"};
 	
@@ -162,6 +163,8 @@ public class TextENG {
 		{"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
 	
 	public static String[] teamLineupHeaders = new String[] {"Name", "Pos", "Age","Exp","Height","Weight","Birth","School"};
+
+	
 	
 	public static final String [] TEAM_NAMES = {"Celtics", "Nets", "Knicks", "76ers", 
 		"Raptors", "Bulls", "Cavaliers", "Pistons", "Pacers", "Bucks", "Hawks", "Hornets", 

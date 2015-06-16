@@ -42,9 +42,13 @@ public class MyFont{
 	/** 数据王2345名的名字 */
 	public static final Font YT_M = new Font("方正姚体", Font.PLAIN, 20);
 	/** 大的胜负场数、数据王2345名的数据、第一名的名字 */
+	
+	public static final Font YT_26 = new Font("方正姚体", Font.PLAIN, 26);
 	public static final Font YT_L = new Font("方正姚体", Font.PLAIN, 32);
 	/** 数据王第一名的分数 */
 	public static final Font YT_XL = new Font("方正姚体", Font.PLAIN, 36);
+	
+	public static final Font YT_XXL = new Font("方正姚体", Font.PLAIN, 70);
 	 
 	public static final Font Arial_S = new Font("ArialMT", Font.PLAIN, 12);
 	public static final Font Arial_B = new Font("ArialMT", Font.PLAIN, 14);

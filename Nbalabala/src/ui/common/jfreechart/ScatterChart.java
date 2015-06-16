@@ -45,9 +45,9 @@ public class ScatterChart extends Panel{
 		x = vo.getCurveX();
 		y = vo.getCurveY();
 		JPanel panel = new ChartPanel(createChart());
-		panel.setSize(700, 400);
+		panel.setSize(UIConfig.CHAR_WIDTH, UIConfig.CHAR_HEIGHT);
 		this.add(panel); // 将chart对象放入Panel面板中去，ChartPanel类已继承Jpanel
-		this.setBounds(20, 90, 700, 400);
+		this.setBounds(UIConfig.CHAR_X, UIConfig.CHAR_Y, 700, 400);
 		this.repaint();
 	}
 	
@@ -77,12 +77,12 @@ public class ScatterChart extends Panel{
 	public void drawScatterChart(JFreeChart scatterChart, String title, String noDataMsg) { 
 		scatterChart.setBackgroundPaint(UIConfig.CHAR_BG_COLOR);
 	    //title, legend, plot 三个部分设置字体的方法分别如下:   
-	       TextTitle textTitle = scatterChart.getTitle();   
-	       textTitle.setFont(new Font("宋体", Font.BOLD, 20));   
+	       TextTitle textTitle = scatterChart.getTitle();
+	       textTitle.setFont(MyFont.YH_B);  // 图表标题的字体
 	       LegendTitle legend = scatterChart.getLegend();   
 	       if (legend != null) 
 	       {   
-	           legend.setItemFont(MyFont.YH_L); 
+	           legend.setItemFont(MyFont.YH_S); 
 	       } 
 	       XYPlot xyplot = scatterChart.getXYPlot();   
 	       xyplot.setNoDataMessage(noDataMsg);

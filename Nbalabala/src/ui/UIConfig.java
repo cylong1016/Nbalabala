@@ -148,5 +148,17 @@ public class UIConfig {
 	 
 	 /*----------------------------图表配置--------------------------------*/
 	 public static final Color CHAR_BG_COLOR = new Color(249, 249, 249);
+	 
 	 public static final int RIGHT_CHAR_X = 26;
+	 
+	 public static final int CHAR_WIDTH = 600;
+	 public static final int CHAR_HEIGHT = 400;
+	 
+	 public static final int CHAR_X = 20;
+	 public static final int CHAR_Y = 70;
+
+		
+	 public static final int CONCLUSION_Y = 128;
+	 public static final int CONCLUSION_X = 687;
+
 }

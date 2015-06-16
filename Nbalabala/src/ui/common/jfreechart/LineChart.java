@@ -40,9 +40,9 @@ public class LineChart extends Panel{
 		formerData = vo.getFormerData();
 		currentData = vo.getCurrentData();
 		JPanel panel = new ChartPanel(createLineChart());
-		panel.setSize(600, 400); // 图表的大小 
+		panel.setSize(UIConfig.CHAR_WIDTH, UIConfig.CHAR_HEIGHT); // 图表的大小 
 		this.add(panel); // 将chart对象放入Panel面板中去，ChartPanel类已继承Jpanel
-		this.setBounds(20, 70, 700, 400); // 图表的位置
+		this.setBounds(UIConfig.CHAR_X, UIConfig.CHAR_Y, 700, 400); // 图表的位置
 		this.repaint();
 	}
 	

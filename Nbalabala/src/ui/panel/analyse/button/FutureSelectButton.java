@@ -24,6 +24,7 @@ public class FutureSelectButton extends TextButton{
 		super(x, y, width, height, text);
 		this.text = text;
 	}
+
 	
 	public InferenceData getInferenceData() {
 		return inferenceData;

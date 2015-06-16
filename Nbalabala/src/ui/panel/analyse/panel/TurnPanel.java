@@ -14,6 +14,7 @@ import ui.common.jfreechart.LineChart;
 import ui.common.label.MyLabel;
 import ui.common.panel.Panel;
 import ui.panel.analyse.button.TurnSelectButton;
+import utility.Constants;
 import vo.AnalysisTransferVO;
 import bl.analysisbl.ValueAnalysis;
 import blservice.AnalysisBLService;
@@ -31,7 +32,7 @@ public class TurnPanel extends Panel {
 	private static final long serialVersionUID = 97048605908825431L;
 	private LineChart chart;
 	private TurnSelectButton[] button;
-	private int bt_x = 20, bt_y = 20, inter_x = 120, inter_y = 33, width = 80, height = 25;
+	private int bt_x = 31, bt_y = 16, inter_x = 100, width = 80, height = 30;
 	private String name;
 	private AnalysisBLService service = new ValueAnalysis();
 	private JTextArea area;
@@ -40,8 +41,12 @@ public class TurnPanel extends Panel {
 	private AnalysisTransferVO vo;
 	
 	/** 结论的纵坐标 */
-	private static final int CONCLUSION_Y = 100;
-	private static final int CONCLUSION_X = 740;
+	private static final int CONCLUSION_Y = UIConfig.CONCLUSION_Y;
+	private static final int CONCLUSION_X = UIConfig.CONCLUSION_X;
+	
+	private static final int TEAM_WID = 100;
+	private static final int TEAM_HEIGHT = 44;
+	private static final int SEASON_WID = 179;
 
 	public TurnPanel(String name) {
 		this.name = name;
@@ -50,18 +55,12 @@ public class TurnPanel extends Panel {
 			//TODO 提示该球员没有转会
 		}else{	
 			
-			area = new JTextArea(vo.getConclusion());
-			area.setLineWrap(true);
-			area.setEditable(false);
-			area.setBounds(CONCLUSION_X, CONCLUSION_Y + 200 ,200,200);
-			area.setFont(MyFont.YH_B);
-			area.setOpaque(false);
-			this.add(area);
+			addConclusion();
 			
 			chart = new LineChart(vo);
 
 			this.add(chart);
-			button = new TurnSelectButton[10];
+			button = new TurnSelectButton[7];
 			addButton();
 			setEffect();
 			
@@ -74,29 +73,52 @@ public class TurnPanel extends Panel {
 		this.repaint();
 	}
 
+	private void addConclusion() {
+		area = new JTextArea(vo.getConclusion());
+		area.setLineWrap(true);
+		area.setEditable(false);
+		area.setBounds(CONCLUSION_X, CONCLUSION_Y + 200 ,200,200);
+		area.setFont(MyFont.YH_B);
+		area.setOpaque(false);
+		this.add(area);
+		
+	}
+
 	private void addLabel() {
 		formerTeam = new MyLabel(vo.getFormerAbbr());
-		formerTeam.setBounds(CONCLUSION_X, CONCLUSION_Y, width, height);
+		formerTeam.setBounds(CONCLUSION_X, CONCLUSION_Y, TEAM_WID, TEAM_HEIGHT);
+		formerTeam.setFont(MyFont.YT_M);
+		formerTeam.setForeground(Color.WHITE);
+		formerTeam.setCenter();
 		this.add(formerTeam);
 		
 		currentTeam = new MyLabel(vo.getCurrentAbbr());
-		currentTeam.setBounds(CONCLUSION_X, CONCLUSION_Y + inter_y, width, height);
+		currentTeam.setBounds(CONCLUSION_X, CONCLUSION_Y + TEAM_HEIGHT + 4, TEAM_WID, TEAM_HEIGHT);
+		currentTeam.setFont(MyFont.YT_M);
+		currentTeam.setForeground(Color.WHITE);
+		currentTeam.setCenter();
 		this.add(currentTeam);
 		
-		startSeason = new MyLabel(vo.startSeason + " - " + vo.transferSeason);
-		startSeason.setBounds(CONCLUSION_X + width, CONCLUSION_Y, width, height);
+		startSeason = new MyLabel(vo.startSeason + "  ~  " + vo.transferSeason);
+		startSeason.setBounds(CONCLUSION_X + TEAM_WID, CONCLUSION_Y, SEASON_WID, TEAM_HEIGHT);
+		startSeason.setCenter();
 		this.add(startSeason);
 		
-		transSeason = new MyLabel(vo.transferSeason + " - " + vo.currentData);
-		transSeason.setBounds(CONCLUSION_X + width, CONCLUSION_Y + inter_y, width, height);
+		transSeason = new MyLabel(vo.transferSeason + "  ~  " + Constants.today);
+		transSeason.setBounds(CONCLUSION_X + TEAM_WID, CONCLUSION_Y + TEAM_HEIGHT + 4, SEASON_WID, TEAM_HEIGHT);
+		transSeason.setCenter();
 		this.add(transSeason);
 	}
 
 	public void addButton() {
-		for (int i = 0; i < button.length; i++) {
+		for (int i = 0; i < 3; i++) {
 			button[i] = new TurnSelectButton(bt_x + i * inter_x, bt_y, width, height, utility.Constants.ANY_SELECT[i]);
-//			button[i] = new TurnSelectButton(bt_x, bt_y + i * inter_y, width, height, utility.Constants.ANY_SELECT[i]);
 			button[i].setInferenceData(InferenceData.values()[i]);
+			this.add(button[i]);
+		}
+		for (int i = 3; i < button.length; i++) {
+			button[i] = new TurnSelectButton(bt_x + i * inter_x, bt_y, width, height, utility.Constants.ANY_SELECT[i + 3]);
+			button[i].setInferenceData(InferenceData.values()[i + 3]);
 			this.add(button[i]);
 		}
 

@@ -48,4 +48,8 @@ public class MyLabel extends JLabel {
 	public void setRight(){
 		this.setHorizontalAlignment(RIGHT);
 	}
+	
+	public void setCenter(){
+		this.setHorizontalAlignment(CENTER);
+	}
 }

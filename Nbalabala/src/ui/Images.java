@@ -115,6 +115,7 @@ public class Images {
 	public static final String RETURN_BTN_ON = "images2.0/returnBtnOn.png";
 	
 	public static final Image TRANS_BG = new ImageIcon("images2.0/analysis/TransBG.png").getImage();
+	public static final Image FUTURE_BG = new ImageIcon("images2.0/analysis/FutureBG.png").getImage();
 
 
 }

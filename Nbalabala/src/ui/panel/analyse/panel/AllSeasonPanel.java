@@ -26,7 +26,7 @@ public class AllSeasonPanel extends Panel{
 	private String name;
 	private BoxChart chart;
 	private SeasonSelectButton[] button;
-	private int bt_x = 20, bt_y = 20, inter_x = 120, width = 80, height = 25;
+	private int bt_x = 31, bt_y = 16, inter_x = 100, width = 80, height = 30;
 	private AnalysisBLService service = new ValueAnalysis();
 	private ArrayList<AnalysisCareerVO> vo;
 	

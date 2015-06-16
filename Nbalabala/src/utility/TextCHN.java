@@ -182,6 +182,8 @@ public class TextCHN {
 	public static String history = "交手历史";
 	public static String waitlive = "等待直播";
 	public static String tolive = "进入直播";
+
+	public static String today = "今日";
 	
 	
 	public static final String [] TEAM_ABBR = {"BOS","BRK","NYK","PHI","TOR","CHI","CLE","DET","IND","MIL","ATL","CHO","MIA","ORL","WAS",
