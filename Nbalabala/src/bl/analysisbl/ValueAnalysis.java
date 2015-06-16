@@ -119,7 +119,8 @@ public class ValueAnalysis implements AnalysisBLService{
 	public ForecastVO getForecastData(String name, InferenceData inferenceData) {
 		loadMatches(name);
 		DivideHandler divideHandler = new DivideHandler();
-		ArrayList<Double> data = divideHandler.divideData(matches, inferenceData, matches.size());
+		ArrayList<MatchPlayerPO> partMatches = new ArrayList<MatchPlayerPO>(matches.subList(matches.size()/4, matches.size())); //TODO
+		ArrayList<Double> data = divideHandler.divideData(partMatches, inferenceData, matches.size());
 		RegressionHandler regression;
 		try {
 			regression = new RegressionHandler(data);
