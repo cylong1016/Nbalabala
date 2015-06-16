@@ -21,13 +21,13 @@ import ui.UIConfig;
 @SuppressWarnings("serial")
 public class TableAutoWrapRenderer extends JTextArea implements TableCellRenderer {
 	
-	private int wrapColumnWidth = 0;
+	// private int wrapColumnWidth = 0;
 	private int row = 0;
 	
     public TableAutoWrapRenderer(int width) { 
     	setOpaque(false);
         setLineWrap(true); 
-        wrapColumnWidth = width;
+        // wrapColumnWidth = width;
         setFont(UIConfig.TABLE_FONT);
         setAlignmentX(JTextArea.CENTER_ALIGNMENT);
         setAlignmentY(JTextArea.CENTER_ALIGNMENT);
