@@ -22,7 +22,7 @@ public class MyFont{
 	public static Font HiraginoB;
 	static{
 		try {
-	        java.io.FileInputStream fi = new java.io.FileInputStream(new File("Hiragino.ttf"));
+	        java.io.FileInputStream fi = new java.io.FileInputStream(new File("font/Hiragino.ttf"));
 	        java.io.BufferedInputStream fb = new java.io.BufferedInputStream(fi);
 	        Font nf = Font.createFont(Font.TRUETYPE_FONT, fb);
 	        HiraginoXS = nf.deriveFont(Font.PLAIN, 12);
@@ -48,7 +48,7 @@ public class MyFont{
 	/** 数据王第一名的分数 */
 	public static final Font YT_XL = new Font("方正姚体", Font.PLAIN, 36);
 	
-	public static final Font YT_XXL = new Font("方正姚体", Font.PLAIN, 70);
+	public static final Font YT_XXL = new Font("方正姚体", Font.PLAIN, 65);
 	 
 	public static final Font Arial_S = new Font("ArialMT", Font.PLAIN, 12);
 	public static final Font Arial_B = new Font("ArialMT", Font.PLAIN, 14);

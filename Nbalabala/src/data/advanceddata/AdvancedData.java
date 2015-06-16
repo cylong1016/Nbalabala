@@ -2,6 +2,7 @@
  * 
  */
 package data.advanceddata;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,17 +11,17 @@ import java.sql.SQLException;
 import po.AdvancedDataPO;
 import po.ClutchPO;
 import data.Database;
+import dataservice.AdvancedDataService;
 
 /**
- *
  * @author Issac Ding
  * @since 2015年6月15日 下午9:19:00
  * @version 1.0
  */
-public class AdvancedData {
-	
+public class AdvancedData implements AdvancedDataService {
+
 	private Connection conn = Database.conn;
-	
+
 	public AdvancedDataPO getAdvancedData(String playerName, String season) {
 		PreparedStatement ps;
 		try {
@@ -37,7 +38,7 @@ public class AdvancedData {
 				po.rpm = rs.getFloat(7);
 				po.war = rs.getFloat(8);
 				return po;
-			}else {
+			} else {
 				return new AdvancedDataPO(playerName, season);
 			}
 		} catch (SQLException e) {
@@ -45,7 +46,7 @@ public class AdvancedData {
 			return new AdvancedDataPO(playerName, season);
 		}
 	}
-	
+
 	public ClutchPO getClutchData(String playerName, String season) {
 		PreparedStatement ps;
 		try {
@@ -53,12 +54,12 @@ public class AdvancedData {
 			ps.setString(1, playerName);
 			ps.setString(2, season);
 			ResultSet rs = ps.executeQuery();
-			if(rs.next()) {
-				ClutchPO po = new ClutchPO(rs.getString(1),rs.getString(2));
+			if (rs.next()) {
+				ClutchPO po = new ClutchPO(rs.getString(1), rs.getString(2));
 				po.clutchTime = rs.getFloat(3);
 				po.clutchScore = rs.getFloat(4);
 				return po;
-			}else {
+			} else {
 				return new ClutchPO(playerName, season);
 			}
 		} catch (SQLException e) {

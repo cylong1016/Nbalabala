@@ -33,9 +33,9 @@ public class TurnPanel extends Panel {
 	private static final long serialVersionUID = 97048605908825431L;
 	private LineChart chart;
 	private TurnSelectButton[] button;
-	private int bt_x = 31, bt_y = 16, inter_x = 100, width = 80, height = 30;
 	private String name;
 	private AnalysisBLService service = new ValueAnalysis();
+	private int bt_x = 31, bt_y = 16, inter_x = 100, width = 80, height = 30;
 	private JTextArea area;
 	private MyLabel formerTeam, currentTeam;
 	private MyLabel startSeason, transSeason;
@@ -78,7 +78,14 @@ public class TurnPanel extends Panel {
 	}
 
 	private void addConclusion() {
-		area = new JTextArea(vo.getConclusion());
+
+		// 90%把握认为（球员）此数据
+		String conclusion[] = vo.getConclusion().split(" ");
+//		if (condition) {
+//			
+//		}
+		area = new JTextArea(conclusion[0] + "90%把握认为" + '\n' + "此数据" + conclusion[1]);
+		
 		area.setLineWrap(true);
 		area.setEditable(false);
 		area.setBounds(CONCLUSION_X, CONCLUSION_Y + 200 ,200,200);
@@ -142,7 +149,8 @@ public class TurnPanel extends Panel {
 					TurnPanel.this.remove(chart);
 					vo = service.getTransferData(name,TurnSelectButton.current.getInferenceData());
 					chart = new LineChart(vo);
-					area.setText(vo.getConclusion());
+					String conclusion[] = vo.getConclusion().split(" ");
+					area.setText(conclusion[0] + "90%把握认为" + '\n' + "此数据" + conclusion[1]);
 					TurnPanel.this.add(chart);
 					TurnPanel.this.repaint();
 				}

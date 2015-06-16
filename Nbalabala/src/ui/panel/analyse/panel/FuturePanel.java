@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -39,6 +40,8 @@ public class FuturePanel extends Panel {
 	private FutureSelectButton[] button;
 	private ForecastVO vo;
 	
+	DecimalFormat format = UIConfig.FORMAT;
+	
 	private Image bgImg = Images.FUTURE_BG;
 	
 	private MyLabel startSeason, endSeason, widthSeason;
@@ -69,30 +72,32 @@ public class FuturePanel extends Panel {
 	}
 
 	private void addLabel() {
-		JTextArea seasonText = new JTextArea("自" + '\n' + '\n' + '\n' + "至");
+		JTextArea seasonText = new JTextArea("自" + '\n' + '\n' + "至");
 		seasonText.setLineWrap(true);
 		seasonText.setEditable(false);
 		seasonText.setOpaque(false);
 		seasonText.setBounds(CONCLUSION_X + 5, CONCLUSION_Y + 12, 100, SEASON_HEIGHT);
+		seasonText.setFont(MyFont.YH_S);
 		this.add(seasonText);
 		
 		startSeason = new MyLabel(vo.getFromseason());
-		startSeason.setBounds(CONCLUSION_X + 25, CONCLUSION_Y - 27, SEASON_WID, SEASON_HEIGHT);
-		startSeason.setFont(MyFont.YT_26);
+		startSeason.setBounds(CONCLUSION_X + 25, CONCLUSION_Y - 25, SEASON_WID, SEASON_HEIGHT);
+		startSeason.setFont(MyFont.YT_M);
 		this.add(startSeason);
 		
 		endSeason = new MyLabel(vo.getToseason());
-		endSeason.setBounds(CONCLUSION_X + 25, CONCLUSION_Y + 25, SEASON_WID, SEASON_HEIGHT);
-		endSeason.setFont(MyFont.YT_26);
+		endSeason.setBounds(CONCLUSION_X + 25, CONCLUSION_Y + 13, SEASON_WID, SEASON_HEIGHT);
+		endSeason.setFont(MyFont.YT_M);
 		this.add(endSeason);
 		
-		JLabel widthText = new JLabel("比赛/组");
-		widthText.setBounds(CONCLUSION_X + SEASON_WID + 90, CONCLUSION_Y + 35, SEASON_WID, SEASON_HEIGHT);
-		widthText.setForeground(Color.WHITE);
+		JLabel widthText = new JLabel( vo.getWidth() + "比赛/组");
+		widthText.setBounds(CONCLUSION_X + 50, CONCLUSION_Y + 33, SEASON_WID, SEASON_HEIGHT);
+		widthText.setFont(MyFont.YH_S);
+//		widthText.setForeground(Color.WHITE);
 		this.add(widthText);
 		
-		widthSeason = new MyLabel("" + (int)vo.getWidth());
-		widthSeason.setBounds(CONCLUSION_X + SEASON_WID - 20, CONCLUSION_Y, SEASON_WID, SEASON_HEIGHT);
+		widthSeason = new MyLabel(format.format(vo.getNextY()));
+		widthSeason.setBounds(CONCLUSION_X + SEASON_WID, CONCLUSION_Y, SEASON_WID, SEASON_HEIGHT);
 		widthSeason.setFont(MyFont.YT_XXL);
 		widthSeason.setForeground(Color.WHITE);
 		widthSeason.setCenter();
@@ -143,6 +148,7 @@ public class FuturePanel extends Panel {
 					vo = service.getForecastData(name, FutureSelectButton.current.getInferenceData());
 					chart = new ScatterChart(vo);
 					area.setText(vo.getConclusion());
+					widthSeason.setText(format.format(vo.getNextY()));
 					FuturePanel.this.add(chart);
 					FuturePanel.this.repaint();
 				}

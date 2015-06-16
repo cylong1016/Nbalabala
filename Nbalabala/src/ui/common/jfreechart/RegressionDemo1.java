@@ -40,9 +40,14 @@ import enums.InferenceData;
  */
 public class RegressionDemo1 extends ApplicationFrame {
 
-    static class DemoPanel extends JPanel {
+    /** serialVersionUID */
+	private static final long serialVersionUID = 1L;
 
-        /** Dataset 1. */
+	static class DemoPanel extends JPanel {
+
+        /** serialVersionUID */
+		private static final long serialVersionUID = 1L;
+		/** Dataset 1. */
         private XYDataset data1;
         private AnalysisBLService service = new ValueAnalysis();
         /**

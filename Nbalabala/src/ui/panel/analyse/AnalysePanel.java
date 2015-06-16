@@ -16,6 +16,7 @@ import ui.panel.analyse.panel.AllSeasonPanel;
 import ui.panel.analyse.panel.ContriPanel;
 import ui.panel.analyse.panel.FuturePanel;
 import ui.panel.analyse.panel.LastFivePanel;
+import ui.panel.analyse.panel.PlayerComPanel;
 import ui.panel.analyse.panel.TurnPanel;
 import utility.Constants;
 import bl.analysisbl.ValueAnalysis;
@@ -39,6 +40,7 @@ public class AnalysePanel extends BottomPanel{
 	private ContriPanel contri;
 	private FuturePanel future;
 	private TurnPanel turn;
+	private PlayerComPanel compare;
 	private AnalysisBLService service;
 	private static int currentI;
 	
@@ -53,13 +55,15 @@ public class AnalysePanel extends BottomPanel{
 		contri = new ContriPanel("BOS",0);
 		future =new FuturePanel(str[0]);
 		turn = new TurnPanel(str[0]);
+		compare = new PlayerComPanel(str[0]);
 		currentPanel = lastFive;
 		addLabel();
 	}
 	
 	public void addLabel(){
-		select = new TabButton[5];
-		for(int i = 0 ;i < 5; i++) {
+		select = new TabButton[6];
+		for(int i = 0 ;i < 6; i++) {
+			System.out.println(i + " "+ Constants.ANALYSE.length);
 			select[i] = new TabButton(Constants.ANALYSE[i],Images.ANA_ON,Images.ANA_CLICK);
 			select[i].setLocation(19+116*i, 60);
 			this.add(select[i]);
@@ -67,14 +71,14 @@ public class AnalysePanel extends BottomPanel{
 			select[0].setOn();
 		}
 		
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 6; i++) {
 			select[i].addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					AnalysePanel.this.remove(currentPanel);
 					if(e.getSource() == select[0]){
 						currentI = 0;
 						currentPanel = lastFive;
-						for(int i = 0 ;i < 5; i++) {
+						for(int i = 0 ;i < 6; i++) {
 							select[i].setOff();
 						}
 						select[0].setOn();
@@ -82,7 +86,7 @@ public class AnalysePanel extends BottomPanel{
 					}else if(e.getSource() == select[1]){
 						currentI = 1;
 						currentPanel = allSeason;
-						for(int i = 0 ;i < 5; i++) {
+						for(int i = 0 ;i < 6; i++) {
 							select[i].setOff();
 						}
 						select[1].setOn();
@@ -90,7 +94,7 @@ public class AnalysePanel extends BottomPanel{
 					}else if(e.getSource() == select[2]){
 						currentI = 2;
 						currentPanel = contri;
-						for(int i = 0 ;i < 5; i++) {
+						for(int i = 0 ;i < 6; i++) {
 							select[i].setOff();
 						}
 						select[2].setOn();
@@ -98,7 +102,7 @@ public class AnalysePanel extends BottomPanel{
 					}else if(e.getSource() == select[3]){
 						currentI = 3;
 						currentPanel = future;
-						for(int i = 0 ;i < 5; i++) {
+						for(int i = 0 ;i < 6; i++) {
 							select[i].setOff();
 						}
 						select[3].setOn();
@@ -106,10 +110,18 @@ public class AnalysePanel extends BottomPanel{
 					}else if(e.getSource() == select[4]){
 						currentI = 4;
 						currentPanel = turn;
-						for(int i = 0 ;i < 5; i++) {
+						for(int i = 0 ;i < 6; i++) {
 							select[i].setOff();
 						}
 						select[4].setOn();
+						AnalysePanel.this.add(currentPanel);
+					}else if(e.getSource() == select[5]){
+						currentI = 5;
+						currentPanel = compare;
+						for(int i = 0 ;i < 6; i++) {
+							select[i].setOff();
+						}
+						select[5].setOn();
 						AnalysePanel.this.add(currentPanel);
 					}
 					AnalysePanel.this.repaint();
@@ -178,6 +190,8 @@ public class AnalysePanel extends BottomPanel{
 					turn = new TurnPanel(str[index]); 
 					AnalysePanel.this.add(turn);
 					AnalysePanel.this.repaint();
+					break;
+				case 5:
 					break;
 				}
 			}
