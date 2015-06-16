@@ -60,7 +60,6 @@ public class PlayerComPanel extends Panel{
 		vo = service.getCompareData(name, name2,InferenceData.SCORE);
 		if (vo == null) {
 			bgImg = Images.NO_DATA;
-			//TODO 显示没有走向分析
 		} else {
 			addConclusion();
 			chart = new NewLineChart(vo);
