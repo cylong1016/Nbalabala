@@ -2,8 +2,6 @@ package ui.common.jfreechart;
 
 import javax.swing.JFrame;
 
-import enums.CareerData;
-import enums.InferenceData;
 import ui.UIConfig;
 import bl.analysisbl.ValueAnalysis;
 import blservice.AnalysisBLService;
@@ -24,8 +22,8 @@ public class Test extends JFrame{
 	
 	public static void main(String[] args){
 		AnalysisBLService service = new ValueAnalysis();
-		String[] name = {"Allen Iverson","James Peter","Kobe Byrant","CYL"};
-		double[] num = {35.4,18.3,26,30.4};
+//		String[] name = {"Allen Iverson","James Peter","Kobe Byrant","CYL"};
+//		double[] num = {35.4,18.3,26,30.4};
 		BarChart chart = new BarChart(service.getDevotionData("BOS"),0,2);
 //		LineChart chart = new LineChart(name,name,num);
 //		ScatterChart chart = new ScatterChart(service.getForecastData("LeBron James", InferenceData.ASSIST));

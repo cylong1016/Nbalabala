@@ -6,8 +6,6 @@ package bl.analysisbl;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 import po.AdvancedDataPO;
 import po.ClutchPO;
 import po.MatchPlayerPO;

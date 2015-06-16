@@ -113,7 +113,6 @@ public class PlayerComPanel extends Panel{
 					index = 0;
 				}
 				name2 = str[index];
-				System.out.println(name+name2+CompareButton.current.getInferenceData());
 				try {
 					vo = service.getCompareData(name, name2,CompareButton.current.getInferenceData());
 					area.setText(vo.getConclusion());
