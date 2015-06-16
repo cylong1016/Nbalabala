@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import po.MatchPlayerPO;
 import ui.Images;
 import ui.UIConfig;
+import ui.common.button.ImgButton;
 import ui.common.button.TabButton;
 import ui.common.panel.Panel;
 import ui.common.table.BottomScrollPane;
+import ui.controller.MainController;
 import utility.Constants;
 import vo.MatchDetailVO;
 
@@ -64,14 +66,14 @@ public class GamePanel extends GameFatherPanel {
 	
 
 	public void addBack() {
-//		back = new ImgButton(UIConfig.IMG_PATH + "back.png", 70, 150, UIConfig.IMG_PATH + "backOn.png", UIConfig.IMG_PATH + "back.png");
-//		this.add(back);
-//		back.addMouseListener(new MouseAdapter() {
-//			public void mousePressed(MouseEvent e) {
-//				MainController.backToOnePanel(gameData);
-//			}
-//
-//		});
+		back = new ImgButton(UIConfig.IMG_PATH + "back.png", 70, 150, UIConfig.IMG_PATH + "backOn.png", UIConfig.IMG_PATH + "back.png");
+		this.add(back);
+		back.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				MainController.backToOnePanel(gameData);
+			}
+
+		});
 	}
 
 
