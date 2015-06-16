@@ -62,11 +62,11 @@ public class TAnalyzer {
 	public String getTransferConclusion() {
 		String conclusion = null;
 		if (left > 0 && right > 0) {
-			conclusion = "有 有显著提升";
+			conclusion = "有90%把握认为该球员此数据有显著提升";
 		}else if (left < 0 && right < 0) {
-			conclusion = "有 有显著下降";
+			conclusion = "有90%把握认为该球员此数据有显著下降";
 		}else {
-			conclusion = "无 有显著变化";
+			conclusion = "无90%把握认为该球员此数据有显著变化";
 		}
 		return conclusion;
 	}

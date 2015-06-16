@@ -114,11 +114,14 @@ public class Images {
 	public static final String RETURN_BTN = "images2.0/returnBtn.png";
 	public static final String RETURN_BTN_ON = "images2.0/returnBtnOn.png";
 	
+	/** 分析界面 */
 	public static final Image TRANS_BG = new ImageIcon("images2.0/analysis/TransBG.png").getImage();
 	public static final Image FUTURE_BG = new ImageIcon("images2.0/analysis/FutureBG.png").getImage();
 	public static final Image BG_IMAGE = new ImageIcon("images2.0/analysis/BG.png").getImage();
 	
 	public static final Image NO_TRANS = new ImageIcon("images2.0/analysis/noTrans.png").getImage();
 	public static final Image NO_DATA = new ImageIcon("images2.0/analysis/tooLess.png").getImage();
-
+	
+	public static final Image COMED_LESS = new ImageIcon("images2.0/analysis/comparedLess.png").getImage();
+	public static final Image COMING_LESS = new ImageIcon("images2.0/analysis/comparingLess.png").getImage();
 }

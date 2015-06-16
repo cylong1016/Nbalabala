@@ -58,7 +58,6 @@ public class FuturePanel extends Panel {
 		vo = service.getForecastData(name, InferenceData.SCORE);
 		if (vo == null) {
 			bgImg = Images.NO_DATA;
-			//TODO 显示没有走向分析
 		} else {
 			chart = new ScatterChart(vo);
 			this.add(chart);
@@ -113,7 +112,9 @@ public class FuturePanel extends Panel {
 		area = new JTextArea(vo.getConclusion());
 		area.setLineWrap(true);
 		area.setEditable(false);
-		area.setBounds(CONCLUSION_X, CONCLUSION_Y + 200, 200, 200);
+		area.setBounds(CONCLUSION_X, CONCLUSION_Y + 150, 290, 200);
+		area.setForeground(UIConfig.BLUE_TEXT_COLOR);
+		area.setFont(MyFont.YH_L);
 		area.setOpaque(false);
 		this.add(area);
 	}
