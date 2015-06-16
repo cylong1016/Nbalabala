@@ -48,9 +48,9 @@ public class AnalysePanel extends BottomPanel{
 //		this.team = Constants.translateTeamAbbr(teamAbbr);
 		str = changeArray(service.getLineupNamesByAbbr("BOS"));
 		addComboBox();
-		lastFive = new LastFivePanel();
+		lastFive = new LastFivePanel(str[0]);
 		allSeason = new AllSeasonPanel(str[0]);
-		contri = new ContriPanel();
+		contri = new ContriPanel(str[0]);
 		future =new FuturePanel(str[0]);
 		turn = new TurnPanel(str[0]);
 		currentPanel = lastFive;

@@ -10,7 +10,6 @@ import ui.UIConfig;
 import ui.common.jfreechart.ScatterChart;
 import ui.common.panel.Panel;
 import ui.panel.analyse.button.FutureSelectButton;
-import ui.panel.hot.ThreeButton;
 import vo.ForecastVO;
 import bl.analysisbl.ValueAnalysis;
 import blservice.AnalysisBLService;
