@@ -170,9 +170,7 @@ public class MatchQuery implements MatchQueryBLService{
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(date.getTime());
 		int year = calendar.get(Calendar.YEAR);
-		System.out.println(year);
 		int month = calendar.get(Calendar.MONTH) + 1;
-		System.out.println(month);
 		int day = calendar.get(Calendar.DAY_OF_MONTH);
 		String monthStr;
 		if(month < 10) {

@@ -53,8 +53,7 @@ public class GamePanel extends GameFatherPanel {
 		
 		techPanel = new TechPanel(matchDetail,GamePanel.this);
 		conPanel = new ConPanel(matchDetail);
-//		liveBelow = new LivePanel();
-		
+		liveBelow = new GameLivePanel(matchDetail);		
 		this.add(techPanel);
 		initiate();
 		addBack();
@@ -79,9 +78,9 @@ public class GamePanel extends GameFatherPanel {
 
 
 	public void addButton() {
-		teambt1 = new TabButton(teamStr1,Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
-		live = new TabButton(teamStr2,Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
-		contrastbt = new TabButton(Constants.contrastText,Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
+		teambt1 = new TabButton(Constants.GAME_LIVE[0],Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
+		live = new TabButton(Constants.GAME_LIVE[1],Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
+		contrastbt = new TabButton(Constants.GAME_LIVE[2],Images.PLAYER_TAB_MOVE_ON, Images.PLAYER_TAB_CHOSEN);
 		teambt1.setLocation(btx, bty);
 		live.setLocation(btx + inter, bty);
 		contrastbt.setLocation(btx + 2* inter, bty);

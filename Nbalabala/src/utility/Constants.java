@@ -394,6 +394,8 @@ public class Constants {
 	
 	public static String[] BAR_SELECT = TextCHN.BAR_SELECT;
 	
+	public static String[] GAME_LIVE = TextCHN.GAME_LIVE;
+	
 	public static String translateDivision(ScreenDivision division) {
 		return translater.translateTeamDivision(division);
 	}

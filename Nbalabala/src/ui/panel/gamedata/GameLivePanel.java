@@ -36,9 +36,11 @@ public class GameLivePanel extends BottomPanel{
 		this.setBounds(UIConfig.RELA_X-4, 250, 948, 309);
 		service = new MatchQuery();
 		String[] team = vo.getProfile().getTeam().split("-");
+		Date date = vo.getProfile().getDate();
+		text = service.getLives(date, team[1]);
+		findSection();
+//		System.out.println(team[0]+" "+text.size());
 		table = new LiveDetailTable(team[0],team[1],text);
-//		Date date = vo.getProfile().getTime();
-//		text = service.getLives(date, team[0]);
 		addButton();
 		setTable(text);
 	}
@@ -107,7 +109,7 @@ public class GameLivePanel extends BottomPanel{
 			}
 			
 		}
-//		System.out.println(section[0]+" "+section[1]+" "+section[2]+" "+section[3]);
+		System.out.println(section[0]+" "+section[1]+" "+section[2]+" "+section[3]);
 	}
 	
 	private ArrayList<String> subArray;
@@ -142,9 +144,8 @@ public class GameLivePanel extends BottomPanel{
 				 tab[2].setOff();
 				 tab[3].setOff();
 				 tab[4].setOff();
-				 findSection();
 				 subArray = new ArrayList<String>();
-				 for(int i = section[0] ;i < text.size(); i++) {
+				 for(int i = 0 ;i < section[0]+1; i++) {
 					 subArray.add(text.get(i));
 				 }
 				 seeSectionTable(subArray);
@@ -158,9 +159,8 @@ public class GameLivePanel extends BottomPanel{
 				 tab[0].setOff();
 				 tab[3].setOff();
 				 tab[4].setOff();
-				 findSection();
 				 subArray = new ArrayList<String>();
-				 for(int i = section[1] ;i < section[0]; i++) {
+				 for(int i = section[0]+1 ;i < section[1]+1; i++) {
 					 subArray.add(text.get(i));
 				 }
 				 seeSectionTable(subArray);
@@ -175,7 +175,7 @@ public class GameLivePanel extends BottomPanel{
 				 tab[0].setOff();
 				 tab[4].setOff();
 				 subArray = new ArrayList<String>();
-				 for(int i = section[2] ;i < section[1]; i++) {
+				 for(int i = section[1]+1 ;i < section[2]+1; i++) {
 					 subArray.add(text.get(i));
 				 }
 				 seeSectionTable(subArray);
@@ -189,9 +189,8 @@ public class GameLivePanel extends BottomPanel{
 				 tab[2].setOff();
 				 tab[0].setOff();
 				 tab[3].setOff();
-				 findSection();
 				 subArray = new ArrayList<String>();
-				 for(int i = section[3] ;i < section[2]; i++) {
+				 for(int i = section[2]+1 ;i < text.size(); i++) {
 					 subArray.add(text.get(i));
 				 }
 				 seeSectionTable(subArray); 

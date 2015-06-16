@@ -106,6 +106,8 @@ public class TextCHN {
 	
 	public static String[] LIVE = {"技术统计","文字直播","对比"};
 	
+	public static String[] GAME_LIVE = {"球队","比赛实录","对比"};
+	
 	/** 无资料的时候显示的提示 */
 	public static final String UNKNOWN = "无资料";
 	
