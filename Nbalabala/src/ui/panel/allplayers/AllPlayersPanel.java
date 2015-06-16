@@ -133,7 +133,7 @@ public class AllPlayersPanel extends BottomPanel {
 		size = players.size();
 		lth = Constants.allPlayerHeaders.length;
 		rowData = new String[size][lth];
-		ArrayList<ImageIcon> iconArr = new ArrayList<ImageIcon>();
+		ArrayList<ImageIcon> iconList = new ArrayList<ImageIcon>();
 		table.setModel(new DefaultTableModel(rowData,Constants.allPlayerHeaders));
 		table.setRowHeight(UIConfig.ALL_PLAYERS_ROW_H);
 		table.setHeaderColorAndFont();
@@ -147,7 +147,7 @@ public class AllPlayersPanel extends BottomPanel {
 			int height = protrait.getHeight(null) * PORTRAIT_WIDTH / protrait.getWidth(null);// 按比例，将高度缩减
 			Image smallImg = protrait.getScaledInstance(PORTRAIT_WIDTH, height, Image.SCALE_SMOOTH);
 			ImageIcon ic = new ImageIcon(smallImg);
-			iconArr.add(ic);
+			iconList.add(ic);
 			table.setValueAt(ppVO.getShortName(), i, 1);
 			table.setValueAt(ppVO.getFromYear(), i, 2);
 			table.setValueAt(ppVO.getToYear(), i, 3);
@@ -156,7 +156,7 @@ public class AllPlayersPanel extends BottomPanel {
 			
 		}
 		MyTableCellRenderer myRenderer = new MyTableCellRenderer();
-		myRenderer.icon = iconArr;
+		myRenderer.icon = iconList;
 		// iconArr.clear();
 		table.getColumnModel().getColumn(0).setCellRenderer(myRenderer);
 	}

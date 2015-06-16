@@ -6,14 +6,10 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import po.AdvancedDataPO;
-import enums.CareerData;
 import ui.UIConfig;
 import ui.common.jfreechart.BarChart;
-import ui.common.jfreechart.BoxChart;
 import ui.common.panel.Panel;
 import ui.panel.analyse.button.ContriButton;
-import ui.panel.analyse.button.SeasonSelectButton;
-import vo.AnalysisCareerVO;
 import bl.analysisbl.ValueAnalysis;
 import blservice.AnalysisBLService;
 

@@ -4,9 +4,6 @@
 package ui.panel.main;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Statement;
@@ -14,7 +11,6 @@ import java.sql.Statement;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JPasswordField;
-import javax.swing.border.Border;
 
 import ui.Images;
 import ui.MyFont;

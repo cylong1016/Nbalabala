@@ -21,7 +21,7 @@ public class MyTableCellRenderer implements TableCellRenderer {
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
 			boolean hasFocus, int row, int column) {
 		// 根据特定的单元格设置不同的Renderer,假如你要在第2行第3列显示图标
-		if (row<icon.size()) {
+		if (row < icon.size()) {
 			ImageIcon iconOne = icon.get(row);
 			JLabel label = new JLabel(iconOne);
 			return label;

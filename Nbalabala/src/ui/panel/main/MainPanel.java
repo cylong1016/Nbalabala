@@ -11,8 +11,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JDialog;
 
-import com.sun.awt.AWTUtilities;
-
 import ui.Images;
 import ui.MyFont;
 import ui.common.button.ImgButton;
