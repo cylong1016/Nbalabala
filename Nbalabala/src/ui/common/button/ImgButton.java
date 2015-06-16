@@ -17,8 +17,6 @@ public class ImgButton extends JButton {
 		ImageIcon imageIcon = new ImageIcon(imgPath);
 		ImageIcon imageIconStop = new ImageIcon(stopImgPath);
 		ImageIcon imageIconPressOn = new ImageIcon(pressOnImgPath);
-		
-		
 
 		set();
 
@@ -26,6 +24,11 @@ public class ImgButton extends JButton {
 		this.setBounds(x, y, imageIcon.getImage().getWidth(null), imageIcon.getImage().getHeight(null));
 		this.setRolloverIcon(imageIconStop);
 		this.setPressedIcon(imageIconPressOn);
+		
+	}
+	
+	public ImgButton(String imgPath, int x, int y, String stopImgPath) {
+		this(imgPath, x, y, stopImgPath, stopImgPath);
 		
 	}
 	

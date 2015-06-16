@@ -141,4 +141,7 @@ public class UIConfig {
 	 
 	 public static final int TITLE_LABEL_H = 43;
 	 public static final int TITLE_LABEL_W = 141;
+	 
+	 public static final int RETURN_X = 10;
+	 public static final int RETURN_Y = 26;
 }

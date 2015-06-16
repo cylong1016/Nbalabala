@@ -42,11 +42,6 @@ import dataservice.SeasonDataService;
  */
 @SuppressWarnings("serial")
 public class PlayerInfoBottomPanel extends BottomPanel {
-
-	private static final String IMG_URL = UIConfig.IMG_PATH + "players/";
-	private static final String BACK_BUTTON_OFF = IMG_URL + "back.png";
-	private static final String BACK_BUTTON_ON = IMG_URL + "backOn.png";
-	private static final String BACK_BUTTON_CLICK = IMG_URL + "back.png";
 	
 	/** 最左边的横坐标 */
 	private static final int LEFT_LABEL_COLUMN_X = 280;
@@ -323,7 +318,7 @@ public class PlayerInfoBottomPanel extends BottomPanel {
 	 * @version 2015年3月24日 下午4:20:16
 	 */
 	private void addBackButton() {
-		backButton = new ImgButton(BACK_BUTTON_OFF, 50, 50, BACK_BUTTON_ON, BACK_BUTTON_CLICK);
+		backButton = new ImgButton(Images.RETURN_BTN, UIConfig.RETURN_X, UIConfig.RETURN_Y, Images.RETURN_BTN_ON);
 		this.add(backButton);
 		backButton.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {

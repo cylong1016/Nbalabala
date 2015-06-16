@@ -130,6 +130,7 @@ public class MainController {
 	 */
 	public static void toGameLivePanel(BottomPanel panel,String teamAbbr1,String teamAbbr2) {
 		gameDataPanel = new GameDataPanel(panel,UIConfig.IMG_PATH_2 + "gameData/GameDataBG.png", teamAbbr1, teamAbbr2);
+		gameDataPanel.addBack();
 		frame.setPanel(gameDataPanel);
 	}
 	

@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import ui.Images;
 import ui.MyFont;
 import ui.UIConfig;
 import ui.common.button.ImgButton;
@@ -62,7 +63,7 @@ public class GameDataPanel extends BottomPanel {
 		addArray();
 		addLabel();
 		addButton();
-		addBack();
+//		addBack();
 	}
 	
 	public GameDataPanel(BottomPanel panel,String url,String teamAbbr1,String teamAbbr2) {
@@ -78,7 +79,7 @@ public class GameDataPanel extends BottomPanel {
 	}
 	
 		public void addBack() {
-			back = new ImgButton(UIConfig.IMG_PATH + "back.png", 0, 0, UIConfig.IMG_PATH + "backOn.png", UIConfig.IMG_PATH + "back.png");
+			back = new ImgButton(Images.RETURN_BTN, UIConfig.RETURN_X, UIConfig.RETURN_Y - 10, Images.RETURN_BTN_ON);
 			this.add(back);
 			back.addMouseListener(new MouseAdapter() {
 				public void mousePressed(MouseEvent e) {

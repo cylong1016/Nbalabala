@@ -109,4 +109,10 @@ public class Images {
 	/** 热点界面的按钮  */
 	public static final Image HOT_BTN_ON = new ImageIcon("images2.0/hot/buttonOn.png").getImage();
 	public static final Image HOT_BTN_CLICK = new ImageIcon("images2.0/hot/buttonClick.png").getImage();
+	
+	/** 返回按钮 */
+	public static final String RETURN_BTN = "images2.0/returnBtn.png";
+	public static final String RETURN_BTN_ON = "images2.0/returnBtnOn.png";
+
+
 }

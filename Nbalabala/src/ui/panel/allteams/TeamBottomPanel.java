@@ -40,7 +40,6 @@ public class TeamBottomPanel extends BottomPanel{
 	private TeamQueryBLService teamQuery = new TeamQuery();
 	
 	private ImgButton back;
-	private String url = UIConfig.IMG_PATH + "players/";
 	private BottomPanel fromPanel;
 
 	/** 球队详细信息 */
@@ -141,7 +140,7 @@ public class TeamBottomPanel extends BottomPanel{
 	 * @version 2015年3月25日  上午11:02:11
 	 */
 	public void addBack() {
-		back = new ImgButton(url + "back.png", 50, 50, url + "backOn.png", url + "back.png");
+		back = new ImgButton(Images.RETURN_BTN, UIConfig.RETURN_X, UIConfig.RETURN_Y, Images.RETURN_BTN_ON);
 		this.add(back);
 		back.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {

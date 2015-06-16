@@ -94,6 +94,7 @@ public class LiveInPanel extends BottomPanel {
 			public void mouseClicked(MouseEvent e) {
 				MainController.toGameLivePanel(LiveInPanel.this, Constants.getAbbrByName(team[0]),
 						Constants.getAbbrByName(team[1]));
+				
 			}
 
 			public void mouseEntered(MouseEvent e) {
