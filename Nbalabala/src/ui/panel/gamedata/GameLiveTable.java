@@ -46,14 +46,11 @@ public class GameLiveTable extends BottomTable{
 		setTableSize();
 		for (int i = 0; i < text.size(); i++) {
 			String mpVO = text.get(i);
-			String[] textArr = mpVO.split(";");
+			String[] textArr = mpVO.split("$");
 			if(textArr.length > 1){
 				setValueAt(textArr[0], i, 0);
-//				if(textArr[1].equals(Constants.translateTeamAbbr(teamAbbr1))){
 					setValueAt(textArr[1], i, 1);
-//				}else{
 					setValueAt(textArr[2], i, 2);
-//				}
 				setValueAt(textArr[3], i, 3);
 			} else {
 				setValueAt(textArr[0], i, 2);

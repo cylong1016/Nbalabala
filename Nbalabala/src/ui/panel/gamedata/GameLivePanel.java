@@ -3,6 +3,7 @@ package ui.panel.gamedata;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
 
 import ui.Images;
 import ui.MyFont;
@@ -26,7 +27,7 @@ public class GameLivePanel extends BottomPanel{
 	/** serialVersionUID */
 	private static final long serialVersionUID = 3242514111661642405L;
 	private TabButton[] tab;
-	private LiveDetailTable table ;
+	private GameLiveTable table ;
 	private ArrayList<String> text;
 	private int currentI;
 	private MatchQueryBLService service;
@@ -40,7 +41,7 @@ public class GameLivePanel extends BottomPanel{
 		text = service.getLives(date, team[1]);
 		findSection();
 //		System.out.println(team[0]+" "+text.size());
-		table = new LiveDetailTable(team[0],team[1],text);
+		table = new GameLiveTable(team[0],team[1],text);
 		addButton();
 		setTable(text);
 	}
