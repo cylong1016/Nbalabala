@@ -11,6 +11,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.xy.XYDataset;
@@ -103,6 +104,11 @@ public class ScatterChart extends Panel{
 	        va.setAxisLinePaint(new Color(215, 215, 215)); // 坐标轴颜色  
 	        va.setLabelPaint(new Color(10, 10, 10)); // 坐标轴标题颜色  
 	        va.setTickLabelPaint(new Color(102, 102, 102)); // 坐标轴标尺值颜色  
+	        
+	        XYItemRenderer renderer = xyplot.getRenderer();
+	        renderer.setSeriesPaint(0, UIConfig.CHART_ORANGE); // 改变散点的颜色
+	        xyplot.setRenderer(renderer);
+	        
   
 	} 
 }

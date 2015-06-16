@@ -1,11 +1,14 @@
 package ui.panel.analyse.panel;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import po.AdvancedDataPO;
+import ui.Images;
 import ui.UIConfig;
 import ui.common.jfreechart.BarChart;
 import ui.common.panel.Panel;
@@ -30,12 +33,14 @@ public class ContriPanel extends Panel{
 	private ArrayList<AdvancedDataPO> po;
 	private int playerIndex;
 	
+	private Image bgImg = Images.BG_IMAGE;
+	
 	public ContriPanel(String teamName,int playerIndex){
 		this.teamName = teamName;
 		this.playerIndex = playerIndex;
 		po = service.getDevotionData(teamName);
 		if (po == null) {
-			//TODO 显示没有走向分析
+			bgImg = Images.NO_DATA;
 		} else {
 			button = new ContriButton[6];
 			addButton();
@@ -82,6 +87,12 @@ public class ContriPanel extends Panel{
 		button[0].setOpaque(true);
 		button[0].setBackground(UIConfig.BUTTON_COLOR);
 		button[0].setForeground(Color.white);
+	}
+	
+	public void paint(Graphics g) {
+		g.drawImage(bgImg, 0, 0, this);
+		// g2d.drawImage(slider, 0, 0, this);
+		super.paint(g);
 	}
 
 	

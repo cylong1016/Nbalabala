@@ -75,7 +75,7 @@ public class BoxChart extends Panel{
 //        renderer.setFillBox(false); // 设置不填充颜色
         renderer.setFillBox(true);
         renderer.setBaseCreateEntities(false);
-        renderer.setSeriesPaint(0, new Color(249, 191, 67));
+        renderer.setSeriesPaint(0, UIConfig.CHART_ORANGE);
         renderer.setSeriesOutlinePaint(0, Color.yellow);      
 //        renderer.setFaroutPaint(Color.LIGHT_GRAY);
         plot = new CategoryPlot(dataset, xAxis, yAxis, renderer);

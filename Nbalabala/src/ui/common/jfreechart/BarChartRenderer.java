@@ -28,8 +28,8 @@ public class BarChartRenderer extends BarRenderer{
 	
 	public BarChartRenderer(int index) { 
 		this.index = index;
-        CHOSEN_COLOR = Color.decode("#AFD8F8");	//TODO　改颜色
-        OTHER_COLOR = Color.decode("#008E8E");
+        CHOSEN_COLOR = Color.decode("#f9bf43");	//TODO　改颜色
+        OTHER_COLOR = Color.decode("#87bdf5");
     } 
 	
 	public Paint getItemPaint(int i , int j) {

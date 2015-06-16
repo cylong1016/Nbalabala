@@ -30,7 +30,7 @@ public class BottomTable extends JTable {
 //	/** 默认的表格前景色 */
 //	private Color headerF = new Color(255, 221, 31);
 	 
-	private static final Color BG_INTERLACE_COLOR = new Color(246, 246, 246);//TODO 交错底色
+	static final Color BG_INTERLACE_COLOR = new Color(246, 246, 246);//TODO 交错底色
 	
 	public BottomTable(Object[][] rowData, String[] columnNames) {
 		super(rowData, columnNames);
