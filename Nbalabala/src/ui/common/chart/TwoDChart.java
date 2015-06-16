@@ -64,10 +64,6 @@ public class TwoDChart extends JTable {
 	 */
 	@Override
 	public void setBounds(int x, int y, int width, int height) {
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
 		dotPoint = new Point(50, height - 50);
 		xLen = width - 100;
 		yLen = height - 100;
