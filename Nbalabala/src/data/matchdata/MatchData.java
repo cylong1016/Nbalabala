@@ -270,6 +270,7 @@ public class MatchData implements MatchDataService {
 			for (int i = 0; i < size; i++) {
 				MatchPlayerPO po = result.get(i);
 				po.date = dates.get(po.matchID);
+				po.season = season;
 				if (po.homeOrRoad == 'H') {
 					po.teamAbbr = homeAbbrs.get(po.matchID);
 					po.oppoAbbr = roadAbbrs.get(po.matchID);

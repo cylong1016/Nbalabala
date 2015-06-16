@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import po.AdvancedDataPO;
 import po.ClutchPO;
 import vo.AnalysisCareerVO;
+import vo.AnalysisCompareVO;
 import vo.AnalysisTransferVO;
 import vo.ForecastVO;
 import enums.CareerData;
@@ -35,6 +36,9 @@ public interface AnalysisBLService {
 	
 	/** 返回某一球员转会分析所需数据 */
 	public AnalysisTransferVO getTransferData(String name, InferenceData inferenceData);
+	
+	/** 返回某一球员和另一球员对比的数据 */
+	public AnalysisCompareVO getCompareData(String thisName, String thatName, InferenceData inferenceData);
 
 	public ArrayList<String> getLineupNamesByAbbr(String abbr);
 }

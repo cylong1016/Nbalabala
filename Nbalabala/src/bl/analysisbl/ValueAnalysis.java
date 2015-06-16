@@ -14,6 +14,7 @@ import ui.UIConfig;
 import utility.Constants;
 import utility.Utility;
 import vo.AnalysisCareerVO;
+import vo.AnalysisCompareVO;
 import vo.AnalysisTransferVO;
 import vo.ForecastVO;
 import vo.YearMatchesVO;
@@ -211,8 +212,7 @@ public class ValueAnalysis implements AnalysisBLService{
 		int smallerSize = Math.min(formerMatches.size(), currentMatches.size());
 		ArrayList<Double> formerData = divideHandler.divideData(formerMatches, inferenceData, smallerSize);
 		ArrayList<Double> currentData = divideHandler.divideData(currentMatches, inferenceData, smallerSize);
-		String conclusion = new TransferAnalyzer().giveConclusion
-				(formerData, currentData, inferenceData);
+		String conclusion = new TAnalyzer(formerData, currentData, inferenceData).getTransferConclusion();
 		
 		AnalysisTransferVO result = new AnalysisTransferVO();
 		result.conclusion = conclusion;
@@ -271,6 +271,44 @@ public class ValueAnalysis implements AnalysisBLService{
 	@Override
 	public ArrayList<String> getLineupNamesByAbbr(String abbr) {
 		return new SeasonData().getPlayerNamesByTeamAbbr(abbr, Constants.LATEST_SEASON_REGULAR);
+	}
+
+
+	/* (non-Javadoc)
+	 * @see blservice.AnalysisBLService#getCompareData(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public AnalysisCompareVO getCompareData(String thisName, String thatName, InferenceData inferenceData) {
+		loadMatches(thisName);
+		ArrayList<MatchPlayerPO> thatMatches = new ArrayList<MatchPlayerPO>();
+		PlayerProfilePO profilePO = playerData.getPlayerProfileByName(thatName);
+		int fromYear = profilePO.fromYear;
+		int toYear = profilePO.toYear;
+		for (int i = fromYear; i < toYear; i++) {
+			String season = Utility.getRegularStringByStartYear(i);
+			thatMatches.addAll(matchData.getMatchRecordByPlayerName(thisName, season));
+		}
+		int smaller = Math.min(matches.size(), thatMatches.size());
+		DivideHandler divideHandler = new DivideHandler();
+		ArrayList<MatchPlayerPO> partThis = new ArrayList<MatchPlayerPO>
+			(matches.subList(matches.size() - smaller, matches.size()));
+		ArrayList<MatchPlayerPO> partThat = new ArrayList<MatchPlayerPO>
+			(thatMatches.subList(thatMatches.size() - smaller, thatMatches.size()));
+		ArrayList<Double> thisData = divideHandler.divideData(partThis, inferenceData, smaller);
+		ArrayList<Double> thatData = divideHandler.divideData(partThat, inferenceData, smaller);
+		String conclusion = new TAnalyzer(thisData, thatData, inferenceData)
+			.getCompareConclusion(Utility.trimName(thisName), Utility.trimName(thatName));
+		AnalysisCompareVO result = new AnalysisCompareVO();
+		result.thisName = Utility.trimName(thisName);
+		result.thatName = Utility.trimName(thatName);
+		result.thisData = thisData;
+		result.thatData = thatData;
+		int start1 = Integer.parseInt(partThis.get(0).season.substring(0,4));
+		int start2 = Integer.parseInt(partThat.get(0).season.substring(0,4));
+		result.startSeason = Utility.getOverallSeason(Math.min(start1, start2));
+		result.endSeason = Constants.LATEST_SEASON_OVERALL;
+		result.conclusion = conclusion;
+		return result;
 	}
 	
 

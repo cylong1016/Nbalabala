@@ -67,6 +67,8 @@ public class MatchPlayerPO {
 	/** 日期 */
 	public Date date;
 	
+	public String season;
+	
 	public int getMatchID() {
 		return matchID;
 	}
