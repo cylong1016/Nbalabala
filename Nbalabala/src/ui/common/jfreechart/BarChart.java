@@ -11,12 +11,15 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import po.AdvancedDataPO;
+import ui.MyFont;
+import ui.UIConfig;
 import ui.common.panel.Panel;
 import utility.Constants;
 import utility.Utility;
@@ -57,7 +60,7 @@ public class BarChart extends Panel {
 				if(i == playerIndex) {
 					dataset.addValue(po.get(i).getGp(), comment[0], Utility.getLastName(po.get(i).getName()));
 				}else{
-					dataset.addValue(po.get(i).getGp(), comment[1], Utility.getLastName(po.get(i).getName()));
+					dataset.addValue(po.get(i).getGp(), comment[0], Utility.getLastName(po.get(i).getName()));
 				}
 				break;
 			case 1:
@@ -105,13 +108,16 @@ public class BarChart extends Panel {
 		JFreeChart chart = ChartFactory.createBarChart(Constants.BAR_CHART[0],Constants.BAR_CHART[1],
 				Constants.BAR_CHART[2],dataset, PlotOrientation.VERTICAL,
 				false, true, false); // 创建一个JFreeChart
+		
+		chart.setBackgroundPaint(UIConfig.CHAR_BG_COLOR);
+		chart.getTitle().setFont(MyFont.YH_B);
 
 		// chart.setTitle(new TextTitle("", new Font("宋体", Font.BOLD +
 		// Font.ITALIC, 20)));// 可以重新设置标题，替换“hi”标题
 		CategoryPlot plot = (CategoryPlot) chart.getPlot();// 获得图标中间部分，即plot
 		
 		CategoryAxis categoryAxis = plot.getDomainAxis();// 获得横坐标
-		categoryAxis.setLabelFont(new Font("微软雅黑", Font.BOLD, 12));// 设置横坐标字体
+		categoryAxis.setLabelFont(new Font("微软雅黑", Font.PLAIN, 12));// 设置横坐标字体
 		// plot.getRangeAxis().setUpperMargin(0.1);//设置最高的一个柱与图片顶端的距离(最高柱的10%)
 
 		CategoryAxis domainAxis = plot.getDomainAxis();
@@ -124,18 +130,37 @@ public class BarChart extends Panel {
 		plot.setBackgroundAlpha((float) 0.5);// 设置透明度
 //		plot.setBackgroundPaint(Color.green);// 设置颜色
 		// 设置网格竖线颜色
-		plot.setDomainGridlinePaint(Color.blue);
-		// plot.setDomainGridlinesVisible(true);
+//		plot.setDomainGridlinePaint(Color.blue);
+		 plot.setDomainGridlinesVisible(false);
+//		 plot.setRangeGridlinesVisible(false);
 		// 设置网格横线颜色
-		plot.setRangeGridlinePaint(Color.blue);
+		plot.setRangeGridlinePaint(Color.LIGHT_GRAY);
 		// plot.setRangeAxisLocation(AxisLocation.BOTTOM_OR_LEFT);
 		// //人数显示在下端(柱子水平)或左侧(柱子竖直)
-
+		
 		BarChartRenderer myRenderer = new BarChartRenderer(playerIndex);
-		myRenderer.setMaximumBarWidth(0.08);// 设置柱子宽度
+		
+		
+		myRenderer.setSeriesPaint(0, UIConfig.CHART_ORANGE);
+		
+		myRenderer.setMaximumBarWidth(0.05);// 设置柱子宽度
 		myRenderer.setMinimumBarLength(0.1);// 设置柱子高度
-		myRenderer.setItemMargin(0.000001);//组内柱子间隔为组宽的
+		myRenderer.setItemMargin(0.3);//组内柱子间隔为组宽的
+		
+		myRenderer.setBaseOutlinePaint(Color.white);
+		myRenderer.setDrawBarOutline(true);
+		
+		// 在柱子上显示数字
+		myRenderer.setIncludeBaseInRange(true); 
+		myRenderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator()); 
+		myRenderer.setBaseItemLabelsVisible(true); 
+		
+		
 		plot.setRenderer(myRenderer);
+		
+//		CategoryItemRenderer renderer = plot.getRenderer();
+//		renderer.setSeriesPaint(0, UIConfig.CHART_ORANGE);
+//		plot.setRenderer(renderer);
 		return chart;
 	}
 
