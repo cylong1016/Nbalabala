@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 import javax.swing.JTextArea;
 
-import ui.Images;
 import ui.MyFont;
 import ui.UIConfig;
 import ui.common.comboBox.MyComboBox;
@@ -114,7 +113,7 @@ public class PlayerComPanel extends Panel{
 					index = 0;
 				}
 				name2 = str[index];
-				System.out.println(name+name2+CompareButton.current.getInferenceData());
+//				System.out.println(name+name2+CompareButton.current.getInferenceData());
 				try {
 					vo = service.getCompareData(name, name2,CompareButton.current.getInferenceData());
 					area.setText(vo.getConclusion());

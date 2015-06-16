@@ -24,7 +24,6 @@ public class LastFivePanel extends Panel{
 	private static final long serialVersionUID = -5007878982571604781L;
 	private String name;
 	private TwoDChart chart;
-	private LastFiveButton[] button;
 	private int bt_x = 31, bt_y = 16, inter_x = 100, width = 80, height = 30;
 	private AnalysisBLService service = new ValueAnalysis();
 	private ArrayList<ClutchPO> vo;
@@ -36,48 +35,10 @@ public class LastFivePanel extends Panel{
 			//TODO
 		} else {
 			chart = new TwoDChart(vo);
+			chart.setBounds(130, 90, 700, 400);
 			this.add(chart);
-			button = new LastFiveButton[6];
-			addButton();
-			setEffect();
 		}
 		this.setBounds(0, 100, 1000, 490);
 		this.repaint();
 	}
-	
-	public void addButton() {
-		for (int i = 0; i < 6; i++) {
-			button[i] = new LastFiveButton(bt_x + i * inter_x, bt_y, width, height, utility.Constants.ANY_SELECT[i]);
-			this.add(button[i]);
-		}
-		LastFiveButton.current = button[0];
-		addListener();
-	}
-	
-	public void addListener() {
-		for (int i = 0; i < button.length; i++) {
-			button[i].addMouseListener(new MouseAdapter() {
-				public void mousePressed(MouseEvent e) {
-					if (e.getSource() == LastFiveButton.current) {
-						return;
-					}
-					LastFiveButton.current.back();
-					LastFiveButton.current = (LastFiveButton) e.getSource();
-					LastFivePanel.this.remove(chart);
-					vo = service.getClutchData(name);
-					chart = new TwoDChart(vo);
-					LastFivePanel.this.add(chart);
-					LastFivePanel.this.repaint();
-				}
-
-			});
-		}
-	}
-
-	public void setEffect() {
-		button[0].setOpaque(true);
-		button[0].setBackground(UIConfig.BUTTON_COLOR);
-		button[0].setForeground(Color.white);
-	}
-
 }
