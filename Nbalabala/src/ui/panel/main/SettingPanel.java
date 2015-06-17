@@ -6,9 +6,6 @@ package ui.panel.main;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -122,16 +119,16 @@ public class SettingPanel extends BottomPanel{
 				}
 				Database.user = userField.getText();
 				Database.password = String.valueOf(pwField.getPassword());
-				try {
-					FileWriter fw = new FileWriter(Database.configPath);
-					BufferedWriter writer = new BufferedWriter(fw);
-					writer.write(Database.user + "\r\n");
-					writer.write(Database.password + "\r\n");
-					writer.write(Database.databaseName + "\r\n");
-					writer.close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+//				try {
+//					FileWriter fw = new FileWriter(Database.configPath);
+//					BufferedWriter writer = new BufferedWriter(fw);
+//					writer.write(Database.user + "\r\n");
+//					writer.write(Database.password + "\r\n");
+//					writer.write(Database.databaseName + "\r\n");
+//					writer.close();
+//				} catch (IOException e1) {
+//					e1.printStackTrace();
+//				}
 				dialog.dispose();
 				mainPanel.refresh();
 			}
