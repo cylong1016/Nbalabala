@@ -3,6 +3,10 @@
  */
 package data;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -17,15 +21,35 @@ public class Database {
 	
     private static String driver = "com.mysql.jdbc.Driver";
 
-    // URL指向要访问的数据库名scutcs
-    private static String url = "jdbc:mysql://127.0.0.1:3306/nbalabala";
+    /** URL指向要访问的数据库名 */
+    private static String url = "jdbc:mysql://127.0.0.1:3306/";
 
-    // MySQL配置时的用户名
-    public static String user = "root"; 
-
-    // MySQL配置时的密码cyl941016
-    public static String password = "cyl941016";
+    /** MySQL配置时的用户名 */
+    public static String user = "root";
+    /** MySQL配置时的密码 */
+    public static String password = "root";
+    /** 数据库名 */
+    public static String databaseName = "nbalabala";
+    /** 数据库配置文件路径 */
+    public static String configPath = "config/database.conf";
+    
     public static Connection conn;
+    static {
+    	try {
+    		// 从文件中读取数据库帐户名，密码和数据库名称
+			FileReader fr = new FileReader(configPath);
+			BufferedReader reader = new BufferedReader(fr);
+			user = reader.readLine();
+			password = reader.readLine();
+			databaseName = reader.readLine();
+			url += databaseName; // URL指向要访问的数据库名
+			reader.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
     
     static{
     	try { 
