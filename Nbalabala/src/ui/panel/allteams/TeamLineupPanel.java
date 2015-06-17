@@ -71,7 +71,7 @@ public class TeamLineupPanel extends BottomPanel {
 					if (rowI > -1) {
 						MainController.toPlayerInfoPanel(
 								TeamLineupPanel.this.players.get(rowI)
-										.getName(), TeamLineupPanel.this);
+										.getName(), (BottomPanel)TeamLineupPanel.this.getParent());
 					}
 				}
 			});

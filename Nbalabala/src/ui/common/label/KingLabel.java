@@ -193,7 +193,7 @@ public class KingLabel extends JLabel{
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() < 2) return;
-				MainController.toPlayerInfoPanel(playerName, (BottomPanel)KingLabel.this.getParent());
+				MainController.toPlayerInfoPanel(playerName, (BottomPanel)(KingLabel.this.getParent().getParent()));
 			}
 		});
 	}

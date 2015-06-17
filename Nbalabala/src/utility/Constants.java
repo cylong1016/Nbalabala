@@ -19,6 +19,121 @@ public class Constants {
 	
 	
 	public static void setCHNTraditional() {
+		isEng = false;
+		Constants.translater = new TranslaterCN();
+		
+		playerType = TextCTR.playerType;
+		live = TextCTR.live;
+		
+		leagueText = TextCTR.leagueText;
+		teamShortText = TextCTR.teamShortText;
+		promotionText = TextCTR.promotionText;
+		positionShortText = TextCTR.positionShortText;
+		
+		leagueAvg = TextCTR.leagueAvg;
+		hotType	= TextCTR.hotType;
+		scoreText = TextCTR.scoreText;
+		formerFiveAvgText = TextCTR.formerFiveAvgText;
+		POSITION_SELECT_TEXT = TextCTR.POSITION_SELECT_TEXT;
+		DIVISION_SELECT_TEXT = TextCTR.DIVISION_SELECT_TEXT;
+		BASIS_SELECT_TEXT = TextCTR.BASIS_SELECT_TEXT;
+		TOTAL_AVG_TEXT = TextCTR.TOTAL_AVG_TEXT;
+		 
+		GAME_SORT_RP = TextCTR.GAME_SORT_RP;
+		LIVE = TextCTR.LIVE;
+		UNKNOWN = TextCTR.UNKNOWN;
+		onePlayerDataHeaders = TextCTR.onePlayerDataHeaders;
+		onePlayerMatchHeaders = TextCTR.onePlayerMatchHeaders;
+		matchPlayerHeaders = TextCTR.matchPlayerHeaders;
+		basicPlayerHeaders = TextCTR.basicPlayerHeaders;
+		advancedPlayerHeaders = TextCTR.advancedPlayerHeaders;
+		offensivePlayerHeaders = TextCTR.offensivePlayerHeaders;
+		defensivePlayerHeaders = TextCTR.defensivePlayerHeaders;
+		basicTeamHeaders = TextCTR.basicTeamHeaders;
+		offensiveTeamHeaders = TextCTR.offensiveTeamHeaders;
+		defensiveTeamHeaders = TextCTR.defensiveTeamHeaders;
+		teamMatchHeaders = TextCTR.teamMatchHeaders;
+		oneTeamDataHeaders = TextCTR.oneTeamDataHeaders;
+		onePlayerDataTableEmptyContent = TextCTR.onePlayerDataTableEmptyContent;
+		oneTeamDataTableEmptyContent = TextCTR.oneTeamDataTableEmptyContent;
+		teamLineupHeaders = TextCTR.teamLineupHeaders;
+		TEAM_NAMES = TextCTR.TEAM_NAMES;
+		ALL_TEAM_NAMES = TextCTR.ALL_TEAM_NAMES;
+		TEAM_PLACES = TextCTR.TEAM_PLACES;
+		GAME_SORT = TextCTR.GAME_SORT;
+		PLAYER_DATA_SORT = TextCTR.PLAYER_DATA_SORT;
+		TEAM_DATA_SORT = TextCTR.TEAM_DATA_SORT;
+		LBSTR = TextCTR.LBSTR;
+		HOT_COLUMNS = TextCTR.HOT_COLUMNS;
+		ANALYSE = TextCTR.ANALYSE;
+		
+		briefText = TextCTR.briefText;
+		seasonDataText = TextCTR.seasonDataText;
+		matchesDataText = TextCTR.matchesDataText;
+		
+		portraitText = TextCTR.portraitText;
+		nameText = TextCTR.nameText;
+		teamText = TextCTR.teamText;
+		numberText = TextCTR.numberText;
+		positionText = TextCTR.positionText;
+		birthdayText = TextCTR.birthdayText;
+		schoolText = TextCTR.schoolText;
+		veteranText = TextCTR.veteranText;
+		
+		winsText = TextCTR.winsText;
+		losesText = TextCTR.losesText;
+		divisionText = TextCTR.divisionText;
+		homeText = TextCTR.homeText;
+		sinceText = TextCTR.sinceText;
+		kingText = TextCTR.kingText;
+		overallRankText = TextCTR.overallRankText;
+		lineupText = TextCTR.lineupText;
+		
+		scoreAvgText = TextCTR.scoreAvgText;
+		reboundAvgText = TextCTR.reboundAvgText;
+		assistAvgText = TextCTR.assistAvgText;
+		
+		totalScoreText = TextCTR.totalScoreText;
+		techText = TextCTR.techText;
+		
+		scoreKingText = TextCTR.scoreKingText;
+		reboundKingText = TextCTR.reboundKingText;
+		assistKingText = TextCTR.assistKingText;
+		recordText = TextCTR.recordText;
+		
+		eastText = TextCTR.eastText;
+		westText = TextCTR.westText;
+		
+		contrastText = TextCTR.contrastText;
+		
+		teamAvgText = TextCTR.teamAvgText;
+		
+		regularText = TextCTR.regularText;
+		playoffText = TextCTR.playoffText;
+		
+		lastestTwo = 	TextCTR.lastestTwo;
+		titleAvgData = TextCTR.titleAvgData;
+		gameLog = TextCTR.gameLog;
+		
+		lineUp = TextCTR.lineUp;
+		gameDate = TextCTR.gameDate;
+		
+		blank = TextCTR.blank;
+		allPlayers =TextCTR.allPlayers;
+		allTeams =TextCTR.allTeams;
+		gamesData = TextCTR.gamesData;
+		playersData = TextCTR.playersData;
+		teamsData = TextCTR.teamsData;
+		hot =  TextCTR.hot;
+		analysis = TextCTR.analysis;
+		
+		hotShort = TextCTR.hotShort;
+		game = TextCTR.game;
+		ret = TextCTR.ret;
+		
+		ot = TextCTR.ot;
+		
+		today = TextCTR.today;
 		
 	}
 	
