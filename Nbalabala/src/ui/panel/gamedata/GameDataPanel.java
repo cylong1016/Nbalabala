@@ -266,7 +266,7 @@ public class GameDataPanel extends BottomPanel {
 		number1.setlbText("1");
 		GameDataPanel.this.repaint();
 	}
-
+	
 	/**
 	 * 日期选择器
 	 * 

@@ -189,7 +189,7 @@ public class MainController {
 	 */
 	public static void backToOnePanel(Panel panelTo) {
 		frame.setPanel(panelTo);
-		panelTo.refresh();
+//		panelTo.refresh();
 		frame.repaint();
 	}
 

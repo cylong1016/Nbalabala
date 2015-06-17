@@ -8,6 +8,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import capture.UpdateMatch;
+
 /**
  * 程序入口
  * @author cylong
@@ -29,8 +31,8 @@ public class Launcher {
 //		PlayerClutch pc = new PlayerClutch();
 //		pc.capture();
 		
-//		UpdateMatch um = new UpdateMatch();
-//		um.capture();
+		UpdateMatch um = new UpdateMatch();
+		um.capture();
 		
 //		imgCut();
 	}
