@@ -31,7 +31,6 @@ public class AnalysePanel extends BottomPanel{
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 560926515968497035L;
-//	private String teamAbbr,team,player;
 	private MyComboBox teamCom,playerCom;
 	private TabButton[] select;
 	private Panel currentPanel;
@@ -42,12 +41,11 @@ public class AnalysePanel extends BottomPanel{
 	private TurnPanel turn;
 	private PlayerComPanel compare;
 	private AnalysisBLService service;
-	private static int currentI;
+	private static int currentI = 5;
 	
 	public AnalysePanel(String url){
 		super(url);
 		service = new ValueAnalysis();
-//		this.team = Constants.translateTeamAbbr(teamAbbr);
 		str = changeArray(service.getLineupNamesByAbbr("BOS"));
 		addComboBox();
 		lastFive = new LastFivePanel("BOS",str[0]);
@@ -58,6 +56,7 @@ public class AnalysePanel extends BottomPanel{
 		compare = new PlayerComPanel(str[0]);
 		currentPanel = lastFive;
 		addLabel();
+		this.add(lastFive);
 	}
 	
 	public void addLabel(){
@@ -66,7 +65,6 @@ public class AnalysePanel extends BottomPanel{
 			select[i] = new TabButton(Constants.ANALYSE[i],Images.ANA_ON,Images.ANA_CLICK);
 			select[i].setLocation(19+116*i, 60);
 			this.add(select[i]);
-			this.add(lastFive);
 			select[0].setOn();
 		}
 		
@@ -229,7 +227,7 @@ public class AnalysePanel extends BottomPanel{
 					break;
 				case 5:
 					AnalysePanel.this.remove(compare);
-					compare = new PlayerComPanel(str[index]); 
+					compare = new PlayerComPanel(str[index],PlayerComPanel.name2); 
 					AnalysePanel.this.add(compare);
 					AnalysePanel.this.repaint();
 					break;

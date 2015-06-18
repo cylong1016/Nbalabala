@@ -35,7 +35,7 @@ public class PlayerComPanel extends Panel{
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 5065142245317348882L;
-	private String name,name2;
+	private String name;
 	private AnalysisBLService service = new ValueAnalysis();
 	private AnalysisCompareVO  vo;
 
@@ -56,6 +56,8 @@ public class PlayerComPanel extends Panel{
 	private Image bgImg = Images.COMPARE_BG;
 	private String conclusion;
 	
+	public static String name2;
+	
 	public PlayerComPanel(String name) {
 		this.name = name;
 		str = changeArray(service.getLineupNamesByAbbr("BOS"));
@@ -67,9 +69,7 @@ public class PlayerComPanel extends Panel{
 			vo = service.getCompareData(name, name2,InferenceData.SCORE);
 			if (vo == null) {
 				bgImg = Images.COMED_LESS;
-				//TODO 显示自己比赛太少无法显示
 			} else {
-				
 				chart = new NewLineChart(vo);
 				chart.setVisible(true);
 				this.add(chart);
@@ -80,7 +80,35 @@ public class PlayerComPanel extends Panel{
 				bgImg = Images.COMPARE_BG;
 			}
 		} catch (Exception e) {
-			// TODO 显示对方球员参加比赛太少无法比较
+			bgImg = Images.COMING_LESS;
+		}
+		this.setOpaque(false);
+		this.setBounds(0, 100, 1000, 490);
+		this.repaint();
+	}
+	
+	public PlayerComPanel(String name,String name2) {
+		this.name = name;
+		str = changeArray(service.getLineupNamesByAbbr("BOS"));
+		name2 = str[1]; 
+		addComboBox();
+		button = new CompareButton[7];
+		setButton();
+		try {
+			vo = service.getCompareData(name, name2,InferenceData.SCORE);
+			if (vo == null) {
+				bgImg = Images.COMED_LESS;
+			} else {
+				chart = new NewLineChart(vo);
+				chart.setVisible(true);
+				this.add(chart);
+				addButton();
+				setEffect();
+				addLabel();
+				addConclusion();
+				bgImg = Images.COMPARE_BG;
+			}
+		} catch (Exception e) {
 			bgImg = Images.COMING_LESS;
 		}
 		this.setOpaque(false);
@@ -123,19 +151,30 @@ public class PlayerComPanel extends Panel{
 					index = 0;
 				}
 				name2 = str[index];
+				PlayerComPanel.this.remove(currentTeam);
+				PlayerComPanel.this.remove(formerTeam);
 				try {
 					vo = service.getCompareData(name, name2,CompareButton.current.getInferenceData());
-					area.setText(vo.getConclusion());
-					PlayerComPanel.this.remove(chart);
-					chart = new NewLineChart(vo);
-					PlayerComPanel.this.add(chart);
-					formerTeam.setText(vo.getThisName());
-					currentTeam.setText(vo.getThatName());
+					if(vo == null) {
+						bgImg = Images.COMED_LESS;
+						PlayerComPanel.this.remove(chart);
+						area.setText("");
+					}else{
+						bgImg = Images.COMPARE_BG;
+						addLabel();
+						area.setText(vo.getConclusion());
+						PlayerComPanel.this.remove(chart);
+						chart = new NewLineChart(vo);
+						PlayerComPanel.this.add(chart);
+						formerTeam.setText(vo.getThisName());
+						currentTeam.setText(vo.getThatName());
+					}
 				} catch (Exception e) {
 					PlayerComPanel.this.remove(chart);
 					PlayerComPanel.this.remove(currentTeam);
 					PlayerComPanel.this.remove(formerTeam);
-					// TODO 显示对方比赛太少无法比较
+					bgImg = Images.COMING_LESS;
+					area.setText("");
 				}
 				PlayerComPanel.this.repaint();
 			}
@@ -158,17 +197,9 @@ public class PlayerComPanel extends Panel{
 		
 	}
 	
-//	private String setAreaText(String conclusion){
-//		String result[] = conclusion.split("(");
-//		String zone[] = result[1].split(")");
-//		
-//		return result[0] + '\n' + zone[0] + '\n' + zone[1];
-//	}
-	
 	public void setColor(){
 		if (!conclusion.substring(conclusion.length() - 5).equals("无显著差异")) {
-			int begin = conclusion.length() - currentTeam.text.length()- 2;
-			System.out.println(conclusion.substring(begin, begin+1));
+//			int begin = conclusion.length() - currentTeam.text.length()- 2;
 //			if (conclusion.substring(begin, begin+1).equals("高")) {
 //				formerTeam.setForeground(UIConfig.CHART_ORANGE);
 //			}
@@ -199,16 +230,6 @@ public class PlayerComPanel extends Panel{
 		currentTeam.setCenter();
 		this.add(currentTeam);
 		
-		
-//		startSeason = new MyLabel(vo.startSeason + "  ~  " + vo.transferSeason);
-//		startSeason.setBounds(CONCLUSION_X + TEAM_WID, CONCLUSION_Y, SEASON_WID, TEAM_HEIGHT);
-//		startSeason.setCenter();
-//		this.add(startSeason);
-//		
-//		transSeason = new MyLabel(vo.transferSeason + "  ~  " + Constants.today);
-//		transSeason.setBounds(CONCLUSION_X + TEAM_WID, CONCLUSION_Y + TEAM_HEIGHT + 4, SEASON_WID, TEAM_HEIGHT);
-//		transSeason.setCenter();
-//		this.add(transSeason);
 	}
 
 	public void setButton() {
@@ -248,20 +269,32 @@ public class PlayerComPanel extends Panel{
 					if (e.getSource() == CompareButton.current) {
 						return;
 					}
+					PlayerComPanel.this.remove(currentTeam);
+					PlayerComPanel.this.remove(formerTeam);
 					CompareButton.current.back();
 					CompareButton.current = (CompareButton) e.getSource();
 					PlayerComPanel.this.remove(chart);
 					try {
 						vo = service.getCompareData(name,name2,CompareButton.current.getInferenceData());
-						chart = new NewLineChart(vo);
-						conclusion = vo.getConclusion();
-						area.setText(conclusion);
-						PlayerComPanel.this.add(chart);
+						if(vo == null) {
+							PlayerComPanel.this.remove(chart);
+							bgImg = Images.COMED_LESS;
+							area.setText("");
+						}else{
+							bgImg = Images.COMPARE_BG;
+							addLabel();
+							chart = new NewLineChart(vo);
+							conclusion = vo.getConclusion();
+							area.setText(conclusion);
+							System.out.println(name+name2);
+							PlayerComPanel.this.add(chart);
+						}
 					} catch (Exception e1) {
 						PlayerComPanel.this.remove(chart);
-						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-						//TODO 显示对方比赛太少无法比较
+						PlayerComPanel.this.remove(currentTeam);
+						PlayerComPanel.this.remove(formerTeam);
+						bgImg = Images.COMING_LESS;
+						area.setText("");
 					}
 					PlayerComPanel.this.repaint();
 				}
